@@ -8,6 +8,24 @@ import altair as alt
 import pandas as pd
 import streamlit as st
 
+
+def _render_altair_chart(chart: alt.Chart, *, width: str = "stretch") -> None:
+    """Render Altair chart with forward-compatible width handling."""
+
+    try:
+        st.altair_chart(chart, width=width)
+    except TypeError:
+        st.altair_chart(chart, use_container_width=(width == "stretch"))
+
+
+def _render_dataframe(df: pd.DataFrame, *, width: str = "stretch") -> None:
+    """Render dataframe with width fallback for older Streamlit releases."""
+
+    try:
+        st.dataframe(df, width=width)
+    except TypeError:
+        st.dataframe(df, use_container_width=(width == "stretch"))
+
 BASE_DIR = Path(__file__).parent
 PROCESSED_DIR = BASE_DIR / "data" / "processed"
 
@@ -100,7 +118,7 @@ def render_cost_vs_grad_scatter(
         f"Points represent institutions with >= {min_enrollment:,} undergraduate degree students; "
         "dashed lines show global medians (no enrollment filter)."
     )
-    st.altair_chart(chart, width='stretch')
+    _render_altair_chart(chart, width="stretch")
 
     classification = filtered_df.copy()
     classification["cost_group"] = classification["cost"].apply(
@@ -142,9 +160,9 @@ def render_cost_vs_grad_scatter(
                 formatted = data[display_cols].sort_values(
                     by=["graduation_rate", "cost"], ascending=[False, True]
                 )
-                st.dataframe(
+                _render_dataframe(
                     formatted,
-                    width='stretch',
+                    width="stretch",
                 )
 
 
