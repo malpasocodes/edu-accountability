@@ -100,7 +100,7 @@ def render_cost_vs_grad_scatter(
         f"Points represent institutions with >= {min_enrollment:,} undergraduate degree students; "
         "dashed lines show global medians (no enrollment filter)."
     )
-    st.altair_chart(chart, use_container_width=True)
+    st.altair_chart(chart, width='stretch')
 
     classification = filtered_df.copy()
     classification["cost_group"] = classification["cost"].apply(
@@ -144,13 +144,13 @@ def render_cost_vs_grad_scatter(
                 )
                 st.dataframe(
                     formatted,
-                    use_container_width=True,
+                    width='stretch',
                 )
 
 
 def main() -> None:
     st.set_page_config(page_title="College ACT Charts", layout="wide")
-    st.title("College ACT Charts Dashboard")
+    st.title("College Accountability Dashboard")
     st.caption("Explore tuition, enrollment, and outcomes across institutions.")
 
     st.sidebar.header("Chart Explorer")
