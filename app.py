@@ -218,16 +218,24 @@ def main() -> None:
     )
 
     states = sorted(data["state"].dropna().unique())
+    state_all_label = "All States"
+    state_options = [state_all_label] + states
     selected_states = st.sidebar.multiselect(
         "States",
-        options=states,
-        default=states,
+        options=state_options,
+        default=[state_all_label],
+        help="Pick one or more states; choose 'All States' to include every state.",
     )
+
+    if state_all_label in selected_states or not selected_states:
+        active_states = states
+    else:
+        active_states = [state for state in selected_states if state in states]
 
     filtered = data.loc[
         (data["enrollment"] >= min_enrollment)
         & (data["sector"].isin(selected_sectors))
-        & (data["state"].isin(selected_states))
+        & (data["state"].isin(active_states))
     ]
 
     render_cost_vs_grad_scatter(
