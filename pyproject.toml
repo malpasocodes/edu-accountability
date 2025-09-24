@@ -1,0 +1,16 @@
+[project]
+name = "college-act-charts"
+version = "0.1.0"
+description = "Streamlit dashboard for exploring ACT-related datasets."
+requires-python = ">=3.10"
+dependencies = [
+    "streamlit>=1.38",
+    "pandas>=2.2",
+    "altair>=5.0",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8.0", "ruff>=0.6", "black>=24.0"]
+
+[tool.uv]
+package = true
