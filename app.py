@@ -58,7 +58,6 @@ def load_processed(name: str) -> pd.DataFrame:
 def render_cost_vs_grad_scatter(
     filtered_df: pd.DataFrame,
     min_enrollment: int,
-    selected_sectors: list[str],
     global_cost_median: float,
     global_grad_median: float,
 ) -> None:
@@ -218,14 +217,22 @@ def main() -> None:
         default=default_selection,
     )
 
+    states = sorted(data["state"].dropna().unique())
+    selected_states = st.sidebar.multiselect(
+        "States",
+        options=states,
+        default=states,
+    )
+
     filtered = data.loc[
-        (data["enrollment"] >= min_enrollment) & (data["sector"].isin(selected_sectors))
+        (data["enrollment"] >= min_enrollment)
+        & (data["sector"].isin(selected_sectors))
+        & (data["state"].isin(selected_states))
     ]
 
     render_cost_vs_grad_scatter(
         filtered,
         min_enrollment,
-        selected_sectors,
         global_cost_median,
         global_grad_median,
     )
