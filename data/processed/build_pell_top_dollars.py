@@ -20,6 +20,11 @@ OUTPUT_PATHS = {
     "two_year": OUTPUT_DIR / "pell_top_dollars_two_year.csv",
 }
 
+TREND_OUTPUT_PATHS = {
+    "four_year": OUTPUT_DIR / "pell_top_dollars_trend_four_year.csv",
+    "two_year": OUTPUT_DIR / "pell_top_dollars_trend_two_year.csv",
+}
+
 SECTOR_NAME_BY_CODE: Dict[str, str] = {
     "1": "Public",
     "2": "Private, not-for-profit",
@@ -157,6 +162,56 @@ def _write_dataset(path: Path, rows: List[FieldRow]) -> None:
             )
 
 
+def _write_trend_dataset(
+    path: Path,
+    unit_ids: List[str],
+    metadata: Dict[str, Dict[str, str]],
+    raw_rows: Dict[str, Dict[str, str]],
+    year_columns: List[Tuple[int, str]],
+) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with path.open("w", newline="", encoding="utf-8") as outfile:
+        fieldnames = [
+            "UnitID",
+            "Institution",
+            "Sector",
+            "Year",
+            "PellDollars",
+            "PellDollarsBillions",
+        ]
+        writer = csv.DictWriter(outfile, fieldnames=fieldnames)
+        writer.writeheader()
+
+        for unit_id in unit_ids:
+            raw_row = raw_rows.get(unit_id)
+            if raw_row is None:
+                continue
+            meta = metadata.get(unit_id, {})
+            institution = meta.get("Institution", "")
+            sector = meta.get("Sector", "Unknown") or "Unknown"
+
+            for year, column in year_columns:
+                value_raw = (raw_row.get(column) or "").replace(",", "").strip()
+                if not value_raw:
+                    continue
+                try:
+                    dollars = float(value_raw)
+                except ValueError:
+                    continue
+                if dollars <= 0:
+                    continue
+                writer.writerow(
+                    {
+                        "UnitID": unit_id,
+                        "Institution": institution,
+                        "Sector": sector,
+                        "Year": year,
+                        "PellDollars": f"{dollars:.0f}",
+                        "PellDollarsBillions": f"{dollars / 1_000_000_000:.3f}",
+                    }
+                )
+
+
 def build_dataset() -> None:
     if not RAW_PELL_PATH.exists():
         raise FileNotFoundError(f"Missing raw Pell totals file: {RAW_PELL_PATH}")
@@ -182,6 +237,8 @@ def build_dataset() -> None:
         rows_all: List[FieldRow] = []
         rows_4: List[FieldRow] = []
         rows_2: List[FieldRow] = []
+        metadata: Dict[str, Dict[str, str]] = {}
+        raw_year_rows: Dict[str, Dict[str, str]] = {}
 
         for raw_row in reader:
             unit_id = (raw_row.get("UnitID") or "").strip()
@@ -219,6 +276,13 @@ def build_dataset() -> None:
             rows_all.append(record)
             if segment_rows is not None:
                 segment_rows.append(record)
+            metadata[unit_id] = {
+                "Institution": institution,
+                "Sector": sector,
+            }
+            raw_year_rows[unit_id] = {
+                column: raw_row.get(column, "") for _, column in year_columns
+            }
 
     if not rows_all:
         raise ValueError("No Pell dollar records constructed. Check raw inputs.")
@@ -227,9 +291,31 @@ def build_dataset() -> None:
     rows_4.sort(key=lambda item: item["PellDollars"], reverse=True)
     rows_2.sort(key=lambda item: item["PellDollars"], reverse=True)
 
-    _write_dataset(OUTPUT_PATHS["all"], rows_all[:TOP_N])
-    _write_dataset(OUTPUT_PATHS["four_year"], rows_4[:TOP_N])
-    _write_dataset(OUTPUT_PATHS["two_year"], rows_2[:TOP_N])
+    top_all = rows_all[:TOP_N]
+    top_four = rows_4[:TOP_N]
+    top_two = rows_2[:TOP_N]
+
+    _write_dataset(OUTPUT_PATHS["all"], top_all)
+    _write_dataset(OUTPUT_PATHS["four_year"], top_four)
+    _write_dataset(OUTPUT_PATHS["two_year"], top_two)
+
+    top_four_ids = [row["UnitID"] for row in top_four]
+    top_two_ids = [row["UnitID"] for row in top_two]
+
+    _write_trend_dataset(
+        TREND_OUTPUT_PATHS["four_year"],
+        top_four_ids,
+        metadata,
+        raw_year_rows,
+        year_columns,
+    )
+    _write_trend_dataset(
+        TREND_OUTPUT_PATHS["two_year"],
+        top_two_ids,
+        metadata,
+        raw_year_rows,
+        year_columns,
+    )
 
 
 if __name__ == "__main__":

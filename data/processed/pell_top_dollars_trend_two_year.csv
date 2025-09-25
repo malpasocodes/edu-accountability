@@ -1,0 +1,376 @@
+UnitID,Institution,Sector,Year,PellDollars,PellDollarsBillions
+150987,Ivy Tech Community College,Public,2008,16197889,0.016
+150987,Ivy Tech Community College,Public,2009,30341009,0.030
+150987,Ivy Tech Community College,Public,2010,38864467,0.039
+150987,Ivy Tech Community College,Public,2011,203153439,0.203
+150987,Ivy Tech Community College,Public,2012,206761012,0.207
+150987,Ivy Tech Community College,Public,2013,184555960,0.185
+150987,Ivy Tech Community College,Public,2014,169982827,0.170
+150987,Ivy Tech Community College,Public,2015,137605412,0.138
+150987,Ivy Tech Community College,Public,2016,122605312,0.123
+150987,Ivy Tech Community College,Public,2017,108048221,0.108
+150987,Ivy Tech Community College,Public,2018,91868838,0.092
+150987,Ivy Tech Community College,Public,2019,108148022,0.108
+150987,Ivy Tech Community College,Public,2020,88492397,0.088
+150987,Ivy Tech Community College,Public,2021,82229048,0.082
+150987,Ivy Tech Community College,Public,2022,84352331,0.084
+190521,CUNY Borough of Manhattan Community College,Public,2008,36209425,0.036
+190521,CUNY Borough of Manhattan Community College,Public,2009,52067035,0.052
+190521,CUNY Borough of Manhattan Community College,Public,2010,58804390,0.059
+190521,CUNY Borough of Manhattan Community College,Public,2011,66023883,0.066
+190521,CUNY Borough of Manhattan Community College,Public,2012,68226045,0.068
+190521,CUNY Borough of Manhattan Community College,Public,2013,66821848,0.067
+190521,CUNY Borough of Manhattan Community College,Public,2014,72435843,0.072
+190521,CUNY Borough of Manhattan Community College,Public,2015,72418802,0.072
+190521,CUNY Borough of Manhattan Community College,Public,2016,70377561,0.070
+190521,CUNY Borough of Manhattan Community College,Public,2017,76418643,0.076
+190521,CUNY Borough of Manhattan Community College,Public,2018,76936456,0.077
+190521,CUNY Borough of Manhattan Community College,Public,2019,75473981,0.075
+190521,CUNY Borough of Manhattan Community College,Public,2020,58423444,0.058
+190521,CUNY Borough of Manhattan Community College,Public,2021,49156082,0.049
+190521,CUNY Borough of Manhattan Community College,Public,2022,47085895,0.047
+224642,El Paso Community College,Public,2008,33447084,0.033
+224642,El Paso Community College,Public,2009,53147028,0.053
+224642,El Paso Community College,Public,2010,58897714,0.059
+224642,El Paso Community College,Public,2011,72157686,0.072
+224642,El Paso Community College,Public,2012,68848352,0.069
+224642,El Paso Community College,Public,2013,67533586,0.068
+224642,El Paso Community College,Public,2014,66283767,0.066
+224642,El Paso Community College,Public,2015,60250567,0.060
+224642,El Paso Community College,Public,2016,61098609,0.061
+224642,El Paso Community College,Public,2017,68879471,0.069
+224642,El Paso Community College,Public,2018,63791119,0.064
+224642,El Paso Community College,Public,2019,64219778,0.064
+224642,El Paso Community College,Public,2020,54025019,0.054
+224642,El Paso Community College,Public,2021,51681950,0.052
+224642,El Paso Community College,Public,2022,57662549,0.058
+228547,Tarrant County College District,Public,2008,21164379,0.021
+228547,Tarrant County College District,Public,2009,40911147,0.041
+228547,Tarrant County College District,Public,2010,65645340,0.066
+228547,Tarrant County College District,Public,2011,72160239,0.072
+228547,Tarrant County College District,Public,2012,67858845,0.068
+228547,Tarrant County College District,Public,2013,72672701,0.073
+228547,Tarrant County College District,Public,2014,66893342,0.067
+228547,Tarrant County College District,Public,2015,60238551,0.060
+228547,Tarrant County College District,Public,2016,55416641,0.055
+228547,Tarrant County College District,Public,2017,73791908,0.074
+228547,Tarrant County College District,Public,2018,59101154,0.059
+228547,Tarrant County College District,Public,2019,67778873,0.068
+228547,Tarrant County College District,Public,2020,45287792,0.045
+228547,Tarrant County College District,Public,2021,50090688,0.050
+228547,Tarrant County College District,Public,2022,43634439,0.044
+202356,Cuyahoga Community College District,Public,2008,30472905,0.030
+202356,Cuyahoga Community College District,Public,2009,57534681,0.058
+202356,Cuyahoga Community College District,Public,2010,70131854,0.070
+202356,Cuyahoga Community College District,Public,2011,51954831,0.052
+202356,Cuyahoga Community College District,Public,2012,64896450,0.065
+202356,Cuyahoga Community College District,Public,2013,62734357,0.063
+202356,Cuyahoga Community College District,Public,2014,59515468,0.060
+202356,Cuyahoga Community College District,Public,2015,51124353,0.051
+202356,Cuyahoga Community College District,Public,2016,34515598,0.035
+202356,Cuyahoga Community College District,Public,2017,31842295,0.032
+202356,Cuyahoga Community College District,Public,2018,38902754,0.039
+202356,Cuyahoga Community College District,Public,2019,34535431,0.035
+202356,Cuyahoga Community College District,Public,2020,32836652,0.033
+202356,Cuyahoga Community College District,Public,2021,32721943,0.033
+202356,Cuyahoga Community College District,Public,2022,31313401,0.031
+215239,Community College of Philadelphia,Public,2008,22402712,0.022
+215239,Community College of Philadelphia,Public,2009,34681871,0.035
+215239,Community College of Philadelphia,Public,2010,51488903,0.051
+215239,Community College of Philadelphia,Public,2011,46515159,0.047
+215239,Community College of Philadelphia,Public,2012,43908044,0.044
+215239,Community College of Philadelphia,Public,2013,45951369,0.046
+215239,Community College of Philadelphia,Public,2014,56842859,0.057
+215239,Community College of Philadelphia,Public,2015,54600983,0.055
+215239,Community College of Philadelphia,Public,2016,45802951,0.046
+215239,Community College of Philadelphia,Public,2017,53019913,0.053
+215239,Community College of Philadelphia,Public,2018,48981246,0.049
+215239,Community College of Philadelphia,Public,2019,48749549,0.049
+215239,Community College of Philadelphia,Public,2020,34506530,0.035
+215239,Community College of Philadelphia,Public,2021,27043204,0.027
+215239,Community College of Philadelphia,Public,2022,30886635,0.031
+187532,Central New Mexico Community College,Public,2008,26674868,0.027
+187532,Central New Mexico Community College,Public,2009,45051894,0.045
+187532,Central New Mexico Community College,Public,2010,57357547,0.057
+187532,Central New Mexico Community College,Public,2011,58126268,0.058
+187532,Central New Mexico Community College,Public,2012,55185497,0.055
+187532,Central New Mexico Community College,Public,2013,53376990,0.053
+187532,Central New Mexico Community College,Public,2014,47106345,0.047
+187532,Central New Mexico Community College,Public,2015,38633597,0.039
+187532,Central New Mexico Community College,Public,2016,35660920,0.036
+187532,Central New Mexico Community College,Public,2017,35407983,0.035
+187532,Central New Mexico Community College,Public,2018,34757869,0.035
+187532,Central New Mexico Community College,Public,2019,31677902,0.032
+187532,Central New Mexico Community College,Public,2020,26448188,0.026
+187532,Central New Mexico Community College,Public,2021,24895760,0.025
+187532,Central New Mexico Community College,Public,2022,26687414,0.027
+158662,Delgado Community College,Public,2008,16149645,0.016
+158662,Delgado Community College,Public,2009,29351533,0.029
+158662,Delgado Community College,Public,2010,43021576,0.043
+158662,Delgado Community College,Public,2011,49017418,0.049
+158662,Delgado Community College,Public,2012,61085776,0.061
+158662,Delgado Community College,Public,2013,53126248,0.053
+158662,Delgado Community College,Public,2014,52033236,0.052
+158662,Delgado Community College,Public,2015,45677659,0.046
+158662,Delgado Community College,Public,2016,30843015,0.031
+158662,Delgado Community College,Public,2017,29351890,0.029
+158662,Delgado Community College,Public,2018,31914789,0.032
+158662,Delgado Community College,Public,2019,32318636,0.032
+158662,Delgado Community College,Public,2020,39570113,0.040
+158662,Delgado Community College,Public,2021,29158592,0.029
+158662,Delgado Community College,Public,2022,53740780,0.054
+232946,Northern Virginia Community College,Public,2008,13328301,0.013
+232946,Northern Virginia Community College,Public,2009,25798621,0.026
+232946,Northern Virginia Community College,Public,2010,34941817,0.035
+232946,Northern Virginia Community College,Public,2011,36060798,0.036
+232946,Northern Virginia Community College,Public,2012,41773954,0.042
+232946,Northern Virginia Community College,Public,2013,46737701,0.047
+232946,Northern Virginia Community College,Public,2014,48160726,0.048
+232946,Northern Virginia Community College,Public,2015,45917679,0.046
+232946,Northern Virginia Community College,Public,2016,41684963,0.042
+232946,Northern Virginia Community College,Public,2017,43371430,0.043
+232946,Northern Virginia Community College,Public,2018,42134745,0.042
+232946,Northern Virginia Community College,Public,2019,41060138,0.041
+232946,Northern Virginia Community College,Public,2020,40240394,0.040
+232946,Northern Virginia Community College,Public,2021,42137715,0.042
+232946,Northern Virginia Community College,Public,2022,44730232,0.045
+209746,Portland Community College,Public,2008,16924730,0.017
+209746,Portland Community College,Public,2009,31868024,0.032
+209746,Portland Community College,Public,2010,40764927,0.041
+209746,Portland Community College,Public,2011,49551243,0.050
+209746,Portland Community College,Public,2012,57436404,0.057
+209746,Portland Community College,Public,2013,55453099,0.055
+209746,Portland Community College,Public,2014,51325909,0.051
+209746,Portland Community College,Public,2015,43505014,0.044
+209746,Portland Community College,Public,2016,39622223,0.040
+209746,Portland Community College,Public,2017,40189237,0.040
+209746,Portland Community College,Public,2018,32092142,0.032
+209746,Portland Community College,Public,2019,29463563,0.029
+209746,Portland Community College,Public,2020,25832482,0.026
+209746,Portland Community College,Public,2021,27622780,0.028
+209746,Portland Community College,Public,2022,26060121,0.026
+202222,Columbus State Community College,Public,2008,21110863,0.021
+202222,Columbus State Community College,Public,2009,40518848,0.041
+202222,Columbus State Community College,Public,2010,66460412,0.066
+202222,Columbus State Community College,Public,2011,61003389,0.061
+202222,Columbus State Community College,Public,2012,49027921,0.049
+202222,Columbus State Community College,Public,2013,43509033,0.044
+202222,Columbus State Community College,Public,2014,34893163,0.035
+202222,Columbus State Community College,Public,2015,32592261,0.033
+202222,Columbus State Community College,Public,2016,33884249,0.034
+202222,Columbus State Community College,Public,2017,33698246,0.034
+202222,Columbus State Community College,Public,2018,25593591,0.026
+202222,Columbus State Community College,Public,2019,40411651,0.040
+202222,Columbus State Community College,Public,2020,24611784,0.025
+202222,Columbus State Community College,Public,2021,23387887,0.023
+202222,Columbus State Community College,Public,2022,24766092,0.025
+119164,Mt San Antonio College,Public,2008,16200761,0.016
+119164,Mt San Antonio College,Public,2009,23577922,0.024
+119164,Mt San Antonio College,Public,2010,33086946,0.033
+119164,Mt San Antonio College,Public,2011,36771977,0.037
+119164,Mt San Antonio College,Public,2012,38429051,0.038
+119164,Mt San Antonio College,Public,2013,38867974,0.039
+119164,Mt San Antonio College,Public,2014,39734380,0.040
+119164,Mt San Antonio College,Public,2015,38583114,0.039
+119164,Mt San Antonio College,Public,2016,35517296,0.036
+119164,Mt San Antonio College,Public,2017,39104544,0.039
+119164,Mt San Antonio College,Public,2018,33491193,0.033
+119164,Mt San Antonio College,Public,2019,38447526,0.038
+119164,Mt San Antonio College,Public,2020,33735511,0.034
+119164,Mt San Antonio College,Public,2021,31327951,0.031
+119164,Mt San Antonio College,Public,2022,35580667,0.036
+117645,Long Beach City College,Public,2008,20917366,0.021
+117645,Long Beach City College,Public,2009,36969193,0.037
+117645,Long Beach City College,Public,2010,37054672,0.037
+117645,Long Beach City College,Public,2011,42368011,0.042
+117645,Long Beach City College,Public,2012,39170794,0.039
+117645,Long Beach City College,Public,2013,34721315,0.035
+117645,Long Beach City College,Public,2014,35623811,0.036
+117645,Long Beach City College,Public,2015,32901456,0.033
+117645,Long Beach City College,Public,2016,31987097,0.032
+117645,Long Beach City College,Public,2017,32826135,0.033
+117645,Long Beach City College,Public,2018,31272567,0.031
+117645,Long Beach City College,Public,2019,35801785,0.036
+117645,Long Beach City College,Public,2020,32416257,0.032
+117645,Long Beach City College,Public,2021,30765390,0.031
+117645,Long Beach City College,Public,2022,34508472,0.035
+244437,Georgia State University-Perimeter College,Public,2008,21095101,0.021
+244437,Georgia State University-Perimeter College,Public,2009,36193988,0.036
+244437,Georgia State University-Perimeter College,Public,2010,50604281,0.051
+244437,Georgia State University-Perimeter College,Public,2011,50071321,0.050
+244437,Georgia State University-Perimeter College,Public,2012,37022601,0.037
+244437,Georgia State University-Perimeter College,Public,2013,32079084,0.032
+244437,Georgia State University-Perimeter College,Public,2014,32986077,0.033
+244437,Georgia State University-Perimeter College,Public,2015,31538184,0.032
+244437,Georgia State University-Perimeter College,Public,2016,28022206,0.028
+244437,Georgia State University-Perimeter College,Public,2017,28989044,0.029
+244437,Georgia State University-Perimeter College,Public,2018,34298004,0.034
+244437,Georgia State University-Perimeter College,Public,2019,36297113,0.036
+244437,Georgia State University-Perimeter College,Public,2020,30568869,0.031
+244437,Georgia State University-Perimeter College,Public,2021,28083100,0.028
+244437,Georgia State University-Perimeter College,Public,2022,29276702,0.029
+172635,Wayne County Community College District,Public,2008,35243826,0.035
+172635,Wayne County Community College District,Public,2009,80101722,0.080
+172635,Wayne County Community College District,Public,2010,53193301,0.053
+172635,Wayne County Community College District,Public,2011,46862393,0.047
+172635,Wayne County Community College District,Public,2012,41881958,0.042
+172635,Wayne County Community College District,Public,2013,39444794,0.039
+172635,Wayne County Community College District,Public,2014,36662175,0.037
+172635,Wayne County Community College District,Public,2015,32248880,0.032
+172635,Wayne County Community College District,Public,2016,26841675,0.027
+172635,Wayne County Community College District,Public,2017,23574242,0.024
+172635,Wayne County Community College District,Public,2018,21250438,0.021
+172635,Wayne County Community College District,Public,2019,21293789,0.021
+172635,Wayne County Community College District,Public,2020,11815450,0.012
+172635,Wayne County Community College District,Public,2021,13719787,0.014
+172635,Wayne County Community College District,Public,2022,13876512,0.014
+233772,Tidewater Community College,Public,2008,19678653,0.020
+233772,Tidewater Community College,Public,2009,36203343,0.036
+233772,Tidewater Community College,Public,2010,44788236,0.045
+233772,Tidewater Community College,Public,2011,45770984,0.046
+233772,Tidewater Community College,Public,2012,41871262,0.042
+233772,Tidewater Community College,Public,2013,42854074,0.043
+233772,Tidewater Community College,Public,2014,41421258,0.041
+233772,Tidewater Community College,Public,2015,35405426,0.035
+233772,Tidewater Community College,Public,2016,30509118,0.031
+233772,Tidewater Community College,Public,2017,28728443,0.029
+233772,Tidewater Community College,Public,2018,26073871,0.026
+233772,Tidewater Community College,Public,2019,23644991,0.024
+233772,Tidewater Community College,Public,2020,18320316,0.018
+233772,Tidewater Community College,Public,2021,18762006,0.019
+233772,Tidewater Community College,Public,2022,18017081,0.018
+175786,Hinds Community College,Public,2008,23306004,0.023
+175786,Hinds Community College,Public,2009,40676319,0.041
+175786,Hinds Community College,Public,2010,40131255,0.040
+175786,Hinds Community College,Public,2011,41490111,0.041
+175786,Hinds Community College,Public,2012,33833341,0.034
+175786,Hinds Community College,Public,2013,40214311,0.040
+175786,Hinds Community College,Public,2014,42343931,0.042
+175786,Hinds Community College,Public,2015,25836467,0.026
+175786,Hinds Community College,Public,2016,27146554,0.027
+175786,Hinds Community College,Public,2017,28579781,0.029
+175786,Hinds Community College,Public,2018,28593614,0.029
+175786,Hinds Community College,Public,2019,27561710,0.028
+175786,Hinds Community College,Public,2020,25842231,0.026
+175786,Hinds Community College,Public,2021,21253159,0.021
+175786,Hinds Community College,Public,2022,18954468,0.019
+434672,Community College of Baltimore County,Public,2008,18727871,0.019
+434672,Community College of Baltimore County,Public,2009,30866397,0.031
+434672,Community College of Baltimore County,Public,2010,40787461,0.041
+434672,Community College of Baltimore County,Public,2011,41909953,0.042
+434672,Community College of Baltimore County,Public,2012,39754041,0.040
+434672,Community College of Baltimore County,Public,2013,39147705,0.039
+434672,Community College of Baltimore County,Public,2014,37518574,0.038
+434672,Community College of Baltimore County,Public,2015,33571321,0.034
+434672,Community College of Baltimore County,Public,2016,31092779,0.031
+434672,Community College of Baltimore County,Public,2017,25950203,0.026
+434672,Community College of Baltimore County,Public,2018,29654223,0.030
+434672,Community College of Baltimore County,Public,2019,25926186,0.026
+434672,Community College of Baltimore County,Public,2020,24135404,0.024
+434672,Community College of Baltimore County,Public,2021,23498326,0.023
+434672,Community College of Baltimore County,Public,2022,20440015,0.020
+113856,East Los Angeles College,Public,2008,17579590,0.018
+113856,East Los Angeles College,Public,2009,28123086,0.028
+113856,East Los Angeles College,Public,2010,36092761,0.036
+113856,East Los Angeles College,Public,2011,37934108,0.038
+113856,East Los Angeles College,Public,2012,35516561,0.036
+113856,East Los Angeles College,Public,2013,34746520,0.035
+113856,East Los Angeles College,Public,2014,36193682,0.036
+113856,East Los Angeles College,Public,2015,32570841,0.033
+113856,East Los Angeles College,Public,2016,33566323,0.034
+113856,East Los Angeles College,Public,2017,31416874,0.031
+113856,East Los Angeles College,Public,2018,30184346,0.030
+113856,East Los Angeles College,Public,2019,32298472,0.032
+113856,East Los Angeles College,Public,2020,26249980,0.026
+113856,East Los Angeles College,Public,2021,22432179,0.022
+113856,East Los Angeles College,Public,2022,25362167,0.025
+190628,CUNY LaGuardia Community College,Public,2008,17134012,0.017
+190628,CUNY LaGuardia Community College,Public,2009,26266601,0.026
+190628,CUNY LaGuardia Community College,Public,2010,30149423,0.030
+190628,CUNY LaGuardia Community College,Public,2011,33097514,0.033
+190628,CUNY LaGuardia Community College,Public,2012,33134670,0.033
+190628,CUNY LaGuardia Community College,Public,2013,37473584,0.037
+190628,CUNY LaGuardia Community College,Public,2014,37423872,0.037
+190628,CUNY LaGuardia Community College,Public,2015,34176383,0.034
+190628,CUNY LaGuardia Community College,Public,2016,33848925,0.034
+190628,CUNY LaGuardia Community College,Public,2017,35254773,0.035
+190628,CUNY LaGuardia Community College,Public,2018,33864290,0.034
+190628,CUNY LaGuardia Community College,Public,2019,32115589,0.032
+190628,CUNY LaGuardia Community College,Public,2020,27822765,0.028
+190628,CUNY LaGuardia Community College,Public,2021,23198791,0.023
+190628,CUNY LaGuardia Community College,Public,2022,22997991,0.023
+105525,Pima Community College,Public,2008,18368897,0.018
+105525,Pima Community College,Public,2009,34316345,0.034
+105525,Pima Community College,Public,2010,47195318,0.047
+105525,Pima Community College,Public,2011,50100643,0.050
+105525,Pima Community College,Public,2012,38806732,0.039
+105525,Pima Community College,Public,2013,32656150,0.033
+105525,Pima Community College,Public,2014,32526166,0.033
+105525,Pima Community College,Public,2015,30610700,0.031
+105525,Pima Community College,Public,2016,29668473,0.030
+105525,Pima Community College,Public,2017,32504661,0.033
+105525,Pima Community College,Public,2018,26305439,0.026
+105525,Pima Community College,Public,2019,27281294,0.027
+105525,Pima Community College,Public,2020,19484746,0.019
+105525,Pima Community College,Public,2021,10128905,0.010
+105525,Pima Community College,Public,2022,23928335,0.024
+171535,Oakland Community College,Public,2008,13770290,0.014
+171535,Oakland Community College,Public,2009,39902064,0.040
+171535,Oakland Community College,Public,2010,45785543,0.046
+171535,Oakland Community College,Public,2011,50903142,0.051
+171535,Oakland Community College,Public,2012,45046473,0.045
+171535,Oakland Community College,Public,2013,44434159,0.044
+171535,Oakland Community College,Public,2014,39300552,0.039
+171535,Oakland Community College,Public,2015,29267816,0.029
+171535,Oakland Community College,Public,2016,19079829,0.019
+171535,Oakland Community College,Public,2017,20449929,0.020
+171535,Oakland Community College,Public,2018,18515777,0.019
+171535,Oakland Community College,Public,2019,18361727,0.018
+171535,Oakland Community College,Public,2020,18930893,0.019
+171535,Oakland Community College,Public,2021,21312054,0.021
+171535,Oakland Community College,Public,2022,23915011,0.024
+190619,CUNY Kingsborough Community College,Public,2008,19034311,0.019
+190619,CUNY Kingsborough Community College,Public,2009,30503287,0.031
+190619,CUNY Kingsborough Community College,Public,2010,35395901,0.035
+190619,CUNY Kingsborough Community College,Public,2011,37528732,0.038
+190619,CUNY Kingsborough Community College,Public,2012,36674866,0.037
+190619,CUNY Kingsborough Community College,Public,2013,37017718,0.037
+190619,CUNY Kingsborough Community College,Public,2014,35237362,0.035
+190619,CUNY Kingsborough Community College,Public,2015,33035909,0.033
+190619,CUNY Kingsborough Community College,Public,2016,29376358,0.029
+190619,CUNY Kingsborough Community College,Public,2017,29820209,0.030
+190619,CUNY Kingsborough Community College,Public,2018,29018693,0.029
+190619,CUNY Kingsborough Community College,Public,2019,28251666,0.028
+190619,CUNY Kingsborough Community College,Public,2020,21986779,0.022
+190619,CUNY Kingsborough Community College,Public,2021,18669833,0.019
+190619,CUNY Kingsborough Community College,Public,2022,20037480,0.020
+111887,Cerritos College,Public,2008,15660046,0.016
+111887,Cerritos College,Public,2009,25437567,0.025
+111887,Cerritos College,Public,2010,32894463,0.033
+111887,Cerritos College,Public,2011,31207175,0.031
+111887,Cerritos College,Public,2012,31176110,0.031
+111887,Cerritos College,Public,2013,33256425,0.033
+111887,Cerritos College,Public,2014,34215746,0.034
+111887,Cerritos College,Public,2015,32545198,0.033
+111887,Cerritos College,Public,2016,29685678,0.030
+111887,Cerritos College,Public,2017,29978372,0.030
+111887,Cerritos College,Public,2018,29133637,0.029
+111887,Cerritos College,Public,2019,33165965,0.033
+111887,Cerritos College,Public,2020,28987293,0.029
+111887,Cerritos College,Public,2021,25561346,0.026
+111887,Cerritos College,Public,2022,27869019,0.028
+193478,Nassau Community College,Public,2008,17010113,0.017
+193478,Nassau Community College,Public,2009,23507875,0.024
+193478,Nassau Community College,Public,2010,31435972,0.031
+193478,Nassau Community College,Public,2011,35577602,0.036
+193478,Nassau Community College,Public,2012,32788261,0.033
+193478,Nassau Community College,Public,2013,35100795,0.035
+193478,Nassau Community College,Public,2014,35361030,0.035
+193478,Nassau Community College,Public,2015,35001273,0.035
+193478,Nassau Community College,Public,2016,29362429,0.029
+193478,Nassau Community College,Public,2017,34988528,0.035
+193478,Nassau Community College,Public,2018,30959920,0.031
+193478,Nassau Community College,Public,2019,32257553,0.032
+193478,Nassau Community College,Public,2020,24979133,0.025
+193478,Nassau Community College,Public,2021,20661731,0.021
+193478,Nassau Community College,Public,2022,20979171,0.021

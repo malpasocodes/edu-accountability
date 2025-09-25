@@ -14,6 +14,7 @@ from src.data.datasets import load_processed
 from src.ui.renderers import render_dataframe
 from src.charts.pell_top_dollars_chart import render_pell_top_dollars_chart
 from src.charts.pell_vs_grad_scatter_chart import render_pell_vs_grad_scatter
+from src.charts.pell_trend_chart import render_pell_trend_chart
 
 PROJECT_ROOT = Path(__file__).resolve().parent
 DATA_DIR = PROJECT_ROOT / "data"
@@ -21,6 +22,8 @@ PELL_SOURCE = DATA_DIR / "raw" / "pelltotals.csv"
 PELL_TOP_DOLLARS_SOURCE = DATA_DIR / "processed" / "pell_top_dollars.csv"
 PELL_TOP_DOLLARS_FOUR_SOURCE = DATA_DIR / "processed" / "pell_top_dollars_four_year.csv"
 PELL_TOP_DOLLARS_TWO_SOURCE = DATA_DIR / "processed" / "pell_top_dollars_two_year.csv"
+PELL_TOP_DOLLARS_TREND_FOUR_SOURCE = DATA_DIR / "processed" / "pell_top_dollars_trend_four_year.csv"
+PELL_TOP_DOLLARS_TREND_TWO_SOURCE = DATA_DIR / "processed" / "pell_top_dollars_trend_two_year.csv"
 PELL_VS_GRAD_SOURCE = DATA_DIR / "processed" / "pell_vs_grad_scatter.csv"
 PELL_VS_GRAD_FOUR_SOURCE = DATA_DIR / "processed" / "pell_vs_grad_scatter_four_year.csv"
 PELL_VS_GRAD_TWO_SOURCE = DATA_DIR / "processed" / "pell_vs_grad_scatter_two_year.csv"
@@ -55,11 +58,15 @@ PELL_TOP_DOLLARS_FOUR_LABEL = "Top 25 Pell Dollar Recipients (4-year)"
 PELL_TOP_DOLLARS_TWO_LABEL = "Top 25 Pell Dollar Recipients (2-year)"
 PELL_VS_GRAD_FOUR_LABEL = "Pell Dollars vs Graduation Rate (4-year)"
 PELL_VS_GRAD_TWO_LABEL = "Pell Dollars vs Graduation Rate (2-year)"
+PELL_TREND_FOUR_LABEL = "Pell Dollars Trend (4-year)"
+PELL_TREND_TWO_LABEL = "Pell Dollars Trend (2-year)"
 PELL_CHARTS = [
     PELL_TOP_DOLLARS_FOUR_LABEL,
     PELL_TOP_DOLLARS_TWO_LABEL,
     PELL_VS_GRAD_FOUR_LABEL,
     PELL_VS_GRAD_TWO_LABEL,
+    PELL_TREND_FOUR_LABEL,
+    PELL_TREND_TWO_LABEL,
 ]
 
 
@@ -97,6 +104,15 @@ def load_pell_vs_grad_dataset(path_str: str) -> pd.DataFrame:
     path = Path(path_str)
     if not path.exists():
         raise FileNotFoundError(f"Pell vs graduation dataset not found at {path}.")
+    return pd.read_csv(path)
+
+
+@st.cache_data(show_spinner=False)
+def load_pell_trend_dataset(path_str: str) -> pd.DataFrame:
+    """Load the processed Pell trend dataset."""
+    path = Path(path_str)
+    if not path.exists():
+        raise FileNotFoundError(f"Pell trend dataset not found at {path}.")
     return pd.read_csv(path)
 
 
@@ -227,6 +243,22 @@ def render_main(
                 st.warning(
                     "Pell vs graduation dataset (2-year) not found. Run `python data/processed/build_pell_vs_grad_scatter.py` to generate it."
                 )
+        elif active_chart == PELL_TREND_FOUR_LABEL:
+            dataset = pell_resources.get("trend_four")
+            if dataset is not None:
+                render_pell_trend_chart(dataset, title=PELL_TREND_FOUR_LABEL)
+            else:
+                st.warning(
+                    "Pell trend dataset (4-year) not found. Run `python data/processed/build_pell_top_dollars.py` to regenerate."
+                )
+        elif active_chart == PELL_TREND_TWO_LABEL:
+            dataset = pell_resources.get("trend_two")
+            if dataset is not None:
+                render_pell_trend_chart(dataset, title=PELL_TREND_TWO_LABEL)
+            else:
+                st.warning(
+                    "Pell trend dataset (2-year) not found. Run `python data/processed/build_pell_top_dollars.py` to regenerate."
+                )
         else:
             st.info(
                 f"{active_chart} will be available in a later phase. Until then, preview the "
@@ -262,6 +294,16 @@ def main() -> None:
         pell_top_dollars_two_df = None
 
     try:
+        pell_trend_four_df = load_pell_trend_dataset(str(PELL_TOP_DOLLARS_TREND_FOUR_SOURCE))
+    except FileNotFoundError:
+        pell_trend_four_df = None
+
+    try:
+        pell_trend_two_df = load_pell_trend_dataset(str(PELL_TOP_DOLLARS_TREND_TWO_SOURCE))
+    except FileNotFoundError:
+        pell_trend_two_df = None
+
+    try:
         pell_vs_grad_all_df = load_pell_vs_grad_dataset(str(PELL_VS_GRAD_SOURCE))
     except FileNotFoundError:
         pell_vs_grad_all_df = None
@@ -283,6 +325,8 @@ def main() -> None:
         "top_all": pell_top_dollars_all_df,
         "top_four": pell_top_dollars_four_df,
         "top_two": pell_top_dollars_two_df,
+        "trend_four": pell_trend_four_df,
+        "trend_two": pell_trend_two_df,
         "scatter_all": pell_vs_grad_all_df,
         "scatter_four": pell_vs_grad_four_df,
         "scatter_two": pell_vs_grad_two_df,
