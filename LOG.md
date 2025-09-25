@@ -2,6 +2,9 @@
 
 | Date | Change | Details | Files |
 | --- | --- | --- | --- |
+| 2024-11-24 | Updated enrollment filter | Enrollment control now uses fixed setpoints (0, 1k, 2.5k, 5k, 10k, 25k, 50k, 100k cap). | `src/dashboard/cost_vs_grad.py` |
+| 2024-11-24 | Added two-year dashboard view | Introduced dual cost vs graduation charts for 4-year and 2-year institutions with shared filters. | `app.py`, `src/dashboard/cost_vs_grad.py`, `src/charts/cost_vs_grad_chart.py` |
+| 2024-11-24 | Extended dataset builder | Builder now materializes four-year and two-year tuition vs graduation exports. | `src/data/build_tuition_vs_graduation.py`, `src/data/datasets.py`, `data/processed/tuition_vs_graduation.csv`, `data/processed/tuition_vs_graduation_two_year.csv` |
 | 2024-11-24 | Added dataset builder | Added script to regenerate tuition vs graduation export for sectors 1-3 and refreshed processed CSV. | `src/data/build_tuition_vs_graduation.py`, `data/processed/tuition_vs_graduation.csv` |
 | 2024-11-24 | Refactor committed | Finalized Streamlit refactor, modularizing dashboard logic for long-term maintenance. | `app.py`, `src/` |
 | 2024-11-24 | Refactored Streamlit entry point | Moved business logic into `src/` modules and slimmed down `app.py`. | `app.py`, `src/` |

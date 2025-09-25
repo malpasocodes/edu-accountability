@@ -14,6 +14,7 @@ PROCESSED_DIR = PROJECT_ROOT / "data" / "processed"
 
 PROCESSED_DATASETS: Dict[str, Path] = {
     "cost_vs_grad": PROCESSED_DIR / "tuition_vs_graduation.csv",
+    "cost_vs_grad_two_year": PROCESSED_DIR / "tuition_vs_graduation_two_year.csv",
 }
 
 

@@ -1,22 +1,35 @@
-"""Build the processed tuition vs. graduation dataset used in the dashboard."""
+"""Build processed tuition vs. graduation datasets used in the dashboard."""
 
 from __future__ import annotations
 
 import csv
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Dict, Iterable, List, Optional
+from typing import Callable, Dict, Iterable, List, Optional, Sequence
 
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent
 RAW_DIR = PROJECT_ROOT / "data" / "raw"
-OUTPUT_PATH = PROJECT_ROOT / "data" / "processed" / "tuition_vs_graduation.csv"
+PROCESSED_DIR = PROJECT_ROOT / "data" / "processed"
 
-FOUR_YEAR_SECTORS = {"1", "2", "3"}
+SEGMENTS = {
+    "tuition_vs_graduation": {
+        "sectors": {"1", "2", "3"},
+        "output": PROCESSED_DIR / "tuition_vs_graduation.csv",
+    },
+    "tuition_vs_graduation_two_year": {
+        "sectors": {"4", "5", "6"},
+        "output": PROCESSED_DIR / "tuition_vs_graduation_two_year.csv",
+    },
+}
+
 SECTOR_LABELS = {
     "1": "Public",
     "2": "Private, not-for-profit",
     "3": "Private, for-profit",
+    "4": "Public",
+    "5": "Private, not-for-profit",
+    "6": "Private, for-profit",
 }
 
 
@@ -54,14 +67,14 @@ class Institution:
         return SECTOR_LABELS.get(self.sector_code, "Unknown")
 
 
-def _load_institutions() -> Dict[str, Institution]:
+def _load_institutions(sector_filter: Sequence[str]) -> Dict[str, Institution]:
     path = RAW_DIR / "institutions.csv"
     institutions: Dict[str, Institution] = {}
     with path.open(newline="", encoding="utf-8") as handle:
         reader = csv.DictReader(handle)
         for row in reader:
             sector = row.get("SECTOR", "").strip()
-            if sector not in FOUR_YEAR_SECTORS:
+            if sector not in sector_filter:
                 continue
 
             unit_id = row.get("UnitID", "").strip()
@@ -79,7 +92,9 @@ def _load_institutions() -> Dict[str, Institution]:
     return institutions
 
 
-def _load_numeric_column(filename: str, value_field: str, parser) -> Dict[str, float]:
+def _load_numeric_column(
+    filename: str, value_field: str, parser: Callable[[str], Optional[float]]
+) -> Dict[str, float]:
     path = RAW_DIR / filename
     values: Dict[str, float] = {}
     with path.open(newline="", encoding="utf-8") as handle:
@@ -95,8 +110,8 @@ def _load_numeric_column(filename: str, value_field: str, parser) -> Dict[str, f
     return values
 
 
-def _build_rows() -> List[List[object]]:
-    institutions = _load_institutions()
+def _build_rows(sector_filter: Sequence[str]) -> List[List[object]]:
+    institutions = _load_institutions(sector_filter)
     if not institutions:
         return []
 
@@ -132,9 +147,9 @@ def _build_rows() -> List[List[object]]:
     return rows
 
 
-def write_dataset(rows: Iterable[List[object]]) -> None:
-    OUTPUT_PATH.parent.mkdir(parents=True, exist_ok=True)
-    with OUTPUT_PATH.open("w", newline="", encoding="utf-8") as handle:
+def write_dataset(rows: Iterable[List[object]], output_path: Path) -> None:
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    with output_path.open("w", newline="", encoding="utf-8") as handle:
         writer = csv.writer(handle)
         writer.writerow(
             [
@@ -155,10 +170,13 @@ def write_dataset(rows: Iterable[List[object]]) -> None:
 
 
 def main() -> None:
-    rows = _build_rows()
-    if not rows:
-        raise SystemExit("No qualifying institutions found.")
-    write_dataset(rows)
+    for name, config in SEGMENTS.items():
+        rows = _build_rows(config["sectors"])
+        if not rows:
+            raise SystemExit(
+                f"No qualifying institutions found for segment '{name}'."
+            )
+        write_dataset(rows, config["output"])
 
 
 if __name__ == "__main__":

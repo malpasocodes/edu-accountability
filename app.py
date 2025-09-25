@@ -14,12 +14,15 @@ def main() -> None:
     st.caption("Explore tuition, enrollment, and outcomes across institutions.")
 
     try:
-        data = load_processed("cost_vs_grad")
+        datasets = {
+            "4-year institutions": load_processed("cost_vs_grad"),
+            "2-year institutions": load_processed("cost_vs_grad_two_year"),
+        }
     except FileNotFoundError as exc:
         st.error(str(exc))
         return
 
-    render_dashboard(data)
+    render_dashboard(datasets)
 
 
 if __name__ == "__main__":

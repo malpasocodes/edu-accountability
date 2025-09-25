@@ -25,6 +25,7 @@ def render_cost_vs_grad_scatter(
     min_enrollment: int,
     global_cost_median: float,
     global_grad_median: float,
+    group_label: str,
 ) -> None:
     """Render the cost-versus-graduation chart and supporting tables."""
 
@@ -80,11 +81,11 @@ def render_cost_vs_grad_scatter(
 
     chart = (scatter + vline + hline).properties(height=500)
 
-    st.subheader("Cost vs. Graduation Rate (Level 1 Institutions)")
+    st.subheader(f"Cost vs. Graduation Rate ({group_label})")
     st.caption(
-        "In-state tuition cost compared against six-year graduation rates. "
-        f"Points represent institutions with >= {min_enrollment:,} undergraduate degree students; "
-        "dashed lines show global medians (no enrollment filter)."
+        "In-state tuition compared with six-year graduation rates. "
+        f"Points represent {group_label.lower()} with >= {min_enrollment:,} undergraduate "
+        "degree-seeking students; dashed lines show medians across the full segment."
     )
     render_altair_chart(chart, width="stretch")
 
