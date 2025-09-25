@@ -12,10 +12,12 @@ import streamlit as st
 from src.charts.cost_vs_grad_chart import render_cost_vs_grad_scatter
 from src.data.datasets import load_processed
 from src.ui.renderers import render_dataframe
+from src.charts.pell_top_dollars_chart import render_pell_top_dollars_chart
 
 PROJECT_ROOT = Path(__file__).resolve().parent
 DATA_DIR = PROJECT_ROOT / "data"
 PELL_SOURCE = DATA_DIR / "raw" / "pelltotals.csv"
+PELL_TOP_DOLLARS_SOURCE = DATA_DIR / "processed" / "pell_top_dollars.csv"
 
 VALUE_GRID_SECTION = "College Value Grid"
 PELL_SECTION = "Pell Grants"
@@ -43,7 +45,9 @@ VALUE_GRID_CHART_CONFIGS = (
 VALUE_GRID_CHARTS = [config.label for config in VALUE_GRID_CHART_CONFIGS]
 VALUE_GRID_CONFIG_MAP = {config.label: config for config in VALUE_GRID_CHART_CONFIGS}
 
+PELL_TOP_DOLLARS_LABEL = "Top Pell Dollars (Institutions)"
 PELL_CHARTS = [
+    PELL_TOP_DOLLARS_LABEL,
     "Pell share by institution (coming soon)",
     "Pell recipients vs Net Price (coming soon)",
     "Pell dollars by region (coming soon)",
@@ -66,6 +70,15 @@ def load_pell_dataset(path_str: str) -> pd.DataFrame:
     path = Path(path_str)
     if not path.exists():
         raise FileNotFoundError(f"Pell dataset not found at {path}.")
+    return pd.read_csv(path)
+
+
+@st.cache_data(show_spinner=False)
+def load_pell_top_dollars_dataset(path_str: str) -> pd.DataFrame:
+    """Load the processed Pell top dollars dataset."""
+    path = Path(path_str)
+    if not path.exists():
+        raise FileNotFoundError(f"Pell top dollars dataset not found at {path}.")
     return pd.read_csv(path)
 
 
@@ -148,6 +161,7 @@ def render_main(
     active_chart: str,
     value_grid_datasets: Dict[str, pd.DataFrame],
     pell_df: pd.DataFrame,
+    pell_top_dollars_df: pd.DataFrame | None,
 ) -> None:
     st.title(f"{active_section} » {active_chart}")
     st.caption(
@@ -163,11 +177,20 @@ def render_main(
             return
         _render_value_grid_chart(config.label, dataset, config.min_enrollment)
     else:
-        st.info(
-            f"{active_chart} will be available in a later phase. Until then, preview the "
-            "underlying Pell dataset below."
-        )
-        render_dataframe(pell_df.head(20), width="stretch")
+        if active_chart == PELL_TOP_DOLLARS_LABEL:
+            source_df = pell_top_dollars_df if pell_top_dollars_df is not None else pell_df
+            render_pell_top_dollars_chart(source_df, top_n=25)
+            if pell_top_dollars_df is None:
+                st.caption(
+                    "Using raw Pell data. Run `python data/processed/build_pell_top_dollars.py` to "
+                    "refresh the processed dataset."
+                )
+        else:
+            st.info(
+                f"{active_chart} will be available in a later phase. Until then, preview the "
+                "underlying Pell dataset below."
+            )
+            render_dataframe(pell_df.head(20), width="stretch")
 
 
 def main() -> None:
@@ -180,6 +203,11 @@ def main() -> None:
         st.sidebar.error(str(exc))
         st.error("Unable to load required datasets. See sidebar for details.")
         return
+
+    try:
+        pell_top_dollars_df = load_pell_top_dollars_dataset(str(PELL_TOP_DOLLARS_SOURCE))
+    except FileNotFoundError:
+        pell_top_dollars_df = None
 
     value_grid_datasets: Dict[str, pd.DataFrame] = {}
     for config in VALUE_GRID_CHART_CONFIGS:
@@ -198,7 +226,13 @@ def main() -> None:
         if active_section == VALUE_GRID_SECTION
         else st.session_state["pell_chart"]
     )
-    render_main(active_section, active_chart, value_grid_datasets, pell_df)
+    render_main(
+        active_section,
+        active_chart,
+        value_grid_datasets,
+        pell_df,
+        pell_top_dollars_df,
+    )
 
 
 if __name__ == "__main__":
