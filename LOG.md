@@ -2,6 +2,7 @@
 
 | Date | Change | Details | Files |
 | --- | --- | --- | --- |
+| 2024-11-24 | Added dataset builder | Added script to regenerate tuition vs graduation export for sectors 1-3 and refreshed processed CSV. | `src/data/build_tuition_vs_graduation.py`, `data/processed/tuition_vs_graduation.csv` |
 | 2024-11-24 | Refactor committed | Finalized Streamlit refactor, modularizing dashboard logic for long-term maintenance. | `app.py`, `src/` |
 | 2024-11-24 | Refactored Streamlit entry point | Moved business logic into `src/` modules and slimmed down `app.py`. | `app.py`, `src/` |
 | 2024-11-24 | Added contributor guide | Replaced prior content with concise repository guidelines for agents. | `AGENTS.md` |
