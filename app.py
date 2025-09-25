@@ -13,11 +13,17 @@ from src.charts.cost_vs_grad_chart import render_cost_vs_grad_scatter
 from src.data.datasets import load_processed
 from src.ui.renderers import render_dataframe
 from src.charts.pell_top_dollars_chart import render_pell_top_dollars_chart
+from src.charts.pell_vs_grad_scatter_chart import render_pell_vs_grad_scatter
 
 PROJECT_ROOT = Path(__file__).resolve().parent
 DATA_DIR = PROJECT_ROOT / "data"
 PELL_SOURCE = DATA_DIR / "raw" / "pelltotals.csv"
 PELL_TOP_DOLLARS_SOURCE = DATA_DIR / "processed" / "pell_top_dollars.csv"
+PELL_TOP_DOLLARS_FOUR_SOURCE = DATA_DIR / "processed" / "pell_top_dollars_four_year.csv"
+PELL_TOP_DOLLARS_TWO_SOURCE = DATA_DIR / "processed" / "pell_top_dollars_two_year.csv"
+PELL_VS_GRAD_SOURCE = DATA_DIR / "processed" / "pell_vs_grad_scatter.csv"
+PELL_VS_GRAD_FOUR_SOURCE = DATA_DIR / "processed" / "pell_vs_grad_scatter_four_year.csv"
+PELL_VS_GRAD_TWO_SOURCE = DATA_DIR / "processed" / "pell_vs_grad_scatter_two_year.csv"
 
 VALUE_GRID_SECTION = "College Value Grid"
 PELL_SECTION = "Pell Grants"
@@ -45,12 +51,15 @@ VALUE_GRID_CHART_CONFIGS = (
 VALUE_GRID_CHARTS = [config.label for config in VALUE_GRID_CHART_CONFIGS]
 VALUE_GRID_CONFIG_MAP = {config.label: config for config in VALUE_GRID_CHART_CONFIGS}
 
-PELL_TOP_DOLLARS_LABEL = "Top Pell Dollars (Institutions)"
+PELL_TOP_DOLLARS_FOUR_LABEL = "Top 25 Pell Dollar Recipients (4-year)"
+PELL_TOP_DOLLARS_TWO_LABEL = "Top 25 Pell Dollar Recipients (2-year)"
+PELL_VS_GRAD_FOUR_LABEL = "Pell Dollars vs Graduation Rate (4-year)"
+PELL_VS_GRAD_TWO_LABEL = "Pell Dollars vs Graduation Rate (2-year)"
 PELL_CHARTS = [
-    PELL_TOP_DOLLARS_LABEL,
-    "Pell share by institution (coming soon)",
-    "Pell recipients vs Net Price (coming soon)",
-    "Pell dollars by region (coming soon)",
+    PELL_TOP_DOLLARS_FOUR_LABEL,
+    PELL_TOP_DOLLARS_TWO_LABEL,
+    PELL_VS_GRAD_FOUR_LABEL,
+    PELL_VS_GRAD_TWO_LABEL,
 ]
 
 
@@ -79,6 +88,15 @@ def load_pell_top_dollars_dataset(path_str: str) -> pd.DataFrame:
     path = Path(path_str)
     if not path.exists():
         raise FileNotFoundError(f"Pell top dollars dataset not found at {path}.")
+    return pd.read_csv(path)
+
+
+@st.cache_data(show_spinner=False)
+def load_pell_vs_grad_dataset(path_str: str) -> pd.DataFrame:
+    """Load the processed Pell vs graduation dataset."""
+    path = Path(path_str)
+    if not path.exists():
+        raise FileNotFoundError(f"Pell vs graduation dataset not found at {path}.")
     return pd.read_csv(path)
 
 
@@ -120,7 +138,7 @@ def render_sidebar() -> None:
             "Chart Type",
             PELL_CHARTS,
             key="pell_chart",
-            help="Pell charts will appear once they are built.",
+            help="Select a Pell grant view to explore.",
         )
 
 
@@ -161,7 +179,7 @@ def render_main(
     active_chart: str,
     value_grid_datasets: Dict[str, pd.DataFrame],
     pell_df: pd.DataFrame,
-    pell_top_dollars_df: pd.DataFrame | None,
+    pell_resources: Dict[str, pd.DataFrame | None],
 ) -> None:
     st.title(f"{active_section} » {active_chart}")
     st.caption(
@@ -177,13 +195,37 @@ def render_main(
             return
         _render_value_grid_chart(config.label, dataset, config.min_enrollment)
     else:
-        if active_chart == PELL_TOP_DOLLARS_LABEL:
-            source_df = pell_top_dollars_df if pell_top_dollars_df is not None else pell_df
-            render_pell_top_dollars_chart(source_df, top_n=25)
-            if pell_top_dollars_df is None:
-                st.caption(
-                    "Using raw Pell data. Run `python data/processed/build_pell_top_dollars.py` to "
-                    "refresh the processed dataset."
+        if active_chart == PELL_TOP_DOLLARS_FOUR_LABEL:
+            dataset = pell_resources.get("top_four")
+            if dataset is not None:
+                render_pell_top_dollars_chart(dataset, top_n=25, title=PELL_TOP_DOLLARS_FOUR_LABEL)
+            else:
+                st.warning(
+                    "Missing processed dataset for four-year institutions. Run `python data/processed/build_pell_top_dollars.py` to regenerate."
+                )
+        elif active_chart == PELL_TOP_DOLLARS_TWO_LABEL:
+            dataset = pell_resources.get("top_two")
+            if dataset is not None:
+                render_pell_top_dollars_chart(dataset, top_n=25, title=PELL_TOP_DOLLARS_TWO_LABEL)
+            else:
+                st.warning(
+                    "Missing processed dataset for two-year institutions. Run `python data/processed/build_pell_top_dollars.py` to regenerate."
+                )
+        elif active_chart == PELL_VS_GRAD_FOUR_LABEL:
+            dataset = pell_resources.get("scatter_four")
+            if dataset is not None:
+                render_pell_vs_grad_scatter(dataset, title=PELL_VS_GRAD_FOUR_LABEL)
+            else:
+                st.warning(
+                    "Pell vs graduation dataset (4-year) not found. Run `python data/processed/build_pell_vs_grad_scatter.py` to generate it."
+                )
+        elif active_chart == PELL_VS_GRAD_TWO_LABEL:
+            dataset = pell_resources.get("scatter_two")
+            if dataset is not None:
+                render_pell_vs_grad_scatter(dataset, title=PELL_VS_GRAD_TWO_LABEL)
+            else:
+                st.warning(
+                    "Pell vs graduation dataset (2-year) not found. Run `python data/processed/build_pell_vs_grad_scatter.py` to generate it."
                 )
         else:
             st.info(
@@ -205,11 +247,46 @@ def main() -> None:
         return
 
     try:
-        pell_top_dollars_df = load_pell_top_dollars_dataset(str(PELL_TOP_DOLLARS_SOURCE))
+        pell_top_dollars_all_df = load_pell_top_dollars_dataset(str(PELL_TOP_DOLLARS_SOURCE))
     except FileNotFoundError:
-        pell_top_dollars_df = None
+        pell_top_dollars_all_df = None
+
+    try:
+        pell_top_dollars_four_df = load_pell_top_dollars_dataset(str(PELL_TOP_DOLLARS_FOUR_SOURCE))
+    except FileNotFoundError:
+        pell_top_dollars_four_df = None
+
+    try:
+        pell_top_dollars_two_df = load_pell_top_dollars_dataset(str(PELL_TOP_DOLLARS_TWO_SOURCE))
+    except FileNotFoundError:
+        pell_top_dollars_two_df = None
+
+    try:
+        pell_vs_grad_all_df = load_pell_vs_grad_dataset(str(PELL_VS_GRAD_SOURCE))
+    except FileNotFoundError:
+        pell_vs_grad_all_df = None
+
+    try:
+        pell_vs_grad_four_df = load_pell_vs_grad_dataset(str(PELL_VS_GRAD_FOUR_SOURCE))
+    except FileNotFoundError:
+        pell_vs_grad_four_df = None
+
+    try:
+        pell_vs_grad_two_df = load_pell_vs_grad_dataset(str(PELL_VS_GRAD_TWO_SOURCE))
+    except FileNotFoundError:
+        pell_vs_grad_two_df = None
 
     value_grid_datasets: Dict[str, pd.DataFrame] = {}
+
+    pell_resources: Dict[str, pd.DataFrame | None] = {
+        "raw": pell_df,
+        "top_all": pell_top_dollars_all_df,
+        "top_four": pell_top_dollars_four_df,
+        "top_two": pell_top_dollars_two_df,
+        "scatter_all": pell_vs_grad_all_df,
+        "scatter_four": pell_vs_grad_four_df,
+        "scatter_two": pell_vs_grad_two_df,
+    }
     for config in VALUE_GRID_CHART_CONFIGS:
         try:
             value_grid_datasets[config.label] = load_processed(config.dataset_key)
@@ -231,7 +308,7 @@ def main() -> None:
         active_chart,
         value_grid_datasets,
         pell_df,
-        pell_top_dollars_df,
+        pell_resources,
     )
 
 

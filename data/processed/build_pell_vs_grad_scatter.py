@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build processed datasets for top Pell grant dollar recipients (4-year and 2-year)."""
+"""Build Pell dollars versus graduation rate datasets (4-year and 2-year)."""
 
 from __future__ import annotations
 
@@ -7,7 +7,6 @@ import csv
 from pathlib import Path
 from typing import Dict, Iterable, List, Optional, Tuple
 
-TOP_N = 25
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 RAW_PELL_PATH = PROJECT_ROOT / "data" / "raw" / "pelltotals.csv"
 INSTITUTIONS_PATH = PROJECT_ROOT / "data" / "raw" / "institutions.csv"
@@ -15,9 +14,9 @@ GRAD_4YR_PATH = PROJECT_ROOT / "data" / "processed" / "tuition_vs_graduation.csv
 GRAD_2YR_PATH = PROJECT_ROOT / "data" / "processed" / "tuition_vs_graduation_two_year.csv"
 OUTPUT_DIR = Path(__file__).resolve().parent
 OUTPUT_PATHS = {
-    "all": OUTPUT_DIR / "pell_top_dollars.csv",
-    "four_year": OUTPUT_DIR / "pell_top_dollars_four_year.csv",
-    "two_year": OUTPUT_DIR / "pell_top_dollars_two_year.csv",
+    "all": OUTPUT_DIR / "pell_vs_grad_scatter.csv",
+    "four_year": OUTPUT_DIR / "pell_vs_grad_scatter_four_year.csv",
+    "two_year": OUTPUT_DIR / "pell_vs_grad_scatter_two_year.csv",
 }
 
 SECTOR_NAME_BY_CODE: Dict[str, str] = {
@@ -110,6 +109,11 @@ def _load_grad_lookup(path: Path, sector_lookup: Dict[str, str]) -> Dict[str, Di
             unit_id = (row.get("UnitID") or row.get("unitid") or "").strip()
             if not unit_id:
                 continue
+            grad_rate_raw = (row.get("graduation_rate") or row.get("GraduationRate") or "").strip()
+            try:
+                grad_rate = float(grad_rate_raw)
+            except ValueError:
+                continue
             institution = (
                 row.get("institution")
                 or row.get("Institution")
@@ -124,6 +128,7 @@ def _load_grad_lookup(path: Path, sector_lookup: Dict[str, str]) -> Dict[str, Di
             lookup[unit_id] = {
                 "institution": institution,
                 "sector": sector,
+                "graduation_rate": grad_rate,
             }
     return lookup
 
@@ -132,29 +137,17 @@ def _write_dataset(path: Path, rows: List[FieldRow]) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     with path.open("w", newline="", encoding="utf-8") as outfile:
         fieldnames = [
-            "rank",
             "UnitID",
             "Institution",
             "Sector",
+            "GraduationRate",
             "PellDollars",
             "PellDollarsBillions",
             "YearsCovered",
         ]
         writer = csv.DictWriter(outfile, fieldnames=fieldnames)
         writer.writeheader()
-        for rank, row in enumerate(rows, start=1):
-            dollars = row["PellDollars"]
-            writer.writerow(
-                {
-                    "rank": rank,
-                    "UnitID": row["UnitID"],
-                    "Institution": row["Institution"],
-                    "Sector": row["Sector"],
-                    "PellDollars": f"{dollars:.0f}",
-                    "PellDollarsBillions": f"{dollars / 1_000_000_000:.3f}",
-                    "YearsCovered": row["YearsCovered"],
-                }
-            )
+        writer.writerows(rows)
 
 
 def build_dataset() -> None:
@@ -192,44 +185,40 @@ def build_dataset() -> None:
             if total_dollars <= 0:
                 continue
 
-            info = grad_lookup_4.get(unit_id)
-            segment_rows: Optional[List[FieldRow]] = None
-            if info is not None:
+            target_lookup: Optional[Dict[str, Dict[str, str]]] = None
+            if unit_id in grad_lookup_4:
+                target_lookup = grad_lookup_4
                 segment_rows = rows_4
+            elif unit_id in grad_lookup_2:
+                target_lookup = grad_lookup_2
+                segment_rows = rows_2
             else:
-                info = grad_lookup_2.get(unit_id)
-                if info is not None:
-                    segment_rows = rows_2
-
-            if info is None:
-                # Institution not present in graduation datasets we rely on.
                 continue
 
-            institution = info["institution"] or (raw_row.get("Institution") or "").strip()
-            sector = info["sector"] or sector_lookup.get(unit_id, "Unknown") or "Unknown"
+            grad_info = target_lookup[unit_id]
+            institution = grad_info["institution"] or (raw_row.get("Institution") or "").strip()
+            sector = grad_info["sector"] or sector_lookup.get(unit_id, "Unknown") or "Unknown"
+            grad_rate = grad_info["graduation_rate"]
 
             record: FieldRow = {
                 "UnitID": unit_id,
                 "Institution": institution,
                 "Sector": sector,
-                "PellDollars": total_dollars,
+                "GraduationRate": f"{grad_rate:.2f}",
+                "PellDollars": f"{total_dollars:.0f}",
+                "PellDollarsBillions": f"{total_dollars / 1_000_000_000:.3f}",
                 "YearsCovered": years_covered,
             }
 
             rows_all.append(record)
-            if segment_rows is not None:
-                segment_rows.append(record)
+            segment_rows.append(record)
 
     if not rows_all:
-        raise ValueError("No Pell dollar records constructed. Check raw inputs.")
+        raise ValueError("No Pell/graduation overlap records constructed. Check inputs.")
 
-    rows_all.sort(key=lambda item: item["PellDollars"], reverse=True)
-    rows_4.sort(key=lambda item: item["PellDollars"], reverse=True)
-    rows_2.sort(key=lambda item: item["PellDollars"], reverse=True)
-
-    _write_dataset(OUTPUT_PATHS["all"], rows_all[:TOP_N])
-    _write_dataset(OUTPUT_PATHS["four_year"], rows_4[:TOP_N])
-    _write_dataset(OUTPUT_PATHS["two_year"], rows_2[:TOP_N])
+    for key, rows in ("all", rows_all), ("four_year", rows_4), ("two_year", rows_2):
+        rows.sort(key=lambda item: float(item["PellDollars"]), reverse=True)
+        _write_dataset(OUTPUT_PATHS[key], rows)
 
 
 if __name__ == "__main__":

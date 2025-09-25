@@ -158,7 +158,7 @@ def _prepare_top_dollar_dataframe(df: pd.DataFrame, top_n: int) -> PellTopDollar
 
 
 
-def render_pell_top_dollars_chart(df: pd.DataFrame, *, top_n: int = 25) -> None:
+def render_pell_top_dollars_chart(df: pd.DataFrame, *, top_n: int = 25, title: str) -> None:
     """Render a horizontal bar chart of top Pell dollar recipients with supporting table."""
 
     try:
@@ -178,7 +178,7 @@ def render_pell_top_dollars_chart(df: pd.DataFrame, *, top_n: int = 25) -> None:
         chart_data["sector"] = "Unknown"
 
     period_suffix = f" ({prepared.period_label})" if prepared.period_label else ""
-    chart_title = f"Top {len(chart_data)} Pell Dollar Recipients{period_suffix}"
+    chart_title = f"{title}{period_suffix}"
     chart = (
         alt.Chart(chart_data)
         .mark_bar()
@@ -211,7 +211,7 @@ def render_pell_top_dollars_chart(df: pd.DataFrame, *, top_n: int = 25) -> None:
     st.subheader(chart_title)
     period_text = prepared.period_label or "the available years"
     st.caption(
-        f"Institutions ranked by total Pell grant dollars across {period_text}."
+        f"Top {len(chart_data)} institutions by Pell grant dollars across {period_text}."
     )
     render_altair_chart(chart, width="stretch")
 
