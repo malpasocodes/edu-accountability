@@ -61,11 +61,13 @@ def render_cost_vs_grad_scatter(
                 "cost:Q",
                 title="Cost (In-State Tuition)",
                 scale=alt.Scale(domain=[cost_domain_min, cost_domain_max]),
+                axis=alt.Axis(titleFontSize=18, titleFontWeight="bold"),
             ),
             y=alt.Y(
                 "graduation_rate:Q",
                 title="Graduation Rate",
                 scale=alt.Scale(domain=[grad_domain_min, grad_domain_max]),
+                axis=alt.Axis(titleFontSize=18, titleFontWeight="bold"),
             ),
             color=alt.Color(
                 "sector:N",
