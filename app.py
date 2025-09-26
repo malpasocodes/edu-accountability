@@ -28,6 +28,7 @@ PELL_VS_GRAD_SOURCE = DATA_DIR / "processed" / "pell_vs_grad_scatter.csv"
 PELL_VS_GRAD_FOUR_SOURCE = DATA_DIR / "processed" / "pell_vs_grad_scatter_four_year.csv"
 PELL_VS_GRAD_TWO_SOURCE = DATA_DIR / "processed" / "pell_vs_grad_scatter_two_year.csv"
 
+OVERVIEW_SECTION = "Project Overview"
 VALUE_GRID_SECTION = "College Value Grid"
 PELL_SECTION = "Pell Grants"
 
@@ -72,7 +73,7 @@ PELL_CHARTS = [
 
 def _init_session_state() -> None:
     defaults: Dict[str, str] = {
-        "active_section": VALUE_GRID_SECTION,
+        "active_section": OVERVIEW_SECTION,
         "value_grid_chart": VALUE_GRID_CHARTS[0],
         "pell_chart": PELL_CHARTS[0],
     }
@@ -132,13 +133,44 @@ def _prepare_value_grid_dataset(label: str, df: pd.DataFrame) -> pd.DataFrame:
     return working
 
 
+def render_overview() -> None:
+    """Display the landing page with project context and navigation tips."""
+
+    st.title("College Value Explorer")
+    st.caption(
+        "A data-first dashboard built from IPEDS extracts to track affordability, outcomes, "
+        "and Pell Grant momentum across U.S. colleges."
+    )
+    st.markdown(
+        """
+        This project aggregates canonical IPEDS releases into reproducible datasets and charts so
+        educators, journalists, and policy partners can evaluate how institutions balance costs,
+        completion, and Pell Grant support.
+        """
+    )
+    st.markdown(
+        """
+        **How to use the dashboard**
+
+        - Choose **College Value Grid** to compare net price against graduation outcomes for four-year and two-year institutions.
+        - Open **Pell Grants** to review award concentrations, multi-year trends, and outcome relationships.
+        - Regenerate or extend datasets with the scripts in `data/processed/` and explore raw pulls in `data/raw/` to keep analyses reproducible.
+        """
+    )
+    st.markdown(
+        """
+        Use the navigation sidebar to switch between sections. Each chart module lives under `src/`, mirrored by tests in `tests/`, so you can extend the dashboard with new visuals that share the same data pipeline.
+        """
+    )
+
+
 def render_sidebar() -> None:
     sidebar = st.sidebar
     sidebar.title("Navigation")
 
     active_section = sidebar.radio(
         "Explore",
-        [VALUE_GRID_SECTION, PELL_SECTION],
+        [OVERVIEW_SECTION, VALUE_GRID_SECTION, PELL_SECTION],
         key="active_section",
     )
 
@@ -149,7 +181,7 @@ def render_sidebar() -> None:
             key="value_grid_chart",
             help="Switch between four-year and two-year value grid charts.",
         )
-    else:
+    elif active_section == PELL_SECTION:
         sidebar.radio(
             "Chart Type",
             PELL_CHARTS,
@@ -192,11 +224,19 @@ def _render_value_grid_chart(label: str, dataset: pd.DataFrame, min_enrollment: 
 
 def render_main(
     active_section: str,
-    active_chart: str,
+    active_chart: str | None,
     value_grid_datasets: Dict[str, pd.DataFrame],
     pell_df: pd.DataFrame,
     pell_resources: Dict[str, pd.DataFrame | None],
 ) -> None:
+    if active_section == OVERVIEW_SECTION:
+        render_overview()
+        return
+
+    if not active_chart:
+        st.info("Select a chart from the sidebar to begin exploring the data.")
+        return
+
     st.title(f"{active_section} » {active_chart}")
     st.caption(
         "We are rebuilding the dashboard with section-scoped charts, filters, and exports. "
@@ -210,7 +250,7 @@ def render_main(
             st.error("Unable to locate dataset for the selected chart.")
             return
         _render_value_grid_chart(config.label, dataset, config.min_enrollment)
-    else:
+    elif active_section == PELL_SECTION:
         if active_chart == PELL_TOP_DOLLARS_FOUR_LABEL:
             dataset = pell_resources.get("top_four")
             if dataset is not None:
@@ -265,6 +305,9 @@ def render_main(
                 "underlying Pell dataset below."
             )
             render_dataframe(pell_df.head(20), width="stretch")
+    else:
+        st.info("Section coming soon. In the meantime, review the available datasets below.")
+        render_dataframe(pell_df.head(20), width="stretch")
 
 
 def main() -> None:
@@ -342,11 +385,12 @@ def main() -> None:
     render_sidebar()
 
     active_section = st.session_state["active_section"]
-    active_chart = (
-        st.session_state["value_grid_chart"]
-        if active_section == VALUE_GRID_SECTION
-        else st.session_state["pell_chart"]
-    )
+    if active_section == VALUE_GRID_SECTION:
+        active_chart = st.session_state["value_grid_chart"]
+    elif active_section == PELL_SECTION:
+        active_chart = st.session_state["pell_chart"]
+    else:
+        active_chart = None
     render_main(
         active_section,
         active_chart,
