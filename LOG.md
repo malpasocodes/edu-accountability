@@ -2,6 +2,7 @@
 
 | Date | Change | Details | Files |
 | --- | --- | --- | --- |
+| 2025-09-25 | Added federal loan scatter charts | Introduced four- and two-year federal loan vs graduation rate scatter visuals to mirror Pell comparisons. | `app.py`, `src/charts/loan_vs_grad_scatter_chart.py` |
 | 2025-09-25 | Added Federal Loans section | Introduced a Federal Loans section with top-dollar charts for four- and two-year institutions sourced from the federal loan dataset. | `app.py`, `src/charts/loan_top_dollars_chart.py` |
 | 2025-09-25 | Streamlined value grid UI | Removed enrollment legend from the value grid charts and increased quadrant tab font size for readability. | `src/charts/cost_vs_grad_chart.py` |
 | 2025-09-25 | Added landing overview | Introduced a project overview landing page so Streamlit opens with context before navigating to charts. | `app.py` |

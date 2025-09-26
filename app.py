@@ -11,6 +11,7 @@ import streamlit as st
 
 from src.charts.cost_vs_grad_chart import render_cost_vs_grad_scatter
 from src.charts.loan_top_dollars_chart import render_loan_top_dollars_chart
+from src.charts.loan_vs_grad_scatter_chart import render_loan_vs_grad_scatter
 from src.data.datasets import load_processed
 from src.ui.renderers import render_dataframe
 from src.charts.pell_top_dollars_chart import render_pell_top_dollars_chart
@@ -77,9 +78,13 @@ PELL_CHARTS = [
 
 LOAN_TOP_DOLLARS_FOUR_LABEL = "Top 25 Federal Loan Dollars (4-year)"
 LOAN_TOP_DOLLARS_TWO_LABEL = "Top 25 Federal Loan Dollars (2-year)"
+LOAN_VS_GRAD_FOUR_LABEL = "Federal Loans vs Graduation Rate (4-year)"
+LOAN_VS_GRAD_TWO_LABEL = "Federal Loans vs Graduation Rate (2-year)"
 LOAN_CHARTS = [
     LOAN_TOP_DOLLARS_FOUR_LABEL,
     LOAN_TOP_DOLLARS_TWO_LABEL,
+    LOAN_VS_GRAD_FOUR_LABEL,
+    LOAN_VS_GRAD_TWO_LABEL,
 ]
 
 
@@ -306,6 +311,26 @@ def render_main(
                     metadata,
                     top_n=25,
                     title=LOAN_TOP_DOLLARS_TWO_LABEL,
+                )
+            else:
+                st.error("Missing metadata for two-year institutions.")
+        elif active_chart == LOAN_VS_GRAD_FOUR_LABEL:
+            metadata = value_grid_datasets.get(FOUR_YEAR_VALUE_GRID_LABEL)
+            if metadata is not None:
+                render_loan_vs_grad_scatter(
+                    loan_df,
+                    metadata,
+                    title=LOAN_VS_GRAD_FOUR_LABEL,
+                )
+            else:
+                st.error("Missing metadata for four-year institutions.")
+        elif active_chart == LOAN_VS_GRAD_TWO_LABEL:
+            metadata = value_grid_datasets.get(TWO_YEAR_VALUE_GRID_LABEL)
+            if metadata is not None:
+                render_loan_vs_grad_scatter(
+                    loan_df,
+                    metadata,
+                    title=LOAN_VS_GRAD_TWO_LABEL,
                 )
             else:
                 st.error("Missing metadata for two-year institutions.")
