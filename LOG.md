@@ -2,6 +2,7 @@
 
 | Date | Change | Details | Files |
 | --- | --- | --- | --- |
+| 2025-09-26 | Added overview navigation | Reworked sidebar expanders with overview pages and guidance copy for value grid, loans, and Pell sections. | `app.py`, `LOG.md` |
 | 2025-09-25 | Added federal loan trend charts | Introduced four- and two-year federal loan trend visuals aligned with existing Pell charts, sizing bubbles by enrollment for consistency. | `app.py`, `src/charts/loan_trend_chart.py`, `src/charts/pell_vs_grad_scatter_chart.py`, `src/charts/loan_vs_grad_scatter_chart.py` |
 | 2025-09-25 | Added federal loan scatter charts | Introduced four- and two-year federal loan vs graduation rate scatter visuals to mirror Pell comparisons. | `app.py`, `src/charts/loan_vs_grad_scatter_chart.py` |
 | 2025-09-25 | Added Federal Loans section | Introduced a Federal Loans section with top-dollar charts for four- and two-year institutions sourced from the federal loan dataset. | `app.py`, `src/charts/loan_top_dollars_chart.py` |

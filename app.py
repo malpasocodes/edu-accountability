@@ -57,7 +57,7 @@ VALUE_GRID_CHART_CONFIGS = (
         min_enrollment=0,
     ),
 )
-VALUE_GRID_CHARTS = [config.label for config in VALUE_GRID_CHART_CONFIGS]
+VALUE_GRID_OVERVIEW_LABEL = "Overview"
 VALUE_GRID_CONFIG_MAP = {config.label: config for config in VALUE_GRID_CHART_CONFIGS}
 FOUR_YEAR_VALUE_GRID_LABEL = VALUE_GRID_CHART_CONFIGS[0].label
 TWO_YEAR_VALUE_GRID_LABEL = VALUE_GRID_CHART_CONFIGS[1].label
@@ -76,6 +76,7 @@ PELL_CHARTS = [
     PELL_TREND_FOUR_LABEL,
     PELL_TREND_TWO_LABEL,
 ]
+PELL_OVERVIEW_LABEL = "Overview"
 
 LOAN_TOP_DOLLARS_FOUR_LABEL = "Top 25 Federal Loan Dollars (4-year)"
 LOAN_TOP_DOLLARS_TWO_LABEL = "Top 25 Federal Loan Dollars (2-year)"
@@ -91,14 +92,15 @@ LOAN_CHARTS = [
     LOAN_TREND_FOUR_LABEL,
     LOAN_TREND_TWO_LABEL,
 ]
+LOAN_OVERVIEW_LABEL = "Overview"
 
 
 def _init_session_state() -> None:
     defaults: Dict[str, str] = {
         "active_section": OVERVIEW_SECTION,
-        "value_grid_chart": VALUE_GRID_CHARTS[0],
-        "loan_chart": LOAN_CHARTS[0],
-        "pell_chart": PELL_CHARTS[0],
+        "value_grid_chart": VALUE_GRID_OVERVIEW_LABEL,
+        "loan_chart": LOAN_OVERVIEW_LABEL,
+        "pell_chart": PELL_OVERVIEW_LABEL,
     }
     for key, value in defaults.items():
         st.session_state.setdefault(key, value)
@@ -168,18 +170,46 @@ def _prepare_value_grid_dataset(label: str, df: pd.DataFrame) -> pd.DataFrame:
 def render_overview() -> None:
     """Display the landing page with project context and navigation tips."""
 
-    st.title("College Value Explorer")
+    st.title("EDU Accountability Dashboard")
     st.caption(
-        "A data-first dashboard built from IPEDS extracts to track affordability, outcomes, "
-        "and Pell Grant momentum across U.S. colleges."
+        "Data driven insights to track college accountability, affordability, and outcomes."
+        
     )
+    st.subheader("Mission")
     st.markdown(
         """
-        This project aggregates canonical IPEDS releases into reproducible datasets and charts so
-        educators, journalists, and policy partners can evaluate how institutions balance costs,
-        completion, and Pell Grant support.
+        The EDU Accountability Dashboard delivers independent, data-driven analysis of 
+        higher education with a focus on accountability, affordability, and outcomes.
+        Our audience includes policymakers, researchers, and taxpayers who seek greater transparency
+        and effectiveness in postsecondary education. We take no advocacy position on specific 
+        institutions, programs, metrics, or policies. Our goal is to provide clear and well-documented 
+        methods that support policy discussions, strengthen institutional accountability, 
+        and improve public understanding of the value of higher education.
+
         """
     )
+    st.subheader("Current Focus")
+    st.markdown(
+        """
+        **1. Metrics for Accountability**  
+We are refining measures that capture affordability, completion, and post-graduation outcomes. These metrics are designed to make comparisons across institutions more transparent, reproducible, and useful for policymakers and researchers.  
+
+**2. Government Funding of Higher Education**  
+We are analyzing the flow of federal support—especially through student loans and Pell Grants—to better understand how public resources shape affordability and access. Tracking these funding streams alongside institutional outcomes provides a fuller picture of higher education’s value and accountability.  
+    """
+    )
+    st.subheader("Disclaimer")
+    st.markdown(
+        """
+        The EDU Accountability Dashboard is a work in progress. Data and analyses presented here are intended solely 
+        for research and policy purposes and should not be used to make enrollment or investment decisions about 
+        individual colleges or programs. Metrics are derived from public datasets (e.g. IPEDS, U.S. Census) and may 
+        not capture all factors influencing educational or economic outcomes. While we strive for accuracy, users are 
+        responsible for independently verifying the data and analysis before drawing conclusions or making decisions.
+
+        """
+    )
+    st.subheader("Getting Started")
     st.markdown(
         """
         **How to use the dashboard**
@@ -187,47 +217,80 @@ def render_overview() -> None:
         - Choose **College Value Grid** to compare net price against graduation outcomes for four-year and two-year institutions.
         - Review **Federal Loans** to see which institutions draw the largest federal loan volumes.
         - Open **Pell Grants** to review award concentrations, multi-year trends, and outcome relationships.
-        - Regenerate or extend datasets with the scripts in `data/processed/` and explore raw pulls in `data/raw/` to keep analyses reproducible.
+       
         """
     )
-    st.markdown(
-        """
-        Use the navigation sidebar to switch between sections. Each chart module lives under `src/`, mirrored by tests in `tests/`, so you can extend the dashboard with new visuals that share the same data pipeline.
-        """
-    )
+    
 
 
 def render_sidebar() -> None:
     sidebar = st.sidebar
     sidebar.title("Navigation")
 
-    active_section = sidebar.radio(
-        "Explore",
-        [OVERVIEW_SECTION, VALUE_GRID_SECTION, FEDERAL_LOANS_SECTION, PELL_SECTION],
-        key="active_section",
-    )
+    if sidebar.button("🏠 Home", key="nav_home", use_container_width=True):
+        st.session_state["active_section"] = OVERVIEW_SECTION
 
-    if active_section == VALUE_GRID_SECTION:
-        sidebar.radio(
-            "Chart Type",
-            VALUE_GRID_CHARTS,
-            key="value_grid_chart",
-            help="Switch between four-year and two-year value grid charts.",
-        )
-    elif active_section == FEDERAL_LOANS_SECTION:
-        sidebar.radio(
-            "Chart Type",
-            LOAN_CHARTS,
-            key="loan_chart",
-            help="Select a federal loan view to explore.",
-        )
-    elif active_section == PELL_SECTION:
-        sidebar.radio(
-            "Chart Type",
-            PELL_CHARTS,
-            key="pell_chart",
-            help="Select a Pell grant view to explore.",
-        )
+    def _is_active(section: str) -> bool:
+        return st.session_state.get("active_section") == section
+
+    value_grid_expander = sidebar.expander(
+        "📊 College Value Grid", expanded=_is_active(VALUE_GRID_SECTION)
+    )
+    if value_grid_expander.button(
+        VALUE_GRID_OVERVIEW_LABEL,
+        key="nav_value_grid_overview",
+        use_container_width=True,
+    ):
+        st.session_state["active_section"] = VALUE_GRID_SECTION
+        st.session_state["value_grid_chart"] = VALUE_GRID_OVERVIEW_LABEL
+    if value_grid_expander.button(
+        FOUR_YEAR_VALUE_GRID_LABEL,
+        key="nav_value_grid_four",
+        use_container_width=True,
+    ):
+        st.session_state["active_section"] = VALUE_GRID_SECTION
+        st.session_state["value_grid_chart"] = FOUR_YEAR_VALUE_GRID_LABEL
+    if value_grid_expander.button(
+        TWO_YEAR_VALUE_GRID_LABEL,
+        key="nav_value_grid_two",
+        use_container_width=True,
+    ):
+        st.session_state["active_section"] = VALUE_GRID_SECTION
+        st.session_state["value_grid_chart"] = TWO_YEAR_VALUE_GRID_LABEL
+
+    loan_expander = sidebar.expander(
+        "💵 Federal Loans", expanded=_is_active(FEDERAL_LOANS_SECTION)
+    )
+    if loan_expander.button(
+        "Overview", key="nav_loans_overview", use_container_width=True
+    ):
+        st.session_state["active_section"] = FEDERAL_LOANS_SECTION
+        st.session_state["loan_chart"] = LOAN_OVERVIEW_LABEL
+    for index, label in enumerate(LOAN_CHARTS):
+        if loan_expander.button(
+            label,
+            key=f"nav_loans_{index}",
+            use_container_width=True,
+        ):
+            st.session_state["active_section"] = FEDERAL_LOANS_SECTION
+            st.session_state["loan_chart"] = label
+
+    pell_expander = sidebar.expander(
+        "🎓 Pell Grants", expanded=_is_active(PELL_SECTION)
+    )
+    if pell_expander.button(
+        "Overview", key="nav_pell_overview", use_container_width=True
+    ):
+        st.session_state["active_section"] = PELL_SECTION
+        st.session_state["pell_chart"] = PELL_OVERVIEW_LABEL
+    for index, label in enumerate(PELL_CHARTS):
+        if pell_expander.button(
+            label,
+            key=f"nav_pell_{index}",
+            use_container_width=True,
+        ):
+            st.session_state["active_section"] = PELL_SECTION
+            st.session_state["pell_chart"] = label
 
 
 def _render_value_grid_chart(label: str, dataset: pd.DataFrame, min_enrollment: int) -> None:
@@ -285,13 +348,45 @@ def render_main(
     )
 
     if active_section == VALUE_GRID_SECTION:
-        config = VALUE_GRID_CONFIG_MAP[active_chart]
+        if active_chart == VALUE_GRID_OVERVIEW_LABEL:
+            st.markdown(
+                """
+                Start with the value grid to see how net price aligns with completion among
+                high-enrollment institutions. Use the buttons in the sidebar to switch between
+                four-year and two-year comparisons once you're ready to dive into the data.
+                """
+            )
+            st.info(
+                "Tip: Refresh processed datasets in `data/processed/` before generating new "
+                "value grid exports so median benchmarks stay up to date."
+            )
+            return
+
+        config = VALUE_GRID_CONFIG_MAP.get(active_chart)
+        if config is None:
+            st.error("Select a value grid view from the sidebar to load a chart.")
+            return
         dataset = value_grid_datasets.get(config.label)
         if dataset is None:
             st.error("Unable to locate dataset for the selected chart.")
             return
         _render_value_grid_chart(config.label, dataset, config.min_enrollment)
     elif active_section == FEDERAL_LOANS_SECTION:
+        if active_chart == LOAN_OVERVIEW_LABEL:
+            st.markdown(
+                """
+                Explore how federal lending patterns shape affordability by using the chart buttons
+                in the sidebar. Start with the top-dollar views to see which institutions borrow the
+                most, then compare graduation outcomes or multi-year trends to understand how debt
+                exposure shifts over time.
+                """
+            )
+            st.info(
+                "Reminder: Loan totals reflect processed IPEDS extracts. "
+                "Validate against the latest Department of Education releases for high-stakes decisions."
+            )
+            return
+
         if loan_df.empty:
             st.warning(
                 "Loan dataset is unavailable. Confirm `data/raw/loantotals.csv` exists and reload."
@@ -360,6 +455,20 @@ def render_main(
             else:
                 st.error("Missing metadata for two-year institutions.")
     elif active_section == PELL_SECTION:
+        if active_chart == PELL_OVERVIEW_LABEL:
+            st.markdown(
+                """
+                Review Pell Grant distributions to understand where need-based aid concentrates. Use
+                the chart buttons to spotlight top recipients, examine graduation relationships, and
+                trace award trends across institutional sectors.
+                """
+            )
+            st.info(
+                "Pell figures come from processed extracts in this repository. Refresh the "
+                "underlying data before publishing new findings."
+            )
+            return
+
         if active_chart == PELL_TOP_DOLLARS_FOUR_LABEL:
             dataset = pell_resources.get("top_four")
             if dataset is not None:
