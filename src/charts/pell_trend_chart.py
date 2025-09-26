@@ -36,6 +36,29 @@ def render_pell_trend_chart(df: pd.DataFrame, *, title: str) -> None:
         st.warning("Trend data contains no numeric values to plot.")
         return
 
+    anchor_year = None
+    if "AnchorYear" in filtered.columns:
+        anchor_candidates = (
+            filtered["AnchorYear"].dropna().astype(float).astype(int).unique()
+        )
+        if anchor_candidates.size:
+            anchor_year = int(anchor_candidates[0])
+
+    if anchor_year is not None:
+        anchor_subset = filtered[filtered["Year"] == anchor_year]
+        top_institutions = (
+            anchor_subset.sort_values("PellDollarsBillions", ascending=False)
+            .drop_duplicates(subset=["Institution"], keep="first")
+            .head(10)["Institution"]
+            .tolist()
+        )
+        filtered = filtered[filtered["Institution"].isin(top_institutions)]
+        if filtered.empty:
+            st.warning(
+                "Unable to plot Pell trends because no institutions had positive Pell dollars in the anchor year."
+            )
+            return
+
     chart = (
         alt.Chart(filtered)
         .mark_line(point=True)
@@ -59,7 +82,15 @@ def render_pell_trend_chart(df: pd.DataFrame, *, title: str) -> None:
     )
 
     st.subheader(title)
-    st.caption(
-        "Trends for the top 25 Pell grant recipients in this segment, showing annual dollar totals; colors indicate sector."
-    )
+    if anchor_year is None:
+        caption = (
+            "Trends for the top Pell grant recipients in this segment, showing annual dollar totals; "
+            "colors indicate sector."
+        )
+    else:
+        caption = (
+            f"Top 10 institutions by Pell dollars in {anchor_year}, with annual totals over time; "
+            "colors indicate sector."
+        )
+    st.caption(caption)
     render_altair_chart(chart, width="stretch")

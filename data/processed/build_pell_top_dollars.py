@@ -168,6 +168,7 @@ def _write_trend_dataset(
     metadata: Dict[str, Dict[str, str]],
     raw_rows: Dict[str, Dict[str, str]],
     year_columns: List[Tuple[int, str]],
+    anchor_year: int,
 ) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     with path.open("w", newline="", encoding="utf-8") as outfile:
@@ -178,6 +179,7 @@ def _write_trend_dataset(
             "Year",
             "PellDollars",
             "PellDollarsBillions",
+            "AnchorYear",
         ]
         writer = csv.DictWriter(outfile, fieldnames=fieldnames)
         writer.writeheader()
@@ -208,8 +210,55 @@ def _write_trend_dataset(
                         "Year": year,
                         "PellDollars": f"{dollars:.0f}",
                         "PellDollarsBillions": f"{dollars / 1_000_000_000:.3f}",
+                        "AnchorYear": anchor_year,
                     }
                 )
+
+
+def _top_ids_for_year(
+    rows: List[FieldRow],
+    raw_rows: Dict[str, Dict[str, str]],
+    year_column_map: Dict[int, str],
+    target_year: int,
+    limit: int,
+) -> List[str]:
+    column = year_column_map.get(target_year)
+    if column is None:
+        return [row["UnitID"] for row in rows[:limit]]
+
+    scored: List[Tuple[str, float]] = []
+    for row in rows:
+        unit_id = row["UnitID"]
+        value_raw = (raw_rows.get(unit_id, {}).get(column) or "").replace(",", "").strip()
+        try:
+            value = float(value_raw)
+        except ValueError:
+            value = 0.0
+        scored.append((unit_id, value))
+
+    scored.sort(key=lambda item: item[1], reverse=True)
+    selected: List[str] = []
+    seen = set()
+    for unit_id, value in scored:
+        if unit_id in seen:
+            continue
+        if value <= 0:
+            continue
+        selected.append(unit_id)
+        seen.add(unit_id)
+        if len(selected) == limit:
+            break
+
+    if not selected:
+        for row in rows[:limit]:
+            unit_id = row["UnitID"]
+            if unit_id not in seen:
+                selected.append(unit_id)
+                seen.add(unit_id)
+                if len(selected) == limit:
+                    break
+
+    return selected
 
 
 def build_dataset() -> None:
@@ -229,6 +278,9 @@ def build_dataset() -> None:
             raise ValueError(
                 "Unable to locate year columns (expected headers like 'YR2022')."
             )
+
+        year_column_map = {year: column for year, column in year_columns}
+        target_year = 2022 if 2022 in year_column_map else year_columns[-1][0]
 
         min_year = year_columns[0][0]
         max_year = year_columns[-1][0]
@@ -302,19 +354,24 @@ def build_dataset() -> None:
     top_four_ids = [row["UnitID"] for row in top_four]
     top_two_ids = [row["UnitID"] for row in top_two]
 
+    trend_four_ids = _top_ids_for_year(rows_4, raw_year_rows, year_column_map, target_year, 10)
+    trend_two_ids = _top_ids_for_year(rows_2, raw_year_rows, year_column_map, target_year, 10)
+
     _write_trend_dataset(
         TREND_OUTPUT_PATHS["four_year"],
-        top_four_ids,
+        trend_four_ids,
         metadata,
         raw_year_rows,
         year_columns,
+        target_year,
     )
     _write_trend_dataset(
         TREND_OUTPUT_PATHS["two_year"],
-        top_two_ids,
+        trend_two_ids,
         metadata,
         raw_year_rows,
         year_columns,
+        target_year,
     )
 
 
