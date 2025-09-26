@@ -36,12 +36,37 @@ def render_cost_vs_grad_scatter(
         )
         return
 
+    cost_min = float(filtered_df["cost"].min())
+    cost_max = float(filtered_df["cost"].max())
+    grad_min = float(filtered_df["graduation_rate"].min())
+    grad_max = float(filtered_df["graduation_rate"].max())
+
+    cost_domain_min = min(cost_min, global_cost_median)
+    cost_domain_max = max(cost_max, global_cost_median)
+    if cost_domain_min == cost_domain_max:
+        cost_domain_min -= 0.5
+        cost_domain_max += 0.5
+
+    grad_domain_min = min(grad_min, global_grad_median)
+    grad_domain_max = max(grad_max, global_grad_median)
+    if grad_domain_min == grad_domain_max:
+        grad_domain_min -= 0.5
+        grad_domain_max += 0.5
+
     scatter = (
         alt.Chart(filtered_df)
         .mark_circle(opacity=0.75)
         .encode(
-            x=alt.X("cost:Q", title="Cost (In-State Tuition)"),
-            y=alt.Y("graduation_rate:Q", title="Graduation Rate"),
+            x=alt.X(
+                "cost:Q",
+                title="Cost (In-State Tuition)",
+                scale=alt.Scale(domain=[cost_domain_min, cost_domain_max]),
+            ),
+            y=alt.Y(
+                "graduation_rate:Q",
+                title="Graduation Rate",
+                scale=alt.Scale(domain=[grad_domain_min, grad_domain_max]),
+            ),
             color=alt.Color(
                 "sector:N",
                 legend=alt.Legend(title="Sector"),
@@ -49,7 +74,7 @@ def render_cost_vs_grad_scatter(
             ),
             size=alt.Size(
                 "enrollment:Q",
-                title="Undergrad Degree Enrollment",
+                legend=None,
                 scale=alt.Scale(range=[30, 600]),
             ),
             tooltip=[
@@ -79,13 +104,61 @@ def render_cost_vs_grad_scatter(
         .encode(y="graduation_rate:Q")
     )
 
-    chart = (scatter + vline + hline).properties(height=500)
+    cost_span = max(cost_max - cost_min, 1.0)
+    grad_span = max(grad_max - grad_min, 1.0)
+    x_offset = cost_span * 0.25
+    y_offset = grad_span * 0.25
+
+    def _clamp(value: float, lower: float, upper: float) -> float:
+        if lower == upper:
+            return lower
+        cushion = (upper - lower) * 0.05
+        if cushion == 0:
+            cushion = 0.01
+        return min(max(value, lower + cushion), upper - cushion)
+
+    annotation_positions = pd.DataFrame(
+        [
+            {
+                "label": "I",
+                "x": _clamp(global_cost_median - x_offset, cost_min, cost_max),
+                "y": _clamp(global_grad_median + y_offset, grad_min, grad_max),
+            },
+            {
+                "label": "II",
+                "x": _clamp(global_cost_median + x_offset, cost_min, cost_max),
+                "y": _clamp(global_grad_median + y_offset, grad_min, grad_max),
+            },
+            {
+                "label": "III",
+                "x": _clamp(global_cost_median - x_offset, cost_min, cost_max),
+                "y": _clamp(global_grad_median - y_offset, grad_min, grad_max),
+            },
+            {
+                "label": "IV",
+                "x": _clamp(global_cost_median + x_offset, cost_min, cost_max),
+                "y": _clamp(global_grad_median - y_offset, grad_min, grad_max),
+            },
+        ]
+    )
+
+    annotations = (
+        alt.Chart(annotation_positions)
+        .mark_text(fontWeight="bold", fontSize=34, color="#313131")
+        .encode(x="x:Q", y="y:Q", text="label:N")
+    )
+
+    chart = (scatter + vline + hline + annotations).properties(height=500)
 
     st.subheader(f"Cost vs. Graduation Rate ({group_label})")
     st.caption(
         "In-state tuition compared with six-year graduation rates. "
         f"Points represent {group_label.lower()} with >= {min_enrollment:,} undergraduate "
         "degree-seeking students; dashed lines show medians across the full segment."
+    )
+    st.markdown(
+        "**Quadrant legend:** I = High GradRate, Low Cost; II = High GradRate, High Cost; "
+        "III = Low GradRate, Low Cost; IV = Low GradRate, High Cost"
     )
     render_altair_chart(chart, width="stretch")
 
@@ -111,6 +184,25 @@ def render_cost_vs_grad_scatter(
             "grad_group == 'Low' and cost_group == 'High'"
         ),
     }
+
+    st.markdown(
+        """
+        <style>
+        div[data-testid="stTabs"] button[role="tab"] div p {
+            font-size: 1.25rem !important;
+            font-weight: 600;
+        }
+        div[data-testid="stTabs"] button[role="tab"] div {
+            font-size: 1.25rem !important;
+        }
+        div[data-testid="stTabs"] button[role="tab"] p {
+            font-size: 1.25rem !important;
+            font-weight: 600;
+        }
+        </style>
+        """,
+        unsafe_allow_html=True,
+    )
 
     tabs = st.tabs(list(quadrants.keys()))
     for tab, (label, quadrant_data) in zip(tabs, quadrants.items()):
