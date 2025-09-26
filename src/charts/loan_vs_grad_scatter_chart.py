@@ -27,7 +27,7 @@ def _prepare_loan_vs_grad_dataframe(
     if not year_columns:
         raise ValueError("No year columns found in loan dataset (expected columns named like 'YR2022').")
 
-    required_metadata = {"UnitID", "institution", "sector", "graduation_rate"}
+    required_metadata = {"UnitID", "institution", "sector", "graduation_rate", "enrollment"}
     missing_metadata = [column for column in required_metadata if column not in metadata_df.columns]
     if missing_metadata:
         raise ValueError(
@@ -48,12 +48,13 @@ def _prepare_loan_vs_grad_dataframe(
     metadata = metadata_df.copy()
     metadata["UnitID"] = _normalize_unit_ids(metadata["UnitID"])
     metadata["graduation_rate"] = pd.to_numeric(metadata["graduation_rate"], errors="coerce")
+    metadata["enrollment"] = pd.to_numeric(metadata["enrollment"], errors="coerce")
     metadata["sector"] = metadata["sector"].astype("string")
     metadata["institution"] = metadata["institution"].astype("string")
 
     merged = pd.merge(
         working,
-        metadata[["UnitID", "institution", "sector", "graduation_rate"]],
+        metadata[["UnitID", "institution", "sector", "graduation_rate", "enrollment"]],
         on="UnitID",
         how="inner",
     )
@@ -61,7 +62,12 @@ def _prepare_loan_vs_grad_dataframe(
         return pd.DataFrame(), None
 
     merged["loan_dollars"] = merged[numeric_year_columns].sum(axis=1, skipna=True)
-    filtered = merged[(merged["loan_dollars"] > 0) & merged["graduation_rate"].notna()].copy()
+    filtered = merged[
+        (merged["loan_dollars"] > 0)
+        & merged["graduation_rate"].notna()
+        & merged["enrollment"].notna()
+        & (merged["enrollment"] > 0)
+    ].copy()
     if filtered.empty:
         return pd.DataFrame(), None
 
@@ -73,6 +79,7 @@ def _prepare_loan_vs_grad_dataframe(
     filtered["Sector"] = filtered["sector"].fillna("Unknown").replace("", "Unknown")
     filtered["loan_dollars_billions"] = filtered["loan_dollars"] / 1_000_000_000
     filtered["graduation_rate"] = filtered["graduation_rate"].astype(float)
+    filtered["enrollment"] = filtered["enrollment"].astype(float)
     filtered["YearsCovered"] = period_label
 
     top_filtered = filtered.sort_values("loan_dollars_billions", ascending=False).head(top_n).copy()
@@ -121,12 +128,13 @@ def render_loan_vs_grad_scatter(
                 alt.Tooltip("graduation_rate:Q", title="Graduation rate", format=".1f"),
                 alt.Tooltip("loan_dollars_billions:Q", title="Loan dollars (billions)", format=".2f"),
                 alt.Tooltip("Sector:N", title="Sector"),
+                alt.Tooltip("enrollment:Q", title="Enrollment", format=","),
                 alt.Tooltip("YearsCovered:N", title="Years"),
             ],
             size=alt.Size(
-                "loan_dollars_billions:Q",
-                title="Loan dollars (billions)",
-                scale=alt.Scale(range=[30, 400]),
+                "enrollment:Q",
+                title="Enrollment",
+                scale=alt.Scale(range=[30, 600]),
             ),
         )
         .properties(height=520)
@@ -135,10 +143,10 @@ def render_loan_vs_grad_scatter(
     st.subheader(title if period_label is None else f"{title} ({period_label})")
     period_text = period_label or "the available years"
     st.caption(
-        "Each point represents an institution with total federal loan volume and graduation rate; "
-        "bubble size scales with loan totals. Showing top {top_n} institutions by loan dollars.".format(
-            top_n=len(prepared)
-        )
+        (
+            "Each point represents an institution with total federal loan volume and graduation rate; "
+            "bubble size scales with enrollment. Showing top {count} institutions by loan dollars."
+        ).format(count=len(prepared))
     )
     render_altair_chart(scatter, width="stretch")
 
@@ -149,6 +157,7 @@ def render_loan_vs_grad_scatter(
             "YearsCovered",
             "loan_dollars_billions",
             "graduation_rate",
+            "enrollment",
         ]]
         .copy()
         .rename(
@@ -156,12 +165,14 @@ def render_loan_vs_grad_scatter(
                 "YearsCovered": "Years",
                 "loan_dollars_billions": "Loan dollars (billions)",
                 "graduation_rate": "Graduation rate (%)",
+                "enrollment": "Enrollment",
             }
         )
         .sort_values("Loan dollars (billions)", ascending=False)
     )
     table["Loan dollars (billions)"] = table["Loan dollars (billions)"].round(2)
     table["Graduation rate (%)"] = table["Graduation rate (%)"].round(1)
+    table["Enrollment"] = table["Enrollment"].round().astype(int)
 
     st.markdown("**Institutions (top loan totals)**")
     render_dataframe(table, width="stretch")

@@ -11,6 +11,7 @@ import streamlit as st
 
 from src.charts.cost_vs_grad_chart import render_cost_vs_grad_scatter
 from src.charts.loan_top_dollars_chart import render_loan_top_dollars_chart
+from src.charts.loan_trend_chart import render_loan_trend_chart
 from src.charts.loan_vs_grad_scatter_chart import render_loan_vs_grad_scatter
 from src.data.datasets import load_processed
 from src.ui.renderers import render_dataframe
@@ -80,11 +81,15 @@ LOAN_TOP_DOLLARS_FOUR_LABEL = "Top 25 Federal Loan Dollars (4-year)"
 LOAN_TOP_DOLLARS_TWO_LABEL = "Top 25 Federal Loan Dollars (2-year)"
 LOAN_VS_GRAD_FOUR_LABEL = "Federal Loans vs Graduation Rate (4-year)"
 LOAN_VS_GRAD_TWO_LABEL = "Federal Loans vs Graduation Rate (2-year)"
+LOAN_TREND_FOUR_LABEL = "Federal Loan Dollars Trend (4-year)"
+LOAN_TREND_TWO_LABEL = "Federal Loan Dollars Trend (2-year)"
 LOAN_CHARTS = [
     LOAN_TOP_DOLLARS_FOUR_LABEL,
     LOAN_TOP_DOLLARS_TWO_LABEL,
     LOAN_VS_GRAD_FOUR_LABEL,
     LOAN_VS_GRAD_TWO_LABEL,
+    LOAN_TREND_FOUR_LABEL,
+    LOAN_TREND_TWO_LABEL,
 ]
 
 
@@ -334,6 +339,26 @@ def render_main(
                 )
             else:
                 st.error("Missing metadata for two-year institutions.")
+        elif active_chart == LOAN_TREND_FOUR_LABEL:
+            metadata = value_grid_datasets.get(FOUR_YEAR_VALUE_GRID_LABEL)
+            if metadata is not None:
+                render_loan_trend_chart(
+                    loan_df,
+                    metadata,
+                    title=LOAN_TREND_FOUR_LABEL,
+                )
+            else:
+                st.error("Missing metadata for four-year institutions.")
+        elif active_chart == LOAN_TREND_TWO_LABEL:
+            metadata = value_grid_datasets.get(TWO_YEAR_VALUE_GRID_LABEL)
+            if metadata is not None:
+                render_loan_trend_chart(
+                    loan_df,
+                    metadata,
+                    title=LOAN_TREND_TWO_LABEL,
+                )
+            else:
+                st.error("Missing metadata for two-year institutions.")
     elif active_section == PELL_SECTION:
         if active_chart == PELL_TOP_DOLLARS_FOUR_LABEL:
             dataset = pell_resources.get("top_four")
@@ -354,7 +379,15 @@ def render_main(
         elif active_chart == PELL_VS_GRAD_FOUR_LABEL:
             dataset = pell_resources.get("scatter_four")
             if dataset is not None:
-                render_pell_vs_grad_scatter(dataset, title=PELL_VS_GRAD_FOUR_LABEL)
+                metadata = value_grid_datasets.get(FOUR_YEAR_VALUE_GRID_LABEL)
+                if metadata is not None:
+                    render_pell_vs_grad_scatter(
+                        dataset,
+                        title=PELL_VS_GRAD_FOUR_LABEL,
+                        metadata_df=metadata,
+                    )
+                else:
+                    st.error("Missing metadata for four-year institutions.")
             else:
                 st.warning(
                     "Pell vs graduation dataset (4-year) not found. Run `python data/processed/build_pell_vs_grad_scatter.py` to generate it."
@@ -362,7 +395,15 @@ def render_main(
         elif active_chart == PELL_VS_GRAD_TWO_LABEL:
             dataset = pell_resources.get("scatter_two")
             if dataset is not None:
-                render_pell_vs_grad_scatter(dataset, title=PELL_VS_GRAD_TWO_LABEL)
+                metadata = value_grid_datasets.get(TWO_YEAR_VALUE_GRID_LABEL)
+                if metadata is not None:
+                    render_pell_vs_grad_scatter(
+                        dataset,
+                        title=PELL_VS_GRAD_TWO_LABEL,
+                        metadata_df=metadata,
+                    )
+                else:
+                    st.error("Missing metadata for two-year institutions.")
             else:
                 st.warning(
                     "Pell vs graduation dataset (2-year) not found. Run `python data/processed/build_pell_vs_grad_scatter.py` to generate it."
