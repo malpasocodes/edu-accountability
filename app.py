@@ -10,6 +10,7 @@ import pandas as pd
 import streamlit as st
 
 from src.charts.cost_vs_grad_chart import render_cost_vs_grad_scatter
+from src.charts.loan_top_dollars_chart import render_loan_top_dollars_chart
 from src.data.datasets import load_processed
 from src.ui.renderers import render_dataframe
 from src.charts.pell_top_dollars_chart import render_pell_top_dollars_chart
@@ -19,6 +20,7 @@ from src.charts.pell_trend_chart import render_pell_trend_chart
 PROJECT_ROOT = Path(__file__).resolve().parent
 DATA_DIR = PROJECT_ROOT / "data"
 PELL_SOURCE = DATA_DIR / "raw" / "pelltotals.csv"
+LOAN_SOURCE = DATA_DIR / "raw" / "loantotals.csv"
 PELL_TOP_DOLLARS_SOURCE = DATA_DIR / "processed" / "pell_top_dollars.csv"
 PELL_TOP_DOLLARS_FOUR_SOURCE = DATA_DIR / "processed" / "pell_top_dollars_four_year.csv"
 PELL_TOP_DOLLARS_TWO_SOURCE = DATA_DIR / "processed" / "pell_top_dollars_two_year.csv"
@@ -30,6 +32,7 @@ PELL_VS_GRAD_TWO_SOURCE = DATA_DIR / "processed" / "pell_vs_grad_scatter_two_yea
 
 OVERVIEW_SECTION = "Project Overview"
 VALUE_GRID_SECTION = "College Value Grid"
+FEDERAL_LOANS_SECTION = "Federal Loans"
 PELL_SECTION = "Pell Grants"
 
 
@@ -54,6 +57,8 @@ VALUE_GRID_CHART_CONFIGS = (
 )
 VALUE_GRID_CHARTS = [config.label for config in VALUE_GRID_CHART_CONFIGS]
 VALUE_GRID_CONFIG_MAP = {config.label: config for config in VALUE_GRID_CHART_CONFIGS}
+FOUR_YEAR_VALUE_GRID_LABEL = VALUE_GRID_CHART_CONFIGS[0].label
+TWO_YEAR_VALUE_GRID_LABEL = VALUE_GRID_CHART_CONFIGS[1].label
 
 PELL_TOP_DOLLARS_FOUR_LABEL = "Top 25 Pell Dollar Recipients (4-year)"
 PELL_TOP_DOLLARS_TWO_LABEL = "Top 25 Pell Dollar Recipients (2-year)"
@@ -70,11 +75,19 @@ PELL_CHARTS = [
     PELL_TREND_TWO_LABEL,
 ]
 
+LOAN_TOP_DOLLARS_FOUR_LABEL = "Top 25 Federal Loan Dollars (4-year)"
+LOAN_TOP_DOLLARS_TWO_LABEL = "Top 25 Federal Loan Dollars (2-year)"
+LOAN_CHARTS = [
+    LOAN_TOP_DOLLARS_FOUR_LABEL,
+    LOAN_TOP_DOLLARS_TWO_LABEL,
+]
+
 
 def _init_session_state() -> None:
     defaults: Dict[str, str] = {
         "active_section": OVERVIEW_SECTION,
         "value_grid_chart": VALUE_GRID_CHARTS[0],
+        "loan_chart": LOAN_CHARTS[0],
         "pell_chart": PELL_CHARTS[0],
     }
     for key, value in defaults.items():
@@ -87,6 +100,15 @@ def load_pell_dataset(path_str: str) -> pd.DataFrame:
     path = Path(path_str)
     if not path.exists():
         raise FileNotFoundError(f"Pell dataset not found at {path}.")
+    return pd.read_csv(path)
+
+
+@st.cache_data(show_spinner=False)
+def load_loan_dataset(path_str: str) -> pd.DataFrame:
+    """Load the federal loan totals dataset."""
+    path = Path(path_str)
+    if not path.exists():
+        raise FileNotFoundError(f"Loan dataset not found at {path}.")
     return pd.read_csv(path)
 
 
@@ -153,6 +175,7 @@ def render_overview() -> None:
         **How to use the dashboard**
 
         - Choose **College Value Grid** to compare net price against graduation outcomes for four-year and two-year institutions.
+        - Review **Federal Loans** to see which institutions draw the largest federal loan volumes.
         - Open **Pell Grants** to review award concentrations, multi-year trends, and outcome relationships.
         - Regenerate or extend datasets with the scripts in `data/processed/` and explore raw pulls in `data/raw/` to keep analyses reproducible.
         """
@@ -170,7 +193,7 @@ def render_sidebar() -> None:
 
     active_section = sidebar.radio(
         "Explore",
-        [OVERVIEW_SECTION, VALUE_GRID_SECTION, PELL_SECTION],
+        [OVERVIEW_SECTION, VALUE_GRID_SECTION, FEDERAL_LOANS_SECTION, PELL_SECTION],
         key="active_section",
     )
 
@@ -180,6 +203,13 @@ def render_sidebar() -> None:
             VALUE_GRID_CHARTS,
             key="value_grid_chart",
             help="Switch between four-year and two-year value grid charts.",
+        )
+    elif active_section == FEDERAL_LOANS_SECTION:
+        sidebar.radio(
+            "Chart Type",
+            LOAN_CHARTS,
+            key="loan_chart",
+            help="Select a federal loan view to explore.",
         )
     elif active_section == PELL_SECTION:
         sidebar.radio(
@@ -226,6 +256,7 @@ def render_main(
     active_section: str,
     active_chart: str | None,
     value_grid_datasets: Dict[str, pd.DataFrame],
+    loan_df: pd.DataFrame,
     pell_df: pd.DataFrame,
     pell_resources: Dict[str, pd.DataFrame | None],
 ) -> None:
@@ -250,6 +281,34 @@ def render_main(
             st.error("Unable to locate dataset for the selected chart.")
             return
         _render_value_grid_chart(config.label, dataset, config.min_enrollment)
+    elif active_section == FEDERAL_LOANS_SECTION:
+        if loan_df.empty:
+            st.warning(
+                "Loan dataset is unavailable. Confirm `data/raw/loantotals.csv` exists and reload."
+            )
+            return
+        if active_chart == LOAN_TOP_DOLLARS_FOUR_LABEL:
+            metadata = value_grid_datasets.get(FOUR_YEAR_VALUE_GRID_LABEL)
+            if metadata is not None:
+                render_loan_top_dollars_chart(
+                    loan_df,
+                    metadata,
+                    top_n=25,
+                    title=LOAN_TOP_DOLLARS_FOUR_LABEL,
+                )
+            else:
+                st.error("Missing metadata for four-year institutions.")
+        elif active_chart == LOAN_TOP_DOLLARS_TWO_LABEL:
+            metadata = value_grid_datasets.get(TWO_YEAR_VALUE_GRID_LABEL)
+            if metadata is not None:
+                render_loan_top_dollars_chart(
+                    loan_df,
+                    metadata,
+                    top_n=25,
+                    title=LOAN_TOP_DOLLARS_TWO_LABEL,
+                )
+            else:
+                st.error("Missing metadata for two-year institutions.")
     elif active_section == PELL_SECTION:
         if active_chart == PELL_TOP_DOLLARS_FOUR_LABEL:
             dataset = pell_resources.get("top_four")
@@ -322,6 +381,12 @@ def main() -> None:
         return
 
     try:
+        loan_df = load_loan_dataset(str(LOAN_SOURCE))
+    except FileNotFoundError as exc:
+        st.sidebar.error(str(exc))
+        loan_df = pd.DataFrame()
+
+    try:
         pell_top_dollars_all_df = load_pell_top_dollars_dataset(str(PELL_TOP_DOLLARS_SOURCE))
     except FileNotFoundError:
         pell_top_dollars_all_df = None
@@ -387,6 +452,8 @@ def main() -> None:
     active_section = st.session_state["active_section"]
     if active_section == VALUE_GRID_SECTION:
         active_chart = st.session_state["value_grid_chart"]
+    elif active_section == FEDERAL_LOANS_SECTION:
+        active_chart = st.session_state["loan_chart"]
     elif active_section == PELL_SECTION:
         active_chart = st.session_state["pell_chart"]
     else:
@@ -395,6 +462,7 @@ def main() -> None:
         active_section,
         active_chart,
         value_grid_datasets,
+        loan_df,
         pell_df,
         pell_resources,
     )
