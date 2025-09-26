@@ -2,65 +2,70 @@
 
 from __future__ import annotations
 
+from dataclasses import dataclass
+
+import numpy as np
 import pandas as pd
 import streamlit as st
 
 from src.charts.cost_vs_grad_chart import render_cost_vs_grad_scatter
 
 
-def _prepare_dataset(df: pd.DataFrame) -> pd.DataFrame:
+MIN_ENROLLMENT_THRESHOLD = 1000
+
+
+def _minimum_enrollment_for_label(label: str) -> int:
+    if "2-year" in label.lower():
+        return 0
+    return MIN_ENROLLMENT_THRESHOLD
+
+
+@dataclass(frozen=True)
+class PreparedDataset:
+    frame: pd.DataFrame
+    enrollment_values: np.ndarray
+
+
+@st.cache_data(show_spinner=False)
+def _prepare_dataset(label: str, df: pd.DataFrame) -> PreparedDataset:
+    """Standardize, sort, and cache dataset details for quick filtering."""
+
+    _ = label  # included to differentiate cache entries per dataset label
+
     if "enrollment" not in df.columns:
-        prepared = df.assign(enrollment=0)
+        working = df.assign(enrollment=0)
     else:
-        prepared = df.copy()
-    prepared["enrollment"] = pd.to_numeric(
-        prepared["enrollment"], errors="coerce"
-    ).fillna(0)
-    return prepared
+        working = df.copy()
+
+    working["enrollment"] = pd.to_numeric(working["enrollment"], errors="coerce").fillna(0)
+    sorted_frame = (
+        working.sort_values("enrollment", kind="mergesort").reset_index(drop=True)
+    )
+    enrollment_values = sorted_frame["enrollment"].to_numpy(copy=True)
+
+    return PreparedDataset(frame=sorted_frame, enrollment_values=enrollment_values)
 
 
-def _build_enrollment_options(max_enrollment: int) -> list[int]:
-    if max_enrollment <= 0:
-        return [0]
-
-    base_setpoints = [0, 1000, 2500, 5000, 10000, 25000, 50000, 100000]
-    options: list[int] = []
-    for point in base_setpoints:
-        if point <= max_enrollment and point not in options:
-            options.append(point)
-
-    if max_enrollment < 100000 and max_enrollment not in options:
-        options.append(max_enrollment)
-
-    if not options:
-        options = [max_enrollment]
-
-    return options
+ENROLLMENT_CHOICES = [0, 1000, 10000, 50000]
 
 
 def render_dashboard(datasets: dict[str, pd.DataFrame]) -> None:
     """Render sidebar controls and the cost-versus-graduation visualizations."""
 
-    prepared = {label: _prepare_dataset(df) for label, df in datasets.items()}
+    prepared = {label: _prepare_dataset(label, df) for label, df in datasets.items()}
     medians = {
         label: (
-            frame["cost"].median(),
-            frame["graduation_rate"].median(),
+            bundle.frame["cost"].median(),
+            bundle.frame["graduation_rate"].median(),
         )
-        for label, frame in prepared.items()
+        for label, bundle in prepared.items()
     }
-
-    max_enrollment = max(
-        (int(frame["enrollment"].max()) for frame in prepared.values() if not frame.empty),
-        default=0,
-    )
-    slider_max = max(0, max_enrollment)
 
     all_sectors = sorted(
         {
             sector
-            for frame in prepared.values()
-            for sector in frame["sector"].dropna().unique()
+            for bundle in prepared.values()
+            for sector in bundle.frame["sector"].dropna().unique()
         }
     )
     default_sectors = [
@@ -73,8 +78,8 @@ def render_dashboard(datasets: dict[str, pd.DataFrame]) -> None:
     all_states = sorted(
         {
             state
-            for frame in prepared.values()
-            for state in frame["state"].dropna().unique()
+            for bundle in prepared.values()
+            for state in bundle.frame["state"].dropna().unique()
         }
     )
     state_all_label = "All States"
@@ -82,23 +87,17 @@ def render_dashboard(datasets: dict[str, pd.DataFrame]) -> None:
     st.sidebar.header("Chart Explorer")
     st.sidebar.write("Cost vs Graduation Rate")
 
-    enrollment_options = _build_enrollment_options(slider_max)
-    default_value = 1000 if slider_max >= 1000 else slider_max
-    if default_value not in enrollment_options:
-        default_value = enrollment_options[-1]
-
-    min_enrollment = st.sidebar.selectbox(
-        "Minimum undergraduate enrollment",
-        options=enrollment_options,
-        index=enrollment_options.index(default_value),
-        help="Filter institutions by undergraduate degree-seeking enrollment (ENR_UGD).",
-    )
-
-    selected_sectors = st.sidebar.multiselect(
-        "Sectors",
-        options=all_sectors,
-        default=default_selection,
-    )
+    sector_container = st.sidebar.container()
+    sector_container.markdown("**Sectors**")
+    selected_sectors = [
+        sector
+        for sector in all_sectors
+        if sector_container.checkbox(
+            sector,
+            value=sector in default_selection,
+            key=f"sector_{sector.lower().replace(' ', '_').replace(',', '').replace('-', '_')}",
+        )
+    ]
 
     state_options = [state_all_label] + all_states
     selected_states = st.sidebar.multiselect(
@@ -116,12 +115,43 @@ def render_dashboard(datasets: dict[str, pd.DataFrame]) -> None:
     tabs = st.tabs(list(prepared.keys()))
     for tab, label in zip(tabs, prepared.keys()):
         with tab:
-            frame = prepared[label]
-            filtered = frame.loc[
-                (frame["enrollment"] >= min_enrollment)
-                & (frame["sector"].isin(selected_sectors))
-                & (frame["state"].isin(active_states))
-            ]
+            min_enrollment = _minimum_enrollment_for_label(label)
+
+            bundle = prepared[label]
+            if not bundle.frame.empty:
+                start_idx = int(
+                    np.searchsorted(
+                        bundle.enrollment_values,
+                        min_enrollment,
+                        side="left",
+                    )
+                )
+                enrollment_filtered = bundle.frame.iloc[start_idx:]
+            else:
+                enrollment_filtered = bundle.frame
+
+            if selected_sectors:
+                sector_filtered = enrollment_filtered[enrollment_filtered["sector"].isin(selected_sectors)]
+            else:
+                sector_filtered = enrollment_filtered.iloc[0:0]
+
+            if active_states:
+                filtered = sector_filtered[sector_filtered["state"].isin(active_states)]
+            else:
+                filtered = sector_filtered.iloc[0:0]
+
+            filtered = filtered.loc[:, [
+                col
+                for col in [
+                    "institution",
+                    "sector",
+                    "cost",
+                    "graduation_rate",
+                    "enrollment",
+                    "state",
+                ]
+                if col in filtered.columns
+            ]]
 
             cost_median, grad_median = medians[label]
             render_cost_vs_grad_scatter(
