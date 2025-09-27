@@ -12,6 +12,9 @@ from src.charts.pell_trend_chart import render_pell_trend_chart
 from src.config.constants import (
     PELL_SECTION,
     PELL_OVERVIEW_LABEL,
+    PELL_TOP_DOLLARS_LABEL,
+    PELL_VS_GRAD_LABEL,
+    PELL_TREND_LABEL,
     PELL_TOP_DOLLARS_FOUR_LABEL,
     PELL_TOP_DOLLARS_TWO_LABEL,
     PELL_VS_GRAD_FOUR_LABEL,
@@ -47,7 +50,15 @@ class PellGrantsSection(BaseSection):
         """Render a specific Pell Grants chart."""
         self.render_section_header(PELL_SECTION, chart_name)
         
-        if chart_name == PELL_TOP_DOLLARS_FOUR_LABEL:
+        # Handle consolidated chart names with tabs
+        if chart_name == PELL_TOP_DOLLARS_LABEL:
+            self._render_pell_top_dollars_with_tabs(chart_name)
+        elif chart_name == PELL_VS_GRAD_LABEL:
+            self._render_pell_vs_grad_with_tabs(chart_name)
+        elif chart_name == PELL_TREND_LABEL:
+            self._render_pell_trend_with_tabs(chart_name)
+        # Handle individual chart names for backward compatibility
+        elif chart_name == PELL_TOP_DOLLARS_FOUR_LABEL:
             self._render_pell_top_dollars("top_four", chart_name)
         elif chart_name == PELL_TOP_DOLLARS_TWO_LABEL:
             self._render_pell_top_dollars("top_two", chart_name)
@@ -110,6 +121,36 @@ class PellGrantsSection(BaseSection):
                 f"Pell trend dataset ({sector}) not found. "
                 "Run `python data/processed/build_pell_top_dollars.py` to regenerate."
             )
+    
+    def _render_pell_top_dollars_with_tabs(self, title: str) -> None:
+        """Render Pell top dollars chart with 4-year and 2-year tabs."""
+        tab1, tab2 = st.tabs(["4-year", "2-year"])
+        
+        with tab1:
+            self._render_pell_top_dollars("top_four", f"{title} (4-year)")
+        
+        with tab2:
+            self._render_pell_top_dollars("top_two", f"{title} (2-year)")
+    
+    def _render_pell_vs_grad_with_tabs(self, title: str) -> None:
+        """Render Pell vs graduation chart with 4-year and 2-year tabs."""
+        tab1, tab2 = st.tabs(["4-year", "2-year"])
+        
+        with tab1:
+            self._render_pell_vs_grad("scatter_four", "four_year", f"{title} (4-year)")
+        
+        with tab2:
+            self._render_pell_vs_grad("scatter_two", "two_year", f"{title} (2-year)")
+    
+    def _render_pell_trend_with_tabs(self, title: str) -> None:
+        """Render Pell trend chart with 4-year and 2-year tabs."""
+        tab1, tab2 = st.tabs(["4-year", "2-year"])
+        
+        with tab1:
+            self._render_pell_trend("trend_four", f"{title} (4-year)")
+        
+        with tab2:
+            self._render_pell_trend("trend_two", f"{title} (2-year)")
     
     def get_available_charts(self) -> List[str]:
         """Get available charts for Pell Grants section."""
