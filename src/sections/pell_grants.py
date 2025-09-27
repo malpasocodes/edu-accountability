@@ -59,9 +59,9 @@ class PellGrantsSection(BaseSection):
             self._render_pell_trend_with_tabs(chart_name)
         # Handle individual chart names for backward compatibility
         elif chart_name == PELL_TOP_DOLLARS_FOUR_LABEL:
-            self._render_pell_top_dollars("top_four", chart_name)
+            self._render_pell_top_dollars("four_year", chart_name)
         elif chart_name == PELL_TOP_DOLLARS_TWO_LABEL:
-            self._render_pell_top_dollars("top_two", chart_name)
+            self._render_pell_top_dollars("two_year", chart_name)
         elif chart_name == PELL_VS_GRAD_FOUR_LABEL:
             self._render_pell_vs_grad("scatter_four", "four_year", chart_name)
         elif chart_name == PELL_VS_GRAD_TWO_LABEL:
@@ -78,17 +78,21 @@ class PellGrantsSection(BaseSection):
             if self.data_manager.pell_df is not None:
                 render_dataframe(self.data_manager.pell_df.head(20), width="stretch")
     
-    def _render_pell_top_dollars(self, resource_key: str, title: str) -> None:
+    def _render_pell_top_dollars(self, sector: str, title: str) -> None:
         """Render Pell top dollars chart."""
-        dataset = self.data_manager.get_pell_resource(resource_key)
-        if dataset is not None:
-            render_pell_top_dollars_chart(dataset, top_n=25, title=title)
-        else:
-            sector = "four-year" if "four" in resource_key else "two-year"
-            st.warning(
-                f"Missing processed dataset for {sector} institutions. "
-                "Run `python data/processed/build_pell_top_dollars.py` to regenerate."
+        metadata = self.data_manager.get_metadata_for_sector(sector)
+        if metadata is not None and self.data_manager.pell_df is not None:
+            render_pell_top_dollars_chart(
+                self.data_manager.pell_df,
+                metadata,
+                top_n=25,
+                title=title
             )
+        else:
+            if metadata is None:
+                st.error(f"Missing metadata for {sector.replace('_', '-')} institutions.")
+            else:
+                st.error("Missing raw Pell data.")
     
     def _render_pell_vs_grad(self, resource_key: str, sector: str, title: str) -> None:
         """Render Pell vs graduation chart."""
@@ -125,12 +129,12 @@ class PellGrantsSection(BaseSection):
     def _render_pell_top_dollars_with_tabs(self, title: str) -> None:
         """Render Pell top dollars chart with 4-year and 2-year tabs."""
         tab1, tab2 = st.tabs(["4-year", "2-year"])
-        
+
         with tab1:
-            self._render_pell_top_dollars("top_four", f"{title} (4-year)")
-        
+            self._render_pell_top_dollars("four_year", f"{title} (4-year)")
+
         with tab2:
-            self._render_pell_top_dollars("top_two", f"{title} (2-year)")
+            self._render_pell_top_dollars("two_year", f"{title} (2-year)")
     
     def _render_pell_vs_grad_with_tabs(self, title: str) -> None:
         """Render Pell vs graduation chart with 4-year and 2-year tabs."""
