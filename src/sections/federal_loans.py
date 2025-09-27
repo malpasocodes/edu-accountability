@@ -14,6 +14,9 @@ from src.config.constants import (
     FOUR_YEAR_VALUE_GRID_LABEL,
     TWO_YEAR_VALUE_GRID_LABEL,
     LOAN_OVERVIEW_LABEL,
+    LOAN_TOP_DOLLARS_LABEL,
+    LOAN_VS_GRAD_LABEL,
+    LOAN_TREND_LABEL,
     LOAN_TOP_DOLLARS_FOUR_LABEL,
     LOAN_TOP_DOLLARS_TWO_LABEL,
     LOAN_VS_GRAD_FOUR_LABEL,
@@ -51,11 +54,19 @@ class FederalLoansSection(BaseSection):
         
         if self.data_manager.loan_df is None or self.data_manager.loan_df.empty:
             st.warning(
-                "Loan dataset is unavailable. Confirm `data/raw/loantotals.csv` exists and reload."
+                "Loan dataset is unavailable. Confirm `data/raw/fsa/loantotals.csv` exists and reload."
             )
             return
         
-        if chart_name == LOAN_TOP_DOLLARS_FOUR_LABEL:
+        # Handle consolidated chart names with tabs
+        if chart_name == LOAN_TOP_DOLLARS_LABEL:
+            self._render_loan_top_dollars_with_tabs(chart_name)
+        elif chart_name == LOAN_VS_GRAD_LABEL:
+            self._render_loan_vs_grad_with_tabs(chart_name)
+        elif chart_name == LOAN_TREND_LABEL:
+            self._render_loan_trend_with_tabs(chart_name)
+        # Handle individual chart names for backward compatibility
+        elif chart_name == LOAN_TOP_DOLLARS_FOUR_LABEL:
             self._render_loan_top_dollars("four_year", chart_name)
         elif chart_name == LOAN_TOP_DOLLARS_TWO_LABEL:
             self._render_loan_top_dollars("two_year", chart_name)
@@ -104,6 +115,36 @@ class FederalLoansSection(BaseSection):
             )
         else:
             st.error(f"Missing metadata for {sector.replace('_', '-')} institutions.")
+    
+    def _render_loan_top_dollars_with_tabs(self, title: str) -> None:
+        """Render loan top dollars chart with 4-year and 2-year tabs."""
+        tab1, tab2 = st.tabs(["4-year", "2-year"])
+        
+        with tab1:
+            self._render_loan_top_dollars("four_year", f"{title} (4-year)")
+        
+        with tab2:
+            self._render_loan_top_dollars("two_year", f"{title} (2-year)")
+    
+    def _render_loan_vs_grad_with_tabs(self, title: str) -> None:
+        """Render loan vs graduation chart with 4-year and 2-year tabs."""
+        tab1, tab2 = st.tabs(["4-year", "2-year"])
+        
+        with tab1:
+            self._render_loan_vs_grad("four_year", f"{title} (4-year)")
+        
+        with tab2:
+            self._render_loan_vs_grad("two_year", f"{title} (2-year)")
+    
+    def _render_loan_trend_with_tabs(self, title: str) -> None:
+        """Render loan trend chart with 4-year and 2-year tabs."""
+        tab1, tab2 = st.tabs(["4-year", "2-year"])
+        
+        with tab1:
+            self._render_loan_trend("four_year", f"{title} (4-year)")
+        
+        with tab2:
+            self._render_loan_trend("two_year", f"{title} (2-year)")
     
     def get_available_charts(self) -> List[str]:
         """Get available charts for Federal Loans section."""

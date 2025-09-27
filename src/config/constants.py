@@ -62,7 +62,7 @@ PELL_CHARTS: List[str] = [
 PELL_OVERVIEW_LABEL = "Overview"
 
 
-# Federal Loan chart labels
+# Federal Loan chart labels - Individual (for backward compatibility)
 LOAN_TOP_DOLLARS_FOUR_LABEL = "Top 25 Federal Loan Dollars (4-year)"
 LOAN_TOP_DOLLARS_TWO_LABEL = "Top 25 Federal Loan Dollars (2-year)"
 LOAN_VS_GRAD_FOUR_LABEL = "Federal Loans vs Graduation Rate (4-year)"
@@ -70,13 +70,15 @@ LOAN_VS_GRAD_TWO_LABEL = "Federal Loans vs Graduation Rate (2-year)"
 LOAN_TREND_FOUR_LABEL = "Federal Loan Dollars Trend (4-year)"
 LOAN_TREND_TWO_LABEL = "Federal Loan Dollars Trend (2-year)"
 
+# Federal Loan chart labels - Consolidated (for new navigation)
+LOAN_TOP_DOLLARS_LABEL = "Top 25 Federal Loan Dollars"
+LOAN_VS_GRAD_LABEL = "Federal Loans vs Graduation Rate"
+LOAN_TREND_LABEL = "Federal Loan Dollars Trend"
+
 LOAN_CHARTS: List[str] = [
-    LOAN_TOP_DOLLARS_FOUR_LABEL,
-    LOAN_TOP_DOLLARS_TWO_LABEL,
-    LOAN_VS_GRAD_FOUR_LABEL,
-    LOAN_VS_GRAD_TWO_LABEL,
-    LOAN_TREND_FOUR_LABEL,
-    LOAN_TREND_TWO_LABEL,
+    LOAN_TOP_DOLLARS_LABEL,
+    LOAN_VS_GRAD_LABEL,
+    LOAN_TREND_LABEL,
 ]
 LOAN_OVERVIEW_LABEL = "Overview"
 
