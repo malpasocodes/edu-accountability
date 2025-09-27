@@ -37,6 +37,7 @@ from .constants import (
     DISTANCE_OVERVIEW_LABEL,
     DISTANCE_TOP_ENROLLMENT_LABEL,
     DISTANCE_ENROLLMENT_TREND_LABEL,
+    DISTANCE_DE_TREND_LABEL,
     ValueGridChartConfig,
 )
 
@@ -87,6 +88,7 @@ __all__ = [
     "DISTANCE_OVERVIEW_LABEL",
     "DISTANCE_TOP_ENROLLMENT_LABEL",
     "DISTANCE_ENROLLMENT_TREND_LABEL",
+    "DISTANCE_DE_TREND_LABEL",
     # Data
     "DataSources",
     # Navigation

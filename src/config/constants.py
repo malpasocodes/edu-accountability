@@ -89,10 +89,12 @@ LOAN_OVERVIEW_LABEL = "Overview"
 # Distance Education chart labels
 DISTANCE_TOP_ENROLLMENT_LABEL = "Top 25 Distance Education Enrollment"
 DISTANCE_ENROLLMENT_TREND_LABEL = "Total Enrollment Trend"
+DISTANCE_DE_TREND_LABEL = "Distance Education Trend"
 
 DISTANCE_CHARTS: List[str] = [
     DISTANCE_TOP_ENROLLMENT_LABEL,
     DISTANCE_ENROLLMENT_TREND_LABEL,
+    DISTANCE_DE_TREND_LABEL,
 ]
 DISTANCE_OVERVIEW_LABEL = "Overview"
 

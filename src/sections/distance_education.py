@@ -8,6 +8,7 @@ import streamlit as st
 
 from src.charts.distance_top_enrollment_chart import render_distance_top_enrollment_chart
 from src.charts.distance_enrollment_trend_chart import render_distance_enrollment_trend_chart
+from src.charts.distance_de_trend_chart import render_distance_de_trend_chart
 from .base import BaseSection
 
 
@@ -39,6 +40,8 @@ class DistanceEducationSection(BaseSection):
             self._render_distance_top_enrollment_with_tabs(chart_name)
         elif chart_name == "Total Enrollment Trend":
             self._render_enrollment_trend_with_tabs(chart_name)
+        elif chart_name == "Distance Education Trend":
+            self._render_de_trend_with_tabs(chart_name)
         else:
             st.error(f"Unknown chart: {chart_name}")
 
@@ -112,10 +115,46 @@ class DistanceEducationSection(BaseSection):
         except Exception as e:
             st.error(f"Error rendering enrollment trend chart: {e}")
 
+    def _render_de_trend_with_tabs(self, title: str) -> None:
+        """Render DE trend chart with 4-year/2-year tabs."""
+        tab1, tab2 = st.tabs(["4-year", "2-year"])
+
+        with tab1:
+            self._render_de_trend("four_year", f"{title} (4-year)")
+
+        with tab2:
+            self._render_de_trend("two_year", f"{title} (2-year)")
+
+    def _render_de_trend(self, sector: str, title: str) -> None:
+        """Render DE trend chart for a specific sector."""
+        # Get distance education data
+        distance_data = self.data_manager.get_distance_data()
+        if distance_data is None or distance_data.empty:
+            st.warning("Distance education data not available.")
+            return
+
+        # Get metadata for the sector
+        metadata = self.data_manager.get_metadata_for_sector(sector)
+        if metadata is None or metadata.empty:
+            st.warning(f"Metadata for {sector} institutions not available.")
+            return
+
+        try:
+            render_distance_de_trend_chart(
+                distance_data,
+                metadata,
+                title=title,
+                top_n=25,
+                anchor_year=2024
+            )
+        except Exception as e:
+            st.error(f"Error rendering DE trend chart: {e}")
+
     def get_available_charts(self) -> List[str]:
         """Get available charts for distance education section."""
         return [
             "Overview",
             "Top 25 Distance Education Enrollment",
-            "Total Enrollment Trend"
+            "Total Enrollment Trend",
+            "Distance Education Trend"
         ]
