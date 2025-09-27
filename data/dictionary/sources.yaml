@@ -1,0 +1,153 @@
+# Data Sources Registry
+# Tracks provenance and metadata for all external data sources
+
+sources:
+  ipeds:
+    name: "Integrated Postsecondary Education Data System"
+    provider: "National Center for Education Statistics (NCES)"
+    organization: "U.S. Department of Education"
+    description: "The primary source for data on colleges, universities, and technical and vocational postsecondary institutions"
+    
+    base_url: "https://nces.ed.gov/ipeds/"
+    data_tools_url: "https://nces.ed.gov/ipeds/datacenter/"
+    api_url: "https://educationdata.urban.org/api/v1/college-university/"
+    
+    license: "Public Domain"
+    license_url: "https://www.usa.gov/government-data"
+    
+    update_frequency: "Annual"
+    release_schedule: "Data typically released 12-18 months after collection year"
+    
+    datasets:
+      hd:
+        name: "Institutional Characteristics (HD)"
+        description: "Basic institutional characteristics including location, control, level, and special designations"
+        survey_form: "HD"
+        collection_period: "Fall"
+        variables_url: "https://nces.ed.gov/ipeds/datacenter/DataFiles.aspx?gotoReportId=7&fromIpeds=true&sid=88a6e4ba-e7ba-43fb-8fbb-3f1b06e5e0f1&rtid=7"
+        
+      ic:
+        name: "Institutional Characteristics - Academic Year (IC_AY)"
+        description: "Tuition, fees, and other charges for academic year programs"
+        survey_form: "IC_AY"
+        collection_period: "Fall"
+        variables_url: "https://nces.ed.gov/ipeds/datacenter/DataFiles.aspx?gotoReportId=7&fromIpeds=true&sid=f3a2c1d0-8e94-46d7-9b55-2a1f8c3e6d45&rtid=7"
+        
+      ef:
+        name: "Fall Enrollment (EF)"
+        description: "Fall enrollment by student level, race/ethnicity, gender, and attendance status"
+        survey_form: "EF"
+        collection_period: "Fall"
+        variables_url: "https://nces.ed.gov/ipeds/datacenter/DataFiles.aspx?gotoReportId=7&fromIpeds=true&sid=b8d4e7f2-3c96-4a18-8e55-1f9d2b4c6e83&rtid=7"
+        
+      gr:
+        name: "Graduation Rates (GR)"
+        description: "Graduation rates for degree/certificate-seeking students"
+        survey_form: "GR"
+        collection_period: "Fall"
+        variables_url: "https://nces.ed.gov/ipeds/datacenter/DataFiles.aspx?gotoReportId=7&fromIpeds=true&sid=e7a9c3f8-6d45-4b92-9c18-3e5a8b1d4f67&rtid=7"
+
+  fsa:
+    name: "Federal Student Aid Data Center"
+    provider: "Federal Student Aid (FSA)"
+    organization: "U.S. Department of Education"
+    description: "Data on federal student aid programs including Pell Grants and federal loans"
+    
+    base_url: "https://studentaid.gov/data-center/"
+    download_url: "https://studentaid.gov/data-center/school"
+    
+    license: "Public Domain"
+    license_url: "https://www.usa.gov/government-data"
+    
+    update_frequency: "Quarterly for recent data, Annual for historical"
+    release_schedule: "Quarterly updates typically 60-90 days after quarter end"
+    
+    datasets:
+      pell_grants:
+        name: "Pell Grant Disbursements by School"
+        description: "Total Pell Grant dollars disbursed by institution and year"
+        file_format: "CSV, Excel"
+        historical_range: "2009-present"
+        
+      federal_loans:
+        name: "Federal Loan Disbursements by School"
+        description: "Total federal loan dollars disbursed by institution and year"
+        file_format: "CSV, Excel"
+        historical_range: "2009-present"
+
+# Current data snapshots
+current_data:
+  ipeds_2023:
+    download_date: "2024-11-24"  # Update with actual download date
+    academic_year: "2023-24"
+    data_year: 2023
+    files:
+      - name: "institutions.csv"
+        source: "HD2023"
+        description: "Institutional characteristics for 2023"
+        records: null  # Update after analysis
+        
+      - name: "enrollment.csv"
+        source: "EF2023A"
+        description: "Fall 2023 enrollment data"
+        records: null
+        
+      - name: "cost.csv"
+        source: "IC2023_AY"
+        description: "2023-24 tuition and fees"
+        records: null
+        
+      - name: "gradrates.csv"
+        source: "GR2023"
+        description: "Graduation rates for 2023 cohorts"
+        records: null
+        
+  fsa_2024:
+    download_date: "2024-11-24"  # Update with actual download date
+    data_range: "2009-2022"
+    files:
+      - name: "pelltotals.csv"
+        source: "Pell Grant Disbursements by School"
+        description: "Annual Pell Grant totals by institution"
+        records: null
+        years: "2009-2022"
+        
+      - name: "loantotals.csv"
+        source: "Federal Loan Disbursements by School"
+        description: "Annual federal loan totals by institution"
+        records: null
+        years: "2009-2022"
+
+# Data quality notes
+quality_notes:
+  ipeds:
+    - "Missing data coded as NULL or specific missing value codes"
+    - "Some institutions may not report all variables"
+    - "Sector codes changed in 2010; pre-2010 data may need recoding"
+    - "Private for-profit institutions have high volatility due to closures"
+    
+  fsa:
+    - "Zero disbursements may indicate no eligible students or no participation"
+    - "Institution names may not exactly match IPEDS due to name changes"
+    - "Historical data availability varies by institution"
+    - "Merger and closure events may affect time series continuity"
+
+# Update procedures
+update_procedures:
+  ipeds:
+    frequency: "Annual (typically fall)"
+    steps:
+      - "Check IPEDS Data Center for new provisional/final data releases"
+      - "Download latest survey data files"
+      - "Update variable definitions from IPEDS documentation"
+      - "Run data validation against schema"
+      - "Update processed datasets"
+      
+  fsa:
+    frequency: "Quarterly for current year, annual for complete updates"
+    steps:
+      - "Check FSA Data Center for quarterly updates"
+      - "Download updated disbursement files"
+      - "Reconcile institution identifiers with IPEDS"
+      - "Update time series data"
+      - "Validate against expected ranges and patterns"

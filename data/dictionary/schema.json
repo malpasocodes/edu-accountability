@@ -1,0 +1,360 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "College Accountability Dashboard Data Dictionary",
+  "version": "1.0.0",
+  "description": "Master data dictionary defining all fields used in the dashboard",
+  "datasets": {
+    "institutions": {
+      "description": "Core institutional characteristics from IPEDS",
+      "source": "IPEDS HD (Header) Survey",
+      "fields": {
+        "UnitID": {
+          "source_name": "UnitID",
+          "data_type": "integer",
+          "nullable": false,
+          "primary_key": true,
+          "description": "Unique identification number assigned to postsecondary institutions by IPEDS",
+          "source": {
+            "provider": "IPEDS",
+            "dataset": "HD",
+            "field": "UNITID"
+          },
+          "constraints": {
+            "unique": true,
+            "min": 100000,
+            "max": 999999
+          }
+        },
+        "INSTITUTION": {
+          "source_name": "INSTITUTION",
+          "data_type": "string",
+          "nullable": false,
+          "description": "Institution name",
+          "source": {
+            "provider": "IPEDS",
+            "dataset": "HD",
+            "field": "INSTNM"
+          },
+          "constraints": {
+            "maxLength": 255
+          }
+        },
+        "CITY": {
+          "source_name": "CITY",
+          "data_type": "string",
+          "nullable": true,
+          "description": "City location of institution",
+          "source": {
+            "provider": "IPEDS",
+            "dataset": "HD",
+            "field": "CITY"
+          }
+        },
+        "STATE": {
+          "source_name": "STATE",
+          "data_type": "string",
+          "nullable": false,
+          "description": "State postal code",
+          "source": {
+            "provider": "IPEDS",
+            "dataset": "HD",
+            "field": "STABBR"
+          },
+          "constraints": {
+            "pattern": "^[A-Z]{2}$"
+          }
+        },
+        "SECTOR": {
+          "source_name": "SECTOR",
+          "data_type": "integer",
+          "nullable": false,
+          "description": "Sector of institution",
+          "source": {
+            "provider": "IPEDS",
+            "dataset": "HD",
+            "field": "SECTOR"
+          },
+          "values": {
+            "1": "Public, 4-year or above",
+            "2": "Private not-for-profit, 4-year or above",
+            "3": "Private for-profit, 4-year or above",
+            "4": "Public, 2-year",
+            "5": "Private not-for-profit, 2-year",
+            "6": "Private for-profit, 2-year",
+            "7": "Public, less-than 2-year",
+            "8": "Private not-for-profit, less-than 2-year",
+            "9": "Private for-profit, less-than 2-year"
+          }
+        },
+        "CONTROL": {
+          "source_name": "CONTROL",
+          "data_type": "integer",
+          "nullable": false,
+          "description": "Control of institution",
+          "source": {
+            "provider": "IPEDS",
+            "dataset": "HD",
+            "field": "CONTROL"
+          },
+          "values": {
+            "1": "Public",
+            "2": "Private not-for-profit",
+            "3": "Private for-profit"
+          }
+        },
+        "HISTORICALLY_BLACK": {
+          "source_name": "HISTORICALLY_BLACK",
+          "data_type": "integer",
+          "nullable": true,
+          "description": "Historically Black College or University indicator",
+          "source": {
+            "provider": "IPEDS",
+            "dataset": "HD",
+            "field": "HBCU"
+          },
+          "values": {
+            "1": "Yes",
+            "2": "No"
+          }
+        },
+        "TRIBAL": {
+          "source_name": "TRIBAL",
+          "data_type": "integer",
+          "nullable": true,
+          "description": "Tribal college indicator",
+          "source": {
+            "provider": "IPEDS",
+            "dataset": "HD",
+            "field": "TRIBAL"
+          },
+          "values": {
+            "1": "Yes",
+            "2": "No"
+          }
+        }
+      }
+    },
+    "enrollment": {
+      "description": "Fall enrollment data from IPEDS",
+      "source": "IPEDS EF (Fall Enrollment) Survey",
+      "fields": {
+        "UnitID": {
+          "source_name": "UnitID",
+          "data_type": "integer",
+          "nullable": false,
+          "foreign_key": "institutions.UnitID",
+          "description": "Institution identifier linking to institutions table"
+        },
+        "ENR_TOTAL": {
+          "source_name": "ENR_TOTAL",
+          "data_type": "integer",
+          "nullable": true,
+          "description": "Total fall enrollment",
+          "source": {
+            "provider": "IPEDS",
+            "dataset": "EFFY",
+            "field": "EFYTOTLT"
+          },
+          "constraints": {
+            "min": 0
+          }
+        },
+        "ENR_UG": {
+          "source_name": "ENR_UG",
+          "data_type": "integer",
+          "nullable": true,
+          "description": "Total undergraduate enrollment",
+          "source": {
+            "provider": "IPEDS",
+            "dataset": "EFFY",
+            "field": "EFYUGRAD"
+          },
+          "constraints": {
+            "min": 0
+          }
+        },
+        "ENR_GRAD": {
+          "source_name": "ENR_GRAD",
+          "data_type": "integer",
+          "nullable": true,
+          "description": "Total graduate enrollment",
+          "source": {
+            "provider": "IPEDS",
+            "dataset": "EFFY",
+            "field": "EFYGRAD"
+          },
+          "constraints": {
+            "min": 0
+          }
+        }
+      }
+    },
+    "cost": {
+      "description": "Tuition and fee data from IPEDS",
+      "source": "IPEDS IC (Institutional Characteristics) Survey",
+      "fields": {
+        "UnitID": {
+          "source_name": "UnitID",
+          "data_type": "integer",
+          "nullable": false,
+          "foreign_key": "institutions.UnitID",
+          "description": "Institution identifier linking to institutions table"
+        },
+        "TUITION_FEES_2023_OUTSTATE": {
+          "source_name": "TUITION_FEES_2023_OUTSTATE",
+          "data_type": "float",
+          "nullable": true,
+          "description": "Published out-of-state tuition and fees for 2023-24 academic year",
+          "source": {
+            "provider": "IPEDS",
+            "dataset": "IC2023_AY",
+            "field": "TUITION2"
+          },
+          "constraints": {
+            "min": 0,
+            "max": 100000
+          }
+        },
+        "TUITION_FEES_INSTATE2023": {
+          "source_name": "TUITION_FEES_INSTATE2023",
+          "data_type": "float",
+          "nullable": true,
+          "description": "Published in-state tuition and fees for 2023-24 academic year",
+          "source": {
+            "provider": "IPEDS",
+            "dataset": "IC2023_AY",
+            "field": "TUITION1"
+          },
+          "constraints": {
+            "min": 0,
+            "max": 100000
+          }
+        }
+      }
+    },
+    "gradrates": {
+      "description": "Graduation rate data from IPEDS",
+      "source": "IPEDS GR (Graduation Rates) Survey",
+      "fields": {
+        "UnitID": {
+          "source_name": "UnitID",
+          "data_type": "integer",
+          "nullable": false,
+          "foreign_key": "institutions.UnitID",
+          "description": "Institution identifier linking to institutions table"
+        },
+        "graduation_rate": {
+          "source_name": "Various",
+          "data_type": "float",
+          "nullable": true,
+          "description": "Graduation rate (150% of normal time for degree completion)",
+          "source": {
+            "provider": "IPEDS",
+            "dataset": "GR",
+            "field": "VARIOUS",
+            "note": "Field varies by institution type and cohort"
+          },
+          "constraints": {
+            "min": 0,
+            "max": 100
+          }
+        }
+      }
+    },
+    "pelltotals": {
+      "description": "Pell Grant disbursement totals by year",
+      "source": "Federal Student Aid Data Center",
+      "fields": {
+        "UnitID": {
+          "source_name": "UnitID",
+          "data_type": "integer",
+          "nullable": false,
+          "foreign_key": "institutions.UnitID",
+          "description": "Institution identifier linking to institutions table"
+        },
+        "YR2022": {
+          "source_name": "YR2022",
+          "data_type": "float",
+          "nullable": true,
+          "description": "Total Pell Grant dollars disbursed in 2022",
+          "source": {
+            "provider": "FSA",
+            "dataset": "Pell_Grant_Disbursements",
+            "year": 2022
+          },
+          "constraints": {
+            "min": 0
+          }
+        },
+        "YR2021": {
+          "source_name": "YR2021",
+          "data_type": "float",
+          "nullable": true,
+          "description": "Total Pell Grant dollars disbursed in 2021",
+          "source": {
+            "provider": "FSA",
+            "dataset": "Pell_Grant_Disbursements",
+            "year": 2021
+          },
+          "constraints": {
+            "min": 0
+          }
+        }
+      }
+    },
+    "loantotals": {
+      "description": "Federal loan disbursement totals by year",
+      "source": "Federal Student Aid Data Center",
+      "fields": {
+        "UnitID": {
+          "source_name": "UnitID",
+          "data_type": "integer",
+          "nullable": false,
+          "foreign_key": "institutions.UnitID",
+          "description": "Institution identifier linking to institutions table"
+        },
+        "YR2022": {
+          "source_name": "YR2022",
+          "data_type": "float",
+          "nullable": true,
+          "description": "Total federal loan dollars disbursed in 2022",
+          "source": {
+            "provider": "FSA",
+            "dataset": "Federal_Loan_Disbursements",
+            "year": 2022
+          },
+          "constraints": {
+            "min": 0
+          }
+        }
+      }
+    }
+  },
+  "transformations": {
+    "cost_to_numeric": {
+      "description": "Convert cost fields to numeric, handling missing values",
+      "input": ["TUITION_FEES_2023_OUTSTATE", "TUITION_FEES_INSTATE2023"],
+      "output": "cost",
+      "logic": "pd.to_numeric(field, errors='coerce')"
+    },
+    "enrollment_to_numeric": {
+      "description": "Convert enrollment to numeric, fill missing with 0",
+      "input": "ENR_TOTAL",
+      "output": "enrollment",
+      "logic": "pd.to_numeric(field, errors='coerce').fillna(0)"
+    },
+    "sector_to_category": {
+      "description": "Map sector codes to readable categories",
+      "input": "SECTOR",
+      "output": "sector",
+      "mapping": {
+        "1": "Public",
+        "2": "Private, not-for-profit",
+        "3": "Private, for-profit",
+        "4": "Public",
+        "5": "Private, not-for-profit",
+        "6": "Private, for-profit"
+      }
+    }
+  }
+}

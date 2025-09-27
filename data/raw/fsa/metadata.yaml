@@ -1,0 +1,98 @@
+# Federal Student Aid Data Metadata
+# Tracks download information and data characteristics for FSA datasets
+
+provider: "Federal Student Aid (FSA)"
+organization: "U.S. Department of Education"
+base_url: "https://studentaid.gov/data-center/"
+
+# Current data snapshot
+current_release:
+  data_range: "2009-2022"
+  download_date: "2024-11-24"  # Update with actual download date
+  update_frequency: "Quarterly for recent years, historical data stable"
+  
+datasets:
+  "pelltotals.csv":
+    source_name: "Pell Grant Recipients and Disbursements by School"
+    description: "Annual Pell Grant dollar amounts disbursed by institution"
+    file_format: "CSV"
+    download_url: "https://studentaid.gov/data-center/school/pell-grants"
+    data_range: "Academic years 2009-10 through 2021-22"
+    currency: "U.S. Dollars (not adjusted for inflation)"
+    key_fields:
+      - "UnitID: Institution identifier (matches IPEDS)"
+      - "Institution: Institution name"
+      - "YR2022: Total Pell dollars disbursed in 2021-22 academic year"
+      - "YR2021: Total Pell dollars disbursed in 2020-21 academic year"
+      - "[Previous years follow same pattern]"
+    
+  "loantotals.csv":
+    source_name: "Direct Loan Recipients and Disbursements by School"
+    description: "Annual federal loan dollar amounts disbursed by institution"
+    file_format: "CSV"
+    download_url: "https://studentaid.gov/data-center/school/direct-loans"
+    data_range: "Academic years 2009-10 through 2021-22"
+    currency: "U.S. Dollars (not adjusted for inflation)"
+    loan_types_included:
+      - "Direct Subsidized Loans"
+      - "Direct Unsubsidized Loans"
+      - "Direct PLUS Loans (Parent and Graduate)"
+    key_fields:
+      - "UnitID: Institution identifier (matches IPEDS)"
+      - "Institution: Institution name"
+      - "YR2022: Total federal loan dollars disbursed in 2021-22 academic year"
+      - "YR2021: Total federal loan dollars disbursed in 2020-21 academic year"
+      - "[Previous years follow same pattern]"
+
+# Data linking notes
+data_linking:
+  ipeds_matching:
+    method: "UnitID field matches IPEDS institution identifier"
+    coverage: "Covers institutions participating in federal student aid programs"
+    exceptions:
+      - "Some institutions may appear in FSA data but not IPEDS (e.g., recently closed)"
+      - "Some IPEDS institutions may not appear in FSA data (non-participating institutions)"
+      - "Institution name changes may cause temporary mismatches"
+  
+# Data processing notes
+processing_notes:
+  - "Data represents academic year totals (e.g., YR2022 = 2021-22 academic year)"
+  - "Amounts include all disbursements during the academic year"
+  - "Zero values may indicate no eligible students or no program participation"
+  - "Missing values appear as empty cells in original data"
+  - "Institution names preserved as provided by FSA"
+  
+# Known data quality issues
+quality_issues:
+  - "Institution closures may result in zero disbursements in final years"
+  - "Mergers and acquisitions may affect institutional continuity"
+  - "Private for-profit sector has high volatility due to regulatory changes"
+  - "Some institutions may have delayed reporting resulting in data revisions"
+  - "UnitID changes rare but possible due to institutional changes"
+  
+# Historical context
+historical_context:
+  significant_events:
+    "2010-2011": "Direct Loan program replaced FFEL program"
+    "2020-2021": "COVID-19 pandemic affected enrollment and aid patterns"
+    "2012-2016": "Increased regulation of for-profit institutions"
+  
+# Update schedule
+update_schedule:
+  current_year: "Quarterly updates (90 days after quarter end)"
+  historical_data: "Annual updates for corrections and late reporting"
+  data_freeze: "Historical years typically frozen after 2-3 years"
+  next_update: "Check quarterly at https://studentaid.gov/data-center/"
+  
+# Data usage guidelines
+usage_guidelines:
+  inflation_adjustment: "Consider adjusting for inflation when analyzing trends"
+  enrollment_context: "Compare with enrollment data for per-student metrics"
+  institutional_context: "Consider sector and control when making comparisons"
+  time_series_analysis: "Account for policy changes and economic cycles"
+  
+# Contact information
+support:
+  general_inquiry: "Contact through https://studentaid.gov/feedback"
+  data_questions: "Check FAQ at https://studentaid.gov/data-center/school"
+  technical_issues: "Report through https://studentaid.gov/feedback"

@@ -1,0 +1,97 @@
+# IPEDS Data Metadata
+# Tracks download information and data characteristics for IPEDS datasets
+
+provider: "IPEDS - Integrated Postsecondary Education Data System"
+organization: "National Center for Education Statistics (NCES)"
+base_url: "https://nces.ed.gov/ipeds/"
+
+# Current data snapshot
+current_release:
+  year: 2023
+  academic_year: "2023-24"
+  download_date: "2024-11-24"  # Update with actual download date
+  data_status: "Provisional"  # Update to "Final" when final data available
+  
+datasets:
+  "2023/institutions.csv":
+    source_survey: "HD2023"
+    survey_name: "Institutional Characteristics"
+    description: "Basic institutional characteristics including location, control, level, and special designations"
+    collection_period: "Fall 2023"
+    ipeds_file_name: "HD2023.csv"
+    download_url: "https://nces.ed.gov/ipeds/datacenter/DataFiles.aspx"
+    variable_definitions: "https://nces.ed.gov/ipeds/datacenter/DataFiles.aspx?gotoReportId=7&fromIpeds=true"
+    key_fields:
+      - "UnitID: Unique institution identifier"
+      - "INSTNM: Institution name"
+      - "STABBR: State postal code"
+      - "SECTOR: Sector of institution"
+      - "CONTROL: Control of institution"
+    
+  "2023/enrollment.csv":
+    source_survey: "EF2023A"
+    survey_name: "Fall Enrollment"
+    description: "Fall enrollment by student level and attendance status"
+    collection_period: "Fall 2023"
+    ipeds_file_name: "EF2023A.csv"
+    download_url: "https://nces.ed.gov/ipeds/datacenter/DataFiles.aspx"
+    variable_definitions: "https://nces.ed.gov/ipeds/datacenter/DataFiles.aspx?gotoReportId=7&fromIpeds=true"
+    key_fields:
+      - "UnitID: Institution identifier"
+      - "EFYTOTLT: Total fall enrollment"
+      - "EFYUGRAD: Undergraduate enrollment"
+      - "EFYGRAD: Graduate enrollment"
+    
+  "2023/cost.csv":
+    source_survey: "IC2023_AY"
+    survey_name: "Institutional Characteristics - Academic Year"
+    description: "Tuition, fees, and other charges for academic year programs"
+    collection_period: "Fall 2023"
+    ipeds_file_name: "IC2023_AY.csv"
+    download_url: "https://nces.ed.gov/ipeds/datacenter/DataFiles.aspx"
+    variable_definitions: "https://nces.ed.gov/ipeds/datacenter/DataFiles.aspx?gotoReportId=7&fromIpeds=true"
+    key_fields:
+      - "UnitID: Institution identifier"
+      - "TUITION1: In-state tuition and fees"
+      - "TUITION2: Out-of-state tuition and fees"
+      - "TUITION3: In-district tuition and fees"
+    
+  "2023/gradrates.csv":
+    source_survey: "GR2023"
+    survey_name: "Graduation Rates"
+    description: "Graduation rates for degree/certificate-seeking students"
+    collection_period: "Fall 2023"
+    ipeds_file_name: "GR2023.csv"
+    download_url: "https://nces.ed.gov/ipeds/datacenter/DataFiles.aspx"
+    variable_definitions: "https://nces.ed.gov/ipeds/datacenter/DataFiles.aspx?gotoReportId=7&fromIpeds=true"
+    key_fields:
+      - "UnitID: Institution identifier"
+      - "GRTOTLT: Graduation rate, total cohort"
+      - "GRTYPE: Type of graduation rate"
+    
+# Data processing notes
+processing_notes:
+  - "Files downloaded from IPEDS Data Center as CSV format"
+  - "Field names preserved from original IPEDS variable names"
+  - "Missing values preserved as empty strings or NULL"
+  - "No data transformations applied at raw data level"
+  - "Institution names may contain special characters or punctuation"
+  
+# Known data quality issues
+quality_issues:
+  - "Some institutions may not report all required fields"
+  - "Private for-profit institutions have higher missing data rates"
+  - "Sector definitions changed in 2010; historical comparisons may need adjustment"
+  - "Graduation rate calculations vary by institution type and student population"
+  
+# Update schedule
+update_schedule:
+  - "Provisional data typically available 12-15 months after collection"
+  - "Final data available 18-24 months after collection"
+  - "Check for updates quarterly at https://nces.ed.gov/ipeds/datacenter/"
+  
+# Contact information
+support:
+  email: "ipedshelp@rti.org"
+  phone: "1-877-225-2568"
+  documentation: "https://nces.ed.gov/ipeds/report-your-data"
