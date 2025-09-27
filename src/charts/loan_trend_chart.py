@@ -96,7 +96,32 @@ def _prepare_loan_trend_dataframe(
     )
     filtered["LoanDollarsBillions"] = filtered["loan_dollars"] / 1_000_000_000
     filtered["AnchorYear"] = anchor_year
-    filtered.drop(columns=["YearLabel", "loan_dollars"], inplace=True, errors="ignore")
+
+    # Calculate year-over-year changes for dot coloring
+    filtered = filtered.sort_values(["UnitID", "Year"])
+    filtered["PrevYearLoanDollars"] = filtered.groupby("UnitID")["loan_dollars"].shift(1)
+    filtered["YoYChange"] = filtered["loan_dollars"] - filtered["PrevYearLoanDollars"]
+    filtered["YoYChangePercent"] = (
+        (filtered["loan_dollars"] - filtered["PrevYearLoanDollars"]) / filtered["PrevYearLoanDollars"] * 100
+    ).round(1)
+
+    # Determine change direction for dot coloring
+    conditions = [
+        filtered["YoYChange"] > 0,  # Increase
+        filtered["YoYChange"] == 0,  # Same
+        filtered["YoYChange"] < 0   # Decrease
+    ]
+    choices = ["Increase", "Same", "Decrease"]
+    filtered["ChangeDirection"] = pd.cut(filtered["YoYChange"], bins=[-float('inf'), -0.01, 0.01, float('inf')],
+                                       labels=["Decrease", "Same", "Increase"], include_lowest=True)
+    filtered["ChangeDirection"] = filtered["ChangeDirection"].fillna("Same").astype(str)
+
+    # For first year of each institution, mark as "Same" since no previous year
+    first_year_mask = filtered["PrevYearLoanDollars"].isna()
+    filtered.loc[first_year_mask, "ChangeDirection"] = "Same"
+    filtered.loc[first_year_mask, "YoYChangePercent"] = 0.0
+
+    filtered.drop(columns=["YearLabel", "loan_dollars", "PrevYearLoanDollars", "YoYChange"], inplace=True, errors="ignore")
 
     columns = [
         "UnitID",
@@ -105,6 +130,8 @@ def _prepare_loan_trend_dataframe(
         "Year",
         "LoanDollarsBillions",
         "AnchorYear",
+        "ChangeDirection",
+        "YoYChangePercent",
     ]
     return filtered.loc[:, columns], anchor_year
 
@@ -132,41 +159,90 @@ def render_loan_trend_chart(
         st.warning("No federal loan trend data available to chart.")
         return
 
-    chart = (
-        alt.Chart(prepared)
-        .mark_line(point=True)
-        .encode(
-            x=alt.X("Year:Q", title="Year", axis=alt.Axis(format="d")),
-            y=alt.Y(
-                "LoanDollarsBillions:Q",
-                title="Federal loan dollars (billions)",
-            ),
-            color=alt.Color("Sector:N", title="Sector", scale=SECTOR_COLOR_SCALE),
-            detail=alt.Detail("Institution:N"),
-            tooltip=[
-                alt.Tooltip("Institution:N", title="Institution"),
-                alt.Tooltip("Year:Q", title="Year", format=".0f"),
-                alt.Tooltip(
-                    "LoanDollarsBillions:Q",
-                    title="Loan dollars (billions)",
-                    format=".2f",
-                ),
-                alt.Tooltip("Sector:N", title="Sector"),
-            ],
-        )
-        .properties(height=520)
+    # Create institution-based color scale
+    institutions = prepared["Institution"].unique()
+    institution_color_scale = alt.Scale(
+        domain=list(institutions),
+        range=alt.SchemeCategory20[:len(institutions)]
     )
+
+    # Create change direction color scale for dots
+    change_color_scale = alt.Scale(
+        domain=["Increase", "Same", "Decrease"],
+        range=["#28a745", "#6c757d", "#dc3545"]  # Green, Gray, Red
+    )
+
+    # Base chart with shared encoding
+    base = alt.Chart(prepared).add_selection(
+        alt.selection_multi(fields=["Institution"])
+    )
+
+    # Line layer with dotted lines colored by institution
+    lines = base.mark_line(
+        strokeDash=[3, 3],  # Dotted line pattern
+        point=False
+    ).encode(
+        x=alt.X("Year:Q", title="Year", axis=alt.Axis(format="d")),
+        y=alt.Y(
+            "LoanDollarsBillions:Q",
+            title="Federal loan dollars (billions)",
+        ),
+        color=alt.Color(
+            "Institution:N",
+            title="Institution",
+            scale=institution_color_scale
+        ),
+        opacity=alt.condition(
+            alt.selection_multi(fields=["Institution"]),
+            alt.value(1.0),
+            alt.value(0.8)
+        )
+    )
+
+    # Point layer with year-over-year change coloring
+    points = base.mark_circle(size=80).encode(
+        x=alt.X("Year:Q"),
+        y=alt.Y("LoanDollarsBillions:Q"),
+        color=alt.Color(
+            "ChangeDirection:N",
+            title="Year-over-Year Change",
+            scale=change_color_scale
+        ),
+        stroke=alt.Color(
+            "Institution:N",
+            scale=institution_color_scale,
+            legend=None
+        ),
+        strokeWidth=alt.value(2),
+        tooltip=[
+            alt.Tooltip("Institution:N", title="Institution"),
+            alt.Tooltip("Year:Q", title="Year", format=".0f"),
+            alt.Tooltip(
+                "LoanDollarsBillions:Q",
+                title="Loan dollars (billions)",
+                format=".2f",
+            ),
+            alt.Tooltip("Sector:N", title="Sector"),
+            alt.Tooltip("YoYChangePercent:Q", title="Year-over-year change (%)", format=".1f"),
+            alt.Tooltip("ChangeDirection:N", title="Change direction"),
+        ],
+    )
+
+    # Combine layers
+    chart = (lines + points).resolve_scale(
+        color="independent"
+    ).properties(height=520)
 
     st.subheader(title)
     if anchor_year is None:
         caption = (
-            "Trends for institutions with available federal loan totals across the selected segment; "
-            "colors indicate sector."
+            "Trends for institutions with available federal loan totals across the selected segment. "
+            "Dotted lines colored by institution; dots colored by year-over-year change (green=increase/same, red=decrease)."
         )
     else:
         caption = (
-            f"Top {top_n} institutions by federal loan dollars in {anchor_year}, with annual totals over time; "
-            "colors indicate sector."
+            f"Top {top_n} institutions by federal loan dollars in {anchor_year}, with annual totals over time. "
+            "Dotted lines colored by institution; dots colored by year-over-year change (green=increase/same, red=decrease)."
         )
     st.caption(caption)
     render_altair_chart(chart, width="stretch")
