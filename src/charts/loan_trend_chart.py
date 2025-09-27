@@ -163,7 +163,7 @@ def render_loan_trend_chart(
     institutions = prepared["Institution"].unique()
     institution_color_scale = alt.Scale(
         domain=list(institutions),
-        range=alt.SchemeCategory20[:len(institutions)]
+        scheme="category20"
     )
 
     # Create change direction color scale for dots
