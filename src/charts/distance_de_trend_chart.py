@@ -41,7 +41,7 @@ def _normalize_unit_ids(series: pd.Series) -> pd.Series:
 def _prepare_de_trend_dataframe(
     distance_df: pd.DataFrame,
     metadata_df: pd.DataFrame,
-    top_n: int = 25,
+    top_n: int = 10,
     anchor_year: int = 2024
 ) -> pd.DataFrame:
     """Prepare data for DE enrollment trend chart."""
@@ -184,12 +184,75 @@ def _prepare_de_trend_dataframe(
     return long_form[final_columns].copy()
 
 
+def _render_de_data_table(
+    prepared: pd.DataFrame,
+    top_n: int,
+    anchor_year: int
+) -> None:
+    """Render data table showing exclusive distance education enrollment figures for each institution by year."""
+    if prepared.empty:
+        return
+
+    # Create pivot table from long format data
+    pivot_data = prepared.pivot_table(
+        index=["Institution", "Sector"],
+        columns="Year",
+        values="de_enrollment",
+        aggfunc="first"
+    ).reset_index()
+
+    # Convert year column names to strings to avoid mixed type warning
+    year_columns = [col for col in pivot_data.columns if isinstance(col, int)]
+    column_mapping = {col: str(col) for col in year_columns}
+    pivot_data = pivot_data.rename(columns=column_mapping)
+
+    # Format DE enrollment numbers and calculate change
+    year_columns = [col for col in pivot_data.columns if col.isdigit()]
+    year_columns.sort()
+
+    # Calculate total change from first to last year
+    if len(year_columns) >= 2:
+        first_year, last_year = year_columns[0], year_columns[-1]
+        # Handle division by zero for percentage calculation
+        total_change = []
+        for _, row in pivot_data.iterrows():
+            first_val = row[first_year]
+            last_val = row[last_year]
+            if pd.notna(first_val) and pd.notna(last_val) and first_val > 0:
+                change_pct = ((last_val - first_val) / first_val * 100)
+                total_change.append(round(change_pct, 1))
+            else:
+                total_change.append(None)
+        pivot_data["Total Change"] = total_change
+
+    # Format the display table
+    display_data = pivot_data.copy()
+    for year in year_columns:
+        display_data[year] = display_data[year].apply(lambda x: f"{x:,.0f}" if pd.notna(x) else "N/A")
+
+    if "Total Change" in display_data.columns:
+        display_data["Total Change"] = display_data["Total Change"].apply(
+            lambda x: f"{x:+.1f}%" if pd.notna(x) else "N/A"
+        )
+
+    # Sort by anchor year DE enrollment (descending)
+    anchor_year_str = str(anchor_year)
+    if anchor_year_str in pivot_data.columns:
+        sort_col_idx = pivot_data.columns.get_loc(anchor_year_str)
+        numeric_data = pivot_data.iloc[:, sort_col_idx]
+        display_data = display_data.iloc[numeric_data.sort_values(ascending=False).index]
+
+    st.subheader("📊 Exclusive Distance Education Enrollment Data")
+    st.caption(f"Exclusive distance education enrollment figures for top {top_n} institutions by {anchor_year} DE enrollment.")
+    st.dataframe(display_data, width="stretch", hide_index=True)
+
+
 def render_distance_de_trend_chart(
     distance_df: pd.DataFrame,
     metadata_df: pd.DataFrame,
     *,
     title: str,
-    top_n: int = 25,
+    top_n: int = 10,
     anchor_year: int = 2024
 ) -> None:
     """Render a multi-line trend chart for exclusive distance education enrollment across years."""
@@ -299,3 +362,6 @@ def render_distance_de_trend_chart(
     )
     st.caption(caption)
     render_altair_chart(chart, width="stretch")
+
+    # Create data table
+    _render_de_data_table(prepared, top_n, anchor_year)

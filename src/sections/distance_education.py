@@ -144,7 +144,7 @@ class DistanceEducationSection(BaseSection):
                 distance_data,
                 metadata,
                 title=title,
-                top_n=25,
+                top_n=10,
                 anchor_year=2024
             )
         except Exception as e:

@@ -178,6 +178,61 @@ def _prepare_enrollment_trend_dataframe(
     return long_form[final_columns].copy()
 
 
+def _render_enrollment_data_table(
+    prepared: pd.DataFrame,
+    top_n: int,
+    anchor_year: int
+) -> None:
+    """Render data table showing enrollment figures for each institution by year."""
+    if prepared.empty:
+        return
+
+    # Create pivot table from long format data
+    pivot_data = prepared.pivot_table(
+        index=["Institution", "Sector"],
+        columns="Year",
+        values="enrollment",
+        aggfunc="first"
+    ).reset_index()
+
+    # Convert year column names to strings to avoid mixed type warning
+    year_columns = [col for col in pivot_data.columns if isinstance(col, int)]
+    column_mapping = {col: str(col) for col in year_columns}
+    pivot_data = pivot_data.rename(columns=column_mapping)
+
+    # Format enrollment numbers and calculate change
+    year_columns = [col for col in pivot_data.columns if col.isdigit()]
+    year_columns.sort()
+
+    # Calculate total change from first to last year
+    if len(year_columns) >= 2:
+        first_year, last_year = year_columns[0], year_columns[-1]
+        pivot_data["Total Change"] = (
+            (pivot_data[last_year] - pivot_data[first_year]) / pivot_data[first_year] * 100
+        ).round(1)
+
+    # Format the display table
+    display_data = pivot_data.copy()
+    for year in year_columns:
+        display_data[year] = display_data[year].apply(lambda x: f"{x:,.0f}" if pd.notna(x) else "N/A")
+
+    if "Total Change" in display_data.columns:
+        display_data["Total Change"] = display_data["Total Change"].apply(
+            lambda x: f"{x:+.1f}%" if pd.notna(x) else "N/A"
+        )
+
+    # Sort by anchor year enrollment (descending)
+    anchor_year_str = str(anchor_year)
+    if anchor_year_str in pivot_data.columns:
+        sort_col_idx = pivot_data.columns.get_loc(anchor_year_str)
+        numeric_data = pivot_data.iloc[:, sort_col_idx]
+        display_data = display_data.iloc[numeric_data.sort_values(ascending=False).index]
+
+    st.subheader("📊 Enrollment Data")
+    st.caption(f"Total enrollment figures for top {top_n} institutions by {anchor_year} enrollment.")
+    st.dataframe(display_data, width="stretch", hide_index=True)
+
+
 def render_distance_enrollment_trend_chart(
     distance_df: pd.DataFrame,
     metadata_df: pd.DataFrame,
@@ -293,3 +348,6 @@ def render_distance_enrollment_trend_chart(
     )
     st.caption(caption)
     render_altair_chart(chart, width="stretch")
+
+    # Create data table
+    _render_enrollment_data_table(prepared, top_n, anchor_year)
