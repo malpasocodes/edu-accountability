@@ -221,11 +221,25 @@ def render_distance_enrollment_trend_chart(
         strokeDash=[3, 3],  # Dotted line pattern
         point=False
     ).encode(
-        x=alt.X("Year:Q", title="Year", axis=alt.Axis(format="d")),
+        x=alt.X(
+            "Year:Q",
+            title="Year",
+            axis=alt.Axis(
+                format="d",
+                labelFontSize=14,
+                titleFontSize=16,
+                titleFontWeight="bold"
+            )
+        ),
         y=alt.Y(
             "enrollment:Q",
             title="Total Enrollment",
-            axis=alt.Axis(format=","),
+            axis=alt.Axis(
+                format=".1s",  # Show as thousands: 50k, 100k
+                labelFontSize=14,
+                titleFontSize=16,
+                titleFontWeight="bold"
+            ),
         ),
         color=alt.Color(
             "Institution:N",
