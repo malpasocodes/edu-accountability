@@ -94,27 +94,36 @@ def _prepare_top_dollar_dataframe(
     trimmed["Institution"] = trimmed["Institution"].fillna("")
     trimmed["sector"] = trimmed["sector"].fillna("Unknown").replace("", "Unknown")
 
+    top = trimmed.sort_values("loan_dollars", ascending=False).head(top_n).copy()
+    top["rank"] = range(1, len(top) + 1)
+
+    # Reshape data to long format for stacked bar chart
+    id_vars = ["UnitID", "Institution", "sector", "loan_dollars", "rank"]
+    year_data = top[id_vars + year_field_names].melt(
+        id_vars=id_vars,
+        value_vars=year_field_names,
+        var_name="year_column",
+        value_name="year_loan_dollars",
+    )
+
+    # Extract year from column name and convert to integer for proper sorting
+    year_data["year"] = year_data["year_column"].str.extract(r"YR(\d{4})")[0].astype(int)
+    year_data["year_loan_dollars_billions"] = year_data["year_loan_dollars"] / 1_000_000_000
+
+    # Filter out NaN values to avoid chart issues
+    year_data = year_data[year_data["year_loan_dollars"].notna() & (year_data["year_loan_dollars"] > 0)]
+
+    # Sort by year for proper stacking order
+    year_data = year_data.sort_values("year", ascending=True)
+
+    # Calculate total for display
+    year_data["loan_dollars_billions"] = year_data["loan_dollars"] / 1_000_000_000
+
     min_year = year_columns[0][0]
     max_year = year_columns[-1][0]
     period_label = f"{min_year}-{max_year}" if min_year != max_year else str(min_year)
-    trimmed["years_covered"] = period_label
-    trimmed["loan_dollars_billions"] = trimmed["loan_dollars"] / 1_000_000_000
 
-    top = trimmed.sort_values("loan_dollars", ascending=False).head(top_n).copy()
-    top["rank"] = range(1, len(top) + 1)
-    ordered = top.sort_values("loan_dollars", ascending=True)
-
-    display_columns = [
-        "rank",
-        "UnitID",
-        "Institution",
-        "sector",
-        "loan_dollars",
-        "loan_dollars_billions",
-        "years_covered",
-    ]
-    chart_data = ordered.loc[:, [col for col in display_columns if col in ordered.columns]]
-    return LoanTopDollarResult(period_label=period_label, chart_data=chart_data)
+    return LoanTopDollarResult(period_label=period_label, chart_data=year_data)
 
 
 def render_loan_top_dollars_chart(
@@ -142,46 +151,79 @@ def render_loan_top_dollars_chart(
     period_suffix = f" ({prepared.period_label})" if prepared.period_label else ""
     chart_title = f"{title}{period_suffix}"
 
+    # Create year color scale for stacking
+    year_color_scale = alt.Scale(
+        scheme="viridis",
+        reverse=False  # Older years darker, newer years lighter
+    )
+
+    # Calculate number of unique institutions for height
+    num_institutions = chart_data["Institution"].nunique()
+
     chart = (
         alt.Chart(chart_data)
         .mark_bar()
         .encode(
             x=alt.X(
-                "loan_dollars_billions:Q",
+                "sum(year_loan_dollars_billions):Q",
                 title="Federal loan dollars (billions)",
                 axis=alt.Axis(format=".2f"),
+                stack="zero",
             ),
             y=alt.Y(
                 "Institution:N",
-                sort=alt.EncodingSortField(field="loan_dollars", order="descending"),
+                sort=alt.EncodingSortField(field="loan_dollars", op="max", order="descending"),
                 title="Institution",
             ),
+            color=alt.Color(
+                "year:O",
+                title="Year",
+                scale=year_color_scale,
+                sort="ascending",
+            ),
+            order=alt.Order("year:O", sort="ascending"),
             tooltip=[
                 alt.Tooltip("Institution:N", title="Institution"),
-                alt.Tooltip("loan_dollars_billions:Q", title="Loan dollars (billions)", format=".2f"),
+                alt.Tooltip("year:O", title="Year"),
+                alt.Tooltip("year_loan_dollars_billions:Q", title="Loan dollars this year (billions)", format=".3f"),
+                alt.Tooltip("loan_dollars_billions:Q", title="Total loan dollars (billions)", format=".2f"),
                 alt.Tooltip("Sector:N", title="Sector"),
-                alt.Tooltip("years_covered:N", title="Years"),
             ],
-            color=alt.Color("Sector:N", title="Sector", scale=SECTOR_COLOR_SCALE),
         )
-        .properties(height=max(320, 32 * len(chart_data)), title=chart_title)
+        .properties(height=max(320, 32 * num_institutions), title=chart_title)
     )
 
     st.subheader(chart_title)
     period_text = prepared.period_label or "the available years"
+    num_institutions_display = chart_data["Institution"].nunique()
     st.caption(
-        f"Top {len(chart_data)} institutions by federal loan dollars across {period_text}."
+        f"Top {num_institutions_display} institutions by federal loan dollars across {period_text}. Each bar shows yearly breakdown."
     )
     render_altair_chart(chart, width="stretch")
 
-    table = chart_data.sort_values("loan_dollars", ascending=False).copy()
-    table.rename(
-        columns={
-            "loan_dollars_billions": "Loan dollars (billions)",
-            "years_covered": "Years",
-        },
-        inplace=True,
-    )
-    if "UnitID" in table.columns:
-        table.drop(columns=["UnitID"], inplace=True, errors="ignore")
+    # Create summary table with yearly breakdown
+    table = chart_data.pivot_table(
+        index=["Institution", "Sector", "loan_dollars_billions"],
+        columns="year",
+        values="year_loan_dollars_billions",
+        aggfunc="sum",
+        fill_value=0,
+    ).reset_index()
+
+    # Sort by total loan dollars descending
+    table = table.sort_values("loan_dollars_billions", ascending=False)
+
+    # Rename total column for clarity
+    table.rename(columns={"loan_dollars_billions": "Total (billions)"}, inplace=True)
+
+    # Format year columns as billions with 2 decimals
+    year_cols = [col for col in table.columns if isinstance(col, (int, float))]
+    for col in year_cols:
+        table[col] = table[col].round(3)
+
+    table["Total (billions)"] = table["Total (billions)"].round(2)
+
+    # Convert all column names to strings to avoid mixed type warning
+    table.columns = [str(col) for col in table.columns]
+
     render_dataframe(table, width="stretch")
