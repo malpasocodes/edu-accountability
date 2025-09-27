@@ -28,40 +28,43 @@ class DataSources:
     _data_dir = _project_root / "data"
     _raw_dir = _data_dir / "raw"
     _processed_dir = _data_dir / "processed"
+    _ipeds_dir = _raw_dir / "ipeds" / "2023"
+    _fsa_dir = _raw_dir / "fsa"
     
-    # Raw data sources
+    # Raw data sources - FSA
     PELL_RAW = DataSourceConfig(
-        path=_raw_dir / "pelltotals.csv",
+        path=_fsa_dir / "pelltotals.csv",
         description="Pell grant totals by institution",
         required=True
     )
     
     LOAN_RAW = DataSourceConfig(
-        path=_raw_dir / "loantotals.csv",
+        path=_fsa_dir / "loantotals.csv",
         description="Federal loan totals by institution",
         required=False
     )
     
+    # Raw data sources - IPEDS
     COST_RAW = DataSourceConfig(
-        path=_raw_dir / "cost.csv",
+        path=_ipeds_dir / "cost.csv",
         description="Cost data by institution",
         required=True
     )
     
     ENROLLMENT_RAW = DataSourceConfig(
-        path=_raw_dir / "enrollment.csv",
+        path=_ipeds_dir / "enrollment.csv",
         description="Enrollment data by institution",
         required=True
     )
     
     GRADRATES_RAW = DataSourceConfig(
-        path=_raw_dir / "gradrates.csv",
+        path=_ipeds_dir / "gradrates.csv",
         description="Graduation rates by institution",
         required=True
     )
     
     INSTITUTIONS_RAW = DataSourceConfig(
-        path=_raw_dir / "institutions.csv",
+        path=_ipeds_dir / "institutions.csv",
         description="Institution metadata",
         required=True
     )
