@@ -14,7 +14,7 @@ class OverviewSection(BaseSection):
     
     def render_overview(self) -> None:
         """Render the overview page content."""
-        st.title("EDU Accountability Dashboard")
+        st.title("EDU Accountability Lab")
         st.caption(
             "Data driven insights to track college accountability, affordability, and outcomes."
         )
@@ -22,7 +22,7 @@ class OverviewSection(BaseSection):
         st.subheader("Mission")
         st.markdown(
             """
-            The EDU Accountability Dashboard delivers independent, data-driven analysis of 
+            The EDU Accountability Lab delivers independent, data-driven analysis of 
             higher education with a focus on accountability, affordability, and outcomes.
             Our audience includes policymakers, researchers, and taxpayers who seek greater transparency
             and effectiveness in postsecondary education. We take no advocacy position on specific 
