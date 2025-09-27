@@ -172,13 +172,8 @@ def render_loan_trend_chart(
         range=["#28a745", "#6c757d", "#dc3545"]  # Green, Gray, Red
     )
 
-    # Base chart with shared encoding
-    base = alt.Chart(prepared).add_selection(
-        alt.selection_multi(fields=["Institution"])
-    )
-
     # Line layer with dotted lines colored by institution
-    lines = base.mark_line(
+    lines = alt.Chart(prepared).mark_line(
         strokeDash=[3, 3],  # Dotted line pattern
         point=False
     ).encode(
@@ -192,15 +187,20 @@ def render_loan_trend_chart(
             title="Institution",
             scale=institution_color_scale
         ),
-        opacity=alt.condition(
-            alt.selection_multi(fields=["Institution"]),
-            alt.value(1.0),
-            alt.value(0.8)
-        )
+        tooltip=[
+            alt.Tooltip("Institution:N", title="Institution"),
+            alt.Tooltip("Year:Q", title="Year", format=".0f"),
+            alt.Tooltip(
+                "LoanDollarsBillions:Q",
+                title="Loan dollars (billions)",
+                format=".2f",
+            ),
+            alt.Tooltip("Sector:N", title="Sector"),
+        ],
     )
 
     # Point layer with year-over-year change coloring
-    points = base.mark_circle(size=80).encode(
+    points = alt.Chart(prepared).mark_circle(size=80).encode(
         x=alt.X("Year:Q"),
         y=alt.Y("LoanDollarsBillions:Q"),
         color=alt.Color(
@@ -208,12 +208,6 @@ def render_loan_trend_chart(
             title="Year-over-Year Change",
             scale=change_color_scale
         ),
-        stroke=alt.Color(
-            "Institution:N",
-            scale=institution_color_scale,
-            legend=None
-        ),
-        strokeWidth=alt.value(2),
         tooltip=[
             alt.Tooltip("Institution:N", title="Institution"),
             alt.Tooltip("Year:Q", title="Year", format=".0f"),
