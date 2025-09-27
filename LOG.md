@@ -2,6 +2,7 @@
 
 | Date | Change | Details | Files |
 | --- | --- | --- | --- |
+| 2025-09-27 | Major architecture refactoring | Extracted all business logic from app.py into modular components: config modules for constants/navigation/data sources, core modules for data management, section classes for each dashboard area, and state management for session handling. Reduced app.py from 648 to ~120 lines. | `app_refactored.py`, `src/config/`, `src/core/`, `src/sections/`, `src/state/`, `CLAUDE.md` |
 | 2025-09-26 | Enhanced value grid axis styling | Increased font size and bold weight on cost and graduation axis titles for both four- and two-year scatter charts to improve legibility. | `src/charts/cost_vs_grad_chart.py`, `LOG.md` |
 | 2025-09-26 | Added overview navigation | Reworked sidebar expanders with overview pages and guidance copy for value grid, loans, and Pell sections. | `app.py`, `LOG.md` |
 | 2025-09-25 | Added federal loan trend charts | Introduced four- and two-year federal loan trend visuals aligned with existing Pell charts, sizing bubbles by enrollment for consistency. | `app.py`, `src/charts/loan_trend_chart.py`, `src/charts/pell_vs_grad_scatter_chart.py`, `src/charts/loan_vs_grad_scatter_chart.py` |
