@@ -10,6 +10,7 @@ from .constants import (
     VALUE_GRID_SECTION,
     FEDERAL_LOANS_SECTION,
     PELL_SECTION,
+    DISTANCE_EDUCATION_SECTION,
     VALUE_GRID_OVERVIEW_LABEL,
     FOUR_YEAR_VALUE_GRID_LABEL,
     TWO_YEAR_VALUE_GRID_LABEL,
@@ -17,6 +18,8 @@ from .constants import (
     LOAN_CHARTS,
     PELL_OVERVIEW_LABEL,
     PELL_CHARTS,
+    DISTANCE_OVERVIEW_LABEL,
+    DISTANCE_CHARTS,
 )
 
 
@@ -123,6 +126,27 @@ class NavigationConfig:
         session_key="pell_chart",
         description="Review Pell Grant distributions and outcomes"
     )
+
+    DISTANCE_EDUCATION = SectionConfig(
+        name=DISTANCE_EDUCATION_SECTION,
+        icon="💻",
+        label="Distance Education",
+        overview_chart=ChartConfig(
+            label=DISTANCE_OVERVIEW_LABEL,
+            key="nav_distance_overview",
+            description="Online and hybrid learning patterns"
+        ),
+        charts=[
+            ChartConfig(
+                label=chart_label,
+                key=f"nav_distance_{index}",
+                description=None
+            )
+            for index, chart_label in enumerate(DISTANCE_CHARTS)
+        ],
+        session_key="distance_chart",
+        description="Explore distance education enrollment patterns"
+    )
     
     @classmethod
     def get_sections(cls) -> List[SectionConfig]:
@@ -132,6 +156,7 @@ class NavigationConfig:
             cls.VALUE_GRID,
             cls.FEDERAL_LOANS,
             cls.PELL_GRANTS,
+            cls.DISTANCE_EDUCATION,
         ]
     
     @classmethod

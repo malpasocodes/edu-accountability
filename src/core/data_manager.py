@@ -26,6 +26,7 @@ class DataManager:
         self.loader = DataLoader()
         self.pell_df: Optional[pd.DataFrame] = None
         self.loan_df: Optional[pd.DataFrame] = None
+        self.distance_df: Optional[pd.DataFrame] = None
         self.value_grid_datasets: Dict[str, pd.DataFrame] = {}
         self.pell_resources: Dict[str, Optional[pd.DataFrame]] = {}
         self.errors: list[str] = []
@@ -45,6 +46,7 @@ class DataManager:
         # Load required raw datasets
         self._load_pell_raw()
         self._load_loan_raw()
+        self._load_distance_raw()
         
         # Load value grid datasets
         self._load_value_grid_datasets()
@@ -73,6 +75,17 @@ class DataManager:
         except DataLoadError:
             # Loan data is optional
             self.loan_df = pd.DataFrame()
+
+    def _load_distance_raw(self) -> None:
+        """Load the raw distance education dataset (optional)."""
+        try:
+            self.distance_df = self.loader.load_csv(
+                str(DataSources.DISTANCE_RAW.path),
+                DataSources.DISTANCE_RAW.description
+            )
+        except DataLoadError:
+            # Distance education data is optional
+            self.distance_df = pd.DataFrame()
     
     def _load_value_grid_datasets(self) -> None:
         """Load value grid datasets using existing load_processed function."""
@@ -118,6 +131,10 @@ class DataManager:
     def get_pell_resource(self, key: str) -> Optional[pd.DataFrame]:
         """Get a Pell resource by key."""
         return self.pell_resources.get(key)
+
+    def get_distance_data(self) -> Optional[pd.DataFrame]:
+        """Get the distance education dataset."""
+        return self.distance_df
     
     def get_metadata_for_sector(
         self, 

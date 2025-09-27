@@ -68,6 +68,12 @@ class DataSources:
         description="Institution metadata",
         required=True
     )
+
+    DISTANCE_RAW = DataSourceConfig(
+        path=_ipeds_dir / "distanced.csv",
+        description="Distance education enrollment data",
+        required=False
+    )
     
     # Processed data sources - Pell
     PELL_TOP_DOLLARS = DataSourceConfig(
@@ -180,4 +186,5 @@ class DataSources:
             "tuition_vs_grad_parquet": cls.TUITION_VS_GRAD_PARQUET,
             "tuition_vs_grad_two": cls.TUITION_VS_GRAD_TWO,
             "tuition_vs_grad_two_parquet": cls.TUITION_VS_GRAD_TWO_PARQUET,
+            "distance_raw": cls.DISTANCE_RAW,
         }

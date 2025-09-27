@@ -328,6 +328,240 @@
           }
         }
       }
+    },
+    "distanced": {
+      "description": "Distance education enrollment data by year",
+      "source": "IPEDS Distance Education Survey",
+      "fields": {
+        "UnitID": {
+          "source_name": "UnitID",
+          "data_type": "integer",
+          "nullable": false,
+          "foreign_key": "institutions.UnitID",
+          "description": "Institution identifier linking to institutions table"
+        },
+        "INSTITUTION": {
+          "source_name": "INSTITUTION",
+          "data_type": "string",
+          "nullable": false,
+          "description": "Institution name",
+          "source": {
+            "provider": "IPEDS",
+            "dataset": "Distance Education",
+            "field": "INSTITUTION"
+          }
+        },
+        "TOTAL_ENROLL_2024": {
+          "source_name": "TOTAL_ENROLL_2024",
+          "data_type": "integer",
+          "nullable": true,
+          "description": "Total enrollment for 2024",
+          "source": {
+            "provider": "IPEDS",
+            "dataset": "Distance Education",
+            "year": 2024
+          },
+          "constraints": {
+            "min": 0
+          }
+        },
+        "DE_ENROLL_2024": {
+          "source_name": "DE_ENROLL_2024",
+          "data_type": "integer",
+          "nullable": true,
+          "description": "Students enrolled exclusively in distance education courses in 2024",
+          "source": {
+            "provider": "IPEDS",
+            "dataset": "Distance Education",
+            "year": 2024
+          },
+          "constraints": {
+            "min": 0
+          }
+        },
+        "SDE_ENROLL_TOTAL": {
+          "source_name": "SDE_ENROLL_TOTAL",
+          "data_type": "integer",
+          "nullable": true,
+          "description": "Students enrolled in some distance education courses in 2024",
+          "source": {
+            "provider": "IPEDS",
+            "dataset": "Distance Education",
+            "year": 2024
+          },
+          "constraints": {
+            "min": 0
+          }
+        },
+        "TOTAL_ENROLL_2023": {
+          "source_name": "TOTAL_ENROLL_2023",
+          "data_type": "integer",
+          "nullable": true,
+          "description": "Total enrollment for 2023",
+          "source": {
+            "provider": "IPEDS",
+            "dataset": "Distance Education",
+            "year": 2023
+          },
+          "constraints": {
+            "min": 0
+          }
+        },
+        "DE_ENROLL_2023": {
+          "source_name": "DE_ENROLL_2023",
+          "data_type": "integer",
+          "nullable": true,
+          "description": "Students enrolled exclusively in distance education courses in 2023",
+          "source": {
+            "provider": "IPEDS",
+            "dataset": "Distance Education",
+            "year": 2023
+          },
+          "constraints": {
+            "min": 0
+          }
+        },
+        "SDE_ENROLL_2023": {
+          "source_name": "SDE_ENROLL_2023",
+          "data_type": "integer",
+          "nullable": true,
+          "description": "Students enrolled in some distance education courses in 2023",
+          "source": {
+            "provider": "IPEDS",
+            "dataset": "Distance Education",
+            "year": 2023
+          },
+          "constraints": {
+            "min": 0
+          }
+        },
+        "TOTAL_ENROLL_2022": {
+          "source_name": "TOTAL_ENROLL_2022",
+          "data_type": "integer",
+          "nullable": true,
+          "description": "Total enrollment for 2022",
+          "source": {
+            "provider": "IPEDS",
+            "dataset": "Distance Education",
+            "year": 2022
+          },
+          "constraints": {
+            "min": 0
+          }
+        },
+        "DE_ENROLL_2022": {
+          "source_name": "DE_ENROLL_2022",
+          "data_type": "integer",
+          "nullable": true,
+          "description": "Students enrolled exclusively in distance education courses in 2022",
+          "source": {
+            "provider": "IPEDS",
+            "dataset": "Distance Education",
+            "year": 2022
+          },
+          "constraints": {
+            "min": 0
+          }
+        },
+        "SDE_ENROLL_2022": {
+          "source_name": "SDE_ENROLL_2022",
+          "data_type": "integer",
+          "nullable": true,
+          "description": "Students enrolled in some distance education courses in 2022",
+          "source": {
+            "provider": "IPEDS",
+            "dataset": "Distance Education",
+            "year": 2022
+          },
+          "constraints": {
+            "min": 0
+          }
+        },
+        "TOTAL_ENROLL_2021": {
+          "source_name": "TOTAL_ENROLL_2021",
+          "data_type": "integer",
+          "nullable": true,
+          "description": "Total enrollment for 2021",
+          "source": {
+            "provider": "IPEDS",
+            "dataset": "Distance Education",
+            "year": 2021
+          },
+          "constraints": {
+            "min": 0
+          }
+        },
+        "DE_ENROLL_2021": {
+          "source_name": "DE_ENROLL_2021",
+          "data_type": "integer",
+          "nullable": true,
+          "description": "Students enrolled exclusively in distance education courses in 2021",
+          "source": {
+            "provider": "IPEDS",
+            "dataset": "Distance Education",
+            "year": 2021
+          },
+          "constraints": {
+            "min": 0
+          }
+        },
+        "SDE_ENROLL_2021": {
+          "source_name": "SDE_ENROLL_2021",
+          "data_type": "integer",
+          "nullable": true,
+          "description": "Students enrolled in some distance education courses in 2021",
+          "source": {
+            "provider": "IPEDS",
+            "dataset": "Distance Education",
+            "year": 2021
+          },
+          "constraints": {
+            "min": 0
+          }
+        },
+        "TOTAL_ENROLL_2020": {
+          "source_name": "TOTAL_ENROLL_2020",
+          "data_type": "integer",
+          "nullable": true,
+          "description": "Total enrollment for 2020",
+          "source": {
+            "provider": "IPEDS",
+            "dataset": "Distance Education",
+            "year": 2020
+          },
+          "constraints": {
+            "min": 0
+          }
+        },
+        "DE_ENROLL_2020": {
+          "source_name": "DE_ENROLL_2020",
+          "data_type": "integer",
+          "nullable": true,
+          "description": "Students enrolled exclusively in distance education courses in 2020",
+          "source": {
+            "provider": "IPEDS",
+            "dataset": "Distance Education",
+            "year": 2020
+          },
+          "constraints": {
+            "min": 0
+          }
+        },
+        "SDE_ENROLL_2020": {
+          "source_name": "SDE_ENROLL_2020",
+          "data_type": "integer",
+          "nullable": true,
+          "description": "Students enrolled in some distance education courses in 2020",
+          "source": {
+            "provider": "IPEDS",
+            "dataset": "Distance Education",
+            "year": 2020
+          },
+          "constraints": {
+            "min": 0
+          }
+        }
+      }
     }
   },
   "transformations": {

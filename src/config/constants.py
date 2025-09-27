@@ -11,6 +11,7 @@ OVERVIEW_SECTION = "Project Overview"
 VALUE_GRID_SECTION = "College Value Grid"
 FEDERAL_LOANS_SECTION = "Federal Loans"
 PELL_SECTION = "Pell Grants"
+DISTANCE_EDUCATION_SECTION = "Distance Education"
 
 
 @dataclass(frozen=True)
@@ -85,10 +86,20 @@ LOAN_CHARTS: List[str] = [
 LOAN_OVERVIEW_LABEL = "Overview"
 
 
+# Distance Education chart labels
+DISTANCE_TOP_ENROLLMENT_LABEL = "Top 25 Distance Education Enrollment"
+
+DISTANCE_CHARTS: List[str] = [
+    DISTANCE_TOP_ENROLLMENT_LABEL,
+]
+DISTANCE_OVERVIEW_LABEL = "Overview"
+
+
 # Session state defaults
 DEFAULT_SESSION_STATE: Dict[str, str] = {
     "active_section": OVERVIEW_SECTION,
     "value_grid_chart": VALUE_GRID_OVERVIEW_LABEL,
     "loan_chart": LOAN_OVERVIEW_LABEL,
     "pell_chart": PELL_OVERVIEW_LABEL,
+    "distance_chart": DISTANCE_OVERVIEW_LABEL,
 }

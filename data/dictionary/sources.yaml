@@ -47,6 +47,13 @@ sources:
         collection_period: "Fall"
         variables_url: "https://nces.ed.gov/ipeds/datacenter/DataFiles.aspx?gotoReportId=7&fromIpeds=true&sid=e7a9c3f8-6d45-4b92-9c18-3e5a8b1d4f67&rtid=7"
 
+      distance_education:
+        name: "Distance Education and Technological Innovation"
+        description: "Enrollment in distance education courses by institution and year"
+        survey_form: "DE"
+        collection_period: "Fall"
+        variables_url: "https://nces.ed.gov/ipeds/datacenter/DataFiles.aspx?gotoReportId=7&fromIpeds=true"
+
   fsa:
     name: "Federal Student Aid Data Center"
     provider: "Federal Student Aid (FSA)"
@@ -100,6 +107,11 @@ current_data:
       - name: "gradrates.csv"
         source: "GR2023"
         description: "Graduation rates for 2023 cohorts"
+        records: null
+
+      - name: "distanced.csv"
+        source: "DE2023"
+        description: "Distance education enrollment for 2020-2024"
         records: null
         
   fsa_2024:

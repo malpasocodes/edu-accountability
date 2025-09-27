@@ -10,6 +10,7 @@ from src.config.constants import (
     VALUE_GRID_SECTION,
     FEDERAL_LOANS_SECTION,
     PELL_SECTION,
+    DISTANCE_EDUCATION_SECTION,
 )
 from src.core import DataManager, DataLoadError
 from src.sections import (
@@ -17,6 +18,7 @@ from src.sections import (
     ValueGridSection,
     FederalLoansSection,
     PellGrantsSection,
+    DistanceEducationSection,
 )
 from src.state import SessionManager
 
@@ -81,6 +83,7 @@ def render_main(data_manager: DataManager) -> None:
         VALUE_GRID_SECTION: ValueGridSection(data_manager),
         FEDERAL_LOANS_SECTION: FederalLoansSection(data_manager),
         PELL_SECTION: PellGrantsSection(data_manager),
+        DISTANCE_EDUCATION_SECTION: DistanceEducationSection(data_manager),
     }
     
     # Get the active section instance
