@@ -198,79 +198,136 @@ def render_pell_top_dollars_chart(df: pd.DataFrame, *, top_n: int = 25, title: s
     period_suffix = f" ({prepared.period_label})" if prepared.period_label else ""
     chart_title = f"{title}{period_suffix}"
 
-    # Create year color scale for stacking
-    year_color_scale = alt.Scale(
-        scheme="viridis",
-        reverse=False  # Older years darker, newer years lighter
-    )
+    # Check if we have year-by-year data or pre-aggregated data
+    has_year_data = "year" in chart_data.columns and "year_pell_dollars_billions" in chart_data.columns
 
-    # Calculate number of unique institutions for height
-    num_institutions = chart_data["Institution"].nunique()
-
-    chart = (
-        alt.Chart(chart_data)
-        .mark_bar()
-        .encode(
-            x=alt.X(
-                "sum(year_pell_dollars_billions):Q",
-                title="Pell grant dollars (billions)",
-                axis=alt.Axis(format=".2f"),
-                stack="zero",
-            ),
-            y=alt.Y(
-                "Institution:N",
-                sort=alt.EncodingSortField(field="pell_dollars", op="max", order="descending"),
-                title="Institution",
-            ),
-            color=alt.Color(
-                "year:O",
-                title="Year",
-                scale=year_color_scale,
-                sort="ascending",
-            ),
-            order=alt.Order("year:O", sort="ascending"),
-            tooltip=[
-                alt.Tooltip("Institution:N", title="Institution"),
-                alt.Tooltip("year:O", title="Year"),
-                alt.Tooltip("year_pell_dollars_billions:Q", title="Pell dollars this year (billions)", format=".3f"),
-                alt.Tooltip("pell_dollars_billions:Q", title="Total Pell dollars (billions)", format=".2f"),
-                alt.Tooltip("sector:N", title="Sector"),
-            ],
+    if has_year_data:
+        # Create year color scale for stacking
+        year_color_scale = alt.Scale(
+            scheme="viridis",
+            reverse=False  # Older years darker, newer years lighter
         )
-        .properties(height=max(320, 32 * num_institutions), title=chart_title)
-    )
+
+        # Calculate number of unique institutions for height
+        num_institutions = chart_data["Institution"].nunique()
+
+        chart = (
+            alt.Chart(chart_data)
+            .mark_bar()
+            .encode(
+                x=alt.X(
+                    "sum(year_pell_dollars_billions):Q",
+                    title="Pell grant dollars (billions)",
+                    axis=alt.Axis(format=".2f"),
+                    stack="zero",
+                ),
+                y=alt.Y(
+                    "Institution:N",
+                    sort=alt.EncodingSortField(field="pell_dollars", op="max", order="descending"),
+                    title="Institution",
+                ),
+                color=alt.Color(
+                    "year:O",
+                    title="Year",
+                    scale=year_color_scale,
+                    sort="ascending",
+                ),
+                order=alt.Order("year:O", sort="ascending"),
+                tooltip=[
+                    alt.Tooltip("Institution:N", title="Institution"),
+                    alt.Tooltip("year:O", title="Year"),
+                    alt.Tooltip("year_pell_dollars_billions:Q", title="Pell dollars this year (billions)", format=".3f"),
+                    alt.Tooltip("pell_dollars_billions:Q", title="Total Pell dollars (billions)", format=".2f"),
+                    alt.Tooltip("sector:N", title="Sector"),
+                ],
+            )
+            .properties(height=max(320, 32 * num_institutions), title=chart_title)
+        )
+    else:
+        # Fallback to simple bar chart for pre-aggregated data
+        chart = (
+            alt.Chart(chart_data)
+            .mark_bar()
+            .encode(
+                x=alt.X(
+                    "pell_dollars_billions:Q",
+                    title="Pell grant dollars (billions)",
+                    axis=alt.Axis(format=".2f"),
+                ),
+                y=alt.Y(
+                    "Institution:N",
+                    sort=alt.EncodingSortField(field="pell_dollars", order="descending"),
+                    title="Institution",
+                ),
+                tooltip=[
+                    alt.Tooltip("Institution:N", title="Institution"),
+                    alt.Tooltip("pell_dollars_billions:Q", title="Pell dollars (billions)", format=".2f"),
+                    alt.Tooltip("sector:N", title="Sector"),
+                    alt.Tooltip("years_covered:N", title="Years"),
+                ],
+            )
+            .properties(height=max(320, 32 * len(chart_data)), title=chart_title)
+        )
+
+        if "sector" in chart_data.columns:
+            chart = chart.encode(
+                color=alt.Color("sector:N", title="Sector", scale=SECTOR_COLOR_SCALE)
+            )
 
     st.subheader(chart_title)
     period_text = prepared.period_label or "the available years"
     num_institutions_display = chart_data["Institution"].nunique()
-    st.caption(
-        f"Top {num_institutions_display} institutions by Pell grant dollars across {period_text}. Each bar shows yearly breakdown."
-    )
+
+    if has_year_data:
+        caption_text = f"Top {num_institutions_display} institutions by Pell grant dollars across {period_text}. Each bar shows yearly breakdown."
+    else:
+        caption_text = f"Top {num_institutions_display} institutions by Pell grant dollars across {period_text}."
+
+    st.caption(caption_text)
     render_altair_chart(chart, width="stretch")
 
-    # Create summary table with yearly breakdown
-    table = chart_data.pivot_table(
-        index=["Institution", "sector", "pell_dollars_billions"],
-        columns="year",
-        values="year_pell_dollars_billions",
-        aggfunc="sum",
-        fill_value=0,
-    ).reset_index()
+    # Create summary table with yearly breakdown if year data is available
+    if "year_pell_dollars_billions" in chart_data.columns and "year" in chart_data.columns:
+        table = chart_data.pivot_table(
+            index=["Institution", "sector", "pell_dollars_billions"],
+            columns="year",
+            values="year_pell_dollars_billions",
+            aggfunc="sum",
+            fill_value=0,
+        ).reset_index()
 
-    # Sort by total Pell dollars descending
-    table = table.sort_values("pell_dollars_billions", ascending=False)
+        # Sort by total Pell dollars descending
+        table = table.sort_values("pell_dollars_billions", ascending=False)
 
-    # Rename total column for clarity
-    table.rename(columns={"pell_dollars_billions": "Total (billions)", "sector": "Sector"}, inplace=True)
+        # Rename total column for clarity
+        table.rename(columns={"pell_dollars_billions": "Total (billions)", "sector": "Sector"}, inplace=True)
 
-    # Format year columns as billions with 3 decimals
-    year_cols = [col for col in table.columns if isinstance(col, (int, float))]
-    for col in year_cols:
-        table[col] = table[col].round(3)
+        # Format year columns as billions with 3 decimals
+        year_cols = [col for col in table.columns if isinstance(col, (int, float))]
+        for col in year_cols:
+            table[col] = table[col].round(3)
 
-    table["Total (billions)"] = table["Total (billions)"].round(2)
+        table["Total (billions)"] = table["Total (billions)"].round(2)
 
-    # Convert all column names to strings to avoid mixed type warning
-    table.columns = [str(col) for col in table.columns]
+        # Convert all column names to strings to avoid mixed type warning
+        table.columns = [str(col) for col in table.columns]
+    else:
+        # Fallback to simple table for pre-aggregated data
+        display_columns = [
+            column
+            for column in ["rank", "Institution", "pell_dollars_billions", "sector", "years_covered"]
+            if column in chart_data.columns
+        ]
+        table = chart_data.sort_values("pell_dollars", ascending=False).loc[:, display_columns].copy()
+        table.rename(
+            columns={
+                "pell_dollars_billions": "Pell dollars (billions)",
+                "sector": "Sector",
+                "years_covered": "Years",
+            },
+            inplace=True,
+        )
+        if "UnitID" in table.columns:
+            table.drop(columns=["UnitID"], inplace=True, errors="ignore")
 
     render_dataframe(table, width="stretch")
