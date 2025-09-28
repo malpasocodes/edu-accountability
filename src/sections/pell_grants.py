@@ -9,12 +9,14 @@ import streamlit as st
 from src.charts.pell_top_dollars_chart import render_pell_top_dollars_chart
 from src.charts.pell_vs_grad_scatter_chart import render_pell_vs_grad_scatter
 from src.charts.pell_trend_chart import render_pell_trend_chart
+from src.charts.pell_grad_rate_scatter_chart import render_pell_grad_rate_scatter
 from src.config.constants import (
     PELL_SECTION,
     PELL_OVERVIEW_LABEL,
     PELL_TOP_DOLLARS_LABEL,
     PELL_VS_GRAD_LABEL,
     PELL_TREND_LABEL,
+    PELL_GRAD_RATE_LABEL,
     PELL_TOP_DOLLARS_FOUR_LABEL,
     PELL_TOP_DOLLARS_TWO_LABEL,
     PELL_VS_GRAD_FOUR_LABEL,
@@ -57,6 +59,8 @@ class PellGrantsSection(BaseSection):
             self._render_pell_vs_grad_with_tabs(chart_name)
         elif chart_name == PELL_TREND_LABEL:
             self._render_pell_trend_with_tabs(chart_name)
+        elif chart_name == PELL_GRAD_RATE_LABEL:
+            self._render_pell_grad_rate_with_tabs(chart_name)
         # Handle individual chart names for backward compatibility
         elif chart_name == PELL_TOP_DOLLARS_FOUR_LABEL:
             self._render_pell_top_dollars("four_year", chart_name)
@@ -149,12 +153,42 @@ class PellGrantsSection(BaseSection):
     def _render_pell_trend_with_tabs(self, title: str) -> None:
         """Render Pell trend chart with 4-year and 2-year tabs."""
         tab1, tab2 = st.tabs(["4-year", "2-year"])
-        
+
         with tab1:
             self._render_pell_trend("trend_four", f"{title} (4-year)")
-        
+
         with tab2:
             self._render_pell_trend("trend_two", f"{title} (2-year)")
+
+    def _render_pell_grad_rate_with_tabs(self, title: str) -> None:
+        """Render Pell graduation rate scatter chart with 4-year and 2-year tabs."""
+        tab1, tab2 = st.tabs(["4-year", "2-year"])
+
+        with tab1:
+            self._render_pell_grad_rate("grad_rate_four", "four_year", f"{title} (4-year)")
+
+        with tab2:
+            self._render_pell_grad_rate("grad_rate_two", "two_year", f"{title} (2-year)")
+
+    def _render_pell_grad_rate(self, resource_key: str, sector: str, title: str) -> None:
+        """Render Pell graduation rate scatter chart."""
+        dataset = self.data_manager.get_pell_resource(resource_key)
+        if dataset is not None:
+            metadata = self.data_manager.get_metadata_for_sector(sector)
+            if metadata is not None:
+                render_pell_grad_rate_scatter(
+                    dataset,
+                    title=title,
+                    metadata_df=metadata,
+                )
+            else:
+                st.error(f"Missing metadata for {sector.replace('_', '-')} institutions.")
+        else:
+            sector_label = "4-year" if "four" in resource_key else "2-year"
+            st.warning(
+                f"Pell graduation rate dataset ({sector_label}) not found. "
+                "Run `python data/processed/build_pell_grad_rate_scatter.py` to generate it."
+            )
     
     def get_available_charts(self) -> List[str]:
         """Get available charts for Pell Grants section."""

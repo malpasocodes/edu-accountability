@@ -123,6 +123,18 @@ class DataSources:
         description="Pell vs graduation rates (2-year)",
         required=False
     )
+
+    PELL_GRAD_RATE_FOUR = DataSourceConfig(
+        path=_processed_dir / "pell_grad_rate_scatter_four_year.csv",
+        description="Pell graduation rate scatter (4-year)",
+        required=False
+    )
+
+    PELL_GRAD_RATE_TWO = DataSourceConfig(
+        path=_processed_dir / "pell_grad_rate_scatter_two_year.csv",
+        description="Pell graduation rate scatter (2-year)",
+        required=False
+    )
     
     # Processed data sources - Value Grid
     TUITION_VS_GRAD = DataSourceConfig(
@@ -162,6 +174,8 @@ class DataSources:
             "scatter_all": cls.PELL_VS_GRAD,
             "scatter_four": cls.PELL_VS_GRAD_FOUR,
             "scatter_two": cls.PELL_VS_GRAD_TWO,
+            "grad_rate_four": cls.PELL_GRAD_RATE_FOUR,
+            "grad_rate_two": cls.PELL_GRAD_RATE_TWO,
         }
     
     @classmethod
@@ -182,6 +196,8 @@ class DataSources:
             "pell_vs_grad": cls.PELL_VS_GRAD,
             "pell_vs_grad_four": cls.PELL_VS_GRAD_FOUR,
             "pell_vs_grad_two": cls.PELL_VS_GRAD_TWO,
+            "pell_grad_rate_four": cls.PELL_GRAD_RATE_FOUR,
+            "pell_grad_rate_two": cls.PELL_GRAD_RATE_TWO,
             "tuition_vs_grad": cls.TUITION_VS_GRAD,
             "tuition_vs_grad_parquet": cls.TUITION_VS_GRAD_PARQUET,
             "tuition_vs_grad_two": cls.TUITION_VS_GRAD_TWO,

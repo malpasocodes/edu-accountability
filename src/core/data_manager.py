@@ -116,6 +116,8 @@ class DataManager:
             "scatter_all": DataSources.PELL_VS_GRAD,
             "scatter_four": DataSources.PELL_VS_GRAD_FOUR,
             "scatter_two": DataSources.PELL_VS_GRAD_TWO,
+            "grad_rate_four": DataSources.PELL_GRAD_RATE_FOUR,
+            "grad_rate_two": DataSources.PELL_GRAD_RATE_TWO,
         }
         
         for key, source in optional_sources.items():

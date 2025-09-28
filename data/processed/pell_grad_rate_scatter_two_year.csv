@@ -1,0 +1,1633 @@
+UnitID,Institution,State,Sector,PellGraduationRate,PellDollars,PellDollarsBillions,Enrollment
+135717,Miami Dade College,FL,Public,34.29,1819649908,1.820,39139
+150987,Ivy Tech Community College,IN,Public,24.29,1673206184,1.673,100077
+225423,Houston Community College,TX,Public,16.71,1190107411,1.190,49749
+138187,Valencia College,FL,Public,40.43,1115288833,1.115,42524
+441371,Ultimate Medical Academy,FL,"Private, not-for-profit",59.29,1002673914,1.003,7436
+132709,Broward College,FL,Public,30.86,970819154,0.971,29140
+190521,CUNY Borough of Manhattan Community College,NY,Public,25.29,946879333,0.947,18225
+227182,Lone Star College System,TX,Public,15.00,933070964,0.933,70991
+224642,El Paso Community College,TX,Public,20.29,901924279,0.902,24420
+228547,Tarrant County College District,TX,Public,21.57,862646039,0.863,41472
+230737,Utah Valley University,UT,Public,28.29,779786345,0.780,43794
+137078,St Petersburg College,FL,Public,29.57,756644712,0.757,23350
+202356,Cuyahoga Community College District,OH,Public,18.71,685032973,0.685,17407
+135081,Keiser University-Ft Lauderdale,FL,"Private, not-for-profit",61.43,684133461,0.684,17634
+409315,South Texas College,TX,Public,23.43,677868041,0.678,26440
+215239,Community College of Philadelphia,PA,Public,14.71,645381928,0.645,12224
+136358,Palm Beach State College,FL,Public,37.14,645027404,0.645,24369
+134495,Hillsborough Community College,FL,Public,27.43,634470269,0.634,20004
+222992,Austin Community College District,TX,Public,12.00,622352816,0.622,35600
+187532,Central New Mexico Community College,NM,Public,26.57,597049042,0.597,19067
+158662,Delgado Community College,LA,Public,9.29,596360906,0.596,12130
+232946,Northern Virginia Community College,VA,Public,30.71,588079214,0.588,53810
+209746,Portland Community College,OR,Public,16.71,567711898,0.568,20033
+202222,Columbus State Community College,OH,Public,19.43,555469390,0.555,26663
+227979,San Jacinto Community College,TX,Public,30.43,543427694,0.543,31494
+242972,NUC University,PR,"Private, for-profit",55.43,529345002,0.529,25900
+224615,Dallas College,TX,Public,21.86,513790239,0.514,66592
+119164,Mt San Antonio College,CA,Public,34.71,512456813,0.512,28742
+117645,Long Beach City College,CA,Public,19.43,509304321,0.509,24425
+244437,Georgia State University-Perimeter College,GA,Public,19.00,507125675,0.507,15522
+172635,Wayne County Community College District,MI,Public,13.29,498010942,0.498,12554
+182005,College of Southern Nevada,NV,Public,11.29,487305729,0.487,29081
+233772,Tidewater Community College,VA,Public,20.29,472049062,0.472,15912
+170240,Henry Ford College,MI,Public,7.86,470102754,0.470,11239
+133702,Florida State College at Jacksonville,FL,Public,31.43,469564540,0.470,20530
+175786,Hinds Community College,MS,Public,31.14,465763256,0.466,9332
+434672,Community College of Baltimore County,MD,Public,10.29,462980459,0.463,15803
+113856,East Los Angeles College,CA,Public,26.86,460267490,0.460,30321
+190628,CUNY LaGuardia Community College,NY,Public,28.71,457959183,0.458,13998
+105525,Pima Community College,AZ,Public,15.57,453882804,0.454,15819
+171535,Oakland Community College,MI,Public,12.43,448975259,0.449,13831
+190619,CUNY Kingsborough Community College,NY,Public,31.71,441589104,0.442,19070
+111887,Cerritos College,CA,Public,26.57,440774040,0.441,21046
+193478,Nassau Community College,NY,Public,19.86,439971386,0.440,11984
+217475,Community College of Rhode Island,RI,Public,18.00,438213076,0.438,12518
+114789,Fresno City College,CA,Public,20.86,433528422,0.434,25285
+218894,Trident Technical College,SC,Public,18.43,424115044,0.424,14025
+179308,Saint Louis Community College,MO,Public,13.14,418806896,0.419,14627
+121044,Pasadena City College,CA,Public,38.57,418315257,0.418,23592
+137209,Seminole State College of Florida,FL,Public,37.43,418313180,0.418,14104
+193326,Monroe Community College,NY,Public,17.29,416703326,0.417,8530
+190673,CUNY Queensborough Community College,NY,Public,27.14,415464015,0.415,10251
+190530,CUNY Bronx Community College,NY,Public,21.29,413173201,0.413,6465
+482477,DeVry University-Illinois,IL,"Private, for-profit",29.86,409574219,0.410,26146
+109819,Bakersfield College,CA,Public,17.29,401172393,0.401,30410
+198534,Fayetteville Technical Community College,NC,Public,17.71,400370898,0.400,10877
+109208,American River College,CA,Public,25.57,396562213,0.397,29908
+227924,San Antonio College,TX,Public,24.43,386941882,0.387,18975
+230746,Salt Lake Community College,UT,Public,24.86,386454096,0.386,26764
+207935,Tulsa Community College,OK,Public,15.43,386376909,0.386,14538
+127200,Front Range Community College,CO,Public,24.00,385329154,0.385,21096
+239248,Milwaukee Area Technical College,WI,Public,15.29,385025793,0.385,13190
+198260,Central Piedmont Community College,NC,Public,19.71,380965032,0.381,18446
+199856,Wake Technical Community College,NC,Public,22.14,380499899,0.380,22763
+248934,ECPI University,VA,"Private, for-profit",44.86,375252254,0.375,11385
+205470,Sinclair Community College,OH,Public,23.14,372217734,0.372,17431
+122977,Santa Monica College,CA,Public,24.86,370845457,0.371,23164
+198622,Guilford Technical Community College,NC,Public,22.00,368011431,0.368,10443
+366395,Suffolk County Community College,NY,Public,20.71,366933000,0.367,20053
+212878,Harrisburg Area Community College,PA,Public,11.86,359999512,0.360,12880
+230782,Weber State University,UT,Public,29.14,358792985,0.359,29534
+163426,Montgomery College,MD,Public,23.71,351963765,0.352,17780
+177472,Ozarks Technical Community College,MO,Public,26.86,348519564,0.349,11036
+122658,San Joaquin Delta College,CA,Public,28.43,341336853,0.341,18226
+144865,College of DuPage,IL,Public,19.86,338264176,0.338,23216
+113980,El Camino Community College District,CA,Public,30.57,337139473,0.337,21599
+127820,Pikes Peak State College,CO,Public,19.71,336565358,0.337,12388
+118976,Modesto Junior College,CA,Public,19.71,333956440,0.334,17152
+134608,Indian River State College,FL,Public,38.14,330851288,0.331,15104
+184995,Hudson County Community College,NJ,Public,14.86,326023146,0.326,7229
+123800,Southwestern College,CA,Public,27.57,325727625,0.326,18469
+105154,Mesa Community College,AZ,Public,14.57,323728921,0.324,16624
+121901,Riverside City College,CA,Public,26.71,321302349,0.321,20437
+223816,Central Texas College,TX,Public,14.57,317810238,0.318,8192
+184481,Essex County College,NJ,Public,12.71,316753494,0.317,6790
+104708,Glendale Community College,AZ,Public,13.71,316398175,0.316,13480
+111939,Chaffey College,CA,Public,25.57,315843633,0.316,20632
+109350,Antelope Valley Community College District,CA,Public,23.71,315792348,0.316,12937
+133508,Florida SouthWestern State College,FL,Public,35.71,315603982,0.316,13860
+170790,Macomb Community College,MI,Public,12.14,315070748,0.315,15983
+170657,Lansing Community College,MI,Public,16.86,313804769,0.314,9207
+137759,Tallahassee Community College,FL,Public,27.86,310048942,0.310,11699
+115001,Glendale Community College,CA,Public,33.71,309676320,0.310,11176
+191083,Erie Community College,NY,Public,22.29,309511189,0.310,7618
+117706,Los Angeles Pierce College,CA,Public,35.43,308724953,0.309,16186
+199333,Pitt Community College,NC,Public,19.00,307870215,0.308,7371
+147378,Moraine Valley Community College,IL,Public,29.14,307329021,0.307,11144
+140331,Chattahoochee Technical College,GA,Public,28.14,306955802,0.307,9842
+210605,Community College of Allegheny County,PA,Public,14.00,304589165,0.305,10451
+221485,Southwest Tennessee Community College,TN,Public,12.71,300409741,0.300,6980
+114859,Fullerton College,CA,Public,29.57,298697781,0.299,18569
+132693,Eastern Florida State College,FL,Public,40.57,298256652,0.298,13601
+153737,Kirkwood Community College,IA,Public,26.43,297461093,0.297,12660
+122180,Sacramento City College,CA,Public,23.43,296035486,0.296,19031
+205841,Stark State College,OH,Public,16.14,294880315,0.295,9616
+209038,Lane Community College,OR,Public,16.14,294535890,0.295,6507
+117788,Los Angeles City College,CA,Public,23.57,293711612,0.294,14076
+229355,Tyler Junior College,TX,Public,16.43,292898929,0.293,11977
+218113,Greenville Technical College,SC,Public,9.86,290474138,0.290,10661
+247834,Collin County Community College District,TX,Public,16.14,288069259,0.288,37772
+133386,Daytona State College,FL,Public,36.86,286789817,0.287,11807
+117733,Los Angeles Valley College,CA,Public,29.43,286430544,0.286,15733
+165112,Bunker Hill Community College,MA,Public,12.57,285770681,0.286,8545
+153214,Des Moines Area Community College,IA,Public,25.86,285046788,0.285,24418
+107664,University of Arkansas-Pulaski Technical College,AR,Public,19.43,279237605,0.279,4175
+125091,Victor Valley College,CA,Public,22.00,278540913,0.279,15372
+227377,Texas Southmost College,TX,Public,24.86,278456084,0.278,8193
+112190,City College of San Francisco,CA,Public,39.14,276790589,0.277,17808
+135391,State College of Florida-Manatee-Sarasota,FL,Public,31.86,273574251,0.274,8411
+126942,Community College of Denver,CO,Public,12.71,272441905,0.272,7715
+176071,Mississippi Gulf Coast Community College,MS,Public,37.00,270579643,0.271,8091
+156921,Jefferson Community and Technical College,KY,Public,22.14,265941126,0.266,12574
+115861,Imperial Valley College,CA,Public,34.43,265521521,0.266,8111
+190585,CUNY Hostos Community College,NY,Public,22.29,265001236,0.265,5526
+110246,Butte College,CA,Public,28.43,264736448,0.265,10211
+183743,Bergen Community College,NJ,Public,20.71,264038289,0.264,11801
+177995,Metropolitan Community College-Kansas City,MO,Public,20.57,262475203,0.262,12994
+170055,Grand Rapids Community College,MI,Public,15.43,261734845,0.262,12142
+139278,West Georgia Technical College,GA,Public,29.00,261658366,0.262,6722
+123217,College of the Sequoias,CA,Public,28.00,261293489,0.261,13586
+187620,New Mexico State University-Dona Ana,NM,Public,14.86,261028488,0.261,6849
+156392,Bluegrass Community and Technical College,KY,Public,26.57,260776040,0.261,11619
+120342,Orange Coast College,CA,Public,42.00,259566395,0.260,17085
+123341,Sierra College,CA,Public,33.00,259398459,0.259,17420
+226578,McLennan Community College,TX,Public,24.00,258077722,0.258,7217
+226134,Laredo College,TX,Public,30.43,257001269,0.257,10191
+106467,Arkansas Tech University,AR,Public,35.57,256284767,0.256,8808
+138309,Rasmussen University-Florida,FL,"Private, for-profit",35.71,255895794,0.256,3034
+122339,San Diego City College,CA,Public,21.71,255250711,0.255,13197
+224350,Del Mar College,TX,Public,14.00,254927421,0.255,9720
+218353,Midlands Technical College,SC,Public,11.71,254693917,0.255,8978
+169521,Delta College,MI,Public,12.14,253409543,0.253,7646
+139986,Southern Crescent Technical College,GA,Public,41.14,252048837,0.252,5804
+204945,Owens Community College,OH,Public,18.29,249596044,0.250,7762
+187198,UCNJ Union College of Union County  NJ,NJ,Public,29.29,246930210,0.247,8081
+118718,Merced College,CA,Public,27.86,246700211,0.247,11835
+197294,SUNY Westchester Community College,NY,Public,18.57,246640088,0.247,9031
+169275,Mott Community College,MI,Public,12.57,245038436,0.245,6482
+119216,Mt San Jacinto Community College District,CA,Public,28.57,244890081,0.245,17215
+104160,Arizona Western College,AZ,Public,21.43,244607359,0.245,8038
+127884,Pueblo Community College,CO,Public,21.86,243218522,0.243,6767
+207449,Oklahoma City Community College,OK,Public,10.14,241951471,0.242,11469
+185536,Middlesex College,NJ,Public,23.57,241782597,0.242,11471
+420398,Northwest Vista College,TX,Public,30.57,239406224,0.239,18808
+203331,Eastern Gateway Community College,OH,Public,17.57,239167164,0.239,15493
+208390,Chemeketa Community College,OR,Public,18.71,236590206,0.237,7433
+113236,Cypress College,CA,Public,33.57,235339576,0.235,13992
+176178,Northwest Mississippi Community College,MS,Public,30.86,234818878,0.235,7520
+101514,John C Calhoun State Community College,AL,Public,24.00,234350878,0.234,8736
+121886,Rio Hondo College,CA,Public,22.29,231544666,0.232,17193
+181303,Metropolitan Community College Area,NE,Public,17.00,230761158,0.231,15964
+163657,Prince George's Community College,MD,Public,13.14,229898574,0.230,10513
+172617,Washtenaw Community College,MI,Public,17.86,229750646,0.230,10756
+437103,Baton Rouge Community College,LA,Public,15.00,229625743,0.230,10859
+122685,San Joaquin Valley College-Visalia,CA,"Private, for-profit",41.29,229029700,0.229,2369
+117724,Los Angeles Trade Technical College,CA,Public,27.29,227874273,0.228,12655
+230603,Southern Utah University,UT,Public,44.14,227339151,0.227,13043
+138840,Atlanta Technical College,GA,Public,38.29,226840375,0.227,3493
+203748,Lorain County Community College,OH,Public,19.29,225938502,0.226,9410
+186034,Passaic County Community College,NJ,Public,12.00,225876454,0.226,5165
+105428,Phoenix College,AZ,Public,14.71,225812860,0.226,10384
+115296,Grossmont College,CA,Public,28.14,225549259,0.226,13591
+230171,Utah Tech University,UT,Public,30.57,224142031,0.224,12481
+222576,Amarillo College,TX,Public,29.00,223415216,0.223,9215
+136400,Pasco-Hernando State College,FL,Public,30.14,222551280,0.223,9449
+139384,Georgia Northwestern Technical College,GA,Public,41.29,221590997,0.222,6742
+140012,Gwinnett Technical College,GA,Public,30.43,221328920,0.221,9726
+211927,Delaware County Community College,PA,Public,18.43,220242908,0.220,7638
+198552,Forsyth Technical Community College,NC,Public,22.29,217722621,0.218,8716
+122375,San Diego Mesa College,CA,Public,27.00,217144769,0.217,19243
+157711,Somerset Community College,KY,Public,30.00,214477799,0.214,5766
+175829,Itawamba Community College,MS,Public,41.14,213674088,0.214,4937
+487320,Texas State Technical College,TX,Public,34.29,211803054,0.212,11436
+144209,City Colleges of Chicago-Harold Washington College,IL,Public,19.43,211026851,0.211,5859
+193283,Mohawk Valley Community College,NY,Public,27.29,207270722,0.207,5762
+158431,Bossier Parish Community College,LA,Public,13.43,207245302,0.207,5636
+153311,Eastern Iowa Community College District,IA,Public,32.00,207241225,0.207,7128
+214379,Northampton County Area Community College,PA,Public,16.00,204636421,0.205,8695
+483045,Central Georgia Technical College,GA,Public,30.71,204423461,0.204,10710
+221184,Nashville State Community College,TN,Public,15.71,204001071,0.204,6608
+113573,College of the Desert,CA,Public,28.29,203668570,0.204,10764
+183938,Camden County College,NJ,Public,14.86,202789159,0.203,7591
+218025,Florence-Darlington Technical College,SC,Public,11.29,202372143,0.202,3521
+227146,Navarro College,TX,Public,19.43,202134575,0.202,6549
+123527,San Bernardino Valley College,CA,Public,21.29,201582921,0.202,12982
+113333,De Anza College,CA,Public,64.86,201267349,0.201,16990
+194222,Onondaga Community College,NY,Public,18.86,200710275,0.201,8112
+117052,Reedley College,CA,Public,28.86,199507929,0.200,8174
+219824,Chattanooga State Community College,TN,Public,16.43,199034947,0.199,6601
+218140,Horry-Georgetown Technical College,SC,Public,27.57,197149061,0.197,7353
+228158,South Plains College,TX,Public,21.00,196603664,0.197,8866
+112172,Citrus College,CA,Public,39.00,195277630,0.195,9915
+136473,Pensacola State College,FL,Public,27.43,195249324,0.195,8518
+174136,Minneapolis Community and Technical College,MN,Public,14.29,193892308,0.194,6269
+120971,Palomar College,CA,Public,26.43,193836983,0.194,18815
+170541,Kalamazoo Valley Community College,MI,Public,15.29,193617510,0.194,6320
+172200,Schoolcraft Community College District,MI,Public,13.86,193545755,0.194,7596
+121619,Santa Ana College,CA,Public,30.43,193214261,0.193,26073
+228316,Southwest Texas Junior College,TX,Public,29.86,193194722,0.193,6579
+101240,Gadsden State Community College,AL,Public,23.86,192969532,0.193,4728
+201928,Cincinnati State Technical and Community College,OH,Public,12.71,192963324,0.193,8681
+199494,Rowan-Cabarrus Community College,NC,Public,24.00,192379813,0.192,6862
+108092,University of Arkansas-Fort Smith,AR,Public,30.00,191614095,0.192,5463
+136516,Polk State College,FL,Public,25.57,190736017,0.191,7963
+223427,Blinn College District,TX,Public,7.71,190112115,0.190,18545
+152637,Vincennes University,IN,Public,21.14,189940093,0.190,18438
+170444,Jackson College,MI,Public,12.14,189579244,0.190,4975
+198154,Cape Fear Community College,NC,Public,23.86,189223083,0.189,14119
+221643,Pellissippi State Community College,TN,Public,23.43,188723143,0.189,8710
+218520,Piedmont Technical College,SC,Public,21.00,188448558,0.188,4999
+175810,Holmes Community College,MS,Public,38.71,188378328,0.188,4959
+132851,College of Central Florida,FL,Public,34.43,188377031,0.188,5747
+122889,Santa Barbara City College,CA,Public,36.57,187410534,0.187,12345
+113096,Cosumnes River College,CA,Public,26.43,185950146,0.186,14980
+138682,Albany Technical College,GA,Public,38.00,185708148,0.186,2761
+183859,Brookdale Community College,NJ,Public,21.43,185151252,0.185,9916
+149842,William Rainey Harper College,IL,Public,35.00,184416283,0.184,13069
+238263,Madison Area Technical College,WI,Public,20.57,183144236,0.183,13238
+140942,Savannah Technical College,GA,Public,35.71,182949057,0.183,3581
+227854,St Philip's College,TX,Public,28.57,182716364,0.183,14281
+165033,Bristol Community College,MA,Public,17.57,180108197,0.180,6096
+176239,Pearl River Community College,MS,Public,35.14,179463267,0.179,5620
+218830,Spartanburg Community College,SC,Public,21.71,179362676,0.179,6330
+123013,Santa Rosa Junior College,CA,Public,32.71,179125823,0.179,16803
+455114,College of Western Idaho,ID,Public,20.86,179039357,0.179,10326
+138956,Augusta Technical College,GA,Public,31.86,178474762,0.178,4118
+236692,Spokane Community College,WA,Public,27.71,178327498,0.178,6286
+126289,Arapahoe Community College,CO,Public,21.43,177983998,0.178,13978
+175315,Century College,MN,Public,17.57,177588994,0.178,8248
+130907,Delaware Technical Community College-Terry,DE,Public,12.29,176782423,0.177,13231
+125028,Ventura College,CA,Public,35.57,176405459,0.176,11367
+232414,J Sargeant Reynolds Community College,VA,Public,20.29,176292832,0.176,7707
+246354,Palo Alto College,TX,Public,30.43,175934159,0.176,10908
+111461,College of the Canyons,CA,Public,37.29,174869030,0.175,17439
+234933,Clark College,WA,Public,25.71,174219128,0.174,7149
+123299,Shasta College,CA,Public,20.71,174044726,0.174,8081
+155210,Johnson County Community College,KS,Public,23.29,173756627,0.174,17121
+191719,Hudson Valley Community College,NY,Public,24.57,173110471,0.173,9443
+101286,George C Wallace Community College-Dothan,AL,Public,18.14,171676163,0.172,4010
+167534,Quinsigamond Community College,MA,Public,17.14,171115209,0.171,6930
+146296,Joliet Junior College,IL,Public,14.14,171065246,0.171,9863
+143215,Southwestern Illinois College,IL,Public,24.29,170633387,0.171,7955
+222053,Volunteer State Community College,TN,Public,19.57,168936549,0.169,6605
+414461,Mech-Tech College,PR,"Private, for-profit",64.43,168538743,0.169,2246
+384333,Estrella Mountain Community College,AZ,Public,18.71,167919399,0.168,10069
+144218,City Colleges of Chicago-Wilbur Wright College,IL,Public,24.71,166779362,0.167,7789
+141255,Wiregrass Georgia Technical College,GA,Public,39.86,165930745,0.166,4380
+183655,Atlantic Cape Community College,NJ,Public,17.86,165011278,0.165,4273
+191126,Fashion Institute of Technology,NY,Public,75.43,164962819,0.165,7843
+175652,East Mississippi Community College,MS,Public,35.14,164169668,0.164,3642
+115126,Golden West College,CA,Public,40.43,163589367,0.164,10433
+101295,George C Wallace State Community College-Hanceville,AL,Public,37.43,163556070,0.164,6023
+144166,City Colleges of Chicago-Malcolm X College,IL,Public,18.00,163148889,0.163,8011
+244446,Georgia Piedmont Technical College,GA,Public,40.43,162766638,0.163,2977
+175041,Saint Paul College,MN,Public,25.14,161618308,0.162,5155
+129367,Connecticut State Community College,CT,Public,8.57,161514280,0.162,34991
+181640,Southeast Community College Area,NE,Public,26.57,161047809,0.161,9799
+218885,Tri-County Technical College,SC,Public,25.57,161033631,0.161,5780
+367459,NorthWest Arkansas Community College,AR,Public,23.29,160840766,0.161,7839
+154800,Butler Community College,KS,Public,20.86,159752755,0.160,6552
+101505,Jefferson State Community College,AL,Public,15.14,158448680,0.158,8839
+113634,Diablo Valley College,CA,Public,40.43,157797060,0.158,16424
+149532,Triton College,IL,Public,21.00,157647194,0.158,9262
+139357,Columbus Technical College,GA,Public,22.00,156977761,0.157,3153
+209250,Mt Hood Community College,OR,Public,22.86,156122202,0.156,6271
+189547,SUNY Broome Community College,NY,Public,21.71,156050740,0.156,5429
+114266,Evergreen Valley College,CA,Public,36.43,155962970,0.156,8989
+139700,Georgia Highlands College,GA,Public,12.43,154436159,0.154,4955
+238759,Gateway Technical College,WI,Public,34.71,154351774,0.154,10134
+233754,Virginia Peninsula Community College,VA,Public,21.29,154343328,0.154,6127
+221908,Northeast State Community College,TN,Public,23.29,153529023,0.154,5474
+146685,Lincoln Land Community College,IL,Public,29.43,153307207,0.153,5238
+214111,Montgomery County Community College,PA,Public,18.86,153020827,0.153,8895
+167376,Northern Essex Community College,MA,Public,14.71,152756258,0.153,4510
+179645,Three Rivers College,MO,Public,26.14,152473481,0.152,2682
+127909,Red Rocks Community College,CO,Public,23.86,151054607,0.151,7286
+167905,Springfield Technical Community College,MA,Public,20.00,150955149,0.151,4561
+126863,Community College of Aurora,CO,Public,24.14,150812247,0.151,8684
+118912,MiraCosta College,CA,Public,35.00,149562085,0.150,11707
+156648,Elizabethtown Community and Technical College,KY,Public,34.14,149152757,0.149,6204
+228608,Temple College,TX,Public,19.43,148965276,0.149,4732
+226019,Kilgore College,TX,Public,25.00,148614926,0.149,6067
+111920,Chabot College,CA,Public,36.57,147346795,0.147,12218
+161767,Anne Arundel Community College,MD,Public,21.14,147263896,0.147,11158
+198376,Davidson-Davie Community College,NC,Public,28.14,146909506,0.147,3959
+161545,Southern Maine Community College,ME,Public,17.71,146836869,0.147,7205
+110334,Cabrillo College,CA,Public,28.57,146795549,0.147,9274
+198570,Gaston College,NC,Public,32.71,146671473,0.147,5871
+155292,Kansas City Kansas Community College,KS,Public,23.71,146286556,0.146,4803
+197887,Asheville-Buncombe Technical Community College,NC,Public,28.14,146109006,0.146,6297
+218858,Central Carolina Technical College,SC,Public,18.71,145737069,0.146,3004
+174428,Normandale Community College,MN,Public,20.14,145443339,0.145,9620
+101161,Coastal Alabama Community College,AL,Public,15.43,145181562,0.145,6791
+208318,Central Oregon Community College,OR,Public,20.86,144951437,0.145,4053
+434061,South Louisiana Community College,LA,Public,27.00,144903206,0.145,5887
+201973,Clark State College,OH,Public,20.43,144100978,0.144,4724
+105668,Rio Salado College,AZ,Public,6.14,143141526,0.143,18631
+115393,Hartnell College,CA,Public,32.14,143074631,0.143,8478
+239488,Northeast Wisconsin Technical College,WI,Public,40.00,142936981,0.143,10815
+176169,Northeast Mississippi Community College,MS,Public,26.71,142884320,0.143,3338
+454810,Auguste Escoffier School of Culinary Arts-Boulder,CO,"Private, for-profit",59.00,142872930,0.143,8571
+218991,York Technical College,SC,Public,23.00,142871541,0.143,4731
+480091,Bryant & Stratton College-Online,NY,"Private, not-for-profit",23.43,142631678,0.143,9418
+122205,Saddleback College,CA,Public,39.57,142232268,0.142,18370
+137096,Santa Fe College,FL,Public,47.71,141425903,0.141,12698
+101569,Lawson State Community College,AL,Public,18.43,141007700,0.141,3153
+139968,Gordon State College,GA,Public,14.14,139660224,0.140,3129
+145682,Illinois Central College,IL,Public,28.14,139655884,0.140,7578
+185873,Ocean County College,NJ,Public,31.86,139512291,0.140,7429
+117867,Los Angeles Mission College,CA,Public,22.86,139394202,0.139,10425
+125471,West Los Angeles College,CA,Public,20.43,139041229,0.139,9299
+117690,Los Angeles Harbor College,CA,Public,29.57,138589911,0.139,8898
+175014,Rasmussen University-Minnesota,MN,"Private, for-profit",37.00,138136581,0.138,8054
+213525,Lehigh Carbon Community College,PA,Public,17.00,137757013,0.138,6385
+161864,Baltimore City Community College,MD,Public,10.86,137513250,0.138,3939
+126119,Yuba College,CA,Public,26.43,137484420,0.137,5735
+148380,Rock Valley College,IL,Public,31.29,136822940,0.137,5480
+190840,Dutchess Community College,NY,Public,24.71,136744646,0.137,6387
+198455,Durham Technical Community College,NC,Public,19.71,136680957,0.137,4354
+188100,San Juan College,NM,Public,21.71,136437623,0.136,6196
+182500,Truckee Meadows Community College,NV,Public,29.14,135943237,0.136,10006
+167312,North Shore Community College,MA,Public,20.43,135489761,0.135,4833
+175519,Coahoma Community College,MS,Public,33.14,135080906,0.135,1808
+175883,Jones County Junior College,MS,Public,35.29,134942451,0.135,4305
+117247,Laney College,CA,Public,26.71,134923955,0.135,10211
+120421,Oxnard College,CA,Public,31.57,134634728,0.135,6911
+146472,College of Lake County,IL,Public,33.14,133862210,0.134,12290
+191339,Genesee Community College,NY,Public,23.86,133850909,0.134,4288
+183877,Rowan College at Burlington County,NJ,Public,19.57,133699109,0.134,6547
+153630,Iowa Western Community College,IA,Public,24.29,133678111,0.134,5503
+102067,Shelton State Community College,AL,Public,15.57,133336100,0.133,4536
+221397,Roane State Community College,TN,Public,25.71,133328178,0.133,4822
+222062,Walters State Community College,TN,Public,24.57,133131529,0.133,5833
+144944,Elgin Community College,IL,Public,36.71,133080218,0.133,9614
+119137,Moorpark College,CA,Public,39.29,132945758,0.133,14091
+108807,Allan Hancock College,CA,Public,30.00,132579178,0.133,11104
+209940,Rogue Community College,OR,Public,10.29,132494188,0.132,3790
+166887,Middlesex Community College,MA,Public,17.29,132142987,0.132,8280
+166133,Holyoke Community College,MA,Public,19.14,131834777,0.132,3706
+113218,Cuyamaca College,CA,Public,31.57,131530341,0.132,8437
+207670,Rose State College,OK,Public,11.71,131414858,0.131,7313
+225308,Trinity Valley Community College,TX,Public,25.14,130715390,0.131,5300
+198251,Central Carolina Community College,NC,Public,28.57,129980640,0.130,5574
+369400,Universal Technical Institute-Auto Motorcycle & Marine Mechanics Institute Division-Orlando,FL,"Private, for-profit",54.00,129264835,0.129,866
+246813,Athens Technical College,GA,Public,34.86,129038629,0.129,4169
+144157,City Colleges of Chicago-Kennedy-King College,IL,Public,21.86,128806059,0.129,2780
+203599,Lakeland Community College,OH,Public,12.29,128766761,0.129,4654
+147916,Parkland College,IL,Public,22.71,128325279,0.128,6018
+104346,Central Arizona College,AZ,Public,18.57,127779658,0.128,5131
+199786,Alamance Community College,NC,Public,28.57,125694186,0.126,3739
+198978,Miller-Motte College-Wilmington,NC,"Private, for-profit",21.00,125642893,0.126,152
+166823,Massasoit Community College,MA,Public,17.86,125622059,0.126,5029
+485111,Georgia Military College,GA,Public,26.14,125606890,0.126,6765
+193946,Niagara County Community College,NY,Public,24.29,125192140,0.125,4217
+148007,Prairie State College,IL,Public,15.71,125050461,0.125,3045
+147411,Morton College,IL,Public,24.00,125044695,0.125,3653
+102429,Bevill State Community College,AL,Public,22.71,124834682,0.125,3946
+366252,Pennsylvania College of Technology,PA,Public,35.43,124613740,0.125,4287
+157483,West Kentucky Community and Technical College,KY,Public,45.14,124460010,0.124,5132
+213659,Luzerne County Community College,PA,Public,15.86,124004629,0.124,4315
+176008,Mississippi Delta Community College,MS,Public,37.29,123752410,0.124,2037
+162779,Howard Community College,MD,Public,19.57,123669287,0.124,8540
+117894,Los Medanos College,CA,Public,34.86,123495473,0.123,8230
+487162,Southern Regional Technical College,GA,Public,33.29,123022292,0.123,5072
+175573,Copiah-Lincoln Community College,MS,Public,41.57,122867127,0.123,2834
+364025,Chandler-Gilbert Community College,AZ,Public,19.86,122653136,0.123,14725
+198233,Catawba Valley Community College,NC,Public,29.86,122646955,0.123,4413
+227401,Paris Junior College,TX,Public,31.29,122291172,0.122,4456
+109040,American Career College-Los Angeles,CA,"Private, for-profit",67.43,121667545,0.122,2066
+101736,Northwest Shoals Community College,AL,Public,21.29,121425352,0.121,4136
+121707,College of the Redwoods,CA,Public,23.29,120912087,0.121,4260
+185509,Mercer County Community College,NJ,Public,13.29,120790760,0.121,6219
+157553,Big Sandy Community and Technical College,KY,Public,27.43,120006815,0.120,2583
+139621,East Georgia State College,GA,Public,9.71,119358069,0.119,1756
+191199,Finger Lakes Community College,NY,Public,25.00,119205461,0.119,5457
+455196,Jersey College,NJ,"Private, for-profit",34.71,119188367,0.119,4089
+215585,Reading Area Community College,PA,Public,17.86,119008982,0.119,4788
+236708,Spokane Falls Community College,WA,Public,23.43,118985694,0.119,3903
+149727,Waubonsee Community College,IL,Public,28.00,118967581,0.119,8324
+116439,Irvine Valley College,CA,Public,49.00,118886964,0.119,11994
+201955,University of Cincinnati-Blue Ash College,OH,Public,12.29,118876463,0.119,7166
+117715,Los Angeles Southwest College,CA,Public,21.86,118760276,0.119,5267
+179539,State Fair Community College,MO,Public,28.43,118596677,0.119,3754
+136233,Northwest Florida State College,FL,Public,32.14,117966239,0.118,5160
+196006,SUNY College of Technology at Alfred,NY,Public,49.43,117961277,0.118,3749
+184791,Rowan College of South Jersey-Gloucester Campus,NJ,Public,24.71,117856742,0.118,5390
+238722,Fox Valley Technical College,WI,Public,49.57,117406970,0.117,10995
+178448,Moberly Area Community College,MO,Public,29.14,117121410,0.117,4997
+203155,Hocking College,OH,Public,20.00,116867028,0.117,1846
+162122,College of Southern Maryland,MD,Public,22.00,116656927,0.117,4984
+232450,Brightpoint Community College,VA,Public,25.14,116586932,0.117,9023
+199838,Vance-Granville Community College,NC,Public,32.71,116573281,0.117,2841
+236753,Tacoma Community College,WA,Public,24.14,116434840,0.116,5771
+122384,San Diego Miramar College,CA,Public,42.71,116284784,0.116,13569
+142559,College of Southern Idaho,ID,Public,24.71,116109604,0.116,8775
+251260,Southern Union State Community College,AL,Public,19.14,116107085,0.116,4673
+204486,University of Northwestern Ohio,OH,"Private, not-for-profit",51.00,114881427,0.115,2572
+209074,Linn-Benton Community College,OR,Public,20.29,114123700,0.114,4881
+173559,Minnesota State Community and Technical College,MN,Public,35.57,114017302,0.114,5414
+431141,Institute of Technology,CA,"Private, for-profit",69.29,113927441,0.114,1376
+143279,Black Hawk College,IL,Public,26.86,113497193,0.113,3853
+174376,North Hennepin Community College,MN,Public,13.71,112806012,0.113,5195
+160649,Southern University at Shreveport,LA,Public,9.00,112671258,0.113,3156
+237109,Yakima Valley College,WA,Public,25.43,112659870,0.113,3523
+225070,Grayson College,TX,Public,20.29,112565501,0.113,4176
+106485,University of Arkansas at Monticello,AR,Public,26.00,112310849,0.112,2328
+216825,Westmoreland County Community College,PA,Public,18.43,112305766,0.112,4275
+149365,South Suburban College,IL,Public,13.57,112216935,0.112,3873
+121363,Porterville College,CA,Public,30.86,112070137,0.112,4939
+220400,Jackson State Community College,TN,Public,16.57,111803865,0.112,3078
+224110,North Central Texas College,TX,Public,16.71,111785357,0.112,7544
+229841,Wharton County Junior College,TX,Public,17.57,111697167,0.112,5687
+446552,Southern Technical College,FL,"Private, for-profit",46.00,111202300,0.111,1686
+392257,The College of Health Care Professions-Northwest,TX,"Private, for-profit",54.00,110743337,0.111,3794
+235237,Pierce College District,WA,Public,26.43,110489392,0.110,7427
+177135,Crowder College,MO,Public,31.86,110437280,0.110,3865
+199740,Stanly Community College,NC,Public,36.71,110384124,0.110,2527
+137281,Saint Johns River State College,FL,Public,39.00,110338801,0.110,7066
+460394,Moreno Valley College,CA,Public,22.29,110335716,0.110,10023
+198330,Coastal Carolina Community College,NC,Public,31.43,110322784,0.110,3457
+233949,Virginia Western Community College,VA,Public,27.71,110175071,0.110,6170
+102030,Bishop State Community College,AL,Public,12.86,109434026,0.109,3568
+207397,Oklahoma State University-Oklahoma City,OK,Public,12.86,109091455,0.109,4134
+166957,Mount Wachusett Community College,MA,Public,20.43,108771228,0.109,3204
+199634,Sandhills Community College,NC,Public,27.57,108529391,0.109,3824
+105206,Mohave Community College,AZ,Public,20.43,108491605,0.108,3693
+195322,Schenectady County Community College,NY,Public,20.29,108298240,0.108,3884
+154572,Western Iowa Tech Community College,IA,Public,36.00,108226653,0.108,5071
+153524,Iowa Central Community College,IA,Public,31.00,108154257,0.108,4909
+134343,Gulf Coast State College,FL,Public,36.14,107815117,0.108,4959
+138901,Atlanta Metropolitan State College,GA,Public,16.00,107750430,0.108,1551
+195058,Rockland Community College,NY,Public,27.43,107584244,0.108,5763
+172963,Anoka-Ramsey Community College,MN,Public,20.57,107498957,0.107,7843
+142443,North Idaho College,ID,Public,24.71,107233048,0.107,3979
+144184,City Colleges of Chicago-Harry S Truman College,IL,Public,24.71,106995571,0.107,6185
+140678,North Georgia Technical College,GA,Public,28.57,106910526,0.107,2696
+208406,Clackamas Community College,OR,Public,18.14,106696298,0.107,5153
+105534,Pima Medical Institute-Tucson,AZ,"Private, for-profit",72.00,106626158,0.107,2619
+106148,Yavapai College,AZ,Public,25.57,106181489,0.106,7200
+198118,Caldwell Community College and Technical Institute,NC,Public,27.71,105933813,0.106,3764
+232797,American National University,VA,"Private, for-profit",28.43,105867234,0.106,643
+106980,National Park College,AR,Public,27.00,105854292,0.106,2308
+123563,Solano Community College,CA,Public,25.29,105436649,0.105,8868
+196051,SUNY Morrisville,NY,Public,28.43,105299181,0.105,2030
+133997,Florida Career College-Miami,FL,"Private, for-profit",55.57,105173518,0.105,130
+141006,South Georgia Technical College,GA,Public,55.14,105093589,0.105,1725
+226204,Lee College,TX,Public,35.29,104903509,0.105,8143
+153472,Indian Hills Community College,IA,Public,33.00,104664032,0.105,3236
+157331,Maysville Community and Technical College,KY,Public,40.86,104553955,0.105,4296
+240116,Chippewa Valley Technical College,WI,Public,43.43,104475497,0.104,8198
+219888,Columbia State Community College,TN,Public,25.71,104302005,0.104,5115
+177676,Jefferson College,MO,Public,24.00,103909977,0.104,3769
+366465,Ogeechee Technical College,GA,Public,41.71,103863631,0.104,2264
+234979,Columbia Basin College,WA,Public,27.14,103620392,0.104,6729
+140243,Lanier Technical College,GA,Public,35.29,103477660,0.103,6145
+171155,Mid Michigan College,MI,Public,11.71,103350673,0.103,3416
+199476,Robeson Community College,NC,Public,22.14,103090752,0.103,1989
+191986,Jamestown Community College,NY,Public,30.71,102808884,0.103,3772
+447768,American Career College-Ontario,CA,"Private, for-profit",64.29,101360389,0.101,2014
+157739,Southeast Kentucky Community & Technical College,KY,Public,34.57,100306650,0.100,3144
+441052,American Career College-Anaheim,CA,"Private, for-profit",68.00,99828980,0.100,1643
+156338,Southcentral Kentucky Community and Technical College,KY,Public,39.00,99680797,0.100,5084
+199449,Richmond Community College,NC,Public,27.43,99657298,0.100,2411
+229799,Weatherford College,TX,Public,22.43,99514793,0.100,5440
+112686,Compton College,CA,Public,20.43,99202587,0.099,4765
+194240,Orange County Community College,NY,Public,19.14,98938203,0.099,5372
+101897,Northeast Alabama Community College,AL,Public,36.29,98525749,0.099,2905
+438504,Universal Technical Institute of California Inc,CA,"Private, for-profit",54.71,98436165,0.098,1484
+184205,Rowan College of South Jersey-Cumberland Campus,NJ,Public,27.29,98125615,0.098,2557
+144193,City Colleges of Chicago-Richard J Daley College,IL,Public,19.29,98047263,0.098,5836
+198774,Johnston Community College,NC,Public,32.14,97477257,0.097,4680
+173708,Hennepin Technical College,MN,Public,28.29,97372593,0.097,3891
+122746,San Jose City College,CA,Public,31.00,96776760,0.097,8400
+230597,Snow College,UT,Public,37.14,96710869,0.097,5506
+227225,Northeast Texas Community College,TX,Public,29.43,96262340,0.096,3105
+113193,Cuesta College,CA,Public,35.00,96212962,0.096,10437
+211307,Bucks County Community College,PA,Public,23.71,96039395,0.096,6098
+170550,Kellogg Community College,MI,Public,17.57,95954137,0.096,3734
+105792,South Mountain Community College,AZ,Public,18.29,95530269,0.096,4157
+175935,Meridian Community College,MS,Public,33.14,95157855,0.095,2556
+176354,Southwest Mississippi Community College,MS,Public,39.00,95049922,0.095,1752
+460464,Norco College,CA,Public,31.29,94866864,0.095,10787
+221148,Lincoln College of Technology-Nashville,TN,"Private, for-profit",54.00,94123408,0.094,1062
+106041,Universal Technical Institute of Arizona Inc,AZ,"Private, for-profit",59.71,94009532,0.094,1791
+174738,Rochester Community and Technical College,MN,Public,21.57,93921815,0.094,4714
+155195,Hutchinson Community College,KS,Public,35.86,93918670,0.094,4983
+203465,Kent State University at Stark,OH,Public,25.14,93815870,0.094,3423
+229416,Universal Technical Institute of Texas Inc.,TX,"Private, for-profit",53.29,93754146,0.094,1823
+112826,Contra Costa College,CA,Public,25.57,93421441,0.093,5997
+153445,Hawkeye Community College,IA,Public,25.86,93349462,0.093,4796
+186645,Raritan Valley Community College,NJ,Public,23.86,93160596,0.093,6587
+174756,St Cloud Technical and Community College,MN,Public,27.86,93150302,0.093,3565
+170620,Lake Michigan College,MI,Public,18.00,93044525,0.093,2904
+199908,Western Piedmont Community College,NC,Public,35.57,92934857,0.093,1791
+247940,Owensboro Community and Technical College,KY,Public,35.14,92879041,0.093,4694
+235343,Green River College,WA,Public,32.57,92511434,0.093,7361
+236513,Seattle Central College,WA,Public,29.71,92202359,0.092,5210
+262031,St Charles Community College,MO,Public,18.00,91929186,0.092,5902
+364016,Paradise Valley Community College,AZ,Public,17.71,91526702,0.092,5880
+221096,Motlow State Community College,TN,Public,29.00,91321985,0.091,6060
+222822,Angelina College,TX,Public,15.29,91288590,0.091,3896
+241304,Columbia Central University-Caguas,PR,"Private, for-profit",51.00,91233584,0.091,2494
+240170,Western Technical College,WI,Public,39.43,91229226,0.091,3906
+448594,Lemoore College,CA,Public,36.86,90935228,0.091,4160
+198321,Cleveland Community College,NC,Public,24.57,90836236,0.091,1890
+156231,Ashland Community and Technical College,KY,Public,41.57,90645446,0.091,2559
+219903,Concorde Career College-Memphis,TN,"Private, for-profit",60.00,90593128,0.091,420
+236188,Olympic College,WA,Public,21.29,90575247,0.091,5413
+161077,Central Maine Community College,ME,Public,22.71,90280466,0.090,4121
+198817,Lenoir Community College,NC,Public,20.86,89982207,0.090,2387
+157438,Gateway Community and Technical College,KY,Public,41.14,89713976,0.090,4752
+118930,Mission College,CA,Public,32.43,89658439,0.090,6669
+196565,Tompkins Cortland Community College,NY,Public,21.71,89590124,0.090,4720
+156790,Hazard Community and Technical College,KY,Public,36.86,89276532,0.089,3039
+156860,Hopkinsville Community College,KY,Public,30.29,89120298,0.089,2156
+180902,Central Community College,NE,Public,37.86,88732954,0.089,6862
+229504,Vernon College,TX,Public,20.14,88648648,0.089,2136
+198491,Edgecombe Community College,NC,Public,21.86,88597019,0.089,1036
+189839,Cayuga County Community College,NY,Public,23.57,88451290,0.088,3451
+218487,Orangeburg Calhoun Technical College,SC,Public,17.43,88112363,0.088,2146
+157793,Sullivan University,KY,"Private, for-profit",21.86,87890989,0.088,2535
+147800,Oakton College,IL,Public,28.00,87812392,0.088,7032
+203386,Hondros College of Nursing,OH,"Private, for-profit",32.00,87557742,0.088,3091
+184180,County College of Morris,NJ,Public,29.29,87499952,0.087,6069
+104090,Brookline College-Phoenix,AZ,"Private, for-profit",46.43,87276538,0.087,714
+146603,Lewis and Clark Community College,IL,Public,32.57,86857415,0.087,4196
+175643,East Central Community College,MS,Public,35.71,86825234,0.087,2523
+104425,Cochise County Community College District,AZ,Public,23.00,86824719,0.087,3782
+105747,Scottsdale Community College,AZ,Public,18.14,86817918,0.087,6875
+178217,Mineral Area College,MO,Public,32.43,86807650,0.087,2389
+154110,Northeast Iowa Community College,IA,Public,41.29,86799888,0.087,4378
+141811,Leeward Community College,HI,Public,23.43,86792099,0.087,6059
+146506,Lake Land College,IL,Public,39.00,86488678,0.086,3699
+234669,Bellevue College,WA,Public,29.71,86319642,0.086,11472
+126207,Aims Community College,CO,Public,28.00,86237316,0.086,7529
+230861,Community College of Vermont,VT,Public,20.43,86126588,0.086,5377
+198987,Mitchell Community College,NC,Public,23.29,86125237,0.086,3617
+227304,Odessa College,TX,Public,23.29,86123651,0.086,8708
+223320,Coastal Bend College,TX,Public,19.57,85922977,0.086,3792
+201672,Central Ohio Technical College,OH,Public,20.29,85730246,0.086,2890
+146418,Kishwaukee College,IL,Public,31.29,85687800,0.086,2807
+217305,New England Institute of Technology,RI,"Private, not-for-profit",44.57,85558199,0.086,1712
+105145,GateWay Community College,AZ,Public,20.00,85485507,0.085,5123
+235431,Highline College,WA,Public,32.14,85422558,0.085,5126
+172291,St Clair County Community College,MI,Public,20.43,85399563,0.085,3105
+228699,Texarkana College,TX,Public,40.14,85289715,0.085,3882
+483212,Louisiana Delta Community College,LA,Public,18.86,84833040,0.085,3775
+243638,College of Micronesia-FSM,FM,Public,27.29,84651057,0.085,1740
+123509,Skyline College,CA,Public,35.00,84225979,0.084,9428
+160579,SOWELA Technical Community College,LA,Public,37.43,84170142,0.084,3316
+106625,Black River Technical College,AR,Public,22.71,84037183,0.084,1544
+187958,University of New Mexico-Gallup Campus,NM,Public,16.71,84018322,0.084,1677
+102845,Charter College,AK,"Private, for-profit",49.57,83884456,0.084,2277
+144175,City Colleges of Chicago-Olive-Harvey College,IL,Public,18.00,83775378,0.084,2747
+203678,James A. Rhodes State College,OH,Public,23.14,83226768,0.083,3968
+233639,Southside Virginia Community College,VA,Public,31.57,83133072,0.083,3258
+232195,Germanna Community College,VA,Public,30.86,83014503,0.083,8082
+199926,Wilkes Community College,NC,Public,39.43,82677851,0.083,2405
+206923,Carl Albert State College,OK,Public,37.43,82581077,0.083,1786
+239460,Northcentral Technical College,WI,Public,30.43,82312097,0.082,5838
+192022,Jefferson Community College,NY,Public,22.86,82084751,0.082,2252
+171304,Muskegon Community College,MI,Public,17.57,81939377,0.082,3518
+146205,John A Logan College,IL,Public,24.14,81908114,0.082,3120
+109907,Barstow Community College,CA,Public,27.29,81633104,0.082,3153
+135188,Lake-Sumter State College,FL,Public,39.14,81394415,0.081,5064
+393649,UEI College-Gardena,CA,"Private, for-profit",62.43,81317777,0.081,1444
+236887,Walla Walla Community College,WA,Public,39.43,80661930,0.081,2982
+235103,Edmonds College,WA,Public,28.86,80194181,0.080,6028
+162557,Frederick Community College,MD,Public,28.71,80148359,0.080,6796
+106449,Arkansas State University-Beebe,AR,Public,32.86,79809073,0.080,3010
+167525,Quincy College,MA,Public,11.86,79804349,0.080,2603
+159407,Louisiana State University-Eunice,LA,Public,11.43,79721717,0.080,3623
+420431,Oconee Fall Line Technical College,GA,Public,44.14,79521791,0.080,2000
+207281,Northern Oklahoma College,OK,Public,38.86,79269936,0.079,3083
+238014,West Virginia Northern Community College,WV,Public,22.43,79191140,0.079,1263
+191612,Herkimer County Community College,NY,Public,28.57,79121396,0.079,1863
+225371,Hill College,TX,Public,25.43,78939082,0.079,4000
+101301,George C Wallace State Community College-Selma,AL,Public,30.57,78730677,0.079,1935
+190442,SUNY Corning Community College,NY,Public,28.71,78580036,0.079,3637
+219879,Cleveland State Community College,TN,Public,23.14,78501073,0.079,3254
+215415,Pittsburgh Technical College,PA,"Private, not-for-profit",50.00,78436854,0.078,864
+444219,Folsom Lake College,CA,Public,31.43,78376056,0.078,10214
+201946,University of Cincinnati-Clermont College,OH,Public,19.00,78335778,0.078,8324
+188438,SUNY Adirondack,NY,Public,23.57,77959326,0.078,2723
+240745,Guam Community College,GU,Public,27.00,77811886,0.078,1450
+129154,Goodwin University,CT,"Private, not-for-profit",38.57,77633940,0.078,2911
+217712,Technical College of the Lowcountry,SC,Public,15.00,77455438,0.077,2349
+171483,Northwestern Michigan College,MI,Public,19.00,77373101,0.077,3146
+451556,Southwest University at El Paso,TX,"Private, for-profit",71.14,77318065,0.077,1817
+234951,Clover Park Technical College,WA,Public,36.86,77282202,0.077,3040
+236975,Wenatchee Valley College,WA,Public,30.43,77055183,0.077,2819
+154952,Cowley County Community College,KS,Public,35.71,76902903,0.077,2158
+199421,Randolph Community College,NC,Public,37.00,76891930,0.077,2648
+220057,Dyersburg State Community College,TN,Public,21.14,76860080,0.077,3143
+114938,Gavilan College,CA,Public,32.29,76452776,0.076,5484
+231882,Danville Community College,VA,Public,32.00,76356228,0.076,2489
+235149,Everett Community College,WA,Public,29.43,75944159,0.076,6211
+223898,Cisco College,TX,Public,21.29,75747009,0.076,3001
+105215,Universal Technical Institute of Arizona Inc-Motorcycle Mechanics Institute Division,AZ,"Private, for-profit",63.71,75255673,0.075,567
+480037,MyComputerCareer at Raleigh,NC,"Private, for-profit",67.14,75238436,0.075,1617
+199768,Surry Community College,NC,Public,27.00,74931132,0.075,2758
+220552,South College,TN,"Private, for-profit",35.86,74804758,0.075,6406
+177250,East Central College,MO,Public,26.86,74751936,0.075,2638
+175236,Ridgewater College,MN,Public,37.43,74540619,0.075,2855
+125532,Carrington College-Sacramento,CA,"Private, for-profit",55.00,74001994,0.074,2288
+173461,Lake Superior College,MN,Public,30.57,73747946,0.074,4001
+448673,Rasmussen University-Illinois,IL,"Private, for-profit",35.71,73538641,0.074,1332
+102076,Snead State Community College,AL,Public,34.43,73443685,0.073,2767
+399212,Santiago Canyon College,CA,Public,42.57,73262926,0.073,11979
+147004,McHenry County College,IL,Public,28.14,73057044,0.073,9051
+162690,Hagerstown Community College,MD,Public,27.00,72900820,0.073,5433
+162706,Harford Community College,MD,Public,23.57,72684902,0.073,5108
+120290,Ohlone College,CA,Public,52.57,72145065,0.072,8375
+160667,Northshore Technical Community College,LA,Public,28.29,72091979,0.072,5716
+235750,Lower Columbia College,WA,Public,21.00,72026959,0.072,2412
+445708,Johnson & Wales University-Charlotte,NC,"Private, not-for-profit",47.86,71851681,0.072,1128
+146700,Lincoln College of Technology-Melrose Park,IL,"Private, for-profit",57.57,71581009,0.072,1345
+236656,South Puget Sound Community College,WA,Public,32.29,71565734,0.072,4252
+240125,Waukesha County Technical College,WI,Public,31.43,71536049,0.072,7757
+448433,Universal Technical Institute of Northern California Inc,CA,"Private, for-profit",58.57,71309896,0.071,1107
+226277,Lincoln College of Technology-Grand Prairie,TX,"Private, for-profit",67.00,71212209,0.071,1330
+232575,Laurel Ridge Community College,VA,Public,34.29,71154268,0.071,5935
+445948,Northwest Career College,NV,"Private, for-profit",68.43,71115317,0.071,2222
+119067,Monterey Peninsula College,CA,Public,29.57,70912417,0.071,7351
+366401,Las Positas College,CA,Public,42.00,70690464,0.071,7448
+188137,Santa Fe Community College,NM,Public,21.00,70571518,0.071,3478
+207290,Northeastern Oklahoma A&M College,OK,Public,24.00,70525424,0.071,1799
+368911,Southeastern Technical College,GA,Public,35.00,70471931,0.070,1887
+154378,Southeastern Community College,IA,Public,38.14,70323051,0.070,2562
+242112,Huertas College,PR,"Private, for-profit",42.86,70247768,0.070,460
+157304,Madisonville Community College,KY,Public,43.43,70092792,0.070,3535
+151661,Lincoln College of Technology-Indianapolis,IN,"Private, for-profit",46.14,70054322,0.070,1004
+141796,Kapiolani Community College,HI,Public,19.86,69753004,0.070,5822
+205179,Fortis College-Centerville,OH,"Private, for-profit",40.71,69519042,0.070,460
+482699,South Georgia State College,GA,Public,10.86,69496289,0.069,1853
+210270,Umpqua Community College,OR,Public,18.00,69325023,0.069,2387
+164313,Wor-Wic Community College,MD,Public,15.14,69310308,0.069,2636
+231536,Blue Ridge Community College,VA,Public,28.57,69286202,0.069,3718
+451477,MyComputerCareer at Columbus,OH,"Private, for-profit",66.86,69252099,0.069,824
+156107,Wichita State University-Campus of Applied Sciences and Technology,KS,Public,34.71,69186921,0.069,5655
+441760,Lamar Institute of Technology,TX,Public,25.57,69165872,0.069,5302
+187639,Clovis Community College,NM,Public,43.57,69081140,0.069,2328
+199731,Southwestern Community College,NC,Public,42.00,68986016,0.069,2109
+225520,Howard College,TX,Public,23.29,68829493,0.069,4136
+181491,Northeast Community College,NE,Public,46.57,68493129,0.068,5595
+112385,Coastline Community College,CA,Public,26.43,68178063,0.068,8576
+158884,Nunez Community College,LA,Public,18.14,68095838,0.068,2950
+198668,Haywood Community College,NC,Public,31.71,67957489,0.068,1260
+135160,Florida Gateway College,FL,Public,44.86,67873930,0.068,2837
+198367,Craven Community College,NC,Public,29.71,67674419,0.068,2851
+137315,South Florida State College,FL,Public,46.86,67590251,0.068,2976
+167631,Roxbury Community College,MA,Public,19.71,67324727,0.067,1631
+107460,North Arkansas College,AR,Public,26.14,67131165,0.067,1930
+232867,New River Community College,VA,Public,28.57,67104974,0.067,4156
+240198,Northwood Technical College,WI,Public,54.86,67083357,0.067,2668
+232788,Mountain Empire Community College,VA,Public,36.57,66896505,0.067,2015
+229540,Victoria College,TX,Public,19.86,66883407,0.067,3214
+440651,Atenas College,PR,"Private, not-for-profit",48.29,66829546,0.067,545
+199087,Nash Community College,NC,Public,24.00,66742439,0.067,2425
+119331,Napa Valley College,CA,Public,34.00,66686129,0.067,4213
+173911,South Central College,MN,Public,22.43,66388788,0.066,2652
+205966,Southern State Community College,OH,Public,21.57,66287225,0.066,2000
+233019,Patrick & Henry Community College,VA,Public,36.14,66272157,0.066,1932
+173799,Inver Hills Community College,MN,Public,21.43,66213462,0.066,3689
+161688,Allegany College of Maryland,MD,Public,25.14,66099099,0.066,2665
+384342,Heartland Community College,IL,Public,28.14,66092913,0.066,4795
+243188,University of Puerto Rico-Utuado,PR,Public,19.00,66007224,0.066,317
+383190,Hawaii Community College,HI,Public,25.57,65945602,0.066,2260
+141839,University of Hawaii Maui College,HI,Public,20.86,65930524,0.066,2647
+146348,Kankakee Community College,IL,Public,27.86,65881714,0.066,2404
+233648,Southwest Virginia Community College,VA,Public,31.57,65877324,0.066,2288
+173203,Central Lakes College-Brainerd,MN,Public,40.86,65754480,0.066,4532
+459213,Gurnick Academy of Medical Arts,CA,"Private, for-profit",68.43,65644270,0.066,2844
+205203,University of Rio Grande,OH,"Private, not-for-profit",31.43,65549588,0.066,2030
+217615,Aiken Technical College,SC,Public,14.43,65389569,0.065,2218
+243832,EDP University of Puerto Rico Inc-San Juan,PR,"Private, not-for-profit",32.29,65267236,0.065,1269
+183099,NHTI-Concord's Community College,NH,Public,21.00,65218197,0.065,2613
+107585,University of Arkansas Community College-Morrilton,AR,Public,31.14,65030576,0.065,2225
+236638,Skagit Valley College,WA,Public,27.29,64989905,0.065,4098
+197850,South Piedmont Community College,NC,Public,20.29,64908312,0.065,3548
+207564,Oklahoma State University Institute of Technology,OK,Public,32.71,64806856,0.065,2493
+406033,Galen College of Nursing-San Antonio,TX,"Private, for-profit",58.86,64710656,0.065,3206
+206996,Connors State College,OK,Public,19.43,64587041,0.065,2098
+210234,Treasure Valley Community College,OR,Public,23.14,64567190,0.065,1131
+238397,Blackhawk Technical College,WI,Public,25.29,64392956,0.064,2894
+187596,Navajo Technical University,NM,Public,12.57,64371151,0.064,1523
+166647,Massachusetts Bay Community College,MA,Public,15.71,64155801,0.064,3973
+199722,Southeastern Community College,NC,Public,37.14,63915079,0.064,1397
+199892,Wayne Community College,NC,Public,36.71,63852782,0.064,2883
+125499,West Valley College,CA,Public,40.00,63817377,0.064,7272
+114716,Foothill College,CA,Public,52.86,63722886,0.064,12931
+241836,EDP University of Puerto Rico Inc-San Sebastian,PR,"Private, not-for-profit",32.14,63410106,0.063,970
+224679,Western Technical College,TX,"Private, for-profit",69.29,63110364,0.063,1148
+122791,College of San Mateo,CA,Public,43.71,63040177,0.063,9208
+168883,Bay de Noc Community College,MI,Public,27.43,62956258,0.063,1996
+157021,American National University-Pikeville,KY,"Private, for-profit",32.43,62805130,0.063,240
+146366,Kaskaskia College,IL,Public,24.86,62643468,0.063,3447
+118772,Merritt College,CA,Public,21.29,62636722,0.063,6716
+204705,Ohio State University-Newark Campus,OH,Public,24.14,62628310,0.063,2422
+226806,Midland College,TX,Public,18.57,62612379,0.063,5219
+104577,Eastern Arizona College,AZ,Public,21.29,62562543,0.063,5076
+226408,College of the Mainland,TX,Public,30.29,62560581,0.063,4961
+207236,Murray State College,OK,Public,24.71,62345812,0.062,2686
+103963,Miller-Motte College-Arizona Automotive Institute,AZ,"Private, for-profit",55.57,62113743,0.062,513
+198729,James Sprunt Community College,NC,Public,26.86,61899749,0.062,1376
+182564,Western Nevada College,NV,Public,27.43,61736900,0.062,4188
+160481,Fletcher Technical Community College,LA,Public,20.14,61416642,0.061,2426
+237817,Southern West Virginia Community and Technical College,WV,Public,20.14,61035241,0.061,1461
+226107,Lamar State College-Orange,TX,Public,20.14,61019263,0.061,3162
+118684,Mendocino College,CA,Public,24.71,61004708,0.061,4032
+240736,American Samoa Community College,AS,Public,41.71,60839091,0.061,909
+211343,Butler County Community College,PA,Public,24.43,60791270,0.061,2468
+172307,Southwestern Michigan College,MI,Public,22.86,60659618,0.061,1953
+204422,North Central State College,OH,Public,18.29,60656343,0.061,2451
+143613,Carl Sandburg College,IL,Public,32.71,60589230,0.061,1688
+174473,Northland Community and Technical College,MN,Public,36.71,60405311,0.060,2477
+237039,Whatcom Community College,WA,Public,33.00,60384493,0.060,3490
+101143,Enterprise State Community College,AL,Public,21.57,60342030,0.060,2248
+204820,Ohio University-Chillicothe Campus,OH,Public,17.00,60212116,0.060,1941
+108667,College of Alameda,CA,Public,31.57,60206182,0.060,5833
+237686,West Virginia University at Parkersburg,WV,Public,34.86,60017387,0.060,2584
+126951,Lincoln College of Technology-Denver,CO,"Private, for-profit",59.14,59962235,0.060,1104
+231697,Central Virginia Community College,VA,Public,27.71,59809923,0.060,3410
+459204,Unitek College,CA,"Private, for-profit",80.86,59559973,0.060,5191
+191302,Fulton-Montgomery Community College,NY,Public,26.86,59460064,0.059,1761
+199625,Sampson Community College,NC,Public,40.29,59285560,0.059,1680
+206011,Terra State Community College,OH,Public,17.29,59278315,0.059,2214
+145831,Illinois Valley Community College,IL,Public,31.14,59103769,0.059,2594
+105543,Pima Medical Institute-Albuquerque,NM,"Private, for-profit",62.29,58898772,0.059,737
+222567,Alvin Community College,TX,Public,25.29,58881817,0.059,5830
+100760,Central Alabama Community College,AL,Public,19.86,58838789,0.059,1910
+199485,Rockingham Community College,NC,Public,24.86,58659824,0.059,1777
+446774,Blue Ridge Community and Technical College,WV,Public,29.00,58406084,0.058,4309
+236610,Shoreline Community College,WA,Public,23.71,58324698,0.058,4460
+239220,Mid-State Technical College,WI,Public,24.29,58248680,0.058,2918
+485458,Coastal Pines Technical College,GA,Public,39.71,58214437,0.058,4137
+164775,Berkshire Community College,MA,Public,16.57,58165561,0.058,1572
+161138,Eastern Maine Community College,ME,Public,22.86,58142235,0.058,2531
+234377,Wytheville Community College,VA,Public,40.43,58139239,0.058,2119
+204255,Zane State College,OH,Public,39.14,58113077,0.058,1619
+213376,Lackawanna College,PA,"Private, not-for-profit",29.29,58110860,0.058,1939
+217077,YTI Career Institute-York,PA,"Private, for-profit",51.29,58096777,0.058,497
+194499,Plaza College,NY,"Private, for-profit",67.29,57979707,0.058,846
+240790,Northern Marianas College,MP,Public,26.14,57974357,0.058,1253
+125170,Berkeley City College,CA,Public,37.71,57854602,0.058,6547
+160010,Northwest Louisiana Technical Community College,LA,Public,59.57,57820586,0.058,1044
+240620,Laramie County Community College,WY,Public,26.29,57820316,0.058,4008
+198710,Isothermal Community College,NC,Public,34.86,57735783,0.058,1810
+128188,Intellitec College-Grand Junction,CO,"Private, for-profit",62.43,57717359,0.058,1160
+101602,Lurleen B Wallace Community College,AL,Public,40.43,57690870,0.058,2130
+442611,NASCAR Technical Institute,NC,"Private, for-profit",52.57,57661316,0.058,1306
+234845,Centralia College,WA,Public,34.86,57380721,0.057,2335
+203474,Kent State University at Trumbull,OH,Public,18.29,57334089,0.057,2029
+197814,College of the Albemarle,NC,Public,31.43,57326375,0.057,2582
+207962,Tulsa Welding School-Tulsa,OK,"Private, for-profit",56.29,57147187,0.057,934
+233116,Piedmont Virginia Community College,VA,Public,29.14,56581203,0.057,5174
+148876,St. Augustine College,IL,"Private, not-for-profit",46.14,56569223,0.057,774
+114354,FIDM-Fashion Institute of Design & Merchandising,CA,"Private, for-profit",64.43,56258281,0.056,1319
+443650,Miller-Motte College-Chattanooga,TN,"Private, for-profit",36.86,56244875,0.056,3667
+146278,John Wood Community College,IL,Public,35.86,56081491,0.056,1866
+443492,Pierpont Community and Technical College,WV,Public,19.29,55959609,0.056,1939
+103893,Carrington College-Phoenix North,AZ,"Private, for-profit",66.14,55747200,0.056,1088
+118347,College of Marin,CA,Public,31.57,55407066,0.055,4673
+171225,Monroe County Community College,MI,Public,18.86,55375814,0.055,2250
+101028,Chattahoochee Valley Community College,AL,Public,16.86,55266273,0.055,1712
+234696,Bellingham Technical College,WA,Public,45.43,55205054,0.055,1850
+233903,Virginia Highlands Community College,VA,Public,32.43,55167055,0.055,2052
+376385,Universal Technology College of Puerto Rico,PR,"Private, not-for-profit",64.29,54905672,0.055,149
+188049,University of New Mexico-Valencia County Campus,NM,Public,16.00,54858629,0.055,1309
+404426,Coconino Community College,AZ,Public,16.00,54824961,0.055,2696
+110219,Bryan University,AZ,"Private, for-profit",24.43,54492188,0.054,2094
+204440,Northwest State Community College,OH,Public,35.00,54274285,0.054,4110
+173063,Riverland Community College,MN,Public,38.86,54187833,0.054,3591
+187994,New Mexico State University-Alamogordo,NM,Public,14.14,54122940,0.054,1088
+102313,H Councill Trenholm State Community College,AL,Public,17.29,53835286,0.054,1907
+107637,Southeast Arkansas College,AR,Public,16.00,53788824,0.054,810
+113111,Crafton Hills College,CA,Public,32.29,53556500,0.054,6097
+128258,Trinidad State College,CO,Public,44.43,53449648,0.053,1636
+196699,Ulster County Community College,NY,Public,26.71,53094759,0.053,3001
+436304,River Parishes Community College,LA,Public,14.29,52986874,0.053,2406
+183132,Manchester Community College,NH,Public,28.00,52971148,0.053,2012
+434821,Blue Cliff College-Metairie,LA,"Private, for-profit",50.86,52937028,0.053,584
+125462,Coalinga College,CA,Public,33.00,52538391,0.053,3592
+447582,New River Community and Technical College,WV,Public,20.29,52211005,0.052,1262
+165194,Cape Cod Community College,MA,Public,21.00,52067882,0.052,2604
+158088,Central Louisiana Technical Community College,LA,Public,70.14,52055220,0.052,1211
+452081,Ross College-Sylvania,OH,"Private, for-profit",53.14,52013674,0.052,1273
+440402,Arkansas State University-Newport,AR,Public,31.86,51948383,0.052,1732
+173638,Minnesota West Community and Technical College,MN,Public,37.86,51939558,0.052,3438
+444954,Mountwest Community and Technical College,WV,Public,25.71,51898568,0.052,1459
+161192,Kennebec Valley Community College,ME,Public,39.43,51896208,0.052,2381
+154059,North Iowa Area Community College,IA,Public,43.43,51804433,0.052,2471
+197966,Beaufort County Community College,NC,Public,31.86,51789544,0.052,1785
+124113,Taft College,CA,Public,33.29,51783080,0.052,4135
+366553,Southern Technical College,FL,"Private, for-profit",34.43,51760681,0.052,532
+198640,Halifax Community College,NC,Public,20.43,51749795,0.052,1013
+204839,Ohio University-Southern Campus,OH,Public,17.14,51527648,0.052,1639
+199324,Piedmont Community College,NC,Public,25.43,51399211,0.051,1250
+148256,Rend Lake College,IL,Public,48.57,51323064,0.051,1871
+144564,Danville Area Community College,IL,Public,33.71,51158896,0.051,2149
+148292,Richland Community College,IL,Public,33.29,51017306,0.051,2214
+227386,Panola College,TX,Public,29.29,50733451,0.051,2356
+219426,Southeast Technical College,SD,Public,52.00,50669684,0.051,2478
+441742,Concorde Career College-Grand Prairie,TX,"Private, for-profit",62.29,50379945,0.050,285
+178891,Ranken Technical College,MO,"Private, not-for-profit",57.00,50099502,0.050,1696
+239372,Moraine Park Technical College,WI,Public,47.14,49914778,0.050,3532
+434140,Pima Medical Institute-Chula Vista,CA,"Private, for-profit",67.29,49890276,0.050,675
+260691,Pima Medical Institute-Mesa,AZ,"Private, for-profit",68.57,49857100,0.050,721
+202648,Edison State Community College,OH,Public,23.14,49854722,0.050,4548
+190503,Culinary Institute of America,NY,"Private, not-for-profit",62.29,49840906,0.050,2989
+430935,Colegio de Cinematografía Artes y Television,PR,"Private, for-profit",47.29,49643207,0.050,551
+179344,Missouri State University-West Plains,MO,Public,26.00,49581045,0.050,1726
+212869,Harcum College,PA,"Private, not-for-profit",33.86,49423409,0.049,936
+445230,Pima Medical Institute-Las Vegas,NV,"Private, for-profit",51.71,49381470,0.049,748
+171395,North Central Michigan College,MI,Public,21.43,49377568,0.049,1540
+240505,Casper College,WY,Public,32.14,49151545,0.049,3400
+207740,Seminole State College,OK,Public,30.43,48972531,0.049,1471
+376695,College of the Marshall Islands,MH,Public,9.00,48859096,0.049,1216
+226116,Lamar State College-Port Arthur,TX,Public,23.43,48598641,0.049,3802
+198206,Carteret Community College,NC,Public,34.14,48589979,0.049,1579
+203447,Kent State University at Ashtabula,OH,Public,22.00,48531453,0.049,1762
+439570,Community Care College,OK,"Private, not-for-profit",67.00,48274863,0.048,430
+236072,North Seattle College,WA,Public,29.14,48112634,0.048,5017
+105659,Refrigeration School Inc,AZ,"Private, for-profit",64.57,48068251,0.048,1296
+187666,Eastern New Mexico University-Roswell Campus,NM,Public,39.71,47942718,0.048,2044
+203483,Kent State University at Tuscarawas,OH,Public,29.43,47833485,0.048,1885
+445799,Universal Technical Institute of Pennsylvania Inc,PA,"Private, for-profit",52.43,47602420,0.048,1004
+107725,University of Arkansas Hope-Texarkana,AR,Public,38.00,47537736,0.048,1288
+107549,Ozarka College,AR,Public,43.00,47507585,0.048,1013
+234711,Big Bend Community College,WA,Public,35.43,47494571,0.047,1786
+219277,Oglala Lakota College,SD,Public,7.57,47363614,0.047,1180
+217989,Denmark Technical College,SC,Public,21.43,47356932,0.047,646
+197285,The College of Westchester,NY,"Private, for-profit",44.71,47302531,0.047,891
+211079,Community College of Beaver County,PA,Public,20.71,47195117,0.047,1673
+155098,Fort Scott Community College,KS,Public,29.71,47181162,0.047,1464
+460543,Universal Technical Institute-Dallas Fort Worth,TX,"Private, for-profit",61.14,47162495,0.047,1661
+163028,Lincoln College of Technology-Columbia,MD,"Private, for-profit",58.14,47124402,0.047,1075
+198039,Blue Ridge Community College,NC,Public,31.57,47050991,0.047,2822
+206446,Washington State Community College,OH,Public,26.86,47014904,0.047,1637
+235334,Grays Harbor College,WA,Public,29.14,46943062,0.047,1663
+181817,Western Nebraska Community College,NE,Public,27.00,46930391,0.047,1508
+107327,Arkansas Northeastern College,AR,Public,25.14,46402557,0.046,1451
+395362,Copper Mountain Community College,CA,Public,23.14,46204707,0.046,1524
+201432,Bowling Green State University-Firelands,OH,Public,10.71,46200567,0.046,1928
+124706,Concorde Career College-San Bernardino,CA,"Private, for-profit",72.57,46154058,0.046,260
+107318,Arkansas State University Mid-South,AR,Public,26.14,46008134,0.046,1021
+173416,Dakota County Technical College,MN,Public,41.43,45954203,0.046,2662
+106999,University of Arkansas Community College-Batesville,AR,Public,46.43,45953513,0.046,1118
+247603,Sussex County Community College,NJ,Public,32.71,45805574,0.046,2220
+127778,Otero College,CO,Public,36.00,45569351,0.046,972
+223463,Remington College-Dallas Campus,TX,"Private, not-for-profit",58.43,45314721,0.045,208
+153533,Iowa Lakes Community College,IA,Public,38.14,45278019,0.045,2024
+126711,Colorado Mountain College,CO,Public,25.71,45177127,0.045,5673
+107974,South Arkansas College,AR,Public,23.86,45069978,0.045,1190
+237701,Potomac State College of West Virginia University,WV,Public,18.00,45018374,0.045,1143
+168607,Alpena Community College,MI,Public,34.43,44972163,0.045,1530
+203881,Marion Technical College,OH,Public,26.14,44967276,0.045,3008
+489201,Clovis Community College,CA,Public,32.67,44659068,0.045,9053
+155186,Highland Community College,KS,Public,34.86,44658510,0.045,2182
+188058,Northern New Mexico College,NM,Public,41.71,44537526,0.045,1310
+214290,New Castle School of Trades,PA,"Private, for-profit",72.00,44455816,0.044,623
+154925,Coffeyville Community College,KS,Public,33.86,44044547,0.044,1428
+207050,Eastern Oklahoma State College,OK,Public,25.29,43849516,0.044,1292
+213534,Miller-Motte College-Berks Technical Institute,PA,"Private, for-profit",34.86,43816037,0.044,452
+171234,Montcalm Community College,MI,Public,20.29,43779344,0.044,1587
+133021,Chipola College,FL,Public,42.71,43661110,0.044,1820
+406024,Galen College of Nursing-Tampa Bay,FL,"Private, for-profit",51.00,43479557,0.043,1601
+126687,Concorde Career College-Aurora,CO,"Private, for-profit",73.00,43479181,0.043,196
+446561,Stanbridge University,CA,"Private, for-profit",70.71,43422151,0.043,2373
+145521,Highland Community College,IL,Public,33.43,43420643,0.043,1369
+111896,Cerro Coso Community College,CA,Public,22.14,43414918,0.043,5690
+199953,Wilson Community College,NC,Public,23.86,43381822,0.043,1751
+208035,Western Oklahoma State College,OK,Public,26.00,43127308,0.043,1151
+224961,Galveston College,TX,Public,35.14,43114220,0.043,2119
+200305,North Dakota State College of Science,ND,Public,36.29,43002252,0.043,3140
+487977,Martinsburg College,WV,"Private, for-profit",29.00,42925510,0.043,3214
+442930,University of Antelope Valley,CA,"Private, for-profit",66.29,42881174,0.043,0
+154697,Barton County Community College,KS,Public,28.43,42724771,0.043,4393
+455512,Woodland Community College,CA,Public,27.71,42695099,0.043,3664
+201283,Belmont College,OH,Public,25.57,42656018,0.043,833
+200022,Bismarck State College,ND,Public,40.00,42653375,0.043,4065
+239008,Lakeshore Technical College,WI,Public,40.71,42486886,0.042,2981
+192688,Mandl School-The College of Allied Health,NY,"Private, for-profit",41.57,42427230,0.042,465
+420538,Arkansas State University-Mountain Home,AR,Public,39.86,42413378,0.042,1284
+195988,Sullivan County Community College,NY,Public,22.29,42403074,0.042,1809
+236382,Renton Technical College,WA,Public,57.00,42303018,0.042,3060
+219143,Lake Area Technical College,SD,Public,66.14,42280600,0.042,2179
+180249,Great Falls College Montana State University,MT,Public,26.71,42249919,0.042,1318
+240718,WyoTech,WY,"Private, for-profit",83.14,42233873,0.042,1206
+123484,College of the Siskiyous,CA,Public,26.43,42180590,0.042,1430
+210155,Southwestern Oregon Community College,OR,Public,31.57,42056048,0.042,1489
+141680,Honolulu Community College,HI,Public,23.57,42039843,0.042,3204
+136145,North Florida College,FL,Public,45.57,42006903,0.042,1281
+127732,Northeastern Junior College,CO,Public,42.00,41920263,0.042,1502
+179715,North Central Missouri College,MO,Public,40.86,41803356,0.042,1847
+155104,Garden City Community College,KS,Public,38.29,41741674,0.042,1904
+434900,Dewey University-Carolina,PR,"Private, not-for-profit",61.14,41275557,0.041,356
+170587,Kirtland Community College,MI,Public,21.57,41230307,0.041,1538
+241517,CEM College-San Juan,PR,"Private, for-profit",57.57,41216565,0.041,178
+420370,Career Technical Institute,DC,"Private, for-profit",70.71,41054982,0.041,383
+173735,Minnesota North College,MN,Public,36.71,41017184,0.041,3020
+148821,Shawnee Community College,IL,Public,37.86,40840748,0.041,1142
+461014,Mildred Elley-New York Campus,NY,"Private, for-profit",31.86,40745050,0.041,1004
+236258,Peninsula College,WA,Public,36.00,40605563,0.041,1837
+111434,Canada College,CA,Public,34.00,40571415,0.041,6141
+235699,Lake Washington Institute of Technology,WA,Public,36.71,40529933,0.041,3357
+175263,Minnesota State College Southeast,MN,Public,31.57,40401649,0.040,2020
+207069,Redlands Community College,OK,Public,23.43,40292800,0.040,1895
+208275,Blue Mountain Community College,OR,Public,23.29,40171159,0.040,1371
+446118,Career Care Institute,CA,"Private, for-profit",73.14,39540354,0.040,649
+188854,American Musical and Dramatic Academy,NY,"Private, not-for-profit",65.14,39484582,0.039,1502
+236212,Perry Technical Institute,WA,"Private, not-for-profit",76.71,39415141,0.039,973
+106795,Cossatot Community College of the University of Arkansas,AR,Public,43.71,39218489,0.039,1387
+123679,Concorde Career College-Garden Grove,CA,"Private, for-profit",77.86,39183600,0.039,202
+180197,Flathead Valley Community College,MT,Public,27.86,39151860,0.039,2201
+428170,Southeastern College-West Palm Beach,FL,"Private, for-profit",75.43,38877202,0.039,650
+105297,Dine College,AZ,Public,15.14,38775154,0.039,1828
+428392,Klamath Community College,OR,Public,29.71,38714325,0.039,1936
+107619,Phillips Community College of the University of Arkansas,AR,Public,39.29,38702906,0.039,1356
+162168,Chesapeake College,MD,Public,22.57,38547157,0.039,1980
+240666,Northern Wyoming Community College District,WY,Public,35.71,38453258,0.038,3298
+169655,MIAT College of Technology,MI,"Private, for-profit",58.00,38382598,0.038,1645
+213570,Lincoln Technical Institute-Allentown,PA,"Private, for-profit",60.86,38282704,0.038,529
+120078,North-West College-West Covina,CA,"Private, for-profit",59.57,38272730,0.038,635
+438179,Brookline College-Tucson,AZ,"Private, for-profit",53.71,38262298,0.038,211
+367112,Miller-Motte College-McCann-Monroe,LA,"Private, for-profit",29.00,38209931,0.038,111
+172954,Anoka Technical College,MN,Public,38.29,37993192,0.038,1822
+148672,Sauk Valley Community College,IL,Public,39.71,37980289,0.038,1433
+106883,East Arkansas Community College,AR,Public,28.43,37877096,0.038,1273
+242556,Instituto Tecnologico de Puerto Rico-Recinto de Guayama,PR,Public,59.14,37876187,0.038,262
+404912,Pima Medical Institute-Denver,CO,"Private, for-profit",70.86,37754594,0.038,764
+484002,High Desert Medical College,CA,"Private, for-profit",64.71,37723799,0.038,1803
+101462,J. F. Drake State Community and Technical College,AL,Public,9.71,37675323,0.038,1011
+430245,Southern Careers Institute-San Antonio,TX,"Private, for-profit",57.29,37662577,0.038,596
+444714,Gwinnett College-Marietta Campus,GA,"Private, for-profit",49.43,37599315,0.038,168
+412599,Remington College-Memphis Campus,TN,"Private, not-for-profit",41.14,37544323,0.038,391
+460835,Miller-Motte College-Conway,SC,"Private, for-profit",24.29,37502493,0.038,164
+196653,Trocaire College,NY,"Private, not-for-profit",19.86,37449782,0.037,1104
+120661,Concorde Career College-San Diego,CA,"Private, for-profit",71.29,37440527,0.037,178
+188340,Vaughn College of Aeronautics and Technology,NY,"Private, not-for-profit",38.43,37437836,0.037,1202
+198084,Brunswick Community College,NC,Public,32.43,37336299,0.037,1845
+172918,Alexandria Technical & Community College,MN,Public,54.00,37271217,0.037,3038
+155566,Neosho County Community College,KS,Public,31.14,36918837,0.037,1783
+112561,Columbia College,CA,Public,28.29,36765995,0.037,2594
+203492,Kent State University at Salem,OH,Public,20.29,36607041,0.037,1463
+204866,Ohio University-Zanesville Campus,OH,Public,19.14,36568475,0.037,1799
+454786,Laurus College,CA,"Private, for-profit",69.14,36524175,0.037,794
+189583,Bryant & Stratton College-Buffalo,NY,"Private, not-for-profit",25.43,36308821,0.036,1840
+156851,Henderson Community College,KY,Public,27.14,36302539,0.036,1606
+239910,Southwest Wisconsin Technical College,WI,Public,54.57,36281996,0.036,2717
+133845,Concorde Career Institute-Jacksonville,FL,"Private, for-profit",59.57,36256053,0.036,140
+155283,Concorde Career College-Kansas City,MO,"Private, for-profit",61.17,36218988,0.036,240
+231785,Bryant & Stratton College-Virginia Beach,VA,"Private, not-for-profit",20.71,35811102,0.036,1339
+105349,Northland Pioneer College,AZ,Public,16.14,35726591,0.036,2825
+155140,Haskell Indian Nations University,KS,Public,35.57,35701667,0.036,878
+165981,Greenfield Community College,MA,Public,20.71,35695159,0.036,1544
+198011,Bladen Community College,NC,Public,26.29,35693951,0.036,990
+233310,Rappahannock Community College,VA,Public,32.43,35686687,0.036,2767
+210599,All-State Career School,PA,"Private, for-profit",47.57,35542966,0.036,831
+141990,Windward Community College,HI,Public,23.29,35492455,0.035,2743
+450058,Fortis College-Columbus,OH,"Private, for-profit",43.43,35421375,0.035,761
+235671,Bates Technical College,WA,Public,40.86,35414804,0.035,3817
+414911,Pennsylvania Highlands Community College,PA,Public,30.43,35395973,0.035,2286
+236504,South Seattle College,WA,Public,34.43,35374746,0.035,5295
+460136,Pima Medical Institute-Houston,TX,"Private, for-profit",69.57,35287856,0.035,1019
+223506,Brazosport College,TX,Public,35.57,35259847,0.035,4100
+182306,Great Basin College,NV,Public,35.29,35238504,0.035,2936
+193858,New York School for Medical and Dental Assistants,NY,"Private, for-profit",71.57,35217550,0.035,281
+204608,Ohio Technical College,OH,"Private, for-profit",64.71,35201563,0.035,331
+128179,Intellitec College-Colorado Springs,CO,"Private, for-profit",67.86,35069453,0.035,816
+408385,Southern Careers Institute-Pharr,TX,"Private, for-profit",56.43,35032688,0.035,629
+242121,Humacao Community College,PR,"Private, not-for-profit",60.14,34964011,0.035,207
+217837,Northeastern Technical College,SC,Public,12.43,34811563,0.035,1477
+190169,Columbia-Greene Community College,NY,Public,31.86,34611076,0.035,1696
+226903,Southern Careers Institute-Austin,TX,"Private, for-profit",54.57,34540646,0.035,1079
+450128,Blue Cliff College-Alexandria,LA,"Private, for-profit",38.00,34406250,0.034,479
+118198,MTI College,CA,"Private, for-profit",59.43,34398017,0.034,1025
+124937,Concorde Career College-North Hollywood,CA,"Private, for-profit",72.14,34074859,0.034,143
+243841,ICPR Junior College,PR,"Private, for-profit",44.86,33978920,0.034,480
+441025,Miller-Motte College-Charleston,SC,"Private, for-profit",31.29,33939784,0.034,124
+372921,Fortis College-Smyrna,GA,"Private, for-profit",55.71,33914909,0.034,488
+181312,Mid-Plains Community College,NE,Public,37.14,33758331,0.034,2066
+194028,North Country Community College,NY,Public,28.00,33654844,0.034,1615
+154907,Cloud County Community College,KS,Public,42.57,33628710,0.034,1644
+247065,Beckfield College-Florence,KY,"Private, for-profit",31.71,33414645,0.033,612
+177302,Pinnacle Career Institute,MO,"Private, for-profit",61.29,33402496,0.033,488
+216296,Thaddeus Stevens College of Technology,PA,Public,52.29,33321780,0.033,1453
+227687,Ranger College,TX,Public,29.71,33289989,0.033,2498
+177977,State Technical College of Missouri,MO,Public,71.71,33284281,0.033,2259
+188225,University of New Mexico-Taos Campus,NM,Public,21.86,33191007,0.033,854
+458441,Miller-Motte College-Columbus,GA,"Private, for-profit",26.57,33135730,0.033,270
+148991,Spoon River College,IL,Public,35.86,33102435,0.033,1225
+190053,Clinton Community College,NY,Public,22.14,33064832,0.033,1015
+162104,Cecil College,MD,Public,17.00,33055065,0.033,1845
+148937,Southeastern Illinois College,IL,Public,35.71,32968440,0.033,1392
+208479,Concorde Career College-Portland,OR,"Private, for-profit",73.29,32940803,0.033,186
+145707,Illinois Eastern Community Colleges,IL,Public,52.00,32928925,0.033,880
+192509,Long Island Business Institute,NY,"Private, for-profit",22.29,32880530,0.033,367
+203526,Kent State University at Geauga,OH,Public,23.14,32871722,0.033,2154
+127617,Morgan Community College,CO,Public,43.71,32711202,0.033,1506
+154642,Allen County Community College,KS,Public,29.71,32609924,0.033,1817
+154396,Southwestern Community College,IA,Public,45.86,32554497,0.033,1633
+219480,Western Dakota Technical College,SD,Public,40.14,32206150,0.032,1047
+153922,Marshalltown Community College,IA,Public,32.00,32186196,0.032,1870
+199795,Tri-County Community College,NC,Public,33.00,32125849,0.032,969
+122694,San Joaquin Valley College-Bakersfield,CA,"Private, for-profit",50.50,32064007,0.032,820
+230418,Ensign College,UT,"Private, not-for-profit",18.71,32038881,0.032,5973
+399869,Southern California Institute of Technology,CA,"Private, for-profit",66.71,31964832,0.032,537
+182148,Las Vegas College,NV,"Private, for-profit",55.71,31936120,0.032,545
+459967,Southern Careers Institute-Brownsville,TX,"Private, for-profit",64.00,31897153,0.032,637
+183150,Great Bay Community College,NH,Public,22.29,31804352,0.032,1440
+218821,Spartanburg Methodist College,SC,"Private, not-for-profit",35.43,31803337,0.032,1029
+224660,Western Technical College,TX,"Private, for-profit",72.29,31747376,0.032,619
+416458,Premiere Career College,CA,"Private, for-profit",77.57,31728948,0.032,106
+205887,Stautzenberger College-Maumee,OH,"Private, for-profit",51.71,31715036,0.032,520
+204680,Ohio State University-Mansfield Campus,OH,Public,19.71,31695832,0.032,843
+107992,Southern Arkansas University Tech,AR,Public,55.14,31543386,0.032,939
+211477,Central Penn College,PA,"Private, for-profit",32.71,31457888,0.031,806
+487490,Florida Career College-Houston,TX,"Private, for-profit",44.00,31415786,0.031,264
+376224,CEM College-Humacao,PR,"Private, for-profit",53.14,31392608,0.031,174
+450571,Rasmussen University-Wisconsin,WI,"Private, for-profit",41.00,31346229,0.031,154
+451750,Bryant & Stratton College-Wauwatosa,WI,"Private, not-for-profit",16.14,31307880,0.031,952
+405872,Carroll Community College,MD,Public,27.57,31196744,0.031,3164
+204699,Ohio State University-Marion Campus,OH,Public,20.86,30983345,0.031,884
+487597,Universal Technical Institute-Southern California,CA,"Private, for-profit",52.83,30896384,0.031,1447
+445364,North-West College-Riverside,CA,"Private, for-profit",60.57,30834136,0.031,680
+198923,McDowell Technical Community College,NC,Public,30.14,30784876,0.031,1203
+449074,Pima Medical Institute-Renton,WA,"Private, for-profit",67.43,30723426,0.031,400
+154998,Dodge City Community College,KS,Public,31.71,30322107,0.030,1757
+366270,Delta College of Arts & Technology,LA,"Private, for-profit",45.71,30274294,0.030,288
+175227,Dunwoody College of Technology,MN,"Private, not-for-profit",62.14,30150883,0.030,1424
+413680,Spartan College of Aeronautics & Technology,CA,"Private, for-profit",64.43,30144404,0.030,319
+214944,Pennco Tech-Bristol,PA,"Private, for-profit",74.29,30082980,0.030,603
+103909,Carrington College-Mesa,AZ,"Private, for-profit",62.17,30063440,0.030,492
+180647,Salish Kootenai College,MT,Public,51.86,30028688,0.030,636
+380368,Fond du Lac Tribal and Community College,MN,Public,18.57,30017503,0.030,1749
+404055,Brookline College-Tempe,AZ,"Private, for-profit",57.14,29978485,0.030,294
+242149,ICPR Junior College-Mayaguez,PR,"Private, for-profit",43.43,29952205,0.030,429
+442444,San Joaquin Valley College-Ontario,CA,"Private, for-profit",61.25,29930614,0.030,1064
+172671,West Shore Community College,MI,Public,22.43,29910598,0.030,1028
+484932,BridgeValley Community & Technical College,WV,Public,25.00,29826904,0.030,1793
+161484,Northern Maine Community College,ME,Public,35.86,29719937,0.030,772
+262457,San Joaquin Valley College-Fresno,CA,"Private, for-profit",57.25,29714735,0.030,481
+447591,The College of Health Care Professions-Southwest Houston,TX,"Private, for-profit",72.43,29708508,0.030,666
+180276,Helena College University of Montana,MT,Public,32.14,29707799,0.030,1485
+458405,Miller-Motte College-Fayetteville,NC,"Private, for-profit",34.57,29676851,0.030,169
+243647,Palau Community College,PW,Public,30.14,29621722,0.030,387
+437936,Carrington College-San Jose,CA,"Private, for-profit",68.00,29359239,0.029,680
+233338,Richard Bland College,VA,Public,23.29,29350472,0.029,2598
+207254,Spartan College of Aeronautics and Technology,OK,"Private, for-profit",58.43,29300394,0.029,744
+240657,Northwest College,WY,Public,36.57,29238293,0.029,1379
+420440,York County Community College,ME,Public,22.71,29194808,0.029,1782
+392415,Fortis College,TX,"Private, for-profit",61.29,29170838,0.029,357
+142179,College of Eastern Idaho,ID,Public,45.14,29165574,0.029,2565
+188003,Southeast New Mexico College,NM,Public,21.14,29075249,0.029,1171
+459985,Southern Careers Institute-Harlingen,TX,"Private, for-profit",62.29,29066316,0.029,437
+455628,Fortis Institute-Birmingham,AL,"Private, for-profit",50.14,29005532,0.029,339
+200846,University of Akron Wayne College,OH,Public,7.43,28943287,0.029,1361
+200785,Herzing University-Akron,OH,"Private, not-for-profit",24.00,28939301,0.029,381
+203960,Mercy College of Ohio,OH,"Private, not-for-profit",41.57,28798127,0.029,999
+442134,Pima Medical Institute-Colorado Springs,CO,"Private, for-profit",67.57,28775693,0.029,339
+133854,Concorde Career Institute-Miramar,FL,"Private, for-profit",63.14,28770760,0.029,137
+155450,Labette Community College,KS,Public,23.14,28761822,0.029,1454
+475565,CUNY Stella and Charles Guttman Community College,NY,Public,37.43,28761515,0.029,1101
+460206,Concorde Career College-San Antonio,TX,"Private, for-profit",69.29,28726530,0.029,122
+412173,Academy for Nursing and Health Occupations,FL,"Private, not-for-profit",78.71,28694691,0.029,559
+193201,Mildred Elley School-Albany Campus,NY,"Private, for-profit",30.00,28613035,0.029,385
+218672,University of South Carolina-Lancaster,SC,Public,21.14,28537668,0.029,2328
+198871,Louisburg College,NC,"Private, not-for-profit",41.14,28470527,0.028,413
+218681,University of South Carolina-Salkehatchie,SC,Public,21.43,28426446,0.028,809
+245962,Miller-Motte College-Tulsa,OK,"Private, for-profit",56.71,28409487,0.028,283
+237437,Huntington Junior College,WV,"Private, not-for-profit",18.71,28384160,0.028,209
+201469,Bryant & Stratton College-Parma,OH,"Private, not-for-profit",20.43,28343773,0.028,522
+449250,The College of Health Care Professions-San Antonio,TX,"Private, for-profit",67.29,28335706,0.028,718
+133863,Concorde Career Institute-Tampa,FL,"Private, for-profit",65.43,28217198,0.028,132
+240693,Western Wyoming Community College,WY,Public,27.29,28042493,0.028,2464
+183141,Nashua Community College,NH,Public,31.86,27898698,0.028,1262
+447263,Joyce University of Nursing and Health Sciences,UT,"Private, for-profit",65.57,27867972,0.028,1892
+198914,Mayland Community College,NC,Public,42.57,27843369,0.028,863
+423120,Compu-Med Vocational Careers Corp,FL,"Private, for-profit",85.86,27683217,0.028,417
+441229,Smith Chason College,CA,"Private, for-profit",72.00,27661320,0.028,2221
+155858,Seward County Community College,KS,Public,43.00,27632928,0.028,1787
+487393,Florida Career College-West Palm Beach,FL,"Private, for-profit",56.29,27560557,0.028,193
+440262,New York Automotive and Diesel Institute,NY,"Private, for-profit",65.86,27548359,0.028,448
+140340,Herzing University-Atlanta,GA,"Private, not-for-profit",19.29,27546249,0.028,499
+213589,Lincoln Technical Institute-Philadelphia,PA,"Private, for-profit",42.71,27532516,0.028,374
+459958,Fortis Institute,TX,"Private, for-profit",65.57,27417209,0.027,332
+239442,Nicolet Area Technical College,WI,Public,44.43,27416410,0.027,1206
+200527,Turtle Mountain Community College,ND,"Private, not-for-profit",36.71,27356417,0.027,688
+460826,Miller-Motte College-Augusta,GA,"Private, for-profit",29.29,27317460,0.027,524
+439367,CBD College,CA,"Private, not-for-profit",81.50,27292241,0.027,1408
+480833,The College of Health Care Professions-Fort Worth,TX,"Private, for-profit",71.43,27153250,0.027,1025
+219189,Mitchell Technical College,SD,Public,65.14,27138404,0.027,1132
+223922,Clarendon College,TX,Public,39.71,27081696,0.027,1407
+246974,Carrington College-San Leandro Campus,CA,"Private, for-profit",60.00,27069609,0.027,401
+487418,Florida Career College-Lauderdale Lakes,FL,"Private, for-profit",47.43,26903533,0.027,204
+213181,Great Lakes Institute of Technology,PA,"Private, for-profit",68.57,26850393,0.027,303
+437635,The College of Health Care Professions-Austin,TX,"Private, for-profit",69.00,26846128,0.027,829
+115010,Glendale Career College,CA,"Private, for-profit",64.17,26778399,0.027,854
+450067,Fortis College-Cincinnati,OH,"Private, for-profit",48.86,26532256,0.027,403
+233037,Paul D Camp Community College,VA,Public,22.29,26503307,0.027,1168
+181941,Career College of Northern Nevada,NV,"Private, for-profit",55.86,26326682,0.026,0
+460181,Concorde Career College-Dallas,TX,"Private, for-profit",65.43,26251666,0.026,183
+442602,Carrington College-Albuquerque,NM,"Private, for-profit",63.57,26180413,0.026,297
+214582,Pennsylvania Institute of Technology,PA,"Private, not-for-profit",59.14,26171392,0.026,662
+433013,Career Networks Institute,CA,"Private, for-profit",70.71,26052166,0.026,971
+445744,Fortis Institute-Port Saint Lucie,FL,"Private, for-profit",59.14,25967333,0.026,472
+245625,Warren County Community College,NJ,Public,33.00,25863088,0.026,3342
+111638,Casa Loma College-Los Angeles,CA,"Private, not-for-profit",49.71,25813974,0.026,581
+186469,Salem Community College,NJ,Public,35.29,25775120,0.026,1094
+250744,Dorsey College-Roseville,MI,"Private, for-profit",40.29,25741995,0.026,443
+188021,New Mexico State University-Grants,NM,Public,29.57,25732756,0.026,834
+242583,Instituto Tecnologico de Puerto Rico-Recinto de San Juan,PR,Public,48.57,25658006,0.026,190
+200013,Rasmussen University-North Dakota,ND,"Private, for-profit",38.57,25627406,0.026,44
+434159,Lincoln College of Technology-Marietta,GA,"Private, for-profit",56.71,25617870,0.026,438
+487409,Florida Career College-Hialeah,FL,"Private, for-profit",58.57,25610978,0.026,185
+169992,Gogebic Community College,MI,Public,29.14,25603077,0.026,844
+375416,Remington College-Cleveland Campus,OH,"Private, not-for-profit",44.57,25576053,0.026,133
+450696,Carrington College-Stockton,CA,"Private, for-profit",59.67,25497395,0.025,429
+405076,Southern Careers Institute-Corpus Christi,TX,"Private, for-profit",57.71,25421481,0.025,505
+184959,Eastwick College-Ramsey,NJ,"Private, for-profit",68.00,25263177,0.025,929
+242130,ICPR Junior College-Arecibo,PR,"Private, for-profit",45.29,25172349,0.025,348
+103501,Alaska Career College,AK,"Private, for-profit",77.29,25096803,0.025,255
+377661,Valley College-Martinsburg,WV,"Private, for-profit",66.71,25030443,0.025,651
+488730,Northeast Lakeview College,TX,Public,31.50,24975768,0.025,8265
+456205,Miller-Motte College-Raleigh,NC,"Private, for-profit",33.29,24910828,0.025,214
+461023,National Paralegal College,AZ,"Private, for-profit",30.29,24902806,0.025,388
+452948,Galen College of Nursing-Cincinnati,OH,"Private, for-profit",41.43,24858358,0.025,670
+199467,Roanoke-Chowan Community College,NC,Public,21.43,24801944,0.025,591
+455479,Fortis Institute-Pensacola,FL,"Private, for-profit",54.00,24786553,0.025,657
+445203,Remington College-North Houston Campus,TX,"Private, not-for-profit",51.43,24779794,0.025,163
+482015,Southern Careers Institute-San Antonio,TX,"Private, for-profit",61.57,24716647,0.025,939
+169974,Glen Oaks Community College,MI,Public,26.86,24682502,0.025,1215
+107521,Arkansas State University Three Rivers,AR,Public,29.57,24633302,0.025,2028
+242042,Instituto Tecnologico de Puerto Rico-Recinto de Manati,PR,Public,75.14,24609493,0.025,297
+368629,Pima Medical Institute-Seattle,WA,"Private, for-profit",67.71,24510499,0.025,450
+439738,Fortis College-Baton Rouge,LA,"Private, for-profit",49.57,24261034,0.024,461
+107743,University of Arkansas Community College Rich Mountain,AR,Public,46.14,24255468,0.024,719
+183123,Lakes Region Community College,NH,Public,31.29,24253827,0.024,695
+432384,Platt College-Ontario,CA,"Private, for-profit",59.00,24238828,0.024,467
+187903,New Mexico Junior College,NM,Public,31.57,24018134,0.024,2118
+440059,Aviation Institute of Maintenance-Atlanta,GA,"Private, for-profit",61.14,23860124,0.024,779
+449506,SABER College,FL,"Private, not-for-profit",97.33,23795261,0.024,202
+200554,United Tribes Technical College,ND,"Private, not-for-profit",18.57,23654407,0.024,542
+460677,ICPR Junior College,PR,"Private, for-profit",45.86,23644723,0.024,414
+260789,Platt College-Los Angeles,CA,"Private, for-profit",58.29,23333469,0.023,598
+196389,Swedish Institute a College of Health Sciences,NY,"Private, for-profit",51.29,23332154,0.023,1160
+450401,Clary Sage College,OK,"Private, not-for-profit",76.43,23236291,0.023,367
+155201,Independence Community College,KS,Public,23.14,23197513,0.023,821
+422835,American College of Healthcare and Technology,CA,"Private, for-profit",77.57,23188550,0.023,321
+224891,Frank Phillips College,TX,Public,29.43,23036198,0.023,1748
+114433,Feather River Community College District,CA,Public,30.71,22853788,0.023,1758
+159197,ITI Technical College,LA,"Private, for-profit",60.14,22785776,0.023,513
+154934,Colby Community College,KS,Public,44.71,22732542,0.023,1375
+117195,Lake Tahoe Community College,CA,Public,41.43,22723735,0.023,3376
+188517,Bryant & Stratton College-Albany,NY,"Private, not-for-profit",28.57,22703980,0.023,224
+240514,Central Wyoming College,WY,Public,26.86,22663269,0.023,2106
+447777,Asher College,CA,"Private, for-profit",58.33,22629465,0.023,699
+377111,Remington College-Fort Worth Campus,TX,"Private, not-for-profit",49.14,22616300,0.023,164
+213774,Manor College,PA,"Private, not-for-profit",26.29,22582485,0.023,599
+442879,Southwest Institute of Healing Arts,AZ,"Private, for-profit",39.71,22433696,0.022,716
+363633,Luna Community College,NM,Public,24.29,22432362,0.022,757
+153296,Ellsworth Community College,IA,Public,24.43,22417697,0.022,685
+403487,Wabash Valley College,IL,Public,49.71,22369774,0.022,906
+484066,MedQuest College,KY,"Private, for-profit",80.14,22342789,0.022,273
+437732,The Chicago School-College of Nursing,TX,"Private, not-for-profit",57.80,22334639,0.022,2
+237996,West Virginia Junior College-Morgantown,WV,"Private, for-profit",63.57,22178699,0.022,584
+162609,Garrett College,MD,Public,21.86,22169510,0.022,701
+476939,FVI School of Nursing and Technology,FL,"Private, for-profit",81.86,22153822,0.022,553
+203456,Kent State University at East Liverpool,OH,Public,19.00,22023764,0.022,1056
+439118,Carrington College-Spokane,WA,"Private, for-profit",65.14,21922911,0.022,296
+142054,Carrington College-Boise,ID,"Private, for-profit",62.57,21913400,0.022,433
+173115,Northwest Technical College,MN,Public,34.86,21905890,0.022,901
+446525,SAE Institute of Technology-Nashville,TN,"Private, for-profit",60.50,21882434,0.022,1800
+461218,Institute of Medical Careers,PA,"Private, for-profit",87.14,21844190,0.022,866
+141802,Kauai Community College,HI,Public,26.71,21636634,0.022,1298
+103927,Carrington College-Tucson,AZ,"Private, for-profit",67.83,21619412,0.022,437
+447935,ATA College,KY,"Private, for-profit",59.71,21527365,0.022,337
+244233,City College-Hollywood,FL,"Private, for-profit",42.86,21368414,0.021,275
+183105,White Mountains Community College,NH,Public,50.86,21358007,0.021,508
+183488,Eastwick College-Hackensack,NJ,"Private, for-profit",47.43,21345264,0.021,874
+155715,Pratt Community College,KS,Public,34.00,21248044,0.021,1153
+442356,Saint Joseph's University - Lancaster,PA,"Private, not-for-profit",50.86,21161439,0.021,1648
+127389,Lamar Community College,CO,Public,36.00,21161395,0.021,711
+439792,Fortis College-Orange Park,FL,"Private, for-profit",55.43,21153885,0.021,327
+154129,Northwest Iowa Community College,IA,Public,57.00,21043812,0.021,1792
+487454,Florida Career College-Margate,FL,"Private, for-profit",56.00,21024325,0.021,130
+115931,Institute for Business and Technology,CA,"Private, for-profit",76.29,20943669,0.021,609
+382957,Fortis College-Richmond,VA,"Private, for-profit",44.00,20834550,0.021,399
+174570,Pine Technical & Community College,MN,Public,27.14,20833313,0.021,1913
+449083,CBT Technology Institute-Main Campus,FL,"Private, for-profit",93.00,20823500,0.021,452
+231873,Mountain Gateway Community College,VA,Public,33.57,20714283,0.021,1002
+218955,Williamsburg Technical College,SC,Public,15.00,20701809,0.021,629
+216083,South Hills School of Business & Technology,PA,"Private, for-profit",58.71,20672181,0.021,242
+366535,Remington College-Mobile Campus,AL,"Private, not-for-profit",49.57,20595069,0.021,244
+441423,Florida Education Institute,FL,"Private, for-profit",78.71,20453658,0.020,652
+380377,Northwest Indian College,WA,Public,21.29,20364397,0.020,696
+189565,Bryant & Stratton College-Syracuse North,NY,"Private, not-for-profit",23.43,20362902,0.020,471
+218690,University of South Carolina-Sumter,SC,Public,30.57,20349459,0.020,1692
+386153,Seminar L'moros Bais Yaakov,NY,"Private, not-for-profit",58.00,20329338,0.020,371
+489283,The College of Health Care Professions-McAllen Campus,TX,"Private, for-profit",77.20,20307370,0.020,728
+185721,Eastwick College-Nutley,NJ,"Private, for-profit",59.00,20275907,0.020,456
+476726,Rio Grande Valley College,TX,"Private, for-profit",86.43,20192598,0.020,883
+133960,The College of the Florida Keys,FL,Public,35.57,20108423,0.020,854
+456038,Pima Medical Institute-East Valley,AZ,"Private, for-profit",64.14,20035192,0.020,373
+386472,Herzing University-Orlando,FL,"Private, not-for-profit",25.14,19918123,0.020,702
+198905,Martin Community College,NC,Public,30.14,19911293,0.020,819
+442426,St Louis College of Health Careers-Fenton,MO,"Private, for-profit",70.14,19846828,0.020,401
+403478,Lincoln Trail College,IL,Public,45.00,19833132,0.020,605
+165884,Benjamin Franklin Cummings Institute of Technology,MA,"Private, not-for-profit",44.86,19677168,0.020,592
+488077,Sonoran Desert Institute,AZ,"Private, for-profit",44.33,19646255,0.020,4763
+469416,Dewey University-Manati,PR,"Private, not-for-profit",71.57,19626302,0.020,255
+117274,Lassen Community College,CA,Public,29.00,19622393,0.020,1783
+155593,Fort Hays Tech North Central,KS,Public,69.00,19529263,0.020,957
+452124,Fortis Institute-Nashville,TN,"Private, for-profit",55.29,19410130,0.019,392
+232016,Centura College-Virginia Beach,VA,"Private, for-profit",56.14,19409845,0.019,8
+199023,Montgomery Community College,NC,Public,35.14,19362304,0.019,1085
+460190,Concorde Career Institute-Orlando,FL,"Private, for-profit",67.29,19338617,0.019,145
+451866,Remington College-Shreveport Campus,LA,"Private, not-for-profit",45.71,19315445,0.019,342
+460817,Miller-Motte College-Jacksonville,NC,"Private, for-profit",41.00,19176249,0.019,187
+372073,Fremont University,CA,"Private, for-profit",44.86,19139965,0.019,153
+460020,Fortis College-Columbia,SC,"Private, for-profit",48.57,19061654,0.019,513
+437769,Chester Career College,VA,"Private, for-profit",41.86,19059323,0.019,147
+447351,San Joaquin Valley College-Modesto,CA,"Private, for-profit",57.50,18988812,0.019,590
+420556,Columbia Gorge Community College,OR,Public,15.57,18929323,0.019,736
+454865,Cambridge College of Healthcare & Technology,FL,"Private, for-profit",60.00,18899024,0.019,1037
+183114,River Valley Community College,NH,Public,28.86,18855858,0.019,674
+160995,Beal University,ME,"Private, for-profit",41.14,18848112,0.019,512
+475060,Miller-Motte College-Macon,GA,"Private, for-profit",27.57,18811015,0.019,206
+203720,Ohio Business College-Sheffield,OH,"Private, for-profit",60.14,18799175,0.019,165
+119270,Musicians Institute,CA,"Private, for-profit",43.00,18743627,0.019,780
+456852,San Joaquin Valley College-Hesperia,CA,"Private, for-profit",59.00,18718727,0.019,437
+438258,Carrington College-Pleasant Hill Campus,CA,"Private, for-profit",59.33,18710871,0.019,432
+208415,Clatsop Community College,OR,Public,17.29,18617223,0.019,813
+480204,Platt College-Riverside,CA,"Private, for-profit",64.33,18601199,0.019,416
+138655,Interactive College of Technology-Chamblee,GA,"Private, for-profit",39.86,18519190,0.019,529
+192004,Jamestown Business College,NY,"Private, for-profit",58.86,18327465,0.018,251
+456214,Lamson Institute,TX,"Private, for-profit",72.86,18289538,0.018,443
+195784,St Paul's School of Nursing-Staten Island,NY,"Private, for-profit",44.57,18147807,0.018,661
+439190,Cascadia College,WA,Public,31.29,18094673,0.018,2013
+231411,Advanced Technology Institute,VA,"Private, for-profit",69.00,18057742,0.018,377
+486822,Pima Medical Institute-Phoenix,AZ,"Private, for-profit",59.60,18003120,0.018,830
+484376,North-West College-Long Beach,CA,"Private, for-profit",55.57,17838510,0.018,576
+443571,InterCoast Colleges-West Covina,CA,"Private, for-profit",81.71,17819745,0.018,507
+444556,Auguste Escoffier School of Culinary Arts-Austin,TX,"Private, for-profit",64.00,17819743,0.018,372
+385503,Fortis Institute-Scranton,PA,"Private, for-profit",47.57,17808743,0.018,205
+232052,Eastern Shore Community College,VA,Public,30.14,17727300,0.018,720
+451228,MyComputerCareer at Indianapolis,IN,"Private, for-profit",60.14,17598857,0.018,1034
+160524,Remington College-Lafayette Campus,LA,"Private, not-for-profit",41.00,17464442,0.017,247
+449135,Dewey University-Juana Díaz,PR,"Private, not-for-profit",69.43,17457676,0.017,243
+447014,Daytona College,FL,"Private, for-profit",67.00,17351111,0.017,199
+101365,Herzing University-Birmingham,AL,"Private, not-for-profit",32.57,17277189,0.017,446
+126748,Colorado Northwestern Community College,CO,Public,33.00,17106221,0.017,1256
+106546,Baptist Health College Little Rock,AR,"Private, not-for-profit",37.14,16845950,0.017,512
+456579,Miller-Motte College-McCann-Allentown,PA,"Private, for-profit",39.29,16805190,0.017,277
+418533,Lancaster County Career and Technology Center,PA,Public,73.43,16678506,0.017,250
+126605,Spartan College of Aeronautics and Technology,CO,"Private, for-profit",70.14,16645017,0.017,321
+487588,Concorde Career College-Southaven,MS,"Private, for-profit",66.71,16597868,0.017,114
+205054,Professional Skills Institute,OH,"Private, for-profit",58.71,16589794,0.017,402
+414939,Nevada Career Institute,NV,"Private, for-profit",60.86,16583893,0.017,396
+486813,Pima Medical Institute-El Paso,TX,"Private, for-profit",61.17,16579188,0.017,667
+189592,Bryant & Stratton College-Greece,NY,"Private, not-for-profit",23.14,16469063,0.016,333
+206932,Central Oklahoma College,OK,"Private, for-profit",46.29,16412703,0.016,467
+101994,Reid State Technical College,AL,Public,29.14,16360960,0.016,576
+455868,National Career College,CA,"Private, for-profit",68.71,16320856,0.016,366
+233329,Fortis College-Norfolk,VA,"Private, for-profit",47.29,16291281,0.016,431
+487445,Florida Career College-Boynton Beach,FL,"Private, for-profit",57.29,16241605,0.016,149
+180054,Blackfeet Community College,MT,"Private, not-for-profit",18.29,16216024,0.016,282
+215682,Rosedale Technical College,PA,"Private, not-for-profit",78.29,16019589,0.016,405
+180081,Highlands College of Montana Tech,MT,Public,21.00,15975509,0.016,699
+449092,CBT Technology Institute-Hialeah,FL,"Private, for-profit",89.14,15867550,0.016,493
+161581,Washington County Community College,ME,Public,44.14,15822265,0.016,685
+456454,Fortis College-Salt Lake City,UT,"Private, for-profit",56.00,15806847,0.016,371
+369516,Bryan University,MO,"Private, for-profit",43.71,15718599,0.016,150
+403469,Frontier Community College,IL,Public,55.43,15652058,0.016,2364
+487302,Fortis College-Cuyahoga Falls,OH,"Private, for-profit",50.14,15612951,0.016,489
+189811,St Paul's School of Nursing-Queens,NY,"Private, for-profit",55.71,15606185,0.016,945
+155052,Flint Hills Technical College,KS,Public,73.86,15497431,0.015,1639
+220118,Chattanooga College Medical Dental and & Technical Careers,TN,"Private, for-profit",84.71,15477027,0.015,311
+460756,Hawaii Medical College,HI,"Private, for-profit",73.43,15407728,0.015,217
+378105,Central Coast College,CA,"Private, for-profit",77.71,15404959,0.015,565
+213233,Johnson College,PA,"Private, not-for-profit",49.00,15323157,0.015,627
+165264,Laboure College of Healthcare,MA,"Private, not-for-profit",33.33,15288395,0.015,717
+200192,Lake Region State College,ND,Public,37.00,15262234,0.015,1810
+457536,Midwestern Career College,IL,"Private, for-profit",65.86,15220895,0.015,824
+480824,The College of Health Care Professions-Dallas,TX,"Private, for-profit",63.00,14943256,0.015,633
+107840,Shorter College,AR,"Private, not-for-profit",11.00,14927313,0.015,290
+244279,Meridian College,FL,"Private, for-profit",58.71,14903615,0.015,144
+192785,Maria College of Albany,NY,"Private, not-for-profit",17.86,14830557,0.015,703
+445249,Remington College-Nashville Campus,TN,"Private, not-for-profit",56.14,14768190,0.015,279
+229832,Western Texas College,TX,Public,51.71,14666909,0.015,1434
+380359,Bay Mills Community College,MI,Public,24.00,14661919,0.015,577
+240596,Eastern Wyoming College,WY,Public,31.43,14595769,0.015,1418
+169761,Dorsey College,MI,"Private, for-profit",51.57,14577091,0.015,547
+120953,Palo Verde College,CA,Public,35.57,14313733,0.014,3461
+372329,IBMC College,CO,"Private, for-profit",67.43,14298613,0.014,306
+438708,Eastern West Virginia Community and Technical College,WV,Public,25.71,14284461,0.014,416
+123642,South Coast College,CA,"Private, for-profit",43.00,14222055,0.014,241
+155618,Northwest Kansas Technical College,KS,Public,58.00,14179053,0.014,725
+451352,Southeastern College-Charlotte,NC,"Private, for-profit",77.71,14050255,0.014,217
+203739,Ohio Business College-Sandusky,OH,"Private, for-profit",58.71,13933386,0.014,24
+483504,Dorsey College-Dearborn,MI,"Private, for-profit",34.71,13923224,0.014,450
+444565,Culinary Institute Inc,TX,"Private, for-profit",55.43,13830849,0.014,334
+450960,Healthcare Career College,CA,"Private, for-profit",74.57,13827318,0.014,381
+449861,Milwaukee Career College,WI,"Private, for-profit",55.57,13791632,0.014,73
+140003,Gwinnett College-Lilburn,GA,"Private, for-profit",42.57,13690263,0.014,132
+451857,Remington College-Houston Southeast Campus,TX,"Private, not-for-profit",51.29,13659357,0.014,65
+452373,ATA College-Cincinnati,OH,"Private, for-profit",49.14,13464634,0.013,264
+200314,Dakota College at Bottineau,ND,Public,21.86,13440778,0.013,1180
+448600,Stautzenberger College-Brecksville,OH,"Private, for-profit",45.29,13412779,0.013,98
+483814,Standard Healthcare Services-College of Nursing,VA,"Private, for-profit",70.71,13399552,0.013,719
+434469,New Professions Technical Institute,FL,"Private, for-profit",96.14,13312867,0.013,340
+214740,Pennsylvania State University-Penn State DuBois,PA,Public,44.20,13283946,0.013,353
+422695,Pacific College,CA,"Private, for-profit",73.57,13271578,0.013,285
+375939,YTI Career Institute-Altoona,PA,"Private, for-profit",67.00,13188287,0.013,112
+447759,National Polytechnic College,CA,"Private, for-profit",54.57,13154834,0.013,299
+151467,International Business College-Indianapolis,IN,"Private, for-profit",71.71,13128679,0.013,145
+480657,Rasmussen University-Kansas,KS,"Private, for-profit",30.40,13024007,0.013,333
+145239,Fox College,IL,"Private, for-profit",63.57,12900560,0.013,239
+155007,Donnelly College,KS,"Private, not-for-profit",21.14,12871115,0.013,349
+218706,University of South Carolina-Union,SC,Public,22.29,12830388,0.013,1392
+200341,Williston State College,ND,Public,28.86,12805453,0.013,912
+440271,Remington College-Baton Rouge Campus,LA,"Private, not-for-profit",39.86,12784853,0.013,138
+178183,Midwest Institute,MO,"Private, for-profit",84.29,12762504,0.013,151
+457101,Carrington College-Las Vegas,NV,"Private, for-profit",57.14,12755793,0.013,359
+458681,Fortis College-Indianapolis,IN,"Private, for-profit",50.29,12689860,0.013,265
+413617,College of Menominee Nation,WI,"Private, not-for-profit",21.14,12679919,0.013,219
+446127,ATA Career Education,FL,"Private, for-profit",71.43,12553507,0.013,226
+208512,Sumner College,OR,"Private, for-profit",67.43,12504258,0.013,514
+249609,Fortis Institute-Forty Fort,PA,"Private, for-profit",61.86,12486203,0.012,159
+377652,Valley College-Beckley,WV,"Private, for-profit",57.14,12462986,0.012,181
+215381,Pittsburgh Institute of Aeronautics,PA,"Private, not-for-profit",67.71,12386623,0.012,591
+237987,West Virginia Junior College-Charleston,WV,"Private, for-profit",63.00,12368685,0.012,317
+200466,Sitting Bull College,ND,Public,20.71,12337493,0.012,229
+444811,PITC Institute,PA,"Private, for-profit",36.71,12320399,0.012,113
+188216,Southwestern Indian Polytechnic Institute,NM,Public,20.57,12311477,0.012,233
+455983,Columbia College,VA,"Private, for-profit",71.57,12264737,0.012,239
+441636,American Institute of Alternative Medicine,OH,"Private, for-profit",60.83,12145694,0.012,374
+204662,Ohio State University Agricultural Technical Institute,OH,Public,36.43,12133139,0.012,462
+155487,Manhattan Area Technical College,KS,Public,56.14,12085258,0.012,968
+417327,City College-Altamonte Springs,FL,"Private, for-profit",38.57,11933219,0.012,329
+126359,Bel-Rea Institute of Animal Technology,CO,"Private, for-profit",51.71,11916214,0.012,161
+250027,Laurel Business Institute,PA,"Private, for-profit",72.43,11827312,0.012,397
+476683,Athena Career Academy,OH,"Private, for-profit",82.00,11457898,0.011,395
+225876,Jacksonville College-Main Campus,TX,"Private, not-for-profit",30.71,11447393,0.011,509
+446109,Cambridge College of Healthcare & Technology,FL,"Private, for-profit",63.00,11420372,0.011,298
+421878,Eastern International College-Jersey City,NJ,"Private, for-profit",57.29,11366992,0.011,474
+138761,Andrew College,GA,"Private, not-for-profit",17.29,11236347,0.011,294
+101648,Marion Military Institute,AL,Public,34.57,11225845,0.011,308
+383996,Eastern New Mexico University Ruidoso Branch Community College,NM,Public,15.43,11223782,0.011,745
+373085,Ross College-Davenport,IA,"Private, for-profit",58.29,11171114,0.011,40
+423652,Oregon Coast Community College,OR,Public,20.57,11125758,0.011,467
+461689,Pima Medical Institute-Aurora,CO,"Private, for-profit",70.86,11042568,0.011,290
+260372,Lac Courte Oreilles Ojibwe University,WI,Public,8.14,10937496,0.011,213
+459851,Herzing University-Brookfield,WI,"Private, not-for-profit",49.00,10931486,0.011,379
+149310,Taylor Business Institute,IL,"Private, for-profit",33.29,10844704,0.011,172
+379782,Center for Advanced Legal Studies,TX,"Private, for-profit",60.43,10820512,0.011,243
+484367,North-West College-Anaheim,CA,"Private, for-profit",55.86,10801177,0.011,455
+199263,Pamlico Community College,NC,Public,28.43,10777836,0.011,379
+469629,Oklahoma Technical College,OK,"Private, not-for-profit",65.57,10720646,0.011,120
+447999,WellSpring School of Allied Health-Kansas City,MO,"Private, for-profit",75.86,10631086,0.011,179
+442383,West Virginia Junior College-Bridgeport,WV,"Private, for-profit",63.14,10622627,0.011,175
+215309,University of Pittsburgh-Titusville,PA,Public,17.43,10604080,0.011,28
+204884,East Ohio College,OH,"Private, for-profit",62.43,10586695,0.011,149
+180373,Miles Community College,MT,Public,42.71,10547027,0.011,670
+455336,MediaTech Institute-Dallas,TX,"Private, for-profit",61.14,10455456,0.010,200
+413626,Leech Lake Tribal College,MN,Public,12.71,10373736,0.010,243
+215992,Laurel Technical Institute,PA,"Private, for-profit",61.86,10372170,0.010,160
+213914,Vet Tech Institute,PA,"Private, for-profit",64.57,10283014,0.010,199
+475176,San Joaquin Valley College-Temecula,CA,"Private, for-profit",63.25,10199788,0.010,649
+457299,Angeles College,CA,"Private, for-profit",90.14,10186171,0.010,484
+421513,Ross College-Hopkinsville,KY,"Private, for-profit",68.00,10126024,0.010,65
+188261,Mesalands Community College,NM,Public,42.71,10090588,0.010,482
+260992,Northwestern College,IL,"Private, for-profit",34.29,10069158,0.010,464
+429128,Urban College of Boston,MA,"Private, not-for-profit",8.33,10064819,0.010,728
+494843,Fortis College-Landover,MD,"Private, for-profit",57.60,9986394,0.010,576
+457086,Homestead Schools,CA,"Private, not-for-profit",93.67,9972039,0.010,176
+188942,Associated Beth Rivkah Schools,NY,"Private, not-for-profit",89.57,9953847,0.010,289
+139995,Gupton Jones College of Funeral Service,GA,"Private, not-for-profit",88.43,9906124,0.010,451
+212045,Douglas Education Center,PA,"Private, for-profit",75.43,9792823,0.010,200
+215637,Walnut Hill College,PA,"Private, for-profit",65.29,9774252,0.010,127
+200590,ETI Technical College,OH,"Private, for-profit",74.14,9736410,0.010,182
+494852,Stautzenberger College-Rockford Career College,IL,"Private, for-profit",69.00,9683214,0.010,733
+133809,Florida College,FL,"Private, not-for-profit",36.29,9640790,0.010,657
+443261,Southeastern College-Charleston,SC,"Private, for-profit",80.86,9632361,0.010,232
+449524,Taylor College,FL,"Private, for-profit",75.00,9603917,0.010,216
+490832,Ross College-Canton,OH,"Private, for-profit",43.75,9544461,0.010,344
+212434,Erie Institute of Technology Inc,PA,"Private, for-profit",72.86,9533455,0.010,183
+202435,Davis College,OH,"Private, for-profit",18.14,9461597,0.009,95
+377458,Centura College-Norfolk,VA,"Private, for-profit",74.14,9457177,0.009,193
+487311,Jones Technical Institute,FL,"Private, not-for-profit",65.33,9388716,0.009,522
+457110,Carrington College-Reno,NV,"Private, for-profit",64.00,9340097,0.009,500
+420723,Tillamook Bay Community College,OR,Public,20.86,9325093,0.009,559
+456506,Ross Medical Education Center-Fort Wayne,IN,"Private, for-profit",62.57,9276480,0.009,124
+492722,The College of Health Care Professions-South San Antonio,TX,"Private, for-profit",75.75,9260752,0.009,390
+187976,University of New Mexico-Los Alamos Campus,NM,Public,22.00,9194925,0.009,376
+155177,Hesston College,KS,"Private, not-for-profit",53.57,9165929,0.009,308
+216436,Triangle Tech Inc-Pittsburgh,PA,"Private, for-profit",56.14,9123048,0.009,90
+213473,Lansdale School of Business,PA,"Private, for-profit",78.29,9116536,0.009,87
+456977,CBT Technology Institute-Cutler Bay,FL,"Private, for-profit",76.71,9081705,0.009,262
+441858,Eastern Virginia Career College,VA,"Private, for-profit",79.57,8997222,0.009,217
+490878,Platt College-Anaheim,CA,"Private, for-profit",57.50,8834882,0.009,405
+492449,Pima Medical Institute-San Marcos,CA,"Private, for-profit",72.00,8756529,0.009,630
+491181,Galen College of Nursing-ARH,KY,"Private, for-profit",38.50,8626190,0.009,424
+187912,New Mexico Military Institute,NM,Public,36.57,8528803,0.009,459
+438221,Miller-Motte College-McCann-Lewisburg,PA,"Private, for-profit",46.86,8447409,0.008,129
+226879,Wade College,TX,"Private, for-profit",52.57,8355510,0.008,205
+180212,Fort Peck Community College,MT,Public,26.57,8343477,0.008,534
+444866,Southeastern College-Columbia,SC,"Private, for-profit",76.00,8329240,0.008,249
+490975,Fortis College-Cutler Bay,FL,"Private, for-profit",50.00,8240270,0.008,358
+449445,Valley College of Medical Careers,CA,"Private, for-profit",74.71,8207421,0.008,57
+420024,Centura College-Chesapeake,VA,"Private, for-profit",66.71,8206821,0.008,225
+487092,Emory University-Oxford College,GA,"Private, not-for-profit",93.86,8093516,0.008,973
+421841,New York Conservatory for Dramatic Arts,NY,"Private, for-profit",73.86,7982219,0.008,286
+214892,Penn Commercial Business/Technical School,PA,"Private, for-profit",74.00,7961639,0.008,223
+439871,PCI College,CA,"Private, for-profit",74.86,7949740,0.008,168
+419244,Atlanta Institute of Music and Media,GA,"Private, for-profit",36.43,7918438,0.008,264
+369668,Central Pennsylvania Institute of Science and Technology,PA,Public,90.14,7903409,0.008,126
+494250,Valley College-Cleveland,OH,"Private, for-profit",56.00,7876958,0.008,787
+155830,Salina Area Technical College,KS,Public,60.57,7868896,0.008,1007
+153427,Orion Technical College,IA,"Private, for-profit",78.43,7745049,0.008,73
+481386,California Career Institute,CA,"Private, for-profit",84.00,7706018,0.008,517
+490841,Ross College-Grand Rapids North,MI,"Private, for-profit",63.50,7676437,0.008,267
+366340,Stone Child College,MT,Public,11.43,7652999,0.008,261
+180328,Little Big Horn College,MT,Public,10.43,7648295,0.008,378
+180151,Dawson Community College,MT,Public,32.43,7620905,0.008,406
+198109,Cabarrus College of Health Sciences,NC,"Private, not-for-profit",57.71,7386174,0.007,661
+442781,Tohono O'odham Community College,AZ,Public,15.57,7356750,0.007,1176
+146816,Generations College,IL,"Private, not-for-profit",27.86,7205866,0.007,317
+444361,ATA College,CA,"Private, for-profit",93.71,7107052,0.007,106
+444325,ATI College-Whittier,CA,"Private, for-profit",87.67,7092088,0.007,141
+446163,Community Christian College,CA,"Private, not-for-profit",51.43,7080741,0.007,428
+223472,Vet Tech Institute of Houston,TX,"Private, for-profit",65.14,7065817,0.007,190
+197744,Yeshivath Zichron Moshe,NY,"Private, not-for-profit",48.57,7033639,0.007,176
+153302,Emmaus Bible College,IA,"Private, not-for-profit",72.29,6897138,0.007,197
+486257,Valor Christian College,OH,"Private, not-for-profit",51.86,6868325,0.007,352
+228486,Southwestern Christian College,TX,"Private, not-for-profit",41.57,6814211,0.007,128
+181765,Nebraska College of Technical Agriculture,NE,Public,63.57,6801637,0.007,259
+448196,Texas Health School,TX,"Private, for-profit",59.14,6728233,0.007,186
+486415,AMG School of Nursing,NY,"Private, for-profit",83.17,6671997,0.007,570
+216454,Triangle Tech Inc-Dubois,PA,"Private, for-profit",73.00,6621529,0.007,79
+457527,Ambria College of Nursing,IL,"Private, for-profit",82.75,6590668,0.007,195
+202912,Good Samaritan College of Nursing and Health Science,OH,"Private, not-for-profit",68.75,6472183,0.006,457
+443599,American College of Healthcare Sciences,OR,"Private, for-profit",53.33,6349524,0.006,812
+188687,American Academy McAllister Institute of Funeral Service,NY,"Private, not-for-profit",22.00,6331429,0.006,282
+212975,Commonwealth Technical Institute,PA,"Private, not-for-profit",86.71,6301864,0.006,132
+167792,Bard College at Simon's Rock,MA,"Private, not-for-profit",61.86,6170980,0.006,312
+216551,Valley Forge Military College,PA,"Private, not-for-profit",34.50,6163227,0.006,86
+481155,Helms College,GA,"Private, not-for-profit",69.29,6158861,0.006,150
+178767,Stevens-The Institute of Business & Arts,MO,"Private, for-profit",77.14,6149121,0.006,95
+225991,KD Conservatory College of Film and Dramatic Arts,TX,"Private, for-profit",82.14,6074026,0.006,87
+379746,College of Health Care Professions,TX,"Private, for-profit",90.40,6036554,0.006,529
+456153,MediaTech Institute-Houston,TX,"Private, for-profit",45.71,5978421,0.006,96
+377218,School of Automotive Machinists & Technology,TX,"Private, for-profit",92.57,5908980,0.006,102
+448372,San Joaquin Valley College-Rancho Cordova,CA,"Private, for-profit",83.50,5858173,0.006,226
+441487,Texas County Technical College,MO,"Private, for-profit",55.43,5823494,0.006,71
+126784,Colorado School of Trades,CO,"Private, for-profit",86.29,5792906,0.006,108
+180203,Aaniiih Nakoda College,MT,Public,21.29,5733131,0.006,133
+493646,Ohel Margulia Seminary,NY,"Private, not-for-profit",99.00,5721360,0.006,243
+216445,Triangle Tech Inc-Greensburg,PA,"Private, for-profit",81.86,5708670,0.006,100
+438735,Aviation Institute of Maintenance-Indianapolis,IN,"Private, for-profit",54.14,5652672,0.006,160
+480851,Miami Media School,FL,"Private, for-profit",76.14,5611589,0.006,37
+425250,Gwinnett College-Sandy Springs,GA,"Private, for-profit",73.57,5604858,0.006,114
+497046,Madera Community College,CA,Public,33.00,5572514,0.006,5825
+233408,Riverside College of Health Careers,VA,"Private, not-for-profit",33.33,5572301,0.006,325
+224271,Dallas Institute of Funeral Service,TX,"Private, not-for-profit",77.43,5528771,0.006,483
+461573,American Trade School,MO,"Private, for-profit",61.29,5481465,0.005,140
+461263,American Medical Sciences Center,CA,"Private, for-profit",70.33,5469194,0.005,200
+193247,Mirrer Yeshiva Cent Institute,NY,"Private, not-for-profit",13.43,5420051,0.005,102
+444334,Advance Science International College,FL,"Private, for-profit",54.00,5375233,0.005,44
+180160,Chief Dull Knife College,MT,Public,30.00,5359527,0.005,242
+195191,St. Joseph's College of Nursing,NY,"Private, not-for-profit",100.00,5290585,0.005,283
+219408,Sisseton Wahpeton College,SD,Public,7.86,5228267,0.005,215
+459514,Peloton College,TX,"Private, for-profit",53.14,5187675,0.005,63
+493992,Southern Careers Institute-Waco,TX,"Private, for-profit",54.00,5124047,0.005,205
+449612,Louisiana Culinary Institute,LA,"Private, for-profit",59.43,5116911,0.005,90
+432524,Delaware College of Art and Design,DE,"Private, not-for-profit",59.43,5085847,0.005,104
+200208,Cankdeska Cikana Community College,ND,Public,10.14,5030227,0.005,325
+188678,American Academy of Dramatic Arts-New York,NY,"Private, not-for-profit",90.00,4892275,0.005,225
+108852,American Academy of Dramatic Arts-Los Angeles,CA,"Private, not-for-profit",59.57,4870583,0.005,169
+461865,Best Care College,NJ,"Private, for-profit",59.71,4857826,0.005,46
+194189,Ohr Hameir Theological Seminary,NY,"Private, not-for-profit",44.00,4848106,0.005,94
+434751,White Earth Tribal and Community College,MN,"Private, not-for-profit",17.29,4835767,0.005,103
+449764,Visible Music College,TN,"Private, not-for-profit",34.14,4770493,0.005,168
+475714,American Medical Academy,FL,"Private, for-profit",53.40,4757351,0.005,303
+154262,St Luke's College,IA,"Private, not-for-profit",76.14,4718889,0.005,196
+150251,College of Court Reporting Inc,IN,"Private, for-profit",14.29,4694495,0.005,191
+487861,Felbry College,OH,"Private, for-profit",67.00,4691939,0.005,214
+494436,Fortis Institute-Cookeville,TN,"Private, for-profit",50.60,4687484,0.005,301
+203289,International College of Broadcasting,OH,"Private, for-profit",63.83,4655558,0.005,44
+366261,Commonwealth Institute of Funeral Service,TX,"Private, not-for-profit",74.86,4654582,0.005,382
+448859,Triangle Tech Inc-Bethlehem,PA,"Private, for-profit",64.43,4607658,0.005,94
+205391,The Modern College of Design,OH,"Private, for-profit",58.14,4593905,0.005,189
+174525,Oak Hills Christian College,MN,"Private, not-for-profit",35.43,4516312,0.005,117
+151962,Mid-America College of Funeral Service,IN,"Private, not-for-profit",83.00,4433895,0.004,337
+494588,Pima Medical Institute-San Antonio,TX,"Private, for-profit",61.00,4425142,0.004,341
+222105,William R Moore College of Technology,TN,"Private, not-for-profit",58.43,4408301,0.004,461
+434016,Little Priest Tribal College,NE,Public,18.29,4395765,0.004,208
+449728,ATA College,OK,"Private, for-profit",71.57,4305193,0.004,178
+161022,Maine College of Health Professions,ME,"Private, not-for-profit",100.00,4285136,0.004,228
+215390,Pittsburgh Institute of Mortuary Science Inc,PA,"Private, not-for-profit",86.14,4283185,0.004,402
+191959,Island Drafting and Technical Institute,NY,"Private, for-profit",85.71,4250249,0.004,53
+497277,Arizona College-Glendale,AZ,"Private, for-profit",73.00,4162570,0.004,306
+443377,Triangle Tech Inc-Sunbury,PA,"Private, for-profit",68.57,4139391,0.004,64
+490276,Yeshiva Shaar Ephraim,NY,"Private, not-for-profit",11.50,4062813,0.004,138
+417734,Southeast Missouri Hospital College of Nursing and Health Sciences,MO,"Private, not-for-profit",100.00,4052180,0.004,147
+442523,Alaska Christian College,AK,"Private, not-for-profit",19.86,4049137,0.004,64
+422020,San Joaquin Valley College-Trades Education Center,CA,"Private, for-profit",72.25,4023841,0.004,292
+486196,Beth Medrash Meor Yitzchok,NY,"Private, not-for-profit",3.00,4022620,0.004,222
+405058,Yeshivas Novominsk,NY,"Private, not-for-profit",20.57,4018312,0.004,163
+481775,San Joaquin Valley College-Lancaster,CA,"Private, for-profit",51.50,3941181,0.004,239
+437750,Professional Golfers Career College,CA,"Private, for-profit",75.86,3935519,0.004,110
+181419,Nebraska Indian Community College,NE,Public,11.57,3788977,0.004,624
+485564,Infinity College,LA,"Private, for-profit",93.17,3780193,0.004,104
+382911,Southwest College for the Deaf,TX,Public,30.86,3745892,0.004,47
+481289,Xavier College School of Nursing,CA,"Private, for-profit",92.80,3727359,0.004,87
+461254,Galaxy Medical College,CA,"Private, for-profit",99.71,3695371,0.004,65
+453792,Ohio Medical Career College,OH,"Private, for-profit",82.43,3684944,0.004,121
+491817,Seminary Bnos Chaim,NJ,"Private, not-for-profit",99.00,3647997,0.004,177
+491446,Bnos Zion Of Bobov Seminary,NY,"Private, not-for-profit",86.50,3643434,0.004,142
+194736,Rabbinical College of Long Island,NY,"Private, not-for-profit",31.67,3547510,0.004,161
+195702,Saint Elizabeth College of Nursing,NY,"Private, not-for-profit",69.33,3522636,0.004,146
+216940,Williamson College of the Trades,PA,"Private, not-for-profit",57.33,3506735,0.004,313
+491640,Yeshiva Gedolah Keren Hatorah,NJ,"Private, not-for-profit",83.00,3497966,0.003,189
+190451,Pomeroy College of Nursing at Crouse Hospital,NY,"Private, not-for-profit",56.80,3470580,0.003,179
+200086,Nueta Hidatsa Sahnish College,ND,Public,8.40,3464847,0.003,158
+433174,Carolinas College of Health Sciences,NC,Public,45.75,3400465,0.003,410
+220464,John A Gupton College,TN,"Private, not-for-profit",39.14,3368259,0.003,160
+475839,Sessions College for Professional Design,AZ,"Private, for-profit",66.14,3277545,0.003,154
+447713,California Career College,CA,"Private, for-profit",100.00,3254622,0.003,195
+492476,EDP University of Puerto Rico-Villalba,PR,"Private, not-for-profit",47.00,3216433,0.003,281
+369455,Worsham College of Mortuary Science,IL,"Private, for-profit",100.00,3215176,0.003,187
+483373,Integrity College of Health,CA,"Private, for-profit",61.86,3167427,0.003,158
+480028,Digital Film Academy,NY,"Private, for-profit",58.14,3147306,0.003,60
+189273,Beth Hamedrash Shaarei Yosher Institute,NY,"Private, not-for-profit",4.00,3060437,0.003,83
+488059,Med College,FL,"Private, for-profit",86.00,3022511,0.003,297
+367103,Interactive College of Technology-Newport,KY,"Private, for-profit",26.00,2992426,0.003,73
+147396,Morrison Institute of Technology,IL,"Private, not-for-profit",77.14,2919575,0.003,54
+491950,Contra Costa Medical Career College,CA,"Private, for-profit",100.00,2856934,0.003,337
+493451,WellSpring School of Allied Health-Springfield,MO,"Private, for-profit",76.00,2721001,0.003,79
+214023,ASPIRA City College,PA,"Private, not-for-profit",36.67,2717276,0.003,14
+481252,Ultrasound Medical Institute,FL,"Private, for-profit",66.50,2636667,0.003,110
+491844,Red Lake Nation College,MN,Public,28.25,2624972,0.003,256
+461315,Keweenaw Bay Ojibwa Community College,MI,Public,12.86,2592672,0.003,222
+441070,Saginaw Chippewa Tribal College,MI,Public,26.67,2588491,0.003,147
+367361,Interactive College of Technology,TX,"Private, for-profit",18.43,2585891,0.003,71
+480967,College of the Muscogee Nation,OK,Public,26.00,2467237,0.002,250
+176336,Southeastern Baptist College,MS,"Private, not-for-profit",61.29,2410756,0.002,69
+442435,Interactive College of Technology-Gainesville,GA,"Private, for-profit",35.86,2328279,0.002,47
+138664,Interactive College of Technology-Morrow,GA,"Private, for-profit",32.86,2324217,0.002,113
+486424,Saint Michael College of Allied Health,DC,"Private, for-profit",98.60,2293865,0.002,123
+485519,Lionel University,CA,"Private, for-profit",36.50,2239763,0.002,480
+190956,Belanger School of Nursing,NY,"Private, not-for-profit",100.00,2228377,0.002,132
+491941,Caris College,IN,"Private, for-profit",87.40,2189698,0.002,189
+440776,Interactive College of Technology,TX,"Private, for-profit",47.43,2172115,0.002,62
+490285,California Institute of Arts & Technology,CA,"Private, for-profit",30.00,2170833,0.002,14
+475422,Finger Lakes Health College of Nursing & Health Sciences,NY,"Private, not-for-profit",43.75,2156331,0.002,65
+183248,St Joseph School of Nursing,NH,"Private, not-for-profit",100.00,2112057,0.002,96
+439969,Acupuncture and Massage College,FL,"Private, for-profit",80.57,2109085,0.002,63
+494898,WellSpring School of Allied Health-Wichita,KS,"Private, for-profit",90.00,2102800,0.002,67
+490203,Bolivar Technical College,MO,"Private, not-for-profit",82.20,2060300,0.002,144
+418889,North Central Institute,TN,"Private, for-profit",77.43,2044271,0.002,55
+436599,FINE Mortuary College,MA,"Private, for-profit",80.00,1990048,0.002,176
+470047,WellSpring School of Allied Health-Lawrence,KS,"Private, for-profit",93.00,1968326,0.002,36
+116226,Interior Designers Institute,CA,"Private, for-profit",83.33,1934700,0.002,107
+195289,Samaritan Hospital School of Nursing,NY,"Private, not-for-profit",50.00,1929430,0.002,132
+193061,Mesivta of Eastern Parkway-Yeshiva Zichron Meilech,NY,"Private, not-for-profit",58.67,1909717,0.002,41
+495952,San Joaquin Valley College-Rancho Mirage,CA,"Private, for-profit",66.00,1901702,0.002,260
+458034,Houston International College Cardiotech Ultrasound School,TX,"Private, for-profit",96.43,1896099,0.002,41
+493080,Institute of Culinary Education,CA,"Private, for-profit",0.00,1858367,0.002,452
+419341,Jna Institute of Culinary Arts,PA,"Private, for-profit",65.43,1810252,0.002,31
+443696,Interactive College of Technology,TX,"Private, for-profit",24.71,1798374,0.002,48
+487658,Academy of Interactive Entertainment,LA,"Private, not-for-profit",83.29,1751828,0.002,113
+488332,Hope College of Arts and Sciences,FL,"Private, for-profit",14.33,1728972,0.002,82
+494694,Texas Healthtech Institute,TX,"Private, for-profit",88.50,1685243,0.002,83
+192961,St. Peter's Hospital College of Nursing,NY,"Private, not-for-profit",100.00,1681978,0.002,125
+188915,Arnot Ogden Medical Center,NY,"Private, not-for-profit",50.00,1639596,0.002,29
+487968,CAAN Academy of Nursing,IL,"Private, not-for-profit",100.00,1571747,0.002,90
+488305,Elim Bible Institute and College,NY,"Private, not-for-profit",77.00,1555054,0.002,98
+134422,Key College,FL,"Private, for-profit",43.00,1554077,0.002,19
+495961,San Joaquin Valley College-Santa Maria,CA,"Private, for-profit",51.00,1546194,0.002,163
+439899,Rosedale Bible College,OH,"Private, not-for-profit",54.86,1541833,0.002,86
+217040,Yeshivath Beth Moshe,PA,"Private, not-for-profit",60.71,1476622,0.001,39
+483647,Ohio Institute of Allied Health,OH,"Private, not-for-profit",78.33,1473906,0.001,39
+491622,Yeshiva Chemdas Hatorah,NJ,"Private, not-for-profit",73.00,1443003,0.001,79
+434584,Ilisagvik College,AK,Public,33.60,1338803,0.001,311
+490346,Elyon College,NY,"Private, not-for-profit",99.00,1287142,0.001,31
+493798,New York Seminary,NY,"Private, not-for-profit",93.00,1242608,0.001,120
+442842,Pacific College of Health and Science,IL,"Private, for-profit",76.60,1207260,0.001,94
+491659,ICOHS College,CA,"Private, not-for-profit",88.75,1181438,0.001,215
+446598,Universal College of Healing Arts,NE,"Private, for-profit",95.83,1159191,0.001,27
+461953,Colorado Academy of Veterinary Technology,CO,"Private, for-profit",54.29,1146078,0.001,25
+447847,Aviator College of Aeronautical Science and Technology,FL,"Private, for-profit",44.50,1133016,0.001,314
+488350,Yeshiva Gedolah Shaarei Shmuel,NJ,"Private, not-for-profit",83.50,1090674,0.001,132
+206154,Tri-State Bible College,OH,"Private, not-for-profit",100.00,1043164,0.001,16
+161208,The Landing School,ME,"Private, not-for-profit",100.00,944220,0.001,43
+434432,Myotherapy Institute,NE,"Private, for-profit",71.14,938988,0.001,10
+128586,Bais Binyomin Academy,NY,"Private, not-for-profit",75.00,935303,0.001,50
+490115,Nashville Film Institute,TN,"Private, for-profit",69.75,884016,0.001,33
+490197,Regan Career Institute,CA,"Private, for-profit",81.00,862464,0.001,51
+194693,Rabbinical College Beth Shraga,NY,"Private, not-for-profit",48.50,847484,0.001,48
+458140,Northwest School of Wooden Boat Building,WA,"Private, not-for-profit",65.00,834917,0.001,43
+486372,San Francisco Film School,CA,"Private, for-profit",70.00,824882,0.001,141
+485500,ABCO Technology,CA,"Private, for-profit",95.83,824492,0.001,121
+490160,Sacramento Ultrasound Institute,CA,"Private, for-profit",87.25,808372,0.001,104
+495183,Mariano Moreno Culinary Institute,FL,"Private, for-profit",56.50,776787,0.001,141
+486123,Theatre of Arts,CA,"Private, for-profit",60.75,766587,0.001,37
+489812,Pima Medical Institute-Dillon,MT,"Private, for-profit",67.40,738305,0.001,21
+494755,West Virginia Junior College-United Career Institute,PA,"Private, for-profit",75.00,697492,0.001,57
+485953,The Recording Conservatory of Austin,TX,"Private, for-profit",50.00,595630,0.001,82
+457226,Horizon University,IN,"Private, not-for-profit",25.00,438195,0.000,58
+496265,Triangle Tech-Chambersburg,PA,"Private, for-profit",40.00,407863,0.000,63
+495147,Pacific Northwest Christian College,WA,"Private, not-for-profit",22.00,382049,0.000,129
+181543,Summit Christian College,NE,"Private, not-for-profit",100.00,381255,0.000,23
+490504,Yeshiva Ohr Naftoli,NY,"Private, not-for-profit",60.00,370383,0.000,43
+490513,Bais Medrash Mayan Hatorah,NJ,"Private, not-for-profit",80.00,344557,0.000,25
+477233,Evangel University-James River Assembly of God Church,MO,"Private, not-for-profit",57.50,315580,0.000,98
+490498,Digital Media Institute,LA,"Private, not-for-profit",96.60,313195,0.000,13
+407610,Pacific Bible College,OR,"Private, not-for-profit",50.00,291497,0.000,44
+493619,Young Americans College of the Performing Arts,CA,"Private, not-for-profit",70.00,221934,0.000,16
+493488,Premiere International College,FL,"Private, for-profit",100.00,86593,0.000,106
+488563,California College of Music,CA,"Private, for-profit",100.00,9059,0.000,7
