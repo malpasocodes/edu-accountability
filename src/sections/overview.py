@@ -82,7 +82,7 @@ class OverviewSection(BaseSection):
                     <div style='padding: 1.5rem; border: 2px solid #2ca02c; border-radius: 10px; text-align: center; background-color: #f8fff8; margin-bottom: 1rem; height: 260px; display: flex; flex-direction: column;'>
                         <h3 style='color: #2ca02c; margin-bottom: 1rem;'>🎓 College Value Grid</h3>
                         <div style='flex-grow: 1; display: flex; flex-direction: column; justify-content: center;'>
-                            <p style='color: #000000; margin-bottom: 1rem;'>Compare net price against graduation outcomes for institutions</p>
+                            <p style='color: #000000; margin-bottom: 1rem;'>Compare cost against graduation outcomes for institutions</p>
                             <p style='font-size: 0.9rem; color: #000000; margin: 0;'>Analyze cost vs. graduation rates across sectors</p>
                         </div>
                     </div>

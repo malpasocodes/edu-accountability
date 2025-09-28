@@ -27,6 +27,7 @@ class DataManager:
         self.pell_df: Optional[pd.DataFrame] = None
         self.loan_df: Optional[pd.DataFrame] = None
         self.distance_df: Optional[pd.DataFrame] = None
+        self.institutions_df: Optional[pd.DataFrame] = None
         self.value_grid_datasets: Dict[str, pd.DataFrame] = {}
         self.pell_resources: Dict[str, Optional[pd.DataFrame]] = {}
         self.errors: list[str] = []
@@ -47,7 +48,8 @@ class DataManager:
         self._load_pell_raw()
         self._load_loan_raw()
         self._load_distance_raw()
-        
+        self._load_institutions_raw()
+
         # Load value grid datasets
         self._load_value_grid_datasets()
         
@@ -86,6 +88,18 @@ class DataManager:
         except DataLoadError:
             # Distance education data is optional
             self.distance_df = pd.DataFrame()
+
+    def _load_institutions_raw(self) -> None:
+        """Load the raw institutions dataset."""
+        try:
+            self.institutions_df = self.loader.load_csv(
+                str(DataSources.INSTITUTIONS_RAW.path),
+                DataSources.INSTITUTIONS_RAW.description
+            )
+        except DataLoadError as e:
+            # Institutions data is important for College Explorer
+            self.errors.append(f"Failed to load institutions data: {str(e)}")
+            self.institutions_df = pd.DataFrame()
     
     def _load_value_grid_datasets(self) -> None:
         """Load value grid datasets using existing load_processed function."""

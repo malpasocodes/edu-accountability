@@ -12,6 +12,7 @@ VALUE_GRID_SECTION = "College Value Grid"
 FEDERAL_LOANS_SECTION = "Federal Loans"
 PELL_SECTION = "Pell Grants"
 DISTANCE_EDUCATION_SECTION = "Distance Education"
+COLLEGE_EXPLORER_SECTION = "College Explorer"
 
 
 @dataclass(frozen=True)
@@ -101,6 +102,17 @@ DISTANCE_CHARTS: List[str] = [
 DISTANCE_OVERVIEW_LABEL = "Overview"
 
 
+# College Explorer labels
+COLLEGE_EXPLORER_OVERVIEW_LABEL = "Overview"
+COLLEGE_SUMMARY_LABEL = "Summary"
+COLLEGE_LOANS_PELL_LABEL = "Federal Loans and Pell Grants"
+
+COLLEGE_EXPLORER_CHARTS: List[str] = [
+    COLLEGE_SUMMARY_LABEL,
+    COLLEGE_LOANS_PELL_LABEL,
+]
+
+
 # Session state defaults
 DEFAULT_SESSION_STATE: Dict[str, str] = {
     "active_section": OVERVIEW_SECTION,
@@ -108,4 +120,5 @@ DEFAULT_SESSION_STATE: Dict[str, str] = {
     "loan_chart": LOAN_OVERVIEW_LABEL,
     "pell_chart": PELL_OVERVIEW_LABEL,
     "distance_chart": DISTANCE_OVERVIEW_LABEL,
+    "college_explorer_chart": COLLEGE_EXPLORER_OVERVIEW_LABEL,
 }
