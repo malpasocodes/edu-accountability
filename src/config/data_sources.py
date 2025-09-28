@@ -74,7 +74,13 @@ class DataSources:
         description="Distance education enrollment data",
         required=False
     )
-    
+
+    PELL_GRAD_RATES_RAW = DataSourceConfig(
+        path=_ipeds_dir / "pellgradrates.csv",
+        description="Graduation rates for overall and Pell students",
+        required=False
+    )
+
     # Processed data sources - Pell
     PELL_TOP_DOLLARS = DataSourceConfig(
         path=_processed_dir / "pell_top_dollars.csv",
@@ -203,4 +209,5 @@ class DataSources:
             "tuition_vs_grad_two": cls.TUITION_VS_GRAD_TWO,
             "tuition_vs_grad_two_parquet": cls.TUITION_VS_GRAD_TWO_PARQUET,
             "distance_raw": cls.DISTANCE_RAW,
+            "pell_grad_rates_raw": cls.PELL_GRAD_RATES_RAW,
         }

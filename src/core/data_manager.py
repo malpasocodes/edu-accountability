@@ -28,6 +28,7 @@ class DataManager:
         self.loan_df: Optional[pd.DataFrame] = None
         self.distance_df: Optional[pd.DataFrame] = None
         self.institutions_df: Optional[pd.DataFrame] = None
+        self.pellgradrates_df: Optional[pd.DataFrame] = None
         self.value_grid_datasets: Dict[str, pd.DataFrame] = {}
         self.pell_resources: Dict[str, Optional[pd.DataFrame]] = {}
         self.errors: list[str] = []
@@ -49,6 +50,7 @@ class DataManager:
         self._load_loan_raw()
         self._load_distance_raw()
         self._load_institutions_raw()
+        self._load_pellgradrates_raw()
 
         # Load value grid datasets
         self._load_value_grid_datasets()
@@ -100,7 +102,18 @@ class DataManager:
             # Institutions data is important for College Explorer
             self.errors.append(f"Failed to load institutions data: {str(e)}")
             self.institutions_df = pd.DataFrame()
-    
+
+    def _load_pellgradrates_raw(self) -> None:
+        """Load the raw Pell graduation rates dataset (optional)."""
+        try:
+            self.pellgradrates_df = self.loader.load_csv(
+                str(DataSources.PELL_GRAD_RATES_RAW.path),
+                DataSources.PELL_GRAD_RATES_RAW.description
+            )
+        except DataLoadError:
+            # Pell graduation rates data is optional
+            self.pellgradrates_df = pd.DataFrame()
+
     def _load_value_grid_datasets(self) -> None:
         """Load value grid datasets using existing load_processed function."""
         for config in VALUE_GRID_CHART_CONFIGS:

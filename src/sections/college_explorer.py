@@ -14,6 +14,7 @@ from src.config.constants import (
     COLLEGE_EXPLORER_OVERVIEW_LABEL,
     COLLEGE_SUMMARY_LABEL,
     COLLEGE_LOANS_PELL_LABEL,
+    COLLEGE_GRAD_RATES_LABEL,
     COLLEGE_EXPLORER_CHARTS,
 )
 
@@ -102,6 +103,8 @@ class CollegeExplorerSection(BaseSection):
             self._render_college_summary()
         elif chart_name == COLLEGE_LOANS_PELL_LABEL:
             self._render_loans_pell_trends()
+        elif chart_name == COLLEGE_GRAD_RATES_LABEL:
+            self._render_graduation_rates()
         else:
             st.error(f"Unknown chart: {chart_name}")
 
@@ -546,6 +549,295 @@ class CollegeExplorerSection(BaseSection):
                             delta=f"${change_amount:+,.0f}",
                             delta_color=delta_color
                         )
+
+    def _render_graduation_rates(self) -> None:
+        """Render the Graduation Rates page."""
+        self.render_section_header("College Explorer", "Graduation Rates")
+
+        # Check if required data is available
+        if self.institutions_df.empty:
+            st.error(
+                "Institution data is not available. Please ensure the institutions.csv file is present in the data directory."
+            )
+            return
+
+        if self.data_manager.pellgradrates_df is None or self.data_manager.pellgradrates_df.empty:
+            st.error("Graduation rates data is not available.")
+            return
+
+        # Prepare institution options for selectbox
+        institutions_list = self._prepare_institution_list()
+
+        # College selection
+        st.markdown("## Select a College")
+
+        # Create selectbox for college selection
+        selected_option = st.selectbox(
+            "Search for a college by name:",
+            options=[""] + institutions_list,
+            index=0,
+            key="selected_college_grad_rates",
+            help="Start typing to search for a college"
+        )
+
+        # Display selected college trend chart
+        if selected_option and selected_option != "":
+            self._display_graduation_trend_chart(selected_option)
+        else:
+            # Show instructions when no college is selected
+            st.info(
+                """
+                **Getting Started**
+
+                Use the dropdown above to search for and select a college. You can:
+                - Type part of the college name to filter the list
+                - Select from over 6,000 institutions
+                - View graduation rate trends over time
+
+                Once selected, you'll see a chart with:
+                - **Overall Graduation Rate**: Blue line showing general student graduation rates
+                - **Pell Student Graduation Rate**: Green line showing Pell recipient graduation rates
+                - **Reference Lines**: Dashed lines at 25%, 50%, and 75% for context
+                """
+            )
+
+            # Preview of chart features
+            with st.expander("Understanding Graduation Rates"):
+                st.markdown(
+                    """
+                    **Graduation Rate Metrics**:
+                    - **Overall Rate (GR)**: Percentage of all students who graduate
+                    - **Pell Rate (PGR)**: Percentage of Pell grant recipients who graduate
+                    - **Time Period**: 2016-2023 (where data is available)
+                    - **Cohort**: 6-year graduation rate for 4-year institutions, 3-year for 2-year
+
+                    **Why This Matters**:
+                    - Graduation rates indicate institutional effectiveness
+                    - Pell vs Overall gap shows equity in student outcomes
+                    - Trends reveal improvement or decline over time
+                    """
+                )
+
+    def _display_graduation_trend_chart(self, selected_option: str) -> None:
+        """Display the graduation rate trend chart for the selected college."""
+        # Parse the selected option to get institution name
+        institution_name = selected_option.split(" - ")[0]
+
+        # Find the institution in the dataframe
+        institution_data = self.institutions_df[
+            self.institutions_df['INSTITUTION'] == institution_name
+        ]
+
+        if institution_data.empty:
+            st.error(f"Could not find data for {institution_name}")
+            return
+
+        # Get the UnitID
+        unit_id = institution_data.iloc[0]['UnitID']
+
+        # Display institution header
+        st.markdown(f"### {institution_name}")
+        st.markdown(f"**Graduation Rate Trends (2016-2023)**")
+
+        # Prepare the graduation trend data
+        trend_data = self._prepare_graduation_trend_data(unit_id, institution_name)
+
+        if trend_data.empty:
+            st.warning(f"No graduation rate data available for {institution_name}")
+            return
+
+        # Create the graduation trend chart
+        chart = self._create_graduation_trend_chart(trend_data, institution_name)
+
+        # Display the chart
+        render_altair_chart(chart, width="stretch")
+
+        # Display summary statistics
+        self._display_grad_rate_summary(trend_data)
+
+    def _prepare_graduation_trend_data(self, unit_id: int, institution_name: str) -> pd.DataFrame:
+        """Prepare graduation trend data for a specific institution."""
+
+        # Get graduation rates data for this institution
+        grad_data = self.data_manager.pellgradrates_df[
+            self.data_manager.pellgradrates_df['UnitID'] == unit_id
+        ]
+
+        if grad_data.empty:
+            return pd.DataFrame()
+
+        trend_records = []
+
+        # Process years from 2016 to 2023
+        for year in range(2016, 2024):
+            pgr_col = f'PGR{year}'
+            gr_col = f'GR{year}'
+
+            # Check if columns exist
+            if pgr_col in grad_data.columns and gr_col in grad_data.columns:
+                # Get values
+                pgr_value = grad_data.iloc[0][pgr_col] if not grad_data[pgr_col].isna().iloc[0] else None
+                gr_value = grad_data.iloc[0][gr_col] if not grad_data[gr_col].isna().iloc[0] else None
+
+                # Add Overall graduation rate record
+                if gr_value is not None:
+                    trend_records.append({
+                        'Year': year,
+                        'Rate_Type': 'Overall',
+                        'Rate': gr_value,
+                        'Institution': institution_name
+                    })
+
+                # Add Pell graduation rate record
+                if pgr_value is not None:
+                    trend_records.append({
+                        'Year': year,
+                        'Rate_Type': 'Pell Students',
+                        'Rate': pgr_value,
+                        'Institution': institution_name
+                    })
+
+        return pd.DataFrame(trend_records)
+
+    def _create_graduation_trend_chart(self, df: pd.DataFrame, institution_name: str) -> alt.Chart:
+        """Create the graduation trend chart with two lines and reference lines."""
+
+        # Create reference lines at 25%, 50%, 75%
+        reference_data = pd.DataFrame({'rate': [25, 50, 75]})
+        reference_lines = alt.Chart(reference_data).mark_rule(
+            color='gray',
+            strokeDash=[6, 4],
+            size=1
+        ).encode(
+            y=alt.Y('rate:Q')
+        )
+
+        # Define colors for the two lines
+        color_scale = alt.Scale(
+            domain=['Overall', 'Pell Students'],
+            range=['#1f77b4', '#28a745']  # Blue for Overall, Green for Pell
+        )
+
+        # Create the main line chart
+        lines = alt.Chart(df).mark_line(
+            strokeWidth=3,
+            point=alt.OverlayMarkDef(size=100, filled=True)
+        ).encode(
+            x=alt.X('Year:Q', title='Year', axis=alt.Axis(format='d')),
+            y=alt.Y('Rate:Q',
+                    title='Graduation Rate (%)',
+                    scale=alt.Scale(domain=[0, 100])),
+            color=alt.Color(
+                'Rate_Type:N',
+                title='Student Type',
+                scale=color_scale
+            ),
+            tooltip=[
+                alt.Tooltip('Institution:N', title='Institution'),
+                alt.Tooltip('Year:Q', title='Year', format='.0f'),
+                alt.Tooltip('Rate_Type:N', title='Student Type'),
+                alt.Tooltip('Rate:Q', title='Graduation Rate (%)', format='.1f')
+            ]
+        )
+
+        # Combine the lines with reference lines
+        chart = (lines + reference_lines).properties(
+            height=520,
+            title=f"Graduation Rate Trends - {institution_name}"
+        )
+
+        return chart
+
+    def _display_grad_rate_summary(self, df: pd.DataFrame) -> None:
+        """Display summary statistics for graduation rates."""
+        if df.empty:
+            return
+
+        st.markdown("#### Summary Statistics")
+
+        # Get the most recent year with data
+        recent_year = df['Year'].max()
+        recent_data = df[df['Year'] == recent_year]
+
+        # Display recent year values
+        st.markdown(f"##### Most Recent Year ({recent_year})")
+        col1, col2, col3 = st.columns(3)
+
+        # Overall graduation rate
+        overall_recent = recent_data[recent_data['Rate_Type'] == 'Overall']
+        if not overall_recent.empty:
+            overall_rate = overall_recent['Rate'].iloc[0]
+            with col1:
+                st.metric("Overall Graduation Rate", f"{overall_rate:.1f}%")
+        else:
+            with col1:
+                st.metric("Overall Graduation Rate", "N/A")
+
+        # Pell graduation rate
+        pell_recent = recent_data[recent_data['Rate_Type'] == 'Pell Students']
+        if not pell_recent.empty:
+            pell_rate = pell_recent['Rate'].iloc[0]
+            with col2:
+                st.metric("Pell Student Graduation Rate", f"{pell_rate:.1f}%")
+        else:
+            with col2:
+                st.metric("Pell Student Graduation Rate", "N/A")
+
+        # Gap between rates
+        if not overall_recent.empty and not pell_recent.empty:
+            gap = overall_recent['Rate'].iloc[0] - pell_recent['Rate'].iloc[0]
+            with col3:
+                color = "normal" if gap < 5 else "inverse"  # Smaller gap is better
+                st.metric("Equity Gap", f"{gap:.1f}%",
+                         help="Difference between overall and Pell graduation rates",
+                         delta_color=color)
+        else:
+            with col3:
+                st.metric("Equity Gap", "N/A")
+
+        # Calculate averages and trends
+        st.markdown("##### Historical Analysis")
+        col1, col2, col3 = st.columns(3)
+
+        # Average rates
+        overall_avg = df[df['Rate_Type'] == 'Overall']['Rate'].mean()
+        pell_avg = df[df['Rate_Type'] == 'Pell Students']['Rate'].mean()
+
+        with col1:
+            if not pd.isna(overall_avg):
+                st.metric("Average Overall Rate", f"{overall_avg:.1f}%",
+                         help="Average across all available years")
+            else:
+                st.metric("Average Overall Rate", "N/A")
+
+        with col2:
+            if not pd.isna(pell_avg):
+                st.metric("Average Pell Rate", f"{pell_avg:.1f}%",
+                         help="Average across all available years")
+            else:
+                st.metric("Average Pell Rate", "N/A")
+
+        # Trend direction
+        with col3:
+            # Get first and last year data
+            years_available = sorted(df['Year'].unique())
+            if len(years_available) >= 2:
+                first_year = years_available[0]
+                last_year = years_available[-1]
+
+                overall_first = df[(df['Year'] == first_year) & (df['Rate_Type'] == 'Overall')]['Rate']
+                overall_last = df[(df['Year'] == last_year) & (df['Rate_Type'] == 'Overall')]['Rate']
+
+                if not overall_first.empty and not overall_last.empty:
+                    trend = overall_last.iloc[0] - overall_first.iloc[0]
+                    trend_label = "📈 Improving" if trend > 0 else "📉 Declining" if trend < 0 else "➡️ Stable"
+                    st.metric("Overall Trend", trend_label,
+                             delta=f"{trend:+.1f}% since {first_year}",
+                             help=f"Change from {first_year} to {last_year}")
+                else:
+                    st.metric("Overall Trend", "N/A")
+            else:
+                st.metric("Overall Trend", "Insufficient Data")
 
     def get_available_charts(self) -> List[str]:
         """
