@@ -51,6 +51,8 @@ class OverviewSection(BaseSection):
             - **Metrics for Accountability**: We are refining measures that capture affordability, completion, and post-graduation outcomes. These metrics are designed to make comparisons across institutions more transparent, reproducible, and useful for policymakers and researchers.
 
             - **Government Funding Analysis**: We are analyzing the flow of federal support—especially through student loans and Pell Grants—to better understand how public resources shape affordability and access. Tracking these funding streams alongside institutional outcomes provides a fuller picture of higher education's value and accountability.
+
+            - **Equity and Subgroup Outcomes**: We are examining how affordability, funding, and outcomes vary across student subgroups (e.g., income levels, race/ethnicity, first-generation status). Highlighting these differential impacts provides a more complete understanding of equity in higher education.
             """
         )
         
