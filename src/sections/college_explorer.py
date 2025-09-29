@@ -5,6 +5,7 @@ from __future__ import annotations
 from typing import List, Optional
 
 import pandas as pd
+import numpy as np
 import streamlit as st
 import altair as alt
 
@@ -26,6 +27,8 @@ class CollegeExplorerSection(BaseSection):
         """Initialize the section with institutions data."""
         super().__init__(data_manager)
         self.institutions_df = data_manager.institutions_df if hasattr(data_manager, 'institutions_df') else pd.DataFrame()
+        self.distance_df = data_manager.get_distance_data() if hasattr(data_manager, 'get_distance_data') else None
+        self.pellgradrates_df = data_manager.pellgradrates_df if hasattr(data_manager, 'pellgradrates_df') else None
 
     def render_overview(self) -> None:
         """Render the college explorer overview page."""
@@ -205,73 +208,158 @@ class CollegeExplorerSection(BaseSection):
         st.markdown(f"### {inst['INSTITUTION']}")
         st.markdown(f"📍 {inst['CITY']}, {inst['STATE']} {inst['ZIP']}")
 
-        # Create columns for basic information
-        col1, col2, col3 = st.columns(3)
+        # Map sector codes to descriptions
+        sector_map = {
+            0: "Administrative Unit",
+            1: "Public, 4-year or above",
+            2: "Private not-for-profit, 4-year or above",
+            3: "Private for-profit, 4-year or above",
+            4: "Public, 2-year",
+            5: "Private not-for-profit, 2-year",
+            6: "Private for-profit, 2-year",
+            7: "Public, less-than 2-year",
+            8: "Private not-for-profit, less-than 2-year",
+            9: "Private for-profit, less-than 2-year"
+        }
+        sector = sector_map.get(inst.get('SECTOR', -1), "Unknown")
 
-        with col1:
-            st.metric("Unit ID", inst['UnitID'])
+        # Display sector as a metric
+        st.metric("Sector", sector)
 
-            # Map sector codes to descriptions
-            sector_map = {
-                0: "Administrative Unit",
-                1: "Public, 4-year or above",
-                2: "Private not-for-profit, 4-year or above",
-                3: "Private for-profit, 4-year or above",
-                4: "Public, 2-year",
-                5: "Private not-for-profit, 2-year",
-                6: "Private for-profit, 2-year",
-                7: "Public, less-than 2-year",
-                8: "Private not-for-profit, less-than 2-year",
-                9: "Private for-profit, less-than 2-year"
-            }
-            sector = sector_map.get(inst.get('SECTOR', -1), "Unknown")
-            st.info(f"**Sector:** {sector}")
+        # Add enrollment data if available
+        if self.distance_df is not None and not self.distance_df.empty:
+            # Find enrollment data for this institution
+            enrollment_data = self.distance_df[self.distance_df['UnitID'] == inst['UnitID']]
 
-        with col2:
-            st.metric("OPEID", inst.get('OPEID', 'N/A'))
+            if not enrollment_data.empty:
+                enroll_row = enrollment_data.iloc[0]
 
-            # Map control codes
-            control_map = {
-                1: "Public",
-                2: "Private not-for-profit",
-                3: "Private for-profit"
-            }
-            control = control_map.get(inst.get('CONTROL', -1), "Unknown")
-            st.info(f"**Control:** {control}")
+                # Display enrollment section
+                st.markdown("---")
+                st.markdown("#### Enrollment")
 
-        with col3:
-            # Check special designations
-            designations = []
-            if inst.get('HISTORICALLY_BLACK') == 1:
-                designations.append("HBCU")
-            if inst.get('TRIBAL') == 1:
-                designations.append("Tribal College")
+                # Get the most recent year's data (2024)
+                total_enrollment = enroll_row.get('TOTAL_ENROLL_2024', None)
+                exclusive_de = enroll_row.get('DE_ENROLL_2024', None)
+                some_de = enroll_row.get('SDE_ENROLL_TOTAL', None)  # Note: 2024 uses SDE_ENROLL_TOTAL
 
-            if designations:
-                st.info(f"**Designations:** {', '.join(designations)}")
-            else:
-                st.info("**Designations:** None")
+                # Create columns for enrollment metrics
+                col1, col2, col3 = st.columns(3)
 
-            # Category if available
-            if 'CATEGORY' in inst and pd.notna(inst['CATEGORY']):
-                st.metric("Category", inst['CATEGORY'])
+                with col1:
+                    if pd.notna(total_enrollment):
+                        st.metric("Total Enrollment", f"{int(total_enrollment):,}")
+                    else:
+                        st.metric("Total Enrollment", "N/A")
 
-        # Placeholder for additional data
-        st.markdown("---")
-        st.markdown("#### Additional Information")
-        st.info(
-            """
-            🚧 **More Data Coming Soon**
+                with col2:
+                    if pd.notna(exclusive_de):
+                        st.metric("Exclusive Distance Education", f"{int(exclusive_de):,}")
+                    else:
+                        st.metric("Exclusive Distance Education", "N/A")
 
-            Future updates will include:
-            - Total enrollment and demographics
-            - Graduation and retention rates
-            - Average net price by income level
-            - Federal loan and Pell Grant statistics
-            - Distance education enrollment
-            - Historical trends and peer comparisons
-            """
-        )
+                with col3:
+                    if pd.notna(some_de):
+                        st.metric("Some Distance Education", f"{int(some_de):,}")
+                    else:
+                        st.metric("Some Distance Education", "N/A")
+
+        # Add graduation rates section if data is available
+        if self.pellgradrates_df is not None and not self.pellgradrates_df.empty:
+            # Find graduation data for this institution
+            grad_data = self.pellgradrates_df[self.pellgradrates_df['UnitID'] == inst['UnitID']]
+
+            if not grad_data.empty:
+                grad_row = grad_data.iloc[0]
+
+                # Display graduation rates section
+                st.markdown("---")
+                st.markdown("#### Graduation Rates")
+
+                # Get the most recent year's data (2023)
+                overall_grad_rate = grad_row.get('GR2023', None)
+                pell_grad_rate = grad_row.get('PGR2023', None)
+
+                # Calculate sector-specific statistics
+                sector_code = inst.get('SECTOR', -1)
+                is_four_year = sector_code in [1, 2, 3]  # 4-year sectors
+                is_two_year = sector_code in [4, 5, 6]   # 2-year sectors
+
+                # Calculate medians and z-scores if we can determine sector
+                if is_four_year or is_two_year:
+                    # Merge institutions with graduation rates to get sector info
+                    merged_df = pd.merge(
+                        self.pellgradrates_df[['UnitID', 'GR2023', 'PGR2023']],
+                        self.institutions_df[['UnitID', 'SECTOR']],
+                        on='UnitID',
+                        how='inner'
+                    )
+
+                    if is_four_year:
+                        sector_df = merged_df[merged_df['SECTOR'].isin([1, 2, 3])]
+                        sector_label = "4-year"
+                    else:
+                        sector_df = merged_df[merged_df['SECTOR'].isin([4, 5, 6])]
+                        sector_label = "2-year"
+
+                    # Calculate medians
+                    overall_median = sector_df['GR2023'].median()
+                    pell_median = sector_df['PGR2023'].median()
+
+                    # Calculate z-scores
+                    overall_mean = sector_df['GR2023'].mean()
+                    overall_std = sector_df['GR2023'].std()
+                    pell_mean = sector_df['PGR2023'].mean()
+                    pell_std = sector_df['PGR2023'].std()
+
+                    overall_z = None
+                    pell_z = None
+
+                    if pd.notna(overall_grad_rate) and overall_std > 0:
+                        overall_z = (overall_grad_rate - overall_mean) / overall_std
+
+                    if pd.notna(pell_grad_rate) and pell_std > 0:
+                        pell_z = (pell_grad_rate - pell_mean) / pell_std
+
+                    # Display graduation rates
+                    col1, col2 = st.columns(2)
+
+                    with col1:
+                        st.markdown("**Overall Graduation Rate**")
+                        if pd.notna(overall_grad_rate):
+                            st.metric("This Institution", f"{overall_grad_rate:.1f}%")
+                            if pd.notna(overall_median):
+                                st.metric(f"{sector_label} Median", f"{overall_median:.1f}%")
+                            if overall_z is not None:
+                                st.metric("Z-Score", f"{overall_z:.2f}")
+                        else:
+                            st.metric("This Institution", "N/A")
+
+                    with col2:
+                        st.markdown("**Pell Student Graduation Rate**")
+                        if pd.notna(pell_grad_rate):
+                            st.metric("This Institution", f"{pell_grad_rate:.1f}%")
+                            if pd.notna(pell_median):
+                                st.metric(f"{sector_label} Median", f"{pell_median:.1f}%")
+                            if pell_z is not None:
+                                st.metric("Z-Score", f"{pell_z:.2f}")
+                        else:
+                            st.metric("This Institution", "N/A")
+                else:
+                    # If sector is unknown, just show the rates without comparisons
+                    col1, col2 = st.columns(2)
+
+                    with col1:
+                        if pd.notna(overall_grad_rate):
+                            st.metric("Overall Graduation Rate", f"{overall_grad_rate:.1f}%")
+                        else:
+                            st.metric("Overall Graduation Rate", "N/A")
+
+                    with col2:
+                        if pd.notna(pell_grad_rate):
+                            st.metric("Pell Student Graduation Rate", f"{pell_grad_rate:.1f}%")
+                        else:
+                            st.metric("Pell Student Graduation Rate", "N/A")
 
     def _render_loans_pell_trends(self) -> None:
         """Render the Federal Loans and Pell Grants trends page."""
