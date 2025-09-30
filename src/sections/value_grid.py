@@ -23,17 +23,27 @@ class ValueGridSection(BaseSection):
     def render_overview(self) -> None:
         """Render the Value Grid overview."""
         self.render_section_header(VALUE_GRID_SECTION, VALUE_GRID_OVERVIEW_LABEL)
-        
+
         st.markdown(
             """
-            Start with the value grid to see how net price aligns with completion among
-            high-enrollment institutions. Use the buttons in the sidebar to switch between
-            four-year and two-year comparisons once you're ready to dive into the data.
+            ## College Value Grid: Understanding Cost vs. Graduation
+
+            The College Value Grid provides a clear way to compare institutions by two simple but powerful measures: graduation rate and in-state tuition cost. Each dot on the chart represents a college or university with at least 1,000 undergraduate students.
+
+            To make the comparisons easier, the chart is divided into four quadrants using the median cost and graduation rate across all institutions:
+
+            • **Quadrant I (High Graduation, Low Cost):** Institutions delivering strong outcomes at an affordable price.
+
+            • **Quadrant II (High Graduation, High Cost):** Institutions with high graduation rates, but at a higher tuition cost.
+
+            • **Quadrant III (Low Graduation, Low Cost):** Lower-cost institutions where graduation rates fall below the median.
+
+            • **Quadrant IV (Low Graduation, High Cost):** Institutions charging above-median tuition with below-median graduation rates—posing the greatest concern for affordability and student outcomes.
+
+            Below the chart, a sortable table lists all institutions included in the analysis, showing sector (public, private not-for-profit, private for-profit), tuition cost, graduation rate, and enrollment. Tabs at the top allow you to view the list of institutions quadrant by quadrant.
+
+            This tool is designed to make patterns across higher education transparent—for example, many public universities fall into Quadrant I, while Quadrant IV highlights higher-risk institutions where students pay more but graduate less often.
             """
-        )
-        st.info(
-            "Tip: Refresh processed datasets in `data/processed/` before generating new "
-            "value grid exports so median benchmarks stay up to date."
         )
     
     def render_chart(self, chart_name: str) -> None:

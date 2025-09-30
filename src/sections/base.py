@@ -65,13 +65,12 @@ class BaseSection(ABC):
     def render_section_header(self, section_name: str, chart_name: str) -> None:
         """
         Render a standard section header.
-        
+
         Args:
             section_name: Name of the section
             chart_name: Name of the current chart
         """
-        st.title(f"{section_name} » {chart_name}")
-        st.caption(
-            "We are rebuilding the dashboard with section-scoped charts, filters, and exports. "
-            "New functionality arrives as we progress through the build phases."
+        st.markdown(
+            f'<p style="font-size: 0.9rem; color: #808080; margin-bottom: 0.5rem;">{section_name} » {chart_name}</p>',
+            unsafe_allow_html=True
         )
