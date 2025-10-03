@@ -7,6 +7,7 @@ from .federal_loans import FederalLoansSection
 from .pell_grants import PellGrantsSection
 from .distance_education import DistanceEducationSection
 from .college_explorer import CollegeExplorerSection
+from .roi import ROISection
 
 __all__ = [
     "BaseSection",
@@ -16,4 +17,5 @@ __all__ = [
     "PellGrantsSection",
     "DistanceEducationSection",
     "CollegeExplorerSection",
+    "ROISection",
 ]

@@ -12,6 +12,7 @@ from src.config.constants import (
     PELL_SECTION,
     DISTANCE_EDUCATION_SECTION,
     COLLEGE_EXPLORER_SECTION,
+    ROI_SECTION,
 )
 from src.core import DataManager, DataLoadError
 from src.sections import (
@@ -21,6 +22,7 @@ from src.sections import (
     PellGrantsSection,
     DistanceEducationSection,
     CollegeExplorerSection,
+    ROISection,
 )
 from src.state import SessionManager
 
@@ -87,6 +89,7 @@ def render_main(data_manager: DataManager) -> None:
         PELL_SECTION: PellGrantsSection(data_manager),
         DISTANCE_EDUCATION_SECTION: DistanceEducationSection(data_manager),
         COLLEGE_EXPLORER_SECTION: CollegeExplorerSection(data_manager),
+        ROI_SECTION: ROISection(data_manager),
     }
     
     # Get the active section instance

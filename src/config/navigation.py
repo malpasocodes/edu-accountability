@@ -12,6 +12,7 @@ from .constants import (
     PELL_SECTION,
     DISTANCE_EDUCATION_SECTION,
     COLLEGE_EXPLORER_SECTION,
+    ROI_SECTION,
     VALUE_GRID_OVERVIEW_LABEL,
     FOUR_YEAR_VALUE_GRID_LABEL,
     TWO_YEAR_VALUE_GRID_LABEL,
@@ -23,6 +24,8 @@ from .constants import (
     DISTANCE_CHARTS,
     COLLEGE_EXPLORER_OVERVIEW_LABEL,
     COLLEGE_EXPLORER_CHARTS,
+    ROI_OVERVIEW_LABEL,
+    ROI_CHARTS,
 )
 
 
@@ -172,6 +175,27 @@ class NavigationConfig:
         description="Get detailed information on individual colleges"
     )
 
+    ROI = SectionConfig(
+        name=ROI_SECTION,
+        icon="💰",
+        label="ROI",
+        overview_chart=ChartConfig(
+            label=ROI_OVERVIEW_LABEL,
+            key="nav_roi_overview",
+            description="Return on investment analysis"
+        ),
+        charts=[
+            ChartConfig(
+                label=chart_label,
+                key=f"nav_roi_{index}",
+                description=None
+            )
+            for index, chart_label in enumerate(ROI_CHARTS)
+        ],
+        session_key="roi_chart",
+        description="Analyze return on investment for higher education"
+    )
+
     @classmethod
     def get_sections(cls) -> List[SectionConfig]:
         """Get all configured sections in navigation order."""
@@ -182,6 +206,7 @@ class NavigationConfig:
             cls.PELL_GRANTS,
             cls.DISTANCE_EDUCATION,
             cls.COLLEGE_EXPLORER,
+            cls.ROI,
         ]
     
     @classmethod
