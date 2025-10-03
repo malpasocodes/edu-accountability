@@ -34,18 +34,119 @@ class FederalLoansSection(BaseSection):
     def render_overview(self) -> None:
         """Render the Federal Loans overview."""
         self.render_section_header(FEDERAL_LOANS_SECTION, LOAN_OVERVIEW_LABEL)
-        
+
+        # Main title
+        st.title("Federal Loans: Tracking Institutional Debt Patterns")
+
+        # Key insight callout
+        st.info("**💡 Key Insight:** Federal loan data reveals which institutions carry the highest student debt burdens and how those patterns relate to graduation outcomes and change over time.")
+
+        st.markdown("")  # Spacing
+
+        # What is this section
+        st.markdown("### What is Federal Loans Analysis?")
         st.markdown(
             """
-            Explore how federal lending patterns shape affordability by using the chart buttons
-            in the sidebar. Start with the top-dollar views to see which institutions borrow the
-            most, then compare graduation outcomes or multi-year trends to understand how debt
-            exposure shifts over time.
+            This section tracks **federal student loan dollars** disbursed to students at colleges and universities
+            across the United States. The data covers **2008-2022** and shows which institutions have the highest
+            loan volumes, how those loans relate to graduation rates, and how debt patterns have evolved over time.
+
+            Federal loans represent a significant source of financial aid and a key measure of student debt burden.
+            Understanding where these dollars flow helps illuminate affordability challenges and institutional reliance
+            on federal lending.
             """
         )
+
+        st.divider()
+
+        # Available analyses section
+        st.markdown("### Three Ways to Explore Federal Loan Data")
+        st.markdown(
+            """
+            Use the **sidebar charts** to examine federal loan patterns from different angles. Each analysis
+            is available for both 4-year and 2-year institutions:
+            """
+        )
+
+        st.markdown("")  # Spacing
+
+        # Three analysis types in columns
+        col1, col2, col3 = st.columns(3)
+
+        with col1:
+            st.markdown(
+                """
+                <div style='padding: 1.5rem; border: 2px solid #1f77b4; border-radius: 10px; background-color: #f8faff; margin-bottom: 1rem;'>
+                    <h4 style='color: #1f77b4; margin-bottom: 0.5rem;'>📊 Top 25 Federal Loan Dollars</h4>
+                    <p style='color: #000000; margin-bottom: 0.5rem;'>See which institutions receive the most federal loan dollars.</p>
+                    <p style='color: #000000; font-style: italic; margin: 0;'>Stacked bars show yearly breakdown (2008-2022).</p>
+                </div>
+                """,
+                unsafe_allow_html=True
+            )
+
+        with col2:
+            st.markdown(
+                """
+                <div style='padding: 1.5rem; border: 2px solid #2ca02c; border-radius: 10px; background-color: #f8fff8; margin-bottom: 1rem;'>
+                    <h4 style='color: #2ca02c; margin-bottom: 0.5rem;'>📈 Federal Loans vs Graduation Rate</h4>
+                    <p style='color: #000000; margin-bottom: 0.5rem;'>Compare loan volumes against graduation outcomes.</p>
+                    <p style='color: #000000; font-style: italic; margin: 0;'>Bubble size shows enrollment scale.</p>
+                </div>
+                """,
+                unsafe_allow_html=True
+            )
+
+        with col3:
+            st.markdown(
+                """
+                <div style='padding: 1.5rem; border: 2px solid #ff7f0e; border-radius: 10px; background-color: #fffaf5; margin-bottom: 1rem;'>
+                    <h4 style='color: #ff7f0e; margin-bottom: 0.5rem;'>📉 Federal Loan Dollars Trend</h4>
+                    <p style='color: #000000; margin-bottom: 0.5rem;'>Track how loan volumes change over time for top institutions.</p>
+                    <p style='color: #000000; font-style: italic; margin: 0;'>Shows year-over-year patterns and shifts.</p>
+                </div>
+                """,
+                unsafe_allow_html=True
+            )
+
+        st.divider()
+
+        # How to use section
+        st.markdown("### How to Use This Tool")
+        st.markdown(
+            """
+            **Start with Top 25 Federal Loan Dollars** to identify institutions with the highest debt volumes.
+            Then explore the **vs Graduation Rate** chart to see how loan burdens relate to student outcomes.
+            Finally, use the **Trend** chart to understand how these patterns have evolved over the past 15 years.
+
+            **Each chart includes tabs** at the top for 4-year and 2-year institutions, allowing you to compare
+            patterns across different institutional types.
+            """
+        )
+
+        st.divider()
+
+        # What to look for section
+        st.markdown("### What the Data Shows")
+        st.markdown(
+            """
+            Federal loan data reveals important patterns about affordability and access:
+
+            - **High loan volumes** may indicate large enrollment, high costs, or limited grant aid
+            - **Loan vs graduation trends** show whether debt burden aligns with degree completion
+            - **Multi-year patterns** reveal how institutions' reliance on federal loans has shifted
+            - **Sector differences** emerge between public, private nonprofit, and for-profit colleges
+            """
+        )
+
+        st.divider()
+
+        # Data disclaimer
+        st.markdown("### Data Source & Notes")
         st.info(
-            "Reminder: Loan totals reflect processed IPEDS extracts. "
-            "Validate against the latest Department of Education releases for high-stakes decisions."
+            "**Data Source:** IPEDS (Integrated Postsecondary Education Data System), 2008-2022. "
+            "Loan totals reflect annual federal loan dollars disbursed to students at each institution. "
+            "For high-stakes decisions, validate against the latest Department of Education releases."
         )
     
     def render_chart(self, chart_name: str) -> None:

@@ -35,17 +35,119 @@ class PellGrantsSection(BaseSection):
     def render_overview(self) -> None:
         """Render the Pell Grants overview."""
         self.render_section_header(PELL_SECTION, PELL_OVERVIEW_LABEL)
-        
+
+        # Main title
+        st.title("Pell Grants: Tracking Need-Based Aid Distribution")
+
+        # Key insight callout
+        st.info("**💡 Key Insight:** Pell Grant data shows where need-based federal aid concentrates, revealing which institutions serve the most low-income students and how grant patterns relate to student outcomes.")
+
+        st.markdown("")  # Spacing
+
+        # What is this section
+        st.markdown("### What is Pell Grants Analysis?")
         st.markdown(
             """
-            Review Pell Grant distributions to understand where need-based aid concentrates. Use
-            the chart buttons to spotlight top recipients, examine graduation relationships, and
-            trace award trends across institutional sectors.
+            This section tracks **Pell Grant dollars** awarded to students at colleges and universities across
+            the United States. The data covers **2008-2022** and shows which institutions serve the most low-income
+            students, how grant aid relates to graduation rates, and how need-based aid patterns have evolved over time.
+
+            Pell Grants are the federal government's primary need-based aid program for undergraduate students.
+            Understanding where these dollars flow helps illuminate access for low-income students and institutional
+            commitment to serving economically disadvantaged populations.
             """
         )
+
+        st.divider()
+
+        # Available analyses section
+        st.markdown("### Three Ways to Explore Pell Grant Data")
+        st.markdown(
+            """
+            Use the **sidebar charts** to examine Pell Grant patterns from different angles. Each analysis
+            is available for both 4-year and 2-year institutions:
+            """
+        )
+
+        st.markdown("")  # Spacing
+
+        # Three analysis types in columns
+        col1, col2, col3 = st.columns(3)
+
+        with col1:
+            st.markdown(
+                """
+                <div style='padding: 1.5rem; border: 2px solid #9467bd; border-radius: 10px; background-color: #faf9ff; margin-bottom: 1rem;'>
+                    <h4 style='color: #9467bd; margin-bottom: 0.5rem;'>📊 Top 25 Pell Dollar Recipients</h4>
+                    <p style='color: #000000; margin-bottom: 0.5rem;'>See which institutions receive the most Pell Grant dollars.</p>
+                    <p style='color: #000000; font-style: italic; margin: 0;'>Stacked bars show yearly breakdown (2008-2022).</p>
+                </div>
+                """,
+                unsafe_allow_html=True
+            )
+
+        with col2:
+            st.markdown(
+                """
+                <div style='padding: 1.5rem; border: 2px solid #2ca02c; border-radius: 10px; background-color: #f8fff8; margin-bottom: 1rem;'>
+                    <h4 style='color: #2ca02c; margin-bottom: 0.5rem;'>📈 Pell Dollars vs Graduation Rate</h4>
+                    <p style='color: #000000; margin-bottom: 0.5rem;'>Compare Pell volumes against graduation outcomes.</p>
+                    <p style='color: #000000; font-style: italic; margin: 0;'>Bubble size shows enrollment scale.</p>
+                </div>
+                """,
+                unsafe_allow_html=True
+            )
+
+        with col3:
+            st.markdown(
+                """
+                <div style='padding: 1.5rem; border: 2px solid #ff7f0e; border-radius: 10px; background-color: #fffaf5; margin-bottom: 1rem;'>
+                    <h4 style='color: #ff7f0e; margin-bottom: 0.5rem;'>📉 Pell Dollars Trend</h4>
+                    <p style='color: #000000; margin-bottom: 0.5rem;'>Track how Pell volumes change over time for top institutions.</p>
+                    <p style='color: #000000; font-style: italic; margin: 0;'>Shows year-over-year patterns and shifts.</p>
+                </div>
+                """,
+                unsafe_allow_html=True
+            )
+
+        st.divider()
+
+        # How to use section
+        st.markdown("### How to Use This Tool")
+        st.markdown(
+            """
+            **Start with Top 25 Pell Dollar Recipients** to identify institutions serving the most low-income students.
+            Then explore the **vs Graduation Rate** chart to see how need-based aid concentrations relate to student outcomes.
+            Finally, use the **Trend** chart to understand how these patterns have evolved over the past 15 years.
+
+            **Each chart includes tabs** at the top for 4-year and 2-year institutions, allowing you to compare
+            patterns across different institutional types.
+            """
+        )
+
+        st.divider()
+
+        # What to look for section
+        st.markdown("### What the Data Shows")
+        st.markdown(
+            """
+            Pell Grant data reveals important patterns about access and equity:
+
+            - **High Pell volumes** indicate institutions serving large numbers of low-income students
+            - **Pell vs graduation trends** show whether aid concentration aligns with degree completion
+            - **Multi-year patterns** reveal how institutions' commitment to low-income access has shifted
+            - **Sector differences** emerge between public, private nonprofit, and for-profit colleges
+            """
+        )
+
+        st.divider()
+
+        # Data disclaimer
+        st.markdown("### Data Source & Notes")
         st.info(
-            "Pell figures come from processed extracts in this repository. Refresh the "
-            "underlying data before publishing new findings."
+            "**Data Source:** IPEDS (Integrated Postsecondary Education Data System), 2008-2022. "
+            "Pell totals reflect annual grant dollars awarded to students at each institution. "
+            "For high-stakes decisions, validate against the latest Department of Education releases."
         )
     
     def render_chart(self, chart_name: str) -> None:

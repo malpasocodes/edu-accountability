@@ -19,16 +19,126 @@ class DistanceEducationSection(BaseSection):
         """Render the Distance Education overview."""
         self.render_section_header("Distance Education", "Overview")
 
+        # Main title
+        st.title("Distance Education: Analyzing Online Learning Patterns")
+
+        # Key insight callout
+        st.info("**💡 Key Insight:** Distance education data reveals how institutions are adapting to online learning, showing enrollment patterns from the COVID-19 era through 2024 and which schools lead in online program delivery.")
+
+        st.markdown("")  # Spacing
+
+        # What is this section
+        st.markdown("### What is Distance Education Analysis?")
         st.markdown(
             """
-            Explore how institutions are utilizing distance education delivery methods to serve students.
-            These visualizations show enrollment patterns across different types of distance education
-            participation: exclusive distance education, partial distance education, and traditional in-person learning.
+            This section tracks **distance education enrollment** at colleges and universities across the United States.
+            The data covers **2020-2024** and categorizes students into three groups:
+
+            - **Exclusively Distance Education**: Students taking all courses online
+            - **Some Distance Education**: Students in hybrid programs mixing online and in-person
+            - **No Distance Education**: Students in traditional in-person programs only
+
+            Understanding these patterns helps illuminate how higher education delivery has evolved, particularly
+            during and after the COVID-19 pandemic, and which institutions are leading in online education.
             """
         )
+
+        st.divider()
+
+        # Available analyses section
+        st.markdown("### Three Ways to Explore Distance Education Data")
+        st.markdown(
+            """
+            Use the **sidebar charts** to examine distance education patterns from different angles. Each analysis
+            is available for both 4-year and 2-year institutions:
+            """
+        )
+
+        st.markdown("")  # Spacing
+
+        # Three analysis types in columns
+        col1, col2, col3 = st.columns(3)
+
+        with col1:
+            st.markdown(
+                """
+                <div style='padding: 1.5rem; border: 2px solid #ff7f0e; border-radius: 10px; background-color: #fffaf5; margin-bottom: 1rem; height: 220px; display: flex; flex-direction: column;'>
+                    <h4 style='color: #ff7f0e; margin-bottom: 0.5rem;'>📊 Top 25 Distance Education Enrollment</h4>
+                    <div style='flex-grow: 1; display: flex; flex-direction: column; justify-content: center;'>
+                        <p style='color: #000000; margin-bottom: 0.5rem;'>See which institutions have the highest distance education enrollment.</p>
+                        <p style='color: #000000; font-style: italic; margin: 0;'>Stacked bars show exclusive, some, and no distance education.</p>
+                    </div>
+                </div>
+                """,
+                unsafe_allow_html=True
+            )
+
+        with col2:
+            st.markdown(
+                """
+                <div style='padding: 1.5rem; border: 2px solid #1f77b4; border-radius: 10px; background-color: #f8faff; margin-bottom: 1rem; height: 220px; display: flex; flex-direction: column;'>
+                    <h4 style='color: #1f77b4; margin-bottom: 0.5rem;'>📈 Total Enrollment Trend</h4>
+                    <div style='flex-grow: 1; display: flex; flex-direction: column; justify-content: center;'>
+                        <p style='color: #000000; margin-bottom: 0.5rem;'>Track overall enrollment changes from 2020-2024.</p>
+                        <p style='color: #000000; font-style: italic; margin: 0;'>Shows year-over-year enrollment patterns for top institutions.</p>
+                    </div>
+                </div>
+                """,
+                unsafe_allow_html=True
+            )
+
+        with col3:
+            st.markdown(
+                """
+                <div style='padding: 1.5rem; border: 2px solid #2ca02c; border-radius: 10px; background-color: #f8fff8; margin-bottom: 1rem; height: 220px; display: flex; flex-direction: column;'>
+                    <h4 style='color: #2ca02c; margin-bottom: 0.5rem;'>📉 Distance Education Trend</h4>
+                    <div style='flex-grow: 1; display: flex; flex-direction: column; justify-content: center;'>
+                        <p style='color: #000000; margin-bottom: 0.5rem;'>Track exclusive distance education enrollment over time.</p>
+                        <p style='color: #000000; font-style: italic; margin: 0;'>Shows how online-only enrollment evolved 2020-2024.</p>
+                    </div>
+                </div>
+                """,
+                unsafe_allow_html=True
+            )
+
+        st.divider()
+
+        # How to use section
+        st.markdown("### How to Use This Tool")
+        st.markdown(
+            """
+            **Start with Top 25 Distance Education Enrollment** to identify institutions with the largest online presence.
+            Then explore the **Total Enrollment Trend** to see how overall student populations changed during the pandemic period.
+            Finally, use the **Distance Education Trend** to track the specific growth of exclusively online programs.
+
+            **Each chart includes tabs** at the top for 4-year and 2-year institutions, allowing you to compare
+            patterns across different institutional types.
+            """
+        )
+
+        st.divider()
+
+        # What to look for section
+        st.markdown("### What the Data Shows")
+        st.markdown(
+            """
+            Distance education data reveals important patterns about online learning adoption:
+
+            - **High distance education enrollment** indicates institutional commitment to online delivery
+            - **COVID-19 impact** is visible in 2020-2021 shifts toward online learning
+            - **Post-pandemic patterns** show whether online enrollment sustained or returned to pre-pandemic levels
+            - **Institutional differences** emerge between traditional colleges and online-focused institutions
+            """
+        )
+
+        st.divider()
+
+        # Data disclaimer
+        st.markdown("### Data Source & Notes")
         st.info(
-            "Distance education data comes from IPEDS Distance Education surveys. Data includes "
-            "enrollment breakdowns by institutional delivery methods from 2020-2024."
+            "**Data Source:** IPEDS Distance Education surveys, 2020-2024. "
+            "Enrollment data includes breakdowns by distance education participation level (exclusive, some, none). "
+            "Data reflects fall enrollment snapshots for each year."
         )
 
     def render_chart(self, chart_name: str) -> None:

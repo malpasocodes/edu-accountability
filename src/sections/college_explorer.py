@@ -34,64 +34,127 @@ class CollegeExplorerSection(BaseSection):
         """Render the college explorer overview page."""
         self.render_section_header("College Explorer", "Overview")
 
-        # Introduction
+        # Main title
+        st.title("College Explorer: Institution-Level Analysis")
+
+        # Key insight callout
+        st.info("**💡 Key Insight:** The College Explorer provides detailed analysis of individual institutions, allowing you to examine specific colleges' enrollment patterns, federal aid trends, and graduation outcomes over time.")
+
+        st.markdown("")  # Spacing
+
+        # What is this section
+        st.markdown("### What is College Explorer?")
         st.markdown(
             """
-            ## Explore Individual College Data
+            The College Explorer allows you to **dive deep into individual institutions** with comprehensive data
+            on specific colleges and universities. Instead of comparing across many institutions, you can focus on
+            a single college to understand its unique characteristics, performance metrics, and trends over time.
 
-            The College Explorer allows you to dive deep into detailed information about individual
-            institutions. This tool provides comprehensive data on specific colleges and universities,
-            enabling you to examine their unique characteristics, performance metrics, and outcomes.
+            This tool integrates data from **6,050+ institutions** across the United States, providing detailed
+            institutional profiles with enrollment metrics, federal aid patterns, and graduation outcomes.
             """
         )
 
-        # Feature Preview
-        st.info(
-            """
-            **🚧 Coming Soon**
+        st.divider()
 
-            This section is under development and will provide:
-            - Detailed institutional profiles with key metrics
-            - Historical trends for individual colleges
-            - Peer comparisons within similar institution types
-            - Student outcome data by demographic groups
-            - Financial aid and affordability analysis
+        # Available analyses section
+        st.markdown("### Three Ways to Explore Individual Colleges")
+        st.markdown(
+            """
+            Use the **sidebar tabs** to examine different aspects of each institution. Each analysis provides
+            unique insights into institutional performance:
             """
         )
 
-        # How it will work
-        st.subheader("How the College Explorer Works")
+        st.markdown("")  # Spacing
+
+        # Three analysis types in columns
+        col1, col2, col3 = st.columns(3)
+
+        with col1:
+            st.markdown(
+                """
+                <div style='padding: 1.5rem; border: 2px solid #1f77b4; border-radius: 10px; background-color: #f8faff; margin-bottom: 1rem; height: 200px; display: flex; flex-direction: column;'>
+                    <h4 style='color: #1f77b4; margin-bottom: 0.5rem;'>📋 Summary</h4>
+                    <div style='flex-grow: 1; display: flex; flex-direction: column; justify-content: center;'>
+                        <p style='color: #000000; margin-bottom: 0.5rem;'>View comprehensive institutional profile and key metrics.</p>
+                        <p style='color: #000000; font-style: italic; margin: 0;'>Includes enrollment, graduation rates, and institutional details.</p>
+                    </div>
+                </div>
+                """,
+                unsafe_allow_html=True
+            )
+
+        with col2:
+            st.markdown(
+                """
+                <div style='padding: 1.5rem; border: 2px solid #2ca02c; border-radius: 10px; background-color: #f8fff8; margin-bottom: 1rem; height: 200px; display: flex; flex-direction: column;'>
+                    <h4 style='color: #2ca02c; margin-bottom: 0.5rem;'>💰 Federal Loans & Pell Grants</h4>
+                    <div style='flex-grow: 1; display: flex; flex-direction: column; justify-content: center;'>
+                        <p style='color: #000000; margin-bottom: 0.5rem;'>Track federal aid trends from 2008-2022.</p>
+                        <p style='color: #000000; font-style: italic; margin: 0;'>Combined visualization of loans and grants over time.</p>
+                    </div>
+                </div>
+                """,
+                unsafe_allow_html=True
+            )
+
+        with col3:
+            st.markdown(
+                """
+                <div style='padding: 1.5rem; border: 2px solid #ff7f0e; border-radius: 10px; background-color: #fffaf5; margin-bottom: 1rem; height: 200px; display: flex; flex-direction: column;'>
+                    <h4 style='color: #ff7f0e; margin-bottom: 0.5rem;'>🎓 Graduation Rates</h4>
+                    <div style='flex-grow: 1; display: flex; flex-direction: column; justify-content: center;'>
+                        <p style='color: #000000; margin-bottom: 0.5rem;'>Compare overall vs Pell student graduation trends.</p>
+                        <p style='color: #000000; font-style: italic; margin: 0;'>Shows equity gaps in completion outcomes (2016-2023).</p>
+                    </div>
+                </div>
+                """,
+                unsafe_allow_html=True
+            )
+
+        st.divider()
+
+        # How to use section
+        st.markdown("### How to Use This Tool")
         st.markdown(
             """
-            1. **Search or Select**: Find colleges by name, location, or characteristics
-            2. **View Summary**: Access comprehensive institutional data at a glance
-            3. **Deep Dive**: Explore detailed metrics across multiple dimensions
-            4. **Compare**: Benchmark against peer institutions
-            5. **Export**: Download data for further analysis
+            **Start with the Summary tab** to select an institution from the searchable dropdown (6,050+ colleges available).
+            Once selected, you'll see institutional details, enrollment metrics, and graduation rates with context.
+
+            **Then explore Federal Loans & Pell Grants** to understand the institution's federal aid patterns and how
+            they've changed from 2008-2022.
+
+            **Finally, review Graduation Rates** to see how overall graduation outcomes compare to Pell student outcomes,
+            revealing potential equity gaps in completion.
             """
         )
 
-        # Data Sources
-        st.subheader("Data Sources")
+        st.divider()
+
+        # What to look for section
+        st.markdown("### What the Data Shows")
         st.markdown(
             """
-            The College Explorer integrates multiple authoritative data sources:
-            - **IPEDS**: Institutional characteristics, enrollment, and completion data
-            - **Federal Student Aid**: Loan and grant disbursement information
-            - **College Scorecard**: Earnings and debt metrics
-            - **Census Data**: Regional demographic context
+            College Explorer reveals institution-specific patterns:
+
+            - **Institutional context**: Sector, control type, location, and special designations
+            - **Enrollment trends**: Total enrollment and distance education participation patterns
+            - **Federal aid evolution**: How reliance on loans and grants has shifted over 15 years
+            - **Equity in outcomes**: Graduation rate gaps between overall and Pell student populations
+            - **Performance benchmarks**: Compare institutional metrics to sector medians with z-scores
             """
         )
 
-        # Call to Action
-        st.markdown("---")
+        st.divider()
+
+        # Getting started
+        st.markdown("### Get Started")
         st.markdown(
             """
-            ### Get Started
-
-            Click on **Summary** in the navigation to begin exploring individual college data.
-            The summary page will allow you to select a specific institution and view its
-            comprehensive profile.
+            Click on **Summary** in the sidebar to begin exploring individual college data. The searchable dropdown
+            allows you to find institutions by name, city, or state—then view comprehensive institutional analysis
+            across all available tabs.
             """
         )
 
