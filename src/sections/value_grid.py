@@ -24,25 +24,120 @@ class ValueGridSection(BaseSection):
         """Render the Value Grid overview."""
         self.render_section_header(VALUE_GRID_SECTION, VALUE_GRID_OVERVIEW_LABEL)
 
+        # Main title
+        st.title("College Value Grid: Understanding Cost vs. Graduation")
+
+        # Key insight callout
+        st.info("**💡 Key Insight:** This tool reveals which institutions deliver strong graduation outcomes at affordable prices—and which charge more but graduate fewer students.")
+
+        st.markdown("")  # Spacing
+
+        # What is this section
+        st.markdown("### What is the College Value Grid?")
         st.markdown(
             """
-            ## College Value Grid: Understanding Cost vs. Graduation
+            The College Value Grid provides a clear way to compare institutions by two simple but powerful measures:
+            **graduation rate** and **in-state tuition cost**. Each dot on the chart represents a college or university
+            with at least 1,000 undergraduate students.
+            """
+        )
 
-            The College Value Grid provides a clear way to compare institutions by two simple but powerful measures: graduation rate and in-state tuition cost. Each dot on the chart represents a college or university with at least 1,000 undergraduate students.
+        st.divider()
 
-            To make the comparisons easier, the chart is divided into four quadrants using the median cost and graduation rate across all institutions:
+        # Reading the chart section
+        st.markdown("### Reading the Chart: Four Quadrants")
+        st.markdown(
+            """
+            The chart is divided into **four quadrants** using the median cost and graduation rate across all institutions.
+            This creates a clear framework for comparing institutional performance:
+            """
+        )
 
-            • **Quadrant I (High Graduation, Low Cost):** Institutions delivering strong outcomes at an affordable price.
+        st.markdown("")  # Spacing
 
-            • **Quadrant II (High Graduation, High Cost):** Institutions with high graduation rates, but at a higher tuition cost.
+        # Quadrant grid layout (2x2)
+        col1, col2 = st.columns(2)
 
-            • **Quadrant III (Low Graduation, Low Cost):** Lower-cost institutions where graduation rates fall below the median.
+        with col1:
+            st.markdown(
+                """
+                <div style='padding: 1.5rem; border: 2px solid #2ca02c; border-radius: 10px; background-color: #f8fff8; margin-bottom: 1rem;'>
+                    <h4 style='color: #2ca02c; margin-bottom: 0.5rem;'>✓ Quadrant I</h4>
+                    <h5 style='color: #000000; margin-bottom: 1rem;'>High Graduation, Low Cost</h5>
+                    <p style='color: #000000; margin-bottom: 0.5rem;'>Institutions delivering strong outcomes at an affordable price.</p>
+                    <p style='color: #000000; font-style: italic; margin: 0;'>This is the "best value" quadrant.</p>
+                </div>
+                """,
+                unsafe_allow_html=True
+            )
 
-            • **Quadrant IV (Low Graduation, High Cost):** Institutions charging above-median tuition with below-median graduation rates—posing the greatest concern for affordability and student outcomes.
+        with col2:
+            st.markdown(
+                """
+                <div style='padding: 1.5rem; border: 2px solid #1f77b4; border-radius: 10px; background-color: #f8faff; margin-bottom: 1rem;'>
+                    <h4 style='color: #1f77b4; margin-bottom: 0.5rem;'>⚠ Quadrant II</h4>
+                    <h5 style='color: #000000; margin-bottom: 1rem;'>High Graduation, High Cost</h5>
+                    <p style='color: #000000; margin-bottom: 0.5rem;'>Institutions with high graduation rates, but at a higher tuition cost.</p>
+                    <p style='color: #000000; font-style: italic; margin: 0;'>Strong outcomes, premium pricing.</p>
+                </div>
+                """,
+                unsafe_allow_html=True
+            )
 
-            Below the chart, a sortable table lists all institutions included in the analysis, showing sector (public, private not-for-profit, private for-profit), tuition cost, graduation rate, and enrollment. Tabs at the top allow you to view the list of institutions quadrant by quadrant.
+        col3, col4 = st.columns(2)
 
-            This tool is designed to make patterns across higher education transparent—for example, many public universities fall into Quadrant I, while Quadrant IV highlights higher-risk institutions where students pay more but graduate less often.
+        with col3:
+            st.markdown(
+                """
+                <div style='padding: 1.5rem; border: 2px solid #ff7f0e; border-radius: 10px; background-color: #fffaf5; margin-bottom: 1rem;'>
+                    <h4 style='color: #ff7f0e; margin-bottom: 0.5rem;'>⚠ Quadrant III</h4>
+                    <h5 style='color: #000000; margin-bottom: 1rem;'>Low Graduation, Low Cost</h5>
+                    <p style='color: #000000; margin-bottom: 0.5rem;'>Lower-cost institutions where graduation rates fall below the median.</p>
+                    <p style='color: #000000; font-style: italic; margin: 0;'>Affordability with outcome challenges.</p>
+                </div>
+                """,
+                unsafe_allow_html=True
+            )
+
+        with col4:
+            st.markdown(
+                """
+                <div style='padding: 1.5rem; border: 2px solid #d62728; border-radius: 10px; background-color: #fff5f5; margin-bottom: 1rem;'>
+                    <h4 style='color: #d62728; margin-bottom: 0.5rem;'>✗ Quadrant IV</h4>
+                    <h5 style='color: #000000; margin-bottom: 1rem;'>Low Graduation, High Cost</h5>
+                    <p style='color: #000000; margin-bottom: 0.5rem;'>Institutions charging above-median tuition with below-median graduation rates.</p>
+                    <p style='color: #000000; font-style: italic; margin: 0;'>Posing the greatest concern for affordability and student outcomes.</p>
+                </div>
+                """,
+                unsafe_allow_html=True
+            )
+
+        st.divider()
+
+        # How to use section
+        st.markdown("### How to Use This Tool")
+        st.markdown(
+            """
+            **Below the chart**, you'll find a sortable table listing all institutions included in the analysis,
+            showing sector (public, private not-for-profit, private for-profit), tuition cost, graduation rate,
+            and enrollment.
+
+            **Tabs at the top** allow you to view the list of institutions quadrant by quadrant, making it easy
+            to explore institutions in each category.
+            """
+        )
+
+        st.divider()
+
+        # What to look for section
+        st.markdown("### What the Data Shows")
+        st.markdown(
+            """
+            This tool is designed to make patterns across higher education transparent. For example:
+
+            - **Many public universities** fall into Quadrant I, offering strong value
+            - **Quadrant IV** highlights higher-risk institutions where students pay more but graduate less often
+            - Patterns emerge by sector, control type, and institutional mission
             """
         )
     
