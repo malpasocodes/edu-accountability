@@ -63,10 +63,10 @@ class DistanceEducationSection(BaseSection):
             st.markdown(
                 """
                 <div style='padding: 1.5rem; border: 2px solid #ff7f0e; border-radius: 10px; background-color: #fffaf5; margin-bottom: 1rem; height: 220px; display: flex; flex-direction: column;'>
-                    <h4 style='color: #ff7f0e; margin-bottom: 0.5rem;'>📊 Top 25 Distance Education Enrollment</h4>
+                    <h4 style='color: #ff7f0e; margin-bottom: 0.5rem;'>📊 Top 25 Total Enrollment (Distance Education Breakdown)</h4>
                     <div style='flex-grow: 1; display: flex; flex-direction: column; justify-content: center;'>
-                        <p style='color: #000000; margin-bottom: 0.5rem;'>See which institutions have the highest distance education enrollment.</p>
-                        <p style='color: #000000; font-style: italic; margin: 0;'>Stacked bars show exclusive, some, and no distance education.</p>
+                        <p style='color: #000000; margin-bottom: 0.5rem;'>See which institutions have the highest total enrollment with distance education breakdown.</p>
+                        <p style='color: #000000; font-style: italic; margin: 0;'>Stacked bars show exclusive, some, and in-person enrollment.</p>
                     </div>
                 </div>
                 """,
@@ -77,10 +77,10 @@ class DistanceEducationSection(BaseSection):
             st.markdown(
                 """
                 <div style='padding: 1.5rem; border: 2px solid #1f77b4; border-radius: 10px; background-color: #f8faff; margin-bottom: 1rem; height: 220px; display: flex; flex-direction: column;'>
-                    <h4 style='color: #1f77b4; margin-bottom: 0.5rem;'>📈 Total Enrollment Trend</h4>
+                    <h4 style='color: #1f77b4; margin-bottom: 0.5rem;'>📈 Total Enrollment Trend (Top 10 Institutions)</h4>
                     <div style='flex-grow: 1; display: flex; flex-direction: column; justify-content: center;'>
-                        <p style='color: #000000; margin-bottom: 0.5rem;'>Track overall enrollment changes from 2020-2024.</p>
-                        <p style='color: #000000; font-style: italic; margin: 0;'>Shows year-over-year enrollment patterns for top institutions.</p>
+                        <p style='color: #000000; margin-bottom: 0.5rem;'>Track overall enrollment changes from 2020-2024 for top 10 institutions by 2024 enrollment.</p>
+                        <p style='color: #000000; font-style: italic; margin: 0;'>Shows year-over-year enrollment patterns.</p>
                     </div>
                 </div>
                 """,
@@ -91,9 +91,9 @@ class DistanceEducationSection(BaseSection):
             st.markdown(
                 """
                 <div style='padding: 1.5rem; border: 2px solid #2ca02c; border-radius: 10px; background-color: #f8fff8; margin-bottom: 1rem; height: 220px; display: flex; flex-direction: column;'>
-                    <h4 style='color: #2ca02c; margin-bottom: 0.5rem;'>📉 Distance Education Trend</h4>
+                    <h4 style='color: #2ca02c; margin-bottom: 0.5rem;'>📉 Exclusive Distance Education Trend (Top 10 Institutions)</h4>
                     <div style='flex-grow: 1; display: flex; flex-direction: column; justify-content: center;'>
-                        <p style='color: #000000; margin-bottom: 0.5rem;'>Track exclusive distance education enrollment over time.</p>
+                        <p style='color: #000000; margin-bottom: 0.5rem;'>Track exclusive distance education enrollment over time for top 10 institutions by 2024 exclusive DE enrollment.</p>
                         <p style='color: #000000; font-style: italic; margin: 0;'>Shows how online-only enrollment evolved 2020-2024.</p>
                     </div>
                 </div>
@@ -107,9 +107,9 @@ class DistanceEducationSection(BaseSection):
         st.markdown("### How to Use This Tool")
         st.markdown(
             """
-            **Start with Top 25 Distance Education Enrollment** to identify institutions with the largest online presence.
-            Then explore the **Total Enrollment Trend** to see how overall student populations changed during the pandemic period.
-            Finally, use the **Distance Education Trend** to track the specific growth of exclusively online programs.
+            **Start with Top 25 Total Enrollment** to see which institutions have the largest student bodies and how those students break down by distance education participation.
+            Then explore the **Total Enrollment Trend** to see how overall student populations changed during the pandemic period for the top 10 largest institutions.
+            Finally, use the **Exclusive Distance Education Trend** to track the specific growth of exclusively online programs for the top 10 institutions by DE enrollment.
 
             **Each chart includes tabs** at the top for 4-year and 2-year institutions, allowing you to compare
             patterns across different institutional types.
@@ -145,12 +145,12 @@ class DistanceEducationSection(BaseSection):
         """Render a specific Distance Education chart."""
         self.render_section_header("Distance Education", chart_name)
 
-        # Handle chart routing
-        if chart_name == "Top 25 Distance Education Enrollment":
+        # Handle chart routing (support both old and new labels for backward compatibility)
+        if chart_name in ["Top 25 Total Enrollment (Distance Education Breakdown)", "Top 25 Distance Education Enrollment"]:
             self._render_distance_top_enrollment_with_tabs(chart_name)
-        elif chart_name == "Total Enrollment Trend":
+        elif chart_name in ["Total Enrollment Trend (Top 10 Institutions)", "Total Enrollment Trend"]:
             self._render_enrollment_trend_with_tabs(chart_name)
-        elif chart_name == "Distance Education Trend":
+        elif chart_name in ["Exclusive Distance Education Trend (Top 10 Institutions)", "Distance Education Trend"]:
             self._render_de_trend_with_tabs(chart_name)
         else:
             st.error(f"Unknown chart: {chart_name}")
@@ -262,9 +262,8 @@ class DistanceEducationSection(BaseSection):
 
     def get_available_charts(self) -> List[str]:
         """Get available charts for distance education section."""
+        from src.config.constants import DISTANCE_OVERVIEW_LABEL, DISTANCE_CHARTS
         return [
-            "Overview",
-            "Top 25 Distance Education Enrollment",
-            "Total Enrollment Trend",
-            "Distance Education Trend"
+            DISTANCE_OVERVIEW_LABEL,
+            *DISTANCE_CHARTS
         ]

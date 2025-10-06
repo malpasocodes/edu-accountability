@@ -281,7 +281,7 @@ def render_distance_top_enrollment_chart(
 
     st.subheader(chart_title)
     period_text = prepared.period_label or "the available year"
-    caption_text = f"Top {num_institutions} institutions by total enrollment for {period_text}. Each bar shows breakdown by distance education participation."
+    caption_text = f"Top {num_institutions} institutions by total enrollment for {period_text}. Each bar shows the breakdown by distance education participation (exclusive DE, some DE, and in-person only)."
     st.caption(caption_text)
     render_altair_chart(chart, width="stretch")
 

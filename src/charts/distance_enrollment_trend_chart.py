@@ -343,8 +343,8 @@ def render_distance_enrollment_trend_chart(
 
     st.subheader(title)
     caption = (
-        f"Top {top_n} institutions by total enrollment in {anchor_year}, with annual enrollment over time. "
-        "Dotted lines colored by institution; dots colored by year-over-year change (green=increase/same, red=decrease)."
+        f"Top {top_n} institutions by total enrollment in {anchor_year}, showing annual total enrollment trends over time (2020-2024). "
+        "Dotted lines colored by institution; dots colored by year-over-year change (green=increase, gray=same, red=decrease)."
     )
     st.caption(caption)
     render_altair_chart(chart, width="stretch")

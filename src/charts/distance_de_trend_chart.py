@@ -134,6 +134,20 @@ def _prepare_de_trend_dataframe(
     if long_form.empty:
         return pd.DataFrame()
 
+    # Calculate total enrollment per year across top N institutions for percentage calculation
+    year_totals = long_form.groupby("Year")["de_enrollment"].sum().reset_index()
+    year_totals.rename(columns={"de_enrollment": "year_total_enrollment"}, inplace=True)
+
+    # Merge year totals back to long_form
+    long_form = long_form.merge(year_totals, on="Year", how="left")
+
+    # Calculate percentage of total for each institution-year
+    long_form["de_percentage"] = (
+        (long_form["de_enrollment"] / long_form["year_total_enrollment"] * 100)
+        .fillna(0)
+        .round(2)
+    )
+
     # Calculate year-over-year changes for dot coloring
     long_form = long_form.sort_values(["UnitID", "Year"])
     long_form["PrevYearDEEnrollment"] = long_form.groupby("UnitID")["de_enrollment"].shift(1)
@@ -176,6 +190,8 @@ def _prepare_de_trend_dataframe(
         "Sector",
         "Year",
         "de_enrollment",
+        "de_percentage",
+        "year_total_enrollment",
         "AnchorYear",
         "ChangeDirection",
         "YoYChangePercent",
@@ -189,22 +205,39 @@ def _render_de_data_table(
     top_n: int,
     anchor_year: int
 ) -> None:
-    """Render data table showing exclusive distance education enrollment figures for each institution by year."""
+    """Render data table showing exclusive distance education enrollment figures and percentages for each institution by year."""
     if prepared.empty:
         return
 
-    # Create pivot table from long format data
-    pivot_data = prepared.pivot_table(
+    # Create pivot tables from long format data - one for enrollment, one for percentage
+    pivot_enrollment = prepared.pivot_table(
         index=["Institution", "Sector"],
         columns="Year",
         values="de_enrollment",
         aggfunc="first"
     ).reset_index()
 
+    pivot_percentage = prepared.pivot_table(
+        index=["Institution", "Sector"],
+        columns="Year",
+        values="de_percentage",
+        aggfunc="first"
+    ).reset_index()
+
     # Convert year column names to strings to avoid mixed type warning
-    year_columns = [col for col in pivot_data.columns if isinstance(col, int)]
-    column_mapping = {col: str(col) for col in year_columns}
-    pivot_data = pivot_data.rename(columns=column_mapping)
+    year_columns_enroll = [col for col in pivot_enrollment.columns if isinstance(col, int)]
+    column_mapping_enroll = {col: str(col) for col in year_columns_enroll}
+    pivot_enrollment = pivot_enrollment.rename(columns=column_mapping_enroll)
+
+    year_columns_pct = [col for col in pivot_percentage.columns if isinstance(col, int)]
+    column_mapping_pct = {col: f"{col} %" for col in year_columns_pct}
+    pivot_percentage = pivot_percentage.rename(columns=column_mapping_pct)
+
+    # Merge enrollment and percentage data
+    pivot_data = pivot_enrollment.copy()
+    for col in pivot_percentage.columns:
+        if col not in ["Institution", "Sector"]:
+            pivot_data[col] = pivot_percentage[col]
 
     # Format DE enrollment numbers and calculate change
     year_columns = [col for col in pivot_data.columns if col.isdigit()]
@@ -227,8 +260,15 @@ def _render_de_data_table(
 
     # Format the display table
     display_data = pivot_data.copy()
+
+    # Format enrollment columns
     for year in year_columns:
         display_data[year] = display_data[year].apply(lambda x: f"{x:,.0f}" if pd.notna(x) else "N/A")
+
+    # Format percentage columns
+    pct_columns = [col for col in display_data.columns if col.endswith(" %")]
+    for col in pct_columns:
+        display_data[col] = display_data[col].apply(lambda x: f"{x:.2f}%" if pd.notna(x) else "N/A")
 
     if "Total Change" in display_data.columns:
         display_data["Total Change"] = display_data["Total Change"].apply(
@@ -243,7 +283,10 @@ def _render_de_data_table(
         display_data = display_data.iloc[numeric_data.sort_values(ascending=False).index]
 
     st.subheader("📊 Exclusive Distance Education Enrollment Data")
-    st.caption(f"Exclusive distance education enrollment figures for top {top_n} institutions by {anchor_year} DE enrollment.")
+    st.caption(
+        f"Exclusive distance education enrollment figures and percentages for top {top_n} institutions by {anchor_year} DE enrollment. "
+        f"Percentage columns (%) show each institution's share of total enrollment among the top {top_n} for that year."
+    )
     st.dataframe(display_data, width="stretch", hide_index=True)
 
 
@@ -357,11 +400,88 @@ def render_distance_de_trend_chart(
 
     st.subheader(title)
     caption = (
-        f"Top {top_n} institutions by exclusive distance education enrollment in {anchor_year}, with annual DE enrollment over time. "
-        "Dotted lines colored by institution; dots colored by year-over-year change (green=increase/same, red=decrease)."
+        f"Top {top_n} institutions by exclusive distance education enrollment in {anchor_year}, showing annual exclusive DE enrollment trends over time (2020-2024). "
+        "Dotted lines colored by institution; dots colored by year-over-year change (green=increase, gray=same, red=decrease)."
     )
     st.caption(caption)
     render_altair_chart(chart, width="stretch")
+
+    # Percentage chart - showing each institution's share of total enrollment among top N
+    st.markdown("")  # Spacing
+    st.subheader("Percentage of Total Enrollment (Among Top 10 Institutions)")
+
+    # Line layer with dotted lines colored by institution for percentage
+    pct_lines = alt.Chart(prepared).mark_line(
+        strokeDash=[3, 3],  # Dotted line pattern
+        point=False
+    ).encode(
+        x=alt.X(
+            "Year:Q",
+            title="Year",
+            axis=alt.Axis(
+                format="d",
+                labelFontSize=14,
+                titleFontSize=16,
+                titleFontWeight="bold"
+            )
+        ),
+        y=alt.Y(
+            "de_percentage:Q",
+            title="Percentage of Total (%)",
+            scale=alt.Scale(domain=[0, 25]),
+            axis=alt.Axis(
+                format=".1f",
+                labelFontSize=14,
+                titleFontSize=16,
+                titleFontWeight="bold"
+            ),
+        ),
+        color=alt.Color(
+            "Institution:N",
+            title="Institution",
+            scale=institution_color_scale
+        ),
+        tooltip=[
+            alt.Tooltip("Institution:N", title="Institution"),
+            alt.Tooltip("Year:Q", title="Year", format=".0f"),
+            alt.Tooltip("de_percentage:Q", title="Percentage of Total", format=".2f"),
+            alt.Tooltip("de_enrollment:Q", title="DE Enrollment", format=","),
+            alt.Tooltip("year_total_enrollment:Q", title="Total (Top 10)", format=","),
+            alt.Tooltip("Sector:N", title="Sector"),
+        ],
+    )
+
+    # Point layer for percentage chart
+    pct_points = alt.Chart(prepared).mark_circle(size=80).encode(
+        x=alt.X("Year:Q"),
+        y=alt.Y("de_percentage:Q"),
+        color=alt.Color(
+            "ChangeDirection:N",
+            title="Year-over-Year Change",
+            scale=change_color_scale
+        ),
+        tooltip=[
+            alt.Tooltip("Institution:N", title="Institution"),
+            alt.Tooltip("Year:Q", title="Year", format=".0f"),
+            alt.Tooltip("de_percentage:Q", title="Percentage of Total", format=".2f"),
+            alt.Tooltip("de_enrollment:Q", title="DE Enrollment", format=","),
+            alt.Tooltip("year_total_enrollment:Q", title="Total (Top 10)", format=","),
+            alt.Tooltip("Sector:N", title="Sector"),
+        ],
+    )
+
+    # Combine percentage chart layers
+    pct_chart = (pct_lines + pct_points).resolve_scale(
+        color="independent"
+    ).properties(height=520)
+
+    pct_caption = (
+        f"Each institution's share of total exclusive DE enrollment among the top {top_n} institutions (2020-2024). "
+        f"Percentages are calculated as: (institution enrollment / sum of top {top_n} enrollment) × 100. "
+        "Dotted lines colored by institution; dots colored by year-over-year enrollment change."
+    )
+    st.caption(pct_caption)
+    render_altair_chart(pct_chart, width="stretch")
 
     # Create data table
     _render_de_data_table(prepared, top_n, anchor_year)
