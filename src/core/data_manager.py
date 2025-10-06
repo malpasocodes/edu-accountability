@@ -29,6 +29,7 @@ class DataManager:
         self.distance_df: Optional[pd.DataFrame] = None
         self.institutions_df: Optional[pd.DataFrame] = None
         self.pellgradrates_df: Optional[pd.DataFrame] = None
+        self.roi_df: Optional[pd.DataFrame] = None
         self.value_grid_datasets: Dict[str, pd.DataFrame] = {}
         self.pell_resources: Dict[str, Optional[pd.DataFrame]] = {}
         self.errors: list[str] = []
@@ -197,3 +198,47 @@ class DataManager:
         if self.has_errors():
             for error in self.errors:
                 st.sidebar.error(error)
+
+    @st.cache_data(ttl=3600)
+    def load_roi_metrics(_self) -> pd.DataFrame:
+        """
+        Load ROI metrics for California institutions.
+
+        This is a cached method that loads the processed ROI dataset
+        from epanalysis migration.
+
+        Returns:
+            DataFrame with ROI data for 116 CA institutions
+        """
+        try:
+            roi_df = pd.read_parquet('data/processed/roi_metrics.parquet')
+            return roi_df
+        except FileNotFoundError:
+            st.warning("ROI data not available. Run `python src/data/build_roi_metrics.py` to generate.")
+            return pd.DataFrame()
+        except Exception as e:
+            st.error(f"Error loading ROI data: {e}")
+            return pd.DataFrame()
+
+    def get_institution_roi(self, unit_id: int) -> Optional[pd.Series]:
+        """
+        Get ROI metrics for a specific institution.
+
+        Args:
+            unit_id: IPEDS UnitID
+
+        Returns:
+            Series with ROI data if available, None if institution not in CA ROI dataset
+        """
+        if self.roi_df is None:
+            self.roi_df = self.load_roi_metrics()
+
+        if self.roi_df.empty:
+            return None
+
+        institution_roi = self.roi_df[self.roi_df['UnitID'] == unit_id]
+
+        if institution_roi.empty:
+            return None
+
+        return institution_roi.iloc[0]

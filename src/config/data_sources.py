@@ -30,7 +30,8 @@ class DataSources:
     _processed_dir = _data_dir / "processed"
     _ipeds_dir = _raw_dir / "ipeds" / "2023"
     _fsa_dir = _raw_dir / "fsa"
-    
+    _epanalysis_dir = _raw_dir / "epanalysis"
+
     # Raw data sources - FSA
     PELL_RAW = DataSourceConfig(
         path=_fsa_dir / "pelltotals.csv",
@@ -166,7 +167,26 @@ class DataSources:
         description="Tuition vs graduation rates (2-year, Parquet)",
         required=False
     )
-    
+
+    # ROI data sources - epanalysis migration
+    ROI_METRICS_RAW = DataSourceConfig(
+        path=_epanalysis_dir / "roi-metrics.csv",
+        description="ROI metrics from epanalysis (116 CA institutions)",
+        required=False
+    )
+
+    ROI_METRICS_PARQUET = DataSourceConfig(
+        path=_processed_dir / "roi_metrics.parquet",
+        description="Processed ROI metrics (116 CA institutions, Parquet)",
+        required=False
+    )
+
+    OPEID_MAPPING = DataSourceConfig(
+        path=_epanalysis_dir / "opeid_unitid_mapping.csv",
+        description="OPEID to UnitID mapping for CA institutions",
+        required=False
+    )
+
     @classmethod
     def get_pell_resources_map(cls) -> Dict[str, DataSourceConfig]:
         """Get a mapping of Pell resource keys to their configurations."""
@@ -210,4 +230,7 @@ class DataSources:
             "tuition_vs_grad_two_parquet": cls.TUITION_VS_GRAD_TWO_PARQUET,
             "distance_raw": cls.DISTANCE_RAW,
             "pell_grad_rates_raw": cls.PELL_GRAD_RATES_RAW,
+            "roi_metrics_raw": cls.ROI_METRICS_RAW,
+            "roi_metrics_parquet": cls.ROI_METRICS_PARQUET,
+            "opeid_mapping": cls.OPEID_MAPPING,
         }

@@ -8,6 +8,67 @@ from pathlib import Path
 from typing import Dict, List, Optional, Union
 import json
 import yaml
+import pandas as pd
+
+
+@dataclass
+class ROIMetrics:
+    """
+    ROI (Return on Investment) metrics for California institutions.
+    Migrated from epanalysis repository.
+
+    ROI Formula: roi_years = total_program_cost / earnings_premium
+    Where earnings_premium = median_earnings_10yr - hs_baseline
+    """
+    # Identifiers
+    unit_id: int
+    opeid6: str
+    institution: str
+    county: str
+    sector: str
+
+    # Earnings and Cost (from College Scorecard and IPEDS)
+    median_earnings_10yr: float
+    total_net_price: float
+
+    # Earnings Premium (calculated)
+    premium_statewide: float
+    premium_regional: float
+
+    # ROI Metrics (calculated)
+    roi_statewide_years: float
+    roi_regional_years: float
+    roi_statewide_months: int
+    roi_regional_months: int
+
+    # Rankings
+    rank_statewide: int
+    rank_regional: int
+    rank_change: int
+
+    # Baseline
+    hs_median_income: float
+
+    # Flags
+    has_positive_premium_state: bool
+    has_positive_premium_regional: bool
+
+    def __post_init__(self):
+        """Validate ROI metrics."""
+        # Check for invalid ROI (999 = negative premium flag)
+        if self.roi_statewide_years >= 999:
+            if not hasattr(self, '_validated'):
+                object.__setattr__(self, '_validated', True)
+                # This is a flag value, not a real ROI
+                return
+
+        # Validate ROI is non-negative for valid cases
+        if self.roi_statewide_years < 0:
+            raise ValueError(f"Invalid ROI: {self.roi_statewide_years} years")
+
+        # Validate rankings are positive
+        if self.rank_statewide < 1:
+            raise ValueError(f"Invalid rank: {self.rank_statewide}")
 
 
 @dataclass(frozen=True)

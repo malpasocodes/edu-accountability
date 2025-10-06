@@ -1,0 +1,328 @@
+OPEID6,Institution,City,County,Region,Predominant Award,Sector,Undergraduate Degree-seeking students,ZIP,Latitude,Longitude,Median Earnings 10 Years After Enrollment,Annual Net Price
+1111,Allan Hancock College,Santa Maria,Santa Barbara,Central Coast,Associate's,Public,7812,93454-6399,34.943716,-120.421144,42786,4638
+1113,Antelope Valley Community College District,Lancaster,Los Angeles,Los Angeles,Associate's,Public,10905,93536-5426,34.676207,-118.186166,36526,8263
+1118,Bakersfield College,Bakersfield,Kern,San Joaquin Valley,Associate's,Public,16451,93305-1299,35.40911,-118.973753,37291,4751
+1119,Barstow Community College,Barstow,San Bernardino,Inland Empire,Associate's,Public,2585,92311,34.870285,-117.023412,35104,12347
+1124,Cabrillo College,Aptos,Santa Cruz,Central Coast,Associate's,Public,7404,95003,36.989448,-121.924797,44114,13328
+1161,Cerritos College,Norwalk,Los Angeles,Los Angeles,Certificate,Public,18710,90650-6298,33.886874,-118.097337,41156,693
+1162,Chabot College,Hayward,Alameda,Bay Area,Associate's,Public,10861,94545,37.642458,-122.105636,48143,4616
+1163,Chaffey College,Rancho Cucamonga,San Bernardino,Inland Empire,Associate's,Public,13568,91737-3002,34.147663,-117.573932,42975,5743
+1166,Citrus College,Glendora,Los Angeles,Los Angeles,Certificate,Public,8126,91741-1899,34.13537,-117.886469,42065,3800
+1176,Coalinga College,Coalinga,Fresno,San Joaquin Valley,Associate's,Public,2177,93210,36.147891,-120.356747,37633,8626
+1178,College of Marin,Kentfield,Marin,Bay Area,Associate's,Public,3928,94904-2590,37.951918,-122.548758,42654,15517
+1181,College of San Mateo,San Mateo,San Mateo,Bay Area,Associate's,Public,7359,94402-3784,37.535698,-122.334801,54172,1504
+1182,College of the Desert,Palm Desert,Riverside,Inland Empire,Associate's,Public,8900,92260,33.732108,-116.388271,39020,11812
+1185,College of the Redwoods,Eureka,Humboldt,North-Far North,Associate's,Public,3514,95501-9300,40.698427,-124.195293,36243,3214
+1186,College of the Sequoias,Visalia,Tulare,San Joaquin Valley,Associate's,Public,10752,93277-2214,36.323877,-119.315182,39092,29
+1187,College of the Siskiyous,Weed,Siskiyou,North-Far North,Associate's,Public,1080,96094-2899,41.413005,-122.38909,39098,7241
+1190,Contra Costa College,San Pablo,Contra Costa,Bay Area,Certificate,Public,4805,94806,37.969381,-122.337377,40850,6522
+1191,Diablo Valley College,Pleasant Hill,Contra Costa,Bay Area,Associate's,Public,14734,94523,37.968516,-122.073142,51378,6142
+1192,Cuesta College,San Luis Obispo,San Luis Obispo,Central Coast,Certificate,Public,6879,93403-8106,35.331276,-120.742235,46047,12898
+1193,Cypress College,Cypress,Orange,Orange,Certificate,Public,12309,90630-5897,33.82833,-118.025143,43533,4683
+1197,El Camino Community College District,Torrance,Los Angeles,Los Angeles,Associate's,Public,18994,90506,33.885229,-118.329913,41589,5170
+1199,Foothill College,Los Altos Hills,Santa Clara,Bay Area,Certificate,Public,10922,94022,37.361655,-122.127964,57072,7549
+1201,Fullerton College,Fullerton,Orange,Orange,Associate's,Public,16637,92832-2095,33.875514,-117.918255,43366,8090
+1202,Gavilan College,Gilroy,Santa Clara,Bay Area,Associate's,Public,4410,95020,36.972627,-121.569842,47169,2244
+1203,Glendale Community College,Glendale,Los Angeles,Los Angeles,Associate's,Public,9807,91208-2894,34.16745,-118.227666,41540,7461
+1206,Golden West College,Huntington Beach,Orange,Orange,Associate's,Public,8919,92647-2710,33.732531,-118.002568,43145,2861
+1208,Grossmont College,El Cajon,San Diego,San Diego,Associate's,Public,11467,92020-1799,32.815246,-117.006277,40309,2755
+1209,Hartnell College,Salinas,Monterey,Central Coast,Associate's,Public,7153,93901,36.675091,-121.666054,44316,2895
+1214,Imperial Valley College,Imperial,Imperial,Imperial,Associate's,Public,6881,92251-0158,32.827209,-115.503563,34487,1697
+1217,Lassen Community College,Susanville,Lassen,North-Far North,Associate's,Public,1564,96130,40.432053,-120.633271,35994,7677
+1219,Long Beach City College,Long Beach,Los Angeles,Los Angeles,Certificate,Public,21899,90808-1706,33.833593,-118.135633,38870,5001
+1223,Los Angeles City College,Los Angeles,Los Angeles,Los Angeles,Associate's,Public,10857,90029,34.087301,-118.292169,36190,7532
+1224,Los Angeles Harbor College,Wilmington,Los Angeles,Los Angeles,Associate's,Public,6496,90744-2397,33.785825,-118.283549,41133,11245
+1226,Los Angeles Pierce College,Woodland Hills,Los Angeles,Los Angeles,Associate's,Public,13029,91371-0002,34.183949,-118.575071,44521,11196
+1227,Los Angeles Trade Technical College,Los Angeles,Los Angeles,Los Angeles,Certificate,Public,10165,90015-4181,34.031907,-118.269447,35233,10658
+1228,Los Angeles Valley College,Valley Glen,Los Angeles,Los Angeles,Associate's,Public,12470,91401-4096,34.175165,-118.421734,42678,10200
+1229,Southern California University of Health Sciences,Whittier,Los Angeles,Los Angeles,Certificate,Private non-profit,132,90604,33.922966,-117.983401,70649,45633
+1232,American River College,Sacramento,Sacramento,Sacramento-Tahoe,Associate's,Public,25758,95841-4286,38.65085,-121.349672,40162,4628
+1233,Sacramento City College,Sacramento,Sacramento,Sacramento-Tahoe,Associate's,Public,16952,95822-1386,38.541096,-121.491139,42214,3974
+1237,Merced College,Merced,Merced,San Joaquin Valley,Associate's,Public,9677,95348-2806,37.3353,-120.476464,37815,4260
+1239,MiraCosta College,Oceanside,San Diego,San Diego,Certificate,Public,10474,92056-3899,33.190483,-117.302606,43845,7178
+1240,Modesto Junior College,Modesto,Stanislaus,San Joaquin Valley,Associate's,Public,14714,95350-5800,37.651056,-121.009792,42368,10176
+1242,Monterey Peninsula College,Monterey,Monterey,Central Coast,Associate's,Public,5759,93940-4799,36.590558,-121.884931,42176,13498
+1245,Mt San Antonio College,Walnut,Los Angeles,Los Angeles,Associate's,Public,25311,91789-1399,34.047764,-117.846629,46283,3107
+1246,Mt San Jacinto Community College District,San Jacinto,Riverside,Inland Empire,Associate's,Public,14859,92583-2399,33.806748,-116.971169,38319,7098
+1247,Napa Valley College,Napa,Napa,Bay Area,Associate's,Public,3205,94558-6236,38.274081,-122.274381,49517,14046
+1250,Orange Coast College,Costa Mesa,Orange,Orange,Certificate,Public,16117,92626,33.66927,-117.909086,47348,4754
+1259,Palo Verde College,Blythe,Riverside,Inland Empire,Associate's,Public,2909,92225,33.661538,-114.651698,36389,10543
+1260,Palomar College,San Marcos,San Diego,San Diego,Certificate,Public,16167,92069-1487,33.149483,-117.183978,42300,5247
+1261,Pasadena City College,Pasadena,Los Angeles,Los Angeles,Associate's,Public,20624,91106-2003,34.144552,-118.118196,43937,3123
+1266,Laney College,Oakland,Alameda,Bay Area,Associate's,Public,7158,94607,37.797257,-122.26283,37282,15805
+1267,Merritt College,Oakland,Alameda,Bay Area,Associate's,Public,5153,94619-3196,37.789088,-122.167335,44392,14742
+1268,Porterville College,Porterville,Tulare,San Joaquin Valley,Associate's,Public,2775,93257,36.049256,-119.014368,36328,3728
+1269,Rio Hondo College,Whittier,Los Angeles,Los Angeles,Associate's,Public,15365,90601-1616,34.019821,-118.033506,44950,11903
+1270,Riverside City College,Riverside,Riverside,Inland Empire,Associate's,Public,17361,92506,33.970918,-117.384323,41091,4026
+1272,San Bernardino Valley College,San Bernardino,San Bernardino,Inland Empire,Certificate,Public,11106,92410-2798,34.086353,-117.313248,39676,8234
+1273,San Diego City College,San Diego,San Diego,San Diego,Associate's,Public,10584,92101-4787,32.717403,-117.152733,38503,818
+1275,San Diego Mesa College,San Diego,San Diego,San Diego,Associate's,Public,15899,92111-4998,32.803825,-117.169165,45120,904
+1280,San Joaquin Delta College,Stockton,San Joaquin,San Joaquin Valley,Associate's,Public,13964,95207,37.995562,-121.317597,43212,8508
+1282,San Jose City College,San Jose,Santa Clara,Bay Area,Certificate,Public,7039,95128-2798,37.315827,-121.926185,46215,16658
+1284,Santa Ana College,Santa Ana,Orange,Orange,Certificate,Public,22011,92706-3398,33.759309,-117.887558,43552,3854
+1285,Santa Barbara City College,Santa Barbara,Santa Barbara,Central Coast,Associate's,Public,10070,93109-2394,34.406788,-119.698045,47647,10029
+1286,Santa Monica College,Santa Monica,Los Angeles,Los Angeles,Associate's,Public,21194,90405-1628,34.017022,-118.469765,42193,3600
+1287,Santa Rosa Junior College,Santa Rosa,Sonoma,Bay Area,Certificate,Public,14327,95401-4395,38.45709,-122.718974,47224,5541
+1289,Shasta College,Redding,Shasta,North-Far North,Associate's,Public,5536,96003,40.625731,-122.317982,39269,3743
+1290,Sierra College,Rocklin,Placer,Sacramento-Tahoe,Associate's,Public,13455,95677-3397,38.790773,-121.211688,45294,4462
+1292,Solano Community College,Fairfield,Solano,Bay Area,Associate's,Public,7688,94534-3197,38.235881,-122.122368,44170,3869
+1294,Southwestern College,Chula Vista,San Diego,San Diego,Associate's,Public,16640,91910-7299,32.640281,-116.996803,40060,10893
+1307,Fresno City College,Fresno,Fresno,San Joaquin Valley,Associate's,Public,18774,93741,36.768164,-119.796096,37361,1699
+1308,Reedley College,Reedley,Fresno,San Joaquin Valley,Certificate,Public,4853,93654,36.605428,-119.458555,38493,1584
+1309,Taft College,Taft,Kern,San Joaquin Valley,Associate's,Public,3216,93268,35.149343,-119.459751,38861,2699
+1334,Ventura College,Ventura,Ventura,Central Coast,Associate's,Public,9971,93003-3872,34.277393,-119.230604,43430,2257
+1335,Victor Valley College,Victorville,San Bernardino,Inland Empire,Certificate,Public,12107,92395-5850,34.472231,-117.261456,36119,3228
+1338,West Valley College,Saratoga,Santa Clara,Bay Area,Associate's,Public,6086,95070,37.26398,-122.008324,51688,1842
+1344,Yuba College,Marysville,Yuba,Sacramento-Tahoe,Associate's,Public,4311,95901,39.126536,-121.53964,39552,3573
+4480,De Anza College,Cupertino,Santa Clara,Bay Area,Associate's,Public,14953,95014,37.319914,-122.045783,56596,4667
+4481,Ohlone College,Fremont,Alameda,Bay Area,Associate's,Public,6958,94539-0390,37.529931,-121.911795,54278,14130
+4502,City College of San Francisco,San Francisco,San Francisco,Bay Area,Certificate,Public,16060,94112-1898,37.725953,-122.451155,45805,7272
+5638,Downey Adult School,Downey,Los Angeles,Los Angeles,Certificate,Public,844,90241,33.91965,-118.115727,46851,13102
+5655,Hacienda La Puente Adult Education,La Puente,Los Angeles,Los Angeles,Certificate,Public,496,91746-0002,34.043301,-117.979139,39271,4211
+6720,College of Alameda,Alameda,Alameda,Bay Area,Associate's,Public,4274,94501,37.781017,-122.279303,42563,9280
+6731,Casa Loma College-Los Angeles,Sherman Oaks,Los Angeles,Los Angeles,Associate's,Private non-profit,581,91403,34.155096,-118.466548,49854,27721
+6973,Canada College,Redwood City,San Mateo,Bay Area,Associate's,Public,4878,94061-1099,37.44877,-122.265398,50087,10
+7047,Los Angeles Southwest College,Los Angeles,Los Angeles,Los Angeles,Associate's,Public,3793,90047-4899,33.929586,-118.304674,32172,6683
+7050,Bellus Academy-Chula Vista,Chula Vista,San Diego,San Diego,Certificate,Private for-profit,379,91911,32.614773,-117.083738,23576,20159
+7115,Moorpark College,Moorpark,Ventura,Central Coast,Associate's,Public,12011,93021-1695,34.301146,-118.834528,49044,742
+7142,Lyle's College of  Beauty,Fresno,Fresno,San Joaquin Valley,Certificate,Private for-profit,77,93710,36.836265,-119.774167,25913,17560
+7142,Lyle's College of Beauty,Bakersfield,Kern,San Joaquin Valley,Certificate,Private for-profit,96,93301,35.386539,-119.02387,25913,19746
+7187,North Adrian's College of Beauty Inc,Modesto,Stanislaus,San Joaquin Valley,Certificate,Private for-profit,213,95350-2381,37.677778,-120.992753,27269,20347
+7203,Salon Success Academy-West Covina,West Covina,Los Angeles,Los Angeles,Certificate,Private for-profit,82,91790-2876,34.070568,-117.933801,26956,16649
+7203,Salon Success Academy-Upland,Upland,San Bernardino,Inland Empire,Certificate,Private for-profit,238,91786,34.108247,-117.631783,26956,16626
+7204,Modern Beauty Academy,Oxnard,Ventura,Central Coast,Certificate,Private for-profit,62,93030,34.195384,-119.181423,22477,11582
+7253,Federico Beauty Institute,Sacramento,Sacramento,Sacramento-Tahoe,Certificate,Private for-profit,245,95834,38.64883,-121.497761,29856,25736
+7465,American Academy of Dramatic Arts-Los Angeles,Los Angeles,Los Angeles,Los Angeles,Associate's,Private non-profit,169,90028,34.095378,-118.343701,27019,40991
+7536,Cosumnes River College,Sacramento,Sacramento,Sacramento-Tahoe,Associate's,Public,13527,95823-5799,38.45295,-121.423108,42446,4648
+7607,Concorde Career College-North Hollywood,North Hollywood,Los Angeles,Los Angeles,Certificate,Private for-profit,143,91606-3134,34.186407,-118.403627,50552,23584
+7707,Columbia College,Sonora,Tuolumne,Central Sierra,Associate's,Public,1917,95370,38.030367,-120.388385,39035,15468
+7713,Skyline College,San Bruno,San Mateo,Bay Area,Associate's,Public,7132,94066-1698,37.63042,-122.467335,55702,1180
+7930,Concorde Career College-San Diego,San Diego,San Diego,San Diego,Certificate,Private for-profit,178,92113-1964,32.702814,-117.102845,39169,24477
+8071,Concorde Career College-Garden Grove,Garden Grove,Orange,Orange,Certificate,Private for-profit,202,92840-9201,33.774741,-117.938395,45711,22610
+8073,Butte College,Oroville,Butte,Upper Sacramento Valley,Associate's,Public,8384,95965-8399,39.649782,-121.644831,41810,4632
+8221,Universal Technical Institute-Southern California,Long Beach,Los Angeles,Los Angeles,Associate's,Private for-profit,1447,90808-1789,33.826017,-118.145393,52873,24867
+8221,Universal Technical Institute of California Inc,Rancho Cucamonga,San Bernardino,Inland Empire,Associate's,Private for-profit,1484,91730-0000,34.082782,-117.576366,52873,23526
+8537,Concorde Career College-San Bernardino,San Bernardino,San Bernardino,Inland Empire,Certificate,Private for-profit,260,92408-3403,34.066823,-117.283995,39993,23161
+8596,West Los Angeles College,Culver City,Los Angeles,Los Angeles,Associate's,Public,7277,90230-3519,34.004512,-118.386664,38537,7131
+8597,Feather River Community College District,Quincy,Plumas,North-Far North,Associate's,Public,1574,95971-9124,39.953101,-120.973067,38142,6520
+8903,College of the Canyons,Santa Clarita,Los Angeles,Los Angeles,Associate's,Public,15365,91355-1899,34.403993,-118.568698,49022,2114
+8918,Saddleback College,Mission Viejo,Orange,Orange,Associate's,Public,15959,92692-3635,33.553346,-117.665584,50874,2976
+9022,Associated Technical College-Los Angeles,Los Angeles,Los Angeles,Los Angeles,Certificate,Private for-profit,159,90017-1604,34.056102,-118.272364,24368,22236
+9272,Crafton Hills College,Yucaipa,San Bernardino,Inland Empire,Associate's,Public,5074,92339-1799,34.039178,-117.101173,42553,10655
+9509,Charles A Jones Career and Education Center,Sacramento,Sacramento,Sacramento-Tahoe,Certificate,Public,90,95824-1529,38.516233,-121.440796,41047,15980
+9748,Carrington College-San Leandro Campus,San Leandro,Alameda,Bay Area,Certificate,Private for-profit,400,94578-3711,37.699627,-122.12567,39633,32368
+9748,Carrington College-Stockton,Stockton,San Joaquin,San Joaquin Valley,Certificate,Private for-profit,429,95207-5509,37.998992,-121.323199,39633,30387
+9748,Carrington College-Pleasant Hill Campus,Pleasant Hill,Contra Costa,Bay Area,Certificate,Private for-profit,430,94523-1984,37.962649,-122.072153,39633,30749
+9748,Carrington College-San Jose,San Jose,Santa Clara,Bay Area,Certificate,Private for-profit,680,95138,37.248411,-121.777062,39633,31043
+9748,Carrington College-Sacramento,Sacramento,Sacramento,Sacramento-Tahoe,Certificate,Private for-profit,2262,95826,38.556104,-121.371383,39633,37143
+10111,Cerro Coso Community College,Ridgecrest,Kern,San Joaquin Valley,Associate's,Public,3496,93555-9571,35.567525,-117.66767,34963,6078
+10340,Los Medanos College,Pittsburg,Contra Costa,Bay Area,Associate's,Public,7100,94565,38.006474,-121.860967,42454,5692
+11112,FIDM-Fashion Institute of Design & Merchandising,Los Angeles,Los Angeles,Los Angeles,Associate's,Private for-profit,1319,90015-1421,34.044209,-118.25993,49840,41493
+11672,Mendocino College,Ukiah,Mendocino,North-Far North,Associate's,Public,2857,95482,39.188989,-123.228809,40243,7500
+11707,North-West College-Glendale,Glendale,Los Angeles,Los Angeles,Certificate,Private for-profit,100,91203,34.148981,-118.255462,37542,34899
+11707,North-West College-West Covina,West Covina,Los Angeles,Los Angeles,Certificate,Private for-profit,635,91790,34.072071,-117.949583,37542,28408
+11820,San Diego Miramar College,San Diego,San Diego,San Diego,Associate's,Public,10740,92126-2999,32.909757,-117.120261,48224,2735
+11865,California Hair Design Academy,La Mesa,San Diego,San Diego,Certificate,Private for-profit,125,91942-5055,32.765221,-117.024261,19347,40350
+11866,Lu Ross Academy,Ventura,Ventura,Central Coast,Certificate,Private for-profit,277,93001-2729,34.278034,-119.293952,23148,15711
+12026,Bellus Academy-El Cajon,El Cajon,San Diego,San Diego,Certificate,Private for-profit,205,92021,32.794072,-116.94627,30807,29547
+12446,Universal College of Beauty Inc-Los Angeles 2,Los Angeles,Los Angeles,Los Angeles,Certificate,Private for-profit,38,90008,34.004498,-118.332236,17821,18591
+12452,Evergreen Valley College,San Jose,Santa Clara,Bay Area,Associate's,Public,7670,95135-1598,37.30167,-121.76561,53077,12591
+12550,Los Angeles Mission College,Sylmar,Los Angeles,Los Angeles,Associate's,Public,8031,91342-3200,34.314668,-118.4195,39834,11972
+12842,Oxnard College,Oxnard,Ventura,Central Coast,Associate's,Public,6059,93033-6699,34.166104,-119.157604,41393,659
+12872,North-West College-Riverside,Riverside,Riverside,Inland Empire,Certificate,Private for-profit,680,92503,33.9145,-117.485881,39876,29106
+12872,North-West College-Pomona,Pomona,Los Angeles,Los Angeles,Certificate,Private for-profit,315,91768,34.062043,-117.751227,39876,33256
+12872,North-West College-Long Beach,Long Beach,Los Angeles,Los Angeles,Certificate,Private for-profit,576,90815-1770,33.801894,-118.14854,39876,32474
+12872,North-West College-Anaheim,Anaheim,Orange,Orange,Certificate,Private for-profit,455,92801,33.839313,-117.959766,39876,31140
+12907,Lake Tahoe Community College,South Lake Tahoe,El Dorado,Sacramento-Tahoe,Associate's,Public,2909,96150,38.926797,-119.972574,36657,10975
+12912,MTI College,Sacramento,Sacramento,Sacramento-Tahoe,Certificate,Private for-profit,1025,95841-9817,38.661377,-121.342568,45328,20336
+12984,Professional Institute of Beauty,El Monte,Los Angeles,Los Angeles,Certificate,Private for-profit,90,91731,34.075561,-118.039028,16886,13152
+13010,Lancaster Beauty School,Lancaster,Los Angeles,Los Angeles,Certificate,Private for-profit,131,93534,34.694914,-118.147547,16220,21235
+13074,American Beauty College,West Covina,Los Angeles,Los Angeles,Certificate,Private for-profit,250,91790,34.069367,-117.936959,22481,24076
+13095,Salon Success Academy-Corona,Corona,Riverside,Inland Empire,Certificate,Private for-profit,216,92881,33.847649,-117.535638,22412,12983
+13095,Salon Success Academy-Redlands,Redlands,San Bernardino,Inland Empire,Certificate,Private for-profit,259,92373,34.062342,-117.218933,22412,14662
+13095,Salon Success Academy-Fontana,Fontana,San Bernardino,Inland Empire,Certificate,Private for-profit,34,92335,34.099087,-117.437904,22412,10813
+13240,Lytles Redwood Empire Beauty College,Santa Rosa,Sonoma,Bay Area,Certificate,Private for-profit,114,95403,38.508385,-122.75777,20358,24603
+20635,Coastline Community College,Fountain Valley,Orange,Orange,Associate's,Public,7007,92708-2597,33.716054,-117.928979,44483,9605
+20643,Sierra College of Beauty,Merced,Merced,San Joaquin Valley,Certificate,Private for-profit,245,95340,37.306975,-120.495874,18519,11519
+20657,California Beauty School,Modesto,Stanislaus,San Joaquin Valley,Certificate,Private for-profit,73,95354,37.645371,-120.997481,22255,11547
+21005,Universal Technical Institute of Northern California Inc,Sacramento,Sacramento,Sacramento-Tahoe,Associate's,Private for-profit,1107,95834,38.64575,-121.529503,48341,26671
+21113,Cuyamaca College,El Cajon,San Diego,San Diego,Associate's,Public,6788,92019,32.744305,-116.942854,32435,6187
+21191,Mission College,Santa Clara,Santa Clara,Bay Area,Associate's,Public,5557,95054-1897,37.391935,-121.980783,50936,5198
+21207,San Joaquin Valley College-Santa Maria,Santa Maria,Santa Barbara,Central Coast,Certificate,Private for-profit,163,93454-6921,34.937806,-120.433296,38317,20549
+21207,San Joaquin Valley College-Delano,Delano,Kern,San Joaquin Valley,Certificate,Private for-profit,83,93215-9691,35.774826,-119.229077,38317,20843
+21207,San Joaquin Valley College-Fresno,Fresno,Fresno,San Joaquin Valley,Certificate,Private for-profit,481,93710-3616,36.829907,-119.784003,38317,23045
+21207,San Joaquin Valley College-Bakersfield,Bakersfield,Kern,San Joaquin Valley,Certificate,Private for-profit,820,93309-2659,35.352848,-119.062071,38317,23393
+21207,San Joaquin Valley College-Porterville,Porterville,Tulare,San Joaquin Valley,Certificate,Private for-profit,98,93257-3730,36.071598,-119.01576,38317,23531
+21207,San Joaquin Valley College-Trades Education Center,Fresno,Fresno,San Joaquin Valley,Certificate,Private for-profit,292,93727-1501,36.776798,-119.72824,38317,24093
+21207,San Joaquin Valley College-Modesto,Salida,Stanislaus,San Joaquin Valley,Certificate,Private for-profit,590,95368-9090,37.717403,-121.092991,38317,24617
+21207,San Joaquin Valley College-Hesperia,Hesperia,San Bernardino,Inland Empire,Certificate,Private for-profit,437,92344-8086,34.420693,-117.383116,38317,23634
+21207,San Joaquin Valley College-Lancaster,Lancaster,Los Angeles,Los Angeles,Certificate,Private for-profit,239,93534-7018,34.648563,-118.148431,38317,23940
+21207,San Joaquin Valley College-Visalia,Visalia,Tulare,San Joaquin Valley,Certificate,Private for-profit,2270,93291-9283,36.328049,-119.384981,38317,29092
+21207,San Joaquin Valley College-Temecula,Temecula,Riverside,Inland Empire,Certificate,Private for-profit,649,92590-5678,33.525983,-117.166502,38317,26652
+21207,San Joaquin Valley College-Ontario,Ontario,San Bernardino,Inland Empire,Certificate,Private for-profit,1022,91764-5107,34.068584,-117.55038,38317,25595
+21207,San Joaquin Valley College-Rancho Mirage,Rancho Mirage,Riverside,Inland Empire,Certificate,Private for-profit,242,92270-2701,33.798782,-116.390793,38317,24175
+21207,San Joaquin Valley College-Rancho Cordova,Rancho Cordova,Sacramento,Sacramento-Tahoe,Associate's,Private for-profit,226,95670-5642,38.595187,-121.28191,38317,27288
+21250,Career Academy of Beauty,Garden Grove,Orange,Orange,Certificate,Private for-profit,207,92845,33.781018,-118.031697,24410,19101
+21282,Bridges Beauty College,Victorville,San Bernardino,Inland Empire,Certificate,Private for-profit,80,92395-3821,34.528602,-117.303933,17287,20849
+21283,Institute for Business and Technology,Santa Clara,Santa Clara,Bay Area,Certificate,Private for-profit,609,95051-1303,37.368642,-121.969541,38015,25471
+21283,National Career Education,Citrus Heights,Sacramento,Sacramento-Tahoe,Certificate,Private for-profit,438,95610,38.679835,-121.273917,38015,24800
+21618,Musicians Institute,Hollywood,Los Angeles,Los Angeles,Certificate,Private for-profit,735,90028,34.101265,-118.337582,32778,37793
+21678,Estes Institute of Cosmetology Arts and Science,Visalia,Tulare,San Joaquin Valley,Certificate,Private for-profit,41,93291,36.330422,-119.289234,26965,12990
+21858,Moler Barber College,Oakland,Alameda,Bay Area,Certificate,Private for-profit,335,94609-2419,37.827075,-122.265352,15204,22135
+22110,Salon Success Academy-Riverside,Riverside,Riverside,Inland Empire,Certificate,Private for-profit,173,92506,33.943149,-117.391024,21777,13095
+22171,Pima Medical Institute-Chula Vista,Chula Vista,San Diego,San Diego,Certificate,Private for-profit,675,91910,32.619858,-117.093388,38673,21925
+22171,Pima Medical Institute-San Marcos,San Marcos,San Diego,San Diego,Certificate,Private for-profit,630,92078-8702,33.136906,-117.160199,38673,29950
+22260,East Los Angeles College,Monterey Park,Los Angeles,Los Angeles,Associate's,Public,24401,91754-6099,34.040531,-118.148785,42006,9791
+22309,Fredrick and Charles Beauty College,Eureka,Humboldt,North-Far North,Certificate,Private for-profit,67,95501,40.798885,-124.164986,21826,14402
+22319,Gemological Institute of America-Carlsbad,Carlsbad,San Diego,San Diego,Certificate,Private non-profit,308,92008,33.131313,-117.318765,42588,31435
+22364,Thanh Le College School of Cosmetology,Garden Grove,Orange,Orange,Certificate,Private for-profit,54,92840,33.789713,-117.908306,13265,21350
+22418,American Career College-Anaheim,Anaheim,Orange,Orange,Certificate,Private for-profit,1643,92801-0000,33.849912,-117.975599,38430,27397
+22418,American Career College-Los Angeles,Los Angeles,Los Angeles,Los Angeles,Certificate,Private for-profit,2066,90004,34.079323,-118.292481,38430,27508
+22427,Berkeley City College,Berkeley,Alameda,Bay Area,Associate's,Public,4541,94704,37.869769,-122.269877,41217,8957
+22482,Milan Institute of Cosmetology-Vacaville,Vacaville,Solano,Bay Area,Certificate,Private for-profit,234,95688,38.370051,-121.960688,22378,25234
+22774,South Coast College,Orange,Orange,Orange,Certificate,Private for-profit,241,92868-2609,33.78818,-117.874031,44897,22480
+23328,CET-Soledad,Soledad,Monterey,Central Coast,Certificate,Private non-profit,179,93960-2996,36.41456,-121.316599,32986,10377
+23328,CET-Coachella,Coachella,Riverside,Inland Empire,Certificate,Private non-profit,84,92236,33.692248,-116.185875,32986,11202
+23328,CET-El Centro,El Centro,Imperial,Imperial,Certificate,Private non-profit,167,92243,32.790908,-115.549079,32986,19211
+23328,CET-Colton,Colton,San Bernardino,Inland Empire,Certificate,Private non-profit,191,92324,34.077381,-117.353488,32986,15800
+23328,CET-Oxnard,Oxnard,Ventura,Central Coast,Certificate,Private non-profit,82,93030,34.194208,-119.18145,32986,9534
+23328,CET-San Diego,San Diego,San Diego,San Diego,Certificate,Private non-profit,225,92102,32.711302,-117.105328,32986,19875
+23328,CET-Salinas,Salinas,Monterey,Central Coast,Certificate,Private non-profit,187,93906,36.707333,-121.65236,32986,6804
+23328,CET-Santa Maria,Santa Maria,Santa Barbara,Central Coast,Certificate,Private non-profit,125,93458,34.943576,-120.441978,32986,2869
+23328,CET-Watsonville,Watsonville,Santa Cruz,Central Coast,Certificate,Private non-profit,149,95076,36.931833,-121.767991,32986,1532
+23328,CET-San Jose,San Jose,Santa Clara,Bay Area,Certificate,Private non-profit,175,95110,37.322723,-121.88698,32986,15045
+23385,North-West College-San Diego,San Diego,San Diego,San Diego,Associate's,Private for-profit,551,92115-1506,32.765537,-117.066577,41472,43043
+23385,Glendale Career College,Glendale,Los Angeles,Los Angeles,Associate's,Private for-profit,854,91203,34.149771,-118.254719,41472,46212
+23385,Glendale Career College-North-West College-Bakersfield,Bakersfield,Kern,San Joaquin Valley,Certificate,Private for-profit,387,93304-5075,35.339951,-119.035082,41472,49781
+23434,Bellus Academy-Poway,Poway,San Diego,San Diego,Certificate,Private for-profit,369,92064,32.957184,-117.042531,25223,30336
+24948,CRU Institute of Cosmetology and Barbering,Garden Grove,Orange,Orange,Certificate,Private for-profit,129,92845-4321,33.790145,-118.030758,20125,18165
+24973,Milan Institute-Visalia,Visalia,Tulare,San Joaquin Valley,Certificate,Private for-profit,632,93277,36.27164,-119.312151,32493,28638
+25204,Adrian's Beauty College of Turlock,Turlock,Stanislaus,San Joaquin Valley,Certificate,Private for-profit,71,95380,37.491448,-120.863784,18199,24393
+25318,Paul Mitchell the School-San Diego,San Diego,San Diego,San Diego,Certificate,Private for-profit,250,92101,32.719128,-117.160838,26897,25671
+25318,Paul Mitchell the School-Costa Mesa,Costa Mesa,Orange,Orange,Certificate,Private for-profit,347,92626,33.695103,-117.927468,26897,12063
+25372,Palomar Institute of Cosmetology,San Marcos,San Diego,San Diego,Certificate,Private for-profit,173,92078,33.13663,-117.188351,23451,18176
+25395,Irvine Valley College,Irvine,Orange,Orange,Associate's,Public,9577,92618-0301,33.675381,-117.777539,49156,1886
+25423,National Holistic Institute,Emeryville,Alameda,Bay Area,Certificate,Private for-profit,1134,94608-2008,37.841898,-122.287672,27978,29199
+25434,Brownson Technical School,Anaheim,Orange,Orange,Certificate,Private for-profit,284,92805,33.819032,-117.905774,68767,32584
+25459,Hypnosis Motivation Institute,Tarzana,Los Angeles,Los Angeles,Certificate,Private non-profit,335,91356-4159,34.170219,-118.538719,24244,42523
+25535,Associated Technical College-San Diego,San Diego,San Diego,San Diego,Certificate,Private for-profit,77,92108-1630,32.773178,-117.135196,26688,24674
+25536,Diversified Vocational College,Los Angeles,Los Angeles,Los Angeles,Certificate,Private for-profit,224,90017-1604,34.056102,-118.272364,25328,21444
+25593,UEI College-Garden Grove,Garden Grove,Orange,Orange,Certificate,Private for-profit,1093,92840-2409,33.801877,-117.943701,31141,23923
+25593,UEI College-Huntington Park,Huntington Park,Los Angeles,Los Angeles,Certificate,Private for-profit,1036,90255-2933,33.986057,-118.226206,31141,26959
+25593,UEI College-West Covina,West Covina,Los Angeles,Los Angeles,Certificate,Private for-profit,1022,91731-2806,34.075984,-117.90946,31141,25924
+25593,UEI College-Ontario,Ontario,San Bernardino,Inland Empire,Certificate,Private for-profit,930,91764-5574,34.0694,-117.547733,31141,25076
+25593,UEI College-Reseda,Reseda,Los Angeles,Los Angeles,Certificate,Private for-profit,1056,91335-4631,34.200881,-118.526784,31141,25949
+25593,UEI College-Oceanside,Oceanside,San Diego,San Diego,Certificate,Private for-profit,777,92058-2321,33.204442,-117.36182,31141,25560
+25593,UEI College-Chula Vista,Chula Vista,San Diego,San Diego,Certificate,Private for-profit,1344,91911-3262,32.608605,-117.065355,31141,26798
+25593,UEI College-Stockton,Stockton,San Joaquin,San Joaquin Valley,Certificate,Private for-profit,823,95207-0000,37.99756,-121.308461,31141,25283
+25594,InterCoast Colleges-Riverside,Riverside,Riverside,Inland Empire,Certificate,Private for-profit,63,92508,33.888511,-117.281383,36089,23880
+25594,InterCoast Colleges-Rancho Cordova,Rancho Cordova,Sacramento,Sacramento-Tahoe,Certificate,Private for-profit,78,95827,38.561309,-121.334243,36089,23629
+25594,InterCoast Colleges-Fairfield,Fairfield,Solano,Bay Area,Certificate,Private for-profit,139,94534,38.212134,-122.147995,36089,23134
+25594,InterCoast Colleges-West Covina,West Covina,Los Angeles,Los Angeles,Certificate,Private for-profit,507,91791,34.073357,-117.897148,36089,23693
+25916,North-West College-Van Nuys,Van Nuys,Los Angeles,Los Angeles,Certificate,Private for-profit,225,91411,34.189497,-118.450184,32488,33464
+25964,Spartan College of Aeronautics and Technology,Riverside,Riverside,Inland Empire,Certificate,Private for-profit,261,92509-8716,33.990127,,61575,32884
+25964,Spartan College of Aeronautics & Technology,Inglewood,Los Angeles,Los Angeles,Certificate,Private for-profit,319,90301-2904,33.956018,-118.377744,61575,30099
+26023,Central Coast College,Salinas,Monterey,Central Coast,Certificate,Private for-profit,490,93906,36.706345,-121.652394,40823,26640
+30199,Capstone College,Pasadena,Los Angeles,Los Angeles,Certificate,Private for-profit,140,91103,34.165741,-118.149478,35348,18047
+30277,Pacific College of Health and Science,San Diego,San Diego,San Diego,Certificate,Private for-profit,173,92108-4407,32.778391,-117.16073,26209,39710
+30296,Pomona Unified School District Adult and Career Education,Pomona,Los Angeles,Los Angeles,Certificate,Public,84,91767,34.061736,-117.720478,34849,6005
+30357,Las Positas College,Livermore,Alameda,Bay Area,Associate's,Public,6766,94551-7650,37.710873,-121.80058,51088,4175
+30399,Fremont University,Cerritos,Los Angeles,Los Angeles,Associate's,Private for-profit,153,90703,33.868382,-118.097019,39003,32256
+30624,Mt. Diablo Adult Education-Mt. Diablo USD,Concord,Contra Costa,Bay Area,Certificate,Public,153,94518-1199,37.968852,-122.026805,40175,12260
+30627,Platt College-Ontario,Ontario,San Bernardino,Inland Empire,Associate's,Private for-profit,467,91764,34.068595,-117.571744,40669,27002
+30627,Platt College-Riverside,Riverside,Riverside,Inland Empire,Associate's,Private for-profit,416,92507,33.932923,-117.298365,40669,26217
+30627,Platt College-Anaheim,Anaheim,Orange,Orange,Associate's,Private for-profit,405,92806-5949,33.809417,-117.878211,40669,25680
+30627,Platt College-Los Angeles,Alhambra,Los Angeles,Los Angeles,Associate's,Private for-profit,598,91803,34.081723,-118.150013,40669,28014
+30634,Modern Technology School,Fountain Valley,Orange,Orange,Certificate,Private for-profit,99,92708-9821,33.723142,-117.918837,50667,23046
+30674,Baldwin Park Adult & Community Education,Baldwin Park,Los Angeles,Los Angeles,Certificate,Public,435,91706-4221,34.09673,-117.959486,32069,7450
+30675,Institute of Technology,Clovis,Fresno,San Joaquin Valley,Certificate,Private for-profit,1376,93612,36.83679,-119.723249,35095,23027
+30847,Ventura Adult and Continuing Education,Ventura,Ventura,Central Coast,Certificate,Public,52,93003-0000,34.256061,-119.219561,38232,9949
+30977,Central California School of Continuing Education,San Luis Obispo,San Luis Obispo,Central Coast,Certificate,Private for-profit,72,93401,35.262091,-120.64847,41223,14364
+30987,Milan Institute-Palm Desert,Palm Desert,Riverside,Inland Empire,Certificate,Private for-profit,290,92211,33.783343,-116.353268,29491,27930
+31081,Summit College,San Bernardino,San Bernardino,Inland Empire,Certificate,Private for-profit,1210,92408,34.072073,-117.26818,40187,24161
+31133,UEI College-Bakersfield,Bakersfield,Kern,San Joaquin Valley,Certificate,Private for-profit,1385,93308-0000,35.381617,-119.049925,27688,27712
+31133,UEI College-Fresno,Fresno,Fresno,San Joaquin Valley,Certificate,Private for-profit,974,93726-5398,36.782858,-119.789002,27688,28271
+31136,Southern California Institute of Technology,Anaheim,Orange,Orange,Certificate,Private for-profit,533,92801-3758,33.8381,-117.950661,53598,27735
+31253,John Wesley International Barber and Beauty College,Long Beach,Los Angeles,Los Angeles,Certificate,Private for-profit,61,90813,33.778235,-118.18469,23643,12735
+31258,Premiere Career College,Irwindale,Los Angeles,Los Angeles,Certificate,Private for-profit,106,91706-3746,34.079755,-117.990894,41270,23214
+31444,American College of Healthcare and Technology-Santa Ana,Santa Ana,Orange,Orange,Certificate,Private for-profit,85,92705-8680,33.759681,-117.840955,31109,14794
+31444,American College of Healthcare and Technology,Riverside,Riverside,Inland Empire,Certificate,Private for-profit,321,92505,33.901581,-117.493507,31109,15115
+31444,American College of Healthcare and Technology,Huntington Park,Los Angeles,Los Angeles,Certificate,Private for-profit,155,90255,33.98271,-118.224752,31109,12483
+32423,Career Networks Institute,Santa Ana,Orange,Orange,Associate's,Private for-profit,971,92705,33.721058,-117.8478,45256,28292
+32503,CBD College,Los Angeles,Los Angeles,Los Angeles,Associate's,Private non-profit,1408,90010,34.06231,-118.306221,37237,21100
+32993,Pacific College,Costa Mesa,Orange,Orange,Associate's,Private for-profit,285,92626-3402,33.680043,-117.873382,70064,21941
+33673,Professional Golfers Career College,Temecula,Riverside,Inland Empire,Associate's,Private for-profit,110,92591,33.528952,-117.163739,46079,31397
+34223,Milan Institute-Bakersfield,Bakersfield,Kern,San Joaquin Valley,Certificate,Private for-profit,514,93301,35.385513,-119.023088,24879,29198
+34223,Milan Institute-Merced,Merced,Merced,San Joaquin Valley,Certificate,Private for-profit,308,95340-2626,37.322518,-120.481067,24879,28094
+34223,Milan Institute-Clovis,Clovis,Fresno,San Joaquin Valley,Certificate,Private for-profit,569,93612,36.810625,-119.725573,24879,21941
+34404,Marian Health Careers Center-Los Angeles Campus,Los Angeles,Los Angeles,Los Angeles,Certificate,Private for-profit,154,90010,34.062096,-118.295073,63612,30387
+34404,Marian Health Careers Center-Van Nuys Campus,Van Nuys,Los Angeles,Los Angeles,Certificate,Private for-profit,88,91411,34.177483,-118.465561,63612,32543
+34793,PCI College,Cerritos,Los Angeles,Los Angeles,Associate's,Private for-profit,168,90703,33.87475,-118.100169,36141,24046
+35324,ATA College,El Cajon,San Diego,San Diego,Certificate,Private for-profit,106,92020,32.819023,-116.981781,35017,20906
+35424,Copper Mountain Community College,Joshua Tree,San Bernardino,Inland Empire,Associate's,Public,1090,92252,34.140464,-116.213939,33281,7962
+35773,Coba Academy,Anaheim,Orange,Orange,Certificate,Private for-profit,100,92801,33.841141,-117.943108,21208,16761
+35904,NTMA Training Centers of Southern California,Santa Fe Springs,Los Angeles,Los Angeles,Certificate,Private non-profit,64,90670,33.94302,-118.074231,45713,22219
+36393,Smith Chason College,Los Angeles,Los Angeles,Los Angeles,Associate's,Private for-profit,2221,90010,34.061409,-118.302836,58004,34402
+36463,Design's School of Cosmetology,Paso Robles,San Luis Obispo,Central Coast,Certificate,Private for-profit,93,93446,35.648459,-120.672526,23937,17968
+36813,California Healing Arts College,Carson,Los Angeles,Los Angeles,Certificate,Private for-profit,298,90746-7323,33.844718,-118.265919,25151,19024
+36953,CES College,Burbank,Los Angeles,Los Angeles,Certificate,Private non-profit,106,91502-2750,34.180401,-118.303297,22916,27139
+36957,Santiago Canyon College,Orange,Orange,Orange,Certificate,Public,10613,92869-4512,33.795449,-117.766762,44956,3407
+37363,Advance Beauty College,Garden Grove,Orange,Orange,Certificate,Private for-profit,448,92843,33.759905,-117.952637,11575,11689
+37404,ATI College-Whittier,Whitter,Los Angeles,Los Angeles,Certificate,Private for-profit,141,90603-0000,33.948364,-118.003687,38938,26689
+37593,Stellar Career College,Modesto,Stanislaus,San Joaquin Valley,Certificate,Private for-profit,50,95356,37.701963,-121.071015,30337,13155
+37974,Career Care Institute,Lancaster,Los Angeles,Los Angeles,Certificate,Private for-profit,649,93534,34.678236,-118.15638,39888,45587
+38713,Folsom Lake College,Folsom,Sacramento,Sacramento-Tahoe,Associate's,Public,8937,95630,38.661372,-121.127486,42568,3661
+38743,Sutter County Career Training Center,Yuba City,Sutter,Sacramento-Tahoe,Certificate,Private for-profit,50,95993,39.139961,-121.652275,34846,24876
+38744,Community Christian College,Redlands,San Bernardino,Inland Empire,Associate's,Private non-profit,428,92374-2893,34.068664,-117.217101,39217,20033
+38893,Stanbridge University,Irvine,Orange,Orange,Associate's,Private for-profit,2373,92612,33.678879,-117.857636,62144,25114
+39104,National Polytechnic College,Lakewood,Los Angeles,Los Angeles,Associate's,Private for-profit,299,90712,33.860528,-118.143809,30781,31626
+39353,California Nurses Educational Institute,Palm Springs,Riverside,Inland Empire,Certificate,Private for-profit,114,92264,33.816672,-116.490142,46895,21278
+39644,International School of Beauty Inc,Palm Desert,Riverside,Inland Empire,Certificate,Private for-profit,173,92260-2740,33.729555,-116.403928,19799,13450
+39696,UEI College-Sacramento,Sacramento,Sacramento,Sacramento-Tahoe,Certificate,Private for-profit,1086,95823-2512,38.494532,-121.454197,30848,26924
+39696,UEI College-Gardena,Gardena,Los Angeles,Los Angeles,Certificate,Private for-profit,1444,90247-4201,33.893016,-118.287234,30848,26611
+39696,UEI College-Riverside,Riverside,Riverside,Inland Empire,Certificate,Private for-profit,1447,92507-5344,33.975392,-117.351755,30848,25704
+39713,American Career College-Ontario,Ontario,San Bernardino,Inland Empire,Certificate,Private for-profit,2014,91764,34.068204,-117.583814,38492,29807
+39993,Beaumont Adult School,Beaumont,Riverside,Inland Empire,Certificate,Public,101,92223,33.951365,-116.964728,50801,30407
+40013,Los Angeles College of Aesthetics,Los Angeles,Los Angeles,Los Angeles,Certificate,Private for-profit,101,90006,34.044739,-118.309491,16540,22239
+40033,Blake Austin College,Vacaville,Solano,Bay Area,Certificate,Private for-profit,11,95687,38.378548,-121.945606,42518,30926
+40144,Palladium Technical Academy Inc,Temple City,Los Angeles,Los Angeles,Certificate,Private for-profit,45,91780,34.091838,-118.04358,34799,16761
+40573,Asher College,Sacramento,Sacramento,Sacramento-Tahoe,Associate's,Private for-profit,699,95825,38.587784,-121.415767,45468,16924
+40923,Coastline Beauty College,Fountain Valley,Orange,Orange,Certificate,Private for-profit,185,92708,33.728821,-117.921471,11585,14231
+41113,Lemoore College,Lemoore,Kings,San Joaquin Valley,Associate's,Public,3223,93245,36.292431,-119.823866,40292,7961
+41145,Valley College of Medical Careers,West Hills,Los Angeles,Los Angeles,Certificate,Private for-profit,57,91304,34.221839,-118.606731,37453,21967
+41153,Coachella Valley Beauty College-Hemet,Hemet,Riverside,Inland Empire,Certificate,Private for-profit,101,92545,33.745675,-117.010783,19665,15776
+41153,Coachella Valley Beauty College,La Quinta,Riverside,Inland Empire,Certificate,Private for-profit,88,92253,33.708193,-116.278254,19665,16812
+41156,Mayfield College,Cathedral City,Riverside,Inland Empire,Certificate,Private for-profit,316,92234,33.790822,-116.458827,29384,22604
+41188,New York Film Academy,Burbank,Los Angeles,Los Angeles,Certificate,Private for-profit,965,91505,34.152076,-118.335567,29633,46420
+41324,Academy of Esthetics and Cosmetology,San Fernando,Los Angeles,Los Angeles,Certificate,Private for-profit,28,91340-3212,34.285043,-118.444228,35089,18458
+41327,Healthcare Career College,Paramount,Los Angeles,Los Angeles,Certificate,Private for-profit,381,90723-5258,33.889719,-118.149645,32613,14534
+41387,Paul Mitchell the School-Pasadena,Pasadena,Los Angeles,Los Angeles,Certificate,Private for-profit,200,91101,34.144765,-118.133403,25845,30966
+41413,San Francisco Institute of Esthetics & Cosmetology Inc,San Francisco,San Francisco,Bay Area,Certificate,Private for-profit,202,94103,37.777043,-122.407083,32926,16845
+41414,Laurus College,San Luis Obispo,San Luis Obispo,Central Coast,Associate's,Private for-profit,794,93401,35.2682,-120.669519,30896,15693
+41417,Healing Hands School of Holistic Health,Escondido,San Diego,San Diego,Certificate,Private for-profit,256,92025,33.124571,-117.078694,24366,56381
+41438,Woodland Community College,Woodland,Yolo,Sacramento-Tahoe,Associate's,Public,2949,95776,38.660392,-121.73533,40042,4097
+41442,Career Development Institute Inc,Los Angeles,Los Angeles,Los Angeles,Certificate,Private for-profit,168,90035,34.045817,-118.386067,62209,21412
+41456,International College of Cosmetology,Oakland,Alameda,Bay Area,Certificate,Private for-profit,125,94601-3525,37.774887,-122.220803,21099,1973
+41460,National Career College,Panorama City,Los Angeles,Los Angeles,Certificate,Private for-profit,366,91402,34.22245,-118.446211,19347,17772
+41482,Beyond 21st Century Beauty Academy,Santa Fe Springs,Los Angeles,Los Angeles,Certificate,Private for-profit,102,90670,33.916443,-118.041477,25139,19155
+41497,Homestead Schools,Torrance,Los Angeles,Los Angeles,Certificate,Private non-profit,176,90505,33.809096,-118.35009,59398,15845
+41528,Paul Mitchell the School-Sacramento,Sacramento,Sacramento,Sacramento-Tahoe,Certificate,Private for-profit,342,95825,38.594752,-121.41594,30336,19748
+41582,Paul Mitchell the School-Sherman Oaks,Sherman Oaks,Los Angeles,Los Angeles,Certificate,Private for-profit,280,91403,34.154315,-118.467289,26262,26369
+41597,American Medical Sciences Center,Glendale,Los Angeles,Los Angeles,Associate's,Private for-profit,200,91204-5108,34.147117,-118.256991,29972,23566
+41604,Angeles College,Los Angeles,Los Angeles,Los Angeles,Certificate,Private for-profit,484,90010,34.061223,-118.29903,49108,25805
+41628,Paul Mitchell the School-Modesto,Modesto,Stanislaus,San Joaquin Valley,Certificate,Private for-profit,305,95350,37.68301,-120.993745,28691,17550
+41644,Angeles Institute,ARTESIA,Los Angeles,Los Angeles,Certificate,Private for-profit,132,90701-2713,33.875772,-118.080741,61195,23161
+41659,Paul Mitchell the School-Fresno,Fresno,Fresno,San Joaquin Valley,Certificate,Private for-profit,262,93710,36.809778,-119.782437,29671,20048
+41670,Paul Mitchell the School-Temecula,Temecula,Riverside,Inland Empire,Certificate,Private for-profit,275,92591,33.507316,-117.146674,22452,33646
+41697,Unitek College,Fremont,Alameda,Bay Area,Certificate,Private for-profit,4715,94538,37.50904,-121.961761,79550,25719
+41698,Gurnick Academy of Medical Arts,San Jose,Santa Clara,Bay Area,Certificate,Private for-profit,2844,95112,37.364294,-121.912991,66844,30558
+41734,Santa Ana Beauty Academy,Santa Ana,Orange,Orange,Certificate,Private for-profit,45,92705-7820,33.766402,-117.835205,28107,7995
+41735,Moreno Valley College,Moreno Valley,Riverside,Inland Empire,Associate's,Public,8292,92551,33.88744,-117.20271,52133,1996
+41752,Paul Mitchell the School-East Bay,Pleasant Hill,Contra Costa,Bay Area,Certificate,Private for-profit,212,94523,37.94492,-122.061226,29418,30889
+41754,Elite Cosmetology School,PALM DESERT,Riverside,Inland Empire,Certificate,Private for-profit,123,92260,33.723624,-116.394724,17966,17818
+41761,Norco College,Norco,Riverside,Inland Empire,Associate's,Public,8359,92860,33.917387,-117.570212,51206,2845
+41800,Cinta Aveda Institute,San Francisco,San Francisco,Bay Area,Certificate,Private for-profit,95,94108-3204,37.790935,-122.404307,34937,10821
+41812,Southern California Health Institute,North Hollywood,Los Angeles,Los Angeles,Certificate,Private for-profit,69,91601,34.173485,-118.370014,34558,26692
+41954,Unitek College,South San Francisco,San Mateo,Bay Area,Certificate,Private for-profit,255,94080-1005,37.65642,-122.455603,87877,28283
+41954,Unitek College,Hayward,Alameda,Bay Area,Certificate,Private for-profit,326,94541-7026,37.661039,-122.116059,87877,27158
+42817,Compton College,Compton,Los Angeles,Los Angeles,Associate's,Public,2881,90221-5393,33.878226,-118.209463,34181,11103

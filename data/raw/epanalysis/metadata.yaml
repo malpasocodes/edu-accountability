@@ -1,0 +1,34 @@
+source: epanalysis Repository (California ROI Analysis)
+url: https://github.com/malpasocodes/epanalysis
+description: |
+  Return on Investment analysis for California's 2-year and certificate-granting
+  colleges. Includes pre-calculated ROI metrics, earnings premiums, and rankings
+  using dual baseline methodology (statewide vs county).
+coverage: 120 California Associate's degree-granting institutions
+data_sources:
+  - College Scorecard (median earnings 10 years post-entry)
+  - IPEDS (net price, institution characteristics)
+  - Census ACS 5-year estimates (high school baseline earnings)
+update_frequency: Annual
+last_updated: 2024
+baseline_statewide: $24,939.44
+methodology: |
+  ROI = Total Program Net Price / Earnings Premium
+  Premium = Graduate Earnings - High School Baseline Earnings
+fields:
+  - OPEID6: 6-digit OPEID institution identifier
+  - Institution: Institution name
+  - County: California county location
+  - Sector: Public/Private/For-profit
+  - median_earnings_10yr: Median earnings 10 years after entry
+  - total_net_price: Total program net price
+  - premium_statewide: Earnings vs CA state baseline
+  - premium_regional: Earnings vs county baseline
+  - roi_statewide_years: Years to recoup (state baseline)
+  - roi_regional_years: Years to recoup (county baseline)
+  - rank_statewide: ROI rank using state baseline
+  - rank_regional: ROI rank using regional baseline
+  - rank_change: Difference between rankings
+  - hs_median_income: County high school baseline earnings
+migration_date: 2025-10-06
+migration_purpose: Consolidate epanalysis into College Accountability Dashboard
