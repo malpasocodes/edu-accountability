@@ -117,11 +117,15 @@ COLLEGE_EXPLORER_CHARTS: List[str] = [
 
 # ROI labels (California institutions only - migrated from epanalysis)
 ROI_OVERVIEW_LABEL = "Overview"
+ROI_EARNINGS_PREMIUM_LABEL = "Earnings Premium (All)"
+ROI_EARNINGS_PREMIUM_RANKINGS_LABEL = "Earnings Premium Rankings"
 ROI_QUADRANT_LABEL = "Cost vs Earnings Quadrant"
 ROI_RANKINGS_LABEL = "Top 25 ROI Rankings"
 ROI_DISTRIBUTION_LABEL = "ROI by Sector"
 
 ROI_CHARTS: List[str] = [
+    ROI_EARNINGS_PREMIUM_LABEL,
+    ROI_EARNINGS_PREMIUM_RANKINGS_LABEL,
     ROI_QUADRANT_LABEL,
     ROI_RANKINGS_LABEL,
     ROI_DISTRIBUTION_LABEL,
