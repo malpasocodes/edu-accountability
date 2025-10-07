@@ -11,8 +11,9 @@ from .constants import (
     FEDERAL_LOANS_SECTION,
     PELL_SECTION,
     DISTANCE_EDUCATION_SECTION,
-    COLLEGE_EXPLORER_SECTION,
+    EARNINGS_PREMIUM_SECTION,
     ROI_SECTION,
+    COLLEGE_EXPLORER_SECTION,
     VALUE_GRID_OVERVIEW_LABEL,
     FOUR_YEAR_VALUE_GRID_LABEL,
     TWO_YEAR_VALUE_GRID_LABEL,
@@ -22,10 +23,12 @@ from .constants import (
     PELL_CHARTS,
     DISTANCE_OVERVIEW_LABEL,
     DISTANCE_CHARTS,
-    COLLEGE_EXPLORER_OVERVIEW_LABEL,
-    COLLEGE_EXPLORER_CHARTS,
+    EARNINGS_PREMIUM_OVERVIEW_LABEL,
+    EARNINGS_PREMIUM_CHARTS,
     ROI_OVERVIEW_LABEL,
     ROI_CHARTS,
+    COLLEGE_EXPLORER_OVERVIEW_LABEL,
+    COLLEGE_EXPLORER_CHARTS,
 )
 
 
@@ -154,25 +157,25 @@ class NavigationConfig:
         description="Explore distance education enrollment patterns"
     )
 
-    COLLEGE_EXPLORER = SectionConfig(
-        name=COLLEGE_EXPLORER_SECTION,
-        icon="🔍",
-        label="College Explorer",
+    EARNINGS_PREMIUM = SectionConfig(
+        name=EARNINGS_PREMIUM_SECTION,
+        icon="📈",
+        label="Earnings Premium",
         overview_chart=ChartConfig(
-            label=COLLEGE_EXPLORER_OVERVIEW_LABEL,
-            key="nav_college_explorer_overview",
-            description="Explore individual college data"
+            label=EARNINGS_PREMIUM_OVERVIEW_LABEL,
+            key="nav_earnings_premium_overview",
+            description="Earnings premium analysis"
         ),
         charts=[
             ChartConfig(
                 label=chart_label,
-                key=f"nav_college_explorer_{index}",
+                key=f"nav_earnings_premium_{index}",
                 description=None
             )
-            for index, chart_label in enumerate(COLLEGE_EXPLORER_CHARTS)
+            for index, chart_label in enumerate(EARNINGS_PREMIUM_CHARTS)
         ],
-        session_key="college_explorer_chart",
-        description="Get detailed information on individual colleges"
+        session_key="earnings_premium_chart",
+        description="Analyze earnings premiums for higher education"
     )
 
     ROI = SectionConfig(
@@ -196,6 +199,27 @@ class NavigationConfig:
         description="Analyze return on investment for higher education"
     )
 
+    COLLEGE_EXPLORER = SectionConfig(
+        name=COLLEGE_EXPLORER_SECTION,
+        icon="🔍",
+        label="College Explorer",
+        overview_chart=ChartConfig(
+            label=COLLEGE_EXPLORER_OVERVIEW_LABEL,
+            key="nav_college_explorer_overview",
+            description="Explore individual college data"
+        ),
+        charts=[
+            ChartConfig(
+                label=chart_label,
+                key=f"nav_college_explorer_{index}",
+                description=None
+            )
+            for index, chart_label in enumerate(COLLEGE_EXPLORER_CHARTS)
+        ],
+        session_key="college_explorer_chart",
+        description="Get detailed information on individual colleges"
+    )
+
     @classmethod
     def get_sections(cls) -> List[SectionConfig]:
         """Get all configured sections in navigation order."""
@@ -205,8 +229,9 @@ class NavigationConfig:
             cls.FEDERAL_LOANS,
             cls.PELL_GRANTS,
             cls.DISTANCE_EDUCATION,
-            cls.COLLEGE_EXPLORER,
+            cls.EARNINGS_PREMIUM,
             cls.ROI,
+            cls.COLLEGE_EXPLORER,
         ]
     
     @classmethod

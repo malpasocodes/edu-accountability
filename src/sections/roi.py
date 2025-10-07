@@ -182,7 +182,7 @@ class ROISection(BaseSection):
             return
 
         # California-only reminder
-        st.info("📍 **California Institutions Only** - This analysis covers 116 California community and technical colleges.")
+        st.info("📍 **California Institutions Only** - This analysis covers California community and technical colleges.")
 
         # Render appropriate chart
         if chart_name == ROI_QUADRANT_LABEL:
@@ -191,10 +191,6 @@ class ROISection(BaseSection):
             self._render_rankings_chart(roi_data)
         elif chart_name == ROI_DISTRIBUTION_LABEL:
             self._render_distribution_chart(roi_data)
-        elif chart_name == ROI_EARNINGS_PREMIUM_LABEL:
-            self._render_earnings_premium_table(roi_data)
-        elif chart_name == ROI_EARNINGS_PREMIUM_RANKINGS_LABEL:
-            self._render_earnings_premium_rankings(roi_data)
         else:
             st.error(f"Unknown chart: {chart_name}")
 
@@ -472,8 +468,6 @@ class ROISection(BaseSection):
     def get_available_charts(self) -> List[str]:
         """Get available charts for ROI section."""
         return [
-            ROI_EARNINGS_PREMIUM_LABEL,
-            ROI_EARNINGS_PREMIUM_RANKINGS_LABEL,
             ROI_QUADRANT_LABEL,
             ROI_RANKINGS_LABEL,
             ROI_DISTRIBUTION_LABEL,

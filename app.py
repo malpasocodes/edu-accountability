@@ -11,8 +11,9 @@ from src.config.constants import (
     FEDERAL_LOANS_SECTION,
     PELL_SECTION,
     DISTANCE_EDUCATION_SECTION,
-    COLLEGE_EXPLORER_SECTION,
+    EARNINGS_PREMIUM_SECTION,
     ROI_SECTION,
+    COLLEGE_EXPLORER_SECTION,
 )
 from src.core import DataManager, DataLoadError
 from src.sections import (
@@ -21,8 +22,9 @@ from src.sections import (
     FederalLoansSection,
     PellGrantsSection,
     DistanceEducationSection,
-    CollegeExplorerSection,
+    EarningsPremiumSection,
     ROISection,
+    CollegeExplorerSection,
 )
 from src.state import SessionManager
 
@@ -88,8 +90,9 @@ def render_main(data_manager: DataManager) -> None:
         FEDERAL_LOANS_SECTION: FederalLoansSection(data_manager),
         PELL_SECTION: PellGrantsSection(data_manager),
         DISTANCE_EDUCATION_SECTION: DistanceEducationSection(data_manager),
-        COLLEGE_EXPLORER_SECTION: CollegeExplorerSection(data_manager),
+        EARNINGS_PREMIUM_SECTION: EarningsPremiumSection(data_manager),
         ROI_SECTION: ROISection(data_manager),
+        COLLEGE_EXPLORER_SECTION: CollegeExplorerSection(data_manager),
     }
     
     # Get the active section instance

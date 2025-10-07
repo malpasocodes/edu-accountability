@@ -12,8 +12,9 @@ VALUE_GRID_SECTION = "College Value Grid"
 FEDERAL_LOANS_SECTION = "Federal Loans"
 PELL_SECTION = "Pell Grants"
 DISTANCE_EDUCATION_SECTION = "Distance Education"
-COLLEGE_EXPLORER_SECTION = "College Explorer"
+EARNINGS_PREMIUM_SECTION = "Earnings Premium"
 ROI_SECTION = "ROI"
+COLLEGE_EXPLORER_SECTION = "College Explorer"
 
 
 @dataclass(frozen=True)
@@ -115,17 +116,23 @@ COLLEGE_EXPLORER_CHARTS: List[str] = [
     COLLEGE_GRAD_RATES_LABEL,
 ]
 
-# ROI labels (California institutions only - migrated from epanalysis)
-ROI_OVERVIEW_LABEL = "Overview"
+# Earnings Premium labels (California institutions only)
+EARNINGS_PREMIUM_OVERVIEW_LABEL = "Overview"
 ROI_EARNINGS_PREMIUM_LABEL = "Earnings Premium (All)"
 ROI_EARNINGS_PREMIUM_RANKINGS_LABEL = "Earnings Premium Rankings"
+
+EARNINGS_PREMIUM_CHARTS: List[str] = [
+    ROI_EARNINGS_PREMIUM_LABEL,
+    ROI_EARNINGS_PREMIUM_RANKINGS_LABEL,
+]
+
+# ROI labels (California institutions only - migrated from epanalysis)
+ROI_OVERVIEW_LABEL = "Overview"
 ROI_QUADRANT_LABEL = "Cost vs Earnings Quadrant"
 ROI_RANKINGS_LABEL = "Top 25 ROI Rankings"
 ROI_DISTRIBUTION_LABEL = "ROI by Sector"
 
 ROI_CHARTS: List[str] = [
-    ROI_EARNINGS_PREMIUM_LABEL,
-    ROI_EARNINGS_PREMIUM_RANKINGS_LABEL,
     ROI_QUADRANT_LABEL,
     ROI_RANKINGS_LABEL,
     ROI_DISTRIBUTION_LABEL,
@@ -142,6 +149,7 @@ DEFAULT_SESSION_STATE: Dict[str, str] = {
     "loan_chart": LOAN_OVERVIEW_LABEL,
     "pell_chart": PELL_OVERVIEW_LABEL,
     "distance_chart": DISTANCE_OVERVIEW_LABEL,
-    "college_explorer_chart": COLLEGE_EXPLORER_OVERVIEW_LABEL,
+    "earnings_premium_chart": EARNINGS_PREMIUM_OVERVIEW_LABEL,
     "roi_chart": ROI_OVERVIEW_LABEL,
+    "college_explorer_chart": COLLEGE_EXPLORER_OVERVIEW_LABEL,
 }
