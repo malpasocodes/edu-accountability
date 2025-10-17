@@ -59,7 +59,7 @@ def render_cost_vs_grad_scatter(
         .encode(
             x=alt.X(
                 "cost:Q",
-                title="Cost (In-State Tuition)",
+                title="Cost (In-State Tuition, 2023-24 USD)",
                 scale=alt.Scale(domain=[cost_domain_min, cost_domain_max]),
                 axis=alt.Axis(titleFontSize=18, titleFontWeight="bold"),
             ),
@@ -81,7 +81,7 @@ def render_cost_vs_grad_scatter(
             ),
             tooltip=[
                 alt.Tooltip("institution:N", title="Institution"),
-                alt.Tooltip("cost:Q", title="Cost", format="$,.0f"),
+                alt.Tooltip("cost:Q", title="Cost (2023-24 Tuition)", format="$,.0f"),
                 alt.Tooltip("graduation_rate:Q", title="Graduation Rate", format=".1f"),
                 alt.Tooltip("sector:N", title="Sector"),
                 alt.Tooltip("enrollment:Q", title="Undergrad Enrollment", format=",.0f"),
@@ -156,7 +156,8 @@ def render_cost_vs_grad_scatter(
     st.caption(
         "In-state tuition compared with six-year graduation rates. "
         f"Points represent {group_label.lower()} with >= {min_enrollment:,} undergraduate "
-        "degree-seeking students; dashed lines show medians across the full segment."
+        "degree-seeking students; dashed lines show medians across the full segment. "
+        "_Sources: IPEDS IC2023_AY (tuition) and GR2023 (150% of normal time, 2015 entering cohort)._"
     )
     st.markdown(
         "**Quadrant legend:** I = High GradRate, Low Cost; II = High GradRate, High Cost; "

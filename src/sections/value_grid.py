@@ -129,6 +129,17 @@ class ValueGridSection(BaseSection):
 
         st.divider()
 
+        # Data notes
+        st.markdown("### Data Notes")
+        st.markdown(
+            """
+            - **Cost** reflects published in-state tuition and required fees reported to IPEDS for the **2023-24 academic year** (IC2023_AY survey).
+            - **Graduation rate** comes from the IPEDS **Graduation Rates (GR) survey** for the cohort that entered in **2015** and completed within 150% of normal time (three years for 2-year colleges, six years for 4-year institutions).
+            """
+        )
+
+        st.divider()
+
         # What to look for section
         st.markdown("### What the Data Shows")
         st.markdown(

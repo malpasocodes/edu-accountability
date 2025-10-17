@@ -132,6 +132,17 @@ class CollegeExplorerSection(BaseSection):
 
         st.divider()
 
+        # Data notes
+        st.markdown("### Data Notes")
+        st.markdown(
+            """
+            - **Graduation rates** in the Summary and Graduation Rates tabs come from IPEDS **Outcome Measures** reporting (columns `GR20XX`/`PGR20XX`), which track **all entering students** over an eight-year window. The most recent value shown is the 2023 outcome for cohorts that started in 2015.
+            - **Enrollment metrics** pull from the IPEDS **Distance Education** collection (2020-2024) so the “Total,” “Exclusive Distance Ed,” and “Some Distance Ed” counts reflect the latest fall snapshot available.
+            """
+        )
+
+        st.divider()
+
         # What to look for section
         st.markdown("### What the Data Shows")
         st.markdown(
@@ -338,6 +349,11 @@ class CollegeExplorerSection(BaseSection):
                 # Display graduation rates section
                 st.markdown("---")
                 st.markdown("#### Graduation Rates")
+                st.caption(
+                    "“Overall Graduation Rate” reflects the share of **all entering students** (full-time, part-time, Pell, and non-Pell) who "
+                    "completed a credential within eight years, using the IPEDS Outcome Measures series. The value shown for 2023 corresponds "
+                    "to students who first entered in 2015."
+                )
 
                 # Get the most recent year's data (2023)
                 overall_grad_rate = grad_row.get('GR2023', None)
