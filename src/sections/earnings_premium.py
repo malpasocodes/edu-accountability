@@ -20,16 +20,37 @@ class EarningsPremiumSection(BaseSection):
         """Render the Earnings Premium overview page (stub)."""
         self.render_section_header("Earnings Premium", "Overview")
 
-        # Placeholder content - user will provide text later
         st.markdown("""
         ## Earnings Premium Overview
 
-        *This section is under development. Content will be added soon.*
+        This section highlights how California community and technical colleges perform on **earnings premiums**—the additional income graduates earn compared to high school completers. We provide two complementary perspectives:
+
+        - **C-Metric (Statewide baseline)**: Compares graduate earnings to California's statewide high school earnings benchmark.
+        - **H-Metric (Regional baseline)**: Compares the same graduates to the median earnings of high school graduates **in their college's county**, capturing local wage conditions.
 
         Use the sidebar to explore:
-        - **Earnings Premium (All)**: Compare statewide vs regional earnings premiums
-        - **Earnings Premium Rankings**: Side-by-side rankings comparison
+        - **Earnings Premium (All)**: Detailed table of statewide vs regional premiums and deltas.
+        - **Earnings Premium Rankings**: Side-by-side ranking views using the two baselines.
         """)
+
+        st.divider()
+
+        st.markdown("### Data Notes")
+        st.markdown(
+            """
+            - **Data coverage:** California community, technical, and career colleges only (327 institutions).
+            - **Source files:** Imported from the [epanalysis](https://github.com/malpasocodes/epanalysis) ROI project (`data/raw/epanalysis/roi-metrics.csv`).
+            - **Earnings data:** College Scorecard median earnings **10 years after entry** (historical cohorts, ~2010 entrants).
+            - **Cost data:** IPEDS net price, aggregated to a total program cost (annual net price × program length) in the epanalysis pipeline.
+            - **Baselines:** High school graduate earnings from U.S. Census ACS 5-year estimates—statewide ($24,939) and county-specific values.
+            - **Processing:** `src/data/build_roi_metrics.py` merges these metrics, appends IPEDS `UnitID`, and stores them in `data/processed/roi_metrics.parquet`.
+            """
+        )
+
+        st.warning(
+            "📍 **California only** – No institutions outside California are included. "
+            "Premiums reflect historical earnings and may not capture recent labor market shifts."
+        )
 
     def render_chart(self, chart_name: str) -> None:
         """Render a specific Earnings Premium chart."""

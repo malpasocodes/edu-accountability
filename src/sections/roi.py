@@ -150,21 +150,21 @@ class ROISection(BaseSection):
         st.markdown("---")
 
         # Data source attribution
-        st.markdown("## Data Sources")
+        st.markdown("## Data Notes")
         st.markdown("""
-        - **Earnings Data**: College Scorecard (median earnings 10 years after entry)
-        - **Cost Data**: IPEDS (net price)
-        - **Baseline Earnings**: U.S. Census Bureau ACS 5-year estimates
-        - **Coverage**: California Associate's degree-granting institutions
-        - **Last Updated**: 2024
-
-        *Migrated from the [Higher Ed ROI Research Lab (epanalysis)](https://github.com/malpasocodes/epanalysis) repository.*
+        - **Coverage:** California community and technical colleges only (327 institutions with mapped IPEDS UnitIDs).
+        - **Source repository:** [Higher Ed ROI Research Lab (epanalysis)](https://github.com/malpasocodes/epanalysis); raw files live under `data/raw/epanalysis/`.
+        - **Earnings:** College Scorecard median earnings **10 years after entry** (`md_earn_wne_p10`).
+        - **Costs:** IPEDS annual net price aggregated to a total program cost before import.
+        - **Baselines:** U.S. Census ACS 5-year high school earnings, provided at both statewide and county levels.
+        - **Processing pipeline:** `src/data/build_roi_metrics.py` merges the epanalysis metrics with IPEDS `UnitID`, normalizes dtypes, adds ROI-in-months flags, and saves `data/processed/roi_metrics.parquet`.
+        - **Negative premiums:** Institutions with non-positive earnings premiums are flagged with `ROI = 999` and excluded from charts by default.
         """)
 
         # Disclaimer
         st.warning("""
         **⚠️ Important Limitations**:
-        - ROI analysis is limited to **California institutions only** (116 community and technical colleges)
+        - ROI analysis is limited to **California institutions only** (327 community, technical, and career colleges)
         - Earnings data represents cohorts from 10+ years ago
         - Individual outcomes vary based on field of study, local labor markets, and personal circumstances
         - This is one metric among many for evaluating college value
