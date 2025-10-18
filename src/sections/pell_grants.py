@@ -77,9 +77,11 @@ class PellGrantsSection(BaseSection):
         with col1:
             st.markdown(
                 """
-                <div style='padding: 1.5rem; border: 2px solid #9467bd; border-radius: 10px; background-color: #faf9ff; margin-bottom: 1rem;'>
-                    <h4 style='color: #9467bd; margin-bottom: 0.5rem;'>📊 Top 25 Pell Dollar Recipients</h4>
-                    <p style='color: #000000; margin-bottom: 0.5rem;'>See which institutions receive the most Pell Grant dollars.</p>
+                <div style='padding: 1.5rem; border: 2px solid #9467bd; border-radius: 10px; background-color: #faf9ff; margin-bottom: 1rem; height: 260px; display: flex; flex-direction: column; justify-content: space-between;'>
+                    <div>
+                        <h4 style='color: #9467bd; margin-bottom: 0.75rem;'>📊 Top 25 Pell Dollar Recipients</h4>
+                        <p style='color: #000000; margin-bottom: 0.75rem;'>See which institutions receive the most Pell Grant dollars.</p>
+                    </div>
                     <p style='color: #000000; font-style: italic; margin: 0;'>Stacked bars show yearly breakdown (2008-2022).</p>
                 </div>
                 """,
@@ -89,9 +91,11 @@ class PellGrantsSection(BaseSection):
         with col2:
             st.markdown(
                 """
-                <div style='padding: 1.5rem; border: 2px solid #2ca02c; border-radius: 10px; background-color: #f8fff8; margin-bottom: 1rem;'>
-                    <h4 style='color: #2ca02c; margin-bottom: 0.5rem;'>📈 Pell Dollars vs Graduation Rate</h4>
-                    <p style='color: #000000; margin-bottom: 0.5rem;'>Compare Pell volumes against graduation outcomes.</p>
+                <div style='padding: 1.5rem; border: 2px solid #2ca02c; border-radius: 10px; background-color: #f8fff8; margin-bottom: 1rem; height: 260px; display: flex; flex-direction: column; justify-content: space-between;'>
+                    <div>
+                        <h4 style='color: #2ca02c; margin-bottom: 0.75rem;'>📈 Pell Dollars vs Graduation Rate</h4>
+                        <p style='color: #000000; margin-bottom: 0.75rem;'>Compare Pell volumes against graduation outcomes.</p>
+                    </div>
                     <p style='color: #000000; font-style: italic; margin: 0;'>Bubble size shows enrollment scale.</p>
                 </div>
                 """,
@@ -101,9 +105,11 @@ class PellGrantsSection(BaseSection):
         with col3:
             st.markdown(
                 """
-                <div style='padding: 1.5rem; border: 2px solid #ff7f0e; border-radius: 10px; background-color: #fffaf5; margin-bottom: 1rem;'>
-                    <h4 style='color: #ff7f0e; margin-bottom: 0.5rem;'>📉 Pell Dollars Trend</h4>
-                    <p style='color: #000000; margin-bottom: 0.5rem;'>Track how Pell volumes change over time for top institutions.</p>
+                <div style='padding: 1.5rem; border: 2px solid #ff7f0e; border-radius: 10px; background-color: #fffaf5; margin-bottom: 1rem; height: 260px; display: flex; flex-direction: column; justify-content: space-between;'>
+                    <div>
+                        <h4 style='color: #ff7f0e; margin-bottom: 0.75rem;'>📉 Pell Dollars Trend</h4>
+                        <p style='color: #000000; margin-bottom: 0.75rem;'>Track how Pell volumes change over time for top institutions.</p>
+                    </div>
                     <p style='color: #000000; font-style: italic; margin: 0;'>Shows year-over-year patterns and shifts.</p>
                 </div>
                 """,
