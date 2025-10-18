@@ -19,7 +19,7 @@ class OverviewSection(BaseSection):
             """
             <div style='text-align: center; padding: 2rem 0; background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); border-radius: 10px; margin-bottom: 2rem;'>
                 <h1 style='color: #1f77b4; font-size: 3rem; margin-bottom: 0.5rem; font-weight: 700;'>
-                    📊 EDU Accountability Lab
+                    📊 EDU Accountability Lab <span style='color: #ff0000;'>(Beta)</span>
                 </h1>
                 <p style='color: #000000; font-size: 1.2rem; margin: 0; font-weight: 400;'>
                     Data-driven insights to track college accountability, affordability, and outcomes
@@ -72,68 +72,72 @@ class OverviewSection(BaseSection):
         st.subheader("Explore the Dashboard")
         st.markdown("**Choose a section to begin your analysis:**")
 
-        # Create four columns for navigation cards
-        col1, col2, col3, col4 = st.columns(4)
+        card_definitions = [
+            {
+                "title": "🎓 College Value Grid",
+                "border": "#2ca02c",
+                "header_color": "#2ca02c",
+                "background": "#f8fff8",
+                "headline": "Compare cost against graduation outcomes for institutions",
+                "detail": "Analyze cost vs. graduation rates across sectors",
+            },
+            {
+                "title": "💳 Federal Loans",
+                "border": "#1f77b4",
+                "header_color": "#1f77b4",
+                "background": "#f8faff",
+                "headline": "Explore institutions with largest federal loan volumes",
+                "detail": "Track loan trends and institutional patterns",
+            },
+            {
+                "title": "🎯 Pell Grants",
+                "border": "#9467bd",
+                "header_color": "#9467bd",
+                "background": "#faf9ff",
+                "headline": "Review award concentrations and multi-year trends",
+                "detail": "Analyze grant distributions and outcomes",
+            },
+            {
+                "title": "💻 Distance Education",
+                "border": "#ff7f0e",
+                "header_color": "#ff7f0e",
+                "background": "#fffaf5",
+                "headline": "Explore online and hybrid learning enrollment patterns",
+                "detail": "Analyze distance education participation trends",
+            },
+            {
+                "title": "💼 Earnings Premium",
+                "border": "#d62728",
+                "header_color": "#d62728",
+                "background": "#fff5f5",
+                "headline": "Assess wage outcomes relative to peer institutions",
+                "detail": "Evaluate post-graduation earnings premiums across cohorts",
+            },
+            {
+                "title": "📈 ROI",
+                "border": "#17becf",
+                "header_color": "#17becf",
+                "background": "#f0fbfd",
+                "headline": "Combine cost, aid, and outcomes into ROI metrics",
+                "detail": "Compare long-term value indicators for institutions",
+            },
+        ]
 
-        with col1:
-            with st.container():
-                st.markdown(
-                    """
-                    <div style='padding: 1.5rem; border: 2px solid #2ca02c; border-radius: 10px; text-align: center; background-color: #f8fff8; margin-bottom: 1rem; height: 260px; display: flex; flex-direction: column;'>
-                        <h3 style='color: #2ca02c; margin-bottom: 1rem;'>🎓 College Value Grid</h3>
-                        <div style='flex-grow: 1; display: flex; flex-direction: column; justify-content: center;'>
-                            <p style='color: #000000; margin-bottom: 1rem;'>Compare cost against graduation outcomes for institutions</p>
-                            <p style='font-size: 0.9rem; color: #000000; margin: 0;'>Analyze cost vs. graduation rates across sectors</p>
+        for row_start in range(0, len(card_definitions), 3):
+            columns = st.columns(3)
+            for column, card in zip(columns, card_definitions[row_start : row_start + 3]):
+                with column:
+                    with st.container():
+                        card_html = f"""
+                        <div style='padding: 1.5rem; border: 2px solid {card["border"]}; border-radius: 10px; text-align: center; background-color: {card["background"]}; margin-bottom: 1rem; height: 260px; display: flex; flex-direction: column;'>
+                            <h3 style='color: {card["header_color"]}; margin-bottom: 1rem;'>{card["title"]}</h3>
+                            <div style='flex-grow: 1; display: flex; flex-direction: column; justify-content: center;'>
+                                <p style='color: #000000; margin-bottom: 1rem;'>{card["headline"]}</p>
+                                <p style='font-size: 0.9rem; color: #000000; margin: 0;'>{card["detail"]}</p>
+                            </div>
                         </div>
-                    </div>
-                    """,
-                    unsafe_allow_html=True
-                )
-
-        with col2:
-            with st.container():
-                st.markdown(
-                    """
-                    <div style='padding: 1.5rem; border: 2px solid #1f77b4; border-radius: 10px; text-align: center; background-color: #f8faff; margin-bottom: 1rem; height: 260px; display: flex; flex-direction: column;'>
-                        <h3 style='color: #1f77b4; margin-bottom: 1rem;'>💳 Federal Loans</h3>
-                        <div style='flex-grow: 1; display: flex; flex-direction: column; justify-content: center;'>
-                            <p style='color: #000000; margin-bottom: 1rem;'>Explore institutions with largest federal loan volumes</p>
-                            <p style='font-size: 0.9rem; color: #000000; margin: 0;'>Track loan trends and institutional patterns</p>
-                        </div>
-                    </div>
-                    """,
-                    unsafe_allow_html=True
-                )
-
-        with col3:
-            with st.container():
-                st.markdown(
-                    """
-                    <div style='padding: 1.5rem; border: 2px solid #9467bd; border-radius: 10px; text-align: center; background-color: #faf9ff; margin-bottom: 1rem; height: 260px; display: flex; flex-direction: column;'>
-                        <h3 style='color: #9467bd; margin-bottom: 1rem;'>🎯 Pell Grants</h3>
-                        <div style='flex-grow: 1; display: flex; flex-direction: column; justify-content: center;'>
-                            <p style='color: #000000; margin-bottom: 1rem;'>Review award concentrations and multi-year trends</p>
-                            <p style='font-size: 0.9rem; color: #000000; margin: 0;'>Analyze grant distributions and outcomes</p>
-                        </div>
-                    </div>
-                    """,
-                    unsafe_allow_html=True
-                )
-
-        with col4:
-            with st.container():
-                st.markdown(
-                    """
-                    <div style='padding: 1.5rem; border: 2px solid #ff7f0e; border-radius: 10px; text-align: center; background-color: #fffaf5; margin-bottom: 1rem; height: 260px; display: flex; flex-direction: column;'>
-                        <h3 style='color: #ff7f0e; margin-bottom: 1rem;'>💻 Distance Education</h3>
-                        <div style='flex-grow: 1; display: flex; flex-direction: column; justify-content: center;'>
-                            <p style='color: #000000; margin-bottom: 1rem;'>Explore online and hybrid learning enrollment patterns</p>
-                            <p style='font-size: 0.9rem; color: #000000; margin: 0;'>Analyze distance education participation trends</p>
-                        </div>
-                    </div>
-                    """,
-                    unsafe_allow_html=True
-                )
+                        """
+                        st.markdown(card_html, unsafe_allow_html=True)
     
     def render_chart(self, chart_name: str) -> None:
         """
