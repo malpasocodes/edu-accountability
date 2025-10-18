@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from typing import List
+from textwrap import dedent
 
 import pandas as pd
 import streamlit as st
@@ -41,6 +42,55 @@ class ValueGridSection(BaseSection):
             with at least 1,000 undergraduate students.
             """
         )
+
+        quadrant_html = dedent(
+            """
+            <div style='display: flex; justify-content: center; margin: 2rem 0 2.5rem;'>
+            <div style='position: relative; width: 100%; max-width: 420px;'>
+            <div style='display: grid; grid-template-columns: repeat(2, 1fr); grid-template-rows: repeat(2, 1fr); width: 100%; aspect-ratio: 1 / 1; border: 2px solid #ced4da; border-radius: 12px; overflow: hidden; background: linear-gradient(135deg, rgba(248,249,250,0.9) 0%, rgba(233,236,239,0.9) 100%); box-shadow: 0 8px 20px rgba(0,0,0,0.05);'>
+
+            <div style='position: relative; border-right: 1px solid #adb5bd; border-bottom: 1px solid #adb5bd; background-color: rgba(44,160,44,0.06); display: flex; align-items: flex-start; justify-content: flex-start; padding: 0.75rem;'>
+            <span style='color: #2ca02c; font-size: 1.8rem; font-weight: 600;'>I</span>
+            </div>
+
+            <div style='position: relative; border-left: 1px solid #adb5bd; border-bottom: 1px solid #adb5bd; background-color: rgba(31,119,180,0.06); display: flex; align-items: flex-start; justify-content: flex-end; padding: 0.75rem;'>
+            <span style='color: #1f77b4; font-size: 1.8rem; font-weight: 600;'>II</span>
+            </div>
+
+            <div style='position: relative; border-right: 1px solid #adb5bd; border-top: 1px solid #adb5bd; background-color: rgba(255,127,14,0.06); display: flex; align-items: flex-end; justify-content: flex-start; padding: 0.75rem;'>
+            <span style='color: #ff7f0e; font-size: 1.8rem; font-weight: 600;'>III</span>
+            </div>
+
+            <div style='position: relative; border-left: 1px solid #adb5bd; border-top: 1px solid #adb5bd; background-color: rgba(214,39,40,0.06); display: flex; align-items: flex-end; justify-content: flex-end; padding: 0.75rem;'>
+            <span style='color: #d62728; font-size: 1.8rem; font-weight: 600;'>IV</span>
+            </div>
+
+            </div>
+
+            <div style='position: absolute; top: 16%; left: 24%; width: 12px; height: 12px; background: #6c757d; border-radius: 50%;'></div>
+            <div style='position: absolute; top: 32%; left: 38%; width: 10px; height: 10px; background: #6c757d; border-radius: 50%; opacity: 0.9;'></div>
+            <div style='position: absolute; top: 44%; left: 60%; width: 13px; height: 13px; background: #6c757d; border-radius: 50%; opacity: 0.8;'></div>
+            <div style='position: absolute; top: 58%; left: 28%; width: 9px; height: 9px; background: #6c757d; border-radius: 50%; opacity: 0.75;'></div>
+            <div style='position: absolute; top: 68%; left: 48%; width: 11px; height: 11px; background: #6c757d; border-radius: 50%; opacity: 0.85;'></div>
+            <div style='position: absolute; top: 22%; right: 20%; width: 12px; height: 12px; background: #6c757d; border-radius: 50%;'></div>
+            <div style='position: absolute; top: 36%; right: 30%; width: 9px; height: 9px; background: #6c757d; border-radius: 50%; opacity: 0.8;'></div>
+            <div style='position: absolute; top: 52%; right: 18%; width: 10px; height: 10px; background: #6c757d; border-radius: 50%; opacity: 0.7;'></div>
+            <div style='position: absolute; top: 64%; right: 32%; width: 12px; height: 12px; background: #6c757d; border-radius: 50%; opacity: 0.75;'></div>
+            <div style='position: absolute; top: 78%; right: 22%; width: 8px; height: 8px; background: #6c757d; border-radius: 50%; opacity: 0.85;'></div>
+            <div style='position: absolute; bottom: 24%; left: 22%; width: 11px; height: 11px; background: #6c757d; border-radius: 50%;'></div>
+            <div style='position: absolute; bottom: 36%; left: 40%; width: 9px; height: 9px; background: #6c757d; border-radius: 50%; opacity: 0.9;'></div>
+            <div style='position: absolute; bottom: 20%; left: 55%; width: 10px; height: 10px; background: #6c757d; border-radius: 50%; opacity: 0.8;'></div>
+            <div style='position: absolute; bottom: 28%; right: 24%; width: 12px; height: 12px; background: #6c757d; border-radius: 50%; opacity: 0.85;'></div>
+            <div style='position: absolute; bottom: 14%; right: 38%; width: 9px; height: 9px; background: #6c757d; border-radius: 50%; opacity: 0.78;'></div>
+
+            <div style='position: absolute; bottom: -2.6rem; left: 50%; transform: translateX(-50%); color: #495057; font-size: 1.15rem; font-weight: 600;'>Higher Cost <span style='font-size: 1.8rem; line-height: 1;'>→</span></div>
+            <div style='position: absolute; top: 50%; left: -7.6rem; transform: translateY(-50%) rotate(-90deg); color: #495057; font-size: 1.15rem; font-weight: 600; white-space: nowrap;'>Higher Graduation Rate <span style='font-size: 1.8rem; line-height: 1;'>→</span></div>
+
+            </div>
+            </div>
+            """
+        )
+        st.markdown(quadrant_html, unsafe_allow_html=True)
 
         st.divider()
 
