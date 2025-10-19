@@ -25,8 +25,20 @@ class ValueGridSection(BaseSection):
         """Render the Value Grid overview."""
         self.render_section_header(VALUE_GRID_SECTION, VALUE_GRID_OVERVIEW_LABEL)
 
-        # Main title
-        st.title("College Value Grid: Understanding Cost vs. Graduation")
+        # Overview hero styling aligned with landing page
+        st.markdown(
+            """
+            <div style='text-align: center; padding: 1.5rem 0; background: linear-gradient(135deg, #dee2e6 0%, #ced4da 100%); border-radius: 10px; margin-bottom: 1.5rem;'>
+                <h2 style='color: #1f77b4; font-size: 2.2rem; margin-bottom: 0.25rem; font-weight: 700;'>
+                    📊 College Value Grid Overview
+                </h2>
+                <p style='color: #000000; font-size: 1.05rem; margin: 0; font-weight: 400;'>
+                    Explore tuition costs and graduation outcomes to identify institutions delivering strong value.
+                </p>
+            </div>
+            """,
+            unsafe_allow_html=True
+        )
 
         # Key insight callout
         st.info("**💡 Key Insight:** This tool reveals which institutions deliver strong graduation outcomes at affordable prices—and which charge more but graduate fewer students.")

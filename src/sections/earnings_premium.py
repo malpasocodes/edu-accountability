@@ -20,18 +20,35 @@ class EarningsPremiumSection(BaseSection):
         """Render the Earnings Premium overview page (stub)."""
         self.render_section_header("Earnings Premium", "Overview")
 
-        st.markdown("""
-        ## Earnings Premium Overview
+        # Overview hero styling aligned with landing page
+        st.markdown(
+            """
+            <div style='text-align: center; padding: 1.5rem 0; background: linear-gradient(135deg, #dee2e6 0%, #ced4da 100%); border-radius: 10px; margin-bottom: 1.5rem;'>
+                <h2 style='color: #1f77b4; font-size: 2.2rem; margin-bottom: 0.25rem; font-weight: 700;'>
+                    💼 Earnings Premium Overview
+                </h2>
+                <p style='color: #000000; font-size: 1.05rem; margin: 0; font-weight: 400;'>
+                    Compare graduate earnings against statewide and local baselines to gauge long-term value.
+                </p>
+            </div>
+            """,
+            unsafe_allow_html=True
+        )
 
-        This section highlights how California community and technical colleges perform on **earnings premiums**—the additional income graduates earn compared to high school completers. We provide two complementary perspectives:
+        st.markdown(
+            """
+            This section highlights how California community and technical colleges perform on **earnings premiums**—the
+            additional income graduates earn compared to high school completers. We provide two complementary perspectives:
 
-        - **C-Metric (Statewide baseline)**: Compares graduate earnings to California's statewide high school earnings benchmark.
-        - **H-Metric (Regional baseline)**: Compares the same graduates to the median earnings of high school graduates **in their college's county**, capturing local wage conditions.
+            - **C-Metric (Statewide baseline)**: Compares graduate earnings to California's statewide high school earnings benchmark.
+            - **H-Metric (Regional baseline)**: Compares the same graduates to the median earnings of high school graduates **in their college's county**, capturing local wage conditions.
 
-        Use the sidebar to explore:
-        - **Earnings Premium (All)**: Detailed table of statewide vs regional premiums and deltas.
-        - **Earnings Premium Rankings**: Side-by-side ranking views using the two baselines.
-        """)
+            Use the sidebar to explore:
+
+            - **Earnings Premium (All)**: Detailed table of statewide vs regional premiums and deltas.
+            - **Earnings Premium Rankings**: Side-by-side ranking views using the two baselines.
+            """
+        )
 
         st.divider()
 

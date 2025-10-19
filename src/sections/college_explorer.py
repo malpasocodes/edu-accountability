@@ -34,8 +34,20 @@ class CollegeExplorerSection(BaseSection):
         """Render the college explorer overview page."""
         self.render_section_header("College Explorer", "Overview")
 
-        # Main title
-        st.title("College Explorer: Institution-Level Analysis")
+        # Overview hero styling aligned with landing page
+        st.markdown(
+            """
+            <div style='text-align: center; padding: 1.5rem 0; background: linear-gradient(135deg, #dee2e6 0%, #ced4da 100%); border-radius: 10px; margin-bottom: 1.5rem;'>
+                <h2 style='color: #1f77b4; font-size: 2.2rem; margin-bottom: 0.25rem; font-weight: 700;'>
+                    🔍 College Explorer Overview
+                </h2>
+                <p style='color: #000000; font-size: 1.05rem; margin: 0; font-weight: 400;'>
+                    Dive into institution-level profiles that blend enrollment, aid, and outcomes data.
+                </p>
+            </div>
+            """,
+            unsafe_allow_html=True
+        )
 
         # Key insight callout
         st.info("**💡 Key Insight:** The College Explorer provides detailed analysis of individual institutions, allowing you to examine specific colleges' enrollment patterns, federal aid trends, and graduation outcomes over time.")

@@ -22,8 +22,20 @@ class DistanceEducationSection(BaseSection):
         """Render the Distance Education overview."""
         self.render_section_header("Distance Education", "Overview")
 
-        # Main title
-        st.title("Distance Education: Analyzing Online Learning Patterns")
+        # Overview hero styling aligned with landing page
+        st.markdown(
+            """
+            <div style='text-align: center; padding: 1.5rem 0; background: linear-gradient(135deg, #dee2e6 0%, #ced4da 100%); border-radius: 10px; margin-bottom: 1.5rem;'>
+                <h2 style='color: #1f77b4; font-size: 2.2rem; margin-bottom: 0.25rem; font-weight: 700;'>
+                    💻 Distance Education Overview
+                </h2>
+                <p style='color: #000000; font-size: 1.05rem; margin: 0; font-weight: 400;'>
+                    Track online and hybrid enrollment trends to understand how institutions deliver digital learning.
+                </p>
+            </div>
+            """,
+            unsafe_allow_html=True
+        )
 
         # Key insight callout
         st.info("**💡 Key Insight:** Distance education data reveals how institutions are adapting to online learning, showing enrollment patterns from the COVID-19 era through 2024 and which schools lead in online program delivery.")

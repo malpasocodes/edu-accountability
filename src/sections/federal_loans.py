@@ -35,8 +35,20 @@ class FederalLoansSection(BaseSection):
         """Render the Federal Loans overview."""
         self.render_section_header(FEDERAL_LOANS_SECTION, LOAN_OVERVIEW_LABEL)
 
-        # Main title
-        st.title("Federal Loans: Tracking Institutional Debt Patterns")
+        # Overview hero styling aligned with landing page
+        st.markdown(
+            """
+            <div style='text-align: center; padding: 1.5rem 0; background: linear-gradient(135deg, #dee2e6 0%, #ced4da 100%); border-radius: 10px; margin-bottom: 1.5rem;'>
+                <h2 style='color: #1f77b4; font-size: 2.2rem; margin-bottom: 0.25rem; font-weight: 700;'>
+                    💳 Federal Loans Overview
+                </h2>
+                <p style='color: #000000; font-size: 1.05rem; margin: 0; font-weight: 400;'>
+                    Follow federal lending patterns to see where student debt concentrates and how it shifts over time.
+                </p>
+            </div>
+            """,
+            unsafe_allow_html=True
+        )
 
         # Key insight callout
         st.info("**💡 Key Insight:** Federal loan data reveals which institutions carry the highest student debt burdens and how those patterns relate to graduation outcomes and change over time.")

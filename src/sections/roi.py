@@ -23,16 +23,20 @@ class ROISection(BaseSection):
         """Render the ROI overview page."""
         self.render_section_header("ROI", "Overview")
 
-        # Hero section
-        st.markdown("""
-        <div style='background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-                    padding: 2rem; border-radius: 10px; color: white; margin-bottom: 2rem;'>
-            <h1 style='margin: 0; color: white;'>💰 Measuring Return on Investment in Higher Education</h1>
-            <p style='font-size: 1.2rem; margin-top: 0.5rem; opacity: 0.9;'>
-                Understanding earnings outcomes and accountability through outcomes-based frameworks
-            </p>
-        </div>
-        """, unsafe_allow_html=True)
+        # Overview hero styling aligned with landing page
+        st.markdown(
+            """
+            <div style='text-align: center; padding: 1.5rem 0; background: linear-gradient(135deg, #dee2e6 0%, #ced4da 100%); border-radius: 10px; margin-bottom: 1.5rem;'>
+                <h2 style='color: #1f77b4; font-size: 2.2rem; margin-bottom: 0.25rem; font-weight: 700;'>
+                    📈 ROI Overview
+                </h2>
+                <p style='color: #000000; font-size: 1.05rem; margin: 0; font-weight: 400;'>
+                    Measure the payoff of college programs by connecting what students pay with what they earn.
+                </p>
+            </div>
+            """,
+            unsafe_allow_html=True
+        )
 
         # Key insight callout
         st.info("""

@@ -36,8 +36,20 @@ class PellGrantsSection(BaseSection):
         """Render the Pell Grants overview."""
         self.render_section_header(PELL_SECTION, PELL_OVERVIEW_LABEL)
 
-        # Main title
-        st.title("Pell Grants: Tracking Need-Based Aid Distribution")
+        # Overview hero styling aligned with landing page
+        st.markdown(
+            """
+            <div style='text-align: center; padding: 1.5rem 0; background: linear-gradient(135deg, #dee2e6 0%, #ced4da 100%); border-radius: 10px; margin-bottom: 1.5rem;'>
+                <h2 style='color: #1f77b4; font-size: 2.2rem; margin-bottom: 0.25rem; font-weight: 700;'>
+                    🎯 Pell Grants Overview
+                </h2>
+                <p style='color: #000000; font-size: 1.05rem; margin: 0; font-weight: 400;'>
+                    Examine where need-based aid concentrates and how those grants connect to student success.
+                </p>
+            </div>
+            """,
+            unsafe_allow_html=True
+        )
 
         # Key insight callout
         st.info("**💡 Key Insight:** Pell Grant data shows where need-based federal aid concentrates, revealing which institutions serve the most low-income students and how grant patterns relate to student outcomes.")

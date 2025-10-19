@@ -17,7 +17,7 @@ class OverviewSection(BaseSection):
         # Hero Section with enhanced styling
         st.markdown(
             """
-            <div style='text-align: center; padding: 2rem 0; background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); border-radius: 10px; margin-bottom: 2rem;'>
+            <div style='text-align: center; padding: 2rem 0; background: linear-gradient(135deg, #dee2e6 0%, #ced4da 100%); border-radius: 10px; margin-bottom: 2rem;'>
                 <h1 style='color: #1f77b4; font-size: 3rem; margin-bottom: 0.5rem; font-weight: 700;'>
                     📊 EDU Accountability Lab <span style='color: #ff0000;'>(Beta)</span>
                 </h1>
@@ -51,6 +51,8 @@ class OverviewSection(BaseSection):
             - **Metrics for Accountability**: We are refining measures that capture affordability, completion, and post-graduation outcomes. These metrics are designed to make comparisons across institutions more transparent, reproducible, and useful for policymakers and researchers.
 
             - **Government Funding Analysis**: We are analyzing the flow of federal support—especially through student loans and Pell Grants—to better understand how public resources shape affordability and access. Tracking these funding streams alongside institutional outcomes provides a fuller picture of higher education's value and accountability.
+
+            - **Earnings Premium & ROI**: We are building tools that compare post-graduation earnings to educational costs and aid profiles. These analyses surface institutions delivering strong wage gains relative to investment, helping stakeholders gauge long-term value across different student populations.
 
             - **Equity and Subgroup Outcomes**: We are examining how affordability, funding, and outcomes vary across student subgroups (e.g., income levels, race/ethnicity, first-generation status). Highlighting these differential impacts provides a more complete understanding of equity in higher education.
             """
