@@ -1234,6 +1234,65 @@ class CollegeExplorerSection(BaseSection):
 
             render_altair_chart((lines + points), width="stretch")
 
+            # Add spacing between charts
+            st.markdown("")
+
+            # Stacked bar chart showing enrollment composition
+            st.subheader("Enrollment Composition Over Time")
+
+            # Create stacked bar chart
+            stacked_chart = (
+                alt.Chart(long_df)
+                .mark_bar()
+                .encode(
+                    x=alt.X(
+                        "Year:O",
+                        title="Year",
+                        axis=alt.Axis(
+                            labelAngle=0,
+                            labelFontSize=14,
+                            titleFontSize=16,
+                            titleFontWeight="bold"
+                        )
+                    ),
+                    y=alt.Y(
+                        "Headcount:Q",
+                        title="Enrollment",
+                        stack="zero",
+                        axis=alt.Axis(
+                            format="~s",
+                            labelFontSize=14,
+                            titleFontSize=16,
+                            titleFontWeight="bold"
+                        )
+                    ),
+                    color=alt.Color(
+                        "Metric:N",
+                        title="Enrollment Type",
+                        scale=metric_color_scale,
+                        legend=alt.Legend(
+                            orient="right",
+                            titleFontSize=12,
+                            labelFontSize=11,
+                            labelLimit=200
+                        )
+                    ),
+                    order=alt.Order("Headcount:Q", sort="descending"),
+                    tooltip=[
+                        alt.Tooltip("Metric:N", title="Type"),
+                        alt.Tooltip("Year:O", title="Year"),
+                        alt.Tooltip("Headcount:Q", title="Enrollment", format=","),
+                    ],
+                )
+                .properties(height=400)
+            )
+
+            st.caption(
+                "Total enrollment breakdown by type (2020-2024). Each bar shows the composition "
+                "of Total Enrollment, Exclusive Distance Education, and On Campus/Hybrid students."
+            )
+            render_altair_chart(stacked_chart, width="stretch")
+
             table = (
                 chart_df.astype(int)
                 .sort_values("Year")
