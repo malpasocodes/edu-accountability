@@ -1221,6 +1221,7 @@ class CollegeExplorerSection(BaseSection):
                         "ChangeDirection:N",
                         title="Year-over-Year Change",
                         scale=change_color_scale,
+                        legend=None,
                     ),
                     tooltip=[
                         alt.Tooltip("Metric:N", title="Series"),
