@@ -4,6 +4,19 @@ from __future__ import annotations
 
 import streamlit as st
 
+# Page configuration
+st.set_page_config(
+    page_title="EDU Accountability Lab",
+    page_icon="📊",
+    layout="wide",
+    initial_sidebar_state="expanded",
+    menu_items={
+        "Get Help": None,
+        "Report a bug": None,
+        "About": "EDU Accountability Lab - Data-driven insights for higher education accountability, affordability, and outcomes.",
+    },
+)
+
 from src.config.navigation import NavigationConfig
 from src.config.constants import (
     OVERVIEW_SECTION,

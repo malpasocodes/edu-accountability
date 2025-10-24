@@ -127,8 +127,12 @@ def render_roi_quadrant_chart(
     st.subheader(f"{title} - {baseline_label} Baseline")
     st.caption(
         f"Each point represents a California institution colored by sector. "
-        f"Quadrant lines show median cost (${median_cost:,.0f}) and median earnings (${median_earnings:,.0f}). "
-        f"**Top-left quadrant** = best value (high earnings, low cost)."
+        f"Quadrant lines show median cost (${median_cost:,.0f}) and median earnings (${median_earnings:,.0f})."
+    )
+    st.markdown(
+        "**Quadrant legend:** Top-Left = High Earnings, Low Cost (best value); "
+        "Top-Right = High Earnings, High Cost; Bottom-Left = Low Earnings, Low Cost; "
+        "Bottom-Right = Low Earnings, High Cost"
     )
     render_altair_chart(chart, width="stretch")
 

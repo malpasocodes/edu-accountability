@@ -45,6 +45,13 @@ class ROISection(BaseSection):
         their investment pays off.
         """)
 
+        # Scope limitation warning
+        st.warning("""
+        📍 **California 2-Year Institutions Only** - This ROI analysis covers 327 California
+        community colleges, technical colleges, and career colleges. 4-year universities
+        (UC, CSU systems) are not included.
+        """)
+
         # What is this section
         st.markdown("## What is ROI Analysis?")
         st.markdown("""
