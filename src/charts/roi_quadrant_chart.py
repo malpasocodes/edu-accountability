@@ -88,9 +88,9 @@ def render_roi_quadrant_chart(
                 axis=alt.Axis(format="$,.0f"),
             ),
             color=alt.Color(
-                "roi_years:Q",
-                title="ROI (years)",
-                scale=ROI_COLOR_SCALE,
+                "sector_clean:N",
+                title="Sector",
+                scale=SECTOR_COLOR_SCALE,
                 legend=alt.Legend(orient="right"),
             ),
             tooltip=[
@@ -126,7 +126,7 @@ def render_roi_quadrant_chart(
     baseline_label = "Statewide" if baseline == "statewide" else "Regional (County-specific)"
     st.subheader(f"{title} - {baseline_label} Baseline")
     st.caption(
-        f"Each point represents a California institution. Color indicates ROI (years to recoup investment). "
+        f"Each point represents a California institution colored by sector. "
         f"Quadrant lines show median cost (${median_cost:,.0f}) and median earnings (${median_earnings:,.0f}). "
         f"**Top-left quadrant** = best value (high earnings, low cost)."
     )
