@@ -320,7 +320,8 @@ def render_distance_enrollment_trend_chart(
         color=alt.Color(
             "ChangeDirection:N",
             title="Year-over-Year Change",
-            scale=change_color_scale
+            scale=change_color_scale,
+            legend=None  # Hide legend, keep visual encoding
         ),
         tooltip=[
             alt.Tooltip("Institution:N", title="Institution"),
@@ -348,6 +349,76 @@ def render_distance_enrollment_trend_chart(
     )
     st.caption(caption)
     render_altair_chart(chart, width="stretch")
+
+    # Add spacing between charts
+    st.markdown("")
+
+    # Stacked bar chart showing market composition
+    st.subheader("Market Composition Over Time")
+
+    # Calculate year totals for percentage tooltips
+    stacked_data = prepared.copy()
+    year_totals = stacked_data.groupby("Year")["enrollment"].sum().reset_index()
+    year_totals.rename(columns={"enrollment": "year_total"}, inplace=True)
+    stacked_data = stacked_data.merge(year_totals, on="Year", how="left")
+    stacked_data["percentage"] = (stacked_data["enrollment"] / stacked_data["year_total"] * 100).round(2)
+
+    # Create stacked bar chart
+    stacked_chart = (
+        alt.Chart(stacked_data)
+        .mark_bar()
+        .encode(
+            x=alt.X(
+                "Year:O",
+                title="Year",
+                axis=alt.Axis(
+                    labelAngle=0,
+                    labelFontSize=14,
+                    titleFontSize=16,
+                    titleFontWeight="bold"
+                )
+            ),
+            y=alt.Y(
+                "enrollment:Q",
+                title="Total Enrollment",
+                stack="zero",
+                axis=alt.Axis(
+                    format="~s",
+                    labelFontSize=14,
+                    titleFontSize=16,
+                    titleFontWeight="bold"
+                )
+            ),
+            color=alt.Color(
+                "Institution:N",
+                title="Institution",
+                scale=institution_color_scale,
+                legend=alt.Legend(
+                    orient="right",
+                    titleFontSize=12,
+                    labelFontSize=11,
+                    labelLimit=200
+                )
+            ),
+            order=alt.Order("enrollment:Q", sort="descending"),
+            tooltip=[
+                alt.Tooltip("Institution:N", title="Institution"),
+                alt.Tooltip("Year:O", title="Year"),
+                alt.Tooltip("enrollment:Q", title="Institution Enrollment", format=","),
+                alt.Tooltip("percentage:Q", title="% of Top 10 Total", format=".2f"),
+                alt.Tooltip("year_total:Q", title="Total (Top 10)", format=","),
+                alt.Tooltip("Sector:N", title="Sector"),
+            ],
+        )
+        .properties(height=450)
+    )
+
+    stacked_caption = (
+        f"Total enrollment across top {top_n} institutions by year (2020-2024), with each segment representing one institution's contribution. "
+        "This view emphasizes market composition and relative institutional size over time."
+    )
+    st.caption(stacked_caption)
+    render_altair_chart(stacked_chart, width="stretch")
 
     # Create data table
     _render_enrollment_data_table(prepared, top_n, anchor_year)
