@@ -152,7 +152,7 @@ def render_cost_vs_grad_scatter(
 
     chart = (scatter + vline + hline + annotations).properties(height=500)
 
-    st.subheader(f"Cost vs. Graduation Rate ({group_label})")
+    st.subheader(group_label)
     st.caption(
         "In-state tuition compared with six-year graduation rates. "
         f"Points represent {group_label.lower()} with >= {min_enrollment:,} undergraduate "

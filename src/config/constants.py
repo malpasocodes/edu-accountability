@@ -28,12 +28,12 @@ class ValueGridChartConfig:
 # Value Grid configurations
 VALUE_GRID_CHART_CONFIGS = (
     ValueGridChartConfig(
-        label="Cost vs Graduation (4-year)",
+        label="Cost vs Graduation Rate (4-year)",
         dataset_key="cost_vs_grad",
         min_enrollment=1000,
     ),
     ValueGridChartConfig(
-        label="Cost vs Graduation (2-year)",
+        label="Cost vs Graduation Rate (2-year)",
         dataset_key="cost_vs_grad_two_year",
         min_enrollment=0,
     ),
