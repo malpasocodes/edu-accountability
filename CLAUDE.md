@@ -23,8 +23,11 @@ This is a Streamlit-based dashboard for analyzing higher education data, focusin
 python -m venv .venv && source .venv/bin/activate
 
 # Install dependencies (defined in pyproject.toml)
-pip install -r requirements.txt  # Production dependencies
+pip install -r requirements.txt  # Production dependencies: streamlit, pandas, altair, plotly
 pip install -e '.[dev]'          # Development dependencies (includes pytest, ruff, black)
+
+# Alternative: Use uv for faster installs
+uv pip install -r requirements.txt
 ```
 
 ### Running the Application
@@ -42,6 +45,10 @@ python -m src.data.datasets
 python data/processed/build_pell_top_dollars.py
 python data/processed/build_pell_vs_grad_scatter.py
 
+# Build ROI analysis datasets
+python src/data/build_roi_opeid_mapping.py  # Map OPEID to UnitID for institutions
+python src/data/build_roi_metrics.py         # Generate ROI metrics Parquet
+
 # Validate data dictionary and sources
 python -c "from src.data.models import DataDictionary; DataDictionary.load_from_file('data/dictionary/schema.json')"
 ```
@@ -52,9 +59,9 @@ python -c "from src.data.models import DataDictionary; DataDictionary.load_from_
 ruff check .
 
 # Format code with black
-black src tests
+black src
 
-# Run tests
+# Run tests (note: no tests/ directory exists yet)
 pytest -q
 ```
 
@@ -167,43 +174,18 @@ When consolidating navigation buttons with tabs:
 - **Testing**: Use pytest with fixtures in `tests/fixtures/`, align test structure with `src/`
 - **Security**: Exclude secrets/PII, use `.env` for credentials, share only aggregate data
 
-## Version History & Major Milestones
+## Version History
 
-- **v0.1**: Initial Streamlit dashboard with basic functionality
-- **v0.2**: Major architecture refactoring + data governance system
-  - Extracted business logic from monolithic app.py (648→141 lines)
-  - Implemented modular architecture with clean separation of concerns
-  - Added comprehensive data dictionary and multi-source governance
-  - Reorganized data by source (IPEDS/FSA) with metadata tracking
-- **v0.3**: Navigation consolidation for improved UX
-  - Reduced Federal Loans navigation from 6 to 3 buttons with tabs
-  - Reduced Pell Grants navigation from 6 to 3 buttons with tabs
-  - Enhanced user experience with consistent tab-based pattern
-- **v0.4**: Distance Education section
-  - Added comprehensive distance education enrollment analysis
-  - Three chart types: Top 25 enrollment, Total enrollment trend, DE trend
-  - Tracks exclusively distance, some distance, and in-person enrollment
-  - 2020-2024 trend analysis for COVID-era distance learning patterns
-- **v0.5**: Visual design enhancements
-  - Redesigned landing page with gradient hero banner and navigation cards
-  - Enhanced trend charts with institution-based coloring
-  - Added year-over-year change indicators (green/red dots)
-  - Transformed top dollar charts to stacked bars with yearly breakdown
-- **v0.6**: College Explorer foundation
-  - Introduced institution-level analysis section
-  - Searchable dropdown with 6,050+ institutions
-  - Institution details with sector, control type, special designations
-  - Foundation for detailed institutional metrics
-- **v0.7**: College Explorer comprehensive metrics
-  - Added Federal Loans & Pell Grants combined trend analysis (2008-2022)
-  - Implemented Graduation Rates tab with dual-line trends (2016-2023)
-  - Enhanced Summary tab with enrollment and graduation metrics
-  - Comprehensive institutional analysis with cumulative totals and z-scores
+**Current Version**: v0.8 (Comprehensive Overview pages across all sections)
+
+**Major Milestones**:
+- **v0.1**: Initial Streamlit dashboard
+- **v0.2**: Architecture refactoring + data governance (648→141 line app.py)
+- **v0.3**: Navigation consolidation with tab-based UX
+- **v0.4**: Distance Education section (COVID-era analysis)
+- **v0.5**: Visual design enhancements (gradient hero, stacked bars)
+- **v0.6**: College Explorer foundation (6,050+ institutions)
+- **v0.7**: College Explorer comprehensive metrics (federal aid + graduation trends)
 - **v0.8**: Comprehensive Overview pages (current)
-  - Redesigned Overview pages for all 5 sections with consistent formatting
-  - Implemented visual hierarchy with st.title(), key insight callouts, and bordered boxes
-  - Organized content with clear subsections: "What is this?", "How to Explore", "How to Use", "What the Data Shows"
-  - Added custom HTML bordered boxes with sector-specific colors (220px for Distance Education, 200px for College Explorer)
-  - Corrected all data source attributions to IPEDS (Integrated Postsecondary Education Data System)
 
-For detailed changes, see [LOG.md](LOG.md) which tracks all modifications with file references.
+For detailed changes with file references, see [LOG.md](LOG.md).
