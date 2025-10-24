@@ -1090,9 +1090,13 @@ class CollegeExplorerSection(BaseSection):
         some_2024 = row.get("SDE_ENROLL_TOTAL")
 
         try:
-            total_2024 = int(float(total_2024))
-            exclusive_2024 = int(float(exclusive_2024))
-            some_2024 = int(float(some_2024))
+            total_2024 = int(float(total_2024)) if pd.notna(total_2024) else None
+            exclusive_2024 = int(float(exclusive_2024)) if pd.notna(exclusive_2024) else None
+            some_2024 = int(float(some_2024)) if pd.notna(some_2024) and some_2024 != '' else 0
+
+            if total_2024 is None or exclusive_2024 is None:
+                st.warning("Distance education figures for 2024 are unavailable for this institution.")
+                return
         except (ValueError, TypeError):
             st.warning("Distance education figures for 2024 are unavailable for this institution.")
             return
