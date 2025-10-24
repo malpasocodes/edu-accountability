@@ -1240,9 +1240,18 @@ class CollegeExplorerSection(BaseSection):
             # Stacked bar chart showing enrollment composition
             st.subheader("Enrollment Composition Over Time")
 
+            # Filter to show only the two components (exclude Total Enrollment)
+            stacked_df = long_df[long_df["Metric"].isin(["Exclusive Distance", "On Campus / Hybrid"])].copy()
+
+            # Create color scale for just the two components
+            component_color_scale = alt.Scale(
+                domain=["Exclusive Distance", "On Campus / Hybrid"],
+                range=["#ff7f0e", "#2ca02c"],  # Orange for Exclusive Distance, Green for On Campus/Hybrid
+            )
+
             # Create stacked bar chart
             stacked_chart = (
-                alt.Chart(long_df)
+                alt.Chart(stacked_df)
                 .mark_bar()
                 .encode(
                     x=alt.X(
@@ -1257,7 +1266,7 @@ class CollegeExplorerSection(BaseSection):
                     ),
                     y=alt.Y(
                         "Headcount:Q",
-                        title="Enrollment",
+                        title="Total Enrollment",
                         stack="zero",
                         axis=alt.Axis(
                             format="~s",
@@ -1269,7 +1278,7 @@ class CollegeExplorerSection(BaseSection):
                     color=alt.Color(
                         "Metric:N",
                         title="Enrollment Type",
-                        scale=metric_color_scale,
+                        scale=component_color_scale,
                         legend=alt.Legend(
                             orient="right",
                             titleFontSize=12,
@@ -1288,8 +1297,8 @@ class CollegeExplorerSection(BaseSection):
             )
 
             st.caption(
-                "Total enrollment breakdown by type (2020-2024). Each bar shows the composition "
-                "of Total Enrollment, Exclusive Distance Education, and On Campus/Hybrid students."
+                "Total enrollment breakdown by type (2020-2024). Each bar is divided into "
+                "Exclusive Distance Education (orange) and On Campus/Hybrid (green) enrollment."
             )
             render_altair_chart(stacked_chart, width="stretch")
 
