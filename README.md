@@ -118,7 +118,7 @@ pytest -q
 
 See [LOG.md](LOG.md) for detailed changelog.
 
-**Current Version**: v0.8 - Comprehensive Overview pages with consistent formatting and visual hierarchy across all sections.
+**Current Version**: v1.0 - First production release with 8 major sections, 6,000+ institutions, comprehensive visualizations, and complete documentation.
 
 ## Technical Notes
 
