@@ -265,16 +265,10 @@ def render_distance_enrollment_trend_chart(
         scheme="category20"
     )
 
-    # Create change direction color scale for dots
-    change_color_scale = alt.Scale(
-        domain=["Increase", "Same", "Decrease"],
-        range=["#28a745", "#6c757d", "#dc3545"]  # Green, Gray, Red
-    )
-
-    # Line layer with dotted lines colored by institution
-    lines = alt.Chart(prepared).mark_line(
-        strokeDash=[3, 3],  # Dotted line pattern
-        point=False
+    # Line chart with solid lines and filled points colored by institution
+    chart = alt.Chart(prepared).mark_line(
+        strokeWidth=3,
+        point=alt.OverlayMarkDef(size=100, filled=True)
     ).encode(
         x=alt.X(
             "Year:Q",
@@ -310,42 +304,15 @@ def render_distance_enrollment_trend_chart(
                 format=",",
             ),
             alt.Tooltip("Sector:N", title="Sector"),
-        ],
-    )
-
-    # Point layer with year-over-year change coloring
-    points = alt.Chart(prepared).mark_circle(size=80).encode(
-        x=alt.X("Year:Q"),
-        y=alt.Y("enrollment:Q"),
-        color=alt.Color(
-            "ChangeDirection:N",
-            title="Year-over-Year Change",
-            scale=change_color_scale,
-            legend=None  # Hide legend, keep visual encoding
-        ),
-        tooltip=[
-            alt.Tooltip("Institution:N", title="Institution"),
-            alt.Tooltip("Year:Q", title="Year", format=".0f"),
-            alt.Tooltip(
-                "enrollment:Q",
-                title="Total Enrollment",
-                format=",",
-            ),
-            alt.Tooltip("Sector:N", title="Sector"),
             alt.Tooltip("YoYChangePercent:Q", title="Year-over-year change (%)", format=".1f"),
             alt.Tooltip("ChangeDirection:N", title="Change direction"),
         ],
-    )
-
-    # Combine layers
-    chart = (lines + points).resolve_scale(
-        color="independent"
     ).properties(height=520)
 
     st.subheader(title)
     caption = (
         f"Top {top_n} institutions by total enrollment in {anchor_year}, showing annual total enrollment trends over time (2020-2024). "
-        "Dotted lines colored by institution; dots colored by year-over-year change (green=increase, gray=same, red=decrease)."
+        "Each line represents one institution with filled data points. Hover over points to see year-over-year change details."
     )
     st.caption(caption)
     render_altair_chart(chart, width="stretch")
