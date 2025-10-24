@@ -56,6 +56,7 @@ from .constants import (
     COLLEGE_SUMMARY_LABEL,
     COLLEGE_LOANS_PELL_LABEL,
     COLLEGE_GRAD_RATES_LABEL,
+    COLLEGE_DISTANCE_ED_LABEL,
     ValueGridChartConfig,
 )
 
@@ -128,6 +129,7 @@ __all__ = [
     "COLLEGE_SUMMARY_LABEL",
     "COLLEGE_LOANS_PELL_LABEL",
     "COLLEGE_GRAD_RATES_LABEL",
+    "COLLEGE_DISTANCE_ED_LABEL",
     # Data
     "DataSources",
     # Navigation

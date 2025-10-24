@@ -95,13 +95,11 @@ LOAN_OVERVIEW_LABEL = "Overview"
 DISTANCE_TOP_ENROLLMENT_LABEL = "Top 25 Total Enrollment (Distance Education Breakdown)"
 DISTANCE_ENROLLMENT_TREND_LABEL = "Total Enrollment Trend (Top 10 Institutions)"
 DISTANCE_DE_TREND_LABEL = "Exclusive Distance Education Trend (Top 10 Institutions)"
-DISTANCE_INSTITUTION_SEARCH_LABEL = "Institution Distance Search"
 
 DISTANCE_CHARTS: List[str] = [
     DISTANCE_TOP_ENROLLMENT_LABEL,
     DISTANCE_ENROLLMENT_TREND_LABEL,
     DISTANCE_DE_TREND_LABEL,
-    DISTANCE_INSTITUTION_SEARCH_LABEL,
 ]
 DISTANCE_OVERVIEW_LABEL = "Overview"
 
@@ -111,11 +109,13 @@ COLLEGE_EXPLORER_OVERVIEW_LABEL = "Overview"
 COLLEGE_SUMMARY_LABEL = "Summary"
 COLLEGE_LOANS_PELL_LABEL = "Federal Loans and Pell Grants"
 COLLEGE_GRAD_RATES_LABEL = "Graduation Rates"
+COLLEGE_DISTANCE_ED_LABEL = "Distance Education"
 
 COLLEGE_EXPLORER_CHARTS: List[str] = [
     COLLEGE_SUMMARY_LABEL,
     COLLEGE_LOANS_PELL_LABEL,
     COLLEGE_GRAD_RATES_LABEL,
+    COLLEGE_DISTANCE_ED_LABEL,
 ]
 
 # Earnings Premium labels (California institutions only)
