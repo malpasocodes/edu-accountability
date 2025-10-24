@@ -132,23 +132,12 @@ def render_roi_quadrant_chart(
     )
     render_altair_chart(chart, width="stretch")
 
-    # Prepare data table
-    display_columns = [
-        "Institution",
-        "County",
-        "sector_clean",
-        "cost",
-        "earnings",
-        "roi_years",
-        "roi_months",
-    ]
-
-    # Identify best value institutions (above median earnings, below median cost)
+    # Identify quadrant for each institution
     filtered["quadrant"] = "Other"
     filtered.loc[
         (filtered["earnings"] > median_earnings) & (filtered["cost"] < median_cost),
         "quadrant",
-    ] = "Best Value (High Earnings, Low Cost)"
+    ] = "High Earnings, Low Cost"
     filtered.loc[
         (filtered["earnings"] > median_earnings) & (filtered["cost"] >= median_cost),
         "quadrant",
@@ -162,45 +151,70 @@ def render_roi_quadrant_chart(
         "quadrant",
     ] = "Low Earnings, High Cost"
 
-    # Sort by ROI (best first)
-    table_df = (
-        filtered[display_columns + ["quadrant"]]
-        .copy()
-        .rename(
-            columns={
-                "sector_clean": "Sector",
-                "cost": "Net Price ($)",
-                "earnings": "Earnings ($)",
-                "roi_years": "ROI (years)",
-                "roi_months": "ROI (months)",
-                "quadrant": "Quadrant",
-            }
-        )
-        .sort_values("ROI (years)")
+    # Create quadrant dictionary for tabs
+    quadrants = {
+        "High Earnings, Low Cost": filtered[filtered["quadrant"] == "High Earnings, Low Cost"].copy(),
+        "High Earnings, High Cost": filtered[filtered["quadrant"] == "High Earnings, High Cost"].copy(),
+        "Low Earnings, Low Cost": filtered[filtered["quadrant"] == "Low Earnings, Low Cost"].copy(),
+        "Low Earnings, High Cost": filtered[filtered["quadrant"] == "Low Earnings, High Cost"].copy(),
+    }
+
+    # Add custom CSS for larger tab font
+    st.markdown(
+        """
+        <style>
+        div[data-testid="stTabs"] button[role="tab"] div p {
+            font-size: 1.25rem !important;
+            font-weight: 600;
+        }
+        div[data-testid="stTabs"] button[role="tab"] div {
+            font-size: 1.25rem !important;
+        }
+        div[data-testid="stTabs"] button[role="tab"] p {
+            font-size: 1.25rem !important;
+            font-weight: 600;
+        }
+        </style>
+        """,
+        unsafe_allow_html=True,
     )
 
-    table_df["Net Price ($)"] = table_df["Net Price ($)"].apply(lambda x: f"${x:,.0f}")
-    table_df["Earnings ($)"] = table_df["Earnings ($)"].apply(lambda x: f"${x:,.0f}")
-    table_df["ROI (years)"] = table_df["ROI (years)"].round(2)
-    table_df["ROI (months)"] = table_df["ROI (months)"].round(0).astype(int)
+    # Create tabs for each quadrant
+    tabs = st.tabs(list(quadrants.keys()))
+    for tab, (label, quadrant_data) in zip(tabs, quadrants.items()):
+        with tab:
+            st.write(
+                f"{len(quadrant_data):,} institutions"
+                if not quadrant_data.empty
+                else "No institutions found"
+            )
+            if not quadrant_data.empty:
+                display_cols = [
+                    "Institution",
+                    "County",
+                    "sector_clean",
+                    "cost",
+                    "earnings",
+                    "roi_years",
+                    "roi_months",
+                ]
+                formatted = quadrant_data[display_cols].copy()
+                formatted = formatted.rename(
+                    columns={
+                        "sector_clean": "Sector",
+                        "cost": "Net Price ($)",
+                        "earnings": "Earnings ($)",
+                        "roi_years": "ROI (years)",
+                        "roi_months": "ROI (months)",
+                    }
+                )
+                # Sort by ROI (best first) within each quadrant
+                formatted = formatted.sort_values("ROI (years)")
 
-    st.markdown(f"**All Institutions (n={len(table_df)})**")
-    render_dataframe(table_df, width="stretch")
+                # Format currency columns
+                formatted["Net Price ($)"] = formatted["Net Price ($)"].apply(lambda x: f"${x:,.0f}")
+                formatted["Earnings ($)"] = formatted["Earnings ($)"].apply(lambda x: f"${x:,.0f}")
+                formatted["ROI (years)"] = formatted["ROI (years)"].round(2)
+                formatted["ROI (months)"] = formatted["ROI (months)"].round(0).astype(int)
 
-    # Quadrant summary
-    st.markdown("### Quadrant Summary")
-    quadrant_summary = (
-        filtered.groupby("quadrant")
-        .agg(
-            count=("Institution", "count"),
-            avg_roi=("roi_years", "mean"),
-            median_roi=("roi_years", "median"),
-        )
-        .reset_index()
-    )
-    quadrant_summary = quadrant_summary.sort_values("avg_roi")
-    quadrant_summary.columns = ["Quadrant", "Count", "Avg ROI (years)", "Median ROI (years)"]
-    quadrant_summary["Avg ROI (years)"] = quadrant_summary["Avg ROI (years)"].round(2)
-    quadrant_summary["Median ROI (years)"] = quadrant_summary["Median ROI (years)"].round(2)
-
-    render_dataframe(quadrant_summary, width="stretch")
+                render_dataframe(formatted, width="stretch")
