@@ -13,8 +13,11 @@ from src.config.constants import (
     VALUE_GRID_CONFIG_MAP,
     VALUE_GRID_OVERVIEW_LABEL,
     VALUE_GRID_SECTION,
+    ENROLLMENT_FILTER_OPTIONS,
+    DEFAULT_ENROLLMENT_FILTER,
 )
 from src.core.data_loader import DataLoader
+from src.state.session_manager import SessionManager
 from .base import BaseSection
 
 
@@ -143,22 +146,70 @@ class ValueGridSection(BaseSection):
             - Patterns emerge by sector, control type, and institutional mission
             """
         )
-    
+
+    def _render_enrollment_filter(self) -> None:
+        """Render the enrollment filter UI control."""
+        st.markdown("### Filter by Enrollment")
+
+        # Create radio button options with formatted labels
+        option_labels = []
+        for threshold in ENROLLMENT_FILTER_OPTIONS:
+            if threshold == 1:
+                option_labels.append("All (>0)")
+            else:
+                option_labels.append(f">{threshold:,}")
+
+        # Map labels to values
+        label_to_value = dict(zip(option_labels, ENROLLMENT_FILTER_OPTIONS))
+
+        # Get current filter value from session state
+        current_value = SessionManager.get("value_grid_enrollment_filter", DEFAULT_ENROLLMENT_FILTER)
+
+        # Find the current label
+        current_label = None
+        for label, value in label_to_value.items():
+            if value == current_value:
+                current_label = label
+                break
+        if current_label is None:
+            current_label = option_labels[2]  # Default to ">1,000"
+
+        # Render radio buttons
+        selected_label = st.radio(
+            "Minimum undergraduate enrollment:",
+            options=option_labels,
+            index=option_labels.index(current_label),
+            horizontal=True,
+            key="enrollment_filter_radio"
+        )
+
+        # Update session state with the selected value
+        selected_value = label_to_value[selected_label]
+        SessionManager.set("value_grid_enrollment_filter", selected_value)
+
+        st.markdown("")  # Add spacing
+
     def render_chart(self, chart_name: str) -> None:
         """Render a specific Value Grid chart."""
         self.render_section_header(VALUE_GRID_SECTION, chart_name)
-        
+
         config = VALUE_GRID_CONFIG_MAP.get(chart_name)
         if config is None:
             st.error("Select a value grid view from the sidebar to load a chart.")
             return
-        
+
         dataset = self.data_manager.get_value_grid_dataset(config.label)
         if dataset is None:
             st.error("Unable to locate dataset for the selected chart.")
             return
-        
-        self._render_value_grid_chart(config.label, dataset, config.min_enrollment)
+
+        # Add enrollment filter UI control
+        self._render_enrollment_filter()
+
+        # Get the selected enrollment filter from session state
+        selected_filter = SessionManager.get("value_grid_enrollment_filter", DEFAULT_ENROLLMENT_FILTER)
+
+        self._render_value_grid_chart(config.label, dataset, selected_filter)
     
     def _render_value_grid_chart(
         self, 

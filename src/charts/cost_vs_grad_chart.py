@@ -30,9 +30,12 @@ def render_cost_vs_grad_scatter(
     """Render the cost-versus-graduation chart and supporting tables."""
 
     if filtered_df.empty:
+        if min_enrollment <= 1:
+            filter_text = "enrollment > 0"
+        else:
+            filter_text = f"enrollment >= {min_enrollment:,}"
         st.warning(
-            "No institutions match the current filters "
-            f"(enrollment >= {min_enrollment:,} and selected sectors)."
+            f"No institutions match the current filters ({filter_text})."
         )
         return
 
@@ -153,10 +156,17 @@ def render_cost_vs_grad_scatter(
     chart = (scatter + vline + hline + annotations).properties(height=500)
 
     st.subheader(group_label)
+
+    # Format enrollment filter text
+    if min_enrollment <= 1:
+        enrollment_text = "all enrollment levels"
+    else:
+        enrollment_text = f">= {min_enrollment:,} undergraduate degree-seeking students"
+
     st.caption(
         "In-state tuition compared with six-year graduation rates. "
-        f"Points represent {group_label.lower()} with >= {min_enrollment:,} undergraduate "
-        "degree-seeking students; dashed lines show medians across the full segment. "
+        f"Points represent {group_label.lower()} with {enrollment_text}; "
+        "dashed lines show medians across the full segment. "
         "_Sources: IPEDS IC2023_AY (tuition) and GR2023 (150% of normal time, 2015 entering cohort)._"
     )
     st.markdown(

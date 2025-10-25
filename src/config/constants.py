@@ -35,9 +35,13 @@ VALUE_GRID_CHART_CONFIGS = (
     ValueGridChartConfig(
         label="Cost vs Graduation Rate (2-year)",
         dataset_key="cost_vs_grad_two_year",
-        min_enrollment=0,
+        min_enrollment=1000,
     ),
 )
+
+# Enrollment filter options for Value Grid
+ENROLLMENT_FILTER_OPTIONS = [1, 500, 1000, 5000, 10000]
+DEFAULT_ENROLLMENT_FILTER = 1000
 
 VALUE_GRID_OVERVIEW_LABEL = "Overview"
 VALUE_GRID_CONFIG_MAP: Dict[str, ValueGridChartConfig] = {
@@ -148,6 +152,7 @@ COLLEGE_EXPLORER_ROI_LABEL = "Earnings & ROI"
 DEFAULT_SESSION_STATE: Dict[str, str] = {
     "active_section": OVERVIEW_SECTION,
     "value_grid_chart": VALUE_GRID_OVERVIEW_LABEL,
+    "value_grid_enrollment_filter": DEFAULT_ENROLLMENT_FILTER,
     "loan_chart": LOAN_OVERVIEW_LABEL,
     "pell_chart": PELL_OVERVIEW_LABEL,
     "distance_chart": DISTANCE_OVERVIEW_LABEL,
