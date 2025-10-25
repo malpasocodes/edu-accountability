@@ -6,3 +6,6 @@ __pycache__/
 
 # Streamlit
 .streamlit/
+
+# Large raw data files (use processed versions instead)
+data/raw/college_scorecard/Most-Recent-Cohorts-Institution_*.csv
