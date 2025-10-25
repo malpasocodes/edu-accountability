@@ -1,0 +1,61 @@
+---
+name: Earnings Premium State Thresholds
+description: |
+  State-level earnings premium thresholds for undergraduate and graduate degree programs.
+  Programs must demonstrate that graduates earn MORE than the median earnings of high school
+  graduates (aged 25-34) in their state to pass the Earnings Premium test.
+
+  Programs failing the EP test for 2 out of 3 consecutive years lose Title IV federal aid eligibility.
+
+source: Federal Register
+source_url: https://www.federalregister.gov
+publication_date: 2024-12-31
+effective_date: 2026-07-01
+
+data_points: 52
+coverage: |
+  - 50 U.S. states
+  - District of Columbia
+  - National threshold
+
+threshold_basis: |
+  Median earnings of high school graduates aged 25-34 in each state, based on Census Bureau
+  American Community Survey (ACS) data.
+
+update_frequency: Annual
+next_update: 2025-12-31 (expected)
+
+regulatory_context:
+  law: "One Big Beautiful Bill Act (OBBBA)"
+  effective_date: 2026-07-01
+  requirement: "Median graduate earnings > state HS graduate median"
+  consequence: "2 failures in 3 years → loss of Title IV eligibility"
+  applies_to: "All undergraduate and graduate degree programs"
+
+fields:
+  - name: State
+    description: State name or "United States (National)" for national threshold
+    type: string
+
+  - name: Threshold
+    description: Median annual earnings of high school graduates aged 25-34 (in USD)
+    type: integer
+    unit: USD
+    year: 2024
+
+notes: |
+  - The national threshold ($31,269) can be used for comparative analysis
+  - Actual EP testing by Department of Education will use IRS/SSA wage data
+  - These thresholds are for planning purposes; official determinations may vary
+  - Programs are tested at individual program level, not institution level
+
+data_validation:
+  total_states: 52
+  min_threshold: 27362  # Mississippi
+  max_threshold: 37850  # New Hampshire
+  median_threshold: 31591
+  mean_threshold: 31658
+
+last_updated: 2025-10-25
+updated_by: Earnings Premium Analysis Implementation
+version: "1.0"
