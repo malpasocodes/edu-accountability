@@ -122,15 +122,22 @@ COLLEGE_EXPLORER_CHARTS: List[str] = [
     COLLEGE_DISTANCE_ED_LABEL,
 ]
 
-# Earnings Premium labels (California institutions only)
+# Earnings Premium Analysis labels (National - Section 9)
 EARNINGS_PREMIUM_OVERVIEW_LABEL = "Overview"
+EP_OVERVIEW_RISK_MAP_LABEL = "Overview & Risk Map"
+EP_INSTITUTION_LOOKUP_LABEL = "Institution Lookup"
+EP_METHODOLOGY_LABEL = "Methodology & Limitations"
+
+# Phase 1 MVP Charts
+EARNINGS_PREMIUM_CHARTS: List[str] = [
+    EP_OVERVIEW_RISK_MAP_LABEL,
+    EP_INSTITUTION_LOOKUP_LABEL,
+    EP_METHODOLOGY_LABEL,
+]
+
+# Legacy EP labels (California institutions - deprecated, kept for backward compatibility)
 ROI_EARNINGS_PREMIUM_LABEL = "Earnings Premium (All)"
 ROI_EARNINGS_PREMIUM_RANKINGS_LABEL = "Earnings Premium Rankings"
-
-EARNINGS_PREMIUM_CHARTS: List[str] = [
-    ROI_EARNINGS_PREMIUM_LABEL,
-    ROI_EARNINGS_PREMIUM_RANKINGS_LABEL,
-]
 
 # ROI labels (California institutions only - migrated from epanalysis)
 ROI_OVERVIEW_LABEL = "Overview"

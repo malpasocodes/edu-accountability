@@ -25,6 +25,9 @@ from .constants import (
     DISTANCE_CHARTS,
     EARNINGS_PREMIUM_OVERVIEW_LABEL,
     EARNINGS_PREMIUM_CHARTS,
+    EP_OVERVIEW_RISK_MAP_LABEL,
+    EP_INSTITUTION_LOOKUP_LABEL,
+    EP_METHODOLOGY_LABEL,
     ROI_OVERVIEW_LABEL,
     ROI_CHARTS,
     COLLEGE_EXPLORER_OVERVIEW_LABEL,
@@ -160,22 +163,31 @@ class NavigationConfig:
     EARNINGS_PREMIUM = SectionConfig(
         name=EARNINGS_PREMIUM_SECTION,
         icon="📈",
-        label="Earnings Premium",
+        label="Earnings Premium Analysis",
         overview_chart=ChartConfig(
             label=EARNINGS_PREMIUM_OVERVIEW_LABEL,
             key="nav_earnings_premium_overview",
-            description="Earnings premium analysis"
+            description="Institutional EP risk assessment (2026 requirements)"
         ),
         charts=[
             ChartConfig(
-                label=chart_label,
-                key=f"nav_earnings_premium_{index}",
-                description=None
-            )
-            for index, chart_label in enumerate(EARNINGS_PREMIUM_CHARTS)
+                label=EP_OVERVIEW_RISK_MAP_LABEL,
+                key="nav_ep_overview_risk_map",
+                description="National risk map and summary statistics"
+            ),
+            ChartConfig(
+                label=EP_INSTITUTION_LOOKUP_LABEL,
+                key="nav_ep_institution_lookup",
+                description="Search institutions and view risk assessments"
+            ),
+            ChartConfig(
+                label=EP_METHODOLOGY_LABEL,
+                key="nav_ep_methodology",
+                description="Data sources, calculations, and limitations"
+            ),
         ],
         session_key="earnings_premium_chart",
-        description="Analyze earnings premiums for higher education"
+        description="Assess institutional readiness for July 1, 2026 EP requirements"
     )
 
     ROI = SectionConfig(

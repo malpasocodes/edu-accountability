@@ -6,7 +6,7 @@ from .value_grid import ValueGridSection
 from .federal_loans import FederalLoansSection
 from .pell_grants import PellGrantsSection
 from .distance_education import DistanceEducationSection
-from .earnings_premium import EarningsPremiumSection
+from .earnings_premium_analysis import EarningsPremiumAnalysisSection as EarningsPremiumSection
 from .roi import ROISection
 from .college_explorer import CollegeExplorerSection
 
