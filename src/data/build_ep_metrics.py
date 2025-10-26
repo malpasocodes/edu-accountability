@@ -276,20 +276,67 @@ def calculate_risk_metrics(df: pd.DataFrame) -> pd.DataFrame:
     return df
 
 
+def add_program_counts(df: pd.DataFrame) -> pd.DataFrame:
+    """
+    Add program count data to EP analysis
+
+    Merges program counts from IPEDS completions data to show
+    the scale of program-level EP assessment requirements.
+    """
+    print("\nAdding program counts...")
+
+    base_dir = Path(__file__).parent.parent.parent
+    program_counts_path = base_dir / 'data' / 'processed' / 'program_counts.parquet'
+
+    if not program_counts_path.exists():
+        print("  ⚠️  WARNING: Program counts file not found")
+        print("  ⚠️  Run: python src/data/build_program_counts.py")
+        print("  ⚠️  Skipping program count integration")
+        return df
+
+    program_counts = pd.read_parquet(program_counts_path)
+
+    # Rename UNITID to UnitID to match EP data
+    program_counts = program_counts.rename(columns={'UNITID': 'UnitID'})
+
+    print(f"  Merging program counts for {len(program_counts):,} institutions...")
+
+    df = df.merge(
+        program_counts[['UnitID', 'total_programs', 'assessable_programs',
+                       'total_completions', 'avg_completions_per_program']],
+        on='UnitID',
+        how='left'
+    )
+
+    # Fill missing with 0 (institutions with no completions data)
+    df['total_programs'] = df['total_programs'].fillna(0).astype('Int32')
+    df['assessable_programs'] = df['assessable_programs'].fillna(0).astype('Int32')
+    df['total_completions'] = df['total_completions'].fillna(0).astype('Int32')
+    df['avg_completions_per_program'] = df['avg_completions_per_program'].fillna(0).astype('float32')
+
+    institutions_with_programs = len(df[df['total_programs'] > 0])
+    print(f"  ✓ {institutions_with_programs:,} institutions have program count data")
+    print(f"  Total programs nationwide: {df['total_programs'].sum():,}")
+    print(f"  Total assessable programs: {df['assessable_programs'].sum():,}")
+
+    return df
+
+
 def optimize_dtypes(df: pd.DataFrame) -> pd.DataFrame:
     """Optimize data types for efficient storage."""
     print("\nOptimizing data types...")
 
-    # Integer columns
-    int_cols = ['UnitID', 'SECTOR', 'risk_level_numeric']
+    # Integer columns (including new program count columns)
+    int_cols = ['UnitID', 'SECTOR', 'risk_level_numeric',
+                'total_programs', 'assessable_programs', 'total_completions']
     for col in int_cols:
         if col in df.columns:
             df[col] = df[col].astype('Int32')
 
-    # Float columns
+    # Float columns (including new avg_completions_per_program)
     float_cols = ['median_earnings', 'Threshold', 'earnings_margin',
                   'earnings_margin_pct', 'MD_EARN_WNE_P10', 'MD_EARN_WNE_P6',
-                  'graduation_rate', 'cost', 'enrollment']
+                  'graduation_rate', 'cost', 'enrollment', 'avg_completions_per_program']
     for col in float_cols:
         if col in df.columns:
             df[col] = df[col].astype('float32')
@@ -328,6 +375,9 @@ def main():
 
         # Calculate risk metrics
         df = calculate_risk_metrics(df)
+
+        # Add program counts
+        df = add_program_counts(df)
 
         # Optimize dtypes
         df = optimize_dtypes(df)

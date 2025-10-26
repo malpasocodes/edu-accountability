@@ -31,6 +31,7 @@ from .constants import (
     EP_STATE_ANALYSIS_LABEL,
     EP_SECTOR_COMPARISON_LABEL,
     EP_RISK_QUADRANTS_LABEL,
+    EP_PROGRAM_DISTRIBUTION_LABEL,
     EP_METHODOLOGY_LABEL,
     ROI_OVERVIEW_LABEL,
     ROI_CHARTS,
@@ -203,6 +204,11 @@ class NavigationConfig:
                 label=EP_INSTITUTION_LOOKUP_LABEL,
                 key="nav_ep_institution_lookup",
                 description="Search institutions and view risk assessments"
+            ),
+            ChartConfig(
+                label=EP_PROGRAM_DISTRIBUTION_LABEL,
+                key="nav_ep_program_distribution",
+                description="Scale of program-level EP assessment requirements"
             ),
             ChartConfig(
                 label=EP_METHODOLOGY_LABEL,

@@ -130,15 +130,17 @@ EP_INSTITUTION_LOOKUP_LABEL = "Institution Lookup"
 EP_STATE_ANALYSIS_LABEL = "State Analysis"
 EP_SECTOR_COMPARISON_LABEL = "Sector Comparison"
 EP_RISK_QUADRANTS_LABEL = "Risk Quadrants"
+EP_PROGRAM_DISTRIBUTION_LABEL = "Program Distribution"
 EP_METHODOLOGY_LABEL = "Methodology & Limitations"
 
-# Phase 1 MVP Charts (Phase 2 adds State Analysis and Sector Comparison, Phase 3 adds Risk Quadrants)
+# Phase 1 MVP Charts (Phase 2 adds State Analysis and Sector Comparison, Phase 3 adds Risk Quadrants, Phase 4 adds Program Distribution)
 EARNINGS_PREMIUM_CHARTS: List[str] = [
     EP_OVERVIEW_RISK_MAP_LABEL,
     EP_INSTITUTION_LOOKUP_LABEL,
     EP_STATE_ANALYSIS_LABEL,
     EP_SECTOR_COMPARISON_LABEL,
     EP_RISK_QUADRANTS_LABEL,
+    EP_PROGRAM_DISTRIBUTION_LABEL,
     EP_METHODOLOGY_LABEL,
 ]
 

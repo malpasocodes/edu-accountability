@@ -17,6 +17,7 @@ from src.config.constants import (
     EP_STATE_ANALYSIS_LABEL,
     EP_SECTOR_COMPARISON_LABEL,
     EP_RISK_QUADRANTS_LABEL,
+    EP_PROGRAM_DISTRIBUTION_LABEL,
     EP_METHODOLOGY_LABEL,
 )
 from src.core.ep_data_loader import (
@@ -170,6 +171,8 @@ class EarningsPremiumAnalysisSection(BaseSection):
             self._render_sector_comparison()
         elif chart_name == EP_RISK_QUADRANTS_LABEL:
             self._render_risk_quadrants()
+        elif chart_name == EP_PROGRAM_DISTRIBUTION_LABEL:
+            self._render_program_distribution()
         elif chart_name == EP_METHODOLOGY_LABEL:
             self._render_methodology()
         else:
@@ -1155,6 +1158,318 @@ class EarningsPremiumAnalysisSection(BaseSection):
                 else:
                     st.info(f"No institutions found in {risk_level} category.")
 
+    def _render_program_distribution(self) -> None:
+        """Render the Program Distribution analysis page."""
+        st.markdown("## 📚 Program Distribution")
+
+        st.markdown("""
+        The Earnings Premium requirement assesses **each degree program individually**—not
+        institutions as a whole. A "program" is defined as a specific field of study
+        (6-digit CIP code) at a specific degree level at a specific institution.
+
+        For example, UCLA's "Bachelor of Arts in Psychology" is one program, separate from
+        its "Master of Arts in Psychology" and its "Bachelor of Arts in English." Each
+        must demonstrate that graduates earn more than comparable non-completers.
+
+        This page explores the scale of the data collection and monitoring effort required
+        to implement Earnings Premium requirements nationwide.
+        """)
+
+        # Load data
+        df = load_ep_data()
+
+        # Filter to institutions with program count data
+        df_with_programs = df[df['total_programs'] > 0].copy()
+
+        if len(df_with_programs) == 0:
+            st.error("No program count data available. Please run: python src/data/build_program_counts.py")
+            return
+
+        # Summary metrics
+        st.markdown("### Key Metrics")
+
+        total_programs = df_with_programs['total_programs'].sum()
+        assessable_programs = df_with_programs['assessable_programs'].sum()
+        max_programs_inst = df_with_programs.loc[df_with_programs['total_programs'].idxmax()]
+        data_points_3yr = total_programs * 3  # 3 years of tracking per program
+
+        col1, col2, col3, col4 = st.columns(4)
+
+        with col1:
+            st.metric(
+                "Total Programs Subject to EP",
+                f"{total_programs:,.0f}",
+                help="Each program (field + level + institution) must be assessed separately"
+            )
+
+        with col2:
+            st.metric(
+                "Large Enough for Assessment",
+                f"{assessable_programs:,.0f}",
+                f"{assessable_programs/total_programs*100:.0f}%",
+                help="Programs with sufficient completers (30+) for reliable median calculation"
+            )
+
+        with col3:
+            inst_name = max_programs_inst['institution']
+            if len(inst_name) > 25:
+                inst_name = inst_name[:25] + "..."
+            st.metric(
+                "Largest Portfolio",
+                inst_name,
+                f"{max_programs_inst['total_programs']:.0f} programs",
+                help="Institution with the most degree programs"
+            )
+
+        with col4:
+            st.metric(
+                "Data Points to Track",
+                f"{data_points_3yr:,.0f}",
+                "3 years × programs",
+                help="ED must track earnings for 3 consecutive years per program"
+            )
+
+        st.markdown("---")
+
+        # Program distribution histogram
+        st.markdown("### How Many Programs Must Be Assessed?")
+
+        st.markdown("""
+        This histogram shows how program counts are distributed across institutions.
+        Most institutions have 25-75 programs, but large research universities may
+        have 150-267 programs, each requiring separate EP assessment.
+        """)
+
+        # Create bins
+        bins = [0, 25, 50, 75, 100, 150, 200, df_with_programs['total_programs'].max() + 1]
+        labels = ['0-25', '25-50', '50-75', '75-100', '100-150', '150-200', '200+']
+
+        df_with_programs['program_bin'] = pd.cut(df_with_programs['total_programs'], bins=bins, labels=labels, right=False)
+
+        # Count institutions per bin
+        bin_counts = df_with_programs['program_bin'].value_counts().sort_index()
+
+        # Create histogram
+        fig = go.Figure(data=[
+            go.Bar(
+                x=bin_counts.index.astype(str),
+                y=bin_counts.values,
+                text=bin_counts.values,
+                textposition='auto',
+                marker_color='steelblue',
+                hovertemplate='<b>%{x} programs</b><br>%{y} institutions<extra></extra>'
+            )
+        ])
+
+        fig.update_layout(
+            xaxis_title="Number of Programs per Institution",
+            yaxis_title="Number of Institutions",
+            height=400,
+            showlegend=False,
+            hovermode='x'
+        )
+
+        st.plotly_chart(fig, width="stretch")
+
+        # Summary statistics below chart
+        col1, col2, col3, col4 = st.columns(4)
+
+        with col1:
+            st.metric("Median Programs", f"{df_with_programs['total_programs'].median():.0f}")
+
+        with col2:
+            st.metric("Mean Programs", f"{df_with_programs['total_programs'].mean():.0f}")
+
+        with col3:
+            st.metric("Institutions with 100+", f"{len(df_with_programs[df_with_programs['total_programs'] >= 100]):,}")
+
+        with col4:
+            st.metric("Institutions with 200+", f"{len(df_with_programs[df_with_programs['total_programs'] >= 200]):,}")
+
+        st.markdown("---")
+
+        # Sector breakdown
+        st.markdown("### Program Distribution by Sector")
+
+        st.markdown("""
+        Different institutional sectors have vastly different program portfolios.
+        Public research universities typically have the largest portfolios, while
+        for-profit institutions tend to be more focused with fewer programs.
+        """)
+
+        # Aggregate by sector
+        sector_stats = df_with_programs.groupby('sector_name').agg({
+            'institution': 'count',
+            'total_programs': ['sum', 'mean', 'median']
+        }).round(0)
+
+        sector_stats.columns = ['Institutions', 'Total Programs', 'Avg Programs', 'Median Programs']
+        sector_stats = sector_stats.sort_values('Total Programs', ascending=False)
+
+        # Create horizontal bar chart
+        fig = go.Figure(data=[
+            go.Bar(
+                y=sector_stats.index,
+                x=sector_stats['Total Programs'],
+                orientation='h',
+                text=sector_stats['Total Programs'].astype(int),
+                textposition='auto',
+                marker_color='steelblue',
+                hovertemplate='<b>%{y}</b><br>' +
+                             'Total Programs: %{x:,.0f}<br>' +
+                             'Institutions: %{customdata[0]:,.0f}<br>' +
+                             'Avg per Institution: %{customdata[1]:.0f}<br>' +
+                             'Median per Institution: %{customdata[2]:.0f}<extra></extra>',
+                customdata=sector_stats[['Institutions', 'Avg Programs', 'Median Programs']].values
+            )
+        ])
+
+        fig.update_layout(
+            xaxis_title="Total Programs in Sector",
+            yaxis_title="",
+            height=400,
+            showlegend=False
+        )
+
+        st.plotly_chart(fig, width="stretch")
+
+        # Table below chart
+        st.markdown("**Detailed Sector Statistics:**")
+        st.dataframe(
+            sector_stats.style.format({
+                'Institutions': '{:,.0f}',
+                'Total Programs': '{:,.0f}',
+                'Avg Programs': '{:.0f}',
+                'Median Programs': '{:.0f}'
+            }),
+            width="stretch"
+        )
+
+        st.markdown("---")
+
+        # Top institutions table
+        st.markdown("### Top 25 Institutions by Program Count")
+
+        st.markdown("""
+        These institutions face the largest compliance burden, with each program
+        requiring separate earnings tracking, monitoring, and potential enforcement actions.
+        """)
+
+        # Select top 25
+        top_25 = df_with_programs.nlargest(25, 'total_programs')[
+            ['institution', 'STABBR', 'sector_name', 'total_programs',
+             'assessable_programs', 'total_completions']
+        ].copy()
+
+        # Calculate data points
+        top_25['data_points_3yr'] = top_25['total_programs'] * 3
+
+        # Reset index for display (1-based)
+        top_25 = top_25.reset_index(drop=True)
+        top_25.index = top_25.index + 1
+
+        # Rename columns for display
+        top_25.columns = [
+            'Institution',
+            'State',
+            'Sector',
+            'Total Programs',
+            'Assessable Programs',
+            'Total Completions',
+            'Data Points (3 years)'
+        ]
+
+        # Display table
+        st.dataframe(
+            top_25.style.format({
+                'Total Programs': '{:.0f}',
+                'Assessable Programs': '{:.0f}',
+                'Total Completions': '{:,.0f}',
+                'Data Points (3 years)': '{:,.0f}'
+            }),
+            width="stretch",
+            height=600
+        )
+
+        # Summary
+        total_top_25_programs = top_25['Total Programs'].sum()
+        total_top_25_datapoints = top_25['Data Points (3 years)'].sum()
+
+        st.caption(f"""
+        These 25 institutions alone account for **{total_top_25_programs:,.0f} programs** requiring
+        individual assessment, representing **{total_top_25_datapoints:,.0f} data points**
+        to track over the 3-year compliance window.
+        """)
+
+        st.markdown("---")
+
+        # The data challenge explainer
+        st.markdown("### The Data Collection Challenge")
+
+        total_institutions = len(df_with_programs)
+
+        st.markdown(f"""
+        #### To Implement Earnings Premium Requirements, the Department of Education Must:
+
+        📊 **Track {total_programs:,.0f} individual programs** across {total_institutions:,} institutions
+
+        📅 **Monitor earnings for 3 consecutive years per program** (years 2, 3, and 4 after completion)
+
+        👥 **Match millions of graduates to IRS/SSA wage records** annually
+
+        🎯 **Calculate program-specific medians** (minimum 30 graduates per cohort for reliable data)
+
+        📧 **Notify institutions within 30 days** when programs fail either metric
+
+        📋 **Process appeals and recalculations** for contested determinations
+
+        🔄 **Repeat this process annually, indefinitely**
+
+        ---
+
+        #### Scale Comparison: Institutional vs. Program-Level Data
+
+        | System | Data Points | Granularity | Update Frequency |
+        |--------|-------------|-------------|------------------|
+        | **College Scorecard** | ~6,000 institutions | Aggregate across all programs | Annual |
+        | **Earnings Premium** | ~{total_programs:,.0f} programs | Individual program-level | Annual (3-year rolling) |
+        | **Multiplier** | **{total_programs/6000:.0f}× more data points** | Program-specific tracking | Continuous compliance monitoring |
+
+        ---
+
+        #### The Data Infrastructure Gap
+
+        This dashboard provides **institutional-level** risk estimates precisely because
+        program-level earnings data is currently:
+
+        - **Not publicly available** - IRS and Social Security Administration wage records are confidential
+        - **Computationally intensive** to generate and maintain at scale ({data_points_3yr:,.0f}+ data points)
+        - **Subject to privacy suppression** for small programs with fewer than 30 graduates
+        - **Not yet systematically collected** in the format required by EP regulations
+
+        The Department of Education will need to build this comprehensive data infrastructure—
+        capable of tracking and monitoring hundreds of thousands of programs—while simultaneously
+        using it to enforce accountability measures affecting billions in federal student aid.
+        """)
+
+        # Comparative context box
+        st.info(f"""
+        💡 **Context for Scale**: The entire IPEDS data collection system currently gathers
+        approximately 100-200 institutional data elements per institution annually. The Earnings
+        Premium requirement effectively creates **{total_programs:,.0f} new "institutional units"**
+        (programs) requiring ongoing earnings monitoring, compliance tracking, and potential
+        enforcement actions—each with multiple years of data to maintain.
+        """)
+
+        # Timeline consideration
+        st.warning("""
+        ⏱️ **Timeline Consideration**: The law requires implementation by **July 1, 2026**,
+        with the first assessments evaluating graduates who completed as early as 2022. This
+        means ED must build the data infrastructure, establish calculation methodologies,
+        create the compliance monitoring system, and begin enforcement—all within the timeframe
+        since the law was signed (July 1, 2024).
+        """)
+
     def _render_methodology(self) -> None:
         """Render the Methodology & Limitations page."""
         st.markdown("## Methodology & Limitations")
@@ -1328,5 +1643,6 @@ class EarningsPremiumAnalysisSection(BaseSection):
             EP_STATE_ANALYSIS_LABEL,
             EP_SECTOR_COMPARISON_LABEL,
             EP_RISK_QUADRANTS_LABEL,
+            EP_PROGRAM_DISTRIBUTION_LABEL,
             EP_METHODOLOGY_LABEL,
         ]
