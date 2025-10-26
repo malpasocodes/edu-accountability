@@ -351,7 +351,7 @@ class EarningsPremiumAnalysisSection(BaseSection):
         # Create institution list for selectbox
         institutions = df[['UnitID', 'institution', 'STABBR']].copy()
         institutions = institutions.sort_values('institution')
-        institutions['display'] = institutions['institution'] + ' (' + institutions['STABBR'] + ')'
+        institutions['display'] = institutions['institution'] + ' (' + institutions['STABBR'].astype(str) + ')'
 
         selected_display = st.selectbox(
             "Search for an institution:",
