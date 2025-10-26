@@ -112,7 +112,7 @@ def render_roi_timeline_chart() -> None:
     )
 
     # Render in Streamlit
-    st.plotly_chart(fig, width="stretch")
+    st.plotly_chart(fig, use_container_width=True)
 
     # Add explanatory caption
     st.caption(

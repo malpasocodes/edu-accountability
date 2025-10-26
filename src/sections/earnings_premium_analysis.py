@@ -64,10 +64,31 @@ class EarningsPremiumAnalysisSection(BaseSection):
         st.markdown("### What is the Earnings Premium Test?")
         st.markdown(
             """
-            Starting **July 1, 2026**, all undergraduate and graduate degree programs must demonstrate that
-            graduates earn **MORE than the median earnings of high school graduates (aged 25-34) in their state**.
+            On July 4, 2025, President Trump signed the "One Big Beautiful Bill" as part of budget reconciliation,
+            fundamentally transforming accountability requirements for American higher education. The law amended
+            the Higher Education Act of 1965 to create a new "earnings premium" (EP) metric that will assess the
+            effectiveness of all degree programs at all universities receiving Title IV federal student aid funds.
+            """
+        )
 
-            Programs that fail this test for **2 out of 3 consecutive years** lose Title IV federal aid eligibility.
+        st.markdown("#### Test 1: The Earnings Premium Test")
+        st.markdown("**Question:** Do your graduates earn more than people who didn't pursue your type of credential?")
+
+        st.markdown(
+            """
+            **For undergraduate programs:** Graduates' median earnings must exceed the median earnings of high school
+            graduates (aged 25-34) in the state where the institution is located. These state thresholds range from
+            $27,362 in Mississippi to $37,850 in New Hampshire, with a national threshold of $31,269.
+
+            **For graduate programs:** Graduates' median earnings must exceed the lowest of three benchmarks:
+            1. Bachelor's degree holders in the state
+            2. Workers in the same field statewide
+            3. Workers in the same field nationally
+
+            **Measurement:** The Department of Education will measure earnings 2, 3, and 4 years after program completion
+            using IRS and Social Security Administration data. Programs must pass in at least 2 out of 3 years.
+
+            **Effective Date:** July 1, 2026
             """
         )
 
@@ -264,7 +285,7 @@ class EarningsPremiumAnalysisSection(BaseSection):
                 color_discrete_map=risk_colors
             )
             fig.update_layout(showlegend=False, height=400)
-            st.plotly_chart(fig, width="stretch")
+            st.plotly_chart(fig, use_container_width=True)
 
         with col2:
             st.markdown("#### Risk Categories")
@@ -468,7 +489,7 @@ class EarningsPremiumAnalysisSection(BaseSection):
             legend_title="Risk Level"
         )
 
-        st.plotly_chart(fig, width="stretch")
+        st.plotly_chart(fig, use_container_width=True)
 
         st.caption(
             "_Data Sources: College Scorecard (median earnings 10 years after entry), "
@@ -728,7 +749,7 @@ class EarningsPremiumAnalysisSection(BaseSection):
                 title="National Risk Distribution"
             )
             fig.update_layout(showlegend=False, height=400)
-            st.plotly_chart(fig, width="stretch")
+            st.plotly_chart(fig, use_container_width=True)
 
         else:
             # Show state-specific analysis
@@ -966,7 +987,7 @@ class EarningsPremiumAnalysisSection(BaseSection):
                 hover_data={'Count': True}
             )
             fig.update_layout(height=500, xaxis_tickangle=-45)
-            st.plotly_chart(fig, width="stretch")
+            st.plotly_chart(fig, use_container_width=True)
 
         st.markdown("")  # Spacing
 
@@ -1131,7 +1152,7 @@ class EarningsPremiumAnalysisSection(BaseSection):
                         legend_title="Sector"
                     )
 
-                    st.plotly_chart(fig, width="stretch")
+                    st.plotly_chart(fig, use_container_width=True)
 
                     # Summary stats for this risk level
                     col1, col2, col3 = st.columns(3)
@@ -1269,7 +1290,7 @@ class EarningsPremiumAnalysisSection(BaseSection):
             hovermode='x'
         )
 
-        st.plotly_chart(fig, width="stretch")
+        st.plotly_chart(fig, use_container_width=True)
 
         # Summary statistics below chart
         col1, col2, col3, col4 = st.columns(4)
@@ -1331,7 +1352,7 @@ class EarningsPremiumAnalysisSection(BaseSection):
             showlegend=False
         )
 
-        st.plotly_chart(fig, width="stretch")
+        st.plotly_chart(fig, use_container_width=True)
 
         # Table below chart
         st.markdown("**Detailed Sector Statistics:**")
