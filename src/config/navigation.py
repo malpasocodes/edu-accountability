@@ -29,6 +29,7 @@ from .constants import (
     EP_INSTITUTION_LOOKUP_LABEL,
     EP_STATE_ANALYSIS_LABEL,
     EP_SECTOR_COMPARISON_LABEL,
+    EP_RISK_QUADRANTS_LABEL,
     EP_METHODOLOGY_LABEL,
     ROI_OVERVIEW_LABEL,
     ROI_CHARTS,
@@ -191,6 +192,11 @@ class NavigationConfig:
                 label=EP_SECTOR_COMPARISON_LABEL,
                 key="nav_ep_sector_comparison",
                 description="Compare risk across institutional types"
+            ),
+            ChartConfig(
+                label=EP_RISK_QUADRANTS_LABEL,
+                key="nav_ep_risk_quadrants",
+                description="Scatter plots by risk category with sector colors"
             ),
             ChartConfig(
                 label=EP_METHODOLOGY_LABEL,

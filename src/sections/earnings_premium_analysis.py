@@ -15,6 +15,7 @@ from src.config.constants import (
     EP_INSTITUTION_LOOKUP_LABEL,
     EP_STATE_ANALYSIS_LABEL,
     EP_SECTOR_COMPARISON_LABEL,
+    EP_RISK_QUADRANTS_LABEL,
     EP_METHODOLOGY_LABEL,
 )
 from src.core.ep_data_loader import (
@@ -252,6 +253,8 @@ class EarningsPremiumAnalysisSection(BaseSection):
             self._render_state_analysis()
         elif chart_name == EP_SECTOR_COMPARISON_LABEL:
             self._render_sector_comparison()
+        elif chart_name == EP_RISK_QUADRANTS_LABEL:
+            self._render_risk_quadrants()
         elif chart_name == EP_METHODOLOGY_LABEL:
             self._render_methodology()
         else:
@@ -945,6 +948,117 @@ class EarningsPremiumAnalysisSection(BaseSection):
                 else:
                     st.info(f"No institutions with risk assessments found in {sector}.")
 
+    def _render_risk_quadrants(self) -> None:
+        """Render the Risk Quadrants page with tabs for each risk category."""
+        st.markdown("## Risk Quadrants")
+        st.markdown(
+            """
+            Visualize how institutions in each risk category compare their earnings to state thresholds.
+            Each scatter plot shows institutions color-coded by sector type.
+            """
+        )
+
+        st.markdown("")  # Spacing
+
+        # Load data
+        df = load_ep_data()
+        df_valid = df[df['risk_level'] != 'No Data'].copy()
+
+        # Create tabs for each risk level
+        risk_levels = ['Low Risk', 'Moderate Risk', 'High Risk', 'Critical Risk']
+        tabs = st.tabs(risk_levels)
+
+        # Sector color mapping (consistent with dashboard patterns)
+        sector_colors = {
+            'Public 4-year': '#2ca02c',
+            'Public 2-year': '#98df8a',
+            'Private nonprofit 4-year': '#9467bd',
+            'Private nonprofit 2-year': '#c5b0d5',
+            'For-profit 4-year': '#ff7f0e',
+            'For-profit 2-year': '#ffbb78'
+        }
+
+        for tab, risk_level in zip(tabs, risk_levels):
+            with tab:
+                # Filter data for this risk level
+                risk_df = df_valid[df_valid['risk_level'] == risk_level].copy()
+
+                st.markdown(f"**{len(risk_df):,} institutions in {risk_level} category**")
+                st.markdown("")  # Spacing
+
+                if not risk_df.empty:
+                    # Create scatter plot
+                    fig = px.scatter(
+                        risk_df,
+                        x='Threshold',
+                        y='median_earnings',
+                        color='sector_name',
+                        color_discrete_map=sector_colors,
+                        hover_data={
+                            'institution': True,
+                            'STABBR': True,
+                            'sector_name': True,
+                            'Threshold': ':$,.0f',
+                            'median_earnings': ':$,.0f',
+                            'earnings_margin_pct': ':.1f%'
+                        },
+                        title=f"{risk_level} Institutions: Earnings vs State Threshold",
+                        labels={
+                            'Threshold': 'State EP Threshold ($)',
+                            'median_earnings': 'Institutional Median Earnings ($)',
+                            'sector_name': 'Sector'
+                        },
+                        height=600
+                    )
+
+                    # Add reference line (y = x)
+                    max_val = max(risk_df['Threshold'].max(), risk_df['median_earnings'].max())
+                    min_val = min(risk_df['Threshold'].min(), risk_df['median_earnings'].min())
+
+                    fig.add_trace(
+                        go.Scatter(
+                            x=[min_val, max_val],
+                            y=[min_val, max_val],
+                            mode='lines',
+                            line=dict(dash='dash', color='gray', width=2),
+                            name='Earnings = Threshold',
+                            showlegend=True
+                        )
+                    )
+
+                    fig.update_layout(
+                        xaxis_title="State EP Threshold ($)",
+                        yaxis_title="Institutional Median Earnings ($)",
+                        legend_title="Sector"
+                    )
+
+                    st.plotly_chart(fig, use_container_width=True)
+
+                    # Summary stats for this risk level
+                    col1, col2, col3 = st.columns(3)
+                    with col1:
+                        st.metric(
+                            "Median Earnings",
+                            f"${risk_df['median_earnings'].median():,.0f}"
+                        )
+                    with col2:
+                        st.metric(
+                            "Median Threshold",
+                            f"${risk_df['Threshold'].median():,.0f}"
+                        )
+                    with col3:
+                        st.metric(
+                            "Avg Margin",
+                            f"{risk_df['earnings_margin_pct'].mean():.1f}%"
+                        )
+
+                    st.caption(
+                        f"_Showing all {len(risk_df):,} institutions classified as {risk_level}. "
+                        f"Points above the diagonal line exceed their state threshold._"
+                    )
+                else:
+                    st.info(f"No institutions found in {risk_level} category.")
+
     def _render_methodology(self) -> None:
         """Render the Methodology & Limitations page."""
         st.markdown("## Methodology & Limitations")
@@ -1116,5 +1230,6 @@ class EarningsPremiumAnalysisSection(BaseSection):
             EP_INSTITUTION_LOOKUP_LABEL,
             EP_STATE_ANALYSIS_LABEL,
             EP_SECTOR_COMPARISON_LABEL,
+            EP_RISK_QUADRANTS_LABEL,
             EP_METHODOLOGY_LABEL,
         ]
