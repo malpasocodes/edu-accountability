@@ -814,47 +814,82 @@ class EarningsPremiumAnalysisSection(BaseSection):
 
         st.markdown("")  # Spacing
 
-        # Sector deep dive
-        st.markdown("### Sector Deep Dive")
+        # All Institutions by Sector (Tabs)
+        st.markdown("### All Institutions by Sector")
+        st.markdown("Click a tab to view all institutions in that sector.")
 
-        selected_sector = st.selectbox(
-            "Select a sector to explore:",
-            options=sectors,
-            key="sector_deep_dive"
-        )
+        # Create tabs for each sector
+        tab_labels = sectors
+        tabs = st.tabs(tab_labels)
 
-        if selected_sector:
-            sector_df = filter_by_sector([selected_sector])
-            sector_df_valid = sector_df[sector_df['risk_level'] != 'No Data'].copy()
+        for tab, sector in zip(tabs, sectors):
+            with tab:
+                sector_df = filter_by_sector([sector])
+                sector_df_valid = sector_df[sector_df['risk_level'] != 'No Data'].copy()
 
-            if not sector_df_valid.empty:
-                col1, col2 = st.columns(2)
+                if not sector_df_valid.empty:
+                    # Show count
+                    st.markdown(f"**{len(sector_df_valid):,} institutions in {sector}**")
 
-                with col1:
-                    st.markdown("#### Top 10 Performers")
-                    st.markdown("Institutions with highest earnings margins")
+                    st.markdown("")  # Spacing
 
-                    top_performers = sector_df_valid.nlargest(10, 'earnings_margin_pct')
-                    top_display = top_performers[['institution', 'STABBR', 'median_earnings', 'earnings_margin_pct', 'risk_level']].copy()
-                    top_display.columns = ['Institution', 'State', 'Median Earnings', 'Margin (%)', 'Risk Level']
-                    top_display['Median Earnings'] = top_display['Median Earnings'].apply(lambda x: f"${x:,.0f}")
-                    top_display['Margin (%)'] = top_display['Margin (%)'].apply(lambda x: f"{x:.1f}%")
+                    # Risk level filter
+                    risk_options = ['Low Risk', 'Moderate Risk', 'High Risk', 'Critical Risk']
+                    selected_risks = st.multiselect(
+                        "Filter by risk level:",
+                        options=risk_options,
+                        default=risk_options,
+                        key=f"sector_{sector.replace(' ', '_').replace('-', '_')}_risk_filter"
+                    )
 
-                    st.dataframe(top_display, use_container_width=True, hide_index=True, height=400)
+                    # Apply filter
+                    if selected_risks:
+                        sector_df_filtered = sector_df_valid[sector_df_valid['risk_level'].isin(selected_risks)]
+                    else:
+                        sector_df_filtered = sector_df_valid
 
-                with col2:
-                    st.markdown("#### Bottom 10 Performers")
-                    st.markdown("Institutions with lowest earnings margins")
+                    st.markdown(f"*Showing {len(sector_df_filtered):,} institutions*")
 
-                    bottom_performers = sector_df_valid.nsmallest(10, 'earnings_margin_pct')
-                    bottom_display = bottom_performers[['institution', 'STABBR', 'median_earnings', 'earnings_margin_pct', 'risk_level']].copy()
-                    bottom_display.columns = ['Institution', 'State', 'Median Earnings', 'Margin (%)', 'Risk Level']
-                    bottom_display['Median Earnings'] = bottom_display['Median Earnings'].apply(lambda x: f"${x:,.0f}")
-                    bottom_display['Margin (%)'] = bottom_display['Margin (%)'].apply(lambda x: f"{x:.1f}%")
+                    st.markdown("")  # Spacing
 
-                    st.dataframe(bottom_display, use_container_width=True, hide_index=True, height=400)
-            else:
-                st.info("No institutions with risk assessments found in this sector.")
+                    # Prepare display dataframe
+                    display_cols = ['institution', 'STABBR', 'median_earnings', 'Threshold', 'earnings_margin_pct', 'risk_level', 'enrollment']
+                    display_df = sector_df_filtered[display_cols].copy()
+
+                    # Sort by earnings margin (best first)
+                    display_df = display_df.sort_values('earnings_margin_pct', ascending=False)
+
+                    # Rename columns
+                    display_df.columns = ['Institution', 'State', 'Median Earnings', 'State Threshold', 'Margin (%)', 'Risk Level', 'Enrollment']
+
+                    # Format columns
+                    display_df['Median Earnings'] = display_df['Median Earnings'].apply(
+                        lambda x: f"${x:,.0f}" if pd.notna(x) else "No Data"
+                    )
+                    display_df['State Threshold'] = display_df['State Threshold'].apply(
+                        lambda x: f"${x:,.0f}" if pd.notna(x) else "No Data"
+                    )
+                    display_df['Margin (%)'] = display_df['Margin (%)'].apply(
+                        lambda x: f"{x:.1f}%" if pd.notna(x) else "No Data"
+                    )
+                    display_df['Enrollment'] = display_df['Enrollment'].apply(
+                        lambda x: f"{x:,.0f}" if pd.notna(x) else "No Data"
+                    )
+
+                    # Display table
+                    st.dataframe(display_df, use_container_width=True, hide_index=True, height=500)
+
+                    # Download button
+                    csv = sector_df_filtered.to_csv(index=False)
+                    st.download_button(
+                        label=f"Download {sector} Data (CSV)",
+                        data=csv,
+                        file_name=f"ep_sector_{sector.replace(' ', '_').replace('-', '_')}.csv",
+                        mime="text/csv",
+                        key=f"sector_{sector.replace(' ', '_').replace('-', '_')}_download"
+                    )
+                else:
+                    st.info(f"No institutions with risk assessments found in {sector}.")
 
     def _render_methodology(self) -> None:
         """Render the Methodology & Limitations page."""
