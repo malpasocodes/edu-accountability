@@ -124,7 +124,8 @@ COLLEGE_EXPLORER_CHARTS: List[str] = [
 
 # Earnings Premium Analysis labels (National - Section 9)
 EARNINGS_PREMIUM_OVERVIEW_LABEL = "Overview"
-EP_OVERVIEW_RISK_MAP_LABEL = "Overview & Risk Map"
+EP_NATIONAL_OVERVIEW_LABEL = "Risk Distribution"
+EP_OVERVIEW_RISK_MAP_LABEL = "Risk Map"
 EP_INSTITUTION_LOOKUP_LABEL = "Institution Lookup"
 EP_STATE_ANALYSIS_LABEL = "State Analysis"
 EP_SECTOR_COMPARISON_LABEL = "Sector Comparison"

@@ -11,6 +11,7 @@ import plotly.graph_objects as go
 from src.config.constants import (
     EARNINGS_PREMIUM_SECTION,
     EARNINGS_PREMIUM_OVERVIEW_LABEL,
+    EP_NATIONAL_OVERVIEW_LABEL,
     EP_OVERVIEW_RISK_MAP_LABEL,
     EP_INSTITUTION_LOOKUP_LABEL,
     EP_STATE_ANALYSIS_LABEL,
@@ -128,13 +129,69 @@ class EarningsPremiumAnalysisSection(BaseSection):
                 unsafe_allow_html=True
             )
 
+        st.divider()
+
+        # What to explore
+        st.markdown("### What You Can Explore")
+        st.markdown(
+            """
+            - **National Overview**: View summary metrics and risk distribution across all institutions
+            - **Overview & Risk Map**: Interactive scatter plot showing all institutions' earnings vs state thresholds
+            - **Institution Lookup**: Search for specific institutions and view detailed risk assessments
+            - **State Analysis**: Explore EP risk patterns by state
+            - **Sector Comparison**: Compare risk across institutional types
+            - **Risk Quadrants**: Visualize institutions by risk category with sector breakdowns
+            - **Methodology & Limitations**: Understanding the data, calculations, and critical limitations
+            """
+        )
+
+        st.markdown("")  # Spacing
+
+        # Important limitations
+        st.warning(
+            "**⚠️ Important Limitation:** This analysis uses institution-level median earnings (aggregated across all programs) "
+            "compared to state thresholds. Actual EP testing will occur at the individual program level using IRS/SSA data "
+            "not publicly available. This tool provides directional risk assessment for planning purposes only."
+        )
+
+    def render_chart(self, chart_name: str) -> None:
+        """Render a specific Earnings Premium chart."""
+        self.render_section_header(EARNINGS_PREMIUM_SECTION, chart_name)
+
+        if chart_name == EP_NATIONAL_OVERVIEW_LABEL:
+            self._render_national_overview()
+        elif chart_name == EP_OVERVIEW_RISK_MAP_LABEL:
+            self._render_overview_risk_map()
+        elif chart_name == EP_INSTITUTION_LOOKUP_LABEL:
+            self._render_institution_lookup()
+        elif chart_name == EP_STATE_ANALYSIS_LABEL:
+            self._render_state_analysis()
+        elif chart_name == EP_SECTOR_COMPARISON_LABEL:
+            self._render_sector_comparison()
+        elif chart_name == EP_RISK_QUADRANTS_LABEL:
+            self._render_risk_quadrants()
+        elif chart_name == EP_METHODOLOGY_LABEL:
+            self._render_methodology()
+        else:
+            st.error(f"Unknown chart: {chart_name}")
+
+    def _render_national_overview(self) -> None:
+        """Render the Risk Distribution page with summary metrics and institution lists."""
+        st.markdown("## 📊 Risk Distribution")
+        st.markdown(
+            """
+            This page provides a comprehensive snapshot of Earnings Premium risk across all U.S. institutions
+            with available data. Review key metrics and the distribution of institutions by risk level.
+            """
+        )
+
         st.markdown("")  # Spacing
 
         # Load summary statistics
         summary = get_risk_summary()
 
-        # Summary statistics
-        st.markdown("### National Overview")
+        # Summary metrics
+        st.markdown("### Key Metrics")
 
         col1, col2, col3, col4 = st.columns(4)
 
@@ -175,7 +232,7 @@ class EarningsPremiumAnalysisSection(BaseSection):
         st.markdown("")  # Spacing
 
         # Risk distribution
-        st.markdown("### Risk Distribution")
+        st.markdown("### Institution Count by Risk Level")
 
         risk_df = pd.DataFrame(
             list(summary['risk_distribution'].items()),
@@ -201,8 +258,7 @@ class EarningsPremiumAnalysisSection(BaseSection):
                 x='Risk Level',
                 y='Count',
                 color='Risk Level',
-                color_discrete_map=risk_colors,
-                title="Institutions by Risk Level"
+                color_discrete_map=risk_colors
             )
             fig.update_layout(showlegend=False, height=400)
             st.plotly_chart(fig, use_container_width=True)
@@ -220,49 +276,89 @@ class EarningsPremiumAnalysisSection(BaseSection):
                     unsafe_allow_html=True
                 )
 
+        st.markdown("")  # Spacing
+
+        # Institutions by Risk Category (Tabs)
+        st.markdown("### Institutions by Risk Category")
+        st.markdown("Click a tab to view all institutions in each risk level.")
+
+        # Load full dataset
+        df = load_ep_data()
+
+        # Create tabs for each risk level
+        risk_levels = ['Low Risk', 'Moderate Risk', 'High Risk', 'Critical Risk', 'No Data']
+        tabs = st.tabs(risk_levels)
+
+        for tab, risk_level in zip(tabs, risk_levels):
+            with tab:
+                # Filter by risk level
+                risk_df = df[df['risk_level'] == risk_level].copy()
+
+                if not risk_df.empty:
+                    # Show count
+                    st.markdown(f"**{len(risk_df):,} institutions in {risk_level}**")
+
+                    st.markdown("")  # Spacing
+
+                    # Prepare display dataframe
+                    display_cols = ['institution', 'STABBR', 'median_earnings', 'Threshold', 'earnings_margin_pct', 'sector_name', 'enrollment']
+                    display_df = risk_df[display_cols].copy()
+
+                    # Sort by earnings margin (best first for Low/Moderate, worst first for High/Critical)
+                    if risk_level in ['Low Risk', 'Moderate Risk']:
+                        display_df = display_df.sort_values('earnings_margin_pct', ascending=False)
+                    else:
+                        display_df = display_df.sort_values('earnings_margin_pct', ascending=True)
+
+                    # Rename columns
+                    display_df.columns = ['Institution', 'State', 'Median Earnings', 'State Threshold', 'Margin (%)', 'Sector', 'Enrollment']
+
+                    # Format columns
+                    display_df['Median Earnings'] = display_df['Median Earnings'].apply(
+                        lambda x: f"${x:,.0f}" if pd.notna(x) else "No Data"
+                    )
+                    display_df['State Threshold'] = display_df['State Threshold'].apply(
+                        lambda x: f"${x:,.0f}" if pd.notna(x) else "No Data"
+                    )
+                    display_df['Margin (%)'] = display_df['Margin (%)'].apply(
+                        lambda x: f"{x:.1f}%" if pd.notna(x) else "No Data"
+                    )
+                    display_df['Enrollment'] = display_df['Enrollment'].apply(
+                        lambda x: f"{x:,.0f}" if pd.notna(x) else "No Data"
+                    )
+
+                    # Display table
+                    st.dataframe(display_df, use_container_width=True, hide_index=True, height=500)
+
+                    # Download button
+                    csv = risk_df.to_csv(index=False)
+                    st.download_button(
+                        label=f"Download {risk_level} Data (CSV)",
+                        data=csv,
+                        file_name=f"ep_national_{risk_level.replace(' ', '_').lower()}.csv",
+                        mime="text/csv",
+                        key=f"national_overview_{risk_level.replace(' ', '_').lower()}_download"
+                    )
+                else:
+                    st.info(f"No institutions found in {risk_level}.")
+
         st.divider()
 
-        # What to explore
-        st.markdown("### What You Can Explore")
+        # Navigation guidance
+        st.markdown("### Dive Deeper")
         st.markdown(
             """
             - **Overview & Risk Map**: Interactive scatter plot showing all institutions' earnings vs state thresholds
-            - **Institution Lookup**: Search for specific institutions and view detailed risk assessments with peer comparisons
-            - **Methodology & Limitations**: Understanding the data, calculations, and critical limitations
+            - **Institution Lookup**: Search for specific institutions and view detailed risk assessments
+            - **State Analysis**: Explore EP risk patterns by state
+            - **Sector Comparison**: Compare risk across institutional types
+            - **Risk Quadrants**: Visualize institutions by risk category with sector breakdowns
             """
         )
 
-        st.markdown("")  # Spacing
-
-        # Important limitations
-        st.warning(
-            "**⚠️ Important Limitation:** This analysis uses institution-level median earnings (aggregated across all programs) "
-            "compared to state thresholds. Actual EP testing will occur at the individual program level using IRS/SSA data "
-            "not publicly available. This tool provides directional risk assessment for planning purposes only."
-        )
-
-    def render_chart(self, chart_name: str) -> None:
-        """Render a specific Earnings Premium chart."""
-        self.render_section_header(EARNINGS_PREMIUM_SECTION, chart_name)
-
-        if chart_name == EP_OVERVIEW_RISK_MAP_LABEL:
-            self._render_overview_risk_map()
-        elif chart_name == EP_INSTITUTION_LOOKUP_LABEL:
-            self._render_institution_lookup()
-        elif chart_name == EP_STATE_ANALYSIS_LABEL:
-            self._render_state_analysis()
-        elif chart_name == EP_SECTOR_COMPARISON_LABEL:
-            self._render_sector_comparison()
-        elif chart_name == EP_RISK_QUADRANTS_LABEL:
-            self._render_risk_quadrants()
-        elif chart_name == EP_METHODOLOGY_LABEL:
-            self._render_methodology()
-        else:
-            st.error(f"Unknown chart: {chart_name}")
-
     def _render_overview_risk_map(self) -> None:
-        """Render the Overview & Risk Map page."""
-        st.markdown("## Overview & Risk Map")
+        """Render the Risk Map page."""
+        st.markdown("## Risk Map")
         st.markdown(
             """
             This interactive scatter plot shows how all U.S. institutions compare to their state's
@@ -1226,6 +1322,7 @@ class EarningsPremiumAnalysisSection(BaseSection):
     def get_available_charts(self) -> List[str]:
         """Get available charts for Earnings Premium section."""
         return [
+            EP_NATIONAL_OVERVIEW_LABEL,
             EP_OVERVIEW_RISK_MAP_LABEL,
             EP_INSTITUTION_LOOKUP_LABEL,
             EP_STATE_ANALYSIS_LABEL,

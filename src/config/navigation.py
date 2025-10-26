@@ -25,6 +25,7 @@ from .constants import (
     DISTANCE_CHARTS,
     EARNINGS_PREMIUM_OVERVIEW_LABEL,
     EARNINGS_PREMIUM_CHARTS,
+    EP_NATIONAL_OVERVIEW_LABEL,
     EP_OVERVIEW_RISK_MAP_LABEL,
     EP_INSTITUTION_LOOKUP_LABEL,
     EP_STATE_ANALYSIS_LABEL,
@@ -170,13 +171,18 @@ class NavigationConfig:
         overview_chart=ChartConfig(
             label=EARNINGS_PREMIUM_OVERVIEW_LABEL,
             key="nav_earnings_premium_overview",
-            description="Institutional EP risk assessment (2026 requirements)"
+            description="Understanding the Earnings Premium Test and risk categories"
         ),
         charts=[
             ChartConfig(
+                label=EP_NATIONAL_OVERVIEW_LABEL,
+                key="nav_ep_national_overview",
+                description="National summary metrics and risk distribution"
+            ),
+            ChartConfig(
                 label=EP_OVERVIEW_RISK_MAP_LABEL,
                 key="nav_ep_overview_risk_map",
-                description="National risk map and summary statistics"
+                description="Interactive scatter plot by risk level"
             ),
             ChartConfig(
                 label=EP_INSTITUTION_LOOKUP_LABEL,
