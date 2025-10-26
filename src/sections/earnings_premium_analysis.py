@@ -75,6 +75,60 @@ class EarningsPremiumAnalysisSection(BaseSection):
 
         st.markdown("")  # Spacing
 
+        # Risk category definitions
+        st.markdown("### Risk Category Definitions")
+        st.markdown("Institutions are classified based on how their median graduate earnings compare to their state's EP threshold:")
+
+        col1, col2 = st.columns(2)
+
+        with col1:
+            st.markdown(
+                """
+                <div style='padding: 1rem; border: 2px solid #2ca02c; border-radius: 8px; margin-bottom: 1rem; background-color: #2ca02c15;'>
+                    <h4 style='margin-top: 0; color: #2ca02c;'>✓ Low Risk</h4>
+                    <p style='margin: 0.25rem 0;'><strong>Margin:</strong> > 50%</p>
+                    <p style='margin: 0.25rem 0;'><strong>Earnings:</strong> 150%+ of state threshold</p>
+                </div>
+                """,
+                unsafe_allow_html=True
+            )
+
+            st.markdown(
+                """
+                <div style='padding: 1rem; border: 2px solid #ff7f0e; border-radius: 8px; margin-bottom: 1rem; background-color: #ff7f0e15;'>
+                    <h4 style='margin-top: 0; color: #ff7f0e;'>⚠ High Risk</h4>
+                    <p style='margin: 0.25rem 0;'><strong>Margin:</strong> 0-20%</p>
+                    <p style='margin: 0.25rem 0;'><strong>Earnings:</strong> 100-120% of threshold</p>
+                </div>
+                """,
+                unsafe_allow_html=True
+            )
+
+        with col2:
+            st.markdown(
+                """
+                <div style='padding: 1rem; border: 2px solid #1f77b4; border-radius: 8px; margin-bottom: 1rem; background-color: #1f77b415;'>
+                    <h4 style='margin-top: 0; color: #1f77b4;'>○ Moderate Risk</h4>
+                    <p style='margin: 0.25rem 0;'><strong>Margin:</strong> 20-50%</p>
+                    <p style='margin: 0.25rem 0;'><strong>Earnings:</strong> 120-150% of threshold</p>
+                </div>
+                """,
+                unsafe_allow_html=True
+            )
+
+            st.markdown(
+                """
+                <div style='padding: 1rem; border: 2px solid #d62728; border-radius: 8px; margin-bottom: 1rem; background-color: #d6272815;'>
+                    <h4 style='margin-top: 0; color: #d62728;'>✕ Critical Risk</h4>
+                    <p style='margin: 0.25rem 0;'><strong>Margin:</strong> < 0%</p>
+                    <p style='margin: 0.25rem 0;'><strong>Earnings:</strong> Below state threshold</p>
+                </div>
+                """,
+                unsafe_allow_html=True
+            )
+
+        st.markdown("")  # Spacing
+
         # Load summary statistics
         summary = get_risk_summary()
 
