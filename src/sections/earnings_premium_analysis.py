@@ -13,15 +13,24 @@ from src.config.constants import (
     EARNINGS_PREMIUM_OVERVIEW_LABEL,
     EP_OVERVIEW_RISK_MAP_LABEL,
     EP_INSTITUTION_LOOKUP_LABEL,
+    EP_STATE_ANALYSIS_LABEL,
+    EP_SECTOR_COMPARISON_LABEL,
     EP_METHODOLOGY_LABEL,
 )
 from src.core.ep_data_loader import (
     load_ep_data,
     load_state_thresholds,
     get_risk_summary,
+    get_national_summary,
+    get_state_summary,
+    get_sector_summary,
+    get_all_states,
+    get_all_sectors,
     search_institutions,
     get_institution_by_unitid,
     get_peer_institutions,
+    filter_by_state,
+    filter_by_sector,
 )
 from .base import BaseSection
 
@@ -185,6 +194,10 @@ class EarningsPremiumAnalysisSection(BaseSection):
             self._render_overview_risk_map()
         elif chart_name == EP_INSTITUTION_LOOKUP_LABEL:
             self._render_institution_lookup()
+        elif chart_name == EP_STATE_ANALYSIS_LABEL:
+            self._render_state_analysis()
+        elif chart_name == EP_SECTOR_COMPARISON_LABEL:
+            self._render_sector_comparison()
         elif chart_name == EP_METHODOLOGY_LABEL:
             self._render_methodology()
         else:
@@ -498,6 +511,351 @@ class EarningsPremiumAnalysisSection(BaseSection):
 
         st.dataframe(comparison_df, use_container_width=True, hide_index=True)
 
+    def _render_state_analysis(self) -> None:
+        """Render the State Analysis page."""
+        st.markdown("## State Analysis")
+        st.markdown(
+            """
+            Explore EP risk landscape by state to understand how institutions in each
+            state compare to their state-specific threshold.
+            """
+        )
+
+        st.markdown("")  # Spacing
+
+        # State selector
+        states = ['National Overview'] + get_all_states()
+        selected_state = st.selectbox(
+            "Select a state to analyze:",
+            options=states,
+            key="ep_state_selector"
+        )
+
+        if selected_state == 'National Overview':
+            # Show national summary
+            national = get_national_summary()
+            st.markdown("### National Overview")
+
+            col1, col2, col3, col4 = st.columns(4)
+            with col1:
+                st.metric("National Threshold", f"${national['national_threshold']:,.0f}")
+            with col2:
+                st.metric("Total Institutions", f"{national['total_institutions']:,}")
+            with col3:
+                st.metric("At Risk", f"{national['at_risk_pct']:.1f}%")
+            with col4:
+                st.metric("Avg Margin", f"{national['avg_margin']:.1f}%")
+
+            st.markdown("")  # Spacing
+
+            # National risk distribution
+            st.markdown("### National Risk Distribution")
+            risk_df = pd.DataFrame(
+                list(national['risk_distribution'].items()),
+                columns=['Risk Level', 'Count']
+            ).sort_values('Count', ascending=False)
+
+            risk_colors = {
+                'Low Risk': '#2ca02c',
+                'Moderate Risk': '#1f77b4',
+                'High Risk': '#ff7f0e',
+                'Critical Risk': '#d62728',
+                'No Data': '#7f7f7f'
+            }
+
+            fig = px.bar(
+                risk_df,
+                x='Risk Level',
+                y='Count',
+                color='Risk Level',
+                color_discrete_map=risk_colors,
+                title="National Risk Distribution"
+            )
+            fig.update_layout(showlegend=False, height=400)
+            st.plotly_chart(fig, use_container_width=True)
+
+        else:
+            # Show state-specific analysis
+            state_summary = get_state_summary(selected_state)
+
+            if state_summary is None:
+                st.warning(f"No data available for {selected_state}")
+                return
+
+            # State summary card
+            st.markdown(f"### {selected_state} Earnings Premium Analysis")
+
+            # Rank state threshold
+            thresholds = load_state_thresholds()
+            sorted_thresholds = sorted(thresholds.items(), key=lambda x: x[1], reverse=True)
+            state_rank = next(i for i, (st_abbr, _) in enumerate(sorted_thresholds, 1) if st_abbr == selected_state)
+
+            st.markdown(
+                f"""
+                <div style='padding: 1.5rem; background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+                    border-radius: 10px; margin-bottom: 1.5rem;'>
+                    <h4 style='margin-top: 0;'>State EP Threshold: ${state_summary['state_threshold']:,.0f}</h4>
+                    <p style='margin: 0;'>Ranked <strong>#{state_rank}</strong> highest nationally (out of 52)</p>
+                </div>
+                """,
+                unsafe_allow_html=True
+            )
+
+            col1, col2, col3 = st.columns(3)
+
+            with col1:
+                st.metric("Institutions in State", f"{state_summary['total_institutions']:,}")
+
+            with col2:
+                if state_summary['median_earnings']:
+                    st.metric("Median Earnings", f"${state_summary['median_earnings']:,.0f}")
+                else:
+                    st.metric("Median Earnings", "No Data")
+
+            with col3:
+                if state_summary['avg_margin'] is not None:
+                    st.metric("Average Margin", f"{state_summary['avg_margin']:.1f}%")
+                else:
+                    st.metric("Average Margin", "No Data")
+
+            st.markdown("")  # Spacing
+
+            # Risk distribution for state
+            st.markdown("#### Risk Distribution")
+            risk_dist = state_summary['risk_distribution']
+
+            for risk_level in ['Low Risk', 'Moderate Risk', 'High Risk', 'Critical Risk']:
+                count = risk_dist.get(risk_level, 0)
+                pct = (count / state_summary['total_institutions'] * 100) if state_summary['total_institutions'] > 0 else 0
+                st.markdown(f"• **{risk_level}**: {count:,} ({pct:.1f}%)")
+
+            st.markdown("")  # Spacing
+
+            # State institutions table
+            st.markdown("### Institutions in State")
+
+            state_df = filter_by_state([selected_state])
+            state_df_display = state_df[state_df['risk_level'] != 'No Data'].copy()
+
+            if not state_df_display.empty:
+                # Filters
+                col1, col2 = st.columns(2)
+
+                with col1:
+                    sector_options = state_df_display['sector_name'].dropna().unique().tolist()
+                    sector_filter = st.multiselect(
+                        "Filter by Sector",
+                        options=sector_options,
+                        default=sector_options,
+                        key="state_sector_filter"
+                    )
+
+                with col2:
+                    risk_filter = st.multiselect(
+                        "Filter by Risk Level",
+                        options=['Low Risk', 'Moderate Risk', 'High Risk', 'Critical Risk'],
+                        default=['Low Risk', 'Moderate Risk', 'High Risk', 'Critical Risk'],
+                        key="state_risk_filter"
+                    )
+
+                # Apply filters
+                if sector_filter:
+                    state_df_display = state_df_display[state_df_display['sector_name'].isin(sector_filter)]
+                if risk_filter:
+                    state_df_display = state_df_display[state_df_display['risk_level'].isin(risk_filter)]
+
+                st.markdown(f"**Showing {len(state_df_display):,} institutions**")
+
+                # Display table
+                display_cols = ['institution', 'sector_name', 'median_earnings', 'earnings_margin_pct', 'risk_level', 'enrollment']
+                display_df = state_df_display[display_cols].copy()
+                display_df.columns = ['Institution', 'Sector', 'Median Earnings', 'Margin (%)', 'Risk Level', 'Enrollment']
+
+                # Format columns
+                display_df['Median Earnings'] = display_df['Median Earnings'].apply(
+                    lambda x: f"${x:,.0f}" if pd.notna(x) else "No Data"
+                )
+                display_df['Margin (%)'] = display_df['Margin (%)'].apply(
+                    lambda x: f"{x:.1f}%" if pd.notna(x) else "No Data"
+                )
+                display_df['Enrollment'] = display_df['Enrollment'].apply(
+                    lambda x: f"{x:,.0f}" if pd.notna(x) else "No Data"
+                )
+
+                st.dataframe(display_df, use_container_width=True, hide_index=True)
+
+                # Download button
+                csv = state_df_display.to_csv(index=False)
+                st.download_button(
+                    label=f"Download {selected_state} Data (CSV)",
+                    data=csv,
+                    file_name=f"ep_analysis_{selected_state}.csv",
+                    mime="text/csv",
+                    key="state_download_csv"
+                )
+            else:
+                st.info("No institutions with risk assessments found for the selected filters.")
+
+            st.markdown("")  # Spacing
+
+            # State comparison
+            st.markdown("### Comparison to National Average")
+
+            national = get_national_summary()
+
+            comparison_data = {
+                'Metric': ['EP Threshold', '% At Risk', 'Median Earnings'],
+                'State': [
+                    f"${state_summary['state_threshold']:,.0f}",
+                    f"{len(state_df_display[state_df_display['risk_level'].isin(['High Risk', 'Critical Risk'])]) / len(state_df_display) * 100:.1f}%" if not state_df_display.empty else "No Data",
+                    f"${state_summary['median_earnings']:,.0f}" if state_summary['median_earnings'] else "No Data"
+                ],
+                'National': [
+                    f"${national['national_threshold']:,.0f}",
+                    f"{national['at_risk_pct']:.1f}%",
+                    f"${national['median_earnings']:,.0f}"
+                ]
+            }
+
+            st.table(pd.DataFrame(comparison_data))
+
+    def _render_sector_comparison(self) -> None:
+        """Render the Sector Comparison page."""
+        st.markdown("## Sector Comparison")
+        st.markdown(
+            """
+            Compare EP risk across different types of institutions to understand
+            which sectors face the greatest compliance challenges.
+            """
+        )
+
+        st.markdown("")  # Spacing
+
+        # Sector overview cards
+        st.markdown("### Sector Overview")
+
+        sectors = get_all_sectors()
+
+        # Create grid layout
+        cols_per_row = 3
+        rows = [sectors[i:i+cols_per_row] for i in range(0, len(sectors), cols_per_row)]
+
+        for row in rows:
+            cols = st.columns(len(row))
+            for col, sector in zip(cols, row):
+                summary = get_sector_summary(sector)
+                if summary:
+                    with col:
+                        # Determine color based on at_risk_pct
+                        if summary['at_risk_pct'] is not None:
+                            if summary['at_risk_pct'] > 50:
+                                color = '#d62728'  # Red
+                            elif summary['at_risk_pct'] > 30:
+                                color = '#ff7f0e'  # Orange
+                            else:
+                                color = '#2ca02c'  # Green
+                        else:
+                            color = '#7f7f7f'  # Gray
+
+                        st.markdown(
+                            f"""
+                            <div style='padding: 1rem; border: 2px solid {color}; border-radius: 8px; margin-bottom: 1rem;'>
+                                <h4 style='margin-top: 0; color: {color};'>{sector}</h4>
+                                <p style='margin: 0.25rem 0;'><strong>Institutions:</strong> {summary['total_institutions']:,}</p>
+                                <p style='margin: 0.25rem 0;'><strong>At Risk:</strong> {summary['at_risk_pct']:.1f}%</p>
+                                <p style='margin: 0.25rem 0;'><strong>Avg Margin:</strong> {summary['avg_margin']:.1f}%</p>
+                            </div>
+                            """,
+                            unsafe_allow_html=True
+                        )
+
+        st.markdown("")  # Spacing
+
+        # Sector risk distribution chart
+        st.markdown("### Risk Distribution by Sector")
+
+        # Prepare data for grouped bar chart
+        risk_data = []
+        for sector in sectors:
+            summary = get_sector_summary(sector)
+            if summary and 'risk_distribution' in summary:
+                for risk_level, count in summary['risk_distribution'].items():
+                    if risk_level != 'No Data':
+                        pct = (count / summary['total_institutions'] * 100) if summary['total_institutions'] > 0 else 0
+                        risk_data.append({
+                            'Sector': sector,
+                            'Risk Level': risk_level,
+                            'Percentage': pct,
+                            'Count': count
+                        })
+
+        if risk_data:
+            risk_df = pd.DataFrame(risk_data)
+
+            risk_colors = {
+                'Low Risk': '#2ca02c',
+                'Moderate Risk': '#1f77b4',
+                'High Risk': '#ff7f0e',
+                'Critical Risk': '#d62728'
+            }
+
+            fig = px.bar(
+                risk_df,
+                x='Sector',
+                y='Percentage',
+                color='Risk Level',
+                color_discrete_map=risk_colors,
+                title="Risk Level Distribution by Sector",
+                barmode='group',
+                hover_data={'Count': True}
+            )
+            fig.update_layout(height=500, xaxis_tickangle=-45)
+            st.plotly_chart(fig, use_container_width=True)
+
+        st.markdown("")  # Spacing
+
+        # Sector deep dive
+        st.markdown("### Sector Deep Dive")
+
+        selected_sector = st.selectbox(
+            "Select a sector to explore:",
+            options=sectors,
+            key="sector_deep_dive"
+        )
+
+        if selected_sector:
+            sector_df = filter_by_sector([selected_sector])
+            sector_df_valid = sector_df[sector_df['risk_level'] != 'No Data'].copy()
+
+            if not sector_df_valid.empty:
+                col1, col2 = st.columns(2)
+
+                with col1:
+                    st.markdown("#### Top 10 Performers")
+                    st.markdown("Institutions with highest earnings margins")
+
+                    top_performers = sector_df_valid.nlargest(10, 'earnings_margin_pct')
+                    top_display = top_performers[['institution', 'STABBR', 'median_earnings', 'earnings_margin_pct', 'risk_level']].copy()
+                    top_display.columns = ['Institution', 'State', 'Median Earnings', 'Margin (%)', 'Risk Level']
+                    top_display['Median Earnings'] = top_display['Median Earnings'].apply(lambda x: f"${x:,.0f}")
+                    top_display['Margin (%)'] = top_display['Margin (%)'].apply(lambda x: f"{x:.1f}%")
+
+                    st.dataframe(top_display, use_container_width=True, hide_index=True, height=400)
+
+                with col2:
+                    st.markdown("#### Bottom 10 Performers")
+                    st.markdown("Institutions with lowest earnings margins")
+
+                    bottom_performers = sector_df_valid.nsmallest(10, 'earnings_margin_pct')
+                    bottom_display = bottom_performers[['institution', 'STABBR', 'median_earnings', 'earnings_margin_pct', 'risk_level']].copy()
+                    bottom_display.columns = ['Institution', 'State', 'Median Earnings', 'Margin (%)', 'Risk Level']
+                    bottom_display['Median Earnings'] = bottom_display['Median Earnings'].apply(lambda x: f"${x:,.0f}")
+                    bottom_display['Margin (%)'] = bottom_display['Margin (%)'].apply(lambda x: f"{x:.1f}%")
+
+                    st.dataframe(bottom_display, use_container_width=True, hide_index=True, height=400)
+            else:
+                st.info("No institutions with risk assessments found in this sector.")
+
     def _render_methodology(self) -> None:
         """Render the Methodology & Limitations page."""
         st.markdown("## Methodology & Limitations")
@@ -667,5 +1025,7 @@ class EarningsPremiumAnalysisSection(BaseSection):
         return [
             EP_OVERVIEW_RISK_MAP_LABEL,
             EP_INSTITUTION_LOOKUP_LABEL,
+            EP_STATE_ANALYSIS_LABEL,
+            EP_SECTOR_COMPARISON_LABEL,
             EP_METHODOLOGY_LABEL,
         ]

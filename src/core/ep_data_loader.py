@@ -335,3 +335,63 @@ def get_sector_summary(sector_name: str) -> Dict[str, Any]:
     }
 
     return summary
+
+
+@st.cache_data(ttl=3600)
+def get_national_summary() -> Dict[str, Any]:
+    """
+    Get national summary statistics for comparison.
+
+    Returns:
+        Dictionary with national statistics:
+        - national_threshold: National EP threshold
+        - total_institutions: Count of all institutions
+        - risk_distribution: Dictionary of risk level counts
+        - median_earnings: National median institutional earnings
+        - avg_margin: National average earnings margin
+        - at_risk_pct: Percentage at risk nationally
+    """
+    df = load_ep_data()
+    df_valid = df[df['risk_level'] != 'No Data']
+
+    # Get national threshold
+    thresholds = load_state_thresholds()
+    national_threshold = thresholds.get('US', None)
+
+    at_risk_count = len(df_valid[df_valid['risk_level'].isin(['High Risk', 'Critical Risk'])])
+    at_risk_pct = (at_risk_count / len(df_valid) * 100) if not df_valid.empty else None
+
+    summary = {
+        'national_threshold': national_threshold,
+        'total_institutions': len(df_valid),
+        'risk_distribution': df_valid['risk_level'].value_counts().to_dict(),
+        'median_earnings': df_valid['median_earnings'].median(),
+        'avg_margin': df_valid['earnings_margin_pct'].mean(),
+        'at_risk_pct': at_risk_pct
+    }
+
+    return summary
+
+
+def get_all_sectors() -> list[str]:
+    """
+    Get list of all unique sectors in the data.
+
+    Returns:
+        List of sector names
+    """
+    df = load_ep_data()
+    sectors = df['sector_name'].dropna().unique().tolist()
+    return sorted(sectors)
+
+
+def get_all_states() -> list[str]:
+    """
+    Get list of all unique states in the data.
+
+    Returns:
+        List of state abbreviations, sorted alphabetically
+    """
+    df = load_ep_data()
+    states = df['STABBR'].dropna().unique().tolist()
+    return sorted(states)

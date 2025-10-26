@@ -27,6 +27,8 @@ from .constants import (
     EARNINGS_PREMIUM_CHARTS,
     EP_OVERVIEW_RISK_MAP_LABEL,
     EP_INSTITUTION_LOOKUP_LABEL,
+    EP_STATE_ANALYSIS_LABEL,
+    EP_SECTOR_COMPARISON_LABEL,
     EP_METHODOLOGY_LABEL,
     ROI_OVERVIEW_LABEL,
     ROI_CHARTS,
@@ -179,6 +181,16 @@ class NavigationConfig:
                 label=EP_INSTITUTION_LOOKUP_LABEL,
                 key="nav_ep_institution_lookup",
                 description="Search institutions and view risk assessments"
+            ),
+            ChartConfig(
+                label=EP_STATE_ANALYSIS_LABEL,
+                key="nav_ep_state_analysis",
+                description="Deep dive into EP risk by state"
+            ),
+            ChartConfig(
+                label=EP_SECTOR_COMPARISON_LABEL,
+                key="nav_ep_sector_comparison",
+                description="Compare risk across institutional types"
             ),
             ChartConfig(
                 label=EP_METHODOLOGY_LABEL,

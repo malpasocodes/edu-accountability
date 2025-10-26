@@ -126,12 +126,16 @@ COLLEGE_EXPLORER_CHARTS: List[str] = [
 EARNINGS_PREMIUM_OVERVIEW_LABEL = "Overview"
 EP_OVERVIEW_RISK_MAP_LABEL = "Overview & Risk Map"
 EP_INSTITUTION_LOOKUP_LABEL = "Institution Lookup"
+EP_STATE_ANALYSIS_LABEL = "State Analysis"
+EP_SECTOR_COMPARISON_LABEL = "Sector Comparison"
 EP_METHODOLOGY_LABEL = "Methodology & Limitations"
 
-# Phase 1 MVP Charts
+# Phase 1 MVP Charts (Phase 2 adds State Analysis and Sector Comparison)
 EARNINGS_PREMIUM_CHARTS: List[str] = [
     EP_OVERVIEW_RISK_MAP_LABEL,
     EP_INSTITUTION_LOOKUP_LABEL,
+    EP_STATE_ANALYSIS_LABEL,
+    EP_SECTOR_COMPARISON_LABEL,
     EP_METHODOLOGY_LABEL,
 ]
 
