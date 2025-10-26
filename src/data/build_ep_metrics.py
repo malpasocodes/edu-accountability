@@ -229,22 +229,22 @@ def calculate_risk_metrics(df: pd.DataFrame) -> pd.DataFrame:
         if pd.isna(margin):
             return 'No Data'
         elif margin > 0.50:
-            return 'Low Risk'
+            return 'Very Low Risk'
         elif margin > 0.20:
-            return 'Moderate Risk'
+            return 'Low Risk'
         elif margin > 0:
-            return 'High Risk'
+            return 'Moderate Risk'
         else:
-            return 'Critical Risk'
+            return 'High Risk'
 
     df['risk_level'] = df['earnings_margin'].apply(categorize_risk)
 
     # Risk level numeric (for sorting/filtering)
     risk_level_map = {
-        'Low Risk': 1,
-        'Moderate Risk': 2,
-        'High Risk': 3,
-        'Critical Risk': 4,
+        'Very Low Risk': 1,
+        'Low Risk': 2,
+        'Moderate Risk': 3,
+        'High Risk': 4,
         'No Data': 5
     }
     df['risk_level_numeric'] = df['risk_level'].map(risk_level_map)

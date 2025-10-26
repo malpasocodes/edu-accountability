@@ -87,7 +87,7 @@ class EarningsPremiumAnalysisSection(BaseSection):
             st.markdown(
                 """
                 <div style='padding: 1rem; border: 2px solid #2ca02c; border-radius: 8px; margin-bottom: 1rem; background-color: #2ca02c15;'>
-                    <h4 style='margin-top: 0; color: #2ca02c;'>✓ Low Risk</h4>
+                    <h4 style='margin-top: 0; color: #2ca02c;'>✓ Very Low Risk</h4>
                     <p style='margin: 0.25rem 0;'><strong>Margin:</strong> > 50%</p>
                     <p style='margin: 0.25rem 0;'><strong>Earnings:</strong> 150%+ of state threshold</p>
                 </div>
@@ -98,7 +98,7 @@ class EarningsPremiumAnalysisSection(BaseSection):
             st.markdown(
                 """
                 <div style='padding: 1rem; border: 2px solid #ff7f0e; border-radius: 8px; margin-bottom: 1rem; background-color: #ff7f0e15;'>
-                    <h4 style='margin-top: 0; color: #ff7f0e;'>⚠ High Risk</h4>
+                    <h4 style='margin-top: 0; color: #ff7f0e;'>⚠ Moderate Risk</h4>
                     <p style='margin: 0.25rem 0;'><strong>Margin:</strong> 0-20%</p>
                     <p style='margin: 0.25rem 0;'><strong>Earnings:</strong> 100-120% of threshold</p>
                 </div>
@@ -110,7 +110,7 @@ class EarningsPremiumAnalysisSection(BaseSection):
             st.markdown(
                 """
                 <div style='padding: 1rem; border: 2px solid #1f77b4; border-radius: 8px; margin-bottom: 1rem; background-color: #1f77b415;'>
-                    <h4 style='margin-top: 0; color: #1f77b4;'>○ Moderate Risk</h4>
+                    <h4 style='margin-top: 0; color: #1f77b4;'>○ Low Risk</h4>
                     <p style='margin: 0.25rem 0;'><strong>Margin:</strong> 20-50%</p>
                     <p style='margin: 0.25rem 0;'><strong>Earnings:</strong> 120-150% of threshold</p>
                 </div>
@@ -121,7 +121,7 @@ class EarningsPremiumAnalysisSection(BaseSection):
             st.markdown(
                 """
                 <div style='padding: 1rem; border: 2px solid #d62728; border-radius: 8px; margin-bottom: 1rem; background-color: #d6272815;'>
-                    <h4 style='margin-top: 0; color: #d62728;'>✕ Critical Risk</h4>
+                    <h4 style='margin-top: 0; color: #d62728;'>✕ High Risk</h4>
                     <p style='margin: 0.25rem 0;'><strong>Margin:</strong> < 0%</p>
                     <p style='margin: 0.25rem 0;'><strong>Earnings:</strong> Below state threshold</p>
                 </div>
@@ -209,15 +209,15 @@ class EarningsPremiumAnalysisSection(BaseSection):
                 f"{summary['at_risk_count']:,}",
                 f"{at_risk_pct:.1f}%",
                 delta_color="inverse",
-                help="High Risk + Critical Risk institutions"
+                help="Moderate Risk + High Risk institutions"
             )
 
         with col3:
-            critical_pct = (summary['critical_count'] / summary['total_institutions']) * 100
+            high_risk_pct = (summary['high_risk_count'] / summary['total_institutions']) * 100
             st.metric(
-                "Critical Risk",
-                f"{summary['critical_count']:,}",
-                f"{critical_pct:.1f}%",
+                "High Risk",
+                f"{summary['high_risk_count']:,}",
+                f"{high_risk_pct:.1f}%",
                 delta_color="inverse",
                 help="Earnings below state threshold"
             )
@@ -241,10 +241,10 @@ class EarningsPremiumAnalysisSection(BaseSection):
 
         # Color mapping
         risk_colors = {
-            'Low Risk': '#2ca02c',
-            'Moderate Risk': '#1f77b4',
-            'High Risk': '#ff7f0e',
-            'Critical Risk': '#d62728',
+            'Very Low Risk': '#2ca02c',
+            'Low Risk': '#1f77b4',
+            'Moderate Risk': '#ff7f0e',
+            'High Risk': '#d62728',
             'No Data': '#7f7f7f'
         }
 
@@ -286,7 +286,7 @@ class EarningsPremiumAnalysisSection(BaseSection):
         df = load_ep_data()
 
         # Create tabs for each risk level
-        risk_levels = ['Low Risk', 'Moderate Risk', 'High Risk', 'Critical Risk', 'No Data']
+        risk_levels = ['Very Low Risk', 'Low Risk', 'Moderate Risk', 'High Risk', 'No Data']
         tabs = st.tabs(risk_levels)
 
         for tab, risk_level in zip(tabs, risk_levels):
@@ -304,8 +304,8 @@ class EarningsPremiumAnalysisSection(BaseSection):
                     display_cols = ['institution', 'STABBR', 'median_earnings', 'Threshold', 'earnings_margin_pct', 'sector_name', 'enrollment']
                     display_df = risk_df[display_cols].copy()
 
-                    # Sort by earnings margin (best first for Low/Moderate, worst first for High/Critical)
-                    if risk_level in ['Low Risk', 'Moderate Risk']:
+                    # Sort by earnings margin (best first for Very Low/Low, worst first for Moderate/High)
+                    if risk_level in ['Very Low Risk', 'Low Risk']:
                         display_df = display_df.sort_values('earnings_margin_pct', ascending=False)
                     else:
                         display_df = display_df.sort_values('earnings_margin_pct', ascending=True)
@@ -379,8 +379,8 @@ class EarningsPremiumAnalysisSection(BaseSection):
         with col1:
             risk_filter = st.multiselect(
                 "Risk Level",
-                options=['Low Risk', 'Moderate Risk', 'High Risk', 'Critical Risk'],
-                default=['Low Risk', 'Moderate Risk', 'High Risk', 'Critical Risk'],
+                options=['Very Low Risk', 'Low Risk', 'Moderate Risk', 'High Risk'],
+                default=['Very Low Risk', 'Low Risk', 'Moderate Risk', 'High Risk'],
                 key="ep_risk_filter"
             )
 
@@ -416,10 +416,10 @@ class EarningsPremiumAnalysisSection(BaseSection):
 
         # Create scatter plot
         risk_colors = {
-            'Low Risk': '#2ca02c',
-            'Moderate Risk': '#1f77b4',
-            'High Risk': '#ff7f0e',
-            'Critical Risk': '#d62728'
+            'Very Low Risk': '#2ca02c',
+            'Low Risk': '#1f77b4',
+            'Moderate Risk': '#ff7f0e',
+            'High Risk': '#d62728'
         }
 
         fig = px.scatter(
@@ -545,10 +545,10 @@ class EarningsPremiumAnalysisSection(BaseSection):
 
         # Risk color
         risk_colors = {
-            'Low Risk': '#2ca02c',
-            'Moderate Risk': '#1f77b4',
-            'High Risk': '#ff7f0e',
-            'Critical Risk': '#d62728',
+            'Very Low Risk': '#2ca02c',
+            'Low Risk': '#1f77b4',
+            'Moderate Risk': '#ff7f0e',
+            'High Risk': '#d62728',
             'No Data': '#7f7f7f'
         }
 
@@ -709,10 +709,10 @@ class EarningsPremiumAnalysisSection(BaseSection):
             ).sort_values('Count', ascending=False)
 
             risk_colors = {
-                'Low Risk': '#2ca02c',
-                'Moderate Risk': '#1f77b4',
-                'High Risk': '#ff7f0e',
-                'Critical Risk': '#d62728',
+                'Very Low Risk': '#2ca02c',
+                'Low Risk': '#1f77b4',
+                'Moderate Risk': '#ff7f0e',
+                'High Risk': '#d62728',
                 'No Data': '#7f7f7f'
             }
 
@@ -777,7 +777,7 @@ class EarningsPremiumAnalysisSection(BaseSection):
             st.markdown("#### Risk Distribution")
             risk_dist = state_summary['risk_distribution']
 
-            for risk_level in ['Low Risk', 'Moderate Risk', 'High Risk', 'Critical Risk']:
+            for risk_level in ['Very Low Risk', 'Low Risk', 'Moderate Risk', 'High Risk']:
                 count = risk_dist.get(risk_level, 0)
                 pct = (count / state_summary['total_institutions'] * 100) if state_summary['total_institutions'] > 0 else 0
                 st.markdown(f"• **{risk_level}**: {count:,} ({pct:.1f}%)")
@@ -806,8 +806,8 @@ class EarningsPremiumAnalysisSection(BaseSection):
                 with col2:
                     risk_filter = st.multiselect(
                         "Filter by Risk Level",
-                        options=['Low Risk', 'Moderate Risk', 'High Risk', 'Critical Risk'],
-                        default=['Low Risk', 'Moderate Risk', 'High Risk', 'Critical Risk'],
+                        options=['Very Low Risk', 'Low Risk', 'Moderate Risk', 'High Risk'],
+                        default=['Very Low Risk', 'Low Risk', 'Moderate Risk', 'High Risk'],
                         key="state_risk_filter"
                     )
 
@@ -946,10 +946,10 @@ class EarningsPremiumAnalysisSection(BaseSection):
             risk_df = pd.DataFrame(risk_data)
 
             risk_colors = {
-                'Low Risk': '#2ca02c',
-                'Moderate Risk': '#1f77b4',
-                'High Risk': '#ff7f0e',
-                'Critical Risk': '#d62728'
+                'Very Low Risk': '#2ca02c',
+                'Low Risk': '#1f77b4',
+                'Moderate Risk': '#ff7f0e',
+                'High Risk': '#d62728'
             }
 
             fig = px.bar(
@@ -987,7 +987,7 @@ class EarningsPremiumAnalysisSection(BaseSection):
                     st.markdown("")  # Spacing
 
                     # Risk level filter
-                    risk_options = ['Low Risk', 'Moderate Risk', 'High Risk', 'Critical Risk']
+                    risk_options = ['Very Low Risk', 'Low Risk', 'Moderate Risk', 'High Risk']
                     selected_risks = st.multiselect(
                         "Filter by risk level:",
                         options=risk_options,
@@ -1061,7 +1061,7 @@ class EarningsPremiumAnalysisSection(BaseSection):
         df_valid = df[df['risk_level'] != 'No Data'].copy()
 
         # Create tabs for each risk level
-        risk_levels = ['Low Risk', 'Moderate Risk', 'High Risk', 'Critical Risk']
+        risk_levels = ['Very Low Risk', 'Low Risk', 'Moderate Risk', 'High Risk']
         tabs = st.tabs(risk_levels)
 
         # Sector color mapping (consistent with dashboard patterns)

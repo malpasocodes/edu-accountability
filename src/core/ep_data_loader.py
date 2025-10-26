@@ -101,8 +101,8 @@ def get_risk_summary() -> Dict[str, Any]:
 
     summary = {
         'total_institutions': len(df_valid),
-        'at_risk_count': len(df_valid[df_valid['risk_level'].isin(['High Risk', 'Critical Risk'])]),
-        'critical_count': len(df_valid[df_valid['risk_level'] == 'Critical Risk']),
+        'at_risk_count': len(df_valid[df_valid['risk_level'].isin(['Moderate Risk', 'High Risk'])]),
+        'high_risk_count': len(df_valid[df_valid['risk_level'] == 'High Risk']),
         'avg_margin': df_valid['earnings_margin_pct'].mean(),
         'risk_distribution': df_valid['risk_level'].value_counts().to_dict()
     }
@@ -174,7 +174,7 @@ def filter_by_risk_level(risk_levels: list[str]) -> pd.DataFrame:
 
     Args:
         risk_levels: List of risk levels to include
-            Options: 'Low Risk', 'Moderate Risk', 'High Risk', 'Critical Risk', 'No Data'
+            Options: 'Very Low Risk', 'Low Risk', 'Moderate Risk', 'High Risk', 'No Data'
 
     Returns:
         Filtered DataFrame
@@ -330,7 +330,7 @@ def get_sector_summary(sector_name: str) -> Dict[str, Any]:
         'risk_distribution': sector_df['risk_level'].value_counts().to_dict(),
         'median_earnings': sector_df_valid['median_earnings'].median() if not sector_df_valid.empty else None,
         'avg_margin': sector_df_valid['earnings_margin_pct'].mean() if not sector_df_valid.empty else None,
-        'at_risk_pct': (len(sector_df_valid[sector_df_valid['risk_level'].isin(['High Risk', 'Critical Risk'])]) /
+        'at_risk_pct': (len(sector_df_valid[sector_df_valid['risk_level'].isin(['Moderate Risk', 'High Risk'])]) /
                         len(sector_df_valid) * 100) if not sector_df_valid.empty else None
     }
 
@@ -358,7 +358,7 @@ def get_national_summary() -> Dict[str, Any]:
     thresholds = load_state_thresholds()
     national_threshold = thresholds.get('US', None)
 
-    at_risk_count = len(df_valid[df_valid['risk_level'].isin(['High Risk', 'Critical Risk'])])
+    at_risk_count = len(df_valid[df_valid['risk_level'].isin(['Moderate Risk', 'High Risk'])])
     at_risk_pct = (at_risk_count / len(df_valid) * 100) if not df_valid.empty else None
 
     summary = {

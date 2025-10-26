@@ -231,7 +231,7 @@ class TestDataIntegrity:
         data_path = base_dir / "data" / "processed" / "ep_analysis.parquet"
         df = pd.read_parquet(data_path)
 
-        valid_risk_levels = {'Low Risk', 'Moderate Risk', 'High Risk', 'Critical Risk', 'No Data'}
+        valid_risk_levels = {'Very Low Risk', 'Low Risk', 'Moderate Risk', 'High Risk', 'No Data'}
         actual_risk_levels = set(df['risk_level'].unique())
 
         assert actual_risk_levels.issubset(valid_risk_levels), \
