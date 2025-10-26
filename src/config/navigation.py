@@ -185,14 +185,9 @@ class NavigationConfig:
                 description="Interactive scatter plot by risk level"
             ),
             ChartConfig(
-                label=EP_INSTITUTION_LOOKUP_LABEL,
-                key="nav_ep_institution_lookup",
-                description="Search institutions and view risk assessments"
-            ),
-            ChartConfig(
-                label=EP_STATE_ANALYSIS_LABEL,
-                key="nav_ep_state_analysis",
-                description="Deep dive into EP risk by state"
+                label=EP_RISK_QUADRANTS_LABEL,
+                key="nav_ep_risk_quadrants",
+                description="Scatter plots by risk category with sector colors"
             ),
             ChartConfig(
                 label=EP_SECTOR_COMPARISON_LABEL,
@@ -200,9 +195,14 @@ class NavigationConfig:
                 description="Compare risk across institutional types"
             ),
             ChartConfig(
-                label=EP_RISK_QUADRANTS_LABEL,
-                key="nav_ep_risk_quadrants",
-                description="Scatter plots by risk category with sector colors"
+                label=EP_STATE_ANALYSIS_LABEL,
+                key="nav_ep_state_analysis",
+                description="Deep dive into EP risk by state"
+            ),
+            ChartConfig(
+                label=EP_INSTITUTION_LOOKUP_LABEL,
+                key="nav_ep_institution_lookup",
+                description="Search institutions and view risk assessments"
             ),
             ChartConfig(
                 label=EP_METHODOLOGY_LABEL,
