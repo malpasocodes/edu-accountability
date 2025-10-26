@@ -1322,7 +1322,7 @@ class CollegeExplorerSection(BaseSection):
 
             st.dataframe(
                 table,
-                use_container_width=True,
+                width="stretch",
                 column_config={
                     "Total": st.column_config.NumberColumn("Total", format="%,d", width="small"),
                     "Exclusive Distance": st.column_config.NumberColumn("Exclusive Distance", format="%,d", width="small"),

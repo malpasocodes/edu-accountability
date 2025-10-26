@@ -261,7 +261,7 @@ class EarningsPremiumAnalysisSection(BaseSection):
                 color_discrete_map=risk_colors
             )
             fig.update_layout(showlegend=False, height=400)
-            st.plotly_chart(fig, use_container_width=True)
+            st.plotly_chart(fig, width="stretch")
 
         with col2:
             st.markdown("#### Risk Categories")
@@ -328,7 +328,7 @@ class EarningsPremiumAnalysisSection(BaseSection):
                     )
 
                     # Display table
-                    st.dataframe(display_df, use_container_width=True, hide_index=True, height=500)
+                    st.dataframe(display_df, width="stretch", hide_index=True, height=500)
 
                     # Download button
                     csv = risk_df.to_csv(index=False)
@@ -465,7 +465,7 @@ class EarningsPremiumAnalysisSection(BaseSection):
             legend_title="Risk Level"
         )
 
-        st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(fig, width="stretch")
 
         st.caption(
             "_Data Sources: College Scorecard (median earnings 10 years after entry), "
@@ -662,7 +662,7 @@ class EarningsPremiumAnalysisSection(BaseSection):
 
         comparison_df = pd.DataFrame(comparison_data)
 
-        st.dataframe(comparison_df, use_container_width=True, hide_index=True)
+        st.dataframe(comparison_df, width="stretch", hide_index=True)
 
     def _render_state_analysis(self) -> None:
         """Render the State Analysis page."""
@@ -725,7 +725,7 @@ class EarningsPremiumAnalysisSection(BaseSection):
                 title="National Risk Distribution"
             )
             fig.update_layout(showlegend=False, height=400)
-            st.plotly_chart(fig, use_container_width=True)
+            st.plotly_chart(fig, width="stretch")
 
         else:
             # Show state-specific analysis
@@ -835,7 +835,7 @@ class EarningsPremiumAnalysisSection(BaseSection):
                     lambda x: f"{x:,.0f}" if pd.notna(x) else "No Data"
                 )
 
-                st.dataframe(display_df, use_container_width=True, hide_index=True)
+                st.dataframe(display_df, width="stretch", hide_index=True)
 
                 # Download button
                 csv = state_df_display.to_csv(index=False)
@@ -963,7 +963,7 @@ class EarningsPremiumAnalysisSection(BaseSection):
                 hover_data={'Count': True}
             )
             fig.update_layout(height=500, xaxis_tickangle=-45)
-            st.plotly_chart(fig, use_container_width=True)
+            st.plotly_chart(fig, width="stretch")
 
         st.markdown("")  # Spacing
 
@@ -1030,7 +1030,7 @@ class EarningsPremiumAnalysisSection(BaseSection):
                     )
 
                     # Display table
-                    st.dataframe(display_df, use_container_width=True, hide_index=True, height=500)
+                    st.dataframe(display_df, width="stretch", hide_index=True, height=500)
 
                     # Download button
                     csv = sector_df_filtered.to_csv(index=False)
@@ -1128,7 +1128,7 @@ class EarningsPremiumAnalysisSection(BaseSection):
                         legend_title="Sector"
                     )
 
-                    st.plotly_chart(fig, use_container_width=True)
+                    st.plotly_chart(fig, width="stretch")
 
                     # Summary stats for this risk level
                     col1, col2, col3 = st.columns(3)
@@ -1189,7 +1189,7 @@ class EarningsPremiumAnalysisSection(BaseSection):
         ]
 
         sources_df = pd.DataFrame(sources_data)
-        st.dataframe(sources_df, use_container_width=True, hide_index=True)
+        st.dataframe(sources_df, width="stretch", hide_index=True)
 
         st.markdown("")  # Spacing
 

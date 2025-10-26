@@ -48,7 +48,7 @@ def render_sidebar() -> None:
     sidebar.title("Navigation")
     
     # Home button
-    if sidebar.button("🏠 Home", key="nav_home", use_container_width=True):
+    if sidebar.button("🏠 Home", key="nav_home", width="stretch"):
         SessionManager.set_active_section(OVERVIEW_SECTION)
     
     # Render each section
@@ -63,7 +63,7 @@ def render_sidebar() -> None:
             if st.button(
                 section_config.overview_chart.label,
                 key=section_config.overview_chart.key,
-                use_container_width=True,
+                width="stretch",
             ):
                 SessionManager.set_active_section(section_config.name)
                 if section_config.session_key:
@@ -77,7 +77,7 @@ def render_sidebar() -> None:
                 if st.button(
                     chart.label,
                     key=chart.key,
-                    use_container_width=True,
+                    width="stretch",
                 ):
                     SessionManager.set_active_section(section_config.name)
                     if section_config.session_key:
