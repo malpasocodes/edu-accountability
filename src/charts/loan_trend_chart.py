@@ -239,4 +239,4 @@ def render_loan_trend_chart(
             "Dotted lines colored by institution; dots colored by year-over-year change (green=increase/same, red=decrease)."
         )
     st.caption(caption)
-    render_altair_chart(chart, width="stretch")
+    render_altair_chart(chart)

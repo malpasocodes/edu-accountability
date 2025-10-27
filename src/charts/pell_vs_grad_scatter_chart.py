@@ -112,7 +112,7 @@ def render_pell_vs_grad_scatter(
         "graduation rate data; bubble size scales with enrollment. Showing top 50 institutions "
         "by Pell dollars."
     )
-    render_altair_chart(scatter, width="stretch")
+    render_altair_chart(scatter)
 
     display_columns = [
         "Institution",

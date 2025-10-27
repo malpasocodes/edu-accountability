@@ -555,7 +555,7 @@ class CollegeExplorerSection(BaseSection):
         chart = self._create_combined_trend_chart(trend_data, institution_name)
 
         # Display the chart
-        render_altair_chart(chart, width="stretch")
+        render_altair_chart(chart)
 
         # Display summary statistics
         self._display_trend_summary(trend_data)
@@ -832,7 +832,7 @@ class CollegeExplorerSection(BaseSection):
         chart = self._create_graduation_trend_chart(trend_data, institution_name)
 
         # Display the chart
-        render_altair_chart(chart, width="stretch")
+        render_altair_chart(chart)
 
         # Display summary statistics
         self._display_grad_rate_summary(trend_data)
@@ -1237,7 +1237,7 @@ class CollegeExplorerSection(BaseSection):
                 )
             )
 
-            render_altair_chart((lines + points), width="stretch")
+            render_altair_chart((lines + points))
 
             # Add spacing between charts
             st.markdown("")
@@ -1305,7 +1305,7 @@ class CollegeExplorerSection(BaseSection):
                 "Total enrollment breakdown by type (2020-2024). Each bar is divided into "
                 "Exclusive Distance Education (orange) and On Campus/Hybrid (green) enrollment."
             )
-            render_altair_chart(stacked_chart, width="stretch")
+            render_altair_chart(stacked_chart)
 
             table = (
                 chart_df.astype(int)

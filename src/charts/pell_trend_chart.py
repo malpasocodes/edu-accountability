@@ -161,4 +161,4 @@ def render_pell_trend_chart(df: pd.DataFrame, *, title: str) -> None:
             "Dotted lines colored by institution; dots colored by year-over-year change (green=increase/same, red=decrease)."
         )
     st.caption(caption)
-    render_altair_chart(chart, width="stretch")
+    render_altair_chart(chart)

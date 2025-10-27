@@ -372,7 +372,7 @@ def render_distance_de_trend_chart(
         "Each line represents one institution with filled data points. Hover over points to see year-over-year change details."
     )
     st.caption(caption)
-    render_altair_chart(chart, width="stretch")
+    render_altair_chart(chart)
 
     # Add spacing between charts
     st.markdown("")
@@ -438,7 +438,7 @@ def render_distance_de_trend_chart(
         "This view emphasizes market composition and relative institutional size in the distance education space."
     )
     st.caption(stacked_caption)
-    render_altair_chart(stacked_chart, width="stretch")
+    render_altair_chart(stacked_chart)
 
     # Create data table
     _render_de_data_table(prepared, top_n, anchor_year)

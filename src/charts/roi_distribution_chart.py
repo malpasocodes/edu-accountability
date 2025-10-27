@@ -125,7 +125,7 @@ def render_roi_distribution_chart(
         f"Box shows median (line), quartiles (box edges), and min/max (whiskers). "
         f"Individual institutions shown as points."
     )
-    render_altair_chart(chart, width="stretch")
+    render_altair_chart(chart)
 
     # Calculate summary statistics by sector
     st.markdown("### Sector Summary Statistics")

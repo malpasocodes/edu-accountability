@@ -126,7 +126,7 @@ def render_roi_rankings_chart(
         f"{view_label} {len(selected)} California institutions by ROI (years to recoup investment). "
         f"Lower ROI = faster payback. Color indicates ROI speed (green = fast, red = slow)."
     )
-    render_altair_chart(chart, width="stretch")
+    render_altair_chart(chart)
 
     # Prepare data table
     display_columns = [

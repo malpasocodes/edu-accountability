@@ -148,7 +148,7 @@ def render_loan_vs_grad_scatter(
             "bubble size scales with enrollment. Showing top {count} institutions by loan dollars."
         ).format(count=len(prepared))
     )
-    render_altair_chart(scatter, width="stretch")
+    render_altair_chart(scatter)
 
     table = (
         prepared[[

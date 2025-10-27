@@ -173,7 +173,7 @@ def render_cost_vs_grad_scatter(
         "**Quadrant legend:** I = High GradRate, Low Cost; II = High GradRate, High Cost; "
         "III = Low GradRate, Low Cost; IV = Low GradRate, High Cost"
     )
-    render_altair_chart(chart, width="stretch")
+    render_altair_chart(chart)
 
     classification = filtered_df.copy()
     classification["cost_group"] = classification["cost"].apply(

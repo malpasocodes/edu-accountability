@@ -199,7 +199,7 @@ def render_loan_top_dollars_chart(
     st.caption(
         f"Top {num_institutions_display} institutions by federal loan dollars across {period_text}. Each bar shows yearly breakdown."
     )
-    render_altair_chart(chart, width="stretch")
+    render_altair_chart(chart)
 
     # Create summary table with yearly breakdown
     table = chart_data.pivot_table(

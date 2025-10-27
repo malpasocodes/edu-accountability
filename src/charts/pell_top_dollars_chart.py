@@ -244,7 +244,7 @@ def render_pell_top_dollars_chart(
         caption_text = f"Top {num_institutions_display} institutions by Pell grant dollars across {period_text}."
 
     st.caption(caption_text)
-    render_altair_chart(chart, width="stretch")
+    render_altair_chart(chart)
 
     # Create summary table with yearly breakdown if year data is available
     if "year_pell_dollars_billions" in chart_data.columns and "year" in chart_data.columns:

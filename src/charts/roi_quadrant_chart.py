@@ -134,7 +134,7 @@ def render_roi_quadrant_chart(
         "Top-Right = High Earnings, High Cost; Bottom-Left = Low Earnings, Low Cost; "
         "Bottom-Right = Low Earnings, High Cost"
     )
-    render_altair_chart(chart, width="stretch")
+    render_altair_chart(chart)
 
     # Identify quadrant for each institution
     filtered["quadrant"] = "Other"

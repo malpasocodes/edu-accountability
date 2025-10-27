@@ -107,7 +107,7 @@ def render_pell_grad_rate_scatter(
         "total Pell dollars data; bubble size scales with enrollment. Showing all institutions "
         "with available data."
     )
-    render_altair_chart(scatter, width="stretch")
+    render_altair_chart(scatter)
 
     # Add summary statistics for all institutions
     col1, col2, col3 = st.columns(3)
