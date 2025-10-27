@@ -201,14 +201,14 @@ class NavigationConfig:
                 description="Deep dive into EP risk by state"
             ),
             ChartConfig(
-                label=EP_INSTITUTION_LOOKUP_LABEL,
-                key="nav_ep_institution_lookup",
-                description="Search institutions and view risk assessments"
-            ),
-            ChartConfig(
                 label=EP_PROGRAM_DISTRIBUTION_LABEL,
                 key="nav_ep_program_distribution",
                 description="Scale of program-level EP assessment requirements"
+            ),
+            ChartConfig(
+                label=EP_INSTITUTION_LOOKUP_LABEL,
+                key="nav_ep_institution_lookup",
+                description="Search institutions and view risk assessments"
             ),
             ChartConfig(
                 label=EP_METHODOLOGY_LABEL,

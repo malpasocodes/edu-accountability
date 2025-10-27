@@ -1209,21 +1209,29 @@ class EarningsPremiumAnalysisSection(BaseSection):
         # Summary metrics
         st.markdown("### Key Metrics")
 
+        num_institutions = len(df_with_programs)
         total_programs = df_with_programs['total_programs'].sum()
         assessable_programs = df_with_programs['assessable_programs'].sum()
         max_programs_inst = df_with_programs.loc[df_with_programs['total_programs'].idxmax()]
         data_points_3yr = total_programs * 3  # 3 years of tracking per program
 
-        col1, col2, col3, col4 = st.columns(4)
+        col1, col2, col3, col4, col5 = st.columns(5)
 
         with col1:
+            st.metric(
+                "Number of Institutions",
+                f"{num_institutions:,}",
+                help="Institutions with program-level completions data"
+            )
+
+        with col2:
             st.metric(
                 "Total Programs Subject to EP",
                 f"{total_programs:,.0f}",
                 help="Each program (field + level + institution) must be assessed separately"
             )
 
-        with col2:
+        with col3:
             st.metric(
                 "Large Enough for Assessment",
                 f"{assessable_programs:,.0f}",
@@ -1231,7 +1239,7 @@ class EarningsPremiumAnalysisSection(BaseSection):
                 help="Programs with sufficient completers (30+) for reliable median calculation"
             )
 
-        with col3:
+        with col4:
             inst_name = max_programs_inst['institution']
             if len(inst_name) > 25:
                 inst_name = inst_name[:25] + "..."
@@ -1242,7 +1250,7 @@ class EarningsPremiumAnalysisSection(BaseSection):
                 help="Institution with the most degree programs"
             )
 
-        with col4:
+        with col5:
             st.metric(
                 "Data Points to Track",
                 f"{data_points_3yr:,.0f}",

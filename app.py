@@ -46,7 +46,7 @@ def render_sidebar() -> None:
     """Render the navigation sidebar."""
     sidebar = st.sidebar
     sidebar.title("Navigation")
-    
+
     # Home button
     if sidebar.button("🏠 Home", key="nav_home", width="stretch"):
         SessionManager.set_active_section(OVERVIEW_SECTION)
