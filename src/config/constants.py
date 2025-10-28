@@ -56,13 +56,13 @@ PELL_TOP_DOLLARS_FOUR_LABEL = "Top 25 Pell Dollar Recipients (4-year)"
 PELL_TOP_DOLLARS_TWO_LABEL = "Top 25 Pell Dollar Recipients (2-year)"
 PELL_VS_GRAD_FOUR_LABEL = "Pell Dollars vs Graduation Rate (4-year)"
 PELL_VS_GRAD_TWO_LABEL = "Pell Dollars vs Graduation Rate (2-year)"
-PELL_TREND_FOUR_LABEL = "Pell Dollars Trend (4-year)"
-PELL_TREND_TWO_LABEL = "Pell Dollars Trend (2-year)"
+PELL_TREND_FOUR_LABEL = "Pell Dollars Trend (Top 10) (4-year)"
+PELL_TREND_TWO_LABEL = "Pell Dollars Trend (Top 10) (2-year)"
 
 # Pell Grant chart labels - Consolidated (for new navigation)
 PELL_TOP_DOLLARS_LABEL = "Top 25 Pell Dollar Recipients"
 PELL_VS_GRAD_LABEL = "Pell Dollars vs Graduation Rate"
-PELL_TREND_LABEL = "Pell Dollars Trend"
+PELL_TREND_LABEL = "Pell Dollars Trend (Top 10)"
 PELL_TREND_TOTAL_LABEL = "Pell Dollars Trend (Total)"
 PELL_GRAD_RATE_LABEL = "Pell Graduation Rate"
 
@@ -81,13 +81,13 @@ LOAN_TOP_DOLLARS_FOUR_LABEL = "Top 25 Federal Loan Dollars (4-year)"
 LOAN_TOP_DOLLARS_TWO_LABEL = "Top 25 Federal Loan Dollars (2-year)"
 LOAN_VS_GRAD_FOUR_LABEL = "Federal Loans vs Graduation Rate (4-year)"
 LOAN_VS_GRAD_TWO_LABEL = "Federal Loans vs Graduation Rate (2-year)"
-LOAN_TREND_FOUR_LABEL = "Federal Loan Dollars Trend (4-year)"
-LOAN_TREND_TWO_LABEL = "Federal Loan Dollars Trend (2-year)"
+LOAN_TREND_FOUR_LABEL = "Federal Loan Dollars Trend (Top 10) (4-year)"
+LOAN_TREND_TWO_LABEL = "Federal Loan Dollars Trend (Top 10) (2-year)"
 
 # Federal Loan chart labels - Consolidated (for new navigation)
 LOAN_TOP_DOLLARS_LABEL = "Top 25 Federal Loan Dollars"
 LOAN_VS_GRAD_LABEL = "Federal Loans vs Graduation Rate"
-LOAN_TREND_LABEL = "Federal Loan Dollars Trend"
+LOAN_TREND_LABEL = "Federal Loan Dollars Trend (Top 10)"
 LOAN_TREND_TOTAL_LABEL = "Federal Loan Dollars Trend (Total)"
 
 LOAN_CHARTS: List[str] = [

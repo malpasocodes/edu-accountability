@@ -120,8 +120,8 @@ class FederalLoansSection(BaseSection):
                 """
                 <div style='padding: 1.5rem; border: 2px solid #ff7f0e; border-radius: 10px; background-color: #fffaf5; margin-bottom: 1rem; height: 260px; display: flex; flex-direction: column; justify-content: space-between;'>
                     <div>
-                        <h4 style='color: #ff7f0e; margin-bottom: 0.75rem;'>📉 Federal Loan Dollars Trend</h4>
-                        <p style='color: #000000; margin-bottom: 0.75rem;'>Track how loan volumes change over time for top institutions.</p>
+                        <h4 style='color: #ff7f0e; margin-bottom: 0.75rem;'>📉 Federal Loan Dollars Trend (Top 10)</h4>
+                        <p style='color: #000000; margin-bottom: 0.75rem;'>Track how loan volumes change over time for top 10 institutions.</p>
                     </div>
                     <p style='color: #000000; font-style: italic; margin: 0;'>Shows year-over-year patterns and shifts.</p>
                 </div>

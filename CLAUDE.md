@@ -115,14 +115,16 @@ The app uses configuration-driven navigation with consolidated tab-based UX:
 **Sections**:
 - **Overview**: Landing page with project context and navigation cards
 - **College Value Grid**: Cost vs graduation analysis with 4-year/2-year charts
-- **Federal Loans**: 3 consolidated charts with tabs (down from 6 individual buttons)
+- **Federal Loans**: 4 consolidated charts with tabs
   - "Top 25 Federal Loan Dollars" → 4-year/2-year tabs
   - "Federal Loans vs Graduation Rate" → 4-year/2-year tabs
-  - "Federal Loan Dollars Trend" → 4-year/2-year tabs
-- **Pell Grants**: 3 consolidated charts with tabs (down from 6 individual buttons)
+  - "Federal Loan Dollars Trend (Top 10)" → 4-year/2-year tabs
+  - "Federal Loan Dollars Trend (Total)" → 4-year/2-year tabs
+- **Pell Grants**: 4 consolidated charts with tabs
   - "Top 25 Pell Dollar Recipients" → 4-year/2-year tabs
   - "Pell Dollars vs Graduation Rate" → 4-year/2-year tabs
-  - "Pell Dollars Trend" → 4-year/2-year tabs
+  - "Pell Dollars Trend (Top 10)" → 4-year/2-year tabs
+  - "Pell Dollars Trend (Total)" → 4-year/2-year tabs
 - **Distance Education** (v0.4+): 3 consolidated charts with tabs
   - "Top 25 Distance Education Enrollment" → 4-year/2-year tabs
   - "Total Enrollment Trend" → 4-year/2-year tabs
