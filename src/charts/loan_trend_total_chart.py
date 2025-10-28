@@ -138,6 +138,63 @@ def _prepare_loan_trend_total_dataframe(
     return aggregated.loc[:, columns]
 
 
+def _render_loan_trend_data_table(prepared: pd.DataFrame, sector: str) -> None:
+    """
+    Render data table showing federal loan totals by year with cumulative totals.
+
+    Parameters
+    ----------
+    prepared : pd.DataFrame
+        Prepared dataframe with Year, TotalLoanDollarsBillions, YoYChangePercent columns
+    sector : str
+        Sector identifier ("four_year" or "two_year")
+    """
+    if prepared.empty:
+        return
+
+    # Prepare display data
+    display_data = prepared.copy()
+
+    # Calculate raw dollars from billions
+    display_data["TotalLoanDollars"] = display_data["TotalLoanDollarsBillions"] * 1_000_000_000
+
+    # Calculate cumulative total
+    display_data["CumulativeTotalDollars"] = display_data["TotalLoanDollars"].cumsum()
+
+    # Format columns for display
+    display_data["Year"] = display_data["Year"].astype(str)
+    display_data["Total Federal Loan Dollars"] = display_data["TotalLoanDollars"].apply(
+        lambda x: f"${x:,.0f}" if pd.notna(x) else "N/A"
+    )
+    display_data["Total (Billions)"] = display_data["TotalLoanDollarsBillions"].apply(
+        lambda x: f"${x:,.2f}B" if pd.notna(x) else "N/A"
+    )
+    display_data["Cumulative Total"] = display_data["CumulativeTotalDollars"].apply(
+        lambda x: f"${x:,.0f}" if pd.notna(x) else "N/A"
+    )
+    display_data["Year-over-Year Change"] = display_data["YoYChangePercent"].apply(
+        lambda x: f"{x:+.1f}%" if pd.notna(x) else "N/A"
+    )
+
+    # Select display columns
+    final_columns = [
+        "Year",
+        "Total Federal Loan Dollars",
+        "Total (Billions)",
+        "Cumulative Total",
+        "Year-over-Year Change"
+    ]
+
+    # Render table
+    sector_label = "4-year" if sector == "four_year" else "2-year"
+    st.subheader("📊 Federal Loan Trend Data")
+    st.caption(
+        f"Annual federal loan dollar totals for {sector_label} institutions (2008-2022), "
+        "with cumulative totals and year-over-year percentage changes."
+    )
+    st.dataframe(display_data[final_columns], width="stretch", hide_index=True)
+
+
 def render_loan_trend_total_chart(
     loans_df: pd.DataFrame,
     metadata_df: pd.DataFrame,
@@ -236,3 +293,9 @@ def render_loan_trend_total_chart(
     )
     st.caption(caption)
     render_altair_chart(chart)
+
+    # Add spacing before table
+    st.markdown("")
+
+    # Render data table
+    _render_loan_trend_data_table(prepared, sector)
