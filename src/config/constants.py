@@ -63,12 +63,14 @@ PELL_TREND_TWO_LABEL = "Pell Dollars Trend (2-year)"
 PELL_TOP_DOLLARS_LABEL = "Top 25 Pell Dollar Recipients"
 PELL_VS_GRAD_LABEL = "Pell Dollars vs Graduation Rate"
 PELL_TREND_LABEL = "Pell Dollars Trend"
+PELL_TREND_TOTAL_LABEL = "Pell Dollars Trend (Total)"
 PELL_GRAD_RATE_LABEL = "Pell Graduation Rate"
 
 PELL_CHARTS: List[str] = [
     PELL_TOP_DOLLARS_LABEL,
     PELL_VS_GRAD_LABEL,
     PELL_TREND_LABEL,
+    PELL_TREND_TOTAL_LABEL,
     PELL_GRAD_RATE_LABEL,
 ]
 PELL_OVERVIEW_LABEL = "Overview"

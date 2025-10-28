@@ -9,6 +9,7 @@ import streamlit as st
 from src.charts.pell_top_dollars_chart import render_pell_top_dollars_chart
 from src.charts.pell_vs_grad_scatter_chart import render_pell_vs_grad_scatter
 from src.charts.pell_trend_chart import render_pell_trend_chart
+from src.charts.pell_trend_total_chart import render_pell_trend_total_chart
 from src.charts.pell_grad_rate_scatter_chart import render_pell_grad_rate_scatter
 from src.config.constants import (
     PELL_SECTION,
@@ -16,6 +17,7 @@ from src.config.constants import (
     PELL_TOP_DOLLARS_LABEL,
     PELL_VS_GRAD_LABEL,
     PELL_TREND_LABEL,
+    PELL_TREND_TOTAL_LABEL,
     PELL_GRAD_RATE_LABEL,
     PELL_TOP_DOLLARS_FOUR_LABEL,
     PELL_TOP_DOLLARS_TWO_LABEL,
@@ -73,7 +75,7 @@ class PellGrantsSection(BaseSection):
         st.divider()
 
         # Available analyses section
-        st.markdown("### Three Ways to Explore Pell Grant Data")
+        st.markdown("### Four Ways to Explore Pell Grant Data")
         st.markdown(
             """
             Use the **sidebar charts** to examine Pell Grant patterns from different angles. Each analysis
@@ -83,8 +85,8 @@ class PellGrantsSection(BaseSection):
 
         st.markdown("")  # Spacing
 
-        # Three analysis types in columns
-        col1, col2, col3 = st.columns(3)
+        # Four analysis types in columns
+        col1, col2, col3, col4 = st.columns(4)
 
         with col1:
             st.markdown(
@@ -123,6 +125,20 @@ class PellGrantsSection(BaseSection):
                         <p style='color: #000000; margin-bottom: 0.75rem;'>Track how Pell volumes change over time for top institutions.</p>
                     </div>
                     <p style='color: #000000; font-style: italic; margin: 0;'>Shows year-over-year patterns and shifts.</p>
+                </div>
+                """,
+                unsafe_allow_html=True
+            )
+
+        with col4:
+            st.markdown(
+                """
+                <div style='padding: 1.5rem; border: 2px solid #9467bd; border-radius: 10px; background-color: #faf8ff; margin-bottom: 1rem; height: 260px; display: flex; flex-direction: column; justify-content: space-between;'>
+                    <div>
+                        <h4 style='color: #9467bd; margin-bottom: 0.75rem;'>📊 Pell Dollars Trend (Total)</h4>
+                        <p style='color: #000000; margin-bottom: 0.75rem;'>See aggregate Pell grant dollar totals summed across all institutions per year.</p>
+                    </div>
+                    <p style='color: #000000; font-style: italic; margin: 0;'>Shows overall aid patterns and national trends (2008-2022).</p>
                 </div>
                 """,
                 unsafe_allow_html=True
@@ -171,7 +187,7 @@ class PellGrantsSection(BaseSection):
     def render_chart(self, chart_name: str) -> None:
         """Render a specific Pell Grants chart."""
         self.render_section_header(PELL_SECTION, chart_name)
-        
+
         # Handle consolidated chart names with tabs
         if chart_name == PELL_TOP_DOLLARS_LABEL:
             self._render_pell_top_dollars_with_tabs(chart_name)
@@ -179,6 +195,8 @@ class PellGrantsSection(BaseSection):
             self._render_pell_vs_grad_with_tabs(chart_name)
         elif chart_name == PELL_TREND_LABEL:
             self._render_pell_trend_with_tabs(chart_name)
+        elif chart_name == PELL_TREND_TOTAL_LABEL:
+            self._render_pell_trend_total_with_tabs(chart_name)
         elif chart_name == PELL_GRAD_RATE_LABEL:
             self._render_pell_grad_rate_with_tabs(chart_name)
         # Handle individual chart names for backward compatibility
@@ -279,6 +297,29 @@ class PellGrantsSection(BaseSection):
 
         with tab2:
             self._render_pell_trend("trend_two", f"{title} (2-year)")
+
+    def _render_pell_trend_total_with_tabs(self, title: str) -> None:
+        """Render total Pell trend chart with 4-year and 2-year tabs."""
+        tab1, tab2 = st.tabs(["4-year", "2-year"])
+
+        with tab1:
+            self._render_pell_trend_total("four_year", f"{title} (4-year)")
+
+        with tab2:
+            self._render_pell_trend_total("two_year", f"{title} (2-year)")
+
+    def _render_pell_trend_total(self, sector: str, title: str) -> None:
+        """Render total Pell trend chart."""
+        metadata = self.data_manager.get_metadata_for_sector(sector)
+        if metadata is not None:
+            render_pell_trend_total_chart(
+                self.data_manager.pell_df,
+                metadata,
+                title=title,
+                sector=sector,
+            )
+        else:
+            st.error(f"Missing metadata for {sector.replace('_', '-')} institutions.")
 
     def _render_pell_grad_rate_with_tabs(self, title: str) -> None:
         """Render Pell graduation rate scatter chart with 4-year and 2-year tabs."""

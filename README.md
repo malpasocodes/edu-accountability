@@ -23,6 +23,7 @@ A data-driven dashboard for analyzing higher education accountability, affordabi
 - Top 25 recipients by total dollar volume (2008-2022)
 - Loan trends vs graduation rates with year-over-year analysis
 - Multi-year trend charts for top institutions
+- Aggregate national trend analysis showing total lending patterns
 - Consolidated tab-based navigation (4-year/2-year)
 - Stacked bar and line chart visualizations
 
@@ -30,6 +31,7 @@ A data-driven dashboard for analyzing higher education accountability, affordabi
 - Top 25 Pell dollar recipients with enrollment context
 - Pell vs graduation rate correlation analysis
 - Year-over-year funding pattern trends (2008-2022)
+- Aggregate national trend analysis showing total aid patterns
 - Need-based aid distribution visualizations
 - Tab-based 4-year/2-year comparisons
 
