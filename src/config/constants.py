@@ -86,11 +86,13 @@ LOAN_TREND_TWO_LABEL = "Federal Loan Dollars Trend (2-year)"
 LOAN_TOP_DOLLARS_LABEL = "Top 25 Federal Loan Dollars"
 LOAN_VS_GRAD_LABEL = "Federal Loans vs Graduation Rate"
 LOAN_TREND_LABEL = "Federal Loan Dollars Trend"
+LOAN_TREND_TOTAL_LABEL = "Federal Loan Dollars Trend (Total)"
 
 LOAN_CHARTS: List[str] = [
     LOAN_TOP_DOLLARS_LABEL,
     LOAN_VS_GRAD_LABEL,
     LOAN_TREND_LABEL,
+    LOAN_TREND_TOTAL_LABEL,
 ]
 LOAN_OVERVIEW_LABEL = "Overview"
 

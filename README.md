@@ -7,30 +7,69 @@ A data-driven dashboard for analyzing higher education accountability, affordabi
 
 ## Features
 
+### 🏠 Overview
+- Landing page with project context and navigation
+- Data scope explanations and important disclaimers
+- Navigation cards for quick access to all sections
+
 ### 📊 College Value Grid
 - Cost vs graduation rate analysis for 4-year and 2-year institutions
 - Quadrant visualization identifying high-value colleges (high graduation, low cost)
-- 6,000+ institutions with enrollment and sector breakdowns
+- Interactive scatter plots with median reference lines
+- Quadrant breakdowns with institution lists and CSV downloads
+- 6,000+ institutions with enrollment filtering (all/>500/>1,000/>5,000/>10,000)
 
-### 💰 Federal Loans & Pell Grants
+### 💵 Federal Loans
 - Top 25 recipients by total dollar volume (2008-2022)
-- Loan/grant trends vs graduation rates
-- Stacked bar visualizations showing year-over-year funding patterns
+- Loan trends vs graduation rates with year-over-year analysis
+- Multi-year trend charts for top institutions
+- Consolidated tab-based navigation (4-year/2-year)
+- Stacked bar and line chart visualizations
 
-### 🌐 Distance Education
-- Top 25 institutions by total enrollment with distance education breakdown
-- Multi-year trend analysis (2020-2024) showing COVID-era shifts
-- Exclusive distance vs hybrid vs in-person enrollment patterns
+### 🎓 Pell Grants
+- Top 25 Pell dollar recipients with enrollment context
+- Pell vs graduation rate correlation analysis
+- Year-over-year funding pattern trends (2008-2022)
+- Need-based aid distribution visualizations
+- Tab-based 4-year/2-year comparisons
 
-### 📈 ROI Analysis (California 2-Year Institutions)
-- Cost vs earnings quadrant analysis for 327 CA community/technical colleges
-- Dual baseline methodology (statewide vs county-specific)
-- Return on investment rankings by sector
+### 💻 Distance Education
+- Top 25 institutions by total enrollment with distance breakdown
+- COVID-era trend analysis (2020-2024) with year-over-year changes
+- Exclusive distance vs on-campus/hybrid enrollment patterns
+- Stacked bar charts showing enrollment composition
+- Institution-specific trend lines with percentage calculations
+
+### 📈 Earnings Premium Analysis (National)
+**Comprehensive 9-page analysis for July 1, 2026 EP requirements:**
+- **Overview**: Explanation of One Big Beautiful Bill Act and EP Test framework
+- **Risk Distribution**: 6,429 institutions categorized into 4 risk levels (High/Moderate/Low/Very Low) with complete downloadable institution lists
+- **Risk Map**: Interactive scatter plot (earnings vs state thresholds) with filters by risk level, sector, and state
+- **Risk Quadrants**: Sector-colored scatter plots for each risk category
+- **Sector Comparison**: 6 sector tabs (Public/Private nonprofit/For-profit × 4yr/2yr) with complete institution lists and CSV exports
+- **State Analysis**: State-by-state deep dives with threshold rankings and risk breakdowns (50 states + DC + National Overview)
+- **Program Distribution**: Scale visualization showing ~165,000 programs subject to EP requirements across 3,900+ institutions
+- **Institution Lookup**: Searchable institution finder with detailed risk assessments and peer comparisons
+- **Methodology & Limitations**: Data sources, calculation formulas, and critical disclaimers
+
+**Key Statistics**: 28.4% Very Low Risk, 22.1% Low Risk, 13.8% Moderate Risk, 19.7% High Risk, 16.0% No Data
+
+### 💰 ROI Analysis (California Institutions)
+- **Overview**: Federal policy framework and Earnings Premium Test context
+- **Cost vs Earnings Quadrant**: Scatter plot with ROI gradient coloring for 327 CA institutions
+- **Top 25 ROI Rankings**: Side-by-side comparison of statewide (C-Metric) vs regional (H-Metric) baselines
+- **ROI by Sector**: Box plot distribution showing median, quartiles, and outliers across sectors
+- Dual baseline methodology: Statewide ($24,939) vs county-specific thresholds
+- Includes public community colleges, private for-profit, and private nonprofit institutions
 
 ### 🔍 College Explorer
-- Institution-level deep dives with searchable dropdown
-- Federal aid trends, graduation rates, distance education enrollment
-- Summary statistics with sector-specific benchmarks
+**Institution-level deep dives with 4 comprehensive tabs:**
+- **Summary**: Institution details, enrollment metrics (total/distance/hybrid), graduation rates with sector benchmarks and z-scores
+- **Federal Loans & Pell Grants**: Combined 15-year trend visualization (2008-2022) with cumulative totals and year-over-year changes
+- **Graduation Rates**: Dual-line trend (Overall vs Pell students) with equity gap analysis (2016-2023)
+- **Distance Education**: Enrollment composition breakdown with line charts and stacked bars (2020-2024)
+- Searchable dropdown with 6,050+ institutions
+- Summary statistics with recent year values and historical averages
 
 ## Quick Start
 
@@ -59,10 +98,12 @@ The dashboard will open in your browser at `http://localhost:8501`.
 
 ## Data Sources
 
-- **IPEDS** (Integrated Postsecondary Education Data System): Cost, enrollment, graduation rates, institutional characteristics
+- **IPEDS** (Integrated Postsecondary Education Data System): Cost, enrollment, graduation rates, institutional characteristics, distance education
+- **IPEDS Completions**: Program-level completions data (C2024_a.csv) for program count analysis
 - **Federal Student Aid**: Federal loan and Pell grant totals by institution (2008-2022)
 - **College Scorecard**: Median earnings data for ROI analysis
 - **U.S. Census ACS**: High school baseline earnings for ROI calculations
+- **Earnings Premium Analysis**: State median earnings thresholds, institutional earnings medians, enrollment data
 
 All data sources are documented in `data/dictionary/sources.yaml` with update procedures and provenance tracking.
 
@@ -95,9 +136,23 @@ Regenerate processed Parquet files from CSV sources:
 python -m src.data.datasets
 ```
 
-Build ROI metrics dataset:
+Build Earnings Premium metrics and program counts:
 
 ```bash
+# Build program counts from IPEDS completions
+python src/data/build_program_counts.py
+
+# Build EP metrics dataset (includes program counts)
+python src/data/build_ep_metrics.py
+```
+
+Build ROI datasets:
+
+```bash
+# Build ROI OPEID mapping
+python src/data/build_roi_opeid_mapping.py
+
+# Build ROI metrics dataset
 python src/data/build_roi_metrics.py
 ```
 
@@ -118,12 +173,12 @@ pytest -q
 
 See [LOG.md](LOG.md) for detailed changelog.
 
-**Current Version**: v1.0 - First production release with 8 major sections, 6,000+ institutions, comprehensive visualizations, and complete documentation.
+**Current Version**: v0.8 - Comprehensive dashboard with 8 major sections including advanced Earnings Premium Analysis with 9 sub-pages, 6,000+ institutions, program-level tracking (~165,000 programs), and complete state/sector/risk analysis capabilities.
 
 ## Technical Notes
 
 ### Processed Data
-- Files: `data/processed/tuition_vs_graduation.parquet` and `data/processed/tuition_vs_graduation_two_year.parquet` are Snappy-compressed Parquet sources used by the app
+- Files: Multiple Parquet files including `tuition_vs_graduation.parquet`, `ep_analysis.parquet` (6,429 institutions), `program_counts.parquet` (3,936 institutions), `roi_metrics.parquet` (327 CA institutions), and federal aid datasets
 - Compression: Snappy via `DataFrame.to_parquet(..., compression="snappy")` balances size and load speed
 - Column dtypes: `UnitID`/`enrollment`/`year` → `Int32`, `cost`/`graduation_rate` → `float32`, `sector`/`state` → pandas `category`, and `institution` → pandas `string`
 - Cache versioning: `DATA_VERSION = "parquet_v1"` in `src/data/datasets.py` scopes Streamlit's `st.cache_data` to current Parquet schema

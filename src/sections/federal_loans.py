@@ -8,6 +8,7 @@ import streamlit as st
 
 from src.charts.loan_top_dollars_chart import render_loan_top_dollars_chart
 from src.charts.loan_trend_chart import render_loan_trend_chart
+from src.charts.loan_trend_total_chart import render_loan_trend_total_chart
 from src.charts.loan_vs_grad_scatter_chart import render_loan_vs_grad_scatter
 from src.config.constants import (
     FEDERAL_LOANS_SECTION,
@@ -17,6 +18,7 @@ from src.config.constants import (
     LOAN_TOP_DOLLARS_LABEL,
     LOAN_VS_GRAD_LABEL,
     LOAN_TREND_LABEL,
+    LOAN_TREND_TOTAL_LABEL,
     LOAN_TOP_DOLLARS_FOUR_LABEL,
     LOAN_TOP_DOLLARS_TWO_LABEL,
     LOAN_VS_GRAD_FOUR_LABEL,
@@ -72,7 +74,7 @@ class FederalLoansSection(BaseSection):
         st.divider()
 
         # Available analyses section
-        st.markdown("### Three Ways to Explore Federal Loan Data")
+        st.markdown("### Four Ways to Explore Federal Loan Data")
         st.markdown(
             """
             Use the **sidebar charts** to examine federal loan patterns from different angles. Each analysis
@@ -82,8 +84,8 @@ class FederalLoansSection(BaseSection):
 
         st.markdown("")  # Spacing
 
-        # Three analysis types in columns
-        col1, col2, col3 = st.columns(3)
+        # Four analysis types in columns
+        col1, col2, col3, col4 = st.columns(4)
 
         with col1:
             st.markdown(
@@ -122,6 +124,20 @@ class FederalLoansSection(BaseSection):
                         <p style='color: #000000; margin-bottom: 0.75rem;'>Track how loan volumes change over time for top institutions.</p>
                     </div>
                     <p style='color: #000000; font-style: italic; margin: 0;'>Shows year-over-year patterns and shifts.</p>
+                </div>
+                """,
+                unsafe_allow_html=True
+            )
+
+        with col4:
+            st.markdown(
+                """
+                <div style='padding: 1.5rem; border: 2px solid #9467bd; border-radius: 10px; background-color: #faf8ff; margin-bottom: 1rem; height: 260px; display: flex; flex-direction: column; justify-content: space-between;'>
+                    <div>
+                        <h4 style='color: #9467bd; margin-bottom: 0.75rem;'>📊 Federal Loan Dollars Trend (Total)</h4>
+                        <p style='color: #000000; margin-bottom: 0.75rem;'>See aggregate federal loan dollar totals summed across all institutions per year.</p>
+                    </div>
+                    <p style='color: #000000; font-style: italic; margin: 0;'>Shows overall lending patterns and national trends (2008-2022).</p>
                 </div>
                 """,
                 unsafe_allow_html=True
@@ -184,6 +200,8 @@ class FederalLoansSection(BaseSection):
             self._render_loan_vs_grad_with_tabs(chart_name)
         elif chart_name == LOAN_TREND_LABEL:
             self._render_loan_trend_with_tabs(chart_name)
+        elif chart_name == LOAN_TREND_TOTAL_LABEL:
+            self._render_loan_trend_total_with_tabs(chart_name)
         # Handle individual chart names for backward compatibility
         elif chart_name == LOAN_TOP_DOLLARS_FOUR_LABEL:
             self._render_loan_top_dollars("four_year", chart_name)
@@ -258,13 +276,36 @@ class FederalLoansSection(BaseSection):
     def _render_loan_trend_with_tabs(self, title: str) -> None:
         """Render loan trend chart with 4-year and 2-year tabs."""
         tab1, tab2 = st.tabs(["4-year", "2-year"])
-        
+
         with tab1:
             self._render_loan_trend("four_year", f"{title} (4-year)")
-        
+
         with tab2:
             self._render_loan_trend("two_year", f"{title} (2-year)")
-    
+
+    def _render_loan_trend_total_with_tabs(self, title: str) -> None:
+        """Render total loan trend chart with 4-year and 2-year tabs."""
+        tab1, tab2 = st.tabs(["4-year", "2-year"])
+
+        with tab1:
+            self._render_loan_trend_total("four_year", f"{title} (4-year)")
+
+        with tab2:
+            self._render_loan_trend_total("two_year", f"{title} (2-year)")
+
+    def _render_loan_trend_total(self, sector: str, title: str) -> None:
+        """Render total loan trend chart."""
+        metadata = self.data_manager.get_metadata_for_sector(sector)
+        if metadata is not None:
+            render_loan_trend_total_chart(
+                self.data_manager.loan_df,
+                metadata,
+                title=title,
+                sector=sector,
+            )
+        else:
+            st.error(f"Missing metadata for {sector.replace('_', '-')} institutions.")
+
     def get_available_charts(self) -> List[str]:
         """Get available charts for Federal Loans section."""
         return LOAN_CHARTS
