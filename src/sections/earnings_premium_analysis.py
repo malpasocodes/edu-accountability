@@ -200,6 +200,16 @@ class EarningsPremiumAnalysisSection(BaseSection):
 
         st.markdown("")  # Spacing
 
+        # Contact section at bottom
+        st.markdown("---")
+        st.markdown(
+            """
+            📬 **Contact**
+            For questions, data verification, or to report a potential inaccuracy, please email **[info@eduaccountability.org](mailto:info@eduaccountability.org)**.
+            Your feedback helps us improve the clarity and reliability of this work.
+            """
+        )
+
     def render_chart(self, chart_name: str) -> None:
         """Render a specific Earnings Premium chart."""
         self.render_section_header(EARNINGS_PREMIUM_SECTION, chart_name)

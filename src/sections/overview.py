@@ -138,7 +138,7 @@ class OverviewSection(BaseSection):
         st.markdown(
             """
             📬 **Contact**
-            For questions, data verification, or to report a potential inaccuracy, please email **[info@eduaccountability.org](mailto:support@eduaccountability.org)**.
+            For questions, data verification, or to report a potential inaccuracy, please email **[info@eduaccountability.org](mailto:info@eduaccountability.org)**.
             Your feedback helps us improve the clarity and reliability of this work.
             """
         )

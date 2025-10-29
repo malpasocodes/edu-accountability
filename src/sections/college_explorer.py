@@ -71,7 +71,7 @@ class CollegeExplorerSection(BaseSection):
         st.divider()
 
         # Available analyses section
-        st.markdown("### Three Ways to Explore Individual Colleges")
+        st.markdown("### Four Ways to Explore Individual Colleges")
         st.markdown(
             """
             Use the **sidebar tabs** to examine different aspects of each institution. Each analysis provides
@@ -81,8 +81,8 @@ class CollegeExplorerSection(BaseSection):
 
         st.markdown("")  # Spacing
 
-        # Three analysis types in columns
-        col1, col2, col3 = st.columns(3)
+        # Four analysis types in columns
+        col1, col2, col3, col4 = st.columns(4)
 
         with col1:
             st.markdown(
@@ -120,6 +120,20 @@ class CollegeExplorerSection(BaseSection):
                     <div style='flex-grow: 1; display: flex; flex-direction: column; justify-content: center;'>
                         <p style='color: #000000; margin-bottom: 0.5rem;'>Compare overall vs Pell student graduation trends.</p>
                         <p style='color: #000000; font-style: italic; margin: 0;'>Shows equity gaps in completion outcomes (2016-2023).</p>
+                    </div>
+                </div>
+                """,
+                unsafe_allow_html=True
+            )
+
+        with col4:
+            st.markdown(
+                """
+                <div style='padding: 1.5rem; border: 2px solid #9467bd; border-radius: 10px; background-color: #faf9ff; margin-bottom: 1rem; height: 200px; display: flex; flex-direction: column;'>
+                    <h4 style='color: #9467bd; margin-bottom: 0.5rem;'>💻 Distance Education</h4>
+                    <div style='flex-grow: 1; display: flex; flex-direction: column; justify-content: center;'>
+                        <p style='color: #000000; margin-bottom: 0.5rem;'>Analyze online and hybrid enrollment patterns.</p>
+                        <p style='color: #000000; font-style: italic; margin: 0;'>Track distance education trends over time (2020-2024).</p>
                     </div>
                 </div>
                 """,

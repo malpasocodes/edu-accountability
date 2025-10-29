@@ -7,5 +7,21 @@ __pycache__/
 # Streamlit
 .streamlit/
 
+# Environment variables
+.env
+*.env
+
+# IDE and System Files
+.DS_Store
+.vscode/
+.idea/
+
+# Testing and Linting
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+
 # Large raw data files (use processed versions instead)
 data/raw/college_scorecard/Most-Recent-Cohorts-Institution_*.csv

@@ -129,12 +129,6 @@ def render_main(data_manager: DataManager) -> None:
 
 def main() -> None:
     """Main application entry point."""
-    # Page configuration
-    st.set_page_config(
-        page_title="College Value Explorer", 
-        layout="wide"
-    )
-    
     # Initialize session state
     SessionManager.initialize()
     
