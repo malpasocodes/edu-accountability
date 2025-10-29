@@ -14,172 +14,126 @@ from src.config.constants import (
     ROI_EARNINGS_PREMIUM_LABEL,
     ROI_EARNINGS_PREMIUM_RANKINGS_LABEL,
 )
+from src.ui.disclaimer import load_disclaimer_content
 
 
 class ROISection(BaseSection):
     """Handles the ROI section for California institutions."""
 
     def render_overview(self) -> None:
-        """Render the ROI overview page."""
+        """Render the ROI overview page - Alpha release."""
         self.render_section_header("ROI", "Overview")
 
-        # Overview hero styling aligned with landing page
+        # Hero section with Alpha Release badge
         st.markdown(
             """
             <div style='text-align: center; padding: 1.5rem 0; background: linear-gradient(135deg, #dee2e6 0%, #ced4da 100%); border-radius: 10px; margin-bottom: 1.5rem;'>
                 <h2 style='color: #1f77b4; font-size: 2.2rem; margin-bottom: 0.25rem; font-weight: 700;'>
-                    📈 ROI Overview
+                    📈 ROI Analysis <span style='color: #ff0000;'>(Alpha Release)</span>
                 </h2>
                 <p style='color: #000000; font-size: 1.05rem; margin: 0; font-weight: 400;'>
-                    Measure the payoff of college programs by connecting what students pay with what they earn.
+                    Measuring educational investment returns for California institutions
                 </p>
             </div>
             """,
             unsafe_allow_html=True
         )
 
-        # Key insight callout
-        st.info("""
-        **🎯 Key Insight**: Higher education policy is shifting from access-only metrics
-        toward value and accountability—not just whether students can enroll, but whether
-        their investment pays off.
-        """)
-
-        # Scope limitation warning
-        st.warning("""
-        📍 **California 2-Year Institutions Only** - This ROI analysis covers 327 California
-        community colleges, technical colleges, and career colleges. 4-year universities
-        (UC, CSU systems) are not included.
-        """)
-
-        # What is this section
-        st.markdown("## What is ROI Analysis?")
+        # Overview section
+        st.markdown("### Overview")
         st.markdown("""
-        A core premise of higher education policy is that pursuing a college degree or credential
-        should lead to higher earnings and greater social mobility. Yet evidence shows that not all
-        programs deliver on that promise. Some leave students with debt but little or no economic
-        gain—sometimes even worse off than if they had entered the workforce directly after high school.
+        This Alpha release introduces the first version of our Return on Investment (ROI) analysis for higher education programs.
+        Our objective is to measure how well colleges and programs translate educational investment—tuition, time, and effort—into improved earnings over time.
 
-        A new federal provision under the **One Big Beautiful Bill Act (OBBBA)** introduces a major
-        step toward addressing this problem. The law establishes an outcomes-based accountability
-        framework that evaluates whether programs provide a positive economic return to their students.
-        At its center is the **Earnings Premium Test**, which asks a simple but powerful question:
+        We are currently working with California institutions only. Additional states and expanded metrics will be added in future updates.
 
-        **Are students, on average, better off financially after completing this program than if they
-        had not attended at all?**
-        """)
-
-        # The Earnings Premium Test
-        st.markdown("### The Earnings Premium Test")
-        st.markdown("""
-        Under this framework, each program's graduates are compared to a relevant benchmark:
-
-        - **Undergraduate programs** → median earnings of graduates are compared to median earnings of high school graduates
-        - **Graduate and professional programs** → median earnings are compared to median earnings of bachelor's degree holders
-
-        If a program fails this test for **two out of three consecutive years**, it loses eligibility to offer federal student loans—a powerful incentive for institutions to ensure that programs genuinely improve their students' economic prospects.
-
-        This approach aligns with broader efforts—such as the **Postsecondary Value Commission's Threshold 0**—to define a minimum acceptable return on investment for higher education. Together, these efforts reflect a shift from access-only metrics toward value and accountability: not just whether students can enroll, but whether their investment pays off.
-        """)
-
-        # Visualizing ROI
-        st.markdown("## Visualizing ROI")
-        st.markdown("""
-        A simple way to understand Return on Investment (ROI) in higher education is to trace a student's path over time—linking what they pay to what they earn.
-
-        1. **Entry Point**: A student enrolls in a college program and begins paying tuition and fees. These represent the cost of investment—the amount of money (and time) the student must commit to pursue the credential.
-
-        2. **Completion**: After several years, the student graduates and enters the workforce.
-
-        3. **Post-Graduation**: A few years after completion, we compare their median annual earnings to those of a comparable group:
-           - For undergraduate programs, high school graduates.
-           - For graduate or professional programs, bachelor's degree holders.
-
-        The difference in earnings represents the **earnings premium**, while the cost of attendance represents the **investment** required to achieve it.
-
-        Together, these two elements—earnings and cost—determine the program's economic value:
-
-        - A high earnings premium and low cost suggest **strong ROI**.
-        - A low earnings premium and high cost indicate **weak ROI** or potential harm.
-        """)
-
-        # A Practical Example
-        st.markdown("### A Practical Example")
-        st.markdown(r"""
-        Consider Maya, a high school graduate deciding whether to enroll in a four-year college program.
-
-        - **Entry Point**: Maya chooses a state university with an average annual cost of \$10,000 in tuition and fees. Over four years, her total investment is about \$40,000, not including living expenses.
-        - **Completion**: Maya graduates with a degree in accounting and begins her career at a modest starting salary.
-        - **Some Years After Graduation (e.g., Five)**: By this point, Maya's median annual earnings have risen to \$70,000. Her friend Jordan, who entered the workforce directly after high school, now earns \$45,000.
-
-        The earnings premium for Maya's degree—measured some number of years (e.g., five) after graduation—is **\$25,000 per year**. Over time, her higher earnings have allowed her to recover the cost of her education and continue building wealth at a faster rate.
-
-        Now consider another student, Leo, who attends a private college fine arts program with total tuition and fees of \$60,000. Some number of years (e.g., five) after graduation, Leo earns \$42,000, only slightly above Jordan's \$45,000. His earnings premium is **negative**, meaning that even years after completing his degree, he has not recouped the cost of his education.
-
-        This example illustrates how the Earnings Premium Test evaluates return over time. It doesn't measure immediate outcomes but rather asks whether, some number of years (e.g., five) after graduation, students are financially better off than if they had never enrolled—and whether the return justifies both the public and personal investment.
-        """)
-
-        # Data coverage
-        st.markdown("## Data Coverage")
-
-        # Load ROI data for summary stats
-        roi_df = self.data_manager.load_roi_metrics()
-
-        if not roi_df.empty:
-            # Filter out invalid ROI (999 flag values)
-            valid_roi = roi_df[roi_df['roi_statewide_years'] < 999]
-
-            col1, col2, col3, col4 = st.columns(4)
-            with col1:
-                st.metric("Institutions", f"{len(roi_df)}")
-            with col2:
-                st.metric("California Only", "Yes ✓")
-            with col3:
-                median_roi = valid_roi['roi_statewide_years'].median()
-                st.metric("Median ROI", f"{median_roi:.1f} years")
-            with col4:
-                best_roi = valid_roi['roi_statewide_years'].min()
-                st.metric("Best ROI", f"{best_roi:.1f} years")
-        else:
-            st.warning("ROI data not available. Run `python src/data/build_roi_metrics.py` to generate.")
-
-        # How to explore
-        st.markdown("## How to Explore This Section")
-        st.markdown("""
-        Use the sidebar charts to analyze ROI from different perspectives:
-
-        - **Cost vs Earnings Quadrant**: Visualize the relationship between program cost
-          and earnings outcomes. Identify high-value institutions (high earnings, low cost).
-
-        - **Top 25 ROI Rankings**: See which institutions offer the fastest payback period.
-          Compare statewide vs regional rankings.
-
-        - **ROI by Sector**: Understand ROI distribution across public, private nonprofit, and
-          private for-profit institutions.
+        This release provides a directional view, not an official assessment. Metrics rely on publicly available data that aggregate outcomes at the institution level, not by specific program.
+        Users should treat these results as exploratory and consult the full disclaimer before drawing conclusions.
         """)
 
         st.markdown("---")
 
-        # Data source attribution
-        st.markdown("## Data Notes")
+        # What We're Building section
+        st.markdown("### What We're Building")
         st.markdown("""
-        - **Coverage:** California community and technical colleges only (327 institutions with mapped IPEDS UnitIDs).
-        - **Source repository:** [Higher Ed ROI Research Lab (epanalysis)](https://github.com/malpasocodes/epanalysis); raw files live under `data/raw/epanalysis/`.
-        - **Earnings:** College Scorecard median earnings **10 years after entry** (`md_earn_wne_p10`).
-        - **Costs:** IPEDS annual net price aggregated to a total program cost before import.
-        - **Baselines:** U.S. Census ACS 5-year high school earnings, provided at both statewide and county levels.
-        - **Processing pipeline:** `src/data/build_roi_metrics.py` merges the epanalysis metrics with IPEDS `UnitID`, normalizes dtypes, adds ROI-in-months flags, and saves `data/processed/roi_metrics.parquet`.
-        - **Negative premiums:** Institutions with non-positive earnings premiums are flagged with `ROI = 999` and excluded from charts by default.
+        Over the coming releases, we will develop several complementary metrics to evaluate educational value, including:
+        - **Earnings Premium (EP)**: Comparing graduates' median earnings to those of high-school peers.
+        - **Payback Period**: Estimating how long it takes for cumulative earnings gains to offset educational costs.
+        - **Cost-Adjusted ROI Index**: Integrating both earnings and cost into a single, interpretable measure.
+
+        These measures together will help identify where students, families, and taxpayers are realizing the greatest returns—and where outcomes fall short.
         """)
 
-        # Disclaimer
-        st.warning("""
-        **⚠️ Important Limitations**:
-        - ROI analysis is limited to **California institutions only** (327 community, technical, and career colleges)
-        - Earnings data represents cohorts from 10+ years ago
-        - Individual outcomes vary based on field of study, local labor markets, and personal circumstances
-        - This is one metric among many for evaluating college value
+        st.markdown("---")
+
+        # A Simple Example section
+        st.markdown("### A Simple Example")
+        st.markdown(r"""
+        Consider two California students making different educational choices:
+
+        **Maya** enrolls in a state university with an average annual cost of \$10,000.
+        After four years, she completes her degree in accounting and, five years later, earns about \$70,000 annually.
+
+        **Jordan**, her friend who entered the workforce directly after high school, now earns \$45,000.
+        Maya's earnings premium is \$25,000 per year, suggesting her degree provided strong long-term value.
+
+        By contrast, **Leo** attends a private fine-arts college with total tuition and fees of \$60,000.
+        Five years after graduation, he earns \$42,000—below Jordan's \$45,000.
+        Leo's earnings premium is negative, meaning his educational investment has not yet paid off.
+
+        These examples show how ROI helps contextualize cost and earnings together—identifying which educational paths lead to faster economic recovery and greater mobility.
         """)
+
+        st.markdown("---")
+
+        # How to Explore section
+        st.markdown("### How to Explore")
+        st.markdown("""
+        Use the sidebar tools to analyze ROI across California institutions:
+        - **Cost vs. Earnings Quadrant**: Compare cost and outcomes across sectors.
+        - **Top ROI Rankings**: View institutions with the fastest estimated payback period.
+        - **ROI by Sector**: Examine differences across public, private nonprofit, and for-profit institutions.
+        """)
+
+        st.markdown("---")
+
+        # Data Notes section
+        st.markdown("### Data Notes")
+        st.markdown("""
+        - **Coverage**: California community and technical colleges (327 institutions with valid IPEDS UnitIDs).
+        - **Earnings**: College Scorecard median earnings 10 years after entry (`md_earn_wne_p10`).
+        - **Costs**: IPEDS annual net price aggregated to total program cost.
+        - **Baseline**: U.S. Census ACS 5-year median earnings for high-school graduates (state and county levels).
+        - **Processing**: `src/data/build_roi_metrics.py` merges and normalizes data into `data/processed/roi_metrics.parquet`.
+        - **Negative premiums**: Institutions with non-positive ROI are flagged and excluded from default charts.
+        """)
+
+        st.markdown("---")
+
+        # Important Limitation section with red styling
+        st.markdown('<h4 style="color: red;">⚠️ Important Limitation</h4>', unsafe_allow_html=True)
+        st.markdown(
+            """
+            This Alpha release presents a preliminary analysis based on institution-level median data for California only.
+            Results are illustrative and exploratory, not official or program-specific, and should not be used for compliance, ranking, or investment decisions.
+            Metrics may change substantially as additional data and states are incorporated.
+            Use of this section implies acceptance of the <span style="color: red;">Full Disclaimer & Terms of Use</span>.
+            """,
+            unsafe_allow_html=True
+        )
+
+        # Full Disclaimer expander
+        with st.expander("📄 View Full Disclaimer & Terms of Use"):
+            disclaimer_content = load_disclaimer_content()
+            st.markdown(disclaimer_content)
+            st.markdown("---")
+            st.markdown(
+                """
+                **By accessing or using this site, you acknowledge that you have read, understood,
+                and accepted these terms.** If you do not agree with these terms, you should discontinue
+                use of the site immediately.
+                """
+            )
 
     def render_chart(self, chart_name: str) -> None:
         """Render a specific ROI chart."""
