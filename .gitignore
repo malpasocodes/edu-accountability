@@ -25,3 +25,10 @@ htmlcov/
 
 # Large raw data files (use processed versions instead)
 data/raw/college_scorecard/Most-Recent-Cohorts-Institution_*.csv
+
+# Documentation files (excluded from version control)
+AGENTS.md
+CLAUDE.md
+DISCLAIMER.md
+LOG.md
+ROI-FEATURE.MD
