@@ -60,6 +60,21 @@ class EarningsPremiumAnalysisSection(BaseSection):
             unsafe_allow_html=True
         )
 
+        # Important Limitation at top
+        st.markdown('<h4 style="color: red;">⚠️ Important Limitation</h4>', unsafe_allow_html=True)
+        st.markdown(
+            """
+            The analyses and visualizations below rely on **institution-level median earnings** rather than **program-level data**.
+            Federal gainful employment and accountability tests (such as EP or D/E) are based on **program-specific earnings** drawn from **IRS and SSA administrative records**, which are **not publicly accessible**.
+
+            As a result, these results are **approximate and non-authoritative**. They **must not be interpreted as official compliance assessments, rankings, or findings**.
+            They are provided **for research and policy discussion purposes only**, and their use implies acceptance of the <span style="color: red;">Full Disclaimer & Terms of Use</span> (see Overview page).
+            """,
+            unsafe_allow_html=True
+        )
+
+        st.markdown("")  # Spacing
+
         # What is Earnings Premium
         st.markdown("### What is the Earnings Premium Test?")
         st.markdown(
@@ -168,13 +183,6 @@ class EarningsPremiumAnalysisSection(BaseSection):
         )
 
         st.markdown("")  # Spacing
-
-        # Important limitations
-        st.warning(
-            "**⚠️ Important Limitation:** This analysis uses institution-level median earnings (aggregated across all programs) "
-            "compared to state thresholds. Actual EP testing will occur at the individual program level using IRS/SSA data "
-            "not publicly available. This tool provides directional risk assessment for planning purposes only."
-        )
 
     def render_chart(self, chart_name: str) -> None:
         """Render a specific Earnings Premium chart."""
