@@ -61,6 +61,8 @@ class EarningsPremiumAnalysisSection(BaseSection):
         )
 
         # Important Limitation at top
+        from src.ui.disclaimer import load_disclaimer_content
+
         st.markdown('<h4 style="color: red;">⚠️ Important Limitation</h4>', unsafe_allow_html=True)
         st.markdown(
             """
@@ -68,10 +70,23 @@ class EarningsPremiumAnalysisSection(BaseSection):
             Federal gainful employment and accountability tests (such as EP or D/E) are based on **program-specific earnings** drawn from **IRS and SSA administrative records**, which are **not publicly accessible**.
 
             As a result, these results are **approximate and non-authoritative**. They **must not be interpreted as official compliance assessments, rankings, or findings**.
-            They are provided **for research and policy discussion purposes only**, and their use implies acceptance of the <span style="color: red;">Full Disclaimer & Terms of Use</span> (see Overview page).
+            They are provided **for research and policy discussion purposes only**, and their use implies acceptance of the <span style="color: red;">Full Disclaimer & Terms of Use</span>.
             """,
             unsafe_allow_html=True
         )
+
+        # Full Disclaimer expander
+        with st.expander("📄 View Full Disclaimer & Terms of Use"):
+            disclaimer_content = load_disclaimer_content()
+            st.markdown(disclaimer_content)
+            st.markdown("---")
+            st.markdown(
+                """
+                **By accessing or using this site, you acknowledge that you have read, understood,
+                and accepted these terms.** If you do not agree with these terms, you should discontinue
+                use of the site immediately.
+                """
+            )
 
         st.markdown("")  # Spacing
 
@@ -172,13 +187,14 @@ class EarningsPremiumAnalysisSection(BaseSection):
         st.markdown("### What You Can Explore")
         st.markdown(
             """
-            - **National Overview**: View summary metrics and risk distribution across all institutions
-            - **Overview & Risk Map**: Interactive scatter plot showing all institutions' earnings vs state thresholds
-            - **Institution Lookup**: Search for specific institutions and view detailed risk assessments
-            - **State Analysis**: Explore EP risk patterns by state
+            - **Risk Distribution**: National summary metrics and risk distribution across all institutions
+            - **Risk Map**: Interactive scatter plot showing all institutions' earnings vs state thresholds
+            - **Risk Quadrants**: Scatter plots by risk category with sector colors
             - **Sector Comparison**: Compare risk across institutional types
-            - **Risk Quadrants**: Visualize institutions by risk category with sector breakdowns
-            - **Methodology & Limitations**: Understanding the data, calculations, and critical limitations
+            - **State Analysis**: Deep dive into EP risk by state
+            - **Program Distribution**: Scale of program-level EP assessment requirements
+            - **Institution Lookup**: Search institutions and view detailed risk assessments
+            - **Methodology & Limitations**: Data sources, calculations, and critical limitations
             """
         )
 
