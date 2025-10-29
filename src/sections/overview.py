@@ -58,17 +58,9 @@ class OverviewSection(BaseSection):
             """
         )
         
-        # Disclaimer section
-        st.subheader("Important Disclaimer")
-        st.markdown(
-            """
-            The EDU Accountability Dashboard is a work in progress. Data and analyses presented here are intended solely
-            for research and policy purposes and should not be used to make enrollment or investment decisions about
-            individual colleges or programs. Metrics are derived from public datasets (e.g. IPEDS, U.S. Census) and may
-            not capture all factors influencing educational or economic outcomes. While we strive for accuracy, users are
-            responsible for independently verifying the data and analysis before drawing conclusions or making decisions.
-            """
-        )
+        # Important Notice section - display full disclaimer
+        from src.ui.disclaimer import render_disclaimer_summary
+        render_disclaimer_summary()
         
         # Interactive Navigation Cards
         st.subheader("Explore the Dashboard")
