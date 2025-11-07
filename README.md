@@ -82,12 +82,12 @@ A data-driven dashboard for analyzing higher education accountability, affordabi
 git clone https://github.com/yourusername/college_act_charts.git
 cd college_act_charts
 
-# Create virtual environment
-python -m venv .venv
-source .venv/bin/activate  # On Windows: .venv\Scripts\activate
+# Create uv-managed virtual environment
+uv venv
+source .venv/bin/activate  # On Windows: .venv\\Scripts\\activate
 
-# Install dependencies
-pip install -r requirements.txt
+# Install dependencies with uv
+uv pip install -r requirements.txt
 ```
 
 ### Running the Dashboard
