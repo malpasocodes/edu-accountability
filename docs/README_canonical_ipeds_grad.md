@@ -43,3 +43,10 @@ Each step overwrites the downstream artifacts and refreshes provenance in `out/c
 - Confirm provenance JSON matches the commit under review (git SHA + row counts).
 - For any null metadata rows, consult `docs/ipeds_missing_metadata.md`.
 - Rate precedence rules are documented in `docs/rate_policy_ipeds_grad.md`; ensure `source_flag` and `is_revised` columns match expectations.
+
+## Gentle App Integration (Phase 07)
+
+- Feature flag: `USE_CANONICAL_GRAD_DATA` (default `true`). When enabled, College Explorer’s summary and graduation tabs display canonical 150% completion rates alongside existing Pell OM trends.
+- Loader: `DataManager.canonical_grad_df` loads `data/processed/2023/canonical/ipeds_grad_rates_latest_by_inst.parquet` through `DataLoader.load_parquet`.
+- UI hook: `CollegeExplorerSection` surfaces a “Canonical Pipeline Snapshot” card with the most recent cohort year, rate, and DRV/DFR provenance.
+- Toggle off the flag to fall back to the legacy Outcome Measures-only experience without touching canonical files.

@@ -117,6 +117,7 @@ All data sources are documented in `data/dictionary/sources.yaml` with update pr
   2. `python -m src.pipelines.canonical.ipeds_grad.enrich_metadata`
   3. `python -m src.pipelines.canonical.ipeds_grad.build_outputs`
 - Outputs land in `data/processed/2023/canonical/` and provenance metadata in `out/canonical/ipeds_grad/`. See `docs/data_dictionary_ipeds_grad.md` for schemas and validations.
+- App integration toggle: set environment variable `USE_CANONICAL_GRAD_DATA=true` (default) to power the College Explorer graduation summary with the canonical pipeline; set to `false` to fall back to legacy Outcome Measures data only.
 
 ## Project Structure
 

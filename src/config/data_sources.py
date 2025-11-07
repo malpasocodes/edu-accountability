@@ -31,6 +31,7 @@ class DataSources:
     _ipeds_dir = _raw_dir / "ipeds" / "2023"
     _fsa_dir = _raw_dir / "fsa"
     _epanalysis_dir = _raw_dir / "epanalysis"
+    _canonical_dir = _processed_dir / "2023" / "canonical"
 
     # Raw data sources - FSA
     PELL_RAW = DataSourceConfig(
@@ -166,6 +167,25 @@ class DataSources:
         path=_processed_dir / "tuition_vs_graduation_two_year.parquet",
         description="Tuition vs graduation rates (2-year, Parquet)",
         required=False
+    )
+
+    # Canonical IPEDS graduation outputs
+    CANONICAL_GRAD_LONG = DataSourceConfig(
+        path=_canonical_dir / "ipeds_grad_rates_long.parquet",
+        description="Canonical IPEDS graduation rates (long format)",
+        required=False,
+    )
+
+    CANONICAL_GRAD_LATEST = DataSourceConfig(
+        path=_canonical_dir / "ipeds_grad_rates_latest_by_inst.parquet",
+        description="Canonical IPEDS graduation rates (latest per institution)",
+        required=False,
+    )
+
+    CANONICAL_GRAD_SUMMARY = DataSourceConfig(
+        path=_canonical_dir / "ipeds_grad_rates_summary_by_year.parquet",
+        description="Canonical IPEDS graduation rates summary by year/sector",
+        required=False,
     )
 
     # ROI data sources - epanalysis migration

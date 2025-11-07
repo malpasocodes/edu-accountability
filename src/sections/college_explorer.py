@@ -19,6 +19,7 @@ from src.config.constants import (
     COLLEGE_DISTANCE_ED_LABEL,
     COLLEGE_EXPLORER_CHARTS,
 )
+from src.config.feature_flags import USE_CANONICAL_GRAD_DATA
 
 
 class CollegeExplorerSection(BaseSection):
@@ -30,6 +31,11 @@ class CollegeExplorerSection(BaseSection):
         self.institutions_df = data_manager.institutions_df if hasattr(data_manager, 'institutions_df') else pd.DataFrame()
         self.distance_df = data_manager.get_distance_data() if hasattr(data_manager, 'get_distance_data') else None
         self.pellgradrates_df = data_manager.pellgradrates_df if hasattr(data_manager, 'pellgradrates_df') else None
+        self.canonical_grad_df = (
+            data_manager.canonical_grad_df
+            if hasattr(data_manager, 'canonical_grad_df')
+            else pd.DataFrame()
+        )
 
     def render_overview(self) -> None:
         """Render the college explorer overview page."""
@@ -387,6 +393,9 @@ class CollegeExplorerSection(BaseSection):
                 # Get the most recent year's data (2023)
                 overall_grad_rate = grad_row.get('GR2023', None)
                 pell_grad_rate = grad_row.get('PGR2023', None)
+
+                if USE_CANONICAL_GRAD_DATA:
+                    self._render_canonical_snapshot(inst['UnitID'])
 
                 # Calculate sector-specific statistics
                 sector_code = inst.get('SECTOR', -1)
@@ -850,6 +859,8 @@ class CollegeExplorerSection(BaseSection):
 
         # Display summary statistics
         self._display_grad_rate_summary(trend_data)
+        if USE_CANONICAL_GRAD_DATA:
+            self._render_canonical_snapshot(unit_id, show_header=False)
 
     def _prepare_graduation_trend_data(self, unit_id: int, institution_name: str) -> pd.DataFrame:
         """Prepare graduation trend data for a specific institution."""
@@ -1034,6 +1045,64 @@ class CollegeExplorerSection(BaseSection):
                     st.metric("Overall Trend", "N/A")
             else:
                 st.metric("Overall Trend", "Insufficient Data")
+
+        st.caption(
+            "Rates reflect IPEDS Outcome Measures (eight-year completion window)."
+        )
+
+    def _get_canonical_grad_record(self, unit_id: int) -> Optional[pd.Series]:
+        """Fetch the canonical graduation record for a UnitID."""
+
+        if self.canonical_grad_df is None or self.canonical_grad_df.empty:
+            return None
+
+        record = self.canonical_grad_df[self.canonical_grad_df["unitid"] == unit_id]
+        if record.empty:
+            return None
+        return record.iloc[0]
+
+    def _render_canonical_snapshot(self, unit_id: int, *, show_header: bool = True) -> None:
+        """Render canonical graduation metrics for the selected institution."""
+
+        record = self._get_canonical_grad_record(unit_id)
+        if record is None:
+            return
+
+        if show_header:
+            st.markdown("##### Canonical Pipeline Snapshot")
+
+        rate = record.get("grad_rate_150")
+        rate_text = f"{float(rate):.1f}%" if pd.notna(rate) else "N/A"
+        cohort_year = record.get("year")
+        year_text = int(cohort_year) if pd.notna(cohort_year) else "—"
+        source_flag = (record.get("source_flag") or "").upper()
+        is_revised = bool(record.get("is_revised"))
+        load_ts = record.get("load_ts")
+        if isinstance(load_ts, str):
+            load_timestamp = pd.to_datetime(load_ts, errors="coerce")
+        else:
+            load_timestamp = load_ts if isinstance(load_ts, pd.Timestamp) else None
+        load_text = (
+            load_timestamp.strftime("%Y-%m-%d") if isinstance(load_timestamp, pd.Timestamp) else ""
+        )
+
+        col1, col2 = st.columns([2, 1])
+        with col1:
+            st.metric(
+                f"Canonical 150% Grad Rate ({year_text})",
+                rate_text,
+                help="Derived from IPEDS DRV/DFR tables via canonical pipeline",
+            )
+        with col2:
+            detail = source_flag or "N/A"
+            if is_revised:
+                detail += " · revised"
+            st.metric("Source", detail)
+
+        if load_text:
+            st.caption(
+                f"Canonical snapshot built {load_text}. See docs/rate_policy_ipeds_grad.md for precedence details."
+            )
 
     def _render_distance_education(self) -> None:
         """Provide a searchable distance education snapshot for a single institution."""

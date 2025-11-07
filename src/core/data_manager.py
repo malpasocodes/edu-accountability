@@ -13,6 +13,7 @@ from src.config.constants import (
     VALUE_GRID_CHART_CONFIGS,
 )
 from src.config.data_sources import DataSources
+from src.config.feature_flags import USE_CANONICAL_GRAD_DATA
 from src.data.datasets import load_processed
 from .data_loader import DataLoader
 from .exceptions import DataLoadError
@@ -32,6 +33,7 @@ class DataManager:
         self.roi_df: Optional[pd.DataFrame] = None
         self.value_grid_datasets: Dict[str, pd.DataFrame] = {}
         self.pell_resources: Dict[str, Optional[pd.DataFrame]] = {}
+        self.canonical_grad_df: Optional[pd.DataFrame] = None
         self.errors: list[str] = []
     
     def load_all_data(self) -> None:
@@ -52,6 +54,7 @@ class DataManager:
         self._load_distance_raw()
         self._load_institutions_raw()
         self._load_pellgradrates_raw()
+        self._load_canonical_grad_data()
 
         # Load value grid datasets
         self._load_value_grid_datasets()
@@ -114,6 +117,25 @@ class DataManager:
         except DataLoadError:
             # Pell graduation rates data is optional
             self.pellgradrates_df = pd.DataFrame()
+
+    def _load_canonical_grad_data(self) -> None:
+        """Load canonical graduation datasets when enabled."""
+
+        if not USE_CANONICAL_GRAD_DATA:
+            self.canonical_grad_df = pd.DataFrame()
+            return
+
+        canonical_source = DataSources.CANONICAL_GRAD_LATEST
+        try:
+            self.canonical_grad_df = self.loader.load_parquet(
+                str(canonical_source.path),
+                canonical_source.description,
+            )
+        except DataLoadError:
+            self.canonical_grad_df = pd.DataFrame()
+            self.errors.append(
+                "Canonical graduation data is enabled but could not be loaded."
+            )
 
     def _load_value_grid_datasets(self) -> None:
         """Load value grid datasets using existing load_processed function."""
