@@ -21,3 +21,10 @@ Future sections will capture transformation steps, validation checks, and releas
 - **Implementation:** `python -m src.pipelines.canonical.ipeds_grad.enrich_metadata` reads the Phase 02 long parquet, attaches metadata, and overwrites `data/processed/2023/canonical/ipeds_grad_rates_long.parquet`.
 - **Data quality:** One institution (Wesley College, UnitID 131098) lacked HD metadata; see `docs/ipeds_missing_metadata.md` for remediation notes.
 - **Rate policy:** Detailed precedence rules for DRV vs DFR sources live in `docs/rate_policy_ipeds_grad.md`; the extractor encodes the source via the `source_flag` column.
+
+## Canonical Outputs (Phase 05)
+
+- `data/processed/2023/canonical/ipeds_grad_rates_latest_by_inst.parquet` — one row per institution with the most recent cohort year.
+- `data/processed/2023/canonical/ipeds_grad_rates_summary_by_year.parquet` — aggregated statistics by year and sector (count, avg, median, quartiles).
+- `out/canonical/ipeds_grad/run_latest.json` — provenance record with build timestamp, row counts, year span, and git SHA.
+- Build command: `python -m src.pipelines.canonical.ipeds_grad.build_outputs` (requires Phase 02/03 inputs).

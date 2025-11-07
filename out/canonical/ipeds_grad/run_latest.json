@@ -1,0 +1,12 @@
+{
+  "build_ts": "2025-11-07T20:24:39.694634+00:00",
+  "source_file": "data/processed/2023/canonical/ipeds_grad_rates_long.parquet",
+  "source_rows": 91840,
+  "latest_rows": 5437,
+  "summary_rows": 198,
+  "year_range": [
+    2004,
+    2023
+  ],
+  "git_sha": "d3743cbf21e1899985943f66fbb1ef20c5e4f050"
+}
