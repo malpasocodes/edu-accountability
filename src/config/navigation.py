@@ -14,7 +14,7 @@ from .constants import (
     EARNINGS_PREMIUM_SECTION,
     ROI_SECTION,
     COLLEGE_EXPLORER_SECTION,
-    GRAD_ALPHA_SECTION,
+    CANONICAL_IPEDS_SECTION,
     VALUE_GRID_OVERVIEW_LABEL,
     FOUR_YEAR_VALUE_GRID_LABEL,
     TWO_YEAR_VALUE_GRID_LABEL,
@@ -38,7 +38,7 @@ from .constants import (
     ROI_CHARTS,
     COLLEGE_EXPLORER_OVERVIEW_LABEL,
     COLLEGE_EXPLORER_CHARTS,
-    GRAD_ALPHA_OVERVIEW_LABEL,
+    CANONICAL_DATASETS,
 )
 
 
@@ -264,18 +264,25 @@ class NavigationConfig:
         description="Get detailed information on individual colleges"
     )
 
-    GRAD_ALPHA = SectionConfig(
-        name=GRAD_ALPHA_SECTION,
+    CANONICAL_IPEDS = SectionConfig(
+        name=CANONICAL_IPEDS_SECTION,
         icon="🧪",
-        label="Graduation Rates (Alpha)",
+        label="Canonical IPEDS",
         overview_chart=ChartConfig(
-            label=GRAD_ALPHA_OVERVIEW_LABEL,
-            key="nav_grad_alpha_overview",
-            description="Preview canonical graduation pipeline outputs",
+            label=CANONICAL_DATASETS[0],
+            key="nav_canonical_ipeds_overview",
+            description="Preview canonical pipeline datasets",
         ),
-        charts=[],
-        session_key="grad_alpha_chart",
-        description="Alpha pilot powered by canonical IPEDS graduation data",
+        charts=[
+            ChartConfig(
+                label=dataset,
+                key=f"nav_canonical_{index}",
+                description=None,
+            )
+            for index, dataset in enumerate(CANONICAL_DATASETS)
+        ],
+        session_key="canonical_ipeds_chart",
+        description="Alpha pilots powered by canonical IPEDS datasets",
     )
 
     @classmethod
@@ -290,7 +297,7 @@ class NavigationConfig:
             cls.EARNINGS_PREMIUM,
             cls.ROI,
             cls.COLLEGE_EXPLORER,
-            cls.GRAD_ALPHA,
+            cls.CANONICAL_IPEDS,
         ]
     
     @classmethod

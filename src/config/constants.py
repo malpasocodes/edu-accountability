@@ -15,7 +15,7 @@ DISTANCE_EDUCATION_SECTION = "Distance Education"
 EARNINGS_PREMIUM_SECTION = "Earnings Premium"
 ROI_SECTION = "ROI"
 COLLEGE_EXPLORER_SECTION = "College Explorer"
-GRAD_ALPHA_SECTION = "Graduation Rates (Alpha)"
+CANONICAL_IPEDS_SECTION = "Canonical IPEDS"
 
 
 @dataclass(frozen=True)
@@ -127,8 +127,8 @@ COLLEGE_EXPLORER_CHARTS: List[str] = [
     COLLEGE_DISTANCE_ED_LABEL,
 ]
 
-GRAD_ALPHA_OVERVIEW_LABEL = "Overview"
-GRAD_ALPHA_CHARTS: List[str] = []
+CANONICAL_DATASET_GRAD = "Graduation Rates"
+CANONICAL_DATASETS: List[str] = [CANONICAL_DATASET_GRAD]
 
 # Earnings Premium Analysis labels (National - Section 9)
 EARNINGS_PREMIUM_OVERVIEW_LABEL = "Overview"
@@ -183,5 +183,5 @@ DEFAULT_SESSION_STATE: Dict[str, str] = {
     "earnings_premium_chart": EARNINGS_PREMIUM_OVERVIEW_LABEL,
     "roi_chart": ROI_OVERVIEW_LABEL,
     "college_explorer_chart": COLLEGE_EXPLORER_OVERVIEW_LABEL,
-    "grad_alpha_chart": GRAD_ALPHA_OVERVIEW_LABEL,
+    "canonical_ipeds_chart": CANONICAL_DATASET_GRAD,
 }
