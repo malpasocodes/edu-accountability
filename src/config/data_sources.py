@@ -29,7 +29,10 @@ class DataSources:
     _raw_dir = _data_dir / "raw"
     _processed_dir = _data_dir / "processed"
     _ipeds_dir = _raw_dir / "ipeds" / "2023"
-    _fsa_dir = _raw_dir / "fsa"
+
+    _fsa_dir = _raw_dir / "ipeds" / "fsa"
+    if not _fsa_dir.exists():
+        _fsa_dir = _raw_dir / "fsa"
     _epanalysis_dir = _raw_dir / "epanalysis"
     _canonical_dir = _processed_dir / "2023" / "canonical"
 

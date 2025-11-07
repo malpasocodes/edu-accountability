@@ -27,6 +27,7 @@ from src.config.constants import (
     EARNINGS_PREMIUM_SECTION,
     ROI_SECTION,
     COLLEGE_EXPLORER_SECTION,
+    GRAD_ALPHA_SECTION,
 )
 from src.core import DataManager, DataLoadError
 from src.sections import (
@@ -38,6 +39,7 @@ from src.sections import (
     EarningsPremiumSection,
     ROISection,
     CollegeExplorerSection,
+    GraduationAlphaSection,
 )
 from src.state import SessionManager
 
@@ -106,6 +108,7 @@ def render_main(data_manager: DataManager) -> None:
         EARNINGS_PREMIUM_SECTION: EarningsPremiumSection(data_manager),
         ROI_SECTION: ROISection(data_manager),
         COLLEGE_EXPLORER_SECTION: CollegeExplorerSection(data_manager),
+        GRAD_ALPHA_SECTION: GraduationAlphaSection(data_manager),
     }
     
     # Get the active section instance

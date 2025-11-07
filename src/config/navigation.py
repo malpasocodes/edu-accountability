@@ -14,6 +14,7 @@ from .constants import (
     EARNINGS_PREMIUM_SECTION,
     ROI_SECTION,
     COLLEGE_EXPLORER_SECTION,
+    GRAD_ALPHA_SECTION,
     VALUE_GRID_OVERVIEW_LABEL,
     FOUR_YEAR_VALUE_GRID_LABEL,
     TWO_YEAR_VALUE_GRID_LABEL,
@@ -37,6 +38,7 @@ from .constants import (
     ROI_CHARTS,
     COLLEGE_EXPLORER_OVERVIEW_LABEL,
     COLLEGE_EXPLORER_CHARTS,
+    GRAD_ALPHA_OVERVIEW_LABEL,
 )
 
 
@@ -262,6 +264,20 @@ class NavigationConfig:
         description="Get detailed information on individual colleges"
     )
 
+    GRAD_ALPHA = SectionConfig(
+        name=GRAD_ALPHA_SECTION,
+        icon="🧪",
+        label="Graduation Rates (Alpha)",
+        overview_chart=ChartConfig(
+            label=GRAD_ALPHA_OVERVIEW_LABEL,
+            key="nav_grad_alpha_overview",
+            description="Preview canonical graduation pipeline outputs",
+        ),
+        charts=[],
+        session_key="grad_alpha_chart",
+        description="Alpha pilot powered by canonical IPEDS graduation data",
+    )
+
     @classmethod
     def get_sections(cls) -> List[SectionConfig]:
         """Get all configured sections in navigation order."""
@@ -274,6 +290,7 @@ class NavigationConfig:
             cls.EARNINGS_PREMIUM,
             cls.ROI,
             cls.COLLEGE_EXPLORER,
+            cls.GRAD_ALPHA,
         ]
     
     @classmethod

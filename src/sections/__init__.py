@@ -9,6 +9,7 @@ from .distance_education import DistanceEducationSection
 from .earnings_premium_analysis import EarningsPremiumAnalysisSection as EarningsPremiumSection
 from .roi import ROISection
 from .college_explorer import CollegeExplorerSection
+from .graduation_alpha import GraduationAlphaSection
 
 __all__ = [
     "BaseSection",
@@ -20,4 +21,5 @@ __all__ = [
     "EarningsPremiumSection",
     "ROISection",
     "CollegeExplorerSection",
+    "GraduationAlphaSection",
 ]
