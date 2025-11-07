@@ -109,6 +109,15 @@ The dashboard will open in your browser at `http://localhost:8501`.
 
 All data sources are documented in `data/dictionary/sources.yaml` with update procedures and provenance tracking.
 
+## Canonical Data Pipeline
+
+- The canonical IPEDS Graduation Rates pipeline (Phases 01–05) lives under `src/pipelines/canonical/ipeds_grad/` with matching docs in `docs/README_canonical_ipeds_grad.md`.
+- Rebuild steps:
+  1. `python -m src.pipelines.canonical.ipeds_grad.extraction`
+  2. `python -m src.pipelines.canonical.ipeds_grad.enrich_metadata`
+  3. `python -m src.pipelines.canonical.ipeds_grad.build_outputs`
+- Outputs land in `data/processed/2023/canonical/` and provenance metadata in `out/canonical/ipeds_grad/`. See `docs/data_dictionary_ipeds_grad.md` for schemas and validations.
+
 ## Project Structure
 
 ```

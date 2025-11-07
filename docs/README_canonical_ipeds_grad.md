@@ -28,3 +28,18 @@ Future sections will capture transformation steps, validation checks, and releas
 - `data/processed/2023/canonical/ipeds_grad_rates_summary_by_year.parquet` — aggregated statistics by year and sector (count, avg, median, quartiles).
 - `out/canonical/ipeds_grad/run_latest.json` — provenance record with build timestamp, row counts, year span, and git SHA.
 - Build command: `python -m src.pipelines.canonical.ipeds_grad.build_outputs` (requires Phase 02/03 inputs).
+
+## Reproduction Checklist
+
+1. `python -m src.pipelines.canonical.ipeds_grad.extraction`
+2. `python -m src.pipelines.canonical.ipeds_grad.enrich_metadata`
+3. `python -m src.pipelines.canonical.ipeds_grad.build_outputs`
+
+Each step overwrites the downstream artifacts and refreshes provenance in `out/canonical/ipeds_grad/`.
+
+## Reviewer Guide
+
+- Inspect the long-table schema in `docs/schema_canonical_ipeds_grad.md` and field-level dictionary in `docs/data_dictionary_ipeds_grad.md`.
+- Confirm provenance JSON matches the commit under review (git SHA + row counts).
+- For any null metadata rows, consult `docs/ipeds_missing_metadata.md`.
+- Rate precedence rules are documented in `docs/rate_policy_ipeds_grad.md`; ensure `source_flag` and `is_revised` columns match expectations.
