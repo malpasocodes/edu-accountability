@@ -19,4 +19,5 @@ Future sections will capture transformation steps, validation checks, and releas
 - **HD join source:** `data/raw/ipeds/2023/institutions.csv` (fallback to newer HD files for governance spot checks).
 - **Mapped fields:** `control` (Public / Private NP / Private FP), `level` (4-year / 2-year / <2-year), `state` (postal), and descriptive `sector` buckets (e.g., "Public, 4-year or above").
 - **Implementation:** `python -m src.pipelines.canonical.ipeds_grad.enrich_metadata` reads the Phase 02 long parquet, attaches metadata, and overwrites `data/processed/2023/canonical/ipeds_grad_rates_long.parquet`.
-- **Data quality:** 18 institutions lacked HD metadata (generally closed/non-title-IV records); they remain with nulls and will be revisited during validation.
+- **Data quality:** One institution (Wesley College, UnitID 131098) lacked HD metadata; see `docs/ipeds_missing_metadata.md` for remediation notes.
+- **Rate policy:** Detailed precedence rules for DRV vs DFR sources live in `docs/rate_policy_ipeds_grad.md`; the extractor encodes the source via the `source_flag` column.
