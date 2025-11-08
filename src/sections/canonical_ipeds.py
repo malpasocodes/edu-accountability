@@ -11,6 +11,7 @@ import streamlit as st
 
 from src.config.constants import (
     CANONICAL_IPEDS_SECTION,
+    CANONICAL_IPEDS_OVERVIEW_LABEL,
     CANONICAL_DATASET_GRAD,
     CANONICAL_DATASET_PELL,
     CANONICAL_DATASET_LOANS,
@@ -58,6 +59,7 @@ class CanonicalIPEDSSection(BaseSection):
             return pd.DataFrame()
 
     def render_overview(self) -> None:
+        st.info("Use the sidebar to switch between canonical datasets.")
         self._render_overview_content(CANONICAL_DATASET_GRAD)
 
     def render_chart(self, chart_name: str) -> None:  # pragma: no cover

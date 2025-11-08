@@ -127,6 +127,7 @@ COLLEGE_EXPLORER_CHARTS: List[str] = [
     COLLEGE_DISTANCE_ED_LABEL,
 ]
 
+CANONICAL_IPEDS_OVERVIEW_LABEL = "Overview"
 CANONICAL_DATASET_GRAD = "Graduation Rates"
 CANONICAL_DATASET_PELL = "Percent Pell"
 CANONICAL_DATASET_LOANS = "Percent Loans"
@@ -189,5 +190,5 @@ DEFAULT_SESSION_STATE: Dict[str, str] = {
     "earnings_premium_chart": EARNINGS_PREMIUM_OVERVIEW_LABEL,
     "roi_chart": ROI_OVERVIEW_LABEL,
     "college_explorer_chart": COLLEGE_EXPLORER_OVERVIEW_LABEL,
-    "canonical_ipeds_chart": CANONICAL_DATASET_GRAD,
+    "canonical_ipeds_chart": CANONICAL_IPEDS_OVERVIEW_LABEL,
 }

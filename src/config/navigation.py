@@ -38,6 +38,7 @@ from .constants import (
     ROI_CHARTS,
     COLLEGE_EXPLORER_OVERVIEW_LABEL,
     COLLEGE_EXPLORER_CHARTS,
+    CANONICAL_IPEDS_OVERVIEW_LABEL,
     CANONICAL_DATASETS,
 )
 
@@ -269,9 +270,9 @@ class NavigationConfig:
         icon="🧪",
         label="Canonical IPEDS",
         overview_chart=ChartConfig(
-            label=CANONICAL_DATASETS[0],
+            label=CANONICAL_IPEDS_OVERVIEW_LABEL,
             key="nav_canonical_ipeds_overview",
-            description="Preview canonical pipeline datasets",
+            description="Canonical dataset explorer",
         ),
         charts=[
             ChartConfig(
