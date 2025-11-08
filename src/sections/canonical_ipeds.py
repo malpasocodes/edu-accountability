@@ -17,7 +17,8 @@ from src.config.constants import (
     CANONICAL_DATASET_LOANS,
     CANONICAL_DATASET_RETENTION,
     CANONICAL_DATASET_RETENTION_RATE,
-    CANONICAL_DATASET_GRAD_Z,
+    CANONICAL_DATASET_GRAD_Z_FOUR,
+    CANONICAL_DATASET_GRAD_Z_TWO,
 )
 from src.analytics.grad_zscores import (
     HEADCOUNT_THRESHOLDS,
@@ -78,7 +79,12 @@ class CanonicalIPEDSSection(BaseSection):
             ),
         }
         self._special_charts = {
-            CANONICAL_DATASET_GRAD_Z: self._render_grad_quadrants_view,
+            CANONICAL_DATASET_GRAD_Z_FOUR: lambda: self._render_grad_quadrants_view(
+                level_filter="4-year"
+            ),
+            CANONICAL_DATASET_GRAD_Z_TWO: lambda: self._render_grad_quadrants_view(
+                level_filter="2-year"
+            ),
         }
 
     def _build_dataset_config(
@@ -172,8 +178,13 @@ class CanonicalIPEDSSection(BaseSection):
         )
         st.altair_chart(chart.interactive(), use_container_width=True)
 
-    def _render_grad_quadrants_view(self) -> None:
-        self.render_section_header(CANONICAL_IPEDS_SECTION, CANONICAL_DATASET_GRAD_Z)
+    def _render_grad_quadrants_view(self, level_filter: str) -> None:
+        title = (
+            CANONICAL_DATASET_GRAD_Z_FOUR
+            if level_filter == "4-year"
+            else CANONICAL_DATASET_GRAD_Z_TWO
+        )
+        self.render_section_header(CANONICAL_IPEDS_SECTION, title)
 
         canonical_df = getattr(self.data_manager, "canonical_grad_df", pd.DataFrame())
         headcount_df = getattr(self.data_manager, "headcount_df", pd.DataFrame())
@@ -205,9 +216,11 @@ class CanonicalIPEDSSection(BaseSection):
             index=0,
         )
 
+        filtered_canonical = canonical_df[canonical_df["level"] == level_filter]
+
         try:
             peer_df, stats, _ = compute_peer_distribution(
-                canonical_df,
+                filtered_canonical,
                 headcount_df,
                 year=selected_year,
                 threshold_label=selected_threshold,
