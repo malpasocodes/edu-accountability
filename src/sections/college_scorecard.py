@@ -97,16 +97,34 @@ class CollegeScorecardSection(BaseSection):
         if inst_df.empty:
             st.warning("No records for selection.")
             return
-        latest_year = int(inst_df["year"].max())
-        year = st.slider("Year", int(df["year"].min()), int(df["year"].max()), value=latest_year)
+        repay_cols = [c for c in inst_df.columns if c.startswith("repay_3yr_")]
+        # Determine years with any repayment data present for this institution
+        year_has_data = (
+            inst_df[["year"] + repay_cols]
+            .assign(_has=inst_df[repay_cols].notna().any(axis=1))
+            .loc[lambda d: d["_has"], "year"]
+            .dropna()
+            .astype(int)
+            .sort_values()
+            .unique()
+        )
+        if len(year_has_data) == 0:
+            st.info("No 3-year repayment data available for this institution.")
+            return
+        latest_year = int(year_has_data[-1])
+        year = st.slider(
+            "Year",
+            min_value=int(year_has_data[0]),
+            max_value=int(year_has_data[-1]),
+            value=latest_year,
+        )
         year_df = inst_df[inst_df["year"] == year]
         if year_df.empty:
             st.warning("No data for selected year.")
             return
-        cols = [c for c in year_df.columns if c.startswith("repay_3yr_")]
         melted = year_df.melt(
-            id_vars=["unitid", "instnm", "year"], value_vars=cols, var_name="status", value_name="percent"
-        )
+            id_vars=["unitid", "instnm", "year"], value_vars=repay_cols, var_name="status", value_name="percent"
+        ).dropna(subset=["percent"])  # drop empty categories to avoid blank chart
         # Pretty labels
         label_map = {
             "repay_3yr_forbearance": "Forbearance",
@@ -120,11 +138,24 @@ class CollegeScorecardSection(BaseSection):
         }
         melted["status_label"] = melted["status"].map(label_map)
 
+        # Keep a stable display order similar to the website
+        order = [
+            "Forbearance",
+            "Not Making Progress",
+            "Deferment",
+            "Defaulted",
+            "Making Progress",
+            "Delinquent",
+            "Paid in Full",
+            "Discharged",
+        ]
+        melted["status_label"] = pd.Categorical(melted["status_label"], categories=order, ordered=True)
+
         chart = (
             alt.Chart(melted)
             .mark_bar()
             .encode(
-                x=alt.X("status_label:N", title="Repayment Status"),
+                x=alt.X("status_label:N", title="Repayment Status", sort=order),
                 y=alt.Y("percent:Q", title="Percent", scale=alt.Scale(domain=[0, 100])),
                 tooltip=[alt.Tooltip("percent:Q", title="Percent", format=".1f")],
                 color=alt.Color("status_label:N", legend=None),
@@ -132,4 +163,3 @@ class CollegeScorecardSection(BaseSection):
             .properties(height=380, title=f"3-year Repayment Status — {inst} ({year})")
         )
         st.altair_chart(chart, use_container_width=True)
-
