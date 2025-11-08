@@ -167,3 +167,44 @@ class CollegeScorecardSection(BaseSection):
             .properties(height=380, title=f"3-year Repayment Status — {inst} ({year})")
         )
         st.altair_chart(chart, use_container_width=True)
+
+        # Consolidated traffic-light summary
+        consolidation_map = {
+            "Making Progress": "Green",
+            "Paid in Full": "Green",
+            "Discharged": "Green",
+            "Forbearance": "Yellow",
+            "Not Making Progress": "Yellow",
+            "Deferment": "Yellow",
+            "Defaulted": "Red",
+            "Delinquent": "Red",
+        }
+        consolidated = (
+            melted.assign(group=melted["status_label"].map(consolidation_map))
+            .dropna(subset=["group"])
+            .groupby("group", as_index=False)["percent"].sum()
+        )
+        if not consolidated.empty:
+            color_scale = alt.Scale(domain=["Green", "Yellow", "Red"], range=["#2ca02c", "#f2c037", "#d62728"])
+            summary_chart = (
+                alt.Chart(consolidated)
+                .mark_bar()
+                .encode(
+                    x=alt.X("group:N", title="Consolidated Status"),
+                    y=alt.Y("percent:Q", title="Percent", scale=alt.Scale(domain=[0, 100])),
+                    color=alt.Color("group:N", scale=color_scale, legend=None),
+                    tooltip=[alt.Tooltip("group:N", title="Group"), alt.Tooltip("percent:Q", title="Percent", format=".1f")],
+                )
+                .properties(title="Traffic-light summary", height=220)
+            )
+            st.altair_chart(summary_chart, use_container_width=True)
+            descriptions = {
+                "Green": "Loans are paid in full, discharged, or actively amortizing (making progress).",
+                "Yellow": "Loans are paused or not reducing balances (forbearance, deferment, not making progress).",
+                "Red": "Loans are delinquent or in default.",
+            }
+            st.markdown(
+                "\n".join(
+                    f"**{group}:** {descriptions[group]}" for group in ["Green", "Yellow", "Red"] if group in consolidated["group"].values
+                )
+            )
