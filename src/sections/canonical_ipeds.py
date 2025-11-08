@@ -17,6 +17,11 @@ from src.config.constants import (
     CANONICAL_DATASET_LOANS,
     CANONICAL_DATASET_RETENTION,
     CANONICAL_DATASET_RETENTION_RATE,
+    CANONICAL_DATASET_GRAD_Z,
+)
+from src.analytics.grad_zscores import (
+    HEADCOUNT_THRESHOLDS,
+    compute_peer_distribution,
 )
 from src.config.data_sources import DataSources
 from src.core.data_loader import DataLoader
@@ -72,6 +77,9 @@ class CanonicalIPEDSSection(BaseSection):
                 value_format=".1f",
             ),
         }
+        self._special_charts = {
+            CANONICAL_DATASET_GRAD_Z: self._render_grad_quadrants_view,
+        }
 
     def _build_dataset_config(
         self,
@@ -108,11 +116,13 @@ class CanonicalIPEDSSection(BaseSection):
     def render_chart(self, chart_name: str) -> None:  # pragma: no cover
         if chart_name in self._datasets:
             self._render_overview_content(chart_name)
+        elif chart_name in self._special_charts:
+            self._special_charts[chart_name]()
         else:
             st.error(f"Unknown chart: {chart_name}")
 
     def get_available_charts(self) -> List[str]:
-        return list(self._datasets.keys())
+        return list(self._datasets.keys()) + list(self._special_charts.keys())
 
     def _render_overview_content(self, dataset: str) -> None:
         self.render_section_header(CANONICAL_IPEDS_SECTION, dataset)
@@ -161,3 +171,145 @@ class CanonicalIPEDSSection(BaseSection):
             .properties(height=400, title=f"{dataset} — {selected}")
         )
         st.altair_chart(chart.interactive(), use_container_width=True)
+
+    def _render_grad_quadrants_view(self) -> None:
+        self.render_section_header(CANONICAL_IPEDS_SECTION, CANONICAL_DATASET_GRAD_Z)
+
+        canonical_df = getattr(self.data_manager, "canonical_grad_df", pd.DataFrame())
+        headcount_df = getattr(self.data_manager, "headcount_df", pd.DataFrame())
+        headcount_fallback = getattr(
+            self.data_manager, "headcount_fallback_map", None
+        )
+
+        if canonical_df.empty:
+            st.warning("Canonical graduation data is not available.")
+            return
+
+        available_years = sorted(canonical_df["year"].dropna().unique())
+        if not available_years:
+            st.warning("No cohort years available for canonical graduation data.")
+            return
+
+        col_year, col_threshold = st.columns(2)
+        selected_year = int(
+            col_year.selectbox(
+                "Cohort year",
+                options=available_years[::-1],
+                index=0,
+            )
+        )
+        threshold_options = [cfg["label"] for cfg in HEADCOUNT_THRESHOLDS]
+        selected_threshold = col_threshold.selectbox(
+            "Headcount filter",
+            options=threshold_options,
+            index=0,
+        )
+
+        try:
+            peer_df, stats, _ = compute_peer_distribution(
+                canonical_df,
+                headcount_df,
+                year=selected_year,
+                threshold_label=selected_threshold,
+                fallback_series=headcount_fallback,
+            )
+        except (ValueError, KeyError) as exc:
+            st.warning(f"Unable to compute distribution: {exc}")
+            return
+
+        if peer_df.empty:
+            st.info("No institutions available after applying the selected filters.")
+            return
+
+        peer_df = peer_df.copy()
+        peer_df["z_score"] = pd.to_numeric(peer_df["z_score"], errors="coerce")
+        peer_df["grad_rate_150"] = pd.to_numeric(
+            peer_df["grad_rate_150"], errors="coerce"
+        )
+
+        quadrant_labels = [
+            ("🚀 High (z > 1)", lambda z: z > 1),
+            ("👍 Above Avg (0 < z ≤ 1)", lambda z: (z > 0) & (z <= 1)),
+            ("⚖️ Slightly Below (-1 ≤ z ≤ 0)", lambda z: (z >= -1) & (z <= 0)),
+            ("⚠️ Low (z < -1)", lambda z: z < -1),
+        ]
+
+        def _label_quadrant(value: float | None) -> str:
+            if pd.isna(value):
+                return "No z-score"
+            for label, matcher in quadrant_labels:
+                if matcher(value):
+                    return label
+            return "No z-score"
+
+        peer_df["quadrant"] = peer_df["z_score"].apply(_label_quadrant)
+
+        chart = (
+            alt.Chart(peer_df)
+            .mark_circle(size=80, opacity=0.8)
+            .encode(
+                x=alt.X(
+                    "z_score:Q",
+                    title="Z-score",
+                    scale=alt.Scale(domain=[peer_df["z_score"].min() - 0.5, peer_df["z_score"].max() + 0.5]),
+                ),
+                y=alt.Y(
+                    "grad_rate_150:Q",
+                    title="Graduation Rate (150%)",
+                    scale=alt.Scale(domain=[0, 100]),
+                ),
+                color=alt.Color("sector:N", title="Sector"),
+                tooltip=[
+                    alt.Tooltip("instnm:N", title="Institution"),
+                    alt.Tooltip("grad_rate_150:Q", title="Grad rate", format=".1f"),
+                    alt.Tooltip("z_score:Q", title="Z-score", format=".2f"),
+                    alt.Tooltip("ft_ug_headcount:Q", title="Headcount", format=",.0f"),
+                    alt.Tooltip("sector:N", title="Sector"),
+                ],
+            )
+            .interactive()
+            .properties(height=400, title="Graduation rate distribution by z-score")
+        )
+
+        dividers = alt.Chart(pd.DataFrame({"z": [-1, 0, 1]})).mark_rule(
+            color="#555555", strokeDash=[6, 4]
+        ).encode(x="z:Q")
+
+        st.altair_chart((chart + dividers), use_container_width=True)
+
+        headcount_descriptor = (
+            f"≥ {stats.min_headcount:,} FT undergraduate 12-month headcount"
+            if stats.min_headcount > 0
+            else "All institutions"
+        )
+        st.caption(
+            f"Peer group: {stats.peer_count:,} institutions • {headcount_descriptor} • "
+            f"Mean rate {stats.mean:.1f}% | Median {stats.median:.1f}%"
+        )
+
+        tabs = st.tabs([label for label, _ in quadrant_labels])
+        for tab, (label, _) in zip(tabs, quadrant_labels):
+            subset = (
+                peer_df[peer_df["quadrant"] == label]
+                .sort_values("z_score", ascending=False)
+                .loc[:, ["instnm", "grad_rate_150", "z_score", "sector", "ft_ug_headcount"]]
+            )
+            subset.rename(
+                columns={
+                    "instnm": "Institution",
+                    "grad_rate_150": "Grad rate (150%)",
+                    "z_score": "Z-score",
+                    "sector": "Sector",
+                    "ft_ug_headcount": "FT UG headcount",
+                },
+                inplace=True,
+            )
+            with tab:
+                if subset.empty:
+                    st.write("No institutions in this quadrant.")
+                else:
+                    st.dataframe(
+                        subset,
+                        hide_index=True,
+                        use_container_width=True,
+                    )
