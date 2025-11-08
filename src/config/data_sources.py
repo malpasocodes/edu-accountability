@@ -191,6 +191,30 @@ class DataSources:
         required=False,
     )
 
+    CANONICAL_PELL_LONG = DataSourceConfig(
+        path=_canonical_dir / "ipeds_percent_pell_long.parquet",
+        description="Canonical percent Pell (long)",
+        required=False,
+    )
+
+    CANONICAL_PELL_SUMMARY = DataSourceConfig(
+        path=_canonical_dir / "ipeds_percent_pell_summary_by_year.parquet",
+        description="Canonical percent Pell summary",
+        required=False,
+    )
+
+    CANONICAL_LOANS_LONG = DataSourceConfig(
+        path=_canonical_dir / "ipeds_percent_loans_long.parquet",
+        description="Canonical percent federal loans (long)",
+        required=False,
+    )
+
+    CANONICAL_LOANS_SUMMARY = DataSourceConfig(
+        path=_canonical_dir / "ipeds_percent_loans_summary_by_year.parquet",
+        description="Canonical percent federal loans summary",
+        required=False,
+    )
+
     # ROI data sources - epanalysis migration
     ROI_METRICS_RAW = DataSourceConfig(
         path=_epanalysis_dir / "roi-metrics.csv",

@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from pathlib import Path
+import argparse
 
 import pandas as pd
 
@@ -86,13 +87,28 @@ class SFAMetadataEnricher:
 
 
 def main() -> None:
-    config = SFAMetadataConfig(
-        long_parquet=Path("data/processed/2023/canonical/ipeds_percent_pell_long.parquet"),
-        hd_csv=Path("data/raw/ipeds/2023/institutions.csv"),
+    parser = argparse.ArgumentParser(description="Enrich SFA canonical datasets with HD metadata.")
+    parser.add_argument(
+        "--dataset",
+        choices=["pell", "loans"],
+        default="pell",
     )
+    args = parser.parse_args()
+
+    mapping = {
+        "pell": SFAMetadataConfig(
+            long_parquet=Path("data/processed/2023/canonical/ipeds_percent_pell_long.parquet"),
+            hd_csv=Path("data/raw/ipeds/2023/institutions.csv"),
+        ),
+        "loans": SFAMetadataConfig(
+            long_parquet=Path("data/processed/2023/canonical/ipeds_percent_loans_long.parquet"),
+            hd_csv=Path("data/raw/ipeds/2023/institutions.csv"),
+        ),
+    }
+    config = mapping[args.dataset]
     enricher = SFAMetadataEnricher(config)
     df = enricher.run(write_output=True)
-    print(f"Enriched Pell rows: {len(df)}")
+    print(f"Enriched {len(df)} rows for dataset {args.dataset}")
 
 
 if __name__ == "__main__":

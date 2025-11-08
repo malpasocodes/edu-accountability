@@ -84,6 +84,9 @@ Each run writes provenance to `out/canonical/ipeds_grad/run_latest.json`. Includ
 
 Provenance stored under `out/canonical/ipeds_pell/`.
 
+### Percent Federal Loans (SFA)
+Repeat the same commands with `--dataset loans`; outputs land under `data/processed/2023/canonical/ipeds_percent_loans_*` with provenance `out/canonical/ipeds_loans/`.
+
 ## 6. Known Limitations
 - Wesley College (UnitID 131098) lacks metadata in the 2023 HD file; see `docs/ipeds_missing_metadata.md` for remediation options.
 - Graduation rates reflect institution-level totals only; Pell subcohorts remain out of scope for the canonical MVP.

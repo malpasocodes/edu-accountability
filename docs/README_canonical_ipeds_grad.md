@@ -31,14 +31,22 @@ Future sections will capture transformation steps, validation checks, and releas
 
 ### Percent Pell Grants (SFA)
 
-- Extraction: `python -m src.pipelines.canonical.ipeds_sfa.extraction` (configured for Pell via CLI `main`).
-- Metadata enrichment: `python -m src.pipelines.canonical.ipeds_sfa.enrich_metadata`.
-- Build outputs: `python -m src.pipelines.canonical.ipeds_sfa.build_outputs`.
+- Extraction: `python -m src.pipelines.canonical.ipeds_sfa.extraction --dataset pell` (default).
+- Metadata enrichment: `python -m src.pipelines.canonical.ipeds_sfa.enrich_metadata --dataset pell`.
+- Build outputs: `python -m src.pipelines.canonical.ipeds_sfa.build_outputs --dataset pell`.
 - Resulting artifacts:
   - `data/processed/2023/canonical/ipeds_percent_pell_long.parquet`
   - `data/processed/2023/canonical/ipeds_percent_pell_latest_by_inst.parquet`
   - `data/processed/2023/canonical/ipeds_percent_pell_summary_by_year.parquet`
   - `out/canonical/ipeds_pell/run_latest.json`
+
+### Percent Federal Loans (SFA)
+
+- Swap the CLI flag to `--dataset loans` for each command above to create:
+  - `data/processed/2023/canonical/ipeds_percent_loans_long.parquet`
+  - `data/processed/2023/canonical/ipeds_percent_loans_latest_by_inst.parquet`
+  - `data/processed/2023/canonical/ipeds_percent_loans_summary_by_year.parquet`
+  - `out/canonical/ipeds_loans/run_latest.json`
 
 ## Reproduction Checklist
 

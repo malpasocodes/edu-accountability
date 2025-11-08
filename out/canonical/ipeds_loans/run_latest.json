@@ -1,0 +1,11 @@
+{
+  "build_ts": "2025-11-08T03:25:34.541671+00:00",
+  "source_file": "data/processed/2023/canonical/ipeds_percent_loans_long.parquet",
+  "source_rows": 76649,
+  "latest_rows": 5664,
+  "summary_rows": 147,
+  "year_range": [
+    2009,
+    2023
+  ]
+}

@@ -13,6 +13,7 @@ from src.config.constants import (
     CANONICAL_IPEDS_SECTION,
     CANONICAL_DATASET_GRAD,
     CANONICAL_DATASET_PELL,
+    CANONICAL_DATASET_LOANS,
 )
 from src.config.data_sources import DataSources
 from src.core.data_loader import DataLoader
@@ -34,16 +35,24 @@ class CanonicalIPEDSSection(BaseSection):
                 "summary": self._load_parquet(DataSources.CANONICAL_GRAD_SUMMARY),
             },
             CANONICAL_DATASET_PELL: {
-                "long": self._load_parquet(Path("data/processed/2023/canonical/ipeds_percent_pell_long.parquet")),
+                "long": self._load_parquet(DataSources.CANONICAL_PELL_LONG),
                 "value_col": "percent_pell",
                 "y_title": "Percent Pell",
-                "summary": self._load_parquet(Path("data/processed/2023/canonical/ipeds_percent_pell_summary_by_year.parquet")),
+                "summary": self._load_parquet(DataSources.CANONICAL_PELL_SUMMARY),
+            },
+            CANONICAL_DATASET_LOANS: {
+                "long": self._load_parquet(DataSources.CANONICAL_LOANS_LONG),
+                "value_col": "percent_loans",
+                "y_title": "Percent Federal Loans",
+                "summary": self._load_parquet(DataSources.CANONICAL_LOANS_SUMMARY),
             },
         }
 
     def _load_parquet(self, source) -> pd.DataFrame:
         try:
-            return self.loader.load_parquet(str(source.path), source.description)
+            if hasattr(source, "path"):
+                return self.loader.load_parquet(str(source.path), source.description)
+            return self.loader.load_parquet(str(source), "Canonical IPEDS dataset")
         except DataLoadError as exc:
             st.warning(str(exc))
             return pd.DataFrame()
@@ -77,7 +86,7 @@ class CanonicalIPEDSSection(BaseSection):
         )
 
         if selected == "Select an institution":
-            st.info("Pick an institution to view canonical 150% graduation rates over time.")
+            st.info(f"Pick an institution to view {dataset_info['y_title']} over time.")
             return
 
         inst_df = df[df["instnm"] == selected].sort_values("year")

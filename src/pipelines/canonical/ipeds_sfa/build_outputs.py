@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from datetime import datetime, timezone
+import argparse
 import json
 from pathlib import Path
 
@@ -83,17 +84,32 @@ class SFABuilder:
 
 
 def main() -> None:
-    config = SFABuildConfig(
-        long_parquet=Path("data/processed/2023/canonical/ipeds_percent_pell_long.parquet"),
-        latest_parquet=Path("data/processed/2023/canonical/ipeds_percent_pell_latest_by_inst.parquet"),
-        summary_parquet=Path("data/processed/2023/canonical/ipeds_percent_pell_summary_by_year.parquet"),
-        metadata_json=Path("out/canonical/ipeds_pell/run_latest.json"),
-        value_column="percent_pell",
-    )
+    parser = argparse.ArgumentParser(description="Build canonical outputs for SFA datasets.")
+    parser.add_argument("--dataset", choices=["pell", "loans"], default="pell")
+    args = parser.parse_args()
+
+    mapping = {
+        "pell": SFABuildConfig(
+            long_parquet=Path("data/processed/2023/canonical/ipeds_percent_pell_long.parquet"),
+            latest_parquet=Path("data/processed/2023/canonical/ipeds_percent_pell_latest_by_inst.parquet"),
+            summary_parquet=Path("data/processed/2023/canonical/ipeds_percent_pell_summary_by_year.parquet"),
+            metadata_json=Path("out/canonical/ipeds_pell/run_latest.json"),
+            value_column="percent_pell",
+        ),
+        "loans": SFABuildConfig(
+            long_parquet=Path("data/processed/2023/canonical/ipeds_percent_loans_long.parquet"),
+            latest_parquet=Path("data/processed/2023/canonical/ipeds_percent_loans_latest_by_inst.parquet"),
+            summary_parquet=Path("data/processed/2023/canonical/ipeds_percent_loans_summary_by_year.parquet"),
+            metadata_json=Path("out/canonical/ipeds_loans/run_latest.json"),
+            value_column="percent_loans",
+        ),
+    }
+
+    config = mapping[args.dataset]
     builder = SFABuilder(config)
     frames = builder.run(write_output=True)
     print(
-        "Built SFA outputs:",
+        f"Built {args.dataset} outputs:",
         f"long={len(frames['long'])}",
         f"latest={len(frames['latest'])}",
         f"summary={len(frames['summary'])}",

@@ -9,6 +9,6 @@
 | `data/raw/ipeds/2023/institutions.csv` | Institutional characteristics (HD extract) | Point-in-time 2023 | ~6,049 | `UnitID`, `INSTITUTION`, `STATE`, `SECTOR`, `LEVEL`, `CONTROL` | UTF-8 CSV; used for metadata joins |
 | `data/raw/ipeds/2024/HD2024.csv` | Latest HD file for governance cross-checks | 2024 collection | ~6,072 | `UNITID`, `INSTNM`, `SECTOR`, `ICLEVEL`, `CONTROL`, `STABBR` | UTF-8 with BOM; comma-delimited; keep BOM handling in mind during ingestion |
 | `data/raw/ipeds/percent_pell_grants.csv` | Wide SFA table: percent of undergrads awarded Pell grants | 2009–2023 (most `_RV`) | ~6,049 | `UnitID`, `Institution Name`, `Percent ... (SFAYYYYYY[_RV])` | Matches grad-rate structure; needs wide→long melt selecting latest `_RV` per cohort |
-| `data/raw/ipeds/percent_federal_loans.csv` | Wide SFA table: percent of undergrads with federal loans | 2009–2023 (most `_RV`) | ~6,049 | `UnitID`, `Institution Name`, `Percent ... (SFAYYYYYY[_RV])` | Same structure as Pell file; staged for next canonical dataset after Pell |
+| `data/raw/ipeds/percent_federal_loans.csv` | Wide SFA table: percent of undergrads with federal loans | 2009–2023 (most `_RV`) | ~6,049 | `UnitID`, `Institution Name`, `Percent ... (SFAYYYYYY[_RV])` | Same structure as Pell file; next canonical dataset after Pell |
 
 Row counts were derived via `wc -l` (subtracting the header row). All files reside under the `data/raw/ipeds/` provider folder to preserve the repository’s data-first convention.

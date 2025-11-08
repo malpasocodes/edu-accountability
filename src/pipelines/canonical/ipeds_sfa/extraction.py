@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from datetime import datetime, timezone
+import argparse
 import re
 from pathlib import Path
 from typing import Iterable
@@ -123,15 +124,34 @@ class SFAPercentExtractor:
 
 
 def main() -> None:
-    config = SFAPercentExtractionConfig(
-        wide_csv=Path("data/raw/ipeds/percent_pell_grants.csv"),
-        value_column="percent_pell",
-        output_path=Path("data/processed/2023/canonical/ipeds_percent_pell_long.parquet"),
-        metric_label="Pell",
+    parser = argparse.ArgumentParser(description="Extract IPEDS SFA percentage datasets.")
+    parser.add_argument(
+        "--dataset",
+        choices=["pell", "loans"],
+        default="pell",
+        help="Which dataset to process",
     )
+    args = parser.parse_args()
+
+    mapping = {
+        "pell": SFAPercentExtractionConfig(
+            wide_csv=Path("data/raw/ipeds/percent_pell_grants.csv"),
+            value_column="percent_pell",
+            output_path=Path("data/processed/2023/canonical/ipeds_percent_pell_long.parquet"),
+            metric_label="Pell",
+        ),
+        "loans": SFAPercentExtractionConfig(
+            wide_csv=Path("data/raw/ipeds/percent_federal_loans.csv"),
+            value_column="percent_loans",
+            output_path=Path("data/processed/2023/canonical/ipeds_percent_loans_long.parquet"),
+            metric_label="Loans",
+        ),
+    }
+
+    config = mapping[args.dataset]
     extractor = SFAPercentExtractor(config)
     df = extractor.run(write_output=True)
-    print(f"Extracted {len(df)} rows of percent Pell grants data.")
+    print(f"Extracted {len(df)} rows for dataset {args.dataset}.")
 
 
 if __name__ == "__main__":
