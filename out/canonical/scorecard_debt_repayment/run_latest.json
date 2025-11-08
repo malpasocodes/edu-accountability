@@ -1,5 +1,5 @@
 {
-  "build_ts": "2025-11-08T20:37:51.505246+00:00",
+  "build_ts": "2025-11-08T22:08:12.250783+00:00",
   "source_file": "data/processed/2023/canonical/scorecard_debt_repayment_long.parquet",
   "source_rows": 196163,
   "latest_rows": 12373,

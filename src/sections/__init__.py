@@ -10,6 +10,7 @@ from .earnings_premium_analysis import EarningsPremiumAnalysisSection as Earning
 from .roi import ROISection
 from .college_explorer import CollegeExplorerSection
 from .canonical_ipeds import CanonicalIPEDSSection
+from .college_scorecard import CollegeScorecardSection
 
 __all__ = [
     "BaseSection",
@@ -22,4 +23,5 @@ __all__ = [
     "ROISection",
     "CollegeExplorerSection",
     "CanonicalIPEDSSection",
+    "CollegeScorecardSection",
 ]

@@ -21,6 +21,7 @@ def _make_zip_with_merged(tmp_path: Path) -> Path:
             "STABBR": ["CA", "NY"],
             "CONTROL": [1, 2],
             "PREDDEG": [3, 2],
+            "UGDS": [15000, 2200],
             "GRAD_DEBT_MDN": [31553, 28000],
             "BBRR3_FED_UG_DFLT": [0.11, 0.08],
             "BBRR3_FED_UG_DLNQ": [0.05, 0.06],
@@ -51,5 +52,7 @@ def test_extractor_builds_long_table(tmp_path):
     assert set(df["year"].unique()) == {2024}
     assert "median_debt_completers" in df.columns
     assert "repay_3yr_forbearance" in df.columns
+    assert "repay_3yr_red" in df.columns
+    assert "enrollment" in df.columns
+    assert "sector" in df.columns
     assert output.exists()
-

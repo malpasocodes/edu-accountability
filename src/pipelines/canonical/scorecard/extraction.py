@@ -54,6 +54,7 @@ BASE_COLUMNS = [
     "STABBR",
     "CONTROL",
     "PREDDEG",
+    "UGDS",
 ]
 
 
@@ -113,6 +114,7 @@ class ScorecardExtractor:
             "STABBR": "state",
             "CONTROL": "control_code",
             "PREDDEG": "preddeg",
+            "UGDS": "enrollment",
         })
 
         # Control/level strings
@@ -125,16 +127,35 @@ class ScorecardExtractor:
         wide["instnm"] = wide["instnm"].astype("string")
         wide["state"] = wide["state"].astype("string")
 
-        # Median debt
+        # Median debt & enrollment
         wide["median_debt_completers"] = pd.to_numeric(wide["GRAD_DEBT_MDN"], errors="coerce").astype("float32")
+        wide["enrollment"] = pd.to_numeric(wide["enrollment"], errors="coerce").astype("float32")
 
         # Repayment shares (as percent 0..100)
         for new_col, src in REPAY3_COLUMNS.items():
             wide[new_col] = pd.to_numeric(wide[src], errors="coerce").astype("float32") * 100.0
 
+        # Consolidated categories
+        wide["repay_3yr_green"] = (
+            wide["repay_3yr_making_progress"]
+            + wide["repay_3yr_paid_in_full"]
+            + wide["repay_3yr_discharged"]
+        )
+        wide["repay_3yr_yellow"] = (
+            wide["repay_3yr_forbearance"]
+            + wide["repay_3yr_not_making_progress"]
+            + wide["repay_3yr_deferment"]
+        )
+        wide["repay_3yr_red"] = wide["repay_3yr_delinquent"] + wide["repay_3yr_default"]
+
+        wide["sector"] = (
+            wide["control"].fillna("Unknown") + ", " + wide["level"].fillna("Unknown")
+        ).str.replace(", Unknown", "", regex=False).astype("string")
+
         columns = [
-            "unitid", "year", "instnm", "state", "control", "level",
-            "median_debt_completers",
+            "unitid", "year", "instnm", "state", "control", "level", "sector",
+            "median_debt_completers", "enrollment",
+            "repay_3yr_green", "repay_3yr_yellow", "repay_3yr_red",
         ] + list(REPAY3_COLUMNS.keys())
         long = wide[columns].sort_values(["unitid", "year"]).reset_index(drop=True)
 
@@ -166,4 +187,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-

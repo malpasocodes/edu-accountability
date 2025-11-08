@@ -53,6 +53,7 @@ class ScorecardBuilder:
         repay_cols = [c for c in df.columns if c.startswith("repay_3yr_")]
         agg = {
             "median_debt_completers": "median",
+            "enrollment": "mean",
         }
         agg.update({c: "mean" for c in repay_cols})
 
@@ -129,4 +130,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-

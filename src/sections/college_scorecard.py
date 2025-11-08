@@ -13,6 +13,8 @@ from src.config.constants import (
     SCORECARD_OVERVIEW_LABEL,
     SCORECARD_DATASET_MEDIAN_DEBT,
     SCORECARD_DATASET_REPAYMENT_3YR,
+    SCORECARD_DATASET_REPAYMENT_SCATTER_FOUR,
+    SCORECARD_DATASET_REPAYMENT_SCATTER_TWO,
 )
 from src.config.data_sources import DataSources
 from src.core.data_loader import DataLoader
@@ -44,11 +46,20 @@ class CollegeScorecardSection(BaseSection):
             self._render_median_debt()
         elif chart_name == SCORECARD_DATASET_REPAYMENT_3YR:
             self._render_repayment_3yr()
+        elif chart_name == SCORECARD_DATASET_REPAYMENT_SCATTER_FOUR:
+            self._render_repayment_scatter(level_filter="4-year")
+        elif chart_name == SCORECARD_DATASET_REPAYMENT_SCATTER_TWO:
+            self._render_repayment_scatter(level_filter="2-year")
         else:
             st.error(f"Unknown chart: {chart_name}")
 
     def get_available_charts(self) -> List[str]:
-        return [SCORECARD_DATASET_MEDIAN_DEBT, SCORECARD_DATASET_REPAYMENT_3YR]
+        return [
+            SCORECARD_DATASET_MEDIAN_DEBT,
+            SCORECARD_DATASET_REPAYMENT_3YR,
+            SCORECARD_DATASET_REPAYMENT_SCATTER_FOUR,
+            SCORECARD_DATASET_REPAYMENT_SCATTER_TWO,
+        ]
 
     def _select_institution(self, df: pd.DataFrame) -> str | None:
         if df.empty:
@@ -214,3 +225,73 @@ class CollegeScorecardSection(BaseSection):
                     f"**{group}:** {descriptions[group]}" for group in ["Green", "Yellow", "Red"] if group in consolidated["group"].values
                 )
             )
+
+    def _render_repayment_scatter(self, level_filter: str) -> None:
+        label = (
+            SCORECARD_DATASET_REPAYMENT_SCATTER_FOUR
+            if level_filter == "4-year"
+            else SCORECARD_DATASET_REPAYMENT_SCATTER_TWO
+        )
+        self.render_section_header(SCORECARD_SECTION, label)
+        df = self._latest
+        if df.empty:
+            st.error("Scorecard latest dataset unavailable.")
+            return
+        view = df[df["level"] == level_filter].copy()
+        if view.empty:
+            st.info(f"No {level_filter} institutions available.")
+            return
+        enrollment_options = {
+            "All": 0,
+            ">1,000": 1000,
+            ">5,000": 5000,
+            ">10,000": 10000,
+        }
+        selected_filter = st.selectbox("Minimum enrollment", list(enrollment_options.keys()), index=0)
+        min_enrollment = enrollment_options[selected_filter]
+        view = view[view["enrollment"].fillna(0) >= min_enrollment]
+        if view.empty:
+            st.warning("No institutions meet the enrollment filter.")
+            return
+
+        status_choice = st.radio(
+            "Consolidated status",
+            ["Red", "Yellow", "Green"],
+            index=0,
+            horizontal=True,
+        )
+        status_column = {
+            "Green": "repay_3yr_green",
+            "Yellow": "repay_3yr_yellow",
+            "Red": "repay_3yr_red",
+        }[status_choice]
+        metric_label = f"{status_choice} Share (%)"
+
+        view = view.dropna(subset=["median_debt_completers", status_column, "enrollment"])
+        if view.empty:
+            st.warning("No data available after filtering.")
+            return
+
+        chart = (
+            alt.Chart(view)
+            .mark_circle(opacity=0.8)
+            .encode(
+                x=alt.X("median_debt_completers:Q", title="Median Debt (Completers)", scale=alt.Scale(zero=False)),
+                y=alt.Y(f"{status_column}:Q", title=metric_label, scale=alt.Scale(domain=[0, 100])),
+                size=alt.Size(
+                    "enrollment:Q",
+                    title="Enrollment",
+                    scale=alt.Scale(domain=[view["enrollment"].min(), view["enrollment"].max()], range=[40, 800]),
+                ),
+                color=alt.Color("sector:N", title="Sector"),
+                tooltip=[
+                    alt.Tooltip("instnm:N", title="Institution"),
+                    alt.Tooltip("median_debt_completers:Q", title="Median Debt", format="$,.0f"),
+                    alt.Tooltip(f"{status_column}:Q", title=metric_label, format=".1f"),
+                    alt.Tooltip("enrollment:Q", title="Enrollment", format=",.0f"),
+                    alt.Tooltip("sector:N", title="Sector"),
+                ],
+            )
+            .properties(height=500)
+        )
+        st.altair_chart(chart.interactive(), use_container_width=True)

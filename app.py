@@ -28,6 +28,7 @@ from src.config.constants import (
     ROI_SECTION,
     COLLEGE_EXPLORER_SECTION,
     CANONICAL_IPEDS_SECTION,
+    SCORECARD_SECTION,
 )
 from src.core import DataManager, DataLoadError
 from src.sections import (
@@ -40,6 +41,7 @@ from src.sections import (
     ROISection,
     CollegeExplorerSection,
     CanonicalIPEDSSection,
+    CollegeScorecardSection,
 )
 from src.state import SessionManager
 
@@ -109,6 +111,7 @@ def render_main(data_manager: DataManager) -> None:
         ROI_SECTION: ROISection(data_manager),
         COLLEGE_EXPLORER_SECTION: CollegeExplorerSection(data_manager),
         CANONICAL_IPEDS_SECTION: CanonicalIPEDSSection(data_manager),
+        SCORECARD_SECTION: CollegeScorecardSection(data_manager),
     }
     
     # Get the active section instance
