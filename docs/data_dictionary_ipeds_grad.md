@@ -77,6 +77,13 @@ Validation: `institution_count` should equal the number of non-null rates contri
 
 Each run writes provenance to `out/canonical/ipeds_grad/run_latest.json`. Include that JSON in reviews to show inputs, row counts, and git SHA.
 
+### Percent Pell Grants (SFA)
+1. `python -m src.pipelines.canonical.ipeds_sfa.extraction`
+2. `python -m src.pipelines.canonical.ipeds_sfa.enrich_metadata`
+3. `python -m src.pipelines.canonical.ipeds_sfa.build_outputs`
+
+Provenance stored under `out/canonical/ipeds_pell/`.
+
 ## 6. Known Limitations
 - Wesley College (UnitID 131098) lacks metadata in the 2023 HD file; see `docs/ipeds_missing_metadata.md` for remediation options.
 - Graduation rates reflect institution-level totals only; Pell subcohorts remain out of scope for the canonical MVP.

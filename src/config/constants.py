@@ -128,7 +128,11 @@ COLLEGE_EXPLORER_CHARTS: List[str] = [
 ]
 
 CANONICAL_DATASET_GRAD = "Graduation Rates"
-CANONICAL_DATASETS: List[str] = [CANONICAL_DATASET_GRAD]
+CANONICAL_DATASET_PELL = "Percent Pell"
+CANONICAL_DATASETS: List[str] = [
+    CANONICAL_DATASET_GRAD,
+    CANONICAL_DATASET_PELL,
+]
 
 # Earnings Premium Analysis labels (National - Section 9)
 EARNINGS_PREMIUM_OVERVIEW_LABEL = "Overview"
