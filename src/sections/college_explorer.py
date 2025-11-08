@@ -11,6 +11,7 @@ import altair as alt
 
 from .base import BaseSection
 from src.ui.renderers import render_altair_chart
+from src.analytics.grad_zscores import HEADCOUNT_THRESHOLDS, PeerStats, summarize_anchor
 from src.config.constants import (
     COLLEGE_EXPLORER_OVERVIEW_LABEL,
     COLLEGE_SUMMARY_LABEL,
@@ -861,6 +862,7 @@ class CollegeExplorerSection(BaseSection):
         self._display_grad_rate_summary(trend_data)
         if USE_CANONICAL_GRAD_DATA:
             self._render_canonical_snapshot(unit_id, show_header=False)
+            self._render_grad_rate_distribution(unit_id, institution_name)
 
     def _prepare_graduation_trend_data(self, unit_id: int, institution_name: str) -> pd.DataFrame:
         """Prepare graduation trend data for a specific institution."""
@@ -1103,6 +1105,148 @@ class CollegeExplorerSection(BaseSection):
             st.caption(
                 f"Canonical snapshot built {load_text}. See docs/rate_policy_ipeds_grad.md for precedence details."
             )
+
+    def _render_grad_rate_distribution(self, unit_id: int, institution_name: str) -> None:
+        """Render z-score controls + distribution chart for canonical graduation rates."""
+
+        canonical_df = getattr(self, "canonical_grad_df", None)
+        headcount_df = getattr(self.data_manager, "headcount_df", None)
+
+        if canonical_df is None or canonical_df.empty:
+            return
+        if headcount_df is None or headcount_df.empty:
+            st.info(
+                "Headcount data is unavailable, so distribution insights cannot be generated."
+            )
+            return
+
+        st.markdown("##### Distribution Context (Canonical)")
+
+        available_years = sorted(canonical_df["year"].unique(), reverse=True)
+        threshold_labels = [cfg["label"] for cfg in HEADCOUNT_THRESHOLDS]
+
+        controls = st.columns([1, 1, 1])
+        selected_year = controls[0].selectbox(
+            "Cohort year",
+            options=available_years,
+            index=0,
+            key=f"grad_z_year_{unit_id}",
+        )
+        threshold_label = controls[1].selectbox(
+            "Headcount filter",
+            options=threshold_labels,
+            index=0,
+            key=f"grad_z_threshold_{unit_id}",
+        )
+        robust_toggle = controls[2].toggle(
+            "Robust z-score",
+            value=False,
+            key=f"grad_z_robust_{unit_id}",
+            help="Uses median/MAD instead of mean/std to down-weight outliers.",
+        )
+        winsorize = st.checkbox(
+            "Winsorize extremes (1st & 99th percentile)",
+            value=False,
+            key=f"grad_z_winsor_{unit_id}",
+        )
+
+        try:
+            summary, stats, peer_df = summarize_anchor(
+                canonical_df,
+                headcount_df,
+                headcount_fallback=getattr(
+                    self.data_manager, "headcount_fallback_map", None
+                ),
+                unitid=unit_id,
+                year=int(selected_year),
+                threshold_label=threshold_label,
+                robust=robust_toggle,
+                winsorize=winsorize,
+            )
+        except (KeyError, ValueError) as exc:
+            st.warning(f"Unable to compute z-scores: {exc}")
+            return
+
+        active_z = summary.z_score_robust if robust_toggle else summary.z_score
+
+        metric_cols = st.columns(3)
+        metric_cols[0].metric(
+            "Graduation rate (150%)",
+            f"{summary.grad_rate:.1f}%" if summary.grad_rate is not None else "N/A",
+        )
+        metric_cols[1].metric(
+            "Z-score",
+            f"{active_z:.2f}" if active_z is not None else "N/A",
+        )
+        percentile_text = (
+            f"{summary.percentile:.1f}th" if summary.percentile is not None else "N/A"
+        )
+        metric_cols[2].metric("Percentile", percentile_text)
+
+        headcount_text = (
+            f"{int(summary.headcount):,}"
+            if summary.headcount is not None
+            else "Not reported"
+        )
+        source_lookup = {
+            "FT_UG_12M": "DRV EF12 full-time undergraduate 12-month unduplicated headcount",
+            "ENR_UG_FALL": "Fall undergraduate enrollment (proxy)",
+        }
+        source_label = source_lookup.get(summary.headcount_source or "", "Not available")
+
+        st.caption(
+            f"Peer group size: {stats.peer_count:,} institutions with ≥ {stats.min_headcount:,} "
+            f"full-time undergraduate students. Reported headcount for {institution_name}: "
+            f"{headcount_text} ({source_label})."
+        )
+
+        if not summary.in_peer_group:
+            st.warning(
+                "This institution is below the selected headcount filter. "
+                "Z-scores are still computed against the chosen peer group for context."
+            )
+
+        chart = self._build_grad_rate_distribution_chart(peer_df, summary.grad_rate, stats)
+        if chart is not None:
+            render_altair_chart(chart, use_container_width=True)
+
+    def _build_grad_rate_distribution_chart(
+        self, peer_df: pd.DataFrame, anchor_value: float | None, stats: PeerStats
+    ) -> alt.Chart | None:
+        """Create a histogram showing peer distribution with anchor + median markers."""
+
+        if peer_df.empty or anchor_value is None:
+            return None
+
+        value_field = "grad_rate_150"
+        base = (
+            alt.Chart(peer_df)
+            .mark_bar(color="#7fc0ff", opacity=0.85)
+            .encode(
+                x=alt.X(
+                    f"{value_field}:Q",
+                    bin=alt.Bin(maxbins=30),
+                    title="Graduation rate (150%)",
+                ),
+                y=alt.Y("count()", title="Institutions"),
+                tooltip=[
+                    alt.Tooltip(f"{value_field}:Q", title="Grad rate", format=".1f"),
+                    alt.Tooltip("count():Q", title="Institutions"),
+                ],
+            )
+        )
+
+        anchor_rule = alt.Chart(
+            pd.DataFrame({"marker": [anchor_value]})
+        ).mark_rule(color="#d62728", size=3).encode(x="marker:Q")
+
+        median_rule = alt.Chart(
+            pd.DataFrame({"median": [stats.median]})
+        ).mark_rule(color="#444444", strokeDash=[6, 4], size=2).encode(x="median:Q")
+
+        return (base + anchor_rule + median_rule).properties(
+            height=280, title="Peer distribution"
+        )
 
     def _render_distance_education(self) -> None:
         """Provide a searchable distance education snapshot for a single institution."""

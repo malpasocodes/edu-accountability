@@ -4,6 +4,9 @@ from __future__ import annotations
 
 from typing import Dict, Optional
 
+import numpy as np
+import re
+
 import pandas as pd
 import streamlit as st
 
@@ -34,6 +37,8 @@ class DataManager:
         self.value_grid_datasets: Dict[str, pd.DataFrame] = {}
         self.pell_resources: Dict[str, Optional[pd.DataFrame]] = {}
         self.canonical_grad_df: Optional[pd.DataFrame] = None
+        self.headcount_df: Optional[pd.DataFrame] = None
+        self.headcount_fallback_map: Optional[pd.Series] = None
         self.errors: list[str] = []
     
     def load_all_data(self) -> None:
@@ -54,6 +59,7 @@ class DataManager:
         self._load_distance_raw()
         self._load_institutions_raw()
         self._load_pellgradrates_raw()
+        self._load_headcount_data()
         self._load_canonical_grad_data()
 
         # Load value grid datasets
@@ -117,6 +123,105 @@ class DataManager:
         except DataLoadError:
             # Pell graduation rates data is optional
             self.pellgradrates_df = pd.DataFrame()
+
+    def _load_headcount_data(self) -> None:
+        """Load undergraduate headcount information used for z-score filtering."""
+
+        ft_ug_headcount = self._load_ft_ug_12month_headcount()
+        fallback_series = self._build_enrollment_headcount_fallback()
+
+        if ft_ug_headcount.empty:
+            if fallback_series is None:
+                self.headcount_df = pd.DataFrame()
+            else:
+                self.headcount_df = pd.DataFrame(
+                    columns=["unitid", "year", "ft_ug_headcount", "headcount_source"]
+                )
+            self.headcount_fallback_map = fallback_series
+            return
+
+        if fallback_series is not None:
+            ft_ug_headcount["fallback_headcount"] = ft_ug_headcount["unitid"].map(
+                fallback_series
+            )
+        else:
+            ft_ug_headcount["fallback_headcount"] = np.nan
+
+        self.headcount_df = ft_ug_headcount
+        self.headcount_fallback_map = fallback_series
+
+    def _load_ft_ug_12month_headcount(self) -> pd.DataFrame:
+        """Load the 12-month FT undergraduate unduplicated headcount file."""
+
+        source = DataSources.FT_UG_HEADCOUNT_RAW
+        path = source.path
+        if not path.exists():
+            return pd.DataFrame()
+
+        try:
+            raw = self.loader.load_csv(str(path), source.description)
+        except DataLoadError:
+            return pd.DataFrame()
+
+        id_vars = ["UnitID", "Institution Name"]
+        columns = [col for col in raw.columns if col not in id_vars and col.strip()]
+
+        pattern = re.compile(r"\(DRVEF12(\d{4})(?:_RV)?\)")
+        records: list[pd.DataFrame] = []
+
+        for column in columns:
+            match = pattern.search(column)
+            if not match:
+                continue
+            year = int(match.group(1))
+            temp = raw[id_vars + [column]].copy()
+            temp["year"] = year
+            temp["ft_ug_headcount"] = pd.to_numeric(temp[column], errors="coerce")
+            records.append(temp[["UnitID", "Institution Name", "year", "ft_ug_headcount"]])
+
+        if not records:
+            return pd.DataFrame()
+
+        long_df = pd.concat(records, ignore_index=True)
+        long_df = long_df.dropna(subset=["ft_ug_headcount"])
+        long_df.rename(
+            columns={
+                "UnitID": "unitid",
+                "Institution Name": "instnm",
+            },
+            inplace=True,
+        )
+        long_df["headcount_source"] = "FT_UG_12M"
+        return long_df
+
+    def _build_enrollment_headcount_fallback(self) -> Optional[pd.Series]:
+        """Create fallback headcounts from fall enrollment data."""
+
+        try:
+            enrollment_df = self.loader.load_csv(
+                str(DataSources.ENROLLMENT_RAW.path),
+                DataSources.ENROLLMENT_RAW.description,
+            )
+        except DataLoadError:
+            return None
+
+        working = enrollment_df.copy()
+        working.rename(columns={"UnitID": "unitid"}, inplace=True)
+        for column in ("ENR_UG", "ENR_TOTAL"):
+            if column in working.columns:
+                working[column] = pd.to_numeric(working[column], errors="coerce")
+
+        working["fallback_headcount"] = working["ENR_UG"].where(
+            working["ENR_UG"].notna(), working["ENR_TOTAL"]
+        )
+
+        fallback = working[["unitid", "fallback_headcount"]].dropna()
+        if fallback.empty:
+            return None
+
+        series = fallback.set_index("unitid")["fallback_headcount"]
+        series = series.astype("float32")
+        return series
 
     def _load_canonical_grad_data(self) -> None:
         """Load canonical graduation datasets when enabled."""

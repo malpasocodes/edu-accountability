@@ -92,6 +92,12 @@ class DataSources:
         required=False
     )
 
+    FT_UG_HEADCOUNT_RAW = DataSourceConfig(
+        path=_raw_dir / "ipeds" / "fulltime_ug_12month_headcount.csv",
+        description="Full-time undergraduate 12-month unduplicated headcount (DRV EF12)",
+        required=False,
+    )
+
     # Processed data sources - Pell
     PELL_TOP_DOLLARS = DataSourceConfig(
         path=_processed_dir / "pell_top_dollars.csv",
@@ -319,6 +325,7 @@ class DataSources:
             "tuition_vs_grad_two_parquet": cls.TUITION_VS_GRAD_TWO_PARQUET,
             "distance_raw": cls.DISTANCE_RAW,
             "pell_grad_rates_raw": cls.PELL_GRAD_RATES_RAW,
+            "ft_ug_headcount_raw": cls.FT_UG_HEADCOUNT_RAW,
             "retention_rate_pct_raw": cls.RETENTION_RATE_PCT_RAW,
             "roi_metrics_raw": cls.ROI_METRICS_RAW,
             "roi_metrics_parquet": cls.ROI_METRICS_PARQUET,
