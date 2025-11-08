@@ -166,7 +166,10 @@ class CollegeScorecardSection(BaseSection):
             )
             .properties(height=380, title=f"3-year Repayment Status — {inst} ({year})")
         )
-        st.altair_chart(chart, use_container_width=True)
+        text_layer = chart.mark_text(dy=-10, color="#333", fontWeight="bold").encode(
+            text=alt.Text("percent:Q", format=".1f")
+        )
+        st.altair_chart(chart + text_layer, use_container_width=True)
 
         # Consolidated traffic-light summary
         consolidation_map = {
@@ -197,7 +200,10 @@ class CollegeScorecardSection(BaseSection):
                 )
                 .properties(title="Traffic-light summary", height=220)
             )
-            st.altair_chart(summary_chart, use_container_width=True)
+            summary_text = summary_chart.mark_text(dy=-10, color="#333", fontWeight="bold").encode(
+                text=alt.Text("percent:Q", format=".1f")
+            )
+            st.altair_chart(summary_chart + summary_text, use_container_width=True)
             descriptions = {
                 "Green": "Loans are paid in full, discharged, or actively amortizing (making progress).",
                 "Yellow": "Loans are paused or not reducing balances (forbearance, deferment, not making progress).",
