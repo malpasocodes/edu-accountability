@@ -112,12 +112,16 @@ class CollegeScorecardSection(BaseSection):
             st.info("No 3-year repayment data available for this institution.")
             return
         latest_year = int(year_has_data[-1])
-        year = st.slider(
-            "Year",
-            min_value=int(year_has_data[0]),
-            max_value=int(year_has_data[-1]),
-            value=latest_year,
-        )
+        if len(year_has_data) == 1:
+            year = latest_year
+            st.caption(f"Showing {year} (only year with 3-year repayment data).")
+        else:
+            year = st.slider(
+                "Year",
+                min_value=int(year_has_data[0]),
+                max_value=int(year_has_data[-1]),
+                value=latest_year,
+            )
         year_df = inst_df[inst_df["year"] == year]
         if year_df.empty:
             st.warning("No data for selected year.")
