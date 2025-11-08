@@ -1,0 +1,11 @@
+{
+  "build_ts": "2025-11-08T18:56:32.166202+00:00",
+  "source_file": "data/processed/2023/canonical/ipeds_avg_salary_instructional_staff_long.parquet",
+  "source_rows": 40786,
+  "latest_rows": 3987,
+  "summary_rows": 104,
+  "year_range": [
+    2013,
+    2023
+  ]
+}

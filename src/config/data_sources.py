@@ -263,6 +263,24 @@ class DataSources:
         required=False,
     )
 
+    CANONICAL_SALARY_LONG = DataSourceConfig(
+        path=_canonical_dir / "ipeds_avg_salary_instructional_staff_long.parquet",
+        description="Canonical IPEDS instructional staff salaries (long)",
+        required=False,
+    )
+
+    CANONICAL_SALARY_LATEST = DataSourceConfig(
+        path=_canonical_dir / "ipeds_avg_salary_instructional_staff_latest_by_inst.parquet",
+        description="Canonical IPEDS instructional staff salaries (latest per institution)",
+        required=False,
+    )
+
+    CANONICAL_SALARY_SUMMARY = DataSourceConfig(
+        path=_canonical_dir / "ipeds_avg_salary_instructional_staff_summary_by_year.parquet",
+        description="Canonical IPEDS instructional staff salaries summary by year",
+        required=False,
+    )
+
     # ROI data sources - epanalysis migration
     ROI_METRICS_RAW = DataSourceConfig(
         path=_epanalysis_dir / "roi-metrics.csv",
@@ -336,4 +354,7 @@ class DataSources:
             "canonical_retention_rate_long": cls.CANONICAL_RETENTION_RATE_LONG,
             "canonical_retention_rate_latest": cls.CANONICAL_RETENTION_RATE_LATEST,
             "canonical_retention_rate_summary": cls.CANONICAL_RETENTION_RATE_SUMMARY,
+            "canonical_salary_long": cls.CANONICAL_SALARY_LONG,
+            "canonical_salary_latest": cls.CANONICAL_SALARY_LATEST,
+            "canonical_salary_summary": cls.CANONICAL_SALARY_SUMMARY,
         }

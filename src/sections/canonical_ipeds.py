@@ -17,6 +17,7 @@ from src.config.constants import (
     CANONICAL_DATASET_LOANS,
     CANONICAL_DATASET_RETENTION,
     CANONICAL_DATASET_RETENTION_RATE,
+    CANONICAL_DATASET_SALARY,
     CANONICAL_DATASET_GRAD_Z_FOUR,
     CANONICAL_DATASET_GRAD_Z_TWO,
 )
@@ -76,6 +77,14 @@ class CanonicalIPEDSSection(BaseSection):
                 y_title="Full-time Retention Rate (%)",
                 y_domain=[0, 100],
                 value_format=".1f",
+            ),
+            CANONICAL_DATASET_SALARY: self._build_dataset_config(
+                long_source=DataSources.CANONICAL_SALARY_LONG,
+                summary_source=DataSources.CANONICAL_SALARY_SUMMARY,
+                value_col="avg_salary_9mo_all_ranks",
+                y_title="Avg Salary (Instructional Staff, 9-month)",
+                y_domain=None,
+                value_format="$,.0f",
             ),
         }
         self._special_charts = {
