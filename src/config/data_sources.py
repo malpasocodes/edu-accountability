@@ -80,6 +80,12 @@ class DataSources:
         required=False
     )
 
+    RETENTION_RATE_PCT_RAW = DataSourceConfig(
+        path=_raw_dir / "ipeds" / "retention_rate_pctgs.csv",
+        description="Full-time retention rate percentages by institution",
+        required=False,
+    )
+
     PELL_GRAD_RATES_RAW = DataSourceConfig(
         path=_ipeds_dir / "pellgradrates.csv",
         description="Graduation rates for overall and Pell students",
@@ -215,6 +221,42 @@ class DataSources:
         required=False,
     )
 
+    CANONICAL_RETENTION_LONG = DataSourceConfig(
+        path=_canonical_dir / "ipeds_retention_full_time_long.parquet",
+        description="Canonical IPEDS retention cohorts (full-time) long",
+        required=False,
+    )
+
+    CANONICAL_RETENTION_LATEST = DataSourceConfig(
+        path=_canonical_dir / "ipeds_retention_full_time_latest_by_inst.parquet",
+        description="Canonical IPEDS retention cohorts latest per institution",
+        required=False,
+    )
+
+    CANONICAL_RETENTION_SUMMARY = DataSourceConfig(
+        path=_canonical_dir / "ipeds_retention_full_time_summary_by_year.parquet",
+        description="Canonical IPEDS retention cohorts summary by year",
+        required=False,
+    )
+
+    CANONICAL_RETENTION_RATE_LONG = DataSourceConfig(
+        path=_canonical_dir / "ipeds_retention_rate_full_time_long.parquet",
+        description="Canonical IPEDS retention rate (full-time) long",
+        required=False,
+    )
+
+    CANONICAL_RETENTION_RATE_LATEST = DataSourceConfig(
+        path=_canonical_dir / "ipeds_retention_rate_full_time_latest_by_inst.parquet",
+        description="Canonical IPEDS retention rate latest per institution",
+        required=False,
+    )
+
+    CANONICAL_RETENTION_RATE_SUMMARY = DataSourceConfig(
+        path=_canonical_dir / "ipeds_retention_rate_full_time_summary_by_year.parquet",
+        description="Canonical IPEDS retention rate summary by year",
+        required=False,
+    )
+
     # ROI data sources - epanalysis migration
     ROI_METRICS_RAW = DataSourceConfig(
         path=_epanalysis_dir / "roi-metrics.csv",
@@ -277,7 +319,14 @@ class DataSources:
             "tuition_vs_grad_two_parquet": cls.TUITION_VS_GRAD_TWO_PARQUET,
             "distance_raw": cls.DISTANCE_RAW,
             "pell_grad_rates_raw": cls.PELL_GRAD_RATES_RAW,
+            "retention_rate_pct_raw": cls.RETENTION_RATE_PCT_RAW,
             "roi_metrics_raw": cls.ROI_METRICS_RAW,
             "roi_metrics_parquet": cls.ROI_METRICS_PARQUET,
             "opeid_mapping": cls.OPEID_MAPPING,
+            "canonical_retention_long": cls.CANONICAL_RETENTION_LONG,
+            "canonical_retention_latest": cls.CANONICAL_RETENTION_LATEST,
+            "canonical_retention_summary": cls.CANONICAL_RETENTION_SUMMARY,
+            "canonical_retention_rate_long": cls.CANONICAL_RETENTION_RATE_LONG,
+            "canonical_retention_rate_latest": cls.CANONICAL_RETENTION_RATE_LATEST,
+            "canonical_retention_rate_summary": cls.CANONICAL_RETENTION_RATE_SUMMARY,
         }

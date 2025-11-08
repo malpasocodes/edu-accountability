@@ -1,0 +1,12 @@
+{
+  "build_ts": "2025-11-08T14:25:13.278820+00:00",
+  "source_file": "data/processed/2023/canonical/ipeds_retention_rate_full_time_long.parquet",
+  "source_rows": 89303,
+  "latest_rows": 5429,
+  "summary_rows": 197,
+  "year_range": [
+    2004,
+    2023
+  ],
+  "git_sha": "d14093c7c28a3795a5e58a4ce0089eaa3d0ca1dd"
+}

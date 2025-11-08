@@ -15,6 +15,8 @@ from src.config.constants import (
     CANONICAL_DATASET_GRAD,
     CANONICAL_DATASET_PELL,
     CANONICAL_DATASET_LOANS,
+    CANONICAL_DATASET_RETENTION,
+    CANONICAL_DATASET_RETENTION_RATE,
 )
 from src.config.data_sources import DataSources
 from src.core.data_loader import DataLoader
@@ -29,24 +31,65 @@ class CanonicalIPEDSSection(BaseSection):
         super().__init__(data_manager)
         self.loader: DataLoader = data_manager.loader
         self._datasets = {
-            CANONICAL_DATASET_GRAD: {
-                "long": self._load_parquet(DataSources.CANONICAL_GRAD_LONG),
-                "value_col": "grad_rate_150",
-                "y_title": "Graduation Rate (150%)",
-                "summary": self._load_parquet(DataSources.CANONICAL_GRAD_SUMMARY),
-            },
-            CANONICAL_DATASET_PELL: {
-                "long": self._load_parquet(DataSources.CANONICAL_PELL_LONG),
-                "value_col": "percent_pell",
-                "y_title": "Percent Pell",
-                "summary": self._load_parquet(DataSources.CANONICAL_PELL_SUMMARY),
-            },
-            CANONICAL_DATASET_LOANS: {
-                "long": self._load_parquet(DataSources.CANONICAL_LOANS_LONG),
-                "value_col": "percent_loans",
-                "y_title": "Percent Federal Loans",
-                "summary": self._load_parquet(DataSources.CANONICAL_LOANS_SUMMARY),
-            },
+            CANONICAL_DATASET_GRAD: self._build_dataset_config(
+                long_source=DataSources.CANONICAL_GRAD_LONG,
+                summary_source=DataSources.CANONICAL_GRAD_SUMMARY,
+                value_col="grad_rate_150",
+                y_title="Graduation Rate (150%)",
+                y_domain=[0, 100],
+                value_format=".1f",
+            ),
+            CANONICAL_DATASET_PELL: self._build_dataset_config(
+                long_source=DataSources.CANONICAL_PELL_LONG,
+                summary_source=DataSources.CANONICAL_PELL_SUMMARY,
+                value_col="percent_pell",
+                y_title="Percent Pell",
+                y_domain=[0, 100],
+                value_format=".1f",
+            ),
+            CANONICAL_DATASET_LOANS: self._build_dataset_config(
+                long_source=DataSources.CANONICAL_LOANS_LONG,
+                summary_source=DataSources.CANONICAL_LOANS_SUMMARY,
+                value_col="percent_loans",
+                y_title="Percent Federal Loans",
+                y_domain=[0, 100],
+                value_format=".1f",
+            ),
+            CANONICAL_DATASET_RETENTION: self._build_dataset_config(
+                long_source=DataSources.CANONICAL_RETENTION_LONG,
+                summary_source=DataSources.CANONICAL_RETENTION_SUMMARY,
+                value_col="retained_students_full_time",
+                y_title="Full-time Cohort Size",
+                y_domain=None,
+                value_format=",.0f",
+            ),
+            CANONICAL_DATASET_RETENTION_RATE: self._build_dataset_config(
+                long_source=DataSources.CANONICAL_RETENTION_RATE_LONG,
+                summary_source=DataSources.CANONICAL_RETENTION_RATE_SUMMARY,
+                value_col="retention_rate_full_time",
+                y_title="Full-time Retention Rate (%)",
+                y_domain=[0, 100],
+                value_format=".1f",
+            ),
+        }
+
+    def _build_dataset_config(
+        self,
+        *,
+        long_source,
+        summary_source,
+        value_col: str,
+        y_title: str,
+        y_domain: list[int] | None,
+        value_format: str,
+    ) -> dict:
+        return {
+            "long": self._load_parquet(long_source),
+            "summary": self._load_parquet(summary_source),
+            "value_col": value_col,
+            "y_title": y_title,
+            "y_domain": y_domain,
+            "value_format": value_format,
         }
 
     def _load_parquet(self, source) -> pd.DataFrame:
@@ -98,15 +141,19 @@ class CanonicalIPEDSSection(BaseSection):
 
         value_col = dataset_info["value_col"]
         y_title = dataset_info["y_title"]
+        y_domain = dataset_info.get("y_domain")
+        value_format = dataset_info.get("value_format", ".1f")
+
+        y_scale = alt.Scale(domain=y_domain) if y_domain else alt.Scale(zero=True)
         chart = (
             alt.Chart(inst_df)
             .mark_line(point=True)
             .encode(
                 x=alt.X("year:O", title="Cohort Year"),
-                y=alt.Y(f"{value_col}:Q", title=y_title, scale=alt.Scale(domain=[0, 100])),
+                y=alt.Y(f"{value_col}:Q", title=y_title, scale=y_scale),
                 tooltip=[
                     alt.Tooltip("year:O", title="Year"),
-                    alt.Tooltip(f"{value_col}:Q", title=y_title, format=".1f"),
+                    alt.Tooltip(f"{value_col}:Q", title=y_title, format=value_format),
                     alt.Tooltip("source_flag:N", title="Source"),
                     alt.Tooltip("is_revised:N", title="Revised"),
                 ],

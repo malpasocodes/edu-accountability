@@ -1,0 +1,12 @@
+{
+  "build_ts": "2025-11-08T14:24:54.002586+00:00",
+  "source_file": "data/processed/2023/canonical/ipeds_retention_full_time_long.parquet",
+  "source_rows": 81078,
+  "latest_rows": 5475,
+  "summary_rows": 167,
+  "year_range": [
+    2006,
+    2022
+  ],
+  "git_sha": "d14093c7c28a3795a5e58a4ce0089eaa3d0ca1dd"
+}
