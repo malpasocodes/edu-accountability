@@ -16,6 +16,7 @@ EARNINGS_PREMIUM_SECTION = "Earnings Premium"
 ROI_SECTION = "ROI"
 COLLEGE_EXPLORER_SECTION = "College Explorer"
 CANONICAL_IPEDS_SECTION = "Canonical IPEDS"
+SCORECARD_SECTION = "College Scorecard"
 
 
 @dataclass(frozen=True)
@@ -145,6 +146,15 @@ CANONICAL_DATASETS: List[str] = [
     CANONICAL_DATASET_SALARY,
     CANONICAL_DATASET_GRAD_Z_FOUR,
     CANONICAL_DATASET_GRAD_Z_TWO,
+]
+
+# College Scorecard labels
+SCORECARD_OVERVIEW_LABEL = "Overview"
+SCORECARD_DATASET_MEDIAN_DEBT = "Median Debt (Completers)"
+SCORECARD_DATASET_REPAYMENT_3YR = "Repayment Status (3-year, Undergrad Federal)"
+SCORECARD_DATASETS: List[str] = [
+    SCORECARD_DATASET_MEDIAN_DEBT,
+    SCORECARD_DATASET_REPAYMENT_3YR,
 ]
 
 # Earnings Premium Analysis labels (National - Section 9)

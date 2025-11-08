@@ -35,6 +35,7 @@ class DataSources:
         _fsa_dir = _raw_dir / "fsa"
     _epanalysis_dir = _raw_dir / "epanalysis"
     _canonical_dir = _processed_dir / "2023" / "canonical"
+    _canonical_scorecard_dir = _canonical_dir  # reuse same canonical folder
 
     # Raw data sources - FSA
     PELL_RAW = DataSourceConfig(
@@ -278,6 +279,23 @@ class DataSources:
     CANONICAL_SALARY_SUMMARY = DataSourceConfig(
         path=_canonical_dir / "ipeds_avg_salary_instructional_staff_summary_by_year.parquet",
         description="Canonical IPEDS instructional staff salaries summary by year",
+        required=False,
+    )
+
+    # Canonical College Scorecard outputs (debt + 3-yr repayment)
+    SCORECARD_DEBT_REPAY_LONG = DataSourceConfig(
+        path=_canonical_scorecard_dir / "scorecard_debt_repayment_long.parquet",
+        description="Canonical Scorecard median debt and 3-year repayment (long)",
+        required=False,
+    )
+    SCORECARD_DEBT_REPAY_LATEST = DataSourceConfig(
+        path=_canonical_scorecard_dir / "scorecard_debt_repayment_latest_by_inst.parquet",
+        description="Canonical Scorecard median debt and 3-year repayment (latest)",
+        required=False,
+    )
+    SCORECARD_DEBT_REPAY_SUMMARY = DataSourceConfig(
+        path=_canonical_scorecard_dir / "scorecard_debt_repayment_summary_by_year.parquet",
+        description="Canonical Scorecard median debt and 3-year repayment summary",
         required=False,
     )
 

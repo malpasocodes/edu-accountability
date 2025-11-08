@@ -15,6 +15,7 @@ from .constants import (
     ROI_SECTION,
     COLLEGE_EXPLORER_SECTION,
     CANONICAL_IPEDS_SECTION,
+    SCORECARD_SECTION,
     VALUE_GRID_OVERVIEW_LABEL,
     FOUR_YEAR_VALUE_GRID_LABEL,
     TWO_YEAR_VALUE_GRID_LABEL,
@@ -40,6 +41,8 @@ from .constants import (
     COLLEGE_EXPLORER_CHARTS,
     CANONICAL_IPEDS_OVERVIEW_LABEL,
     CANONICAL_DATASETS,
+    SCORECARD_OVERVIEW_LABEL,
+    SCORECARD_DATASETS,
 )
 
 
@@ -286,6 +289,23 @@ class NavigationConfig:
         description="Alpha pilots powered by canonical IPEDS datasets",
     )
 
+    SCORECARD = SectionConfig(
+        name=SCORECARD_SECTION,
+        icon="📚",
+        label="College Scorecard",
+        overview_chart=ChartConfig(
+            label=SCORECARD_OVERVIEW_LABEL,
+            key="nav_scorecard_overview",
+            description="Median debt and 3-year repayment status",
+        ),
+        charts=[
+            ChartConfig(label=label, key=f"nav_scorecard_{i}")
+            for i, label in enumerate(SCORECARD_DATASETS)
+        ],
+        session_key="scorecard_chart",
+        description="Canonical Scorecard metrics",
+    )
+
     @classmethod
     def get_sections(cls) -> List[SectionConfig]:
         """Get all configured sections in navigation order."""
@@ -299,6 +319,7 @@ class NavigationConfig:
             cls.ROI,
             cls.COLLEGE_EXPLORER,
             cls.CANONICAL_IPEDS,
+            cls.SCORECARD,
         ]
     
     @classmethod

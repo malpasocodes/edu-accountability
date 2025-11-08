@@ -1,0 +1,12 @@
+{
+  "build_ts": "2025-11-08T20:37:51.505246+00:00",
+  "source_file": "data/processed/2023/canonical/scorecard_debt_repayment_long.parquet",
+  "source_rows": 196163,
+  "latest_rows": 12373,
+  "summary_rows": 417,
+  "year_range": [
+    1997,
+    2024
+  ],
+  "repayment_horizon": "3-year"
+}
