@@ -140,6 +140,13 @@ def render_loan_vs_grad_scatter(
         .properties(height=520)
     )
 
+    grad_guides = alt.Chart(pd.DataFrame({"rate": [25, 50, 75]})).mark_rule(
+        strokeDash=[6, 6],
+        color="#888888",
+    ).encode(
+        x=alt.X("rate:Q"),
+    )
+
     st.subheader(title if period_label is None else f"{title} ({period_label})")
     period_text = period_label or "the available years"
     selection_note = ""
@@ -151,7 +158,7 @@ def render_loan_vs_grad_scatter(
             "bubble size scales with enrollment. Showing top {count} institutions by loan dollars{note}."
         ).format(count=len(prepared), note=selection_note)
     )
-    render_altair_chart(scatter)
+    render_altair_chart(scatter + grad_guides)
 
     table = (
         prepared[[
