@@ -44,6 +44,10 @@ from .constants import (
     SCORECARD_OVERVIEW_LABEL,
     SCORECARD_DATASETS,
 )
+from .feature_flags import (
+    ENABLE_CANONICAL_IPEDS_SECTION,
+    ENABLE_CANONICAL_SCORECARD_SECTION,
+)
 
 
 @dataclass(frozen=True)
@@ -292,7 +296,7 @@ class NavigationConfig:
     SCORECARD = SectionConfig(
         name=SCORECARD_SECTION,
         icon="📚",
-        label="College Scorecard",
+        label="Canonical Scorecard",
         overview_chart=ChartConfig(
             label=SCORECARD_OVERVIEW_LABEL,
             key="nav_scorecard_overview",
@@ -309,7 +313,7 @@ class NavigationConfig:
     @classmethod
     def get_sections(cls) -> List[SectionConfig]:
         """Get all configured sections in navigation order."""
-        return [
+        sections = [
             cls.OVERVIEW,
             cls.VALUE_GRID,
             cls.FEDERAL_LOANS,
@@ -318,9 +322,12 @@ class NavigationConfig:
             cls.EARNINGS_PREMIUM,
             cls.ROI,
             cls.COLLEGE_EXPLORER,
-            cls.CANONICAL_IPEDS,
-            cls.SCORECARD,
         ]
+        if ENABLE_CANONICAL_IPEDS_SECTION:
+            sections.append(cls.CANONICAL_IPEDS)
+        if ENABLE_CANONICAL_SCORECARD_SECTION:
+            sections.append(cls.SCORECARD)
+        return sections
     
     @classmethod
     def get_section_by_name(cls, name: str) -> Optional[SectionConfig]:

@@ -30,6 +30,10 @@ from src.config.constants import (
     CANONICAL_IPEDS_SECTION,
     SCORECARD_SECTION,
 )
+from src.config.feature_flags import (
+    ENABLE_CANONICAL_IPEDS_SECTION,
+    ENABLE_CANONICAL_SCORECARD_SECTION,
+)
 from src.core import DataManager, DataLoadError
 from src.sections import (
     OverviewSection,
@@ -110,9 +114,12 @@ def render_main(data_manager: DataManager) -> None:
         EARNINGS_PREMIUM_SECTION: EarningsPremiumSection(data_manager),
         ROI_SECTION: ROISection(data_manager),
         COLLEGE_EXPLORER_SECTION: CollegeExplorerSection(data_manager),
-        CANONICAL_IPEDS_SECTION: CanonicalIPEDSSection(data_manager),
-        SCORECARD_SECTION: CollegeScorecardSection(data_manager),
     }
+    
+    if ENABLE_CANONICAL_IPEDS_SECTION:
+        sections[CANONICAL_IPEDS_SECTION] = CanonicalIPEDSSection(data_manager)
+    if ENABLE_CANONICAL_SCORECARD_SECTION:
+        sections[SCORECARD_SECTION] = CollegeScorecardSection(data_manager)
     
     # Get the active section instance
     section = sections.get(active_section)
