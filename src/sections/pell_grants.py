@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import List
+from typing import List, Optional
 
 import streamlit as st
 
@@ -93,10 +93,10 @@ class PellGrantsSection(BaseSection):
                 """
                 <div style='padding: 1.5rem; border: 2px solid #9467bd; border-radius: 10px; background-color: #faf9ff; margin-bottom: 1rem; height: 260px; display: flex; flex-direction: column; justify-content: space-between;'>
                     <div>
-                        <h4 style='color: #9467bd; margin-bottom: 0.75rem;'>📊 Top 25 Pell Dollar Recipients</h4>
-                        <p style='color: #000000; margin-bottom: 0.75rem;'>See which institutions receive the most Pell Grant dollars.</p>
+                        <h4 style='color: #9467bd; margin-bottom: 0.75rem;'>📊 Largest Pell Grant Portfolios</h4>
+                        <p style='color: #000000; margin-bottom: 0.75rem;'>See which institutions receive the most Pell Grant dollars, aggregated across all available years.</p>
                     </div>
-                    <p style='color: #000000; font-style: italic; margin: 0;'>Stacked bars show yearly breakdown (2008-2022).</p>
+                    <p style='color: #000000; font-style: italic; margin: 0;'>Choose Top 10/25/50/100 institutions and compare totals by sector.</p>
                 </div>
                 """,
                 unsafe_allow_html=True
@@ -150,7 +150,7 @@ class PellGrantsSection(BaseSection):
         st.markdown("### How to Use This Tool")
         st.markdown(
             """
-            **Start with Top 25 Pell Dollar Recipients** to identify institutions serving the most low-income students.
+            **Start with Largest Pell Grant Portfolios** to identify institutions serving the most low-income students.
             Then explore the **vs Graduation Rate** chart to see how need-based aid concentrations relate to student outcomes.
             Finally, use the **Trend** chart to understand how these patterns have evolved over the past 15 years.
 
@@ -220,15 +220,26 @@ class PellGrantsSection(BaseSection):
             if self.data_manager.pell_df is not None:
                 render_dataframe(self.data_manager.pell_df.head(20), width="stretch")
     
-    def _render_pell_top_dollars(self, sector: str, title: str) -> None:
+    def _render_pell_top_dollars(self, sector: str, title: str, *, top_n: Optional[int] = None) -> None:
         """Render Pell top dollars chart."""
+        if top_n is None:
+            top_options = [10, 25, 50, 100]
+            default_index = top_options.index(10)
+            top_n = st.selectbox(
+                "Select ranking depth",
+                options=top_options,
+                index=default_index,
+                format_func=lambda value: f"Top {value}",
+                key=f"pell_top_portfolios_{sector}_top_n",
+                help="Change how many institutions appear in the ranking.",
+            )
         metadata = self.data_manager.get_metadata_for_sector(sector)
         if metadata is not None and self.data_manager.pell_df is not None:
             render_pell_top_dollars_chart(
                 self.data_manager.pell_df,
                 metadata,
-                top_n=25,
-                title=title
+                top_n=top_n,
+                title=title,
             )
         else:
             if metadata is None:
@@ -270,13 +281,22 @@ class PellGrantsSection(BaseSection):
     
     def _render_pell_top_dollars_with_tabs(self, title: str) -> None:
         """Render Pell top dollars chart with 4-year and 2-year tabs."""
+        top_options = [10, 25, 50, 100]
+        default_index = top_options.index(10)
+        top_n = st.selectbox(
+            "Show largest Pell grant portfolios",
+            options=top_options,
+            index=default_index,
+            format_func=lambda value: f"Top {value}",
+            key="pell_top_portfolios_top_n",
+        )
         tab1, tab2 = st.tabs(["4-year", "2-year"])
 
         with tab1:
-            self._render_pell_top_dollars("four_year", f"{title} (4-year)")
+            self._render_pell_top_dollars("four_year", f"{title} (4-year)", top_n=top_n)
 
         with tab2:
-            self._render_pell_top_dollars("two_year", f"{title} (2-year)")
+            self._render_pell_top_dollars("two_year", f"{title} (2-year)", top_n=top_n)
     
     def _render_pell_vs_grad_with_tabs(self, title: str) -> None:
         """Render Pell vs graduation chart with 4-year and 2-year tabs."""

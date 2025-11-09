@@ -54,15 +54,15 @@ TWO_YEAR_VALUE_GRID_LABEL = VALUE_GRID_CHART_CONFIGS[1].label
 
 
 # Pell Grant chart labels - Individual (for backward compatibility)
-PELL_TOP_DOLLARS_FOUR_LABEL = "Top 25 Pell Dollar Recipients (4-year)"
-PELL_TOP_DOLLARS_TWO_LABEL = "Top 25 Pell Dollar Recipients (2-year)"
+PELL_TOP_DOLLARS_FOUR_LABEL = "Largest Pell Grant Portfolios (4-year)"
+PELL_TOP_DOLLARS_TWO_LABEL = "Largest Pell Grant Portfolios (2-year)"
 PELL_VS_GRAD_FOUR_LABEL = "Pell Dollars vs Graduation Rate (4-year)"
 PELL_VS_GRAD_TWO_LABEL = "Pell Dollars vs Graduation Rate (2-year)"
 PELL_TREND_FOUR_LABEL = "Pell Dollars Trend (Top 10) (4-year)"
 PELL_TREND_TWO_LABEL = "Pell Dollars Trend (Top 10) (2-year)"
 
 # Pell Grant chart labels - Consolidated (for new navigation)
-PELL_TOP_DOLLARS_LABEL = "Top 25 Pell Dollar Recipients"
+PELL_TOP_DOLLARS_LABEL = "Largest Pell Grant Portfolios"
 PELL_VS_GRAD_LABEL = "Pell Dollars vs Graduation Rate"
 PELL_TREND_LABEL = "Pell Dollars Trend (Top 10)"
 PELL_TREND_TOTAL_LABEL = "Pell Dollars Trend (Total)"

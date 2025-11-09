@@ -28,12 +28,12 @@ A data-driven dashboard for analyzing higher education accountability, affordabi
 - Sector-colored bar and multi-series line chart visualizations
 
 ### 🎓 Pell Grants
-- Top 25 Pell dollar recipients with enrollment context
+- Largest Pell grant portfolios with Top 10/25/50/100 selector (aggregated 2008-2022)
 - Pell vs graduation rate correlation analysis
 - Year-over-year funding pattern trends (2008-2022)
 - Aggregate national trend analysis showing total aid patterns
 - Need-based aid distribution visualizations
-- Tab-based 4-year/2-year comparisons
+- Tab-based 4-year/2-year comparisons with sector-colored charts + totals
 
 ### 💻 Distance Education
 - Top 25 institutions by total enrollment with distance breakdown
