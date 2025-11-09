@@ -20,12 +20,12 @@ A data-driven dashboard for analyzing higher education accountability, affordabi
 - 6,000+ institutions with enrollment filtering (all/>500/>1,000/>5,000/>10,000)
 
 ### 💵 Federal Loans
-- Top 25 recipients by total dollar volume (2008-2022)
+- Largest federal loan portfolios with Top 10/25/50/100 selector (aggregated 2008-2022)
 - Loan trends vs graduation rates with year-over-year analysis
 - Multi-year trend charts for top 10 institutions
 - Aggregate national trend analysis showing total lending patterns
 - Consolidated tab-based navigation (4-year/2-year)
-- Stacked bar and line chart visualizations
+- Sector-colored bar and multi-series line chart visualizations
 
 ### 🎓 Pell Grants
 - Top 25 Pell dollar recipients with enrollment context

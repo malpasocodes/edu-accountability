@@ -79,15 +79,15 @@ PELL_OVERVIEW_LABEL = "Overview"
 
 
 # Federal Loan chart labels - Individual (for backward compatibility)
-LOAN_TOP_DOLLARS_FOUR_LABEL = "Top 25 Federal Loan Dollars (4-year)"
-LOAN_TOP_DOLLARS_TWO_LABEL = "Top 25 Federal Loan Dollars (2-year)"
+LOAN_TOP_DOLLARS_FOUR_LABEL = "Largest Federal Loan Portfolios (4-year)"
+LOAN_TOP_DOLLARS_TWO_LABEL = "Largest Federal Loan Portfolios (2-year)"
 LOAN_VS_GRAD_FOUR_LABEL = "Federal Loans vs Graduation Rate (4-year)"
 LOAN_VS_GRAD_TWO_LABEL = "Federal Loans vs Graduation Rate (2-year)"
 LOAN_TREND_FOUR_LABEL = "Federal Loan Dollars Trend (Top 10) (4-year)"
 LOAN_TREND_TWO_LABEL = "Federal Loan Dollars Trend (Top 10) (2-year)"
 
 # Federal Loan chart labels - Consolidated (for new navigation)
-LOAN_TOP_DOLLARS_LABEL = "Top 25 Federal Loan Dollars"
+LOAN_TOP_DOLLARS_LABEL = "Largest Federal Loan Portfolios"
 LOAN_VS_GRAD_LABEL = "Federal Loans vs Graduation Rate"
 LOAN_TREND_LABEL = "Federal Loan Dollars Trend (Top 10)"
 LOAN_TREND_TOTAL_LABEL = "Federal Loan Dollars Trend (Total)"

@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import List
+from typing import List, Optional
 
 import streamlit as st
 
@@ -92,10 +92,10 @@ class FederalLoansSection(BaseSection):
                 """
                 <div style='padding: 1.5rem; border: 2px solid #1f77b4; border-radius: 10px; background-color: #f8faff; margin-bottom: 1rem; height: 260px; display: flex; flex-direction: column; justify-content: space-between;'>
                     <div>
-                        <h4 style='color: #1f77b4; margin-bottom: 0.75rem;'>📊 Top 25 Federal Loan Dollars</h4>
-                        <p style='color: #000000; margin-bottom: 0.75rem;'>See which institutions receive the most federal loan dollars.</p>
+                        <h4 style='color: #1f77b4; margin-bottom: 0.75rem;'>📊 Largest Federal Loan Portfolios</h4>
+                        <p style='color: #000000; margin-bottom: 0.75rem;'>See which institutions receive the most federal loan dollars, aggregated across all available years.</p>
                     </div>
-                    <p style='color: #000000; font-style: italic; margin: 0;'>Stacked bars show yearly breakdown (2008-2022).</p>
+                    <p style='color: #000000; font-style: italic; margin: 0;'>Choose Top 10/25/50/100 institutions and compare totals by sector.</p>
                 </div>
                 """,
                 unsafe_allow_html=True
@@ -149,7 +149,7 @@ class FederalLoansSection(BaseSection):
         st.markdown("### How to Use This Tool")
         st.markdown(
             """
-            **Start with Top 25 Federal Loan Dollars** to identify institutions with the highest debt volumes.
+            **Start with Largest Federal Loan Portfolios** to identify institutions with the highest debt volumes.
             Then explore the **vs Graduation Rate** chart to see how loan burdens relate to student outcomes.
             Finally, use the **Trend** chart to understand how these patterns have evolved over the past 15 years.
 
@@ -216,14 +216,25 @@ class FederalLoansSection(BaseSection):
         elif chart_name == LOAN_TREND_TWO_LABEL:
             self._render_loan_trend("two_year", chart_name)
     
-    def _render_loan_top_dollars(self, sector: str, title: str) -> None:
+    def _render_loan_top_dollars(self, sector: str, title: str, *, top_n: Optional[int] = None) -> None:
         """Render loan top dollars chart."""
+        if top_n is None:
+            top_options = [10, 25, 50, 100]
+            default_index = top_options.index(25)
+            top_n = st.selectbox(
+                "Select ranking depth",
+                options=top_options,
+                index=default_index,
+                format_func=lambda value: f"Top {value}",
+                key=f"loan_top_portfolios_{sector}_top_n",
+                help="Change how many institutions appear in the ranking.",
+            )
         metadata = self.data_manager.get_metadata_for_sector(sector)
         if metadata is not None:
             render_loan_top_dollars_chart(
                 self.data_manager.loan_df,
                 metadata,
-                top_n=25,
+                top_n=top_n,
                 title=title,
             )
         else:
@@ -255,13 +266,22 @@ class FederalLoansSection(BaseSection):
     
     def _render_loan_top_dollars_with_tabs(self, title: str) -> None:
         """Render loan top dollars chart with 4-year and 2-year tabs."""
+        top_options = [10, 25, 50, 100]
+        default_index = top_options.index(25)
+        top_n = st.selectbox(
+            "Show largest federal loan portfolios",
+            options=top_options,
+            index=default_index,
+            format_func=lambda value: f"Top {value}",
+            key="loan_top_portfolios_top_n",
+        )
         tab1, tab2 = st.tabs(["4-year", "2-year"])
         
         with tab1:
-            self._render_loan_top_dollars("four_year", f"{title} (4-year)")
+            self._render_loan_top_dollars("four_year", f"{title} (4-year)", top_n=top_n)
         
         with tab2:
-            self._render_loan_top_dollars("two_year", f"{title} (2-year)")
+            self._render_loan_top_dollars("two_year", f"{title} (2-year)", top_n=top_n)
     
     def _render_loan_vs_grad_with_tabs(self, title: str) -> None:
         """Render loan vs graduation chart with 4-year and 2-year tabs."""

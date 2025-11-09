@@ -23,6 +23,8 @@ SECTOR_COLOR_SCALE = alt.Scale(
 class LoanTopDollarResult:
     period_label: Optional[str]
     chart_data: pd.DataFrame
+    table_data: pd.DataFrame
+    requested_top_n: int
 
 
 def _identify_year_columns(columns: Iterable[str]) -> List[tuple[int, str]]:
@@ -48,7 +50,13 @@ def _prepare_top_dollar_dataframe(
     top_n: int,
 ) -> LoanTopDollarResult:
     if loans_df.empty:
-        return LoanTopDollarResult(period_label=None, chart_data=loans_df)
+        empty = pd.DataFrame()
+        return LoanTopDollarResult(
+            period_label=None,
+            chart_data=empty,
+            table_data=empty,
+            requested_top_n=top_n,
+        )
 
     year_columns = _identify_year_columns(loans_df.columns)
     if not year_columns:
@@ -80,12 +88,24 @@ def _prepare_top_dollar_dataframe(
         how="inner",
     )
     if merged.empty:
-        return LoanTopDollarResult(period_label=None, chart_data=merged)
+        empty = pd.DataFrame()
+        return LoanTopDollarResult(
+            period_label=None,
+            chart_data=empty,
+            table_data=empty,
+            requested_top_n=top_n,
+        )
 
     merged["loan_dollars"] = merged[year_field_names].sum(axis=1, skipna=True)
     trimmed = merged[merged["loan_dollars"] > 0].copy()
     if trimmed.empty:
-        return LoanTopDollarResult(period_label=None, chart_data=trimmed)
+        empty = pd.DataFrame()
+        return LoanTopDollarResult(
+            period_label=None,
+            chart_data=empty,
+            table_data=empty,
+            requested_top_n=top_n,
+        )
 
     trimmed["Institution"] = trimmed["institution"].where(
         trimmed["institution"].notna() & (trimmed["institution"].astype(str) != ""),
@@ -96,34 +116,53 @@ def _prepare_top_dollar_dataframe(
 
     top = trimmed.sort_values("loan_dollars", ascending=False).head(top_n).copy()
     top["rank"] = range(1, len(top) + 1)
+    top["loan_dollars_billions"] = top["loan_dollars"] / 1_000_000_000
 
-    # Reshape data to long format for stacked bar chart
-    id_vars = ["UnitID", "Institution", "sector", "loan_dollars", "rank"]
+    chart_data = top[["rank", "Institution", "sector", "loan_dollars_billions", "loan_dollars"]].copy()
+    chart_data.rename(columns={"sector": "Sector"}, inplace=True)
+
+    id_vars = ["UnitID", "Institution", "sector", "loan_dollars", "loan_dollars_billions", "rank"]
     year_data = top[id_vars + year_field_names].melt(
         id_vars=id_vars,
         value_vars=year_field_names,
         var_name="year_column",
         value_name="year_loan_dollars",
     )
-
-    # Extract year from column name and convert to integer for proper sorting
-    year_data["year"] = year_data["year_column"].str.extract(r"YR(\d{4})")[0].astype(int)
-    year_data["year_loan_dollars_billions"] = year_data["year_loan_dollars"] / 1_000_000_000
-
-    # Filter out NaN values to avoid chart issues
     year_data = year_data[year_data["year_loan_dollars"].notna() & (year_data["year_loan_dollars"] > 0)]
+    if year_data.empty:
+        table_data = pd.DataFrame()
+    else:
+        year_data["year"] = year_data["year_column"].str.extract(r"YR(\d{4})")[0].astype(int)
+        year_data["year_loan_dollars_billions"] = year_data["year_loan_dollars"] / 1_000_000_000
+        year_data["loan_dollars_billions"] = year_data["loan_dollars"] / 1_000_000_000
+        year_data = year_data.sort_values(["loan_dollars", "year"], ascending=[False, True])
 
-    # Sort by year for proper stacking order
-    year_data = year_data.sort_values("year", ascending=True)
-
-    # Calculate total for display
-    year_data["loan_dollars_billions"] = year_data["loan_dollars"] / 1_000_000_000
+        table = year_data.pivot_table(
+            index=["Institution", "sector", "loan_dollars_billions"],
+            columns="year",
+            values="year_loan_dollars_billions",
+            aggfunc="sum",
+            fill_value=0,
+        ).reset_index()
+        table = table.sort_values("loan_dollars_billions", ascending=False)
+        table.rename(columns={"sector": "Sector", "loan_dollars_billions": "Total (billions)"}, inplace=True)
+        year_cols = [col for col in table.columns if isinstance(col, (int, float))]
+        for col in year_cols:
+            table[col] = table[col].round(3)
+        table["Total (billions)"] = table["Total (billions)"].round(2)
+        table.columns = [str(col) for col in table.columns]
+        table_data = table
 
     min_year = year_columns[0][0]
     max_year = year_columns[-1][0]
     period_label = f"{min_year}-{max_year}" if min_year != max_year else str(min_year)
 
-    return LoanTopDollarResult(period_label=period_label, chart_data=year_data)
+    return LoanTopDollarResult(
+        period_label=period_label,
+        chart_data=chart_data,
+        table_data=table_data,
+        requested_top_n=top_n,
+    )
 
 
 def render_loan_top_dollars_chart(
@@ -146,16 +185,9 @@ def render_loan_top_dollars_chart(
         return
 
     chart_data = prepared.chart_data.copy()
-    chart_data.rename(columns={"sector": "Sector"}, inplace=True)
 
     period_suffix = f" ({prepared.period_label})" if prepared.period_label else ""
     chart_title = f"{title}{period_suffix}"
-
-    # Create year color scale for stacking
-    year_color_scale = alt.Scale(
-        scheme="viridis",
-        reverse=False  # Older years darker, newer years lighter
-    )
 
     # Calculate number of unique institutions for height
     num_institutions = chart_data["Institution"].nunique()
@@ -165,29 +197,26 @@ def render_loan_top_dollars_chart(
         .mark_bar()
         .encode(
             x=alt.X(
-                "sum(year_loan_dollars_billions):Q",
+                "loan_dollars_billions:Q",
                 title="Federal loan dollars (billions)",
                 axis=alt.Axis(format=".2f"),
-                stack="zero",
             ),
             y=alt.Y(
                 "Institution:N",
-                sort=alt.EncodingSortField(field="loan_dollars", op="max", order="descending"),
+                sort=alt.EncodingSortField(field="loan_dollars_billions", order="descending"),
                 title="Institution",
             ),
             color=alt.Color(
-                "year:O",
-                title="Year",
-                scale=year_color_scale,
-                sort="ascending",
+                "Sector:N",
+                scale=SECTOR_COLOR_SCALE,
+                title="Sector",
             ),
-            order=alt.Order("year:O", sort="ascending"),
             tooltip=[
                 alt.Tooltip("Institution:N", title="Institution"),
-                alt.Tooltip("year:O", title="Year"),
-                alt.Tooltip("year_loan_dollars_billions:Q", title="Loan dollars this year (billions)", format=".3f"),
-                alt.Tooltip("loan_dollars_billions:Q", title="Total loan dollars (billions)", format=".2f"),
                 alt.Tooltip("Sector:N", title="Sector"),
+                alt.Tooltip("loan_dollars_billions:Q", title="Total loan dollars (billions)", format=".2f"),
+                alt.Tooltip("loan_dollars:Q", title="Total loan dollars", format=",.0f"),
+                alt.Tooltip("rank:Q", title="Rank"),
             ],
         )
         .properties(height=max(320, 32 * num_institutions), title=chart_title)
@@ -196,34 +225,18 @@ def render_loan_top_dollars_chart(
     st.subheader(chart_title)
     period_text = prepared.period_label or "the available years"
     num_institutions_display = chart_data["Institution"].nunique()
+    selection_note = ""
+    if num_institutions_display < prepared.requested_top_n:
+        selection_note = (
+            f" (requested Top {prepared.requested_top_n}, data available for {num_institutions_display})"
+        )
     st.caption(
-        f"Top {num_institutions_display} institutions by federal loan dollars across {period_text}. Each bar shows yearly breakdown."
+        f"Top {num_institutions_display} institutions by federal loan dollars across {period_text}{selection_note}. "
+        "Bars show total loan portfolios, colored by sector."
     )
     render_altair_chart(chart)
 
-    # Create summary table with yearly breakdown
-    table = chart_data.pivot_table(
-        index=["Institution", "Sector", "loan_dollars_billions"],
-        columns="year",
-        values="year_loan_dollars_billions",
-        aggfunc="sum",
-        fill_value=0,
-    ).reset_index()
-
-    # Sort by total loan dollars descending
-    table = table.sort_values("loan_dollars_billions", ascending=False)
-
-    # Rename total column for clarity
-    table.rename(columns={"loan_dollars_billions": "Total (billions)"}, inplace=True)
-
-    # Format year columns as billions with 2 decimals
-    year_cols = [col for col in table.columns if isinstance(col, (int, float))]
-    for col in year_cols:
-        table[col] = table[col].round(3)
-
-    table["Total (billions)"] = table["Total (billions)"].round(2)
-
-    # Convert all column names to strings to avoid mixed type warning
-    table.columns = [str(col) for col in table.columns]
-
-    render_dataframe(table, width="stretch")
+    if prepared.table_data.empty:
+        st.warning("Unable to build year-by-year breakdown for the selected institutions.")
+    else:
+        render_dataframe(prepared.table_data, width="stretch")
