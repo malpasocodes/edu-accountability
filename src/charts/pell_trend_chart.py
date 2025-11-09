@@ -6,7 +6,7 @@ import pandas as pd
 import streamlit as st
 import altair as alt
 
-from src.ui.renderers import render_altair_chart
+from src.ui.renderers import render_altair_chart, render_dataframe
 
 SECTOR_COLOR_SCALE = alt.Scale(
     domain=["Public", "Private, not-for-profit", "Private, for-profit", "Unknown"],
@@ -162,3 +162,22 @@ def render_pell_trend_chart(df: pd.DataFrame, *, title: str) -> None:
         )
     st.caption(caption)
     render_altair_chart(chart)
+
+    summary = (
+        filtered.pivot_table(
+            index=["Institution", "Sector"],
+            columns="Year",
+            values="PellDollarsBillions",
+            aggfunc="sum",
+            fill_value=0,
+        )
+        .reset_index()
+    )
+    year_cols = sorted(col for col in summary.columns if isinstance(col, int))
+    summary["Total (billions)"] = summary[year_cols].sum(axis=1).round(2)
+    for col in year_cols:
+        summary[col] = summary[col].round(2)
+    columns = ["Institution", "Sector"] + [str(year) for year in year_cols] + ["Total (billions)"]
+    summary = summary[columns].sort_values("Total (billions)", ascending=False)
+    st.markdown("**Top institutions (Pell dollars in billions)**")
+    render_dataframe(summary, width="stretch")
