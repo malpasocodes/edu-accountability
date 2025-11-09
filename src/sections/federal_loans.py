@@ -240,14 +240,26 @@ class FederalLoansSection(BaseSection):
         else:
             st.error(f"Missing metadata for {sector.replace('_', '-')} institutions.")
     
-    def _render_loan_vs_grad(self, sector: str, title: str) -> None:
+    def _render_loan_vs_grad(self, sector: str, title: str, *, top_n: Optional[int] = None) -> None:
         """Render loan vs graduation chart."""
+        if top_n is None:
+            top_options = [10, 25, 50, 100]
+            default_index = top_options.index(10)
+            top_n = st.selectbox(
+                "Select ranking depth",
+                options=top_options,
+                index=default_index,
+                format_func=lambda value: f"Top {value}",
+                key=f"loan_vs_grad_{sector}_top_n",
+                help="Change how many institutions appear in the scatter and table.",
+            )
         metadata = self.data_manager.get_metadata_for_sector(sector)
         if metadata is not None:
             render_loan_vs_grad_scatter(
                 self.data_manager.loan_df,
                 metadata,
                 title=title,
+                top_n=top_n,
             )
         else:
             st.error(f"Missing metadata for {sector.replace('_', '-')} institutions.")
@@ -285,13 +297,22 @@ class FederalLoansSection(BaseSection):
     
     def _render_loan_vs_grad_with_tabs(self, title: str) -> None:
         """Render loan vs graduation chart with 4-year and 2-year tabs."""
+        top_options = [10, 25, 50, 100]
+        default_index = top_options.index(10)
+        top_n = st.selectbox(
+            "Show institutions by loan portfolio size",
+            options=top_options,
+            index=default_index,
+            format_func=lambda value: f"Top {value}",
+            key="loan_vs_grad_top_n",
+        )
         tab1, tab2 = st.tabs(["4-year", "2-year"])
         
         with tab1:
-            self._render_loan_vs_grad("four_year", f"{title} (4-year)")
+            self._render_loan_vs_grad("four_year", f"{title} (4-year)", top_n=top_n)
         
         with tab2:
-            self._render_loan_vs_grad("two_year", f"{title} (2-year)")
+            self._render_loan_vs_grad("two_year", f"{title} (2-year)", top_n=top_n)
     
     def _render_loan_trend_with_tabs(self, title: str) -> None:
         """Render loan trend chart with 4-year and 2-year tabs."""

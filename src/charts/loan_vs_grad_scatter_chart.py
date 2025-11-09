@@ -142,11 +142,14 @@ def render_loan_vs_grad_scatter(
 
     st.subheader(title if period_label is None else f"{title} ({period_label})")
     period_text = period_label or "the available years"
+    selection_note = ""
+    if len(prepared) < top_n:
+        selection_note = f" (requested Top {top_n}, data available for {len(prepared)})"
     st.caption(
         (
             "Each point represents an institution with total federal loan volume and graduation rate; "
-            "bubble size scales with enrollment. Showing top {count} institutions by loan dollars."
-        ).format(count=len(prepared))
+            "bubble size scales with enrollment. Showing top {count} institutions by loan dollars{note}."
+        ).format(count=len(prepared), note=selection_note)
     )
     render_altair_chart(scatter)
 
