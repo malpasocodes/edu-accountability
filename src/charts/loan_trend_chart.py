@@ -11,7 +11,7 @@ from src.charts.loan_top_dollars_chart import (
     _identify_year_columns,
     _normalize_unit_ids,
 )
-from src.ui.renderers import render_altair_chart
+from src.ui.renderers import render_altair_chart, render_dataframe
 
 
 def _prepare_loan_trend_dataframe(
@@ -240,3 +240,27 @@ def render_loan_trend_chart(
         )
     st.caption(caption)
     render_altair_chart(chart)
+
+    # Build summary table (year-by-year billons + total)
+    year_columns = sorted(prepared["Year"].unique())
+    if year_columns:
+        table = (
+            prepared.pivot_table(
+                index=["Institution", "Sector"],
+                columns="Year",
+                values="LoanDollarsBillions",
+                aggfunc="sum",
+                fill_value=0,
+            )
+            .reset_index()
+        )
+        table["Total (billions)"] = table[year_columns].sum(axis=1)
+        table["Total (billions)"] = table["Total (billions)"].round(2)
+        for col in year_columns:
+            table[col] = table[col].round(2)
+        display_columns = ["Institution", "Sector"] + year_columns + ["Total (billions)"]
+        table = table[display_columns].sort_values("Total (billions)", ascending=False)
+        # Convert column names to strings for Streamlit rendering
+        table.columns = [str(col) for col in table.columns]
+        st.markdown("**Top institutions (federal loan dollars in billions)**")
+        render_dataframe(table, width="stretch")
