@@ -247,8 +247,19 @@ class PellGrantsSection(BaseSection):
             else:
                 st.error("Missing raw Pell data.")
     
-    def _render_pell_vs_grad(self, resource_key: str, sector: str, title: str) -> None:
+    def _render_pell_vs_grad(self, resource_key: str, sector: str, title: str, *, top_n: Optional[int] = None) -> None:
         """Render Pell vs graduation chart."""
+        if top_n is None:
+            top_options = [10, 25, 50, 100]
+            default_index = top_options.index(10)
+            top_n = st.selectbox(
+                "Select ranking depth",
+                options=top_options,
+                index=default_index,
+                format_func=lambda value: f"Top {value}",
+                key=f"pell_vs_grad_{sector}_top_n",
+                help="Change how many institutions appear in the scatter and table.",
+            )
         dataset = self.data_manager.get_pell_resource(resource_key)
         if dataset is not None:
             metadata = self.data_manager.get_metadata_for_sector(sector)
@@ -257,6 +268,7 @@ class PellGrantsSection(BaseSection):
                     dataset,
                     title=title,
                     metadata_df=metadata,
+                    top_n=top_n,
                 )
             else:
                 st.error(f"Missing metadata for {sector.replace('_', '-')} institutions.")
@@ -300,13 +312,22 @@ class PellGrantsSection(BaseSection):
     
     def _render_pell_vs_grad_with_tabs(self, title: str) -> None:
         """Render Pell vs graduation chart with 4-year and 2-year tabs."""
+        top_options = [10, 25, 50, 100]
+        default_index = top_options.index(10)
+        top_n = st.selectbox(
+            "Show institutions by Pell portfolio size",
+            options=top_options,
+            index=default_index,
+            format_func=lambda value: f"Top {value}",
+            key="pell_vs_grad_top_n",
+        )
         tab1, tab2 = st.tabs(["4-year", "2-year"])
         
         with tab1:
-            self._render_pell_vs_grad("scatter_four", "four_year", f"{title} (4-year)")
+            self._render_pell_vs_grad("scatter_four", "four_year", f"{title} (4-year)", top_n=top_n)
         
         with tab2:
-            self._render_pell_vs_grad("scatter_two", "two_year", f"{title} (2-year)")
+            self._render_pell_vs_grad("scatter_two", "two_year", f"{title} (2-year)", top_n=top_n)
     
     def _render_pell_trend_with_tabs(self, title: str) -> None:
         """Render Pell trend chart with 4-year and 2-year tabs."""

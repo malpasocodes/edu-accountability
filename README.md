@@ -29,7 +29,7 @@ A data-driven dashboard for analyzing higher education accountability, affordabi
 
 ### 🎓 Pell Grants
 - Largest Pell grant portfolios with Top 10/25/50/100 selector (aggregated 2008-2022)
-- Pell vs graduation rate correlation analysis
+- Pell vs graduation rate correlation analysis with Top-N selector + grad-rate guide rails
 - Year-over-year funding pattern trends (2008-2022)
 - Aggregate national trend analysis showing total aid patterns
 - Need-based aid distribution visualizations

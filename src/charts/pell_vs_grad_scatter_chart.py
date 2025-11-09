@@ -24,6 +24,7 @@ def render_pell_vs_grad_scatter(
     *,
     title: str,
     metadata_df: pd.DataFrame | None = None,
+    top_n: int = 50,
 ) -> None:
     """Render a scatter plot of Pell dollars (billions) versus graduation rate."""
 
@@ -73,7 +74,7 @@ def render_pell_vs_grad_scatter(
         st.warning("No valid numeric data available for the scatter chart.")
         return
 
-    top_filtered = filtered.sort_values("pell_dollars_billions", ascending=False).head(50)
+    top_filtered = filtered.sort_values("pell_dollars_billions", ascending=False).head(top_n)
 
     scatter = (
         alt.Chart(top_filtered)
@@ -106,13 +107,21 @@ def render_pell_vs_grad_scatter(
         .properties(height=520)
     )
 
+    grad_guides = alt.Chart(pd.DataFrame({"rate": [25, 50, 75]})).mark_rule(
+        strokeDash=[6, 6],
+        color="#888888",
+    ).encode(x=alt.X("rate:Q"))
+
     st.subheader(title)
+    selection_note = ""
+    if len(top_filtered) < top_n:
+        selection_note = f" (requested Top {top_n}, data available for {len(top_filtered)})"
     st.caption(
         "Each point represents an institution with available Pell grant totals (billions) and "
-        "graduation rate data; bubble size scales with enrollment. Showing top 50 institutions "
-        "by Pell dollars."
+        "graduation rate data; bubble size scales with enrollment. Showing top "
+        f"{len(top_filtered)} institutions by Pell dollars{selection_note}."
     )
-    render_altair_chart(scatter)
+    render_altair_chart(scatter + grad_guides)
 
     display_columns = [
         "Institution",
@@ -139,5 +148,5 @@ def render_pell_vs_grad_scatter(
     table_df["Graduation rate (%)"] = table_df["Graduation rate (%)"].round(1)
     table_df["Enrollment"] = table_df["Enrollment"].round().astype(int)
 
-    st.markdown("**Institutions (top 50 by Pell dollars)**")
+    st.markdown("**Institutions (top Pell portfolios)**")
     render_dataframe(table_df, width="stretch")
