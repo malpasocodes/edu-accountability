@@ -24,6 +24,7 @@ class LoanTopDollarResult:
     period_label: Optional[str]
     chart_data: pd.DataFrame
     table_data: pd.DataFrame
+    sector_summary: pd.DataFrame
     requested_top_n: int
 
 
@@ -55,6 +56,7 @@ def _prepare_top_dollar_dataframe(
             period_label=None,
             chart_data=empty,
             table_data=empty,
+            sector_summary=empty,
             requested_top_n=top_n,
         )
 
@@ -93,6 +95,7 @@ def _prepare_top_dollar_dataframe(
             period_label=None,
             chart_data=empty,
             table_data=empty,
+            sector_summary=empty,
             requested_top_n=top_n,
         )
 
@@ -104,6 +107,7 @@ def _prepare_top_dollar_dataframe(
             period_label=None,
             chart_data=empty,
             table_data=empty,
+            sector_summary=empty,
             requested_top_n=top_n,
         )
 
@@ -120,6 +124,20 @@ def _prepare_top_dollar_dataframe(
 
     chart_data = top[["rank", "Institution", "sector", "loan_dollars_billions", "loan_dollars"]].copy()
     chart_data.rename(columns={"sector": "Sector"}, inplace=True)
+
+    sector_summary = (
+        top.groupby("sector", as_index=False)["loan_dollars"]
+        .sum()
+        .rename(columns={"sector": "Sector"})
+    )
+    sector_summary["loan_dollars_billions"] = sector_summary["loan_dollars"] / 1_000_000_000
+    sector_summary = sector_summary.sort_values("loan_dollars", ascending=False)
+    total_loans = sector_summary["loan_dollars"].sum()
+    if total_loans > 0:
+        sector_summary["share_pct"] = (sector_summary["loan_dollars"] / total_loans) * 100
+    else:
+        sector_summary["share_pct"] = 0.0
+    sector_summary["label_mid"] = sector_summary["loan_dollars_billions"] / 2
 
     id_vars = ["UnitID", "Institution", "sector", "loan_dollars", "loan_dollars_billions", "rank"]
     year_data = top[id_vars + year_field_names].melt(
@@ -161,6 +179,7 @@ def _prepare_top_dollar_dataframe(
         period_label=period_label,
         chart_data=chart_data,
         table_data=table_data,
+        sector_summary=sector_summary,
         requested_top_n=top_n,
     )
 
@@ -262,6 +281,56 @@ def render_loan_top_dollars_chart(
         "Bars show total loan portfolios, colored by sector."
     )
     render_altair_chart(chart)
+
+    if not prepared.sector_summary.empty:
+        st.markdown("#### Sector Totals")
+        sector_chart = (
+            alt.Chart(prepared.sector_summary)
+            .mark_bar()
+            .encode(
+                y=alt.Y(
+                    "Sector:N",
+                    sort=alt.SortField(field="loan_dollars", order="descending"),
+                    title="Sector",
+                    axis=alt.Axis(labelFontSize=12, labelFontWeight="bold", titleFontSize=13, titleFontWeight="bold"),
+                ),
+                x=alt.X(
+                    "loan_dollars_billions:Q",
+                    title="Federal loan dollars (billions)",
+                    axis=alt.Axis(format=".2f", labelFontSize=12, labelFontWeight="bold", titleFontSize=13, titleFontWeight="bold"),
+                ),
+                color=alt.Color("Sector:N", scale=SECTOR_COLOR_SCALE, legend=None),
+                tooltip=[
+                    alt.Tooltip("Sector:N", title="Sector"),
+                    alt.Tooltip("loan_dollars_billions:Q", title="Loan dollars (billions)", format=".2f"),
+                    alt.Tooltip("loan_dollars:Q", title="Loan dollars", format=",.0f"),
+                    alt.Tooltip("share_pct:Q", title="Share of total (%)", format=".1f"),
+                ],
+            )
+            .properties(height=320, width=540)
+        )
+        label_data = prepared.sector_summary[prepared.sector_summary["loan_dollars"] > 0]
+        sector_labels = (
+            alt.Chart(label_data)
+            .mark_text(
+                color="#ffffff",
+                fontWeight="bold",
+                fontSize=32,
+                align="center",
+                baseline="middle",
+            )
+            .encode(
+                y=alt.Y(
+                    "Sector:N",
+                    sort=alt.SortField(field="loan_dollars", order="descending"),
+                ),
+                x=alt.X("label_mid:Q"),
+                text=alt.Text("label:N"),
+            )
+            .transform_calculate(label="format(datum.share_pct, '.1f') + '%'")
+        )
+        render_altair_chart(sector_chart + sector_labels)
+        st.caption("Sector totals aggregate only the institutions included in the ranking above.")
 
     if prepared.table_data.empty:
         st.warning("Unable to build year-by-year breakdown for the selected institutions.")
