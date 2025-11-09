@@ -220,7 +220,7 @@ class FederalLoansSection(BaseSection):
         """Render loan top dollars chart."""
         if top_n is None:
             top_options = [10, 25, 50, 100]
-            default_index = top_options.index(25)
+            default_index = top_options.index(10)
             top_n = st.selectbox(
                 "Select ranking depth",
                 options=top_options,
@@ -267,7 +267,7 @@ class FederalLoansSection(BaseSection):
     def _render_loan_top_dollars_with_tabs(self, title: str) -> None:
         """Render loan top dollars chart with 4-year and 2-year tabs."""
         top_options = [10, 25, 50, 100]
-        default_index = top_options.index(25)
+        default_index = top_options.index(10)
         top_n = st.selectbox(
             "Show largest federal loan portfolios",
             options=top_options,

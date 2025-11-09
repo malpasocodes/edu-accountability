@@ -184,7 +184,8 @@ def render_loan_top_dollars_chart(
         st.warning("No federal loan information available to chart.")
         return
 
-    chart_data = prepared.chart_data.copy()
+    chart_data = prepared.chart_data.copy().sort_values("loan_dollars", ascending=False)
+    chart_data["Institution"] = pd.Categorical(chart_data["Institution"], categories=chart_data["Institution"], ordered=True)
 
     period_suffix = f" ({prepared.period_label})" if prepared.period_label else ""
     chart_title = f"{title}{period_suffix}"
@@ -192,34 +193,60 @@ def render_loan_top_dollars_chart(
     # Calculate number of unique institutions for height
     num_institutions = chart_data["Institution"].nunique()
 
-    chart = (
-        alt.Chart(chart_data)
-        .mark_bar()
-        .encode(
-            x=alt.X(
-                "loan_dollars_billions:Q",
-                title="Federal loan dollars (billions)",
-                axis=alt.Axis(format=".2f"),
-            ),
-            y=alt.Y(
-                "Institution:N",
-                sort=alt.EncodingSortField(field="loan_dollars_billions", order="descending"),
-                title="Institution",
-            ),
-            color=alt.Color(
-                "Sector:N",
-                scale=SECTOR_COLOR_SCALE,
-                title="Sector",
-            ),
-            tooltip=[
-                alt.Tooltip("Institution:N", title="Institution"),
-                alt.Tooltip("Sector:N", title="Sector"),
-                alt.Tooltip("loan_dollars_billions:Q", title="Total loan dollars (billions)", format=".2f"),
-                alt.Tooltip("loan_dollars:Q", title="Total loan dollars", format=",.0f"),
-                alt.Tooltip("rank:Q", title="Rank"),
-            ],
+    base = alt.Chart(chart_data).encode(
+        y=alt.Y(
+            "Institution:N",
+            sort=None,
+            title="Institution",
+            axis=alt.Axis(labelFontSize=13, labelFontWeight="bold", titleFontSize=14, titleFontWeight="bold"),
         )
-        .properties(height=max(320, 32 * num_institutions), title=chart_title)
+    )
+
+    bars = base.mark_bar().encode(
+        x=alt.X(
+            "loan_dollars_billions:Q",
+            title="Federal loan dollars (billions)",
+            axis=alt.Axis(
+                format=".2f",
+                labelFontSize=12,
+                labelFontWeight="bold",
+                titleFontSize=14,
+                titleFontWeight="bold",
+            ),
+        ),
+        color=alt.Color(
+            "Sector:N",
+            scale=SECTOR_COLOR_SCALE,
+            title="Sector",
+        ),
+        tooltip=[
+            alt.Tooltip("Institution:N", title="Institution"),
+            alt.Tooltip("Sector:N", title="Sector"),
+            alt.Tooltip("loan_dollars_billions:Q", title="Total loan dollars (billions)", format=".2f"),
+            alt.Tooltip("loan_dollars:Q", title="Total loan dollars", format=",.0f"),
+            alt.Tooltip("rank:Q", title="Rank"),
+        ],
+    )
+
+    labels = base.mark_text(
+        align="left",
+        baseline="middle",
+        dx=4,
+        color="#111111",
+        fontSize=11,
+        fontWeight="bold",
+    ).encode(
+        x=alt.X("loan_dollars_billions:Q"),
+        text=alt.Text("loan_dollars_billions:Q", format=".2f"),
+    )
+
+    chart = (
+        (bars + labels)
+        .properties(
+            height=max(320, 32 * num_institutions),
+            width=540,
+            title=chart_title,
+        )
     )
 
     st.subheader(chart_title)
