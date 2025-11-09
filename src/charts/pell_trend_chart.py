@@ -173,11 +173,16 @@ def render_pell_trend_chart(df: pd.DataFrame, *, title: str) -> None:
         )
         .reset_index()
     )
-    year_cols = sorted(col for col in summary.columns if isinstance(col, int))
+    year_cols = sorted(
+        col for col in summary.columns if isinstance(col, (int, float))
+    )
+    str_year_cols = [str(int(col)) for col in year_cols]
     summary["Total (billions)"] = summary[year_cols].sum(axis=1).round(2)
     for col in year_cols:
         summary[col] = summary[col].round(2)
-    columns = ["Institution", "Sector"] + [str(year) for year in year_cols] + ["Total (billions)"]
+    rename_map = {col: str(int(col)) for col in year_cols}
+    summary.rename(columns=rename_map, inplace=True)
+    columns = ["Institution", "Sector"] + str_year_cols + ["Total (billions)"]
     summary = summary[columns].sort_values("Total (billions)", ascending=False)
     st.markdown("**Top institutions (Pell dollars in billions)**")
     render_dataframe(summary, width="stretch")
