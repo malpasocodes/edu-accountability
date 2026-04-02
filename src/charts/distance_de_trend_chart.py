@@ -142,11 +142,13 @@ def _prepare_de_trend_dataframe(
     long_form = long_form.merge(year_totals, on="Year", how="left")
 
     # Calculate percentage of total for each institution-year
-    long_form["de_percentage"] = (
-        (long_form["de_enrollment"] / long_form["year_total_enrollment"] * 100)
-        .fillna(0)
-        .round(2)
-    )
+    long_form["de_percentage"] = 0.0
+    nonzero_total = long_form["year_total_enrollment"] > 0
+    long_form.loc[nonzero_total, "de_percentage"] = (
+        long_form.loc[nonzero_total, "de_enrollment"]
+        / long_form.loc[nonzero_total, "year_total_enrollment"]
+        * 100
+    ).round(2)
 
     # Calculate year-over-year changes for dot coloring
     long_form = long_form.sort_values(["UnitID", "Year"])

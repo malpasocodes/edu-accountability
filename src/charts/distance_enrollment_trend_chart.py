@@ -138,8 +138,12 @@ def _prepare_enrollment_trend_dataframe(
     long_form = long_form.sort_values(["UnitID", "Year"])
     long_form["PrevYearEnrollment"] = long_form.groupby("UnitID")["enrollment"].shift(1)
     long_form["YoYChange"] = long_form["enrollment"] - long_form["PrevYearEnrollment"]
-    long_form["YoYChangePercent"] = (
-        (long_form["enrollment"] - long_form["PrevYearEnrollment"]) / long_form["PrevYearEnrollment"] * 100
+    long_form["YoYChangePercent"] = 0.0
+    prev_nonzero = long_form["PrevYearEnrollment"] > 0
+    long_form.loc[prev_nonzero, "YoYChangePercent"] = (
+        long_form.loc[prev_nonzero, "YoYChange"]
+        / long_form.loc[prev_nonzero, "PrevYearEnrollment"]
+        * 100
     ).round(1)
 
     # Determine change direction for dot coloring (based on percent change)
