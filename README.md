@@ -5,6 +5,8 @@
 
 A data-driven dashboard for analyzing higher education accountability, affordability, and outcomes across U.S. institutions. Built with Streamlit and powered by IPEDS, Federal Student Aid, and College Scorecard data.
 
+*Last verified: 2026-04-01*
+
 ## Features
 
 ### 🏠 Overview
