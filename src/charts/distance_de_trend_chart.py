@@ -162,14 +162,9 @@ def _prepare_de_trend_dataframe(
             long_form.loc[mask, "PrevYearDEEnrollment"] * 100
         ).round(1)
 
-    # Determine change direction for dot coloring
-    long_form["ChangeDirection"] = pd.cut(
-        long_form["YoYChange"],
-        bins=[-float('inf'), -0.1, 0.1, float('inf')],
-        labels=["Decrease", "Same", "Increase"],
-        include_lowest=True
-    )
-    long_form["ChangeDirection"] = long_form["ChangeDirection"].fillna("Same").astype(str)
+    # Determine change direction for dot coloring (based on percent change)
+    from src.charts.trend_utils import classify_yoy_direction
+    long_form["ChangeDirection"] = classify_yoy_direction(long_form["YoYChangePercent"])
 
     # For first year of each institution, mark as "Same" since no previous year
     first_year_mask = long_form["PrevYearDEEnrollment"].isna()

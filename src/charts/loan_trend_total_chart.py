@@ -116,17 +116,8 @@ def _prepare_loan_trend_total_dataframe(
     )
 
     # Categorize change direction
-    def categorize_change(change_pct):
-        if pd.isna(change_pct):
-            return "Same"
-        elif change_pct > 0.5:  # More than 0.5% increase
-            return "Increase"
-        elif change_pct < -0.5:  # More than 0.5% decrease
-            return "Decrease"
-        else:
-            return "Same"
-
-    aggregated["ChangeDirection"] = aggregated["YoYChangePercent"].apply(categorize_change)
+    from src.charts.trend_utils import classify_yoy_direction
+    aggregated["ChangeDirection"] = classify_yoy_direction(aggregated["YoYChangePercent"])
 
     # Select final columns
     columns = [

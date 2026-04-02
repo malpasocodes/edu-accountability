@@ -105,16 +105,9 @@ def _prepare_loan_trend_dataframe(
         (filtered["loan_dollars"] - filtered["PrevYearLoanDollars"]) / filtered["PrevYearLoanDollars"] * 100
     ).round(1)
 
-    # Determine change direction for dot coloring
-    conditions = [
-        filtered["YoYChange"] > 0,  # Increase
-        filtered["YoYChange"] == 0,  # Same
-        filtered["YoYChange"] < 0   # Decrease
-    ]
-    choices = ["Increase", "Same", "Decrease"]
-    filtered["ChangeDirection"] = pd.cut(filtered["YoYChange"], bins=[-float('inf'), -0.01, 0.01, float('inf')],
-                                       labels=["Decrease", "Same", "Increase"], include_lowest=True)
-    filtered["ChangeDirection"] = filtered["ChangeDirection"].fillna("Same").astype(str)
+    # Determine change direction for dot coloring (based on percent change)
+    from src.charts.trend_utils import classify_yoy_direction
+    filtered["ChangeDirection"] = classify_yoy_direction(filtered["YoYChangePercent"])
 
     # For first year of each institution, mark as "Same" since no previous year
     first_year_mask = filtered["PrevYearLoanDollars"].isna()

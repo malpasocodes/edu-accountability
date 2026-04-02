@@ -73,10 +73,9 @@ def render_pell_trend_chart(df: pd.DataFrame, *, title: str) -> None:
         (filtered["PellDollarsBillions"] - filtered["PrevYearPellDollars"]) / filtered["PrevYearPellDollars"] * 100
     ).round(1)
 
-    # Determine change direction for dot coloring
-    filtered["ChangeDirection"] = pd.cut(filtered["YoYChange"], bins=[-float('inf'), -0.001, 0.001, float('inf')],
-                                       labels=["Decrease", "Same", "Increase"], include_lowest=True)
-    filtered["ChangeDirection"] = filtered["ChangeDirection"].fillna("Same").astype(str)
+    # Determine change direction for dot coloring (based on percent change)
+    from src.charts.trend_utils import classify_yoy_direction
+    filtered["ChangeDirection"] = classify_yoy_direction(filtered["YoYChangePercent"])
 
     # For first year of each institution, mark as "Same" since no previous year
     first_year_mask = filtered["PrevYearPellDollars"].isna()
