@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from typing import List, Optional
 
+import re
 import pandas as pd
 import numpy as np
 import streamlit as st
@@ -596,10 +597,9 @@ class CollegeExplorerSection(BaseSection):
             return pd.DataFrame()
 
         # Detect year columns dynamically from data
-        import re as _re
-        _yr_pat = _re.compile(r"^YR(\d{4})$", _re.IGNORECASE)
+        yr_pat = re.compile(r"^YR(\d{4})$", re.IGNORECASE)
         available_year_columns = sorted(
-            col for col in self.data_manager.pell_df.columns if _yr_pat.match(col)
+            col for col in self.data_manager.pell_df.columns if yr_pat.match(col)
         )
 
         trend_records = []
