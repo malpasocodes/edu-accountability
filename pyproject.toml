@@ -13,5 +13,8 @@ dependencies = [
 [project.optional-dependencies]
 dev = ["pytest>=8.0", "ruff>=0.6", "black>=24.0"]
 
+[tool.pytest.ini_options]
+pythonpath = ["."]
+
 [tool.uv]
 package = true
