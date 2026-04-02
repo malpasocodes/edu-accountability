@@ -72,7 +72,10 @@ class IPEDSGradExtractor:
         )
 
         melted[MELT_VALUE_COL] = pd.to_numeric(melted[MELT_VALUE_COL], errors="coerce")
+        pre_drop = len(melted)
         melted = melted.dropna(subset=[MELT_VALUE_COL])
+        if pre_drop - len(melted):
+            print(f"  Dropped {pre_drop - len(melted)} rows with null {MELT_VALUE_COL} ({len(melted)} remaining)")
 
         melted.rename(
             columns={UNIT_ID_COL: "unitid", INST_NAME_COL: "instnm"}, inplace=True

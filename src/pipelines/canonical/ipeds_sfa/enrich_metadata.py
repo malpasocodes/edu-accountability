@@ -46,6 +46,10 @@ class SFAMetadataEnricher:
         remaining = [c for c in enriched.columns if c not in columns]
         enriched = enriched[columns + remaining]
 
+        missing = enriched["control"].isna().sum()
+        if missing:
+            print(f"Warning: {missing} rows missing HD metadata.")
+
         if write_output:
             output_path = self.config.output_parquet or self.config.long_parquet
             output_path.parent.mkdir(parents=True, exist_ok=True)

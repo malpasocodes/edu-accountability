@@ -82,7 +82,10 @@ class IPEDSSalaryExtractor:
 
         value_col = self.config.value_column
         melted[value_col] = pd.to_numeric(melted[value_col], errors="coerce")
+        pre_drop = len(melted)
         melted = melted.dropna(subset=[value_col])
+        if pre_drop - len(melted):
+            print(f"  Dropped {pre_drop - len(melted)} rows with null {value_col} ({len(melted)} remaining)")
 
         melted = melted.rename(columns={"UnitID": "unitid", "Institution Name": "instnm"})
         melted["unitid"] = melted["unitid"].astype("Int64")

@@ -3,9 +3,12 @@
 from __future__ import annotations
 
 import csv
+import logging
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Callable, Dict, Iterable, List, Optional, Sequence
+
+logger = logging.getLogger(__name__)
 
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent
@@ -120,10 +123,19 @@ def _build_rows(sector_filter: Sequence[str]) -> List[List[object]]:
     enrollment = _load_numeric_column("enrollment.csv", "ENR_UGD", _parse_int)
 
     rows: List[List[object]] = []
+    missing_cost = 0
+    missing_grad = 0
+    missing_both = 0
     for unit_id, inst in institutions.items():
         cost = tuition.get(unit_id)
         grad = grad_rates.get(unit_id)
         if cost is None or grad is None:
+            if cost is None and grad is None:
+                missing_both += 1
+            elif cost is None:
+                missing_cost += 1
+            else:
+                missing_grad += 1
             continue
 
         enr = enrollment.get(unit_id, 0)
@@ -141,6 +153,13 @@ def _build_rows(sector_filter: Sequence[str]) -> List[List[object]]:
                 enr,
                 inst.sector_label,
             ]
+        )
+
+    dropped = missing_cost + missing_grad + missing_both
+    if dropped:
+        logger.info(
+            "Dropped %d of %d institutions (missing cost=%d, missing grad=%d, missing both=%d)",
+            dropped, len(institutions), missing_cost, missing_grad, missing_both,
         )
 
     rows.sort(key=lambda item: (item[1].lower(), item[0]))
@@ -170,6 +189,7 @@ def write_dataset(rows: Iterable[List[object]], output_path: Path) -> None:
 
 
 def main() -> None:
+    logging.basicConfig(level=logging.INFO, format="%(levelname)s: %(message)s")
     for name, config in SEGMENTS.items():
         rows = _build_rows(config["sectors"])
         if not rows:
@@ -177,6 +197,7 @@ def main() -> None:
                 f"No qualifying institutions found for segment '{name}'."
             )
         write_dataset(rows, config["output"])
+        logger.info("Wrote %d rows to %s", len(rows), config["output"])
 
 
 if __name__ == "__main__":

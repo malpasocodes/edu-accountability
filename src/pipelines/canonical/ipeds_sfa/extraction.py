@@ -62,7 +62,10 @@ class SFAPercentExtractor:
         melted = melted.merge(meta_df, left_on="_original_column", right_on="column_name", how="left")
 
         melted[self.config.value_column] = pd.to_numeric(melted[self.config.value_column], errors="coerce")
+        pre_drop = len(melted)
         melted = melted.dropna(subset=[self.config.value_column])
+        if pre_drop - len(melted):
+            print(f"  Dropped {pre_drop - len(melted)} rows with null {self.config.value_column} ({len(melted)} remaining)")
 
         melted = melted.rename(columns={"UnitID": "unitid", "Institution Name": "instnm"})
         melted["unitid"] = melted["unitid"].astype("Int64")

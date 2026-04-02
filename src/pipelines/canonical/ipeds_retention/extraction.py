@@ -88,7 +88,10 @@ class IPEDSRetentionExtractor:
         melted[self.config.value_column] = pd.to_numeric(
             melted[self.config.value_column], errors="coerce"
         )
+        pre_drop = len(melted)
         melted = melted.dropna(subset=[self.config.value_column])
+        if pre_drop - len(melted):
+            print(f"  Dropped {pre_drop - len(melted)} rows with null {self.config.value_column} ({len(melted)} remaining)")
 
         if self.config.round_values:
             melted[self.config.value_column] = melted[self.config.value_column].round()
