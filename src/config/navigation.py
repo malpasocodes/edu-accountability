@@ -11,8 +11,6 @@ from .constants import (
     FEDERAL_LOANS_SECTION,
     PELL_SECTION,
     DISTANCE_EDUCATION_SECTION,
-    EARNINGS_PREMIUM_SECTION,
-    ROI_SECTION,
     COLLEGE_EXPLORER_SECTION,
     CANONICAL_IPEDS_SECTION,
     SCORECARD_SECTION,
@@ -25,18 +23,6 @@ from .constants import (
     PELL_CHARTS,
     DISTANCE_OVERVIEW_LABEL,
     DISTANCE_CHARTS,
-    EARNINGS_PREMIUM_OVERVIEW_LABEL,
-    EARNINGS_PREMIUM_CHARTS,
-    EP_NATIONAL_OVERVIEW_LABEL,
-    EP_OVERVIEW_RISK_MAP_LABEL,
-    EP_INSTITUTION_LOOKUP_LABEL,
-    EP_STATE_ANALYSIS_LABEL,
-    EP_SECTOR_COMPARISON_LABEL,
-    EP_RISK_QUADRANTS_LABEL,
-    EP_PROGRAM_DISTRIBUTION_LABEL,
-    EP_METHODOLOGY_LABEL,
-    ROI_OVERVIEW_LABEL,
-    ROI_CHARTS,
     COLLEGE_EXPLORER_OVERVIEW_LABEL,
     COLLEGE_EXPLORER_CHARTS,
     CANONICAL_IPEDS_OVERVIEW_LABEL,
@@ -175,82 +161,6 @@ class NavigationConfig:
         description="Explore distance education enrollment patterns"
     )
 
-    EARNINGS_PREMIUM = SectionConfig(
-        name=EARNINGS_PREMIUM_SECTION,
-        icon="📈",
-        label="Earnings Premium Analysis",
-        overview_chart=ChartConfig(
-            label=EARNINGS_PREMIUM_OVERVIEW_LABEL,
-            key="nav_earnings_premium_overview",
-            description="Understanding the Earnings Premium Test and risk categories"
-        ),
-        charts=[
-            ChartConfig(
-                label=EP_NATIONAL_OVERVIEW_LABEL,
-                key="nav_ep_national_overview",
-                description="National summary metrics and risk distribution"
-            ),
-            ChartConfig(
-                label=EP_OVERVIEW_RISK_MAP_LABEL,
-                key="nav_ep_overview_risk_map",
-                description="Interactive scatter plot by risk level"
-            ),
-            ChartConfig(
-                label=EP_RISK_QUADRANTS_LABEL,
-                key="nav_ep_risk_quadrants",
-                description="Scatter plots by risk category with sector colors"
-            ),
-            ChartConfig(
-                label=EP_SECTOR_COMPARISON_LABEL,
-                key="nav_ep_sector_comparison",
-                description="Compare risk across institutional types"
-            ),
-            ChartConfig(
-                label=EP_STATE_ANALYSIS_LABEL,
-                key="nav_ep_state_analysis",
-                description="Deep dive into EP risk by state"
-            ),
-            ChartConfig(
-                label=EP_PROGRAM_DISTRIBUTION_LABEL,
-                key="nav_ep_program_distribution",
-                description="Scale of program-level EP assessment requirements"
-            ),
-            ChartConfig(
-                label=EP_INSTITUTION_LOOKUP_LABEL,
-                key="nav_ep_institution_lookup",
-                description="Search institutions and view risk assessments"
-            ),
-            ChartConfig(
-                label=EP_METHODOLOGY_LABEL,
-                key="nav_ep_methodology",
-                description="Data sources, calculations, and limitations"
-            ),
-        ],
-        session_key="earnings_premium_chart",
-        description="Assess institutional readiness for July 1, 2026 EP requirements"
-    )
-
-    ROI = SectionConfig(
-        name=ROI_SECTION,
-        icon="💰",
-        label="ROI",
-        overview_chart=ChartConfig(
-            label=ROI_OVERVIEW_LABEL,
-            key="nav_roi_overview",
-            description="Return on investment analysis"
-        ),
-        charts=[
-            ChartConfig(
-                label=chart_label,
-                key=f"nav_roi_{index}",
-                description=None
-            )
-            for index, chart_label in enumerate(ROI_CHARTS)
-        ],
-        session_key="roi_chart",
-        description="Analyze return on investment for higher education"
-    )
-
     COLLEGE_EXPLORER = SectionConfig(
         name=COLLEGE_EXPLORER_SECTION,
         icon="🔍",
@@ -319,8 +229,6 @@ class NavigationConfig:
             cls.FEDERAL_LOANS,
             cls.PELL_GRANTS,
             cls.DISTANCE_EDUCATION,
-            cls.EARNINGS_PREMIUM,
-            cls.ROI,
             cls.COLLEGE_EXPLORER,
         ]
         if ENABLE_CANONICAL_IPEDS_SECTION:

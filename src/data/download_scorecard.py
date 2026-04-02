@@ -269,7 +269,7 @@ def main():
     print("\n" + "=" * 70)
     print("✓ Download and processing complete!")
     print("=" * 70)
-    print(f"\nNext step: Run build_ep_metrics.py to generate EP analysis dataset")
+    print(f"\nDownload and processing complete. Data is ready for use.")
 
 
 if __name__ == "__main__":

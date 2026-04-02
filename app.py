@@ -24,8 +24,6 @@ from src.config.constants import (
     FEDERAL_LOANS_SECTION,
     PELL_SECTION,
     DISTANCE_EDUCATION_SECTION,
-    EARNINGS_PREMIUM_SECTION,
-    ROI_SECTION,
     COLLEGE_EXPLORER_SECTION,
     CANONICAL_IPEDS_SECTION,
     SCORECARD_SECTION,
@@ -41,8 +39,6 @@ from src.sections import (
     FederalLoansSection,
     PellGrantsSection,
     DistanceEducationSection,
-    EarningsPremiumSection,
-    ROISection,
     CollegeExplorerSection,
     CanonicalIPEDSSection,
     CollegeScorecardSection,
@@ -111,8 +107,6 @@ def render_main(data_manager: DataManager) -> None:
         FEDERAL_LOANS_SECTION: FederalLoansSection(data_manager),
         PELL_SECTION: PellGrantsSection(data_manager),
         DISTANCE_EDUCATION_SECTION: DistanceEducationSection(data_manager),
-        EARNINGS_PREMIUM_SECTION: EarningsPremiumSection(data_manager),
-        ROI_SECTION: ROISection(data_manager),
         COLLEGE_EXPLORER_SECTION: CollegeExplorerSection(data_manager),
     }
     

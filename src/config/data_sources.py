@@ -33,7 +33,6 @@ class DataSources:
     _fsa_dir = _raw_dir / "ipeds" / "fsa"
     if not _fsa_dir.exists():
         _fsa_dir = _raw_dir / "fsa"
-    _epanalysis_dir = _raw_dir / "epanalysis"
     _canonical_dir = _processed_dir / "2023" / "canonical"
     _canonical_scorecard_dir = _canonical_dir  # reuse same canonical folder
 
@@ -299,25 +298,6 @@ class DataSources:
         required=False,
     )
 
-    # ROI data sources - epanalysis migration
-    ROI_METRICS_RAW = DataSourceConfig(
-        path=_epanalysis_dir / "roi-metrics.csv",
-        description="ROI metrics from epanalysis (116 CA institutions)",
-        required=False
-    )
-
-    ROI_METRICS_PARQUET = DataSourceConfig(
-        path=_processed_dir / "roi_metrics.parquet",
-        description="Processed ROI metrics (116 CA institutions, Parquet)",
-        required=False
-    )
-
-    OPEID_MAPPING = DataSourceConfig(
-        path=_epanalysis_dir / "opeid_unitid_mapping.csv",
-        description="OPEID to UnitID mapping for CA institutions",
-        required=False
-    )
-
     @classmethod
     def get_pell_resources_map(cls) -> Dict[str, DataSourceConfig]:
         """Get a mapping of Pell resource keys to their configurations."""
@@ -363,9 +343,6 @@ class DataSources:
             "pell_grad_rates_raw": cls.PELL_GRAD_RATES_RAW,
             "ft_ug_headcount_raw": cls.FT_UG_HEADCOUNT_RAW,
             "retention_rate_pct_raw": cls.RETENTION_RATE_PCT_RAW,
-            "roi_metrics_raw": cls.ROI_METRICS_RAW,
-            "roi_metrics_parquet": cls.ROI_METRICS_PARQUET,
-            "opeid_mapping": cls.OPEID_MAPPING,
             "canonical_retention_long": cls.CANONICAL_RETENTION_LONG,
             "canonical_retention_latest": cls.CANONICAL_RETENTION_LATEST,
             "canonical_retention_summary": cls.CANONICAL_RETENTION_SUMMARY,

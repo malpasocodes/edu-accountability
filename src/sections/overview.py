@@ -52,8 +52,6 @@ class OverviewSection(BaseSection):
 
             - **Government Funding Analysis**: We are analyzing the flow of federal support—especially through student loans and Pell Grants—to better understand how public resources shape affordability and access. Tracking these funding streams alongside institutional outcomes provides a fuller picture of higher education's value and accountability.
 
-            - **Earnings Premium & ROI**: We are building tools that compare post-graduation earnings to educational costs and aid profiles. These analyses surface institutions delivering strong wage gains relative to investment, helping stakeholders gauge long-term value across different student populations.
-
             - **Equity and Subgroup Outcomes**: We are examining how affordability, funding, and outcomes vary across student subgroups (e.g., income levels, race/ethnicity, first-generation status). Highlighting these differential impacts provides a more complete understanding of equity in higher education.
             """
         )
@@ -98,22 +96,6 @@ class OverviewSection(BaseSection):
                 "background": "#fffaf5",
                 "headline": "Explore online and hybrid learning enrollment patterns",
                 "detail": "Analyze distance education participation trends",
-            },
-            {
-                "title": "💼 Earnings Premium",
-                "border": "#d62728",
-                "header_color": "#d62728",
-                "background": "#fff5f5",
-                "headline": "Assess wage outcomes relative to peer institutions",
-                "detail": "Evaluate post-graduation earnings premiums across cohorts",
-            },
-            {
-                "title": "📈 ROI",
-                "border": "#17becf",
-                "header_color": "#17becf",
-                "background": "#f0fbfd",
-                "headline": "Combine cost, aid, and outcomes into ROI metrics",
-                "detail": "Compare long-term value indicators for institutions",
             },
         ]
 

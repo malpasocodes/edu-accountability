@@ -12,8 +12,6 @@ VALUE_GRID_SECTION = "College Value Grid"
 FEDERAL_LOANS_SECTION = "Federal Loans"
 PELL_SECTION = "Pell Grants"
 DISTANCE_EDUCATION_SECTION = "Distance Education"
-EARNINGS_PREMIUM_SECTION = "Earnings Premium"
-ROI_SECTION = "ROI"
 COLLEGE_EXPLORER_SECTION = "College Explorer"
 CANONICAL_IPEDS_SECTION = "Canonical IPEDS"
 SCORECARD_SECTION = "Canonical Scorecard"
@@ -161,48 +159,6 @@ SCORECARD_DATASETS: List[str] = [
     SCORECARD_DATASET_REPAYMENT_SCATTER_TWO,
 ]
 
-# Earnings Premium Analysis labels (National - Section 9)
-EARNINGS_PREMIUM_OVERVIEW_LABEL = "Overview"
-EP_NATIONAL_OVERVIEW_LABEL = "Risk Distribution"
-EP_OVERVIEW_RISK_MAP_LABEL = "Risk Map"
-EP_INSTITUTION_LOOKUP_LABEL = "Institution Lookup"
-EP_STATE_ANALYSIS_LABEL = "State Analysis"
-EP_SECTOR_COMPARISON_LABEL = "Sector Comparison"
-EP_RISK_QUADRANTS_LABEL = "Risk Quadrants"
-EP_PROGRAM_DISTRIBUTION_LABEL = "Program Distribution"
-EP_METHODOLOGY_LABEL = "Methodology & Limitations"
-
-# Phase 1 MVP Charts (Phase 2 adds State Analysis and Sector Comparison, Phase 3 adds Risk Quadrants, Phase 4 adds Program Distribution)
-EARNINGS_PREMIUM_CHARTS: List[str] = [
-    EP_OVERVIEW_RISK_MAP_LABEL,
-    EP_INSTITUTION_LOOKUP_LABEL,
-    EP_STATE_ANALYSIS_LABEL,
-    EP_SECTOR_COMPARISON_LABEL,
-    EP_RISK_QUADRANTS_LABEL,
-    EP_PROGRAM_DISTRIBUTION_LABEL,
-    EP_METHODOLOGY_LABEL,
-]
-
-# Legacy EP labels (California institutions - deprecated, kept for backward compatibility)
-ROI_EARNINGS_PREMIUM_LABEL = "Earnings Premium (All)"
-ROI_EARNINGS_PREMIUM_RANKINGS_LABEL = "Earnings Premium Rankings"
-
-# ROI labels (California institutions only - migrated from epanalysis)
-ROI_OVERVIEW_LABEL = "Overview"
-ROI_QUADRANT_LABEL = "Cost vs Earnings Quadrant"
-ROI_RANKINGS_LABEL = "Top 25 ROI Rankings"
-ROI_DISTRIBUTION_LABEL = "ROI by Sector"
-
-ROI_CHARTS: List[str] = [
-    ROI_QUADRANT_LABEL,
-    ROI_RANKINGS_LABEL,
-    ROI_DISTRIBUTION_LABEL,
-]
-
-# College Explorer - ROI tab
-COLLEGE_EXPLORER_ROI_LABEL = "Earnings & ROI"
-
-
 # Session state defaults
 DEFAULT_SESSION_STATE: Dict[str, str] = {
     "active_section": OVERVIEW_SECTION,
@@ -211,8 +167,6 @@ DEFAULT_SESSION_STATE: Dict[str, str] = {
     "loan_chart": LOAN_OVERVIEW_LABEL,
     "pell_chart": PELL_OVERVIEW_LABEL,
     "distance_chart": DISTANCE_OVERVIEW_LABEL,
-    "earnings_premium_chart": EARNINGS_PREMIUM_OVERVIEW_LABEL,
-    "roi_chart": ROI_OVERVIEW_LABEL,
     "college_explorer_chart": COLLEGE_EXPLORER_OVERVIEW_LABEL,
     "canonical_ipeds_chart": CANONICAL_IPEDS_OVERVIEW_LABEL,
 }
