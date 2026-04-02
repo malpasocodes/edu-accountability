@@ -54,6 +54,14 @@ sources:
         collection_period: "Fall"
         variables_url: "https://nces.ed.gov/ipeds/datacenter/DataFiles.aspx?gotoReportId=7&fromIpeds=true"
 
+      sfa:
+        name: "Student Financial Aid (SFA)"
+        description: "Percent of undergraduates receiving Pell Grants and federal student loans"
+        survey_form: "SFA"
+        collection_period: "Fall"
+        variables_url: "https://nces.ed.gov/ipeds/datacenter/DataFiles.aspx?gotoReportId=7&fromIpeds=true"
+        fetch_script: "python src/data/fetch_ipeds_sfa.py"
+
   fsa:
     name: "Federal Student Aid Data Center"
     provider: "Federal Student Aid (FSA)"
@@ -74,13 +82,15 @@ sources:
         name: "Pell Grant Disbursements by School"
         description: "Total Pell Grant dollars disbursed by institution and year"
         file_format: "CSV, Excel"
-        historical_range: "2009-present"
-        
+        historical_range: "2008-present"
+        fetch_script: "python src/data/fetch_fsa_data.py"
+
       federal_loans:
         name: "Federal Loan Disbursements by School"
         description: "Total federal loan dollars disbursed by institution and year"
         file_format: "CSV, Excel"
-        historical_range: "2009-present"
+        historical_range: "2008-present"
+        fetch_script: "python src/data/fetch_fsa_data.py"
 
 # Current data snapshots
 current_data:
@@ -116,19 +126,20 @@ current_data:
         
   fsa_2024:
     download_date: "2024-11-24"  # Update with actual download date
-    data_range: "2009-2022"
+    data_range: "2008-2022"
+    notes: "Year range is detected dynamically from CSV column headers (YR2008-YR2022)"
     files:
       - name: "pelltotals.csv"
         source: "Pell Grant Disbursements by School"
         description: "Annual Pell Grant totals by institution"
         records: null
-        years: "2009-2022"
-        
+        years: "2008-2022"
+
       - name: "loantotals.csv"
         source: "Federal Loan Disbursements by School"
         description: "Annual federal loan totals by institution"
         records: null
-        years: "2009-2022"
+        years: "2008-2022"
 
 # Data quality notes
 quality_notes:

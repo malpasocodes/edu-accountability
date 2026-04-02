@@ -59,10 +59,11 @@ class FederalLoansSection(BaseSection):
 
         # What is this section
         st.markdown("### What is Federal Loans Analysis?")
+        fsa_years = self.data_manager.get_fsa_year_range()
         st.markdown(
-            """
+            f"""
             This section tracks **federal student loan dollars** disbursed to students at colleges and universities
-            across the United States. The data covers **2008-2022** and shows which institutions have the highest
+            across the United States. The data covers **{fsa_years}** and shows which institutions have the highest
             loan volumes, how those loans relate to graduation rates, and how debt patterns have evolved over time.
 
             Federal loans represent a significant source of financial aid and a key measure of student debt burden.
@@ -131,13 +132,13 @@ class FederalLoansSection(BaseSection):
 
         with col4:
             st.markdown(
-                """
+                f"""
                 <div style='padding: 1.5rem; border: 2px solid #9467bd; border-radius: 10px; background-color: #faf8ff; margin-bottom: 1rem; height: 260px; display: flex; flex-direction: column; justify-content: space-between;'>
                     <div>
                         <h4 style='color: #9467bd; margin-bottom: 0.75rem;'>📊 Federal Loan Dollars Trend (Total)</h4>
                         <p style='color: #000000; margin-bottom: 0.75rem;'>See aggregate federal loan dollar totals summed across all institutions per year.</p>
                     </div>
-                    <p style='color: #000000; font-style: italic; margin: 0;'>Shows overall lending patterns and national trends (2008-2022).</p>
+                    <p style='color: #000000; font-style: italic; margin: 0;'>Shows overall lending patterns and national trends ({fsa_years}).</p>
                 </div>
                 """,
                 unsafe_allow_html=True
@@ -178,7 +179,7 @@ class FederalLoansSection(BaseSection):
         # Data disclaimer
         st.markdown("### Data Source & Notes")
         st.info(
-            "**Data Source:** IPEDS (Integrated Postsecondary Education Data System), 2008-2022. "
+            f"**Data Source:** IPEDS (Integrated Postsecondary Education Data System), {fsa_years}. "
             "Loan totals reflect annual federal loan dollars disbursed to students at each institution. "
             "For high-stakes decisions, validate against the latest Department of Education releases."
         )

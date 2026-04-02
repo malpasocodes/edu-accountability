@@ -59,11 +59,12 @@ class PellGrantsSection(BaseSection):
         st.markdown("")  # Spacing
 
         # What is this section
+        fsa_years = self.data_manager.get_fsa_year_range()
         st.markdown("### What is Pell Grants Analysis?")
         st.markdown(
-            """
+            f"""
             This section tracks **Pell Grant dollars** awarded to students at colleges and universities across
-            the United States. The data covers **2008-2022** and shows which institutions serve the most low-income
+            the United States. The data covers **{fsa_years}** and shows which institutions serve the most low-income
             students, how grant aid relates to graduation rates, and how need-based aid patterns have evolved over time.
 
             Pell Grants are the federal government's primary need-based aid program for undergraduate students.
@@ -132,13 +133,13 @@ class PellGrantsSection(BaseSection):
 
         with col4:
             st.markdown(
-                """
+                f"""
                 <div style='padding: 1.5rem; border: 2px solid #9467bd; border-radius: 10px; background-color: #faf8ff; margin-bottom: 1rem; height: 260px; display: flex; flex-direction: column; justify-content: space-between;'>
                     <div>
                         <h4 style='color: #9467bd; margin-bottom: 0.75rem;'>📊 Pell Dollars Trend (Total)</h4>
                         <p style='color: #000000; margin-bottom: 0.75rem;'>See aggregate Pell grant dollar totals summed across all institutions per year.</p>
                     </div>
-                    <p style='color: #000000; font-style: italic; margin: 0;'>Shows overall aid patterns and national trends (2008-2022).</p>
+                    <p style='color: #000000; font-style: italic; margin: 0;'>Shows overall aid patterns and national trends ({fsa_years}).</p>
                 </div>
                 """,
                 unsafe_allow_html=True
@@ -179,7 +180,7 @@ class PellGrantsSection(BaseSection):
         # Data disclaimer
         st.markdown("### Data Source & Notes")
         st.info(
-            "**Data Source:** IPEDS (Integrated Postsecondary Education Data System), 2008-2022. "
+            f"**Data Source:** IPEDS (Integrated Postsecondary Education Data System), {fsa_years}. "
             "Pell totals reflect annual grant dollars awarded to students at each institution. "
             "For high-stakes decisions, validate against the latest Department of Education releases."
         )

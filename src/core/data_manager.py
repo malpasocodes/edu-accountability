@@ -280,6 +280,20 @@ class DataManager:
                 source.description
             )
     
+    def get_fsa_year_range(self) -> str:
+        """Return the year range string (e.g. '2008-2022') detected from FSA data columns."""
+        yr_pattern = re.compile(r"^YR(\d{4})$", re.IGNORECASE)
+        years: set[int] = set()
+        for df in (self.pell_df, self.loan_df):
+            if df is not None and not df.empty:
+                for col in df.columns:
+                    m = yr_pattern.match(col.strip())
+                    if m:
+                        years.add(int(m.group(1)))
+        if not years:
+            return "2008-2022"  # fallback
+        return f"{min(years)}-{max(years)}"
+
     def get_value_grid_dataset(self, label: str) -> Optional[pd.DataFrame]:
         """Get a value grid dataset by label."""
         return self.value_grid_datasets.get(label)

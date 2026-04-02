@@ -111,7 +111,7 @@ class CollegeExplorerSection(BaseSection):
                 <div style='padding: 1.5rem; border: 2px solid #2ca02c; border-radius: 10px; background-color: #f8fff8; margin-bottom: 1rem; height: 200px; display: flex; flex-direction: column;'>
                     <h4 style='color: #2ca02c; margin-bottom: 0.5rem;'>💰 Federal Loans & Pell Grants</h4>
                     <div style='flex-grow: 1; display: flex; flex-direction: column; justify-content: center;'>
-                        <p style='color: #000000; margin-bottom: 0.5rem;'>Track federal aid trends from 2008-2022.</p>
+                        <p style='color: #000000; margin-bottom: 0.5rem;'>Track federal aid trends over time.</p>
                         <p style='color: #000000; font-style: italic; margin: 0;'>Combined visualization of loans and grants over time.</p>
                     </div>
                 </div>
@@ -157,7 +157,7 @@ class CollegeExplorerSection(BaseSection):
             Once selected, you'll see institutional details, enrollment metrics, and graduation rates with context.
 
             **Then explore Federal Loans & Pell Grants** to understand the institution's federal aid patterns and how
-            they've changed from 2008-2022.
+            they've changed over time.
 
             **Finally, review Graduation Rates** to see how overall graduation outcomes compare to Pell student outcomes,
             revealing potential equity gaps in completion.
@@ -539,7 +539,7 @@ class CollegeExplorerSection(BaseSection):
                 st.markdown(
                     """
                     The combined trend chart will show:
-                    - **Time period**: 2008-2022 (where data is available)
+                    - **Time period**: All available years (where data is available)
                     - **Three trend lines**: Pell Grants, Federal Loans, and Total
                     - **Interactive tooltips**: Hover for exact values and year-over-year changes
                     - **Professional styling**: Consistent with existing dashboard charts
@@ -566,7 +566,8 @@ class CollegeExplorerSection(BaseSection):
 
         # Display institution header
         st.markdown(f"### {institution_name}")
-        st.markdown(f"**Financial Aid Trends (2008-2022)**")
+        fsa_years = self.data_manager.get_fsa_year_range()
+        st.markdown(f"**Financial Aid Trends ({fsa_years})**")
 
         # Prepare the combined trend data
         trend_data = self._prepare_combined_trend_data(unit_id, institution_name)
@@ -594,9 +595,12 @@ class CollegeExplorerSection(BaseSection):
         if pell_data.empty and loan_data.empty:
             return pd.DataFrame()
 
-        # Prepare year columns (YR2008 through YR2022)
-        year_columns = [f'YR{year}' for year in range(2008, 2023)]
-        available_year_columns = [col for col in year_columns if col in self.data_manager.pell_df.columns]
+        # Detect year columns dynamically from data
+        import re as _re
+        _yr_pat = _re.compile(r"^YR(\d{4})$", _re.IGNORECASE)
+        available_year_columns = sorted(
+            col for col in self.data_manager.pell_df.columns if _yr_pat.match(col)
+        )
 
         trend_records = []
 
@@ -712,7 +716,7 @@ class CollegeExplorerSection(BaseSection):
             st.metric("Total Aid", f"${total_recent:,.0f}")
 
         # Calculate and display cumulative totals
-        st.markdown("##### Cumulative Total (2008-2022)")
+        st.markdown(f"##### Cumulative Total ({self.data_manager.get_fsa_year_range()})")
         col1, col2, col3 = st.columns(3)
 
         # Calculate cumulative sums for each aid type

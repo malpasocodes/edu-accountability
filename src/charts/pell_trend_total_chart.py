@@ -178,9 +178,10 @@ def _render_pell_trend_data_table(prepared: pd.DataFrame, sector: str) -> None:
 
     # Render table
     sector_label = "4-year" if sector == "four_year" else "2-year"
+    year_min, year_max = int(prepared["Year"].min()), int(prepared["Year"].max())
     st.subheader("📊 Pell Grant Trend Data")
     st.caption(
-        f"Annual Pell grant dollar totals for {sector_label} institutions (2008-2022), "
+        f"Annual Pell grant dollar totals for {sector_label} institutions ({year_min}-{year_max}), "
         "with cumulative totals and year-over-year percentage changes."
     )
     st.dataframe(display_data[final_columns], width="stretch", hide_index=True)
@@ -279,7 +280,7 @@ def render_pell_trend_total_chart(
 
     sector_label = "4-year" if sector == "four_year" else "2-year"
     caption = (
-        f"Total Pell grant dollars summed across all {sector_label} institutions per year (2008-2022). "
+        f"Total Pell grant dollars summed across all {sector_label} institutions per year ({int(prepared['Year'].min())}-{int(prepared['Year'].max())}). "
         "Dotted line shows aggregate trend; dots colored by year-over-year change (green=increase, gray=same, red=decrease)."
     )
     st.caption(caption)
