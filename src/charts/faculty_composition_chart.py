@@ -69,7 +69,9 @@ def _prepare_faculty_ranking(
     working["sector"] = working["sector"].astype("string").fillna("Unknown")
     working["pct_parttime"] = working["pct_parttime"].round(1)
 
-    top = working.sort_values("pct_parttime", ascending=False).head(top_n).copy()
+    ranked = working.sort_values("pct_parttime", ascending=False)
+    # top_n <= 0 means "All" (no limit).
+    top = (ranked.head(top_n) if top_n and top_n > 0 else ranked).copy()
     top["rank"] = range(1, len(top) + 1)
 
     chart_data = top.rename(columns={"institution": "Institution", "sector": "Sector"})[
@@ -78,6 +80,7 @@ def _prepare_faculty_ranking(
             "Institution",
             "Sector",
             "state",
+            "enrollment",
             "pct_parttime",
             "parttime_faculty",
             "fulltime_faculty",
@@ -89,6 +92,7 @@ def _prepare_faculty_ranking(
         columns={
             "rank": "Rank",
             "state": "State",
+            "enrollment": "Undergrad Enrollment",
             "pct_parttime": "% Part-time",
             "parttime_faculty": "Part-time",
             "fulltime_faculty": "Full-time",
@@ -161,6 +165,7 @@ def render_faculty_adjunct_chart(
             alt.Tooltip("Institution:N", title="Institution"),
             alt.Tooltip("Sector:N", title="Sector"),
             alt.Tooltip("state:N", title="State"),
+            alt.Tooltip("enrollment:Q", title="Undergrad enrollment", format=",.0f"),
             alt.Tooltip("pct_parttime:Q", title="% part-time", format=".1f"),
             alt.Tooltip("parttime_faculty:Q", title="Part-time staff", format=",.0f"),
             alt.Tooltip("fulltime_faculty:Q", title="Full-time staff", format=",.0f"),
@@ -169,20 +174,39 @@ def render_faculty_adjunct_chart(
         ],
     )
 
-    labels = base.mark_text(
-        align="left",
-        baseline="middle",
-        dx=4,
-        color="#111111",
-        fontSize=11,
-        fontWeight="bold",
-    ).encode(
-        x=alt.X("pct_parttime:Q"),
-        text=alt.Text("pct_parttime:Q", format=".1f"),
-    )
+    # Per-bar height shrinks as the list grows so "All" stays navigable; value
+    # labels are dropped once bars get too thin for text to fit cleanly.
+    if num_institutions <= 50:
+        per_bar = 32
+    elif num_institutions <= 100:
+        per_bar = 22
+    else:
+        per_bar = 14
 
-    chart = (bars + labels).properties(
-        height=max(320, 32 * num_institutions),
+    layers = [bars]
+    if num_institutions <= 60:
+        labels = (
+            base.mark_text(
+                align="left",
+                baseline="middle",
+                dx=4,
+                color="#111111",
+                fontSize=11,
+                fontWeight="bold",
+            )
+            .encode(
+                x=alt.X("pct_parttime:Q"),
+                text=alt.Text("label:N"),
+            )
+            .transform_calculate(
+                label="format(datum.pct_parttime, '.1f') + '%  ·  '"
+                " + format(datum.enrollment, ',') + ' UG'"
+            )
+        )
+        layers.append(labels)
+
+    chart = alt.layer(*layers).properties(
+        height=max(320, per_bar * num_institutions),
         width=540,
         title=title,
     )
@@ -192,13 +216,18 @@ def render_faculty_adjunct_chart(
         if prepared.min_enrollment > 0
         else ""
     )
+    if num_institutions >= prepared.total_considered:
+        count_note = f"All {prepared.total_considered:,} institutions"
+    else:
+        count_note = (
+            f"Top {num_institutions} of {prepared.total_considered:,} institutions"
+        )
     st.subheader(title)
     st.caption(
-        f"Top {num_institutions} of {prepared.total_considered:,} institutions "
-        f"(with at least {prepared.min_total} instructional staff{enrollment_note}) "
-        "ranked by part-time share. IPEDS has no “adjunct” field; part-time "
-        "instructional staff is the standard proxy. Source: IPEDS Human "
-        "Resources (EAP), 2023."
+        f"{count_note} (with at least {prepared.min_total} instructional "
+        f"staff{enrollment_note}) ranked by part-time share. IPEDS has no "
+        "“adjunct” field; part-time instructional staff is the standard proxy. "
+        "Source: IPEDS Human Resources (EAP), 2023."
     )
     render_altair_chart(chart)
     render_dataframe(prepared.table_data, width="stretch")

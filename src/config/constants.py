@@ -121,6 +121,10 @@ FACULTY_CHARTS: List[str] = [
 ]
 FACULTY_OVERVIEW_LABEL = "Overview"
 
+# Top-N options for the Faculty ranking (0 == show all institutions)
+FACULTY_TOP_N_OPTIONS = [25, 50, 100, 0]
+DEFAULT_FACULTY_TOP_N = 25
+
 
 # College Explorer labels
 COLLEGE_EXPLORER_OVERVIEW_LABEL = "Overview"
@@ -179,6 +183,7 @@ DEFAULT_SESSION_STATE: Dict[str, str] = {
     "distance_chart": DISTANCE_OVERVIEW_LABEL,
     "faculty_chart": FACULTY_OVERVIEW_LABEL,
     "faculty_enrollment_filter": 1,
+    "faculty_top_n_filter": 25,
     "college_explorer_chart": COLLEGE_EXPLORER_OVERVIEW_LABEL,
     "canonical_ipeds_chart": CANONICAL_IPEDS_OVERVIEW_LABEL,
 }

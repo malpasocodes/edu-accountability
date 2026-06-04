@@ -8,16 +8,19 @@ import streamlit as st
 
 from src.charts.faculty_composition_chart import render_faculty_adjunct_chart
 from src.config.constants import (
+    DEFAULT_FACULTY_TOP_N,
     ENROLLMENT_FILTER_OPTIONS,
     FACULTY_ADJUNCT_RELIANCE_LABEL,
     FACULTY_CHARTS,
     FACULTY_OVERVIEW_LABEL,
+    FACULTY_TOP_N_OPTIONS,
 )
 from src.state.session_manager import SessionManager
 from .base import BaseSection
 
 FACULTY_ENROLLMENT_FILTER_KEY = "faculty_enrollment_filter"
 DEFAULT_FACULTY_ENROLLMENT_FILTER = 1
+FACULTY_TOP_N_FILTER_KEY = "faculty_top_n_filter"
 
 
 class FacultySection(BaseSection):
@@ -126,6 +129,40 @@ class FacultySection(BaseSection):
         st.markdown("")  # Spacing
         return selected_value
 
+    def _render_top_n_filter(self) -> int:
+        """Render the "number of institutions" filter and return the selected value."""
+        st.markdown("### Number of Institutions")
+
+        option_labels = [
+            "All" if value == 0 else f"Top {value}" for value in FACULTY_TOP_N_OPTIONS
+        ]
+        label_to_value = dict(zip(option_labels, FACULTY_TOP_N_OPTIONS))
+
+        current_value = SessionManager.get(
+            FACULTY_TOP_N_FILTER_KEY, DEFAULT_FACULTY_TOP_N
+        )
+        current_label = next(
+            (
+                label
+                for label, value in label_to_value.items()
+                if value == current_value
+            ),
+            option_labels[0],
+        )
+
+        selected_label = st.radio(
+            "Number of institutions to show:",
+            options=option_labels,
+            index=option_labels.index(current_label),
+            horizontal=True,
+            key="faculty_top_n_filter_radio",
+        )
+
+        selected_value = label_to_value[selected_label]
+        SessionManager.set(FACULTY_TOP_N_FILTER_KEY, selected_value)
+        st.markdown("")  # Spacing
+        return selected_value
+
     def _render_adjunct_reliance_with_tabs(self, title: str) -> None:
         """Render the adjunct reliance ranking with 4-year/2-year tabs."""
         faculty_df = self.data_manager.get_faculty_data()
@@ -137,6 +174,7 @@ class FacultySection(BaseSection):
             return
 
         min_enrollment = self._render_enrollment_filter()
+        top_n = self._render_top_n_filter()
 
         tab_four, tab_two = st.tabs(["4-year", "2-year"])
         with tab_four:
@@ -144,6 +182,7 @@ class FacultySection(BaseSection):
                 faculty_df,
                 sector="four_year",
                 title=f"{title} (4-year)",
+                top_n=top_n,
                 min_enrollment=min_enrollment,
             )
         with tab_two:
@@ -151,6 +190,7 @@ class FacultySection(BaseSection):
                 faculty_df,
                 sector="two_year",
                 title=f"{title} (2-year)",
+                top_n=top_n,
                 min_enrollment=min_enrollment,
             )
 

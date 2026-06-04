@@ -130,6 +130,11 @@ class TestPrepareFacultyRanking:
         result = _prepare_faculty_ranking(_make_df(), "four_year", 1, 50, 0)
         assert len(result.chart_data) == 1
 
+    def test_top_n_zero_shows_all_eligible(self):
+        # 4 eligible 4-year schools (Tiny Seminary excluded by staff floor)
+        result = _prepare_faculty_ranking(_make_df(), "four_year", 0, 50, 0)
+        assert len(result.chart_data) == result.total_considered == 4
+
     def test_empty_input_returns_empty(self):
         result = _prepare_faculty_ranking(pd.DataFrame(), "four_year", 25, 50, 0)
         assert result.chart_data.empty
@@ -139,3 +144,8 @@ class TestPrepareFacultyRanking:
         result = _prepare_faculty_ranking(_make_df(), "four_year", 25, 50, 0)
         assert "% Part-time" in result.table_data.columns
         assert "Total instructional" in result.table_data.columns
+
+    def test_table_and_chart_include_enrollment(self):
+        result = _prepare_faculty_ranking(_make_df(), "four_year", 25, 50, 0)
+        assert "Undergrad Enrollment" in result.table_data.columns
+        assert "enrollment" in result.chart_data.columns
