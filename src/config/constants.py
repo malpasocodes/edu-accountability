@@ -115,9 +115,11 @@ DISTANCE_OVERVIEW_LABEL = "Overview"
 
 # Faculty chart labels (IPEDS HR / EAP instructional staffing)
 FACULTY_ADJUNCT_RELIANCE_LABEL = "Adjunct (Part-time) Faculty Reliance"
+FACULTY_ADJUNCT_VS_GRAD_LABEL = "Adjunct Reliance vs Graduation Rate"
 
 FACULTY_CHARTS: List[str] = [
     FACULTY_ADJUNCT_RELIANCE_LABEL,
+    FACULTY_ADJUNCT_VS_GRAD_LABEL,
 ]
 FACULTY_OVERVIEW_LABEL = "Overview"
 

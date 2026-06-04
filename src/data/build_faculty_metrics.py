@@ -30,6 +30,7 @@ PROCESSED_DIR = PROJECT_ROOT / "data" / "processed"
 EAP_PATH = RAW_DIR / "ipeds" / "eap2023.csv"
 INSTITUTIONS_PATH = RAW_DIR / "ipeds" / "2023" / "institutions.csv"
 ENROLLMENT_PATH = RAW_DIR / "ipeds" / "2023" / "enrollment.csv"
+GRADRATES_PATH = RAW_DIR / "ipeds" / "2023" / "gradrates.csv"
 
 CSV_OUTPUT = PROCESSED_DIR / "faculty_metrics.csv"
 PARQUET_OUTPUT = PROCESSED_DIR / "faculty_metrics.parquet"
@@ -57,6 +58,7 @@ OUTPUT_COLUMNS = [
     "SECTOR",
     "sector",
     "enrollment",
+    "graduation_rate",
     "fulltime_faculty",
     "parttime_faculty",
     "total_faculty",
@@ -114,14 +116,30 @@ def _load_enrollment() -> pd.DataFrame:
     return enrollment[["UnitID", "enrollment"]]
 
 
+def _load_graduation_rates() -> pd.DataFrame:
+    """Read six-year graduation rate (PCT_AWARD_6YRS) keyed on UnitID.
+
+    Matches the ``graduation_rate`` field used by the College Value Grid so the
+    two scatter charts report the same outcome measure.
+    """
+    grad = pd.read_csv(
+        GRADRATES_PATH,
+        usecols=["UnitID", "PCT_AWARD_6YRS"],
+    )
+    grad["graduation_rate"] = pd.to_numeric(grad["PCT_AWARD_6YRS"], errors="coerce")
+    return grad[["UnitID", "graduation_rate"]]
+
+
 def build_dataframe() -> pd.DataFrame:
     """Join instructional staffing with institution metadata and derive metrics."""
     totals = _load_instructional_totals()
     institutions = _load_institutions()
     enrollment = _load_enrollment()
+    grad_rates = _load_graduation_rates()
 
     merged = totals.merge(institutions, on="UnitID", how="inner")
     merged = merged.merge(enrollment, on="UnitID", how="left")
+    merged = merged.merge(grad_rates, on="UnitID", how="left")
     merged["enrollment"] = merged["enrollment"].fillna(0)
     dropped = len(totals) - len(merged)
     if dropped:
@@ -159,6 +177,7 @@ def _apply_schema(df: pd.DataFrame) -> pd.DataFrame:
         typed[column] = typed[column].round().astype("Int32")
     typed["SECTOR"] = typed["SECTOR"].astype("Int32")
     typed["pct_parttime"] = typed["pct_parttime"].astype("float32")
+    typed["graduation_rate"] = typed["graduation_rate"].astype("float32")
     typed["institution"] = typed["institution"].astype("string")
     typed["state"] = typed["state"].astype("category")
     typed["sector"] = typed["sector"].astype("category")

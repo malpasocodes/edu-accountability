@@ -7,10 +7,12 @@ from typing import List
 import streamlit as st
 
 from src.charts.faculty_composition_chart import render_faculty_adjunct_chart
+from src.charts.faculty_grad_chart import render_faculty_grad_scatter
 from src.config.constants import (
     DEFAULT_FACULTY_TOP_N,
     ENROLLMENT_FILTER_OPTIONS,
     FACULTY_ADJUNCT_RELIANCE_LABEL,
+    FACULTY_ADJUNCT_VS_GRAD_LABEL,
     FACULTY_CHARTS,
     FACULTY_OVERVIEW_LABEL,
     FACULTY_TOP_N_OPTIONS,
@@ -65,13 +67,17 @@ class FacultySection(BaseSection):
             than an exact count.
             """)
 
-        st.markdown("### How to Read the Ranking")
+        st.markdown("### Charts in This Section")
         st.markdown("""
-            The **Adjunct (Part-time) Faculty Reliance** chart ranks institutions by the
-            part-time share of instructional staff, separated into 4-year and 2-year tabs.
-            To keep the ranking meaningful, only institutions with at least 50 instructional
-            staff are included — otherwise very small departments dominate the top with
-            100% part-time figures.
+            - **Adjunct (Part-time) Faculty Reliance** ranks institutions by the
+              part-time share of instructional staff (4-year and 2-year tabs). To keep the
+              ranking meaningful, only institutions with at least 50 instructional staff are
+              included — otherwise very small departments dominate the top with 100%
+              part-time figures.
+            - **Adjunct Reliance vs Graduation Rate** plots six-year graduation rate (y)
+              against adjunct share (x), with median crosshairs forming four quadrants.
+              Quadrant **IV (low graduation, high adjunct reliance)** flags the institutions
+              of greatest concern. Both charts share the enrollment filter.
             """)
 
         st.divider()
@@ -88,6 +94,8 @@ class FacultySection(BaseSection):
 
         if chart_name == FACULTY_ADJUNCT_RELIANCE_LABEL:
             self._render_adjunct_reliance_with_tabs(chart_name)
+        elif chart_name == FACULTY_ADJUNCT_VS_GRAD_LABEL:
+            self._render_grad_scatter_with_tabs(chart_name)
         else:
             st.error(f"Unknown chart: {chart_name}")
 
@@ -191,6 +199,34 @@ class FacultySection(BaseSection):
                 sector="two_year",
                 title=f"{title} (2-year)",
                 top_n=top_n,
+                min_enrollment=min_enrollment,
+            )
+
+    def _render_grad_scatter_with_tabs(self, title: str) -> None:
+        """Render the adjunct-reliance-vs-graduation scatter with 4-year/2-year tabs."""
+        faculty_df = self.data_manager.get_faculty_data()
+        if faculty_df is None or faculty_df.empty:
+            st.warning(
+                "Faculty staffing data is not available. Run "
+                "`python -m src.data.build_faculty_metrics` to generate it."
+            )
+            return
+
+        min_enrollment = self._render_enrollment_filter()
+
+        tab_four, tab_two = st.tabs(["4-year", "2-year"])
+        with tab_four:
+            render_faculty_grad_scatter(
+                faculty_df,
+                sector="four_year",
+                title=f"{title} (4-year)",
+                min_enrollment=min_enrollment,
+            )
+        with tab_two:
+            render_faculty_grad_scatter(
+                faculty_df,
+                sector="two_year",
+                title=f"{title} (2-year)",
                 min_enrollment=min_enrollment,
             )
 
