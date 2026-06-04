@@ -6,6 +6,10 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 A Streamlit dashboard analyzing U.S. higher education accountability, affordability, and outcomes. It covers ~6,000+ institutions using IPEDS, Federal Student Aid, College Scorecard, and Census data. Deployed on Render.com.
 
+## Change Log
+
+After every commit and push, append a row to `LOG.md` documenting the change. Keep the table sorted newest-on-top using the format `| Date | Change | Details | Files |` (ISO date, one-sentence summary, backticked paths). See the Update Instructions at the bottom of `LOG.md`.
+
 ## Commands
 
 ```bash
