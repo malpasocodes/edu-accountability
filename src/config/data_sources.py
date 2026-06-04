@@ -160,6 +160,19 @@ class DataSources:
         required=False,
     )
 
+    # Processed data sources - Faculty (IPEDS HR / EAP instructional staffing)
+    FACULTY_METRICS_PARQUET = DataSourceConfig(
+        path=_processed_dir / "faculty_metrics.parquet",
+        description="Instructional faculty full-time/part-time staffing (Parquet)",
+        required=False,
+    )
+
+    FACULTY_METRICS = DataSourceConfig(
+        path=_processed_dir / "faculty_metrics.csv",
+        description="Instructional faculty full-time/part-time staffing",
+        required=False,
+    )
+
     # Processed data sources - Value Grid
     TUITION_VS_GRAD = DataSourceConfig(
         path=_processed_dir / "tuition_vs_graduation.csv",

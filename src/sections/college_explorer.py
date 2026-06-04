@@ -48,6 +48,11 @@ class CollegeExplorerSection(BaseSection):
             if hasattr(data_manager, "canonical_grad_df")
             else pd.DataFrame()
         )
+        self.faculty_df = (
+            data_manager.get_faculty_data()
+            if hasattr(data_manager, "get_faculty_data")
+            else None
+        )
 
     def render_overview(self) -> None:
         """Render the college explorer overview page."""
@@ -376,6 +381,43 @@ class CollegeExplorerSection(BaseSection):
                         st.metric("Some Distance Education", f"{int(some_de):,}")
                     else:
                         st.metric("Some Distance Education", "N/A")
+
+        # Add instructional faculty section if data is available
+        if self.faculty_df is not None and not self.faculty_df.empty:
+            faculty_data = self.faculty_df[self.faculty_df["UnitID"] == inst["UnitID"]]
+
+            if not faculty_data.empty:
+                fac_row = faculty_data.iloc[0]
+                fulltime = fac_row.get("fulltime_faculty", None)
+                parttime = fac_row.get("parttime_faculty", None)
+                pct_parttime = fac_row.get("pct_parttime", None)
+
+                st.markdown("---")
+                st.markdown("#### Instructional Faculty")
+                st.caption(
+                    "Part-time instructional staff is the standard IPEDS proxy for "
+                    "adjunct faculty (IPEDS has no “adjunct” field). "
+                    "Source: IPEDS Human Resources (EAP), 2023."
+                )
+
+                col1, col2, col3 = st.columns(3)
+                with col1:
+                    if pd.notna(fulltime):
+                        st.metric("Full-time Faculty", f"{int(fulltime):,}")
+                    else:
+                        st.metric("Full-time Faculty", "N/A")
+                with col2:
+                    if pd.notna(parttime):
+                        st.metric("Part-time (Adjunct) Faculty", f"{int(parttime):,}")
+                    else:
+                        st.metric("Part-time (Adjunct) Faculty", "N/A")
+                with col3:
+                    if pd.notna(pct_parttime):
+                        st.metric(
+                            "% Part-time (Adjunct)", f"{float(pct_parttime):.1f}%"
+                        )
+                    else:
+                        st.metric("% Part-time (Adjunct)", "N/A")
 
         # Add graduation rates section if data is available
         if self.pellgradrates_df is not None and not self.pellgradrates_df.empty:

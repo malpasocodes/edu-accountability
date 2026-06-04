@@ -33,6 +33,7 @@ class DataManager:
         self.distance_df: Optional[pd.DataFrame] = None
         self.institutions_df: Optional[pd.DataFrame] = None
         self.pellgradrates_df: Optional[pd.DataFrame] = None
+        self.faculty_df: Optional[pd.DataFrame] = None
         self.value_grid_datasets: Dict[str, pd.DataFrame] = {}
         self.pell_resources: Dict[str, Optional[pd.DataFrame]] = {}
         self.canonical_grad_df: Optional[pd.DataFrame] = None
@@ -58,6 +59,7 @@ class DataManager:
         self._load_distance_raw()
         self._load_institutions_raw()
         self._load_pellgradrates_raw()
+        self._load_faculty_metrics()
         self._load_headcount_data()
         self._load_canonical_grad_data()
 
@@ -119,6 +121,20 @@ class DataManager:
         except DataLoadError:
             # Pell graduation rates data is optional
             self.pellgradrates_df = pd.DataFrame()
+
+    def _load_faculty_metrics(self) -> None:
+        """Load processed instructional-faculty staffing metrics (optional)."""
+        source = DataSources.FACULTY_METRICS_PARQUET
+        if not source.path.exists():
+            self.faculty_df = pd.DataFrame()
+            return
+        try:
+            self.faculty_df = self.loader.load_parquet(
+                str(source.path), source.description
+            )
+        except DataLoadError:
+            # Faculty staffing is optional; absence should not break the app.
+            self.faculty_df = pd.DataFrame()
 
     def _load_headcount_data(self) -> None:
         """Load undergraduate headcount information used for z-score filtering."""
@@ -292,6 +308,10 @@ class DataManager:
     def get_distance_data(self) -> Optional[pd.DataFrame]:
         """Get the distance education dataset."""
         return self.distance_df
+
+    def get_faculty_data(self) -> Optional[pd.DataFrame]:
+        """Get the instructional-faculty staffing dataset."""
+        return self.faculty_df
 
     def get_metadata_for_sector(self, sector: str) -> Optional[pd.DataFrame]:
         """

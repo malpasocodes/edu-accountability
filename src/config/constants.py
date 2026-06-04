@@ -11,6 +11,7 @@ VALUE_GRID_SECTION = "College Value Grid"
 FEDERAL_LOANS_SECTION = "Federal Loans"
 PELL_SECTION = "Pell Grants"
 DISTANCE_EDUCATION_SECTION = "Distance Education"
+FACULTY_SECTION = "Faculty"
 COLLEGE_EXPLORER_SECTION = "College Explorer"
 CANONICAL_IPEDS_SECTION = "Canonical IPEDS"
 SCORECARD_SECTION = "Canonical Scorecard"
@@ -112,6 +113,15 @@ DISTANCE_CHARTS: List[str] = [
 DISTANCE_OVERVIEW_LABEL = "Overview"
 
 
+# Faculty chart labels (IPEDS HR / EAP instructional staffing)
+FACULTY_ADJUNCT_RELIANCE_LABEL = "Adjunct (Part-time) Faculty Reliance"
+
+FACULTY_CHARTS: List[str] = [
+    FACULTY_ADJUNCT_RELIANCE_LABEL,
+]
+FACULTY_OVERVIEW_LABEL = "Overview"
+
+
 # College Explorer labels
 COLLEGE_EXPLORER_OVERVIEW_LABEL = "Overview"
 COLLEGE_SUMMARY_LABEL = "Summary"
@@ -167,6 +177,7 @@ DEFAULT_SESSION_STATE: Dict[str, str] = {
     "loan_chart": LOAN_OVERVIEW_LABEL,
     "pell_chart": PELL_OVERVIEW_LABEL,
     "distance_chart": DISTANCE_OVERVIEW_LABEL,
+    "faculty_chart": FACULTY_OVERVIEW_LABEL,
     "college_explorer_chart": COLLEGE_EXPLORER_OVERVIEW_LABEL,
     "canonical_ipeds_chart": CANONICAL_IPEDS_OVERVIEW_LABEL,
 }

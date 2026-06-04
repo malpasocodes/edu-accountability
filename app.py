@@ -24,6 +24,7 @@ from src.config.constants import (
     FEDERAL_LOANS_SECTION,
     PELL_SECTION,
     DISTANCE_EDUCATION_SECTION,
+    FACULTY_SECTION,
     COLLEGE_EXPLORER_SECTION,
     CANONICAL_IPEDS_SECTION,
     SCORECARD_SECTION,
@@ -39,6 +40,7 @@ from src.sections import (
     FederalLoansSection,
     PellGrantsSection,
     DistanceEducationSection,
+    FacultySection,
     CollegeExplorerSection,
     CanonicalIPEDSSection,
     CollegeScorecardSection,
@@ -54,14 +56,13 @@ def render_sidebar() -> None:
     # Home button
     if sidebar.button("🏠 Home", key="nav_home", width="stretch"):
         SessionManager.set_active_section(OVERVIEW_SECTION)
-    
+
     # Render each section
     for section_config in NavigationConfig.get_sections()[1:]:  # Skip overview
         is_active = SessionManager.is_section_active(section_config.name)
-        
+
         with sidebar.expander(
-            f"{section_config.icon} {section_config.label}", 
-            expanded=is_active
+            f"{section_config.icon} {section_config.label}", expanded=is_active
         ):
             # Overview button for the section
             if st.button(
@@ -72,10 +73,9 @@ def render_sidebar() -> None:
                 SessionManager.set_active_section(section_config.name)
                 if section_config.session_key:
                     SessionManager.set_active_chart(
-                        section_config.name,
-                        section_config.overview_chart.label
+                        section_config.name, section_config.overview_chart.label
                     )
-            
+
             # Chart buttons
             for chart in section_config.charts:
                 if st.button(
@@ -86,20 +86,19 @@ def render_sidebar() -> None:
                     SessionManager.set_active_section(section_config.name)
                     if section_config.session_key:
                         SessionManager.set_active_chart(
-                            section_config.name,
-                            chart.label
+                            section_config.name, chart.label
                         )
 
 
 def render_main(data_manager: DataManager) -> None:
     """
     Render the main content area.
-    
+
     Args:
         data_manager: The data manager instance
     """
     active_section = SessionManager.get_active_section()
-    
+
     # Create section instances
     sections = {
         OVERVIEW_SECTION: OverviewSection(data_manager),
@@ -107,23 +106,24 @@ def render_main(data_manager: DataManager) -> None:
         FEDERAL_LOANS_SECTION: FederalLoansSection(data_manager),
         PELL_SECTION: PellGrantsSection(data_manager),
         DISTANCE_EDUCATION_SECTION: DistanceEducationSection(data_manager),
+        FACULTY_SECTION: FacultySection(data_manager),
         COLLEGE_EXPLORER_SECTION: CollegeExplorerSection(data_manager),
     }
-    
+
     if ENABLE_CANONICAL_IPEDS_SECTION:
         sections[CANONICAL_IPEDS_SECTION] = CanonicalIPEDSSection(data_manager)
     if ENABLE_CANONICAL_SCORECARD_SECTION:
         sections[SCORECARD_SECTION] = CollegeScorecardSection(data_manager)
-    
+
     # Get the active section instance
     section = sections.get(active_section)
     if section is None:
         st.error(f"Unknown section: {active_section}")
         return
-    
+
     # Get active chart for the section
     active_chart = SessionManager.get_active_chart(active_section)
-    
+
     # Render the section
     if active_section == OVERVIEW_SECTION:
         section.render()
@@ -138,7 +138,7 @@ def main() -> None:
     """Main application entry point."""
     # Initialize session state
     SessionManager.initialize()
-    
+
     # Initialize data manager (loaded once per session via st.cache_resource;
     # subsequent reruns reuse the same instance instead of reloading/transforming)
     try:
@@ -146,10 +146,10 @@ def main() -> None:
     except DataLoadError as e:
         st.error(f"Critical data loading error: {e}")
         st.stop()
-    
+
     # Display any non-critical errors
     data_manager.display_errors()
-    
+
     # Render UI
     render_sidebar()
     render_main(data_manager)

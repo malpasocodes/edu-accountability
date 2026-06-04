@@ -62,6 +62,14 @@ sources:
         variables_url: "https://nces.ed.gov/ipeds/datacenter/DataFiles.aspx?gotoReportId=7&fromIpeds=true"
         fetch_script: "python src/data/fetch_ipeds_sfa.py"
 
+      eap:
+        name: "Human Resources - Employees by Assigned Position (EAP)"
+        description: "Instructional staff headcounts by full-time/part-time and faculty/tenure status; part-time instructional staff is the standard proxy for adjunct faculty (IPEDS has no 'adjunct' category)"
+        survey_form: "EAP"
+        collection_period: "Spring (Human Resources component)"
+        variables_url: "https://nces.ed.gov/ipeds/datacenter/data/EAP2023_Dict.zip"
+        build_script: "python -m src.data.build_faculty_metrics"
+
   fsa:
     name: "Federal Student Aid Data Center"
     provider: "Federal Student Aid (FSA)"
@@ -123,7 +131,12 @@ current_data:
         source: "DE2023"
         description: "Distance education enrollment for 2020-2024"
         records: null
-        
+
+      - name: "eap2023.csv"
+        source: "EAP2023"
+        description: "Instructional staff full-time/part-time headcounts (adjunct proxy)"
+        records: 5848
+
   fsa_2024:
     download_date: "2024-11-24"  # Update with actual download date
     data_range: "2008-2022"

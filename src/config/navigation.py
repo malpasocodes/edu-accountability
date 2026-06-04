@@ -11,6 +11,7 @@ from .constants import (
     FEDERAL_LOANS_SECTION,
     PELL_SECTION,
     DISTANCE_EDUCATION_SECTION,
+    FACULTY_SECTION,
     COLLEGE_EXPLORER_SECTION,
     CANONICAL_IPEDS_SECTION,
     SCORECARD_SECTION,
@@ -23,6 +24,8 @@ from .constants import (
     PELL_CHARTS,
     DISTANCE_OVERVIEW_LABEL,
     DISTANCE_CHARTS,
+    FACULTY_OVERVIEW_LABEL,
+    FACULTY_CHARTS,
     COLLEGE_EXPLORER_OVERVIEW_LABEL,
     COLLEGE_EXPLORER_CHARTS,
     CANONICAL_IPEDS_OVERVIEW_LABEL,
@@ -153,6 +156,23 @@ class NavigationConfig:
         description="Explore distance education enrollment patterns",
     )
 
+    FACULTY = SectionConfig(
+        name=FACULTY_SECTION,
+        icon="👩‍🏫",
+        label="Faculty",
+        overview_chart=ChartConfig(
+            label=FACULTY_OVERVIEW_LABEL,
+            key="nav_faculty_overview",
+            description="Instructional faculty staffing patterns",
+        ),
+        charts=[
+            ChartConfig(label=chart_label, key=f"nav_faculty_{index}", description=None)
+            for index, chart_label in enumerate(FACULTY_CHARTS)
+        ],
+        session_key="faculty_chart",
+        description="Full-time vs. part-time (adjunct) instructional staffing",
+    )
+
     COLLEGE_EXPLORER = SectionConfig(
         name=COLLEGE_EXPLORER_SECTION,
         icon="🔍",
@@ -219,6 +239,7 @@ class NavigationConfig:
             cls.FEDERAL_LOANS,
             cls.PELL_GRANTS,
             cls.DISTANCE_EDUCATION,
+            cls.FACULTY,
             cls.COLLEGE_EXPLORER,
         ]
         if ENABLE_CANONICAL_IPEDS_SECTION:

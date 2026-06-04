@@ -6,6 +6,7 @@ from .value_grid import ValueGridSection
 from .federal_loans import FederalLoansSection
 from .pell_grants import PellGrantsSection
 from .distance_education import DistanceEducationSection
+from .faculty import FacultySection
 from .college_explorer import CollegeExplorerSection
 from .canonical_ipeds import CanonicalIPEDSSection
 from .college_scorecard import CollegeScorecardSection
@@ -17,6 +18,7 @@ __all__ = [
     "FederalLoansSection",
     "PellGrantsSection",
     "DistanceEducationSection",
+    "FacultySection",
     "CollegeExplorerSection",
     "CanonicalIPEDSSection",
     "CollegeScorecardSection",
