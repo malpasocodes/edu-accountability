@@ -255,29 +255,17 @@ class DataManager:
     
     def _load_pell_processed_datasets(self) -> None:
         """Load all processed Pell datasets."""
+        # Single source of truth for the Pell resource keys/paths.
         pell_sources = DataSources.get_pell_resources_map()
-        
-        # Raw data is already loaded
+
+        # Raw data is already loaded in memory; everything else is optional CSV.
         self.pell_resources["raw"] = self.pell_df
-        
-        # Load optional processed datasets
-        optional_sources = {
-            "top_all": DataSources.PELL_TOP_DOLLARS,
-            "top_four": DataSources.PELL_TOP_DOLLARS_FOUR,
-            "top_two": DataSources.PELL_TOP_DOLLARS_TWO,
-            "trend_four": DataSources.PELL_TREND_FOUR,
-            "trend_two": DataSources.PELL_TREND_TWO,
-            "scatter_all": DataSources.PELL_VS_GRAD,
-            "scatter_four": DataSources.PELL_VS_GRAD_FOUR,
-            "scatter_two": DataSources.PELL_VS_GRAD_TWO,
-            "grad_rate_four": DataSources.PELL_GRAD_RATE_FOUR,
-            "grad_rate_two": DataSources.PELL_GRAD_RATE_TWO,
-        }
-        
-        for key, source in optional_sources.items():
+        for key, source in pell_sources.items():
+            if key == "raw":
+                continue
             self.pell_resources[key] = self.loader.load_optional_csv(
                 source.path,
-                source.description
+                source.description,
             )
     
     def get_fsa_year_range(self) -> str:

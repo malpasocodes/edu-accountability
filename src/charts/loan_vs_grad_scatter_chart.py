@@ -148,7 +148,6 @@ def render_loan_vs_grad_scatter(
     )
 
     st.subheader(title if period_label is None else f"{title} ({period_label})")
-    period_text = period_label or "the available years"
     selection_note = ""
     if len(prepared) < top_n:
         selection_note = f" (requested Top {top_n}, data available for {len(prepared)})"

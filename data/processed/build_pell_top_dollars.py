@@ -351,9 +351,6 @@ def build_dataset() -> None:
     _write_dataset(OUTPUT_PATHS["four_year"], top_four)
     _write_dataset(OUTPUT_PATHS["two_year"], top_two)
 
-    top_four_ids = [row["UnitID"] for row in top_four]
-    top_two_ids = [row["UnitID"] for row in top_two]
-
     trend_four_ids = _top_ids_for_year(rows_4, raw_year_rows, year_column_map, target_year, 10)
     trend_two_ids = _top_ids_for_year(rows_2, raw_year_rows, year_column_map, target_year, 10)
 
