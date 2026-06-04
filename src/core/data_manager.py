@@ -339,3 +339,19 @@ class DataManager:
             for error in self.errors:
                 st.sidebar.error(error)
 
+
+@st.cache_resource(show_spinner=False)
+def get_data_manager() -> "DataManager":
+    """Return a process-wide ``DataManager`` with all datasets loaded once.
+
+    The individual file reads are already cached via ``@st.cache_data``, but the
+    post-load assembly in ``load_all_data`` (headcount reshaping, fallback maps,
+    value-grid wiring) is not. Caching the loaded instance with
+    ``st.cache_resource`` keeps that work to a single run per session instead of
+    repeating it on every Streamlit rerun. Errors raised during loading are not
+    cached, so callers can still surface them via the usual try/except.
+    """
+    manager = DataManager()
+    manager.load_all_data()
+    return manager
+

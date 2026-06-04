@@ -32,7 +32,7 @@ from src.config.feature_flags import (
     ENABLE_CANONICAL_IPEDS_SECTION,
     ENABLE_CANONICAL_SCORECARD_SECTION,
 )
-from src.core import DataManager, DataLoadError
+from src.core import DataLoadError, DataManager, get_data_manager
 from src.sections import (
     OverviewSection,
     ValueGridSection,
@@ -139,12 +139,10 @@ def main() -> None:
     # Initialize session state
     SessionManager.initialize()
     
-    # Initialize data manager
-    data_manager = DataManager()
-    
-    # Load all data
+    # Initialize data manager (loaded once per session via st.cache_resource;
+    # subsequent reruns reuse the same instance instead of reloading/transforming)
     try:
-        data_manager.load_all_data()
+        data_manager = get_data_manager()
     except DataLoadError as e:
         st.error(f"Critical data loading error: {e}")
         st.stop()
