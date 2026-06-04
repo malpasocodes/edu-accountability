@@ -13,6 +13,7 @@ from src.charts.pell_top_dollars_chart import (
 from src.ui.renderers import render_altair_chart
 
 
+@st.cache_data(show_spinner=False)
 def _prepare_pell_trend_total_dataframe(
     pell_df: pd.DataFrame,
     metadata_df: pd.DataFrame,

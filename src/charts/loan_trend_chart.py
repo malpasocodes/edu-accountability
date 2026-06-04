@@ -13,6 +13,7 @@ from src.charts.loan_top_dollars_chart import (
 from src.ui.renderers import render_altair_chart, render_dataframe
 
 
+@st.cache_data(show_spinner=False)
 def _prepare_loan_trend_dataframe(
     loans_df: pd.DataFrame,
     metadata_df: pd.DataFrame,

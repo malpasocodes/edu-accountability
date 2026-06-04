@@ -45,6 +45,7 @@ def _normalize_unit_ids(series: pd.Series) -> pd.Series:
     return coerced.astype("Int64")
 
 
+@st.cache_data(show_spinner=False)
 def _prepare_top_dollar_dataframe(
     loans_df: pd.DataFrame,
     metadata_df: pd.DataFrame,
