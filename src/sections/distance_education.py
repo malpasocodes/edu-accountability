@@ -4,14 +4,11 @@ from __future__ import annotations
 
 from typing import List
 
-import pandas as pd
 import streamlit as st
-import altair as alt
 
 from src.charts.distance_top_enrollment_chart import render_distance_top_enrollment_chart
 from src.charts.distance_enrollment_trend_chart import render_distance_enrollment_trend_chart
 from src.charts.distance_de_trend_chart import render_distance_de_trend_chart
-from src.ui.renderers import render_altair_chart
 from .base import BaseSection
 
 

@@ -85,7 +85,7 @@ def validate_files() -> bool:
         years = _detect_years(path)
 
         if not years:
-            print(f"  WARNING: No YR columns detected in header")
+            print("  WARNING: No YR columns detected in header")
             all_ok = False
             continue
 
@@ -111,7 +111,7 @@ def fetch_file(url: str, dest: Path, *, force: bool = False) -> bool:
         # Sanity-check: response should look like CSV, not HTML error page
         snippet = data[:200].decode("utf-8", errors="replace")
         if "UnitID" not in snippet and "unitid" not in snippet.lower():
-            print(f"  Download returned unexpected content (not a CSV)")
+            print("  Download returned unexpected content (not a CSV)")
             return False
 
         dest.parent.mkdir(parents=True, exist_ok=True)

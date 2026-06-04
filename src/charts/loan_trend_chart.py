@@ -7,7 +7,6 @@ import pandas as pd
 import streamlit as st
 
 from src.charts.loan_top_dollars_chart import (
-    SECTOR_COLOR_SCALE,
     _identify_year_columns,
     _normalize_unit_ids,
 )

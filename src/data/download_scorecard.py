@@ -53,9 +53,9 @@ def download_scorecard_data(
         print(f"✓ ZIP file already exists: {zip_path}")
         return zip_path
 
-    print(f"Downloading College Scorecard data from:")
+    print("Downloading College Scorecard data from:")
     print(f"  {url}")
-    print(f"  This may take a few minutes (~200MB)...")
+    print("  This may take a few minutes (~200MB)...")
 
     try:
         urllib.request.urlretrieve(url, zip_path)
@@ -78,7 +78,7 @@ def extract_scorecard_csv(zip_path: Path, output_dir: Path) -> Optional[Path]:
     Returns:
         Path to extracted CSV file, or None if not found
     """
-    print(f"\nExtracting CSV from ZIP...")
+    print("\nExtracting CSV from ZIP...")
 
     try:
         with zipfile.ZipFile(zip_path, 'r') as zip_ref:
@@ -123,9 +123,9 @@ def process_scorecard_data(
     Returns:
         DataFrame with extracted fields
     """
-    print(f"\nProcessing Scorecard data...")
+    print("\nProcessing Scorecard data...")
     print(f"  Reading: {csv_path}")
-    print(f"  This may take a minute...")
+    print("  This may take a minute...")
 
     try:
         # Read only the columns we need to reduce memory usage
@@ -145,7 +145,7 @@ def process_scorecard_data(
         has_6yr = df["MD_EARN_WNE_P6"].notna().sum()
         has_either = (df["MD_EARN_WNE_P10"].notna() | df["MD_EARN_WNE_P6"].notna()).sum()
 
-        print(f"\nData availability:")
+        print("\nData availability:")
         print(f"  10-year earnings: {has_10yr:,} ({has_10yr/len(df)*100:.1f}%)")
         print(f"  6-year earnings:  {has_6yr:,} ({has_6yr/len(df)*100:.1f}%)")
         print(f"  Either available: {has_either:,} ({has_either/len(df)*100:.1f}%)")
@@ -269,7 +269,7 @@ def main():
     print("\n" + "=" * 70)
     print("✓ Download and processing complete!")
     print("=" * 70)
-    print(f"\nDownload and processing complete. Data is ready for use.")
+    print("\nDownload and processing complete. Data is ready for use.")
 
 
 if __name__ == "__main__":

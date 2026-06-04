@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import re
-from typing import Iterable, List, Optional
+from typing import Iterable, List
 
 import pandas as pd
 import streamlit as st

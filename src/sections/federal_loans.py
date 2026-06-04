@@ -12,8 +12,6 @@ from src.charts.loan_trend_total_chart import render_loan_trend_total_chart
 from src.charts.loan_vs_grad_scatter_chart import render_loan_vs_grad_scatter
 from src.config.constants import (
     FEDERAL_LOANS_SECTION,
-    FOUR_YEAR_VALUE_GRID_LABEL,
-    TWO_YEAR_VALUE_GRID_LABEL,
     LOAN_OVERVIEW_LABEL,
     LOAN_TOP_DOLLARS_LABEL,
     LOAN_VS_GRAD_LABEL,

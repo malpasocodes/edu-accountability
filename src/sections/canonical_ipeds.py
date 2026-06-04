@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-from pathlib import Path
 from typing import List
 
 import altair as alt
@@ -11,7 +10,6 @@ import streamlit as st
 
 from src.config.constants import (
     CANONICAL_IPEDS_SECTION,
-    CANONICAL_IPEDS_OVERVIEW_LABEL,
     CANONICAL_DATASET_GRAD,
     CANONICAL_DATASET_PELL,
     CANONICAL_DATASET_LOANS,

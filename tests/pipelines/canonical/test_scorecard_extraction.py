@@ -2,7 +2,6 @@
 
 from pathlib import Path
 import zipfile
-import io
 
 import pandas as pd
 

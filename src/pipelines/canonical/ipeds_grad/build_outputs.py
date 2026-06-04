@@ -7,7 +7,7 @@ from datetime import datetime, timezone
 import json
 import subprocess
 from pathlib import Path
-from typing import Any, Dict
+from typing import Dict
 
 import pandas as pd
 

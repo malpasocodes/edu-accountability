@@ -1,7 +1,6 @@
 """Tests for shared YoY trend classification utility."""
 
 import pandas as pd
-import pytest
 
 from src.charts.trend_utils import YOY_PCT_THRESHOLD, classify_yoy_direction
 

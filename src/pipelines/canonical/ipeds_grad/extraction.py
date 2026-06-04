@@ -6,7 +6,7 @@ from dataclasses import dataclass
 from datetime import datetime, timezone
 import re
 from pathlib import Path
-from typing import Iterable, List
+from typing import Iterable
 
 import pandas as pd
 

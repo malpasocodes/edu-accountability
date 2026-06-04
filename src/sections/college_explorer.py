@@ -6,7 +6,6 @@ from typing import List, Optional
 
 import re
 import pandas as pd
-import numpy as np
 import streamlit as st
 import altair as alt
 
@@ -14,7 +13,6 @@ from .base import BaseSection
 from src.ui.renderers import render_altair_chart
 from src.analytics.grad_zscores import HEADCOUNT_THRESHOLDS, PeerStats, summarize_anchor
 from src.config.constants import (
-    COLLEGE_EXPLORER_OVERVIEW_LABEL,
     COLLEGE_SUMMARY_LABEL,
     COLLEGE_LOANS_PELL_LABEL,
     COLLEGE_GRAD_RATES_LABEL,
@@ -847,7 +845,7 @@ class CollegeExplorerSection(BaseSection):
 
         # Display institution header
         st.markdown(f"### {institution_name}")
-        st.markdown(f"**Graduation Rate Trends (2016-2023)**")
+        st.markdown("**Graduation Rate Trends (2016-2023)**")
 
         # Prepare the graduation trend data
         trend_data = self._prepare_graduation_trend_data(unit_id, institution_name)
