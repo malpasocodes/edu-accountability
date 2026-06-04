@@ -93,17 +93,18 @@ class IPEDSGradOutputBuilder:
     @staticmethod
     def _git_sha() -> str:
         try:
-            return (
-                subprocess.check_output(["git", "rev-parse", "HEAD"], text=True)
-                .strip()
-            )
+            return subprocess.check_output(
+                ["git", "rev-parse", "HEAD"], text=True
+            ).strip()
         except Exception:
             return "unknown"
 
 
 def main() -> None:
     config = OutputBuildConfig(
-        long_parquet=Path("data/processed/2023/canonical/ipeds_grad_rates_long.parquet"),
+        long_parquet=Path(
+            "data/processed/2023/canonical/ipeds_grad_rates_long.parquet"
+        ),
         latest_parquet=Path(
             "data/processed/2023/canonical/ipeds_grad_rates_latest_by_inst.parquet"
         ),

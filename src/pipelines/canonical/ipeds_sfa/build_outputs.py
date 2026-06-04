@@ -69,7 +69,9 @@ class SFABuilder:
         latest.to_parquet(self.config.latest_parquet, index=False)
         summary.to_parquet(self.config.summary_parquet, index=False)
 
-    def _write_metadata(self, long_df: pd.DataFrame, latest: pd.DataFrame, summary: pd.DataFrame) -> None:
+    def _write_metadata(
+        self, long_df: pd.DataFrame, latest: pd.DataFrame, summary: pd.DataFrame
+    ) -> None:
         metadata = {
             "build_ts": datetime.now(timezone.utc).isoformat(),
             "source_file": str(self.config.long_parquet),
@@ -84,22 +86,36 @@ class SFABuilder:
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="Build canonical outputs for SFA datasets.")
+    parser = argparse.ArgumentParser(
+        description="Build canonical outputs for SFA datasets."
+    )
     parser.add_argument("--dataset", choices=["pell", "loans"], default="pell")
     args = parser.parse_args()
 
     mapping = {
         "pell": SFABuildConfig(
-            long_parquet=Path("data/processed/2023/canonical/ipeds_percent_pell_long.parquet"),
-            latest_parquet=Path("data/processed/2023/canonical/ipeds_percent_pell_latest_by_inst.parquet"),
-            summary_parquet=Path("data/processed/2023/canonical/ipeds_percent_pell_summary_by_year.parquet"),
+            long_parquet=Path(
+                "data/processed/2023/canonical/ipeds_percent_pell_long.parquet"
+            ),
+            latest_parquet=Path(
+                "data/processed/2023/canonical/ipeds_percent_pell_latest_by_inst.parquet"
+            ),
+            summary_parquet=Path(
+                "data/processed/2023/canonical/ipeds_percent_pell_summary_by_year.parquet"
+            ),
             metadata_json=Path("out/canonical/ipeds_pell/run_latest.json"),
             value_column="percent_pell",
         ),
         "loans": SFABuildConfig(
-            long_parquet=Path("data/processed/2023/canonical/ipeds_percent_loans_long.parquet"),
-            latest_parquet=Path("data/processed/2023/canonical/ipeds_percent_loans_latest_by_inst.parquet"),
-            summary_parquet=Path("data/processed/2023/canonical/ipeds_percent_loans_summary_by_year.parquet"),
+            long_parquet=Path(
+                "data/processed/2023/canonical/ipeds_percent_loans_long.parquet"
+            ),
+            latest_parquet=Path(
+                "data/processed/2023/canonical/ipeds_percent_loans_latest_by_inst.parquet"
+            ),
+            summary_parquet=Path(
+                "data/processed/2023/canonical/ipeds_percent_loans_summary_by_year.parquet"
+            ),
             metadata_json=Path("out/canonical/ipeds_loans/run_latest.json"),
             value_column="percent_loans",
         ),

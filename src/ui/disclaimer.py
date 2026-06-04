@@ -23,7 +23,9 @@ def render_disclaimer_summary() -> None:
     This function displays a concise warning message with an expandable section
     containing the full legal disclaimer and terms of use from DISCLAIMER.md.
     """
-    st.markdown('<h3 style="color: red;">⚠️ Important Notice</h3>', unsafe_allow_html=True)
+    st.markdown(
+        '<h3 style="color: red;">⚠️ Important Notice</h3>', unsafe_allow_html=True
+    )
     st.markdown(
         """
         The **EDU Accountability Lab** provides **research-oriented, non-commercial analyses** using public datasets such as IPEDS and the U.S. Census.
@@ -32,20 +34,18 @@ def render_disclaimer_summary() -> None:
         By accessing or using this site, you acknowledge that you have **read, understood, and accepted** the <span style="color: red;">Full Disclaimer & Terms of Use</span> (below), including all limitations of accuracy, liability, and applicability.
         If you do not agree with these terms, you should **discontinue use of the site immediately**.
         """,
-        unsafe_allow_html=True
+        unsafe_allow_html=True,
     )
 
     with st.expander("📄 View Full Disclaimer & Terms of Use"):
         disclaimer_content = load_disclaimer_content()
         st.markdown(disclaimer_content)
         st.markdown("---")
-        st.markdown(
-            """
+        st.markdown("""
             **By accessing or using this site, you acknowledge that you have read, understood,
             and accepted these terms.** If you do not agree with these terms, you should discontinue
             use of the site immediately.
-            """
-        )
+            """)
 
 
 def render_disclaimer_footer() -> None:

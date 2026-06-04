@@ -22,11 +22,15 @@ def _prepare_loan_trend_dataframe(
 
     year_info = _identify_year_columns(loans_df.columns)
     if not year_info:
-        raise ValueError("No year columns found in loan dataset (expected headers like 'YR2022').")
+        raise ValueError(
+            "No year columns found in loan dataset (expected headers like 'YR2022')."
+        )
 
     working = loans_df.copy()
     if "UnitID" not in working.columns:
-        raise ValueError("Loan dataset missing 'UnitID' column required for trend charting.")
+        raise ValueError(
+            "Loan dataset missing 'UnitID' column required for trend charting."
+        )
 
     year_columns = [column for _, column in year_info]
     for column in year_columns:
@@ -34,7 +38,9 @@ def _prepare_loan_trend_dataframe(
     working["UnitID"] = _normalize_unit_ids(working.get("UnitID"))
 
     required_metadata = {"UnitID", "institution", "sector"}
-    missing_metadata = [column for column in required_metadata if column not in metadata_df.columns]
+    missing_metadata = [
+        column for column in required_metadata if column not in metadata_df.columns
+    ]
     if missing_metadata:
         raise ValueError(
             "Cannot prepare loan trend dataset. Missing metadata columns: "
@@ -62,14 +68,14 @@ def _prepare_loan_trend_dataframe(
         value_name="loan_dollars",
     )
 
-    long_form["loan_dollars"] = pd.to_numeric(long_form["loan_dollars"], errors="coerce")
+    long_form["loan_dollars"] = pd.to_numeric(
+        long_form["loan_dollars"], errors="coerce"
+    )
     long_form.dropna(subset=["loan_dollars"], inplace=True)
     if long_form.empty:
         return pd.DataFrame(), None
 
-    long_form["Year"] = (
-        long_form["YearLabel"].str.extract(r"(\d{4})").astype(float)
-    )
+    long_form["Year"] = long_form["YearLabel"].str.extract(r"(\d{4})").astype(float)
     long_form.dropna(subset=["Year"], inplace=True)
     if long_form.empty:
         return pd.DataFrame(), None
@@ -80,7 +86,9 @@ def _prepare_loan_trend_dataframe(
     if anchor_year is not None:
         anchor_subset = long_form[long_form["Year"] == anchor_year]
         anchor_subset = anchor_subset.sort_values("loan_dollars", ascending=False)
-        top_ids = anchor_subset.dropna(subset=["loan_dollars"])["UnitID"].head(top_n).tolist()
+        top_ids = (
+            anchor_subset.dropna(subset=["loan_dollars"])["UnitID"].head(top_n).tolist()
+        )
         filtered = long_form[long_form["UnitID"].isin(top_ids)].copy()
         if filtered.empty:
             return pd.DataFrame(), None
@@ -88,22 +96,25 @@ def _prepare_loan_trend_dataframe(
         filtered = long_form.copy()
 
     filtered["Institution"] = filtered["institution"].astype(str)
-    filtered["Sector"] = (
-        filtered["sector"].fillna("Unknown").replace("", "Unknown")
-    )
+    filtered["Sector"] = filtered["sector"].fillna("Unknown").replace("", "Unknown")
     filtered["LoanDollarsBillions"] = filtered["loan_dollars"] / 1_000_000_000
     filtered["AnchorYear"] = anchor_year
 
     # Calculate year-over-year changes for dot coloring
     filtered = filtered.sort_values(["UnitID", "Year"])
-    filtered["PrevYearLoanDollars"] = filtered.groupby("UnitID")["loan_dollars"].shift(1)
+    filtered["PrevYearLoanDollars"] = filtered.groupby("UnitID")["loan_dollars"].shift(
+        1
+    )
     filtered["YoYChange"] = filtered["loan_dollars"] - filtered["PrevYearLoanDollars"]
     filtered["YoYChangePercent"] = (
-        (filtered["loan_dollars"] - filtered["PrevYearLoanDollars"]) / filtered["PrevYearLoanDollars"] * 100
+        (filtered["loan_dollars"] - filtered["PrevYearLoanDollars"])
+        / filtered["PrevYearLoanDollars"]
+        * 100
     ).round(1)
 
     # Determine change direction for dot coloring (based on percent change)
     from src.charts.trend_utils import classify_yoy_direction
+
     filtered["ChangeDirection"] = classify_yoy_direction(filtered["YoYChangePercent"])
 
     # For first year of each institution, mark as "Same" since no previous year
@@ -111,7 +122,11 @@ def _prepare_loan_trend_dataframe(
     filtered.loc[first_year_mask, "ChangeDirection"] = "Same"
     filtered.loc[first_year_mask, "YoYChangePercent"] = 0.0
 
-    filtered.drop(columns=["YearLabel", "loan_dollars", "PrevYearLoanDollars", "YoYChange"], inplace=True, errors="ignore")
+    filtered.drop(
+        columns=["YearLabel", "loan_dollars", "PrevYearLoanDollars", "YoYChange"],
+        inplace=True,
+        errors="ignore",
+    )
 
     columns = [
         "UnitID",
@@ -151,71 +166,73 @@ def render_loan_trend_chart(
 
     # Create institution-based color scale
     institutions = prepared["Institution"].unique()
-    institution_color_scale = alt.Scale(
-        domain=list(institutions),
-        scheme="category20"
-    )
+    institution_color_scale = alt.Scale(domain=list(institutions), scheme="category20")
 
     # Create change direction color scale for dots
     change_color_scale = alt.Scale(
         domain=["Increase", "Same", "Decrease"],
-        range=["#28a745", "#6c757d", "#dc3545"]  # Green, Gray, Red
+        range=["#28a745", "#6c757d", "#dc3545"],  # Green, Gray, Red
     )
 
     # Line layer with dotted lines colored by institution
-    lines = alt.Chart(prepared).mark_line(
-        strokeDash=[3, 3],  # Dotted line pattern
-        point=False
-    ).encode(
-        x=alt.X("Year:Q", title="Year", axis=alt.Axis(format="d")),
-        y=alt.Y(
-            "LoanDollarsBillions:Q",
-            title="Federal loan dollars (billions)",
-        ),
-        color=alt.Color(
-            "Institution:N",
-            title="Institution",
-            scale=institution_color_scale
-        ),
-        tooltip=[
-            alt.Tooltip("Institution:N", title="Institution"),
-            alt.Tooltip("Year:Q", title="Year", format=".0f"),
-            alt.Tooltip(
+    lines = (
+        alt.Chart(prepared)
+        .mark_line(strokeDash=[3, 3], point=False)  # Dotted line pattern
+        .encode(
+            x=alt.X("Year:Q", title="Year", axis=alt.Axis(format="d")),
+            y=alt.Y(
                 "LoanDollarsBillions:Q",
-                title="Loan dollars (billions)",
-                format=".2f",
+                title="Federal loan dollars (billions)",
             ),
-            alt.Tooltip("Sector:N", title="Sector"),
-        ],
+            color=alt.Color(
+                "Institution:N", title="Institution", scale=institution_color_scale
+            ),
+            tooltip=[
+                alt.Tooltip("Institution:N", title="Institution"),
+                alt.Tooltip("Year:Q", title="Year", format=".0f"),
+                alt.Tooltip(
+                    "LoanDollarsBillions:Q",
+                    title="Loan dollars (billions)",
+                    format=".2f",
+                ),
+                alt.Tooltip("Sector:N", title="Sector"),
+            ],
+        )
     )
 
     # Point layer with year-over-year change coloring
-    points = alt.Chart(prepared).mark_circle(size=80).encode(
-        x=alt.X("Year:Q"),
-        y=alt.Y("LoanDollarsBillions:Q"),
-        color=alt.Color(
-            "ChangeDirection:N",
-            title="Year-over-Year Change",
-            scale=change_color_scale
-        ),
-        tooltip=[
-            alt.Tooltip("Institution:N", title="Institution"),
-            alt.Tooltip("Year:Q", title="Year", format=".0f"),
-            alt.Tooltip(
-                "LoanDollarsBillions:Q",
-                title="Loan dollars (billions)",
-                format=".2f",
+    points = (
+        alt.Chart(prepared)
+        .mark_circle(size=80)
+        .encode(
+            x=alt.X("Year:Q"),
+            y=alt.Y("LoanDollarsBillions:Q"),
+            color=alt.Color(
+                "ChangeDirection:N",
+                title="Year-over-Year Change",
+                scale=change_color_scale,
             ),
-            alt.Tooltip("Sector:N", title="Sector"),
-            alt.Tooltip("YoYChangePercent:Q", title="Year-over-year change (%)", format=".1f"),
-            alt.Tooltip("ChangeDirection:N", title="Change direction"),
-        ],
+            tooltip=[
+                alt.Tooltip("Institution:N", title="Institution"),
+                alt.Tooltip("Year:Q", title="Year", format=".0f"),
+                alt.Tooltip(
+                    "LoanDollarsBillions:Q",
+                    title="Loan dollars (billions)",
+                    format=".2f",
+                ),
+                alt.Tooltip("Sector:N", title="Sector"),
+                alt.Tooltip(
+                    "YoYChangePercent:Q",
+                    title="Year-over-year change (%)",
+                    format=".1f",
+                ),
+                alt.Tooltip("ChangeDirection:N", title="Change direction"),
+            ],
+        )
     )
 
     # Combine layers
-    chart = (lines + points).resolve_scale(
-        color="independent"
-    ).properties(height=520)
+    chart = (lines + points).resolve_scale(color="independent").properties(height=520)
 
     st.subheader(title)
     if anchor_year is None:
@@ -234,21 +251,20 @@ def render_loan_trend_chart(
     # Build summary table (year-by-year billons + total)
     year_columns = sorted(prepared["Year"].unique())
     if year_columns:
-        table = (
-            prepared.pivot_table(
-                index=["Institution", "Sector"],
-                columns="Year",
-                values="LoanDollarsBillions",
-                aggfunc="sum",
-                fill_value=0,
-            )
-            .reset_index()
-        )
+        table = prepared.pivot_table(
+            index=["Institution", "Sector"],
+            columns="Year",
+            values="LoanDollarsBillions",
+            aggfunc="sum",
+            fill_value=0,
+        ).reset_index()
         table["Total (billions)"] = table[year_columns].sum(axis=1)
         table["Total (billions)"] = table["Total (billions)"].round(2)
         for col in year_columns:
             table[col] = table[col].round(2)
-        display_columns = ["Institution", "Sector"] + year_columns + ["Total (billions)"]
+        display_columns = (
+            ["Institution", "Sector"] + year_columns + ["Total (billions)"]
+        )
         table = table[display_columns].sort_values("Total (billions)", ascending=False)
         # Convert column names to strings for Streamlit rendering
         table.columns = [str(col) for col in table.columns]

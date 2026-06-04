@@ -29,7 +29,9 @@ class SFAMetadataEnricher:
         self.config = config
 
     def run(self, *, write_output: bool = True) -> pd.DataFrame:
-        base_df = self._load_long().drop(columns=["control", "level", "state", "sector"], errors="ignore")
+        base_df = self._load_long().drop(
+            columns=["control", "level", "state", "sector"], errors="ignore"
+        )
         hd_df = self._load_hd()
 
         enriched = base_df.merge(hd_df, on="unitid", how="left", validate="many_to_one")
@@ -91,7 +93,9 @@ class SFAMetadataEnricher:
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="Enrich SFA canonical datasets with HD metadata.")
+    parser = argparse.ArgumentParser(
+        description="Enrich SFA canonical datasets with HD metadata."
+    )
     parser.add_argument(
         "--dataset",
         choices=["pell", "loans"],
@@ -101,11 +105,15 @@ def main() -> None:
 
     mapping = {
         "pell": SFAMetadataConfig(
-            long_parquet=Path("data/processed/2023/canonical/ipeds_percent_pell_long.parquet"),
+            long_parquet=Path(
+                "data/processed/2023/canonical/ipeds_percent_pell_long.parquet"
+            ),
             hd_csv=Path("data/raw/ipeds/2023/institutions.csv"),
         ),
         "loans": SFAMetadataConfig(
-            long_parquet=Path("data/processed/2023/canonical/ipeds_percent_loans_long.parquet"),
+            long_parquet=Path(
+                "data/processed/2023/canonical/ipeds_percent_loans_long.parquet"
+            ),
             hd_csv=Path("data/raw/ipeds/2023/institutions.csv"),
         ),
     }

@@ -45,7 +45,9 @@ def _prepare_top_dollar_dataframe(
 
     year_columns = _identify_year_columns(pell_df.columns)
     if not year_columns:
-        raise ValueError("No year columns found in Pell dataset (expected columns named like 'YR2022').")
+        raise ValueError(
+            "No year columns found in Pell dataset (expected columns named like 'YR2022')."
+        )
 
     working = pell_df.copy()
     if "UnitID" not in working.columns:
@@ -58,7 +60,9 @@ def _prepare_top_dollar_dataframe(
     working["UnitID"] = _normalize_unit_ids(working.get("UnitID"))
     metadata = metadata_df.copy()
     required_metadata = {"UnitID", "institution", "sector"}
-    missing_metadata = [column for column in required_metadata if column not in metadata.columns]
+    missing_metadata = [
+        column for column in required_metadata if column not in metadata.columns
+    ]
     if missing_metadata:
         raise ValueError(
             "Cannot merge Pell dataset with metadata. Missing columns: "
@@ -106,7 +110,9 @@ def _prepare_top_dollar_dataframe(
     top["rank"] = range(1, len(top) + 1)
     top["pell_dollars_billions"] = top["pell_dollars"] / 1_000_000_000
 
-    chart_data = top[["rank", "Institution", "sector", "pell_dollars_billions", "pell_dollars"]].copy()
+    chart_data = top[
+        ["rank", "Institution", "sector", "pell_dollars_billions", "pell_dollars"]
+    ].copy()
     chart_data.rename(columns={"sector": "Sector"}, inplace=True)
 
     sector_summary = (
@@ -114,30 +120,49 @@ def _prepare_top_dollar_dataframe(
         .sum()
         .rename(columns={"sector": "Sector"})
     )
-    sector_summary["pell_dollars_billions"] = sector_summary["pell_dollars"] / 1_000_000_000
+    sector_summary["pell_dollars_billions"] = (
+        sector_summary["pell_dollars"] / 1_000_000_000
+    )
     sector_summary = sector_summary.sort_values("pell_dollars", ascending=False)
     total_pell = sector_summary["pell_dollars"].sum()
     if total_pell > 0:
-        sector_summary["share_pct"] = (sector_summary["pell_dollars"] / total_pell) * 100
+        sector_summary["share_pct"] = (
+            sector_summary["pell_dollars"] / total_pell
+        ) * 100
     else:
         sector_summary["share_pct"] = 0.0
     sector_summary["label_mid"] = sector_summary["pell_dollars_billions"] / 2
 
-    id_vars = ["UnitID", "Institution", "sector", "pell_dollars", "pell_dollars_billions", "rank"]
+    id_vars = [
+        "UnitID",
+        "Institution",
+        "sector",
+        "pell_dollars",
+        "pell_dollars_billions",
+        "rank",
+    ]
     year_data = top[id_vars + year_field_names].melt(
         id_vars=id_vars,
         value_vars=year_field_names,
         var_name="year_column",
         value_name="year_pell_dollars",
     )
-    year_data = year_data[year_data["year_pell_dollars"].notna() & (year_data["year_pell_dollars"] > 0)]
+    year_data = year_data[
+        year_data["year_pell_dollars"].notna() & (year_data["year_pell_dollars"] > 0)
+    ]
     if year_data.empty:
         table_data = pd.DataFrame()
     else:
-        year_data["year"] = year_data["year_column"].str.extract(r"YR(\d{4})")[0].astype(int)
-        year_data["year_pell_dollars_billions"] = year_data["year_pell_dollars"] / 1_000_000_000
+        year_data["year"] = (
+            year_data["year_column"].str.extract(r"YR(\d{4})")[0].astype(int)
+        )
+        year_data["year_pell_dollars_billions"] = (
+            year_data["year_pell_dollars"] / 1_000_000_000
+        )
         year_data["pell_dollars_billions"] = year_data["pell_dollars"] / 1_000_000_000
-        year_data = year_data.sort_values(["pell_dollars", "year"], ascending=[False, True])
+        year_data = year_data.sort_values(
+            ["pell_dollars", "year"], ascending=[False, True]
+        )
 
         table = year_data.pivot_table(
             index=["Institution", "sector", "pell_dollars_billions"],
@@ -147,7 +172,10 @@ def _prepare_top_dollar_dataframe(
             fill_value=0,
         ).reset_index()
         table = table.sort_values("pell_dollars_billions", ascending=False)
-        table.rename(columns={"sector": "Sector", "pell_dollars_billions": "Total (billions)"}, inplace=True)
+        table.rename(
+            columns={"sector": "Sector", "pell_dollars_billions": "Total (billions)"},
+            inplace=True,
+        )
         year_cols = [col for col in table.columns if isinstance(col, (int, float))]
         for col in year_cols:
             table[col] = table[col].round(3)
@@ -188,7 +216,9 @@ def render_pell_top_dollars_chart(
         return
 
     chart_data = prepared.chart_data.copy().sort_values("pell_dollars", ascending=False)
-    chart_data["Institution"] = pd.Categorical(chart_data["Institution"], categories=chart_data["Institution"], ordered=True)
+    chart_data["Institution"] = pd.Categorical(
+        chart_data["Institution"], categories=chart_data["Institution"], ordered=True
+    )
 
     period_suffix = f" ({prepared.period_label})" if prepared.period_label else ""
     chart_title = f"{title}{period_suffix}"
@@ -200,7 +230,12 @@ def render_pell_top_dollars_chart(
             "Institution:N",
             sort=None,
             title="Institution",
-            axis=alt.Axis(labelFontSize=13, labelFontWeight="bold", titleFontSize=14, titleFontWeight="bold"),
+            axis=alt.Axis(
+                labelFontSize=13,
+                labelFontWeight="bold",
+                titleFontSize=14,
+                titleFontWeight="bold",
+            ),
         )
     )
 
@@ -224,7 +259,11 @@ def render_pell_top_dollars_chart(
         tooltip=[
             alt.Tooltip("Institution:N", title="Institution"),
             alt.Tooltip("Sector:N", title="Sector"),
-            alt.Tooltip("pell_dollars_billions:Q", title="Total Pell dollars (billions)", format=".2f"),
+            alt.Tooltip(
+                "pell_dollars_billions:Q",
+                title="Total Pell dollars (billions)",
+                format=".2f",
+            ),
             alt.Tooltip("pell_dollars:Q", title="Total Pell dollars", format=",.0f"),
             alt.Tooltip("rank:Q", title="Rank"),
         ],
@@ -242,13 +281,10 @@ def render_pell_top_dollars_chart(
         text=alt.Text("pell_dollars_billions:Q", format=".2f"),
     )
 
-    chart = (
-        (bars + labels)
-        .properties(
-            height=max(320, 32 * num_institutions),
-            width=540,
-            title=chart_title,
-        )
+    chart = (bars + labels).properties(
+        height=max(320, 32 * num_institutions),
+        width=540,
+        title=chart_title,
     )
 
     st.subheader(chart_title)
@@ -273,24 +309,43 @@ def render_pell_top_dollars_chart(
                     "Sector:N",
                     sort=alt.SortField(field="pell_dollars", order="descending"),
                     title="Sector",
-                    axis=alt.Axis(labelFontSize=12, labelFontWeight="bold", titleFontSize=13, titleFontWeight="bold"),
+                    axis=alt.Axis(
+                        labelFontSize=12,
+                        labelFontWeight="bold",
+                        titleFontSize=13,
+                        titleFontWeight="bold",
+                    ),
                 ),
                 x=alt.X(
                     "pell_dollars_billions:Q",
                     title="Pell grant dollars (billions)",
-                    axis=alt.Axis(format=".2f", labelFontSize=12, labelFontWeight="bold", titleFontSize=13, titleFontWeight="bold"),
+                    axis=alt.Axis(
+                        format=".2f",
+                        labelFontSize=12,
+                        labelFontWeight="bold",
+                        titleFontSize=13,
+                        titleFontWeight="bold",
+                    ),
                 ),
                 color=alt.Color("Sector:N", scale=SECTOR_COLOR_SCALE, legend=None),
                 tooltip=[
                     alt.Tooltip("Sector:N", title="Sector"),
-                    alt.Tooltip("pell_dollars_billions:Q", title="Pell dollars (billions)", format=".2f"),
+                    alt.Tooltip(
+                        "pell_dollars_billions:Q",
+                        title="Pell dollars (billions)",
+                        format=".2f",
+                    ),
                     alt.Tooltip("pell_dollars:Q", title="Pell dollars", format=",.0f"),
-                    alt.Tooltip("share_pct:Q", title="Share of total (%)", format=".1f"),
+                    alt.Tooltip(
+                        "share_pct:Q", title="Share of total (%)", format=".1f"
+                    ),
                 ],
             )
             .properties(height=320, width=540)
         )
-        label_data = prepared.sector_summary[prepared.sector_summary["pell_dollars"] > 0]
+        label_data = prepared.sector_summary[
+            prepared.sector_summary["pell_dollars"] > 0
+        ]
         sector_labels = (
             alt.Chart(label_data)
             .mark_text(
@@ -311,9 +366,13 @@ def render_pell_top_dollars_chart(
             .transform_calculate(label="format(datum.share_pct, '.1f') + '%'")
         )
         render_altair_chart(sector_chart + sector_labels)
-        st.caption("Sector totals aggregate only the institutions included in the ranking above.")
+        st.caption(
+            "Sector totals aggregate only the institutions included in the ranking above."
+        )
 
     if prepared.table_data.empty:
-        st.warning("Unable to build year-by-year breakdown for the selected institutions.")
+        st.warning(
+            "Unable to build year-by-year breakdown for the selected institutions."
+        )
     else:
         render_dataframe(prepared.table_data, width="stretch")

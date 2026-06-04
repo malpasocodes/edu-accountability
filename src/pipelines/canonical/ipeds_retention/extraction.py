@@ -11,7 +11,6 @@ from typing import Iterable, Pattern
 
 import pandas as pd
 
-
 UNIT_ID_COL = "UnitID"
 INST_NAME_COL = "Institution Name"
 
@@ -91,7 +90,9 @@ class IPEDSRetentionExtractor:
         pre_drop = len(melted)
         melted = melted.dropna(subset=[self.config.value_column])
         if pre_drop - len(melted):
-            print(f"  Dropped {pre_drop - len(melted)} rows with null {self.config.value_column} ({len(melted)} remaining)")
+            print(
+                f"  Dropped {pre_drop - len(melted)} rows with null {self.config.value_column} ({len(melted)} remaining)"
+            )
 
         if self.config.round_values:
             melted[self.config.value_column] = melted[self.config.value_column].round()

@@ -24,7 +24,7 @@ from .exceptions import DataLoadError
 
 class DataManager:
     """Manages all data loading and caching for the dashboard."""
-    
+
     def __init__(self):
         """Initialize the data manager."""
         self.loader = DataLoader()
@@ -39,19 +39,19 @@ class DataManager:
         self.headcount_df: Optional[pd.DataFrame] = None
         self.headcount_fallback_map: Optional[pd.Series] = None
         self.errors: list[str] = []
-    
+
     def load_all_data(self) -> None:
         """
         Load all required and optional datasets.
-        
+
         This method loads data in priority order:
         1. Required raw datasets (Pell)
-        2. Optional raw datasets (Loans)  
+        2. Optional raw datasets (Loans)
         3. Processed value grid datasets
         4. Processed Pell datasets
         """
         self.errors.clear()
-        
+
         # Load required raw datasets
         self._load_pell_raw()
         self._load_loan_raw()
@@ -63,27 +63,25 @@ class DataManager:
 
         # Load value grid datasets
         self._load_value_grid_datasets()
-        
+
         # Load processed Pell datasets
         self._load_pell_processed_datasets()
-    
+
     def _load_pell_raw(self) -> None:
         """Load the raw Pell dataset."""
         try:
             self.pell_df = self.loader.load_csv(
-                str(DataSources.PELL_RAW.path),
-                DataSources.PELL_RAW.description
+                str(DataSources.PELL_RAW.path), DataSources.PELL_RAW.description
             )
         except DataLoadError as e:
             self.errors.append(str(e))
             raise
-    
+
     def _load_loan_raw(self) -> None:
         """Load the raw loan dataset (optional)."""
         try:
             self.loan_df = self.loader.load_csv(
-                str(DataSources.LOAN_RAW.path),
-                DataSources.LOAN_RAW.description
+                str(DataSources.LOAN_RAW.path), DataSources.LOAN_RAW.description
             )
         except DataLoadError:
             # Loan data is optional
@@ -93,8 +91,7 @@ class DataManager:
         """Load the raw distance education dataset (optional)."""
         try:
             self.distance_df = self.loader.load_csv(
-                str(DataSources.DISTANCE_RAW.path),
-                DataSources.DISTANCE_RAW.description
+                str(DataSources.DISTANCE_RAW.path), DataSources.DISTANCE_RAW.description
             )
         except DataLoadError:
             # Distance education data is optional
@@ -105,7 +102,7 @@ class DataManager:
         try:
             self.institutions_df = self.loader.load_csv(
                 str(DataSources.INSTITUTIONS_RAW.path),
-                DataSources.INSTITUTIONS_RAW.description
+                DataSources.INSTITUTIONS_RAW.description,
             )
         except DataLoadError as e:
             # Institutions data is important for College Explorer
@@ -117,7 +114,7 @@ class DataManager:
         try:
             self.pellgradrates_df = self.loader.load_csv(
                 str(DataSources.PELL_GRAD_RATES_RAW.path),
-                DataSources.PELL_GRAD_RATES_RAW.description
+                DataSources.PELL_GRAD_RATES_RAW.description,
             )
         except DataLoadError:
             # Pell graduation rates data is optional
@@ -176,7 +173,9 @@ class DataManager:
             temp = raw[id_vars + [column]].copy()
             temp["year"] = year
             temp["ft_ug_headcount"] = pd.to_numeric(temp[column], errors="coerce")
-            records.append(temp[["UnitID", "Institution Name", "year", "ft_ug_headcount"]])
+            records.append(
+                temp[["UnitID", "Institution Name", "year", "ft_ug_headcount"]]
+            )
 
         if not records:
             return pd.DataFrame()
@@ -252,7 +251,7 @@ class DataManager:
                 error_msg = f"Missing processed dataset for {config.label}"
                 self.errors.append(error_msg)
                 raise DataLoadError(error_msg) from e
-    
+
     def _load_pell_processed_datasets(self) -> None:
         """Load all processed Pell datasets."""
         # Single source of truth for the Pell resource keys/paths.
@@ -267,7 +266,7 @@ class DataManager:
                 source.path,
                 source.description,
             )
-    
+
     def get_fsa_year_range(self) -> str:
         """Return the year range string (e.g. '2008-2022') detected from FSA data columns."""
         yr_pattern = re.compile(r"^YR(\d{4})$", re.IGNORECASE)
@@ -285,7 +284,7 @@ class DataManager:
     def get_value_grid_dataset(self, label: str) -> Optional[pd.DataFrame]:
         """Get a value grid dataset by label."""
         return self.value_grid_datasets.get(label)
-    
+
     def get_pell_resource(self, key: str) -> Optional[pd.DataFrame]:
         """Get a Pell resource by key."""
         return self.pell_resources.get(key)
@@ -293,17 +292,14 @@ class DataManager:
     def get_distance_data(self) -> Optional[pd.DataFrame]:
         """Get the distance education dataset."""
         return self.distance_df
-    
-    def get_metadata_for_sector(
-        self, 
-        sector: str
-    ) -> Optional[pd.DataFrame]:
+
+    def get_metadata_for_sector(self, sector: str) -> Optional[pd.DataFrame]:
         """
         Get metadata DataFrame for a given sector.
-        
+
         Args:
             sector: Either "four_year" or "two_year"
-            
+
         Returns:
             DataFrame with metadata for the sector
         """
@@ -312,15 +308,15 @@ class DataManager:
         elif sector == "two_year":
             return self.value_grid_datasets.get(TWO_YEAR_VALUE_GRID_LABEL)
         return None
-    
+
     def has_errors(self) -> bool:
         """Check if any errors occurred during loading."""
         return len(self.errors) > 0
-    
+
     def get_errors(self) -> list[str]:
         """Get list of errors that occurred during loading."""
         return self.errors.copy()
-    
+
     def display_errors(self) -> None:
         """Display any loading errors in the Streamlit sidebar."""
         if self.has_errors():
@@ -342,4 +338,3 @@ def get_data_manager() -> "DataManager":
     manager = DataManager()
     manager.load_all_data()
     return manager
-

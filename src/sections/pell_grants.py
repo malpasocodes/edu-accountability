@@ -33,7 +33,7 @@ from .base import BaseSection
 
 class PellGrantsSection(BaseSection):
     """Handles the Pell Grants section."""
-    
+
     def render_overview(self) -> None:
         """Render the Pell Grants overview."""
         self.render_section_header(PELL_SECTION, PELL_OVERVIEW_LABEL)
@@ -50,19 +50,20 @@ class PellGrantsSection(BaseSection):
                 </p>
             </div>
             """,
-            unsafe_allow_html=True
+            unsafe_allow_html=True,
         )
 
         # Key insight callout
-        st.info("**💡 Key Insight:** Pell Grant data shows where need-based federal aid concentrates, revealing which institutions serve the most low-income students and how grant patterns relate to student outcomes.")
+        st.info(
+            "**💡 Key Insight:** Pell Grant data shows where need-based federal aid concentrates, revealing which institutions serve the most low-income students and how grant patterns relate to student outcomes."
+        )
 
         st.markdown("")  # Spacing
 
         # What is this section
         fsa_years = self.data_manager.get_fsa_year_range()
         st.markdown("### What is Pell Grants Analysis?")
-        st.markdown(
-            f"""
+        st.markdown(f"""
             This section tracks **Pell Grant dollars** awarded to students at colleges and universities across
             the United States. The data covers **{fsa_years}** and shows which institutions serve the most low-income
             students, how grant aid relates to graduation rates, and how need-based aid patterns have evolved over time.
@@ -70,19 +71,16 @@ class PellGrantsSection(BaseSection):
             Pell Grants are the federal government's primary need-based aid program for undergraduate students.
             Understanding where these dollars flow helps illuminate access for low-income students and institutional
             commitment to serving economically disadvantaged populations.
-            """
-        )
+            """)
 
         st.divider()
 
         # Available analyses section
         st.markdown("### Four Ways to Explore Pell Grant Data")
-        st.markdown(
-            """
+        st.markdown("""
             Use the **sidebar charts** to examine Pell Grant patterns from different angles. Each analysis
             is available for both 4-year and 2-year institutions:
-            """
-        )
+            """)
 
         st.markdown("")  # Spacing
 
@@ -100,7 +98,7 @@ class PellGrantsSection(BaseSection):
                     <p style='color: #000000; font-style: italic; margin: 0;'>Choose Top 10/25/50/100 institutions and compare totals by sector.</p>
                 </div>
                 """,
-                unsafe_allow_html=True
+                unsafe_allow_html=True,
             )
 
         with col2:
@@ -114,7 +112,7 @@ class PellGrantsSection(BaseSection):
                     <p style='color: #000000; font-style: italic; margin: 0;'>Bubble size shows enrollment scale.</p>
                 </div>
                 """,
-                unsafe_allow_html=True
+                unsafe_allow_html=True,
             )
 
         with col3:
@@ -128,7 +126,7 @@ class PellGrantsSection(BaseSection):
                     <p style='color: #000000; font-style: italic; margin: 0;'>Shows year-over-year patterns and shifts.</p>
                 </div>
                 """,
-                unsafe_allow_html=True
+                unsafe_allow_html=True,
             )
 
         with col4:
@@ -142,38 +140,34 @@ class PellGrantsSection(BaseSection):
                     <p style='color: #000000; font-style: italic; margin: 0;'>Shows overall aid patterns and national trends ({fsa_years}).</p>
                 </div>
                 """,
-                unsafe_allow_html=True
+                unsafe_allow_html=True,
             )
 
         st.divider()
 
         # How to use section
         st.markdown("### How to Use This Tool")
-        st.markdown(
-            """
+        st.markdown("""
             **Start with Largest Pell Grant Portfolios** to identify institutions serving the most low-income students.
             Then explore the **vs Graduation Rate** chart to see how need-based aid concentrations relate to student outcomes.
             Finally, use the **Trend** chart to understand how these patterns have evolved over the past 15 years.
 
             **Each chart includes tabs** at the top for 4-year and 2-year institutions, allowing you to compare
             patterns across different institutional types.
-            """
-        )
+            """)
 
         st.divider()
 
         # What to look for section
         st.markdown("### What the Data Shows")
-        st.markdown(
-            """
+        st.markdown("""
             Pell Grant data reveals important patterns about access and equity:
 
             - **High Pell volumes** indicate institutions serving large numbers of low-income students
             - **Pell vs graduation trends** show whether aid concentration aligns with degree completion
             - **Multi-year patterns** reveal how institutions' commitment to low-income access has shifted
             - **Sector differences** emerge between public, private nonprofit, and for-profit colleges
-            """
-        )
+            """)
 
         st.divider()
 
@@ -184,7 +178,7 @@ class PellGrantsSection(BaseSection):
             "Pell totals reflect annual grant dollars awarded to students at each institution. "
             "For high-stakes decisions, validate against the latest Department of Education releases."
         )
-    
+
     def render_chart(self, chart_name: str) -> None:
         """Render a specific Pell Grants chart."""
         self.render_section_header(PELL_SECTION, chart_name)
@@ -220,8 +214,10 @@ class PellGrantsSection(BaseSection):
             )
             if self.data_manager.pell_df is not None:
                 render_dataframe(self.data_manager.pell_df.head(20), width="stretch")
-    
-    def _render_pell_top_dollars(self, sector: str, title: str, *, top_n: Optional[int] = None) -> None:
+
+    def _render_pell_top_dollars(
+        self, sector: str, title: str, *, top_n: Optional[int] = None
+    ) -> None:
         """Render Pell top dollars chart."""
         if top_n is None:
             top_options = [10, 25, 50, 100]
@@ -244,11 +240,15 @@ class PellGrantsSection(BaseSection):
             )
         else:
             if metadata is None:
-                st.error(f"Missing metadata for {sector.replace('_', '-')} institutions.")
+                st.error(
+                    f"Missing metadata for {sector.replace('_', '-')} institutions."
+                )
             else:
                 st.error("Missing raw Pell data.")
-    
-    def _render_pell_vs_grad(self, resource_key: str, sector: str, title: str, *, top_n: Optional[int] = None) -> None:
+
+    def _render_pell_vs_grad(
+        self, resource_key: str, sector: str, title: str, *, top_n: Optional[int] = None
+    ) -> None:
         """Render Pell vs graduation chart."""
         if top_n is None:
             top_options = [10, 25, 50, 100]
@@ -272,14 +272,16 @@ class PellGrantsSection(BaseSection):
                     top_n=top_n,
                 )
             else:
-                st.error(f"Missing metadata for {sector.replace('_', '-')} institutions.")
+                st.error(
+                    f"Missing metadata for {sector.replace('_', '-')} institutions."
+                )
         else:
             sector_label = "4-year" if "four" in resource_key else "2-year"
             st.warning(
                 f"Pell vs graduation dataset ({sector_label}) not found. "
                 "Run `python data/processed/build_pell_vs_grad_scatter.py` to generate it."
             )
-    
+
     def _render_pell_trend(self, resource_key: str, title: str) -> None:
         """Render Pell trend chart."""
         dataset = self.data_manager.get_pell_resource(resource_key)
@@ -291,7 +293,7 @@ class PellGrantsSection(BaseSection):
                 f"Pell trend dataset ({sector}) not found. "
                 "Run `python data/processed/build_pell_top_dollars.py` to regenerate."
             )
-    
+
     def _render_pell_top_dollars_with_tabs(self, title: str) -> None:
         """Render Pell top dollars chart with 4-year and 2-year tabs."""
         top_options = [10, 25, 50, 100]
@@ -310,7 +312,7 @@ class PellGrantsSection(BaseSection):
 
         with tab2:
             self._render_pell_top_dollars("two_year", f"{title} (2-year)", top_n=top_n)
-    
+
     def _render_pell_vs_grad_with_tabs(self, title: str) -> None:
         """Render Pell vs graduation chart with 4-year and 2-year tabs."""
         top_options = [10, 25, 50, 100]
@@ -323,13 +325,17 @@ class PellGrantsSection(BaseSection):
             key="pell_vs_grad_top_n",
         )
         tab1, tab2 = st.tabs(["4-year", "2-year"])
-        
+
         with tab1:
-            self._render_pell_vs_grad("scatter_four", "four_year", f"{title} (4-year)", top_n=top_n)
-        
+            self._render_pell_vs_grad(
+                "scatter_four", "four_year", f"{title} (4-year)", top_n=top_n
+            )
+
         with tab2:
-            self._render_pell_vs_grad("scatter_two", "two_year", f"{title} (2-year)", top_n=top_n)
-    
+            self._render_pell_vs_grad(
+                "scatter_two", "two_year", f"{title} (2-year)", top_n=top_n
+            )
+
     def _render_pell_trend_with_tabs(self, title: str) -> None:
         """Render Pell trend chart with 4-year and 2-year tabs."""
         tab1, tab2 = st.tabs(["4-year", "2-year"])
@@ -368,12 +374,18 @@ class PellGrantsSection(BaseSection):
         tab1, tab2 = st.tabs(["4-year", "2-year"])
 
         with tab1:
-            self._render_pell_grad_rate("grad_rate_four", "four_year", f"{title} (4-year)")
+            self._render_pell_grad_rate(
+                "grad_rate_four", "four_year", f"{title} (4-year)"
+            )
 
         with tab2:
-            self._render_pell_grad_rate("grad_rate_two", "two_year", f"{title} (2-year)")
+            self._render_pell_grad_rate(
+                "grad_rate_two", "two_year", f"{title} (2-year)"
+            )
 
-    def _render_pell_grad_rate(self, resource_key: str, sector: str, title: str) -> None:
+    def _render_pell_grad_rate(
+        self, resource_key: str, sector: str, title: str
+    ) -> None:
         """Render Pell graduation rate scatter chart."""
         dataset = self.data_manager.get_pell_resource(resource_key)
         if dataset is not None:
@@ -385,14 +397,16 @@ class PellGrantsSection(BaseSection):
                     metadata_df=metadata,
                 )
             else:
-                st.error(f"Missing metadata for {sector.replace('_', '-')} institutions.")
+                st.error(
+                    f"Missing metadata for {sector.replace('_', '-')} institutions."
+                )
         else:
             sector_label = "4-year" if "four" in resource_key else "2-year"
             st.warning(
                 f"Pell graduation rate dataset ({sector_label}) not found. "
                 "Run `python data/processed/build_pell_grad_rate_scatter.py` to generate it."
             )
-    
+
     def get_available_charts(self) -> List[str]:
         """Get available charts for Pell Grants section."""
         return PELL_CHARTS

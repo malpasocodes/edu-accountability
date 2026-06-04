@@ -5,7 +5,6 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import Dict, List
 
-
 # Section identifiers
 OVERVIEW_SECTION = "Project Overview"
 VALUE_GRID_SECTION = "College Value Grid"
@@ -20,6 +19,7 @@ SCORECARD_SECTION = "Canonical Scorecard"
 @dataclass(frozen=True)
 class ValueGridChartConfig:
     """Configuration for a value grid chart."""
+
     label: str
     dataset_key: str
     min_enrollment: int

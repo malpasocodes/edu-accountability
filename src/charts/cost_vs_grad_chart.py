@@ -8,7 +8,6 @@ import altair as alt
 
 from src.ui.renderers import render_altair_chart, render_dataframe
 
-
 SECTOR_COLOR_SCALE = alt.Scale(
     domain=[
         "Public",
@@ -34,9 +33,7 @@ def render_cost_vs_grad_scatter(
             filter_text = "enrollment > 0"
         else:
             filter_text = f"enrollment >= {min_enrollment:,}"
-        st.warning(
-            f"No institutions match the current filters ({filter_text})."
-        )
+        st.warning(f"No institutions match the current filters ({filter_text}).")
         return
 
     cost_min = float(filtered_df["cost"].min())
@@ -87,7 +84,9 @@ def render_cost_vs_grad_scatter(
                 alt.Tooltip("cost:Q", title="Cost (2023-24 Tuition)", format="$,.0f"),
                 alt.Tooltip("graduation_rate:Q", title="Graduation Rate", format=".1f"),
                 alt.Tooltip("sector:N", title="Sector"),
-                alt.Tooltip("enrollment:Q", title="Undergrad Enrollment", format=",.0f"),
+                alt.Tooltip(
+                    "enrollment:Q", title="Undergrad Enrollment", format=",.0f"
+                ),
             ],
         )
     )

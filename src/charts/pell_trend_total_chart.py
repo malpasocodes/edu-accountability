@@ -40,11 +40,15 @@ def _prepare_pell_trend_total_dataframe(
 
     year_info = _identify_year_columns(pell_df.columns)
     if not year_info:
-        raise ValueError("No year columns found in Pell dataset (expected headers like 'YR2022').")
+        raise ValueError(
+            "No year columns found in Pell dataset (expected headers like 'YR2022')."
+        )
 
     working = pell_df.copy()
     if "UnitID" not in working.columns:
-        raise ValueError("Pell dataset missing 'UnitID' column required for trend charting.")
+        raise ValueError(
+            "Pell dataset missing 'UnitID' column required for trend charting."
+        )
 
     year_columns = [column for _, column in year_info]
     for column in year_columns:
@@ -52,7 +56,9 @@ def _prepare_pell_trend_total_dataframe(
     working["UnitID"] = _normalize_unit_ids(working.get("UnitID"))
 
     required_metadata = {"UnitID", "sector"}
-    missing_metadata = [column for column in required_metadata if column not in metadata_df.columns]
+    missing_metadata = [
+        column for column in required_metadata if column not in metadata_df.columns
+    ]
     if missing_metadata:
         raise ValueError(
             "Cannot prepare Pell trend total dataset. Missing metadata columns: "
@@ -81,14 +87,14 @@ def _prepare_pell_trend_total_dataframe(
         value_name="pell_dollars",
     )
 
-    long_form["pell_dollars"] = pd.to_numeric(long_form["pell_dollars"], errors="coerce")
+    long_form["pell_dollars"] = pd.to_numeric(
+        long_form["pell_dollars"], errors="coerce"
+    )
     long_form.dropna(subset=["pell_dollars"], inplace=True)
     if long_form.empty:
         return pd.DataFrame()
 
-    long_form["Year"] = (
-        long_form["YearLabel"].str.extract(r"(\d{4})").astype(float)
-    )
+    long_form["Year"] = long_form["YearLabel"].str.extract(r"(\d{4})").astype(float)
     long_form.dropna(subset=["Year"], inplace=True)
     if long_form.empty:
         return pd.DataFrame()
@@ -109,13 +115,14 @@ def _prepare_pell_trend_total_dataframe(
     aggregated["TotalPellDollarsBillions"] = aggregated["pell_dollars"] / 1_000_000_000
 
     # Calculate year-over-year changes
-    aggregated["YoYChangePercent"] = (
-        aggregated["pell_dollars"].pct_change() * 100
-    )
+    aggregated["YoYChangePercent"] = aggregated["pell_dollars"].pct_change() * 100
 
     # Categorize change direction
     from src.charts.trend_utils import classify_yoy_direction
-    aggregated["ChangeDirection"] = classify_yoy_direction(aggregated["YoYChangePercent"])
+
+    aggregated["ChangeDirection"] = classify_yoy_direction(
+        aggregated["YoYChangePercent"]
+    )
 
     # Select final columns
     columns = [
@@ -145,7 +152,9 @@ def _render_pell_trend_data_table(prepared: pd.DataFrame, sector: str) -> None:
     display_data = prepared.copy()
 
     # Calculate raw dollars from billions
-    display_data["TotalPellDollars"] = display_data["TotalPellDollarsBillions"] * 1_000_000_000
+    display_data["TotalPellDollars"] = (
+        display_data["TotalPellDollarsBillions"] * 1_000_000_000
+    )
 
     # Calculate cumulative total
     display_data["CumulativeTotalDollars"] = display_data["TotalPellDollars"].cumsum()
@@ -171,7 +180,7 @@ def _render_pell_trend_data_table(prepared: pd.DataFrame, sector: str) -> None:
         "Total Pell Dollars",
         "Total (Billions)",
         "Cumulative Total",
-        "Year-over-Year Change"
+        "Year-over-Year Change",
     ]
 
     # Render table
@@ -223,56 +232,66 @@ def render_pell_trend_total_chart(
     # Create change direction color scale for dots
     change_color_scale = alt.Scale(
         domain=["Increase", "Same", "Decrease"],
-        range=["#28a745", "#6c757d", "#dc3545"]  # Green, Gray, Red
+        range=["#28a745", "#6c757d", "#dc3545"],  # Green, Gray, Red
     )
 
     # Line layer with dotted line
-    lines = alt.Chart(prepared).mark_line(
-        strokeDash=[3, 3],  # Dotted line pattern
-        point=False,
-        color="#9467bd",  # Purple color for Pell grants
-        strokeWidth=2
-    ).encode(
-        x=alt.X("Year:Q", title="Year", axis=alt.Axis(format="d")),
-        y=alt.Y(
-            "TotalPellDollarsBillions:Q",
-            title="Total Pell grant dollars (billions)",
-        ),
-        tooltip=[
-            alt.Tooltip("Year:Q", title="Year", format=".0f"),
-            alt.Tooltip(
+    lines = (
+        alt.Chart(prepared)
+        .mark_line(
+            strokeDash=[3, 3],  # Dotted line pattern
+            point=False,
+            color="#9467bd",  # Purple color for Pell grants
+            strokeWidth=2,
+        )
+        .encode(
+            x=alt.X("Year:Q", title="Year", axis=alt.Axis(format="d")),
+            y=alt.Y(
                 "TotalPellDollarsBillions:Q",
-                title="Total Pell dollars (billions)",
-                format=".2f",
+                title="Total Pell grant dollars (billions)",
             ),
-        ],
+            tooltip=[
+                alt.Tooltip("Year:Q", title="Year", format=".0f"),
+                alt.Tooltip(
+                    "TotalPellDollarsBillions:Q",
+                    title="Total Pell dollars (billions)",
+                    format=".2f",
+                ),
+            ],
+        )
     )
 
     # Point layer with year-over-year change coloring
-    points = alt.Chart(prepared).mark_circle(size=80).encode(
-        x=alt.X("Year:Q"),
-        y=alt.Y("TotalPellDollarsBillions:Q"),
-        color=alt.Color(
-            "ChangeDirection:N",
-            title="Year-over-Year Change",
-            scale=change_color_scale
-        ),
-        tooltip=[
-            alt.Tooltip("Year:Q", title="Year", format=".0f"),
-            alt.Tooltip(
-                "TotalPellDollarsBillions:Q",
-                title="Total Pell dollars (billions)",
-                format=".2f",
+    points = (
+        alt.Chart(prepared)
+        .mark_circle(size=80)
+        .encode(
+            x=alt.X("Year:Q"),
+            y=alt.Y("TotalPellDollarsBillions:Q"),
+            color=alt.Color(
+                "ChangeDirection:N",
+                title="Year-over-Year Change",
+                scale=change_color_scale,
             ),
-            alt.Tooltip("YoYChangePercent:Q", title="Year-over-year change (%)", format=".1f"),
-            alt.Tooltip("ChangeDirection:N", title="Change direction"),
-        ],
+            tooltip=[
+                alt.Tooltip("Year:Q", title="Year", format=".0f"),
+                alt.Tooltip(
+                    "TotalPellDollarsBillions:Q",
+                    title="Total Pell dollars (billions)",
+                    format=".2f",
+                ),
+                alt.Tooltip(
+                    "YoYChangePercent:Q",
+                    title="Year-over-year change (%)",
+                    format=".1f",
+                ),
+                alt.Tooltip("ChangeDirection:N", title="Change direction"),
+            ],
+        )
     )
 
     # Combine layers
-    chart = (lines + points).resolve_scale(
-        color="independent"
-    ).properties(height=520)
+    chart = (lines + points).resolve_scale(color="independent").properties(height=520)
 
     st.subheader(title)
 

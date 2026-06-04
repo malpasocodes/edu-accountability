@@ -37,7 +37,7 @@ def _prepare_enrollment_trend_dataframe(
     distance_df: pd.DataFrame,
     metadata_df: pd.DataFrame,
     top_n: int = 10,
-    anchor_year: int = 2024
+    anchor_year: int = 2024,
 ) -> pd.DataFrame:
     """Prepare data for enrollment trend chart."""
     if distance_df.empty:
@@ -45,11 +45,15 @@ def _prepare_enrollment_trend_dataframe(
 
     enrollment_columns = _identify_total_enrollment_columns(distance_df.columns)
     if not enrollment_columns:
-        raise ValueError("No total enrollment columns found in distance education dataset.")
+        raise ValueError(
+            "No total enrollment columns found in distance education dataset."
+        )
 
     working = distance_df.copy()
     if "UnitID" not in working.columns:
-        raise ValueError("Distance education dataset missing 'UnitID' column required for charting.")
+        raise ValueError(
+            "Distance education dataset missing 'UnitID' column required for charting."
+        )
 
     # Convert enrollment columns to numeric
     enrollment_field_names = [column for _, column in enrollment_columns]
@@ -61,7 +65,9 @@ def _prepare_enrollment_trend_dataframe(
     # Prepare metadata
     metadata = metadata_df.copy()
     required_metadata = {"UnitID", "institution", "sector"}
-    missing_metadata = [column for column in required_metadata if column not in metadata.columns]
+    missing_metadata = [
+        column for column in required_metadata if column not in metadata.columns
+    ]
     if missing_metadata:
         raise ValueError(
             "Cannot merge distance education dataset with metadata. Missing columns: "
@@ -95,9 +101,7 @@ def _prepare_enrollment_trend_dataframe(
     if anchor_data.empty:
         return pd.DataFrame()
 
-    top_institutions = (
-        anchor_data.nlargest(top_n, anchor_col)["institution"].tolist()
-    )
+    top_institutions = anchor_data.nlargest(top_n, anchor_col)["institution"].tolist()
 
     # Filter to top institutions
     filtered = merged[merged["institution"].isin(top_institutions)].copy()
@@ -143,6 +147,7 @@ def _prepare_enrollment_trend_dataframe(
 
     # Determine change direction for dot coloring (based on percent change)
     from src.charts.trend_utils import classify_yoy_direction
+
     long_form["ChangeDirection"] = classify_yoy_direction(long_form["YoYChangePercent"])
 
     # For first year of each institution, mark as "Same" since no previous year
@@ -152,9 +157,7 @@ def _prepare_enrollment_trend_dataframe(
 
     # Prepare final columns
     long_form["Institution"] = long_form["institution"].astype(str)
-    long_form["Sector"] = (
-        long_form["sector"].fillna("Unknown").replace("", "Unknown")
-    )
+    long_form["Sector"] = long_form["sector"].fillna("Unknown").replace("", "Unknown")
     long_form["AnchorYear"] = anchor_year
 
     # Clean up columns
@@ -173,9 +176,7 @@ def _prepare_enrollment_trend_dataframe(
 
 
 def _render_enrollment_data_table(
-    prepared: pd.DataFrame,
-    top_n: int,
-    anchor_year: int
+    prepared: pd.DataFrame, top_n: int, anchor_year: int
 ) -> None:
     """Render data table showing enrollment figures for each institution by year."""
     if prepared.empty:
@@ -186,7 +187,7 @@ def _render_enrollment_data_table(
         index=["Institution", "Sector"],
         columns="Year",
         values="enrollment",
-        aggfunc="first"
+        aggfunc="first",
     ).reset_index()
 
     # Convert year column names to strings to avoid mixed type warning
@@ -202,13 +203,17 @@ def _render_enrollment_data_table(
     if len(year_columns) >= 2:
         first_year, last_year = year_columns[0], year_columns[-1]
         pivot_data["Total Change"] = (
-            (pivot_data[last_year] - pivot_data[first_year]) / pivot_data[first_year] * 100
+            (pivot_data[last_year] - pivot_data[first_year])
+            / pivot_data[first_year]
+            * 100
         ).round(1)
 
     # Format the display table
     display_data = pivot_data.copy()
     for year in year_columns:
-        display_data[year] = display_data[year].apply(lambda x: f"{x:,.0f}" if pd.notna(x) else "N/A")
+        display_data[year] = display_data[year].apply(
+            lambda x: f"{x:,.0f}" if pd.notna(x) else "N/A"
+        )
 
     if "Total Change" in display_data.columns:
         display_data["Total Change"] = display_data["Total Change"].apply(
@@ -220,10 +225,14 @@ def _render_enrollment_data_table(
     if anchor_year_str in pivot_data.columns:
         sort_col_idx = pivot_data.columns.get_loc(anchor_year_str)
         numeric_data = pivot_data.iloc[:, sort_col_idx]
-        display_data = display_data.iloc[numeric_data.sort_values(ascending=False).index]
+        display_data = display_data.iloc[
+            numeric_data.sort_values(ascending=False).index
+        ]
 
     st.subheader("📊 Enrollment Data")
-    st.caption(f"Total enrollment figures for top {top_n} institutions by {anchor_year} enrollment.")
+    st.caption(
+        f"Total enrollment figures for top {top_n} institutions by {anchor_year} enrollment."
+    )
     st.dataframe(display_data, width="stretch", hide_index=True)
 
 
@@ -233,7 +242,7 @@ def render_distance_enrollment_trend_chart(
     *,
     title: str,
     top_n: int = 10,
-    anchor_year: int = 2024
+    anchor_year: int = 2024,
 ) -> None:
     """Render a multi-line trend chart for total enrollment across years."""
 
@@ -254,54 +263,55 @@ def render_distance_enrollment_trend_chart(
 
     # Create institution-based color scale
     institutions = prepared["Institution"].unique()
-    institution_color_scale = alt.Scale(
-        domain=list(institutions),
-        scheme="category20"
-    )
+    institution_color_scale = alt.Scale(domain=list(institutions), scheme="category20")
 
     # Line chart with solid lines and filled points colored by institution
-    chart = alt.Chart(prepared).mark_line(
-        strokeWidth=3,
-        point=alt.OverlayMarkDef(size=100, filled=True)
-    ).encode(
-        x=alt.X(
-            "Year:Q",
-            title="Year",
-            axis=alt.Axis(
-                format="d",
-                labelFontSize=14,
-                titleFontSize=16,
-                titleFontWeight="bold"
-            )
-        ),
-        y=alt.Y(
-            "enrollment:Q",
-            title="Total Enrollment",
-            axis=alt.Axis(
-                format=".1s",  # Show as thousands: 50k, 100k
-                labelFontSize=14,
-                titleFontSize=16,
-                titleFontWeight="bold"
+    chart = (
+        alt.Chart(prepared)
+        .mark_line(strokeWidth=3, point=alt.OverlayMarkDef(size=100, filled=True))
+        .encode(
+            x=alt.X(
+                "Year:Q",
+                title="Year",
+                axis=alt.Axis(
+                    format="d",
+                    labelFontSize=14,
+                    titleFontSize=16,
+                    titleFontWeight="bold",
+                ),
             ),
-        ),
-        color=alt.Color(
-            "Institution:N",
-            title="Institution",
-            scale=institution_color_scale
-        ),
-        tooltip=[
-            alt.Tooltip("Institution:N", title="Institution"),
-            alt.Tooltip("Year:Q", title="Year", format=".0f"),
-            alt.Tooltip(
+            y=alt.Y(
                 "enrollment:Q",
                 title="Total Enrollment",
-                format=",",
+                axis=alt.Axis(
+                    format=".1s",  # Show as thousands: 50k, 100k
+                    labelFontSize=14,
+                    titleFontSize=16,
+                    titleFontWeight="bold",
+                ),
             ),
-            alt.Tooltip("Sector:N", title="Sector"),
-            alt.Tooltip("YoYChangePercent:Q", title="Year-over-year change (%)", format=".1f"),
-            alt.Tooltip("ChangeDirection:N", title="Change direction"),
-        ],
-    ).properties(height=520)
+            color=alt.Color(
+                "Institution:N", title="Institution", scale=institution_color_scale
+            ),
+            tooltip=[
+                alt.Tooltip("Institution:N", title="Institution"),
+                alt.Tooltip("Year:Q", title="Year", format=".0f"),
+                alt.Tooltip(
+                    "enrollment:Q",
+                    title="Total Enrollment",
+                    format=",",
+                ),
+                alt.Tooltip("Sector:N", title="Sector"),
+                alt.Tooltip(
+                    "YoYChangePercent:Q",
+                    title="Year-over-year change (%)",
+                    format=".1f",
+                ),
+                alt.Tooltip("ChangeDirection:N", title="Change direction"),
+            ],
+        )
+        .properties(height=520)
+    )
 
     st.subheader(title)
     caption = (
@@ -322,7 +332,9 @@ def render_distance_enrollment_trend_chart(
     year_totals = stacked_data.groupby("Year")["enrollment"].sum().reset_index()
     year_totals.rename(columns={"enrollment": "year_total"}, inplace=True)
     stacked_data = stacked_data.merge(year_totals, on="Year", how="left")
-    stacked_data["percentage"] = (stacked_data["enrollment"] / stacked_data["year_total"] * 100).round(2)
+    stacked_data["percentage"] = (
+        stacked_data["enrollment"] / stacked_data["year_total"] * 100
+    ).round(2)
 
     # Create stacked bar chart
     stacked_chart = (
@@ -336,8 +348,8 @@ def render_distance_enrollment_trend_chart(
                     labelAngle=0,
                     labelFontSize=14,
                     titleFontSize=16,
-                    titleFontWeight="bold"
-                )
+                    titleFontWeight="bold",
+                ),
             ),
             y=alt.Y(
                 "enrollment:Q",
@@ -347,19 +359,16 @@ def render_distance_enrollment_trend_chart(
                     format="~s",
                     labelFontSize=14,
                     titleFontSize=16,
-                    titleFontWeight="bold"
-                )
+                    titleFontWeight="bold",
+                ),
             ),
             color=alt.Color(
                 "Institution:N",
                 title="Institution",
                 scale=institution_color_scale,
                 legend=alt.Legend(
-                    orient="right",
-                    titleFontSize=12,
-                    labelFontSize=11,
-                    labelLimit=200
-                )
+                    orient="right", titleFontSize=12, labelFontSize=11, labelLimit=200
+                ),
             ),
             order=alt.Order("enrollment:Q", sort="descending"),
             tooltip=[

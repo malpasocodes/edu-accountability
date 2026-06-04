@@ -23,10 +23,20 @@ def _prepare_loan_vs_grad_dataframe(
 
     year_columns = _identify_year_columns(loans_df.columns)
     if not year_columns:
-        raise ValueError("No year columns found in loan dataset (expected columns named like 'YR2022').")
+        raise ValueError(
+            "No year columns found in loan dataset (expected columns named like 'YR2022')."
+        )
 
-    required_metadata = {"UnitID", "institution", "sector", "graduation_rate", "enrollment"}
-    missing_metadata = [column for column in required_metadata if column not in metadata_df.columns]
+    required_metadata = {
+        "UnitID",
+        "institution",
+        "sector",
+        "graduation_rate",
+        "enrollment",
+    }
+    missing_metadata = [
+        column for column in required_metadata if column not in metadata_df.columns
+    ]
     if missing_metadata:
         raise ValueError(
             "Cannot prepare loan vs graduation dataset. Missing metadata columns: "
@@ -45,7 +55,9 @@ def _prepare_loan_vs_grad_dataframe(
 
     metadata = metadata_df.copy()
     metadata["UnitID"] = _normalize_unit_ids(metadata["UnitID"])
-    metadata["graduation_rate"] = pd.to_numeric(metadata["graduation_rate"], errors="coerce")
+    metadata["graduation_rate"] = pd.to_numeric(
+        metadata["graduation_rate"], errors="coerce"
+    )
     metadata["enrollment"] = pd.to_numeric(metadata["enrollment"], errors="coerce")
     metadata["sector"] = metadata["sector"].astype("string")
     metadata["institution"] = metadata["institution"].astype("string")
@@ -80,7 +92,11 @@ def _prepare_loan_vs_grad_dataframe(
     filtered["enrollment"] = filtered["enrollment"].astype(float)
     filtered["YearsCovered"] = period_label
 
-    top_filtered = filtered.sort_values("loan_dollars_billions", ascending=False).head(top_n).copy()
+    top_filtered = (
+        filtered.sort_values("loan_dollars_billions", ascending=False)
+        .head(top_n)
+        .copy()
+    )
     return top_filtered, period_label
 
 
@@ -104,7 +120,9 @@ def render_loan_vs_grad_scatter(
         return
 
     if prepared.empty:
-        st.warning("No overlapping federal loan and graduation data available to chart.")
+        st.warning(
+            "No overlapping federal loan and graduation data available to chart."
+        )
         return
 
     scatter = (
@@ -124,7 +142,11 @@ def render_loan_vs_grad_scatter(
             tooltip=[
                 alt.Tooltip("Institution:N", title="Institution"),
                 alt.Tooltip("graduation_rate:Q", title="Graduation rate", format=".1f"),
-                alt.Tooltip("loan_dollars_billions:Q", title="Loan dollars (billions)", format=".2f"),
+                alt.Tooltip(
+                    "loan_dollars_billions:Q",
+                    title="Loan dollars (billions)",
+                    format=".2f",
+                ),
                 alt.Tooltip("Sector:N", title="Sector"),
                 alt.Tooltip("enrollment:Q", title="Enrollment", format=","),
                 alt.Tooltip("YearsCovered:N", title="Years"),
@@ -138,11 +160,15 @@ def render_loan_vs_grad_scatter(
         .properties(height=520)
     )
 
-    grad_guides = alt.Chart(pd.DataFrame({"rate": [25, 50, 75]})).mark_rule(
-        strokeDash=[6, 6],
-        color="#888888",
-    ).encode(
-        x=alt.X("rate:Q"),
+    grad_guides = (
+        alt.Chart(pd.DataFrame({"rate": [25, 50, 75]}))
+        .mark_rule(
+            strokeDash=[6, 6],
+            color="#888888",
+        )
+        .encode(
+            x=alt.X("rate:Q"),
+        )
     )
 
     st.subheader(title if period_label is None else f"{title} ({period_label})")
@@ -158,14 +184,16 @@ def render_loan_vs_grad_scatter(
     render_altair_chart(scatter + grad_guides)
 
     table = (
-        prepared[[
-            "Institution",
-            "Sector",
-            "YearsCovered",
-            "loan_dollars_billions",
-            "graduation_rate",
-            "enrollment",
-        ]]
+        prepared[
+            [
+                "Institution",
+                "Sector",
+                "YearsCovered",
+                "loan_dollars_billions",
+                "graduation_rate",
+                "enrollment",
+            ]
+        ]
         .copy()
         .rename(
             columns={

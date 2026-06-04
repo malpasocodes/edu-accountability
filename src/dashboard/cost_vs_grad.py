@@ -10,7 +10,6 @@ import streamlit as st
 
 from src.charts.cost_vs_grad_chart import render_cost_vs_grad_scatter
 
-
 MIN_ENROLLMENT_THRESHOLD = 1000
 
 
@@ -37,9 +36,11 @@ def _prepare_dataset(label: str, df: pd.DataFrame) -> PreparedDataset:
     else:
         working = df.copy()
 
-    working["enrollment"] = pd.to_numeric(working["enrollment"], errors="coerce").fillna(0)
-    sorted_frame = (
-        working.sort_values("enrollment", kind="mergesort").reset_index(drop=True)
+    working["enrollment"] = pd.to_numeric(
+        working["enrollment"], errors="coerce"
+    ).fillna(0)
+    sorted_frame = working.sort_values("enrollment", kind="mergesort").reset_index(
+        drop=True
     )
     enrollment_values = sorted_frame["enrollment"].to_numpy(copy=True)
 
@@ -73,7 +74,9 @@ def render_dashboard(datasets: dict[str, pd.DataFrame]) -> None:
         "Private, not-for-profit",
         "Private, for-profit",
     ]
-    default_selection = [sector for sector in default_sectors if sector in all_sectors] or all_sectors
+    default_selection = [
+        sector for sector in default_sectors if sector in all_sectors
+    ] or all_sectors
 
     all_states = sorted(
         {
@@ -131,7 +134,9 @@ def render_dashboard(datasets: dict[str, pd.DataFrame]) -> None:
                 enrollment_filtered = bundle.frame
 
             if selected_sectors:
-                sector_filtered = enrollment_filtered[enrollment_filtered["sector"].isin(selected_sectors)]
+                sector_filtered = enrollment_filtered[
+                    enrollment_filtered["sector"].isin(selected_sectors)
+                ]
             else:
                 sector_filtered = enrollment_filtered.iloc[0:0]
 
@@ -140,18 +145,21 @@ def render_dashboard(datasets: dict[str, pd.DataFrame]) -> None:
             else:
                 filtered = sector_filtered.iloc[0:0]
 
-            filtered = filtered.loc[:, [
-                col
-                for col in [
-                    "institution",
-                    "sector",
-                    "cost",
-                    "graduation_rate",
-                    "enrollment",
-                    "state",
-                ]
-                if col in filtered.columns
-            ]]
+            filtered = filtered.loc[
+                :,
+                [
+                    col
+                    for col in [
+                        "institution",
+                        "sector",
+                        "cost",
+                        "graduation_rate",
+                        "enrollment",
+                        "state",
+                    ]
+                    if col in filtered.columns
+                ],
+            ]
 
             cost_median, grad_median = medians[label]
             render_cost_vs_grad_scatter(

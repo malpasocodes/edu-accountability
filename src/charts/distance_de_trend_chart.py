@@ -37,7 +37,7 @@ def _prepare_de_trend_dataframe(
     distance_df: pd.DataFrame,
     metadata_df: pd.DataFrame,
     top_n: int = 10,
-    anchor_year: int = 2024
+    anchor_year: int = 2024,
 ) -> pd.DataFrame:
     """Prepare data for DE enrollment trend chart."""
     if distance_df.empty:
@@ -45,11 +45,15 @@ def _prepare_de_trend_dataframe(
 
     de_columns = _identify_de_enrollment_columns(distance_df.columns)
     if not de_columns:
-        raise ValueError("No exclusive distance education enrollment columns found in dataset.")
+        raise ValueError(
+            "No exclusive distance education enrollment columns found in dataset."
+        )
 
     working = distance_df.copy()
     if "UnitID" not in working.columns:
-        raise ValueError("Distance education dataset missing 'UnitID' column required for charting.")
+        raise ValueError(
+            "Distance education dataset missing 'UnitID' column required for charting."
+        )
 
     # Convert DE enrollment columns to numeric
     de_field_names = [column for _, column in de_columns]
@@ -61,7 +65,9 @@ def _prepare_de_trend_dataframe(
     # Prepare metadata
     metadata = metadata_df.copy()
     required_metadata = {"UnitID", "institution", "sector"}
-    missing_metadata = [column for column in required_metadata if column not in metadata.columns]
+    missing_metadata = [
+        column for column in required_metadata if column not in metadata.columns
+    ]
     if missing_metadata:
         raise ValueError(
             "Cannot merge distance education dataset with metadata. Missing columns: "
@@ -95,9 +101,7 @@ def _prepare_de_trend_dataframe(
     if anchor_data.empty:
         return pd.DataFrame()
 
-    top_institutions = (
-        anchor_data.nlargest(top_n, anchor_col)["institution"].tolist()
-    )
+    top_institutions = anchor_data.nlargest(top_n, anchor_col)["institution"].tolist()
 
     # Filter to top institutions
     filtered = merged[merged["institution"].isin(top_institutions)].copy()
@@ -124,7 +128,9 @@ def _prepare_de_trend_dataframe(
     long_form["Year"] = long_form["Year"].astype(int)
 
     # Convert DE enrollment to numeric and filter valid values (allow 0 for meaningful trend)
-    long_form["de_enrollment"] = pd.to_numeric(long_form["de_enrollment"], errors="coerce")
+    long_form["de_enrollment"] = pd.to_numeric(
+        long_form["de_enrollment"], errors="coerce"
+    )
     long_form = long_form.dropna(subset=["de_enrollment"])
     if long_form.empty:
         return pd.DataFrame()
@@ -147,20 +153,29 @@ def _prepare_de_trend_dataframe(
 
     # Calculate year-over-year changes for dot coloring
     long_form = long_form.sort_values(["UnitID", "Year"])
-    long_form["PrevYearDEEnrollment"] = long_form.groupby("UnitID")["de_enrollment"].shift(1)
-    long_form["YoYChange"] = long_form["de_enrollment"] - long_form["PrevYearDEEnrollment"]
+    long_form["PrevYearDEEnrollment"] = long_form.groupby("UnitID")[
+        "de_enrollment"
+    ].shift(1)
+    long_form["YoYChange"] = (
+        long_form["de_enrollment"] - long_form["PrevYearDEEnrollment"]
+    )
 
     # Handle percentage calculation - avoid division by zero
-    with pd.option_context('mode.chained_assignment', None):
+    with pd.option_context("mode.chained_assignment", None):
         long_form["YoYChangePercent"] = 0.0  # Default value
         mask = long_form["PrevYearDEEnrollment"] > 0
         long_form.loc[mask, "YoYChangePercent"] = (
-            (long_form.loc[mask, "de_enrollment"] - long_form.loc[mask, "PrevYearDEEnrollment"]) /
-            long_form.loc[mask, "PrevYearDEEnrollment"] * 100
+            (
+                long_form.loc[mask, "de_enrollment"]
+                - long_form.loc[mask, "PrevYearDEEnrollment"]
+            )
+            / long_form.loc[mask, "PrevYearDEEnrollment"]
+            * 100
         ).round(1)
 
     # Determine change direction for dot coloring (based on percent change)
     from src.charts.trend_utils import classify_yoy_direction
+
     long_form["ChangeDirection"] = classify_yoy_direction(long_form["YoYChangePercent"])
 
     # For first year of each institution, mark as "Same" since no previous year
@@ -170,9 +185,7 @@ def _prepare_de_trend_dataframe(
 
     # Prepare final columns
     long_form["Institution"] = long_form["institution"].astype(str)
-    long_form["Sector"] = (
-        long_form["sector"].fillna("Unknown").replace("", "Unknown")
-    )
+    long_form["Sector"] = long_form["sector"].fillna("Unknown").replace("", "Unknown")
     long_form["AnchorYear"] = anchor_year
 
     # Clean up columns
@@ -192,11 +205,7 @@ def _prepare_de_trend_dataframe(
     return long_form[final_columns].copy()
 
 
-def _render_de_data_table(
-    prepared: pd.DataFrame,
-    top_n: int,
-    anchor_year: int
-) -> None:
+def _render_de_data_table(prepared: pd.DataFrame, top_n: int, anchor_year: int) -> None:
     """Render data table showing exclusive distance education enrollment figures and percentages for each institution by year."""
     if prepared.empty:
         return
@@ -206,18 +215,20 @@ def _render_de_data_table(
         index=["Institution", "Sector"],
         columns="Year",
         values="de_enrollment",
-        aggfunc="first"
+        aggfunc="first",
     ).reset_index()
 
     pivot_percentage = prepared.pivot_table(
         index=["Institution", "Sector"],
         columns="Year",
         values="de_percentage",
-        aggfunc="first"
+        aggfunc="first",
     ).reset_index()
 
     # Convert year column names to strings to avoid mixed type warning
-    year_columns_enroll = [col for col in pivot_enrollment.columns if isinstance(col, int)]
+    year_columns_enroll = [
+        col for col in pivot_enrollment.columns if isinstance(col, int)
+    ]
     column_mapping_enroll = {col: str(col) for col in year_columns_enroll}
     pivot_enrollment = pivot_enrollment.rename(columns=column_mapping_enroll)
 
@@ -244,7 +255,7 @@ def _render_de_data_table(
             first_val = row[first_year]
             last_val = row[last_year]
             if pd.notna(first_val) and pd.notna(last_val) and first_val > 0:
-                change_pct = ((last_val - first_val) / first_val * 100)
+                change_pct = (last_val - first_val) / first_val * 100
                 total_change.append(round(change_pct, 1))
             else:
                 total_change.append(None)
@@ -255,12 +266,16 @@ def _render_de_data_table(
 
     # Format enrollment columns
     for year in year_columns:
-        display_data[year] = display_data[year].apply(lambda x: f"{x:,.0f}" if pd.notna(x) else "N/A")
+        display_data[year] = display_data[year].apply(
+            lambda x: f"{x:,.0f}" if pd.notna(x) else "N/A"
+        )
 
     # Format percentage columns
     pct_columns = [col for col in display_data.columns if col.endswith(" %")]
     for col in pct_columns:
-        display_data[col] = display_data[col].apply(lambda x: f"{x:.2f}%" if pd.notna(x) else "N/A")
+        display_data[col] = display_data[col].apply(
+            lambda x: f"{x:.2f}%" if pd.notna(x) else "N/A"
+        )
 
     if "Total Change" in display_data.columns:
         display_data["Total Change"] = display_data["Total Change"].apply(
@@ -272,7 +287,9 @@ def _render_de_data_table(
     if anchor_year_str in pivot_data.columns:
         sort_col_idx = pivot_data.columns.get_loc(anchor_year_str)
         numeric_data = pivot_data.iloc[:, sort_col_idx]
-        display_data = display_data.iloc[numeric_data.sort_values(ascending=False).index]
+        display_data = display_data.iloc[
+            numeric_data.sort_values(ascending=False).index
+        ]
 
     st.subheader("📊 Exclusive Distance Education Enrollment Data")
     st.caption(
@@ -288,7 +305,7 @@ def render_distance_de_trend_chart(
     *,
     title: str,
     top_n: int = 10,
-    anchor_year: int = 2024
+    anchor_year: int = 2024,
 ) -> None:
     """Render a multi-line trend chart for exclusive distance education enrollment across years."""
 
@@ -304,59 +321,62 @@ def render_distance_de_trend_chart(
         return
 
     if prepared.empty:
-        st.warning("No exclusive distance education enrollment trend data available to chart.")
+        st.warning(
+            "No exclusive distance education enrollment trend data available to chart."
+        )
         return
 
     # Create institution-based color scale
     institutions = prepared["Institution"].unique()
-    institution_color_scale = alt.Scale(
-        domain=list(institutions),
-        scheme="category20"
-    )
+    institution_color_scale = alt.Scale(domain=list(institutions), scheme="category20")
 
     # Line chart with solid lines and filled points colored by institution
-    chart = alt.Chart(prepared).mark_line(
-        strokeWidth=3,
-        point=alt.OverlayMarkDef(size=100, filled=True)
-    ).encode(
-        x=alt.X(
-            "Year:Q",
-            title="Year",
-            axis=alt.Axis(
-                format="d",
-                labelFontSize=14,
-                titleFontSize=16,
-                titleFontWeight="bold"
-            )
-        ),
-        y=alt.Y(
-            "de_enrollment:Q",
-            title="Exclusive Distance Education Enrollment",
-            axis=alt.Axis(
-                format=".1s",  # Show as thousands: 5k, 10k
-                labelFontSize=14,
-                titleFontSize=16,
-                titleFontWeight="bold"
+    chart = (
+        alt.Chart(prepared)
+        .mark_line(strokeWidth=3, point=alt.OverlayMarkDef(size=100, filled=True))
+        .encode(
+            x=alt.X(
+                "Year:Q",
+                title="Year",
+                axis=alt.Axis(
+                    format="d",
+                    labelFontSize=14,
+                    titleFontSize=16,
+                    titleFontWeight="bold",
+                ),
             ),
-        ),
-        color=alt.Color(
-            "Institution:N",
-            title="Institution",
-            scale=institution_color_scale
-        ),
-        tooltip=[
-            alt.Tooltip("Institution:N", title="Institution"),
-            alt.Tooltip("Year:Q", title="Year", format=".0f"),
-            alt.Tooltip(
+            y=alt.Y(
                 "de_enrollment:Q",
-                title="Exclusive DE Enrollment",
-                format=",",
+                title="Exclusive Distance Education Enrollment",
+                axis=alt.Axis(
+                    format=".1s",  # Show as thousands: 5k, 10k
+                    labelFontSize=14,
+                    titleFontSize=16,
+                    titleFontWeight="bold",
+                ),
             ),
-            alt.Tooltip("Sector:N", title="Sector"),
-            alt.Tooltip("YoYChangePercent:Q", title="Year-over-year change (%)", format=".1f"),
-            alt.Tooltip("ChangeDirection:N", title="Change direction"),
-        ],
-    ).properties(height=520)
+            color=alt.Color(
+                "Institution:N", title="Institution", scale=institution_color_scale
+            ),
+            tooltip=[
+                alt.Tooltip("Institution:N", title="Institution"),
+                alt.Tooltip("Year:Q", title="Year", format=".0f"),
+                alt.Tooltip(
+                    "de_enrollment:Q",
+                    title="Exclusive DE Enrollment",
+                    format=",",
+                ),
+                alt.Tooltip("Sector:N", title="Sector"),
+                alt.Tooltip(
+                    "YoYChangePercent:Q",
+                    title="Year-over-year change (%)",
+                    format=".1f",
+                ),
+                alt.Tooltip("ChangeDirection:N", title="Change direction"),
+            ],
+        )
+        .properties(height=520)
+    )
 
     st.subheader(title)
     caption = (
@@ -387,8 +407,8 @@ def render_distance_de_trend_chart(
                     labelAngle=0,
                     labelFontSize=14,
                     titleFontSize=16,
-                    titleFontWeight="bold"
-                )
+                    titleFontWeight="bold",
+                ),
             ),
             y=alt.Y(
                 "de_enrollment:Q",
@@ -398,27 +418,28 @@ def render_distance_de_trend_chart(
                     format="~s",
                     labelFontSize=14,
                     titleFontSize=16,
-                    titleFontWeight="bold"
-                )
+                    titleFontWeight="bold",
+                ),
             ),
             color=alt.Color(
                 "Institution:N",
                 title="Institution",
                 scale=institution_color_scale,
                 legend=alt.Legend(
-                    orient="right",
-                    titleFontSize=12,
-                    labelFontSize=11,
-                    labelLimit=200
-                )
+                    orient="right", titleFontSize=12, labelFontSize=11, labelLimit=200
+                ),
             ),
             order=alt.Order("de_enrollment:Q", sort="descending"),
             tooltip=[
                 alt.Tooltip("Institution:N", title="Institution"),
                 alt.Tooltip("Year:O", title="Year"),
-                alt.Tooltip("de_enrollment:Q", title="Institution DE Enrollment", format=","),
+                alt.Tooltip(
+                    "de_enrollment:Q", title="Institution DE Enrollment", format=","
+                ),
                 alt.Tooltip("de_percentage:Q", title="% of Top 10 Total", format=".2f"),
-                alt.Tooltip("year_total_enrollment:Q", title="Total (Top 10)", format=","),
+                alt.Tooltip(
+                    "year_total_enrollment:Q", title="Total (Top 10)", format=","
+                ),
                 alt.Tooltip("Sector:N", title="Sector"),
             ],
         )

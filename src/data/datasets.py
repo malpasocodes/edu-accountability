@@ -120,7 +120,9 @@ def _validate_parquet(baseline: pd.DataFrame, parquet_path: Path) -> None:
                 .agg(["min", "max", "mean"])
                 .to_numpy(dtype="float64")
             )
-            if not np.allclose(base_stats, loaded_stats, equal_nan=True, rtol=1e-5, atol=1e-8):
+            if not np.allclose(
+                base_stats, loaded_stats, equal_nan=True, rtol=1e-5, atol=1e-8
+            ):
                 raise ValueError(
                     f"Statistic mismatch for column '{column}' in {parquet_path.name}."
                 )

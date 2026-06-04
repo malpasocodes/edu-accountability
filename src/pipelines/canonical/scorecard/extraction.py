@@ -18,7 +18,6 @@ import pandas as pd
 
 from src.pipelines.canonical.ipeds_grad.enrich_metadata import CONTROL_MAP
 
-
 MERGED_PATTERN = re.compile(r"MERGED(\d{4})_(\d{2})_PP\.csv$", re.IGNORECASE)
 
 
@@ -61,9 +60,11 @@ BASE_COLUMNS = [
 def _iter_merged_members(zf: zipfile.ZipFile) -> Iterable[zipfile.ZipInfo]:
     for info in zf.infolist():
         name = info.filename
-        if name.endswith(".csv") and \
-           "/" in name and \
-           MERGED_PATTERN.search(Path(name).name):
+        if (
+            name.endswith(".csv")
+            and "/" in name
+            and MERGED_PATTERN.search(Path(name).name)
+        ):
             yield info
 
 
@@ -97,7 +98,9 @@ class ScorecardExtractor:
                 with zf.open(member, "r") as fh:
                     data = fh.read()
                 csv_buf = io.BytesIO(data)
-                usecols = BASE_COLUMNS + ["GRAD_DEBT_MDN"] + list(REPAY3_COLUMNS.values())
+                usecols = (
+                    BASE_COLUMNS + ["GRAD_DEBT_MDN"] + list(REPAY3_COLUMNS.values())
+                )
                 df = pd.read_csv(csv_buf, usecols=[c for c in usecols if c])
                 df["year"] = year
                 frames.append(df)
@@ -108,14 +111,16 @@ class ScorecardExtractor:
         wide = pd.concat(frames, ignore_index=True)
 
         # Normalize columns
-        wide = wide.rename(columns={
-            "UNITID": "unitid",
-            "INSTNM": "instnm",
-            "STABBR": "state",
-            "CONTROL": "control_code",
-            "PREDDEG": "preddeg",
-            "UGDS": "enrollment",
-        })
+        wide = wide.rename(
+            columns={
+                "UNITID": "unitid",
+                "INSTNM": "instnm",
+                "STABBR": "state",
+                "CONTROL": "control_code",
+                "PREDDEG": "preddeg",
+                "UGDS": "enrollment",
+            }
+        )
 
         # Control/level strings
         wide["control"] = wide["control_code"].map(CONTROL_MAP).astype("string")
@@ -128,12 +133,18 @@ class ScorecardExtractor:
         wide["state"] = wide["state"].astype("string")
 
         # Median debt & enrollment
-        wide["median_debt_completers"] = pd.to_numeric(wide["GRAD_DEBT_MDN"], errors="coerce").astype("float32")
-        wide["enrollment"] = pd.to_numeric(wide["enrollment"], errors="coerce").astype("float32")
+        wide["median_debt_completers"] = pd.to_numeric(
+            wide["GRAD_DEBT_MDN"], errors="coerce"
+        ).astype("float32")
+        wide["enrollment"] = pd.to_numeric(wide["enrollment"], errors="coerce").astype(
+            "float32"
+        )
 
         # Repayment shares (as percent 0..100)
         for new_col, src in REPAY3_COLUMNS.items():
-            wide[new_col] = pd.to_numeric(wide[src], errors="coerce").astype("float32") * 100.0
+            wide[new_col] = (
+                pd.to_numeric(wide[src], errors="coerce").astype("float32") * 100.0
+            )
 
         # Consolidated categories
         wide["repay_3yr_green"] = (
@@ -149,13 +160,24 @@ class ScorecardExtractor:
         wide["repay_3yr_red"] = wide["repay_3yr_delinquent"] + wide["repay_3yr_default"]
 
         wide["sector"] = (
-            wide["control"].fillna("Unknown") + ", " + wide["level"].fillna("Unknown")
-        ).str.replace(", Unknown", "", regex=False).astype("string")
+            (wide["control"].fillna("Unknown") + ", " + wide["level"].fillna("Unknown"))
+            .str.replace(", Unknown", "", regex=False)
+            .astype("string")
+        )
 
         columns = [
-            "unitid", "year", "instnm", "state", "control", "level", "sector",
-            "median_debt_completers", "enrollment",
-            "repay_3yr_green", "repay_3yr_yellow", "repay_3yr_red",
+            "unitid",
+            "year",
+            "instnm",
+            "state",
+            "control",
+            "level",
+            "sector",
+            "median_debt_completers",
+            "enrollment",
+            "repay_3yr_green",
+            "repay_3yr_yellow",
+            "repay_3yr_red",
         ] + list(REPAY3_COLUMNS.keys())
         long = wide[columns].sort_values(["unitid", "year"]).reset_index(drop=True)
 
@@ -167,16 +189,22 @@ class ScorecardExtractor:
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="Extract Scorecard MERGED files from ZIP.")
+    parser = argparse.ArgumentParser(
+        description="Extract Scorecard MERGED files from ZIP."
+    )
     parser.add_argument(
         "--zip",
         type=Path,
-        default=Path("data/raw/college_scorecard/College_Scorecard_Raw_Data_05192025.zip"),
+        default=Path(
+            "data/raw/college_scorecard/College_Scorecard_Raw_Data_05192025.zip"
+        ),
     )
     parser.add_argument(
         "--output",
         type=Path,
-        default=Path("data/processed/2023/canonical/scorecard_debt_repayment_long.parquet"),
+        default=Path(
+            "data/processed/2023/canonical/scorecard_debt_repayment_long.parquet"
+        ),
     )
     args = parser.parse_args()
 

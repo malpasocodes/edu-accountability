@@ -39,6 +39,7 @@ from .feature_flags import (
 @dataclass(frozen=True)
 class ChartConfig:
     """Configuration for a chart within a section."""
+
     label: str
     key: str
     description: Optional[str] = None
@@ -47,6 +48,7 @@ class ChartConfig:
 @dataclass(frozen=True)
 class SectionConfig:
     """Configuration for a dashboard section."""
+
     name: str
     icon: str
     label: str
@@ -58,7 +60,7 @@ class SectionConfig:
 
 class NavigationConfig:
     """Central navigation configuration for the dashboard."""
-    
+
     OVERVIEW = SectionConfig(
         name=OVERVIEW_SECTION,
         icon="🏠",
@@ -66,13 +68,13 @@ class NavigationConfig:
         overview_chart=ChartConfig(
             label="Overview",
             key="overview",
-            description="Project context and navigation tips"
+            description="Project context and navigation tips",
         ),
         charts=[],
         session_key="",
-        description="Landing page with project information"
+        description="Landing page with project information",
     )
-    
+
     VALUE_GRID = SectionConfig(
         name=VALUE_GRID_SECTION,
         icon="📊",
@@ -80,24 +82,24 @@ class NavigationConfig:
         overview_chart=ChartConfig(
             label=VALUE_GRID_OVERVIEW_LABEL,
             key="nav_value_grid_overview",
-            description="How net price aligns with completion"
+            description="How net price aligns with completion",
         ),
         charts=[
             ChartConfig(
                 label=FOUR_YEAR_VALUE_GRID_LABEL,
                 key="nav_value_grid_four",
-                description="Four-year institution analysis"
+                description="Four-year institution analysis",
             ),
             ChartConfig(
                 label=TWO_YEAR_VALUE_GRID_LABEL,
                 key="nav_value_grid_two",
-                description="Two-year institution analysis"
+                description="Two-year institution analysis",
             ),
         ],
         session_key="value_grid_chart",
-        description="Compare net price against graduation outcomes"
+        description="Compare net price against graduation outcomes",
     )
-    
+
     FEDERAL_LOANS = SectionConfig(
         name=FEDERAL_LOANS_SECTION,
         icon="💵",
@@ -105,20 +107,16 @@ class NavigationConfig:
         overview_chart=ChartConfig(
             label=LOAN_OVERVIEW_LABEL,
             key="nav_loans_overview",
-            description="Federal lending patterns and affordability"
+            description="Federal lending patterns and affordability",
         ),
         charts=[
-            ChartConfig(
-                label=chart_label,
-                key=f"nav_loans_{index}",
-                description=None
-            )
+            ChartConfig(label=chart_label, key=f"nav_loans_{index}", description=None)
             for index, chart_label in enumerate(LOAN_CHARTS)
         ],
         session_key="loan_chart",
-        description="Analyze federal loan distributions and trends"
+        description="Analyze federal loan distributions and trends",
     )
-    
+
     PELL_GRANTS = SectionConfig(
         name=PELL_SECTION,
         icon="🎓",
@@ -126,18 +124,14 @@ class NavigationConfig:
         overview_chart=ChartConfig(
             label=PELL_OVERVIEW_LABEL,
             key="nav_pell_overview",
-            description="Need-based aid distributions"
+            description="Need-based aid distributions",
         ),
         charts=[
-            ChartConfig(
-                label=chart_label,
-                key=f"nav_pell_{index}",
-                description=None
-            )
+            ChartConfig(label=chart_label, key=f"nav_pell_{index}", description=None)
             for index, chart_label in enumerate(PELL_CHARTS)
         ],
         session_key="pell_chart",
-        description="Review Pell Grant distributions and outcomes"
+        description="Review Pell Grant distributions and outcomes",
     )
 
     DISTANCE_EDUCATION = SectionConfig(
@@ -147,18 +141,16 @@ class NavigationConfig:
         overview_chart=ChartConfig(
             label=DISTANCE_OVERVIEW_LABEL,
             key="nav_distance_overview",
-            description="Online and hybrid learning patterns"
+            description="Online and hybrid learning patterns",
         ),
         charts=[
             ChartConfig(
-                label=chart_label,
-                key=f"nav_distance_{index}",
-                description=None
+                label=chart_label, key=f"nav_distance_{index}", description=None
             )
             for index, chart_label in enumerate(DISTANCE_CHARTS)
         ],
         session_key="distance_chart",
-        description="Explore distance education enrollment patterns"
+        description="Explore distance education enrollment patterns",
     )
 
     COLLEGE_EXPLORER = SectionConfig(
@@ -168,18 +160,16 @@ class NavigationConfig:
         overview_chart=ChartConfig(
             label=COLLEGE_EXPLORER_OVERVIEW_LABEL,
             key="nav_college_explorer_overview",
-            description="Explore individual college data"
+            description="Explore individual college data",
         ),
         charts=[
             ChartConfig(
-                label=chart_label,
-                key=f"nav_college_explorer_{index}",
-                description=None
+                label=chart_label, key=f"nav_college_explorer_{index}", description=None
             )
             for index, chart_label in enumerate(COLLEGE_EXPLORER_CHARTS)
         ],
         session_key="college_explorer_chart",
-        description="Get detailed information on individual colleges"
+        description="Get detailed information on individual colleges",
     )
 
     CANONICAL_IPEDS = SectionConfig(
@@ -236,7 +226,7 @@ class NavigationConfig:
         if ENABLE_CANONICAL_SCORECARD_SECTION:
             sections.append(cls.SCORECARD)
         return sections
-    
+
     @classmethod
     def get_section_by_name(cls, name: str) -> Optional[SectionConfig]:
         """Get a section configuration by its name."""

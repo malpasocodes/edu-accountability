@@ -8,7 +8,6 @@ from typing import Dict
 
 import pandas as pd
 
-
 CONTROL_MAP: Dict[int, str] = {1: "Public", 2: "Private NP", 3: "Private FP"}
 LEVEL_MAP: Dict[int, str] = {1: "4-year", 2: "2-year", 3: "<2-year"}
 SECTOR_MAP: Dict[int, str] = {
@@ -41,12 +40,12 @@ class IPEDSMetadataEnricher:
 
     def run(self, *, write_output: bool = True) -> pd.DataFrame:
         long_df = self._load_long()
-        base_df = long_df.drop(columns=["control", "level", "state", "sector"], errors="ignore")
+        base_df = long_df.drop(
+            columns=["control", "level", "state", "sector"], errors="ignore"
+        )
         hd_df = self._load_hd()
 
-        enriched = base_df.merge(
-            hd_df, on="unitid", how="left", validate="many_to_one"
-        )
+        enriched = base_df.merge(hd_df, on="unitid", how="left", validate="many_to_one")
 
         column_order = [
             "unitid",
@@ -109,7 +108,9 @@ class IPEDSMetadataEnricher:
 
 def main() -> None:
     config = MetadataEnrichmentConfig(
-        long_parquet=Path("data/processed/2023/canonical/ipeds_grad_rates_long.parquet"),
+        long_parquet=Path(
+            "data/processed/2023/canonical/ipeds_grad_rates_long.parquet"
+        ),
         hd_csv=Path("data/raw/ipeds/2023/institutions.csv"),
     )
 

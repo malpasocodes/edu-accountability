@@ -44,7 +44,9 @@ def render_pell_vs_grad_scatter(
         if "UnitID" in metadata_df.columns and "enrollment" in metadata_df.columns:
             metadata = metadata_df.copy()
             metadata["UnitID"] = _normalize_unit_ids(metadata.get("UnitID"))
-            metadata["enrollment"] = pd.to_numeric(metadata["enrollment"], errors="coerce")
+            metadata["enrollment"] = pd.to_numeric(
+                metadata["enrollment"], errors="coerce"
+            )
             working["UnitID"] = _normalize_unit_ids(working.get("UnitID"))
             working = working.merge(
                 metadata[["UnitID", "enrollment"]], on="UnitID", how="left"
@@ -60,17 +62,23 @@ def render_pell_vs_grad_scatter(
     if "enrollment" in working.columns:
         working["enrollment"] = pd.to_numeric(working["enrollment"], errors="coerce")
 
-    working["Sector"] = working.get("Sector", "Unknown").fillna("Unknown").replace("", "Unknown")
+    working["Sector"] = (
+        working.get("Sector", "Unknown").fillna("Unknown").replace("", "Unknown")
+    )
     working["Institution"] = working.get("Institution", "")
     working["YearsCovered"] = working.get("YearsCovered", "")
 
-    filtered = working.dropna(subset=["graduation_rate", "pell_dollars_billions", "enrollment"])
+    filtered = working.dropna(
+        subset=["graduation_rate", "pell_dollars_billions", "enrollment"]
+    )
     filtered = filtered[filtered["enrollment"] > 0]
     if filtered.empty:
         st.warning("No valid numeric data available for the scatter chart.")
         return
 
-    top_filtered = filtered.sort_values("pell_dollars_billions", ascending=False).head(top_n)
+    top_filtered = filtered.sort_values("pell_dollars_billions", ascending=False).head(
+        top_n
+    )
 
     scatter = (
         alt.Chart(top_filtered)
@@ -89,7 +97,11 @@ def render_pell_vs_grad_scatter(
             tooltip=[
                 alt.Tooltip("Institution:N", title="Institution"),
                 alt.Tooltip("graduation_rate:Q", title="Graduation rate", format=".1f"),
-                alt.Tooltip("pell_dollars_billions:Q", title="Pell dollars (billions)", format=".2f"),
+                alt.Tooltip(
+                    "pell_dollars_billions:Q",
+                    title="Pell dollars (billions)",
+                    format=".2f",
+                ),
                 alt.Tooltip("enrollment:Q", title="Enrollment", format=","),
                 alt.Tooltip("Sector:N", title="Sector"),
                 alt.Tooltip("YearsCovered:N", title="Years"),
@@ -103,15 +115,21 @@ def render_pell_vs_grad_scatter(
         .properties(height=520)
     )
 
-    grad_guides = alt.Chart(pd.DataFrame({"rate": [25, 50, 75]})).mark_rule(
-        strokeDash=[6, 6],
-        color="#888888",
-    ).encode(x=alt.X("rate:Q"))
+    grad_guides = (
+        alt.Chart(pd.DataFrame({"rate": [25, 50, 75]}))
+        .mark_rule(
+            strokeDash=[6, 6],
+            color="#888888",
+        )
+        .encode(x=alt.X("rate:Q"))
+    )
 
     st.subheader(title)
     selection_note = ""
     if len(top_filtered) < top_n:
-        selection_note = f" (requested Top {top_n}, data available for {len(top_filtered)})"
+        selection_note = (
+            f" (requested Top {top_n}, data available for {len(top_filtered)})"
+        )
     st.caption(
         "Each point represents an institution with available Pell grant totals (billions) and "
         "graduation rate data; bubble size scales with enrollment. Showing top "

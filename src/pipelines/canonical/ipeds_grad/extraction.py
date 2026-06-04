@@ -45,7 +45,9 @@ class IPEDSGradExtractor:
 
     def _load_wide(self) -> pd.DataFrame:
         if not self.config.wide_csv.exists():
-            raise FileNotFoundError(f"Wide IPEDS file not found: {self.config.wide_csv}")
+            raise FileNotFoundError(
+                f"Wide IPEDS file not found: {self.config.wide_csv}"
+            )
 
         return pd.read_csv(self.config.wide_csv)
 
@@ -75,7 +77,9 @@ class IPEDSGradExtractor:
         pre_drop = len(melted)
         melted = melted.dropna(subset=[MELT_VALUE_COL])
         if pre_drop - len(melted):
-            print(f"  Dropped {pre_drop - len(melted)} rows with null {MELT_VALUE_COL} ({len(melted)} remaining)")
+            print(
+                f"  Dropped {pre_drop - len(melted)} rows with null {MELT_VALUE_COL} ({len(melted)} remaining)"
+            )
 
         melted.rename(
             columns={UNIT_ID_COL: "unitid", INST_NAME_COL: "instnm"}, inplace=True

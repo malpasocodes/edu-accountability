@@ -39,7 +39,9 @@ def render_pell_trend_chart(df: pd.DataFrame, *, title: str) -> None:
     # Add UnitID if not present for grouping
     if "UnitID" not in filtered.columns:
         # Create a unique identifier for each institution
-        institution_to_id = {inst: idx for idx, inst in enumerate(filtered["Institution"].unique())}
+        institution_to_id = {
+            inst: idx for idx, inst in enumerate(filtered["Institution"].unique())
+        }
         filtered["UnitID"] = filtered["Institution"].map(institution_to_id)
 
     anchor_year = None
@@ -67,14 +69,21 @@ def render_pell_trend_chart(df: pd.DataFrame, *, title: str) -> None:
 
     # Calculate year-over-year changes for dot coloring
     filtered = filtered.sort_values(["UnitID", "Year"])
-    filtered["PrevYearPellDollars"] = filtered.groupby("UnitID")["PellDollarsBillions"].shift(1)
-    filtered["YoYChange"] = filtered["PellDollarsBillions"] - filtered["PrevYearPellDollars"]
+    filtered["PrevYearPellDollars"] = filtered.groupby("UnitID")[
+        "PellDollarsBillions"
+    ].shift(1)
+    filtered["YoYChange"] = (
+        filtered["PellDollarsBillions"] - filtered["PrevYearPellDollars"]
+    )
     filtered["YoYChangePercent"] = (
-        (filtered["PellDollarsBillions"] - filtered["PrevYearPellDollars"]) / filtered["PrevYearPellDollars"] * 100
+        (filtered["PellDollarsBillions"] - filtered["PrevYearPellDollars"])
+        / filtered["PrevYearPellDollars"]
+        * 100
     ).round(1)
 
     # Determine change direction for dot coloring (based on percent change)
     from src.charts.trend_utils import classify_yoy_direction
+
     filtered["ChangeDirection"] = classify_yoy_direction(filtered["YoYChangePercent"])
 
     # For first year of each institution, mark as "Same" since no previous year
@@ -84,69 +93,70 @@ def render_pell_trend_chart(df: pd.DataFrame, *, title: str) -> None:
 
     # Create institution-based color scale
     institutions = filtered["Institution"].unique()
-    institution_color_scale = alt.Scale(
-        domain=list(institutions),
-        scheme="category20"
-    )
+    institution_color_scale = alt.Scale(domain=list(institutions), scheme="category20")
 
     # Create change direction color scale for dots
     change_color_scale = alt.Scale(
         domain=["Increase", "Same", "Decrease"],
-        range=["#28a745", "#6c757d", "#dc3545"]  # Green, Gray, Red
+        range=["#28a745", "#6c757d", "#dc3545"],  # Green, Gray, Red
     )
 
     # Line layer with dotted lines colored by institution
-    lines = alt.Chart(filtered).mark_line(
-        strokeDash=[3, 3],  # Dotted line pattern
-        point=False
-    ).encode(
-        x=alt.X("Year:Q", title="Year", axis=alt.Axis(format="d")),
-        y=alt.Y("PellDollarsBillions:Q", title="Pell dollars (billions)"),
-        color=alt.Color(
-            "Institution:N",
-            title="Institution",
-            scale=institution_color_scale
-        ),
-        tooltip=[
-            alt.Tooltip("Institution:N", title="Institution"),
-            alt.Tooltip("Year:Q", title="Year", format=".0f"),
-            alt.Tooltip(
-                "PellDollarsBillions:Q",
-                title="Pell dollars (billions)",
-                format=".2f",
+    lines = (
+        alt.Chart(filtered)
+        .mark_line(strokeDash=[3, 3], point=False)  # Dotted line pattern
+        .encode(
+            x=alt.X("Year:Q", title="Year", axis=alt.Axis(format="d")),
+            y=alt.Y("PellDollarsBillions:Q", title="Pell dollars (billions)"),
+            color=alt.Color(
+                "Institution:N", title="Institution", scale=institution_color_scale
             ),
-            alt.Tooltip("Sector:N", title="Sector"),
-        ],
+            tooltip=[
+                alt.Tooltip("Institution:N", title="Institution"),
+                alt.Tooltip("Year:Q", title="Year", format=".0f"),
+                alt.Tooltip(
+                    "PellDollarsBillions:Q",
+                    title="Pell dollars (billions)",
+                    format=".2f",
+                ),
+                alt.Tooltip("Sector:N", title="Sector"),
+            ],
+        )
     )
 
     # Point layer with year-over-year change coloring
-    points = alt.Chart(filtered).mark_circle(size=80).encode(
-        x=alt.X("Year:Q"),
-        y=alt.Y("PellDollarsBillions:Q"),
-        color=alt.Color(
-            "ChangeDirection:N",
-            title="Year-over-Year Change",
-            scale=change_color_scale
-        ),
-        tooltip=[
-            alt.Tooltip("Institution:N", title="Institution"),
-            alt.Tooltip("Year:Q", title="Year", format=".0f"),
-            alt.Tooltip(
-                "PellDollarsBillions:Q",
-                title="Pell dollars (billions)",
-                format=".2f",
+    points = (
+        alt.Chart(filtered)
+        .mark_circle(size=80)
+        .encode(
+            x=alt.X("Year:Q"),
+            y=alt.Y("PellDollarsBillions:Q"),
+            color=alt.Color(
+                "ChangeDirection:N",
+                title="Year-over-Year Change",
+                scale=change_color_scale,
             ),
-            alt.Tooltip("Sector:N", title="Sector"),
-            alt.Tooltip("YoYChangePercent:Q", title="Year-over-year change (%)", format=".1f"),
-            alt.Tooltip("ChangeDirection:N", title="Change direction"),
-        ],
+            tooltip=[
+                alt.Tooltip("Institution:N", title="Institution"),
+                alt.Tooltip("Year:Q", title="Year", format=".0f"),
+                alt.Tooltip(
+                    "PellDollarsBillions:Q",
+                    title="Pell dollars (billions)",
+                    format=".2f",
+                ),
+                alt.Tooltip("Sector:N", title="Sector"),
+                alt.Tooltip(
+                    "YoYChangePercent:Q",
+                    title="Year-over-year change (%)",
+                    format=".1f",
+                ),
+                alt.Tooltip("ChangeDirection:N", title="Change direction"),
+            ],
+        )
     )
 
     # Combine layers
-    chart = (lines + points).resolve_scale(
-        color="independent"
-    ).properties(height=520)
-
+    chart = (lines + points).resolve_scale(color="independent").properties(height=520)
 
     st.subheader(title)
     if anchor_year is None:
@@ -162,19 +172,14 @@ def render_pell_trend_chart(df: pd.DataFrame, *, title: str) -> None:
     st.caption(caption)
     render_altair_chart(chart)
 
-    summary = (
-        filtered.pivot_table(
-            index=["Institution", "Sector"],
-            columns="Year",
-            values="PellDollarsBillions",
-            aggfunc="sum",
-            fill_value=0,
-        )
-        .reset_index()
-    )
-    year_cols = sorted(
-        col for col in summary.columns if isinstance(col, (int, float))
-    )
+    summary = filtered.pivot_table(
+        index=["Institution", "Sector"],
+        columns="Year",
+        values="PellDollarsBillions",
+        aggfunc="sum",
+        fill_value=0,
+    ).reset_index()
+    year_cols = sorted(col for col in summary.columns if isinstance(col, (int, float)))
     str_year_cols = [str(int(col)) for col in year_cols]
     summary["Total (billions)"] = summary[year_cols].sum(axis=1).round(2)
     for col in year_cols:

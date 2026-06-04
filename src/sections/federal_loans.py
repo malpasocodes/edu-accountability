@@ -30,7 +30,7 @@ from .base import BaseSection
 
 class FederalLoansSection(BaseSection):
     """Handles the Federal Loans section."""
-    
+
     def render_overview(self) -> None:
         """Render the Federal Loans overview."""
         self.render_section_header(FEDERAL_LOANS_SECTION, LOAN_OVERVIEW_LABEL)
@@ -47,19 +47,20 @@ class FederalLoansSection(BaseSection):
                 </p>
             </div>
             """,
-            unsafe_allow_html=True
+            unsafe_allow_html=True,
         )
 
         # Key insight callout
-        st.info("**💡 Key Insight:** Federal loan data reveals which institutions carry the highest student debt burdens and how those patterns relate to graduation outcomes and change over time.")
+        st.info(
+            "**💡 Key Insight:** Federal loan data reveals which institutions carry the highest student debt burdens and how those patterns relate to graduation outcomes and change over time."
+        )
 
         st.markdown("")  # Spacing
 
         # What is this section
         st.markdown("### What is Federal Loans Analysis?")
         fsa_years = self.data_manager.get_fsa_year_range()
-        st.markdown(
-            f"""
+        st.markdown(f"""
             This section tracks **federal student loan dollars** disbursed to students at colleges and universities
             across the United States. The data covers **{fsa_years}** and shows which institutions have the highest
             loan volumes, how those loans relate to graduation rates, and how debt patterns have evolved over time.
@@ -67,19 +68,16 @@ class FederalLoansSection(BaseSection):
             Federal loans represent a significant source of financial aid and a key measure of student debt burden.
             Understanding where these dollars flow helps illuminate affordability challenges and institutional reliance
             on federal lending.
-            """
-        )
+            """)
 
         st.divider()
 
         # Available analyses section
         st.markdown("### Four Ways to Explore Federal Loan Data")
-        st.markdown(
-            """
+        st.markdown("""
             Use the **sidebar charts** to examine federal loan patterns from different angles. Each analysis
             is available for both 4-year and 2-year institutions:
-            """
-        )
+            """)
 
         st.markdown("")  # Spacing
 
@@ -97,7 +95,7 @@ class FederalLoansSection(BaseSection):
                     <p style='color: #000000; font-style: italic; margin: 0;'>Choose Top 10/25/50/100 institutions and compare totals by sector.</p>
                 </div>
                 """,
-                unsafe_allow_html=True
+                unsafe_allow_html=True,
             )
 
         with col2:
@@ -111,7 +109,7 @@ class FederalLoansSection(BaseSection):
                     <p style='color: #000000; font-style: italic; margin: 0;'>Bubble size shows enrollment scale.</p>
                 </div>
                 """,
-                unsafe_allow_html=True
+                unsafe_allow_html=True,
             )
 
         with col3:
@@ -125,7 +123,7 @@ class FederalLoansSection(BaseSection):
                     <p style='color: #000000; font-style: italic; margin: 0;'>Shows year-over-year patterns and shifts.</p>
                 </div>
                 """,
-                unsafe_allow_html=True
+                unsafe_allow_html=True,
             )
 
         with col4:
@@ -139,38 +137,34 @@ class FederalLoansSection(BaseSection):
                     <p style='color: #000000; font-style: italic; margin: 0;'>Shows overall lending patterns and national trends ({fsa_years}).</p>
                 </div>
                 """,
-                unsafe_allow_html=True
+                unsafe_allow_html=True,
             )
 
         st.divider()
 
         # How to use section
         st.markdown("### How to Use This Tool")
-        st.markdown(
-            """
+        st.markdown("""
             **Start with Largest Federal Loan Portfolios** to identify institutions with the highest debt volumes.
             Then explore the **vs Graduation Rate** chart to see how loan burdens relate to student outcomes.
             Finally, use the **Trend** chart to understand how these patterns have evolved over the past 15 years.
 
             **Each chart includes tabs** at the top for 4-year and 2-year institutions, allowing you to compare
             patterns across different institutional types.
-            """
-        )
+            """)
 
         st.divider()
 
         # What to look for section
         st.markdown("### What the Data Shows")
-        st.markdown(
-            """
+        st.markdown("""
             Federal loan data reveals important patterns about affordability and access:
 
             - **High loan volumes** may indicate large enrollment, high costs, or limited grant aid
             - **Loan vs graduation trends** show whether debt burden aligns with degree completion
             - **Multi-year patterns** reveal how institutions' reliance on federal loans has shifted
             - **Sector differences** emerge between public, private nonprofit, and for-profit colleges
-            """
-        )
+            """)
 
         st.divider()
 
@@ -181,17 +175,17 @@ class FederalLoansSection(BaseSection):
             "Loan totals reflect annual federal loan dollars disbursed to students at each institution. "
             "For high-stakes decisions, validate against the latest Department of Education releases."
         )
-    
+
     def render_chart(self, chart_name: str) -> None:
         """Render a specific Federal Loans chart."""
         self.render_section_header(FEDERAL_LOANS_SECTION, chart_name)
-        
+
         if self.data_manager.loan_df is None or self.data_manager.loan_df.empty:
             st.warning(
                 "Loan dataset is unavailable. Confirm `data/raw/fsa/loantotals.csv` exists and reload."
             )
             return
-        
+
         # Handle consolidated chart names with tabs
         if chart_name == LOAN_TOP_DOLLARS_LABEL:
             self._render_loan_top_dollars_with_tabs(chart_name)
@@ -214,8 +208,10 @@ class FederalLoansSection(BaseSection):
             self._render_loan_trend("four_year", chart_name)
         elif chart_name == LOAN_TREND_TWO_LABEL:
             self._render_loan_trend("two_year", chart_name)
-    
-    def _render_loan_top_dollars(self, sector: str, title: str, *, top_n: Optional[int] = None) -> None:
+
+    def _render_loan_top_dollars(
+        self, sector: str, title: str, *, top_n: Optional[int] = None
+    ) -> None:
         """Render loan top dollars chart."""
         if top_n is None:
             top_options = [10, 25, 50, 100]
@@ -238,8 +234,10 @@ class FederalLoansSection(BaseSection):
             )
         else:
             st.error(f"Missing metadata for {sector.replace('_', '-')} institutions.")
-    
-    def _render_loan_vs_grad(self, sector: str, title: str, *, top_n: Optional[int] = None) -> None:
+
+    def _render_loan_vs_grad(
+        self, sector: str, title: str, *, top_n: Optional[int] = None
+    ) -> None:
         """Render loan vs graduation chart."""
         if top_n is None:
             top_options = [10, 25, 50, 100]
@@ -262,7 +260,7 @@ class FederalLoansSection(BaseSection):
             )
         else:
             st.error(f"Missing metadata for {sector.replace('_', '-')} institutions.")
-    
+
     def _render_loan_trend(self, sector: str, title: str) -> None:
         """Render loan trend chart."""
         metadata = self.data_manager.get_metadata_for_sector(sector)
@@ -274,7 +272,7 @@ class FederalLoansSection(BaseSection):
             )
         else:
             st.error(f"Missing metadata for {sector.replace('_', '-')} institutions.")
-    
+
     def _render_loan_top_dollars_with_tabs(self, title: str) -> None:
         """Render loan top dollars chart with 4-year and 2-year tabs."""
         top_options = [10, 25, 50, 100]
@@ -287,13 +285,13 @@ class FederalLoansSection(BaseSection):
             key="loan_top_portfolios_top_n",
         )
         tab1, tab2 = st.tabs(["4-year", "2-year"])
-        
+
         with tab1:
             self._render_loan_top_dollars("four_year", f"{title} (4-year)", top_n=top_n)
-        
+
         with tab2:
             self._render_loan_top_dollars("two_year", f"{title} (2-year)", top_n=top_n)
-    
+
     def _render_loan_vs_grad_with_tabs(self, title: str) -> None:
         """Render loan vs graduation chart with 4-year and 2-year tabs."""
         top_options = [10, 25, 50, 100]
@@ -306,13 +304,13 @@ class FederalLoansSection(BaseSection):
             key="loan_vs_grad_top_n",
         )
         tab1, tab2 = st.tabs(["4-year", "2-year"])
-        
+
         with tab1:
             self._render_loan_vs_grad("four_year", f"{title} (4-year)", top_n=top_n)
-        
+
         with tab2:
             self._render_loan_vs_grad("two_year", f"{title} (2-year)", top_n=top_n)
-    
+
     def _render_loan_trend_with_tabs(self, title: str) -> None:
         """Render loan trend chart with 4-year and 2-year tabs."""
         tab1, tab2 = st.tabs(["4-year", "2-year"])

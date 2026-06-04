@@ -28,12 +28,24 @@ class CollegeExplorerSection(BaseSection):
     def __init__(self, data_manager):
         """Initialize the section with institutions data."""
         super().__init__(data_manager)
-        self.institutions_df = data_manager.institutions_df if hasattr(data_manager, 'institutions_df') else pd.DataFrame()
-        self.distance_df = data_manager.get_distance_data() if hasattr(data_manager, 'get_distance_data') else None
-        self.pellgradrates_df = data_manager.pellgradrates_df if hasattr(data_manager, 'pellgradrates_df') else None
+        self.institutions_df = (
+            data_manager.institutions_df
+            if hasattr(data_manager, "institutions_df")
+            else pd.DataFrame()
+        )
+        self.distance_df = (
+            data_manager.get_distance_data()
+            if hasattr(data_manager, "get_distance_data")
+            else None
+        )
+        self.pellgradrates_df = (
+            data_manager.pellgradrates_df
+            if hasattr(data_manager, "pellgradrates_df")
+            else None
+        )
         self.canonical_grad_df = (
             data_manager.canonical_grad_df
-            if hasattr(data_manager, 'canonical_grad_df')
+            if hasattr(data_manager, "canonical_grad_df")
             else pd.DataFrame()
         )
 
@@ -53,37 +65,35 @@ class CollegeExplorerSection(BaseSection):
                 </p>
             </div>
             """,
-            unsafe_allow_html=True
+            unsafe_allow_html=True,
         )
 
         # Key insight callout
-        st.info("**💡 Key Insight:** The College Explorer provides detailed analysis of individual institutions, allowing you to examine specific colleges' enrollment patterns, federal aid trends, and graduation outcomes over time.")
+        st.info(
+            "**💡 Key Insight:** The College Explorer provides detailed analysis of individual institutions, allowing you to examine specific colleges' enrollment patterns, federal aid trends, and graduation outcomes over time."
+        )
 
         st.markdown("")  # Spacing
 
         # What is this section
         st.markdown("### What is College Explorer?")
-        st.markdown(
-            """
+        st.markdown("""
             The College Explorer allows you to **dive deep into individual institutions** with comprehensive data
             on specific colleges and universities. Instead of comparing across many institutions, you can focus on
             a single college to understand its unique characteristics, performance metrics, and trends over time.
 
             This tool integrates data from **6,050+ institutions** across the United States, providing detailed
             institutional profiles with enrollment metrics, federal aid patterns, and graduation outcomes.
-            """
-        )
+            """)
 
         st.divider()
 
         # Available analyses section
         st.markdown("### Four Ways to Explore Individual Colleges")
-        st.markdown(
-            """
+        st.markdown("""
             Use the **sidebar tabs** to examine different aspects of each institution. Each analysis provides
             unique insights into institutional performance:
-            """
-        )
+            """)
 
         st.markdown("")  # Spacing
 
@@ -101,7 +111,7 @@ class CollegeExplorerSection(BaseSection):
                     </div>
                 </div>
                 """,
-                unsafe_allow_html=True
+                unsafe_allow_html=True,
             )
 
         with col2:
@@ -115,7 +125,7 @@ class CollegeExplorerSection(BaseSection):
                     </div>
                 </div>
                 """,
-                unsafe_allow_html=True
+                unsafe_allow_html=True,
             )
 
         with col3:
@@ -129,7 +139,7 @@ class CollegeExplorerSection(BaseSection):
                     </div>
                 </div>
                 """,
-                unsafe_allow_html=True
+                unsafe_allow_html=True,
             )
 
         with col4:
@@ -143,15 +153,14 @@ class CollegeExplorerSection(BaseSection):
                     </div>
                 </div>
                 """,
-                unsafe_allow_html=True
+                unsafe_allow_html=True,
             )
 
         st.divider()
 
         # How to use section
         st.markdown("### How to Use This Tool")
-        st.markdown(
-            """
+        st.markdown("""
             **Start with the Summary tab** to select an institution from the searchable dropdown (6,050+ colleges available).
             Once selected, you'll see institutional details, enrollment metrics, and graduation rates with context.
 
@@ -160,26 +169,22 @@ class CollegeExplorerSection(BaseSection):
 
             **Finally, review Graduation Rates** to see how overall graduation outcomes compare to Pell student outcomes,
             revealing potential equity gaps in completion.
-            """
-        )
+            """)
 
         st.divider()
 
         # Data notes
         st.markdown("### Data Notes")
-        st.markdown(
-            """
+        st.markdown("""
             - **Graduation rates** in the Summary and Graduation Rates tabs come from IPEDS **Outcome Measures** reporting (columns `GR20XX`/`PGR20XX`), which track **all entering students** over an eight-year window. The most recent value shown is the 2023 outcome for cohorts that started in 2015.
             - **Enrollment metrics** pull from the IPEDS **Distance Education** collection (2020-2024) so the “Total,” “Exclusive Distance Ed,” and “Some Distance Ed” counts reflect the latest fall snapshot available.
-            """
-        )
+            """)
 
         st.divider()
 
         # What to look for section
         st.markdown("### What the Data Shows")
-        st.markdown(
-            """
+        st.markdown("""
             College Explorer reveals institution-specific patterns:
 
             - **Institutional context**: Sector, control type, location, and special designations
@@ -187,20 +192,17 @@ class CollegeExplorerSection(BaseSection):
             - **Federal aid evolution**: How reliance on loans and grants has shifted over 15 years
             - **Equity in outcomes**: Graduation rate gaps between overall and Pell student populations
             - **Performance benchmarks**: Compare institutional metrics to sector medians with z-scores
-            """
-        )
+            """)
 
         st.divider()
 
         # Getting started
         st.markdown("### Get Started")
-        st.markdown(
-            """
+        st.markdown("""
             Click on **Summary** in the sidebar to begin exploring individual college data. The searchable dropdown
             allows you to find institutions by name, city, or state—then view comprehensive institutional analysis
             across all available tabs.
-            """
-        )
+            """)
 
     def render_chart(self, chart_name: str) -> None:
         """
@@ -243,7 +245,7 @@ class CollegeExplorerSection(BaseSection):
             options=[""] + institutions_list,
             index=0,
             key="selected_college",
-            help="Start typing to search for a college"
+            help="Start typing to search for a college",
         )
 
         # Display selected college information
@@ -251,8 +253,7 @@ class CollegeExplorerSection(BaseSection):
             self._display_college_summary(selected_option)
         else:
             # Show instructions when no college is selected
-            st.info(
-                """
+            st.info("""
                 **Getting Started**
 
                 Use the dropdown above to search for and select a college. You can:
@@ -261,13 +262,11 @@ class CollegeExplorerSection(BaseSection):
                 - View basic institutional information
 
                 Once selected, you'll see the college's summary information.
-                """
-            )
+                """)
 
             # Preview of available data
             with st.expander("Data Available"):
-                st.markdown(
-                    """
+                st.markdown("""
                     Current data includes:
                     - Institution name and location
                     - State and ZIP code
@@ -280,8 +279,7 @@ class CollegeExplorerSection(BaseSection):
                     - Graduation rates
                     - Cost and financial aid data
                     - Student outcomes
-                    """
-                )
+                    """)
 
     def _prepare_institution_list(self) -> List[str]:
         """Prepare formatted list of institutions for display."""
@@ -303,7 +301,7 @@ class CollegeExplorerSection(BaseSection):
 
         # Find the institution in the dataframe
         institution_data = self.institutions_df[
-            self.institutions_df['INSTITUTION'] == institution_name
+            self.institutions_df["INSTITUTION"] == institution_name
         ]
 
         if institution_data.empty:
@@ -328,9 +326,9 @@ class CollegeExplorerSection(BaseSection):
             6: "Private for-profit, 2-year",
             7: "Public, less-than 2-year",
             8: "Private not-for-profit, less-than 2-year",
-            9: "Private for-profit, less-than 2-year"
+            9: "Private for-profit, less-than 2-year",
         }
-        sector = sector_map.get(inst.get('SECTOR', -1), "Unknown")
+        sector = sector_map.get(inst.get("SECTOR", -1), "Unknown")
 
         # Display sector as a metric
         st.metric("Sector", sector)
@@ -338,7 +336,9 @@ class CollegeExplorerSection(BaseSection):
         # Add enrollment data if available
         if self.distance_df is not None and not self.distance_df.empty:
             # Find enrollment data for this institution
-            enrollment_data = self.distance_df[self.distance_df['UnitID'] == inst['UnitID']]
+            enrollment_data = self.distance_df[
+                self.distance_df["UnitID"] == inst["UnitID"]
+            ]
 
             if not enrollment_data.empty:
                 enroll_row = enrollment_data.iloc[0]
@@ -348,9 +348,11 @@ class CollegeExplorerSection(BaseSection):
                 st.markdown("#### Enrollment")
 
                 # Get the most recent year's data (2024)
-                total_enrollment = enroll_row.get('TOTAL_ENROLL_2024', None)
-                exclusive_de = enroll_row.get('DE_ENROLL_2024', None)
-                some_de = enroll_row.get('SDE_ENROLL_TOTAL', None)  # Note: 2024 uses SDE_ENROLL_TOTAL
+                total_enrollment = enroll_row.get("TOTAL_ENROLL_2024", None)
+                exclusive_de = enroll_row.get("DE_ENROLL_2024", None)
+                some_de = enroll_row.get(
+                    "SDE_ENROLL_TOTAL", None
+                )  # Note: 2024 uses SDE_ENROLL_TOTAL
 
                 # Create columns for enrollment metrics
                 col1, col2, col3 = st.columns(3)
@@ -363,7 +365,9 @@ class CollegeExplorerSection(BaseSection):
 
                 with col2:
                     if pd.notna(exclusive_de):
-                        st.metric("Exclusive Distance Education", f"{int(exclusive_de):,}")
+                        st.metric(
+                            "Exclusive Distance Education", f"{int(exclusive_de):,}"
+                        )
                     else:
                         st.metric("Exclusive Distance Education", "N/A")
 
@@ -376,7 +380,9 @@ class CollegeExplorerSection(BaseSection):
         # Add graduation rates section if data is available
         if self.pellgradrates_df is not None and not self.pellgradrates_df.empty:
             # Find graduation data for this institution
-            grad_data = self.pellgradrates_df[self.pellgradrates_df['UnitID'] == inst['UnitID']]
+            grad_data = self.pellgradrates_df[
+                self.pellgradrates_df["UnitID"] == inst["UnitID"]
+            ]
 
             if not grad_data.empty:
                 grad_row = grad_data.iloc[0]
@@ -391,43 +397,43 @@ class CollegeExplorerSection(BaseSection):
                 )
 
                 # Get the most recent year's data (2023)
-                overall_grad_rate = grad_row.get('GR2023', None)
-                pell_grad_rate = grad_row.get('PGR2023', None)
+                overall_grad_rate = grad_row.get("GR2023", None)
+                pell_grad_rate = grad_row.get("PGR2023", None)
 
                 if USE_CANONICAL_GRAD_DATA:
-                    self._render_canonical_snapshot(inst['UnitID'])
+                    self._render_canonical_snapshot(inst["UnitID"])
 
                 # Calculate sector-specific statistics
-                sector_code = inst.get('SECTOR', -1)
+                sector_code = inst.get("SECTOR", -1)
                 is_four_year = sector_code in [1, 2, 3]  # 4-year sectors
-                is_two_year = sector_code in [4, 5, 6]   # 2-year sectors
+                is_two_year = sector_code in [4, 5, 6]  # 2-year sectors
 
                 # Calculate medians and z-scores if we can determine sector
                 if is_four_year or is_two_year:
                     # Merge institutions with graduation rates to get sector info
                     merged_df = pd.merge(
-                        self.pellgradrates_df[['UnitID', 'GR2023', 'PGR2023']],
-                        self.institutions_df[['UnitID', 'SECTOR']],
-                        on='UnitID',
-                        how='inner'
+                        self.pellgradrates_df[["UnitID", "GR2023", "PGR2023"]],
+                        self.institutions_df[["UnitID", "SECTOR"]],
+                        on="UnitID",
+                        how="inner",
                     )
 
                     if is_four_year:
-                        sector_df = merged_df[merged_df['SECTOR'].isin([1, 2, 3])]
+                        sector_df = merged_df[merged_df["SECTOR"].isin([1, 2, 3])]
                         sector_label = "4-year"
                     else:
-                        sector_df = merged_df[merged_df['SECTOR'].isin([4, 5, 6])]
+                        sector_df = merged_df[merged_df["SECTOR"].isin([4, 5, 6])]
                         sector_label = "2-year"
 
                     # Calculate medians
-                    overall_median = sector_df['GR2023'].median()
-                    pell_median = sector_df['PGR2023'].median()
+                    overall_median = sector_df["GR2023"].median()
+                    pell_median = sector_df["PGR2023"].median()
 
                     # Calculate z-scores
-                    overall_mean = sector_df['GR2023'].mean()
-                    overall_std = sector_df['GR2023'].std()
-                    pell_mean = sector_df['PGR2023'].mean()
-                    pell_std = sector_df['PGR2023'].std()
+                    overall_mean = sector_df["GR2023"].mean()
+                    overall_std = sector_df["GR2023"].std()
+                    pell_mean = sector_df["PGR2023"].mean()
+                    pell_std = sector_df["PGR2023"].std()
 
                     overall_z = None
                     pell_z = None
@@ -446,7 +452,9 @@ class CollegeExplorerSection(BaseSection):
                         if pd.notna(overall_grad_rate):
                             st.metric("This Institution", f"{overall_grad_rate:.1f}%")
                             if pd.notna(overall_median):
-                                st.metric(f"{sector_label} Median", f"{overall_median:.1f}%")
+                                st.metric(
+                                    f"{sector_label} Median", f"{overall_median:.1f}%"
+                                )
                             if overall_z is not None:
                                 st.metric("Z-Score", f"{overall_z:.2f}")
                         else:
@@ -457,7 +465,9 @@ class CollegeExplorerSection(BaseSection):
                         if pd.notna(pell_grad_rate):
                             st.metric("This Institution", f"{pell_grad_rate:.1f}%")
                             if pd.notna(pell_median):
-                                st.metric(f"{sector_label} Median", f"{pell_median:.1f}%")
+                                st.metric(
+                                    f"{sector_label} Median", f"{pell_median:.1f}%"
+                                )
                             if pell_z is not None:
                                 st.metric("Z-Score", f"{pell_z:.2f}")
                         else:
@@ -468,13 +478,17 @@ class CollegeExplorerSection(BaseSection):
 
                     with col1:
                         if pd.notna(overall_grad_rate):
-                            st.metric("Overall Graduation Rate", f"{overall_grad_rate:.1f}%")
+                            st.metric(
+                                "Overall Graduation Rate", f"{overall_grad_rate:.1f}%"
+                            )
                         else:
                             st.metric("Overall Graduation Rate", "N/A")
 
                     with col2:
                         if pd.notna(pell_grad_rate):
-                            st.metric("Pell Student Graduation Rate", f"{pell_grad_rate:.1f}%")
+                            st.metric(
+                                "Pell Student Graduation Rate", f"{pell_grad_rate:.1f}%"
+                            )
                         else:
                             st.metric("Pell Student Graduation Rate", "N/A")
 
@@ -509,7 +523,7 @@ class CollegeExplorerSection(BaseSection):
             options=[""] + institutions_list,
             index=0,
             key="selected_college_loans_pell",
-            help="Start typing to search for a college"
+            help="Start typing to search for a college",
         )
 
         # Display selected college trend chart
@@ -517,8 +531,7 @@ class CollegeExplorerSection(BaseSection):
             self._display_combined_trend_chart(selected_option)
         else:
             # Show instructions when no college is selected
-            st.info(
-                """
+            st.info("""
                 **Getting Started**
 
                 Use the dropdown above to search for and select a college. You can:
@@ -530,21 +543,18 @@ class CollegeExplorerSection(BaseSection):
                 - **Pell Grants**: Annual Pell grant dollars received
                 - **Federal Loans**: Annual federal loan dollars received
                 - **Total Aid**: Combined Pell + Loan dollars
-                """
-            )
+                """)
 
             # Preview of chart features
             with st.expander("Chart Features"):
-                st.markdown(
-                    """
+                st.markdown("""
                     The combined trend chart will show:
                     - **Time period**: All available years (where data is available)
                     - **Three trend lines**: Pell Grants, Federal Loans, and Total
                     - **Interactive tooltips**: Hover for exact values and year-over-year changes
                     - **Professional styling**: Consistent with existing dashboard charts
                     - **Responsive design**: Scales to fit your screen
-                    """
-                )
+                    """)
 
     def _display_combined_trend_chart(self, selected_option: str) -> None:
         """Display the combined Pell and Loan trend chart for the selected college."""
@@ -553,7 +563,7 @@ class CollegeExplorerSection(BaseSection):
 
         # Find the institution in the dataframe
         institution_data = self.institutions_df[
-            self.institutions_df['INSTITUTION'] == institution_name
+            self.institutions_df["INSTITUTION"] == institution_name
         ]
 
         if institution_data.empty:
@@ -561,7 +571,7 @@ class CollegeExplorerSection(BaseSection):
             return
 
         # Get the UnitID
-        unit_id = institution_data.iloc[0]['UnitID']
+        unit_id = institution_data.iloc[0]["UnitID"]
 
         # Display institution header
         st.markdown(f"### {institution_name}")
@@ -584,12 +594,18 @@ class CollegeExplorerSection(BaseSection):
         # Display summary statistics
         self._display_trend_summary(trend_data)
 
-    def _prepare_combined_trend_data(self, unit_id: int, institution_name: str) -> pd.DataFrame:
+    def _prepare_combined_trend_data(
+        self, unit_id: int, institution_name: str
+    ) -> pd.DataFrame:
         """Prepare combined Pell and Loan trend data for a specific institution."""
 
         # Get Pell data for this institution
-        pell_data = self.data_manager.pell_df[self.data_manager.pell_df['UnitID'] == unit_id]
-        loan_data = self.data_manager.loan_df[self.data_manager.loan_df['UnitID'] == unit_id]
+        pell_data = self.data_manager.pell_df[
+            self.data_manager.pell_df["UnitID"] == unit_id
+        ]
+        loan_data = self.data_manager.loan_df[
+            self.data_manager.loan_df["UnitID"] == unit_id
+        ]
 
         if pell_data.empty and loan_data.empty:
             return pd.DataFrame()
@@ -625,63 +641,64 @@ class CollegeExplorerSection(BaseSection):
                 total_billions = pell_billions + loan_billions
 
                 # Add three records for this year (one for each line)
-                trend_records.extend([
-                    {
-                        'Year': year,
-                        'Aid_Type': 'Pell Grants',
-                        'Amount_Billions': pell_billions,
-                        'Raw_Amount': pell_value,
-                        'Institution': institution_name
-                    },
-                    {
-                        'Year': year,
-                        'Aid_Type': 'Federal Loans',
-                        'Amount_Billions': loan_billions,
-                        'Raw_Amount': loan_value,
-                        'Institution': institution_name
-                    },
-                    {
-                        'Year': year,
-                        'Aid_Type': 'Total Aid',
-                        'Amount_Billions': total_billions,
-                        'Raw_Amount': pell_value + loan_value,
-                        'Institution': institution_name
-                    }
-                ])
+                trend_records.extend(
+                    [
+                        {
+                            "Year": year,
+                            "Aid_Type": "Pell Grants",
+                            "Amount_Billions": pell_billions,
+                            "Raw_Amount": pell_value,
+                            "Institution": institution_name,
+                        },
+                        {
+                            "Year": year,
+                            "Aid_Type": "Federal Loans",
+                            "Amount_Billions": loan_billions,
+                            "Raw_Amount": loan_value,
+                            "Institution": institution_name,
+                        },
+                        {
+                            "Year": year,
+                            "Aid_Type": "Total Aid",
+                            "Amount_Billions": total_billions,
+                            "Raw_Amount": pell_value + loan_value,
+                            "Institution": institution_name,
+                        },
+                    ]
+                )
 
         return pd.DataFrame(trend_records)
 
-    def _create_combined_trend_chart(self, df: pd.DataFrame, institution_name: str) -> alt.Chart:
+    def _create_combined_trend_chart(
+        self, df: pd.DataFrame, institution_name: str
+    ) -> alt.Chart:
         """Create the combined trend chart with three lines."""
 
         # Define colors for the three lines
         color_scale = alt.Scale(
-            domain=['Pell Grants', 'Federal Loans', 'Total Aid'],
-            range=['#28a745', '#1f77b4', '#ff7f0e']  # Green, Blue, Orange
+            domain=["Pell Grants", "Federal Loans", "Total Aid"],
+            range=["#28a745", "#1f77b4", "#ff7f0e"],  # Green, Blue, Orange
         )
 
         # Create the line chart
-        lines = alt.Chart(df).mark_line(
-            strokeWidth=3,
-            point=alt.OverlayMarkDef(size=100, filled=True)
-        ).encode(
-            x=alt.X('Year:Q', title='Year', axis=alt.Axis(format='d')),
-            y=alt.Y('Amount_Billions:Q', title='Amount (billions of dollars)'),
-            color=alt.Color(
-                'Aid_Type:N',
-                title='Aid Type',
-                scale=color_scale
-            ),
-            tooltip=[
-                alt.Tooltip('Institution:N', title='Institution'),
-                alt.Tooltip('Year:Q', title='Year', format='.0f'),
-                alt.Tooltip('Aid_Type:N', title='Aid Type'),
-                alt.Tooltip('Amount_Billions:Q', title='Amount (billions)', format='.3f'),
-                alt.Tooltip('Raw_Amount:Q', title='Amount ($)', format=',.0f')
-            ]
-        ).properties(
-            height=520,
-            title=f"Financial Aid Trends - {institution_name}"
+        lines = (
+            alt.Chart(df)
+            .mark_line(strokeWidth=3, point=alt.OverlayMarkDef(size=100, filled=True))
+            .encode(
+                x=alt.X("Year:Q", title="Year", axis=alt.Axis(format="d")),
+                y=alt.Y("Amount_Billions:Q", title="Amount (billions of dollars)"),
+                color=alt.Color("Aid_Type:N", title="Aid Type", scale=color_scale),
+                tooltip=[
+                    alt.Tooltip("Institution:N", title="Institution"),
+                    alt.Tooltip("Year:Q", title="Year", format=".0f"),
+                    alt.Tooltip("Aid_Type:N", title="Aid Type"),
+                    alt.Tooltip(
+                        "Amount_Billions:Q", title="Amount (billions)", format=".3f"
+                    ),
+                    alt.Tooltip("Raw_Amount:Q", title="Amount ($)", format=",.0f"),
+                ],
+            )
+            .properties(height=520, title=f"Financial Aid Trends - {institution_name}")
         )
 
         return lines
@@ -694,33 +711,53 @@ class CollegeExplorerSection(BaseSection):
         st.markdown("#### Summary Statistics")
 
         # Get the most recent year with data
-        recent_year = df['Year'].max()
-        recent_data = df[df['Year'] == recent_year]
+        recent_year = df["Year"].max()
+        recent_data = df[df["Year"] == recent_year]
 
         # Display recent year values
         st.markdown(f"##### Most Recent Year ({recent_year})")
         col1, col2, col3 = st.columns(3)
 
         with col1:
-            pell_recent = recent_data[recent_data['Aid_Type'] == 'Pell Grants']['Raw_Amount'].iloc[0] if not recent_data[recent_data['Aid_Type'] == 'Pell Grants'].empty else 0
+            pell_recent = (
+                recent_data[recent_data["Aid_Type"] == "Pell Grants"][
+                    "Raw_Amount"
+                ].iloc[0]
+                if not recent_data[recent_data["Aid_Type"] == "Pell Grants"].empty
+                else 0
+            )
             st.metric("Pell Grants", f"${pell_recent:,.0f}")
 
         with col2:
-            loan_recent = recent_data[recent_data['Aid_Type'] == 'Federal Loans']['Raw_Amount'].iloc[0] if not recent_data[recent_data['Aid_Type'] == 'Federal Loans'].empty else 0
+            loan_recent = (
+                recent_data[recent_data["Aid_Type"] == "Federal Loans"][
+                    "Raw_Amount"
+                ].iloc[0]
+                if not recent_data[recent_data["Aid_Type"] == "Federal Loans"].empty
+                else 0
+            )
             st.metric("Federal Loans", f"${loan_recent:,.0f}")
 
         with col3:
-            total_recent = recent_data[recent_data['Aid_Type'] == 'Total Aid']['Raw_Amount'].iloc[0] if not recent_data[recent_data['Aid_Type'] == 'Total Aid'].empty else 0
+            total_recent = (
+                recent_data[recent_data["Aid_Type"] == "Total Aid"]["Raw_Amount"].iloc[
+                    0
+                ]
+                if not recent_data[recent_data["Aid_Type"] == "Total Aid"].empty
+                else 0
+            )
             st.metric("Total Aid", f"${total_recent:,.0f}")
 
         # Calculate and display cumulative totals
-        st.markdown(f"##### Cumulative Total ({self.data_manager.get_fsa_year_range()})")
+        st.markdown(
+            f"##### Cumulative Total ({self.data_manager.get_fsa_year_range()})"
+        )
         col1, col2, col3 = st.columns(3)
 
         # Calculate cumulative sums for each aid type
-        pell_cumulative = df[df['Aid_Type'] == 'Pell Grants']['Raw_Amount'].sum()
-        loan_cumulative = df[df['Aid_Type'] == 'Federal Loans']['Raw_Amount'].sum()
-        total_cumulative = df[df['Aid_Type'] == 'Total Aid']['Raw_Amount'].sum()
+        pell_cumulative = df[df["Aid_Type"] == "Pell Grants"]["Raw_Amount"].sum()
+        loan_cumulative = df[df["Aid_Type"] == "Federal Loans"]["Raw_Amount"].sum()
+        total_cumulative = df[df["Aid_Type"] == "Total Aid"]["Raw_Amount"].sum()
 
         with col1:
             st.metric("Pell Grants", f"${pell_cumulative:,.0f}")
@@ -732,18 +769,30 @@ class CollegeExplorerSection(BaseSection):
             st.metric("Total Aid", f"${total_cumulative:,.0f}")
 
         # Calculate year-over-year changes if we have multiple years
-        years_available = sorted(df['Year'].unique())
+        years_available = sorted(df["Year"].unique())
         if len(years_available) >= 2:
             prev_year = years_available[-2]
-            prev_data = df[df['Year'] == prev_year]
+            prev_data = df[df["Year"] == prev_year]
 
             st.markdown(f"#### Year-over-Year Change ({prev_year} to {recent_year})")
 
             col1, col2, col3 = st.columns(3)
 
-            for i, (aid_type, col) in enumerate(zip(['Pell Grants', 'Federal Loans', 'Total Aid'], [col1, col2, col3])):
-                recent_val = recent_data[recent_data['Aid_Type'] == aid_type]['Raw_Amount'].iloc[0] if not recent_data[recent_data['Aid_Type'] == aid_type].empty else 0
-                prev_val = prev_data[prev_data['Aid_Type'] == aid_type]['Raw_Amount'].iloc[0] if not prev_data[prev_data['Aid_Type'] == aid_type].empty else 0
+            for i, (aid_type, col) in enumerate(
+                zip(["Pell Grants", "Federal Loans", "Total Aid"], [col1, col2, col3])
+            ):
+                recent_val = (
+                    recent_data[recent_data["Aid_Type"] == aid_type]["Raw_Amount"].iloc[
+                        0
+                    ]
+                    if not recent_data[recent_data["Aid_Type"] == aid_type].empty
+                    else 0
+                )
+                prev_val = (
+                    prev_data[prev_data["Aid_Type"] == aid_type]["Raw_Amount"].iloc[0]
+                    if not prev_data[prev_data["Aid_Type"] == aid_type].empty
+                    else 0
+                )
 
                 if prev_val > 0:
                     change_pct = ((recent_val - prev_val) / prev_val) * 100
@@ -755,7 +804,7 @@ class CollegeExplorerSection(BaseSection):
                             aid_type,
                             f"{change_pct:+.1f}%",
                             delta=f"${change_amount:+,.0f}",
-                            delta_color=delta_color
+                            delta_color=delta_color,
                         )
 
     def _render_graduation_rates(self) -> None:
@@ -769,7 +818,10 @@ class CollegeExplorerSection(BaseSection):
             )
             return
 
-        if self.data_manager.pellgradrates_df is None or self.data_manager.pellgradrates_df.empty:
+        if (
+            self.data_manager.pellgradrates_df is None
+            or self.data_manager.pellgradrates_df.empty
+        ):
             st.error("Graduation rates data is not available.")
             return
 
@@ -785,7 +837,7 @@ class CollegeExplorerSection(BaseSection):
             options=[""] + institutions_list,
             index=0,
             key="selected_college_grad_rates",
-            help="Start typing to search for a college"
+            help="Start typing to search for a college",
         )
 
         # Display selected college trend chart
@@ -793,8 +845,7 @@ class CollegeExplorerSection(BaseSection):
             self._display_graduation_trend_chart(selected_option)
         else:
             # Show instructions when no college is selected
-            st.info(
-                """
+            st.info("""
                 **Getting Started**
 
                 Use the dropdown above to search for and select a college. You can:
@@ -806,13 +857,11 @@ class CollegeExplorerSection(BaseSection):
                 - **Overall Graduation Rate**: Blue line showing general student graduation rates
                 - **Pell Student Graduation Rate**: Green line showing Pell recipient graduation rates
                 - **Reference Lines**: Dashed lines at 25%, 50%, and 75% for context
-                """
-            )
+                """)
 
             # Preview of chart features
             with st.expander("Understanding Graduation Rates"):
-                st.markdown(
-                    """
+                st.markdown("""
                     **Graduation Rate Metrics**:
                     - **Overall Rate (GR)**: Percentage of all students who graduate
                     - **Pell Rate (PGR)**: Percentage of Pell grant recipients who graduate
@@ -823,8 +872,7 @@ class CollegeExplorerSection(BaseSection):
                     - Graduation rates indicate institutional effectiveness
                     - Pell vs Overall gap shows equity in student outcomes
                     - Trends reveal improvement or decline over time
-                    """
-                )
+                    """)
 
     def _display_graduation_trend_chart(self, selected_option: str) -> None:
         """Display the graduation rate trend chart for the selected college."""
@@ -833,7 +881,7 @@ class CollegeExplorerSection(BaseSection):
 
         # Find the institution in the dataframe
         institution_data = self.institutions_df[
-            self.institutions_df['INSTITUTION'] == institution_name
+            self.institutions_df["INSTITUTION"] == institution_name
         ]
 
         if institution_data.empty:
@@ -841,7 +889,7 @@ class CollegeExplorerSection(BaseSection):
             return
 
         # Get the UnitID
-        unit_id = institution_data.iloc[0]['UnitID']
+        unit_id = institution_data.iloc[0]["UnitID"]
 
         # Display institution header
         st.markdown(f"### {institution_name}")
@@ -866,12 +914,14 @@ class CollegeExplorerSection(BaseSection):
             self._render_canonical_snapshot(unit_id, show_header=False)
             self._render_grad_rate_distribution(unit_id, institution_name)
 
-    def _prepare_graduation_trend_data(self, unit_id: int, institution_name: str) -> pd.DataFrame:
+    def _prepare_graduation_trend_data(
+        self, unit_id: int, institution_name: str
+    ) -> pd.DataFrame:
         """Prepare graduation trend data for a specific institution."""
 
         # Get graduation rates data for this institution
         grad_data = self.data_manager.pellgradrates_df[
-            self.data_manager.pellgradrates_df['UnitID'] == unit_id
+            self.data_manager.pellgradrates_df["UnitID"] == unit_id
         ]
 
         if grad_data.empty:
@@ -881,80 +931,90 @@ class CollegeExplorerSection(BaseSection):
 
         # Process years from 2016 to 2023
         for year in range(2016, 2024):
-            pgr_col = f'PGR{year}'
-            gr_col = f'GR{year}'
+            pgr_col = f"PGR{year}"
+            gr_col = f"GR{year}"
 
             # Check if columns exist
             if pgr_col in grad_data.columns and gr_col in grad_data.columns:
                 # Get values
-                pgr_value = grad_data.iloc[0][pgr_col] if not grad_data[pgr_col].isna().iloc[0] else None
-                gr_value = grad_data.iloc[0][gr_col] if not grad_data[gr_col].isna().iloc[0] else None
+                pgr_value = (
+                    grad_data.iloc[0][pgr_col]
+                    if not grad_data[pgr_col].isna().iloc[0]
+                    else None
+                )
+                gr_value = (
+                    grad_data.iloc[0][gr_col]
+                    if not grad_data[gr_col].isna().iloc[0]
+                    else None
+                )
 
                 # Add Overall graduation rate record
                 if gr_value is not None:
-                    trend_records.append({
-                        'Year': year,
-                        'Rate_Type': 'Overall',
-                        'Rate': gr_value,
-                        'Institution': institution_name
-                    })
+                    trend_records.append(
+                        {
+                            "Year": year,
+                            "Rate_Type": "Overall",
+                            "Rate": gr_value,
+                            "Institution": institution_name,
+                        }
+                    )
 
                 # Add Pell graduation rate record
                 if pgr_value is not None:
-                    trend_records.append({
-                        'Year': year,
-                        'Rate_Type': 'Pell Students',
-                        'Rate': pgr_value,
-                        'Institution': institution_name
-                    })
+                    trend_records.append(
+                        {
+                            "Year": year,
+                            "Rate_Type": "Pell Students",
+                            "Rate": pgr_value,
+                            "Institution": institution_name,
+                        }
+                    )
 
         return pd.DataFrame(trend_records)
 
-    def _create_graduation_trend_chart(self, df: pd.DataFrame, institution_name: str) -> alt.Chart:
+    def _create_graduation_trend_chart(
+        self, df: pd.DataFrame, institution_name: str
+    ) -> alt.Chart:
         """Create the graduation trend chart with two lines and reference lines."""
 
         # Create reference lines at 25%, 50%, 75%
-        reference_data = pd.DataFrame({'rate': [25, 50, 75]})
-        reference_lines = alt.Chart(reference_data).mark_rule(
-            color='gray',
-            strokeDash=[6, 4],
-            size=1
-        ).encode(
-            y=alt.Y('rate:Q')
+        reference_data = pd.DataFrame({"rate": [25, 50, 75]})
+        reference_lines = (
+            alt.Chart(reference_data)
+            .mark_rule(color="gray", strokeDash=[6, 4], size=1)
+            .encode(y=alt.Y("rate:Q"))
         )
 
         # Define colors for the two lines
         color_scale = alt.Scale(
-            domain=['Overall', 'Pell Students'],
-            range=['#1f77b4', '#28a745']  # Blue for Overall, Green for Pell
+            domain=["Overall", "Pell Students"],
+            range=["#1f77b4", "#28a745"],  # Blue for Overall, Green for Pell
         )
 
         # Create the main line chart
-        lines = alt.Chart(df).mark_line(
-            strokeWidth=3,
-            point=alt.OverlayMarkDef(size=100, filled=True)
-        ).encode(
-            x=alt.X('Year:Q', title='Year', axis=alt.Axis(format='d')),
-            y=alt.Y('Rate:Q',
-                    title='Graduation Rate (%)',
-                    scale=alt.Scale(domain=[0, 100])),
-            color=alt.Color(
-                'Rate_Type:N',
-                title='Student Type',
-                scale=color_scale
-            ),
-            tooltip=[
-                alt.Tooltip('Institution:N', title='Institution'),
-                alt.Tooltip('Year:Q', title='Year', format='.0f'),
-                alt.Tooltip('Rate_Type:N', title='Student Type'),
-                alt.Tooltip('Rate:Q', title='Graduation Rate (%)', format='.1f')
-            ]
+        lines = (
+            alt.Chart(df)
+            .mark_line(strokeWidth=3, point=alt.OverlayMarkDef(size=100, filled=True))
+            .encode(
+                x=alt.X("Year:Q", title="Year", axis=alt.Axis(format="d")),
+                y=alt.Y(
+                    "Rate:Q",
+                    title="Graduation Rate (%)",
+                    scale=alt.Scale(domain=[0, 100]),
+                ),
+                color=alt.Color("Rate_Type:N", title="Student Type", scale=color_scale),
+                tooltip=[
+                    alt.Tooltip("Institution:N", title="Institution"),
+                    alt.Tooltip("Year:Q", title="Year", format=".0f"),
+                    alt.Tooltip("Rate_Type:N", title="Student Type"),
+                    alt.Tooltip("Rate:Q", title="Graduation Rate (%)", format=".1f"),
+                ],
+            )
         )
 
         # Combine the lines with reference lines
         chart = (lines + reference_lines).properties(
-            height=520,
-            title=f"Graduation Rate Trends - {institution_name}"
+            height=520, title=f"Graduation Rate Trends - {institution_name}"
         )
 
         return chart
@@ -967,17 +1027,17 @@ class CollegeExplorerSection(BaseSection):
         st.markdown("#### Summary Statistics")
 
         # Get the most recent year with data
-        recent_year = df['Year'].max()
-        recent_data = df[df['Year'] == recent_year]
+        recent_year = df["Year"].max()
+        recent_data = df[df["Year"] == recent_year]
 
         # Display recent year values
         st.markdown(f"##### Most Recent Year ({recent_year})")
         col1, col2, col3 = st.columns(3)
 
         # Overall graduation rate
-        overall_recent = recent_data[recent_data['Rate_Type'] == 'Overall']
+        overall_recent = recent_data[recent_data["Rate_Type"] == "Overall"]
         if not overall_recent.empty:
-            overall_rate = overall_recent['Rate'].iloc[0]
+            overall_rate = overall_recent["Rate"].iloc[0]
             with col1:
                 st.metric("Overall Graduation Rate", f"{overall_rate:.1f}%")
         else:
@@ -985,9 +1045,9 @@ class CollegeExplorerSection(BaseSection):
                 st.metric("Overall Graduation Rate", "N/A")
 
         # Pell graduation rate
-        pell_recent = recent_data[recent_data['Rate_Type'] == 'Pell Students']
+        pell_recent = recent_data[recent_data["Rate_Type"] == "Pell Students"]
         if not pell_recent.empty:
-            pell_rate = pell_recent['Rate'].iloc[0]
+            pell_rate = pell_recent["Rate"].iloc[0]
             with col2:
                 st.metric("Pell Student Graduation Rate", f"{pell_rate:.1f}%")
         else:
@@ -996,12 +1056,15 @@ class CollegeExplorerSection(BaseSection):
 
         # Gap between rates
         if not overall_recent.empty and not pell_recent.empty:
-            gap = overall_recent['Rate'].iloc[0] - pell_recent['Rate'].iloc[0]
+            gap = overall_recent["Rate"].iloc[0] - pell_recent["Rate"].iloc[0]
             with col3:
                 color = "normal" if gap < 5 else "inverse"  # Smaller gap is better
-                st.metric("Equity Gap", f"{gap:.1f}%",
-                         help="Difference between overall and Pell graduation rates",
-                         delta_color=color)
+                st.metric(
+                    "Equity Gap",
+                    f"{gap:.1f}%",
+                    help="Difference between overall and Pell graduation rates",
+                    delta_color=color,
+                )
         else:
             with col3:
                 st.metric("Equity Gap", "N/A")
@@ -1011,40 +1074,57 @@ class CollegeExplorerSection(BaseSection):
         col1, col2, col3 = st.columns(3)
 
         # Average rates
-        overall_avg = df[df['Rate_Type'] == 'Overall']['Rate'].mean()
-        pell_avg = df[df['Rate_Type'] == 'Pell Students']['Rate'].mean()
+        overall_avg = df[df["Rate_Type"] == "Overall"]["Rate"].mean()
+        pell_avg = df[df["Rate_Type"] == "Pell Students"]["Rate"].mean()
 
         with col1:
             if not pd.isna(overall_avg):
-                st.metric("Average Overall Rate", f"{overall_avg:.1f}%",
-                         help="Average across all available years")
+                st.metric(
+                    "Average Overall Rate",
+                    f"{overall_avg:.1f}%",
+                    help="Average across all available years",
+                )
             else:
                 st.metric("Average Overall Rate", "N/A")
 
         with col2:
             if not pd.isna(pell_avg):
-                st.metric("Average Pell Rate", f"{pell_avg:.1f}%",
-                         help="Average across all available years")
+                st.metric(
+                    "Average Pell Rate",
+                    f"{pell_avg:.1f}%",
+                    help="Average across all available years",
+                )
             else:
                 st.metric("Average Pell Rate", "N/A")
 
         # Trend direction
         with col3:
             # Get first and last year data
-            years_available = sorted(df['Year'].unique())
+            years_available = sorted(df["Year"].unique())
             if len(years_available) >= 2:
                 first_year = years_available[0]
                 last_year = years_available[-1]
 
-                overall_first = df[(df['Year'] == first_year) & (df['Rate_Type'] == 'Overall')]['Rate']
-                overall_last = df[(df['Year'] == last_year) & (df['Rate_Type'] == 'Overall')]['Rate']
+                overall_first = df[
+                    (df["Year"] == first_year) & (df["Rate_Type"] == "Overall")
+                ]["Rate"]
+                overall_last = df[
+                    (df["Year"] == last_year) & (df["Rate_Type"] == "Overall")
+                ]["Rate"]
 
                 if not overall_first.empty and not overall_last.empty:
                     trend = overall_last.iloc[0] - overall_first.iloc[0]
-                    trend_label = "📈 Improving" if trend > 0 else "📉 Declining" if trend < 0 else "➡️ Stable"
-                    st.metric("Overall Trend", trend_label,
-                             delta=f"{trend:+.1f}% since {first_year}",
-                             help=f"Change from {first_year} to {last_year}")
+                    trend_label = (
+                        "📈 Improving"
+                        if trend > 0
+                        else "📉 Declining" if trend < 0 else "➡️ Stable"
+                    )
+                    st.metric(
+                        "Overall Trend",
+                        trend_label,
+                        delta=f"{trend:+.1f}% since {first_year}",
+                        help=f"Change from {first_year} to {last_year}",
+                    )
                 else:
                     st.metric("Overall Trend", "N/A")
             else:
@@ -1065,7 +1145,9 @@ class CollegeExplorerSection(BaseSection):
             return None
         return record.iloc[0]
 
-    def _render_canonical_snapshot(self, unit_id: int, *, show_header: bool = True) -> None:
+    def _render_canonical_snapshot(
+        self, unit_id: int, *, show_header: bool = True
+    ) -> None:
         """Render canonical graduation metrics for the selected institution."""
 
         record = self._get_canonical_grad_record(unit_id)
@@ -1087,7 +1169,9 @@ class CollegeExplorerSection(BaseSection):
         else:
             load_timestamp = load_ts if isinstance(load_ts, pd.Timestamp) else None
         load_text = (
-            load_timestamp.strftime("%Y-%m-%d") if isinstance(load_timestamp, pd.Timestamp) else ""
+            load_timestamp.strftime("%Y-%m-%d")
+            if isinstance(load_timestamp, pd.Timestamp)
+            else ""
         )
 
         col1, col2 = st.columns([2, 1])
@@ -1108,7 +1192,9 @@ class CollegeExplorerSection(BaseSection):
                 f"Canonical snapshot built {load_text}. See docs/rate_policy_ipeds_grad.md for precedence details."
             )
 
-    def _render_grad_rate_distribution(self, unit_id: int, institution_name: str) -> None:
+    def _render_grad_rate_distribution(
+        self, unit_id: int, institution_name: str
+    ) -> None:
         """Render z-score controls + distribution chart for canonical graduation rates."""
 
         canonical_df = getattr(self, "canonical_grad_df", None)
@@ -1194,7 +1280,9 @@ class CollegeExplorerSection(BaseSection):
             "FT_UG_12M": "DRV EF12 full-time undergraduate 12-month unduplicated headcount",
             "ENR_UG_FALL": "Fall undergraduate enrollment (proxy)",
         }
-        source_label = source_lookup.get(summary.headcount_source or "", "Not available")
+        source_label = source_lookup.get(
+            summary.headcount_source or "", "Not available"
+        )
 
         st.caption(
             f"Peer group size: {stats.peer_count:,} institutions with ≥ {stats.min_headcount:,} "
@@ -1208,7 +1296,9 @@ class CollegeExplorerSection(BaseSection):
                 "Z-scores are still computed against the chosen peer group for context."
             )
 
-        chart = self._build_grad_rate_distribution_chart(peer_df, summary.grad_rate, stats)
+        chart = self._build_grad_rate_distribution_chart(
+            peer_df, summary.grad_rate, stats
+        )
         if chart is not None:
             render_altair_chart(chart, use_container_width=True)
 
@@ -1238,13 +1328,17 @@ class CollegeExplorerSection(BaseSection):
             )
         )
 
-        anchor_rule = alt.Chart(
-            pd.DataFrame({"marker": [anchor_value]})
-        ).mark_rule(color="#d62728", size=3).encode(x="marker:Q")
+        anchor_rule = (
+            alt.Chart(pd.DataFrame({"marker": [anchor_value]}))
+            .mark_rule(color="#d62728", size=3)
+            .encode(x="marker:Q")
+        )
 
-        median_rule = alt.Chart(
-            pd.DataFrame({"median": [stats.median]})
-        ).mark_rule(color="#444444", strokeDash=[6, 4], size=2).encode(x="median:Q")
+        median_rule = (
+            alt.Chart(pd.DataFrame({"median": [stats.median]}))
+            .mark_rule(color="#444444", strokeDash=[6, 4], size=2)
+            .encode(x="median:Q")
+        )
 
         return (base + anchor_rule + median_rule).properties(
             height=280, title="Peer distribution"
@@ -1257,15 +1351,22 @@ class CollegeExplorerSection(BaseSection):
         distance_data = self.data_manager.get_distance_data()
         institutions = getattr(self.data_manager, "institutions_df", None)
 
-        if distance_data is None or distance_data.empty or institutions is None or institutions.empty:
-            st.warning("Distance education institution lookup is unavailable because the required datasets are missing.")
+        if (
+            distance_data is None
+            or distance_data.empty
+            or institutions is None
+            or institutions.empty
+        ):
+            st.warning(
+                "Distance education institution lookup is unavailable because the required datasets are missing."
+            )
             return
 
         merged = distance_data.merge(
             institutions[["UnitID", "INSTITUTION", "STATE", "SECTOR"]],
             on="UnitID",
             how="left",
-            )
+        )
 
         def _resolve_column(prefix: str) -> str:
             candidates = [
@@ -1282,7 +1383,9 @@ class CollegeExplorerSection(BaseSection):
         name_col = _resolve_column("INSTITUTION")
         state_col = _resolve_column("STATE")
         merged["__inst_name"] = merged[name_col].fillna("")
-        merged["__inst_state"] = merged[state_col].fillna("") if state_col in merged.columns else ""
+        merged["__inst_state"] = (
+            merged[state_col].fillna("") if state_col in merged.columns else ""
+        )
 
         options = (
             merged[["__inst_name", "__inst_state"]]
@@ -1304,13 +1407,17 @@ class CollegeExplorerSection(BaseSection):
         )
 
         if not selected:
-            st.info("Select an institution to view the latest exclusive vs. hybrid enrollment breakdown.")
+            st.info(
+                "Select an institution to view the latest exclusive vs. hybrid enrollment breakdown."
+            )
             return
 
         institution_name = selected.split(" (")[0]
         selected_rows = merged[merged["__inst_name"] == institution_name]
         if selected_rows.empty:
-            st.warning("Unable to locate distance education data for the selected institution.")
+            st.warning(
+                "Unable to locate distance education data for the selected institution."
+            )
             return
 
         row = selected_rows.iloc[0]
@@ -1320,14 +1427,22 @@ class CollegeExplorerSection(BaseSection):
 
         try:
             total_2024 = int(float(total_2024)) if pd.notna(total_2024) else None
-            exclusive_2024 = int(float(exclusive_2024)) if pd.notna(exclusive_2024) else None
-            some_2024 = int(float(some_2024)) if pd.notna(some_2024) and some_2024 != '' else 0
+            exclusive_2024 = (
+                int(float(exclusive_2024)) if pd.notna(exclusive_2024) else None
+            )
+            some_2024 = (
+                int(float(some_2024)) if pd.notna(some_2024) and some_2024 != "" else 0
+            )
 
             if total_2024 is None or exclusive_2024 is None:
-                st.warning("Distance education figures for 2024 are unavailable for this institution.")
+                st.warning(
+                    "Distance education figures for 2024 are unavailable for this institution."
+                )
                 return
         except (ValueError, TypeError):
-            st.warning("Distance education figures for 2024 are unavailable for this institution.")
+            st.warning(
+                "Distance education figures for 2024 are unavailable for this institution."
+            )
             return
 
         oncampus_or_hybrid = max(total_2024 - exclusive_2024, 0)
@@ -1373,10 +1488,10 @@ class CollegeExplorerSection(BaseSection):
                 oncampus_series.append(None)
             else:
                 total_series.append(total_val)
-                exclusive_series.append(exclusive_val if exclusive_val is not None else 0)
-                oncampus_series.append(
-                    max(total_val - (exclusive_val or 0), 0)
+                exclusive_series.append(
+                    exclusive_val if exclusive_val is not None else 0
                 )
+                oncampus_series.append(max(total_val - (exclusive_val or 0), 0))
 
         plot_data = {
             "Year": years,
@@ -1386,10 +1501,9 @@ class CollegeExplorerSection(BaseSection):
         }
         chart_df = pd.DataFrame(plot_data).dropna()
         if not chart_df.empty:
-            long_df = (
-                chart_df.melt(id_vars="Year", var_name="Metric", value_name="Headcount")
-                .sort_values(["Metric", "Year"])
-            )
+            long_df = chart_df.melt(
+                id_vars="Year", var_name="Metric", value_name="Headcount"
+            ).sort_values(["Metric", "Year"])
             long_df["Year"] = long_df["Year"].astype(int)
             long_df["Headcount"] = long_df["Headcount"].astype(int)
             long_df["PrevHeadcount"] = long_df.groupby("Metric")["Headcount"].shift(1)
@@ -1475,12 +1589,17 @@ class CollegeExplorerSection(BaseSection):
             st.subheader("Enrollment Composition Over Time")
 
             # Filter to show only the two components (exclude Total Enrollment)
-            stacked_df = long_df[long_df["Metric"].isin(["Exclusive Distance", "On Campus / Hybrid"])].copy()
+            stacked_df = long_df[
+                long_df["Metric"].isin(["Exclusive Distance", "On Campus / Hybrid"])
+            ].copy()
 
             # Create color scale for just the two components
             component_color_scale = alt.Scale(
                 domain=["Exclusive Distance", "On Campus / Hybrid"],
-                range=["#ff7f0e", "#2ca02c"],  # Orange for Exclusive Distance, Green for On Campus/Hybrid
+                range=[
+                    "#ff7f0e",
+                    "#2ca02c",
+                ],  # Orange for Exclusive Distance, Green for On Campus/Hybrid
             )
 
             # Create stacked bar chart
@@ -1495,8 +1614,8 @@ class CollegeExplorerSection(BaseSection):
                             labelAngle=0,
                             labelFontSize=14,
                             titleFontSize=16,
-                            titleFontWeight="bold"
-                        )
+                            titleFontWeight="bold",
+                        ),
                     ),
                     y=alt.Y(
                         "Headcount:Q",
@@ -1506,8 +1625,8 @@ class CollegeExplorerSection(BaseSection):
                             format="~s",
                             labelFontSize=14,
                             titleFontSize=16,
-                            titleFontWeight="bold"
-                        )
+                            titleFontWeight="bold",
+                        ),
                     ),
                     color=alt.Color(
                         "Metric:N",
@@ -1517,8 +1636,8 @@ class CollegeExplorerSection(BaseSection):
                             orient="right",
                             titleFontSize=12,
                             labelFontSize=11,
-                            labelLimit=200
-                        )
+                            labelLimit=200,
+                        ),
                     ),
                     order=alt.Order("Headcount:Q", sort="descending"),
                     tooltip=[
@@ -1553,13 +1672,21 @@ class CollegeExplorerSection(BaseSection):
                 table,
                 width="stretch",
                 column_config={
-                    "Total": st.column_config.NumberColumn("Total", format="%,d", width="small"),
-                    "Exclusive Distance": st.column_config.NumberColumn("Exclusive Distance", format="%,d", width="small"),
-                    "On Campus / Hybrid": st.column_config.NumberColumn("On Campus / Hybrid", format="%,d", width="small"),
+                    "Total": st.column_config.NumberColumn(
+                        "Total", format="%,d", width="small"
+                    ),
+                    "Exclusive Distance": st.column_config.NumberColumn(
+                        "Exclusive Distance", format="%,d", width="small"
+                    ),
+                    "On Campus / Hybrid": st.column_config.NumberColumn(
+                        "On Campus / Hybrid", format="%,d", width="small"
+                    ),
                 },
             )
         else:
-            st.info("Historical distance education data is not available for this institution.")
+            st.info(
+                "Historical distance education data is not available for this institution."
+            )
 
     def get_available_charts(self) -> List[str]:
         """

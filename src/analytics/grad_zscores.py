@@ -92,7 +92,11 @@ def _prepare_year_frame(
         )
 
         merge_cols = ["unitid", "year", "ft_ug_headcount", "headcount_source"]
-        fallback_col = "fallback_headcount" if "fallback_headcount" in headcount_subset.columns else None
+        fallback_col = (
+            "fallback_headcount"
+            if "fallback_headcount" in headcount_subset.columns
+            else None
+        )
         if fallback_col:
             merge_cols.append(fallback_col)
 
@@ -184,14 +188,10 @@ def compute_peer_distribution(
     if mad == 0:
         peer_df["z_score_robust"] = np.nan
     else:
-        peer_df["z_score_robust"] = 0.6745 * (
-            peer_df["_calc_value"] - median
-        ) / mad
+        peer_df["z_score_robust"] = 0.6745 * (peer_df["_calc_value"] - median) / mad
 
     peer_df["percentile"] = (
-        peer_df[CANONICAL_VALUE_COLUMN]
-        .rank(method="average", pct=True)
-        .astype(float)
+        peer_df[CANONICAL_VALUE_COLUMN].rank(method="average", pct=True).astype(float)
         * 100
     )
 
@@ -237,22 +237,16 @@ def summarize_anchor(
         fallback_series=headcount_fallback,
     )
     min_headcount = stats.min_headcount
-    anchor_in_peer_group = bool(
-        anchor_row["ft_ug_headcount"].iloc[0] >= min_headcount
-    )
+    anchor_in_peer_group = bool(anchor_row["ft_ug_headcount"].iloc[0] >= min_headcount)
 
     anchor_value = float(anchor_row[CANONICAL_VALUE_COLUMN].iloc[0])
     calc_value = anchor_value
     if winsorize and not np.isnan(bounds[0]) and not np.isnan(bounds[1]):
         calc_value = float(np.clip(calc_value, bounds[0], bounds[1]))
 
-    z_score = (
-        (calc_value - stats.mean) / stats.std if stats.std > 0 else np.nan
-    )
+    z_score = (calc_value - stats.mean) / stats.std if stats.std > 0 else np.nan
     z_score_robust = (
-        0.6745 * (calc_value - stats.median) / stats.mad
-        if stats.mad > 0
-        else np.nan
+        0.6745 * (calc_value - stats.median) / stats.mad if stats.mad > 0 else np.nan
     )
 
     anchor_percentile = _percentile_from_distribution(
@@ -270,13 +264,13 @@ def summarize_anchor(
         instnm=str(anchor_row["instnm"].iloc[0]),
         year=year,
         grad_rate=anchor_value,
-        headcount=float(anchor_row["ft_ug_headcount"].iloc[0])
-        if pd.notna(anchor_row["ft_ug_headcount"].iloc[0])
-        else None,
+        headcount=(
+            float(anchor_row["ft_ug_headcount"].iloc[0])
+            if pd.notna(anchor_row["ft_ug_headcount"].iloc[0])
+            else None
+        ),
         z_score=float(z_score) if not np.isnan(z_score) else None,
-        z_score_robust=float(z_score_robust)
-        if not np.isnan(z_score_robust)
-        else None,
+        z_score_robust=float(z_score_robust) if not np.isnan(z_score_robust) else None,
         percentile=anchor_percentile,
         in_peer_group=anchor_in_peer_group,
         headcount_source=headcount_source,

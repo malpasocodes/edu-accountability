@@ -6,8 +6,12 @@ from typing import List
 
 import streamlit as st
 
-from src.charts.distance_top_enrollment_chart import render_distance_top_enrollment_chart
-from src.charts.distance_enrollment_trend_chart import render_distance_enrollment_trend_chart
+from src.charts.distance_top_enrollment_chart import (
+    render_distance_top_enrollment_chart,
+)
+from src.charts.distance_enrollment_trend_chart import (
+    render_distance_enrollment_trend_chart,
+)
 from src.charts.distance_de_trend_chart import render_distance_de_trend_chart
 from .base import BaseSection
 
@@ -31,18 +35,19 @@ class DistanceEducationSection(BaseSection):
                 </p>
             </div>
             """,
-            unsafe_allow_html=True
+            unsafe_allow_html=True,
         )
 
         # Key insight callout
-        st.info("**💡 Key Insight:** Distance education data reveals how institutions are adapting to online learning, showing enrollment patterns from the COVID-19 era through 2024 and which schools lead in online program delivery.")
+        st.info(
+            "**💡 Key Insight:** Distance education data reveals how institutions are adapting to online learning, showing enrollment patterns from the COVID-19 era through 2024 and which schools lead in online program delivery."
+        )
 
         st.markdown("")  # Spacing
 
         # What is this section
         st.markdown("### What is Distance Education Analysis?")
-        st.markdown(
-            """
+        st.markdown("""
             This section tracks **distance education enrollment** at colleges and universities across the United States.
             The data covers **2020-2024** and categorizes students into three groups:
 
@@ -52,19 +57,16 @@ class DistanceEducationSection(BaseSection):
 
             Understanding these patterns helps illuminate how higher education delivery has evolved, particularly
             during and after the COVID-19 pandemic, and which institutions are leading in online education.
-            """
-        )
+            """)
 
         st.divider()
 
         # Available analyses section
         st.markdown("### Three Ways to Explore Distance Education Data")
-        st.markdown(
-            """
+        st.markdown("""
             Use the **sidebar charts** to examine distance education patterns from different angles. Each analysis
             is available for both 4-year and 2-year institutions:
-            """
-        )
+            """)
 
         st.markdown("")  # Spacing
 
@@ -82,7 +84,7 @@ class DistanceEducationSection(BaseSection):
                     </div>
                 </div>
                 """,
-                unsafe_allow_html=True
+                unsafe_allow_html=True,
             )
 
         with col2:
@@ -96,7 +98,7 @@ class DistanceEducationSection(BaseSection):
                     </div>
                 </div>
                 """,
-                unsafe_allow_html=True
+                unsafe_allow_html=True,
             )
 
         with col3:
@@ -110,38 +112,34 @@ class DistanceEducationSection(BaseSection):
                     </div>
                 </div>
                 """,
-                unsafe_allow_html=True
+                unsafe_allow_html=True,
             )
 
         st.divider()
 
         # How to use section
         st.markdown("### How to Use This Tool")
-        st.markdown(
-            """
+        st.markdown("""
             **Start with Top 25 Total Enrollment** to see which institutions have the largest student bodies and how those students break down by distance education participation.
             Then explore the **Total Enrollment Trend** to see how overall student populations changed during the pandemic period for the top 10 largest institutions.
             Finally, use the **Exclusive Distance Education Trend** to track the specific growth of exclusively online programs for the top 10 institutions by DE enrollment.
 
             **Each chart includes tabs** at the top for 4-year and 2-year institutions, allowing you to compare
             patterns across different institutional types.
-            """
-        )
+            """)
 
         st.divider()
 
         # What to look for section
         st.markdown("### What the Data Shows")
-        st.markdown(
-            """
+        st.markdown("""
             Distance education data reveals important patterns about online learning adoption:
 
             - **High distance education enrollment** indicates institutional commitment to online delivery
             - **COVID-19 impact** is visible in 2020-2021 shifts toward online learning
             - **Post-pandemic patterns** show whether online enrollment sustained or returned to pre-pandemic levels
             - **Institutional differences** emerge between traditional colleges and online-focused institutions
-            """
-        )
+            """)
 
         st.divider()
 
@@ -158,11 +156,20 @@ class DistanceEducationSection(BaseSection):
         self.render_section_header("Distance Education", chart_name)
 
         # Handle chart routing (support both old and new labels for backward compatibility)
-        if chart_name in ["Top 25 Total Enrollment (Distance Education Breakdown)", "Top 25 Distance Education Enrollment"]:
+        if chart_name in [
+            "Top 25 Total Enrollment (Distance Education Breakdown)",
+            "Top 25 Distance Education Enrollment",
+        ]:
             self._render_distance_top_enrollment_with_tabs(chart_name)
-        elif chart_name in ["Total Enrollment Trend (Top 10 Institutions)", "Total Enrollment Trend"]:
+        elif chart_name in [
+            "Total Enrollment Trend (Top 10 Institutions)",
+            "Total Enrollment Trend",
+        ]:
             self._render_enrollment_trend_with_tabs(chart_name)
-        elif chart_name in ["Exclusive Distance Education Trend (Top 10 Institutions)", "Distance Education Trend"]:
+        elif chart_name in [
+            "Exclusive Distance Education Trend (Top 10 Institutions)",
+            "Distance Education Trend",
+        ]:
             self._render_de_trend_with_tabs(chart_name)
         else:
             st.error(f"Unknown chart: {chart_name}")
@@ -197,7 +204,7 @@ class DistanceEducationSection(BaseSection):
                 metadata,
                 top_n=25,
                 title=title,
-                year=2024  # Use most recent year
+                year=2024,  # Use most recent year
             )
         except Exception as e:
             st.error(f"Error rendering chart: {e}")
@@ -228,11 +235,7 @@ class DistanceEducationSection(BaseSection):
 
         try:
             render_distance_enrollment_trend_chart(
-                distance_data,
-                metadata,
-                title=title,
-                top_n=10,
-                anchor_year=2024
+                distance_data, metadata, title=title, top_n=10, anchor_year=2024
             )
         except Exception as e:
             st.error(f"Error rendering enrollment trend chart: {e}")
@@ -263,11 +266,7 @@ class DistanceEducationSection(BaseSection):
 
         try:
             render_distance_de_trend_chart(
-                distance_data,
-                metadata,
-                title=title,
-                top_n=10,
-                anchor_year=2024
+                distance_data, metadata, title=title, top_n=10, anchor_year=2024
             )
         except Exception as e:
             st.error(f"Error rendering DE trend chart: {e}")
@@ -275,7 +274,5 @@ class DistanceEducationSection(BaseSection):
     def get_available_charts(self) -> List[str]:
         """Get available charts for distance education section."""
         from src.config.constants import DISTANCE_OVERVIEW_LABEL, DISTANCE_CHARTS
-        return [
-            DISTANCE_OVERVIEW_LABEL,
-            *DISTANCE_CHARTS
-        ]
+
+        return [DISTANCE_OVERVIEW_LABEL, *DISTANCE_CHARTS]

@@ -65,7 +65,9 @@ class CollegeScorecardSection(BaseSection):
             st.error("Scorecard data is unavailable.")
             return None
         options = sorted(df["instnm"].dropna().unique())
-        selection = st.selectbox("Institution", ["Select an institution"] + options, index=0)
+        selection = st.selectbox(
+            "Institution", ["Select an institution"] + options, index=0
+        )
         if selection == "Select an institution":
             return None
         return selection
@@ -85,10 +87,16 @@ class CollegeScorecardSection(BaseSection):
             .mark_line(point=True)
             .encode(
                 x=alt.X("year:O", title="Year"),
-                y=alt.Y("median_debt_completers:Q", title="Median Debt (Completers)", scale=alt.Scale(zero=True)),
+                y=alt.Y(
+                    "median_debt_completers:Q",
+                    title="Median Debt (Completers)",
+                    scale=alt.Scale(zero=True),
+                ),
                 tooltip=[
                     alt.Tooltip("year:O", title="Year"),
-                    alt.Tooltip("median_debt_completers:Q", title="Median Debt", format="$,.0f"),
+                    alt.Tooltip(
+                        "median_debt_completers:Q", title="Median Debt", format="$,.0f"
+                    ),
                     alt.Tooltip("control:N", title="Control"),
                     alt.Tooltip("level:N", title="Level"),
                 ],
@@ -137,8 +145,13 @@ class CollegeScorecardSection(BaseSection):
             st.warning("No data for selected year.")
             return
         melted = year_df.melt(
-            id_vars=["unitid", "instnm", "year"], value_vars=repay_cols, var_name="status", value_name="percent"
-        ).dropna(subset=["percent"])  # drop empty categories to avoid blank chart
+            id_vars=["unitid", "instnm", "year"],
+            value_vars=repay_cols,
+            var_name="status",
+            value_name="percent",
+        ).dropna(
+            subset=["percent"]
+        )  # drop empty categories to avoid blank chart
         # Pretty labels
         label_map = {
             "repay_3yr_forbearance": "Forbearance",
@@ -163,7 +176,9 @@ class CollegeScorecardSection(BaseSection):
             "Paid in Full",
             "Discharged",
         ]
-        melted["status_label"] = pd.Categorical(melted["status_label"], categories=order, ordered=True)
+        melted["status_label"] = pd.Categorical(
+            melted["status_label"], categories=order, ordered=True
+        )
 
         chart = (
             alt.Chart(melted)
@@ -195,24 +210,33 @@ class CollegeScorecardSection(BaseSection):
         consolidated = (
             melted.assign(group=melted["status_label"].map(consolidation_map))
             .dropna(subset=["group"])
-            .groupby("group", as_index=False)["percent"].sum()
+            .groupby("group", as_index=False)["percent"]
+            .sum()
         )
         if not consolidated.empty:
-            color_scale = alt.Scale(domain=["Green", "Yellow", "Red"], range=["#2ca02c", "#f2c037", "#d62728"])
+            color_scale = alt.Scale(
+                domain=["Green", "Yellow", "Red"],
+                range=["#2ca02c", "#f2c037", "#d62728"],
+            )
             summary_chart = (
                 alt.Chart(consolidated)
                 .mark_bar()
                 .encode(
                     x=alt.X("group:N", title="Consolidated Status"),
-                    y=alt.Y("percent:Q", title="Percent", scale=alt.Scale(domain=[0, 100])),
+                    y=alt.Y(
+                        "percent:Q", title="Percent", scale=alt.Scale(domain=[0, 100])
+                    ),
                     color=alt.Color("group:N", scale=color_scale, legend=None),
-                    tooltip=[alt.Tooltip("group:N", title="Group"), alt.Tooltip("percent:Q", title="Percent", format=".1f")],
+                    tooltip=[
+                        alt.Tooltip("group:N", title="Group"),
+                        alt.Tooltip("percent:Q", title="Percent", format=".1f"),
+                    ],
                 )
                 .properties(title="Traffic-light summary", height=220)
             )
-            summary_text = summary_chart.mark_text(dy=-10, color="#333", fontWeight="bold").encode(
-                text=alt.Text("percent:Q", format=".1f")
-            )
+            summary_text = summary_chart.mark_text(
+                dy=-10, color="#333", fontWeight="bold"
+            ).encode(text=alt.Text("percent:Q", format=".1f"))
             st.altair_chart(summary_chart + summary_text, use_container_width=True)
             descriptions = {
                 "Green": "Loans are paid in full, discharged, or actively amortizing (making progress).",
@@ -221,7 +245,9 @@ class CollegeScorecardSection(BaseSection):
             }
             st.markdown(
                 "\n".join(
-                    f"**{group}:** {descriptions[group]}" for group in ["Green", "Yellow", "Red"] if group in consolidated["group"].values
+                    f"**{group}:** {descriptions[group]}"
+                    for group in ["Green", "Yellow", "Red"]
+                    if group in consolidated["group"].values
                 )
             )
 
@@ -246,7 +272,9 @@ class CollegeScorecardSection(BaseSection):
             ">5,000": 5000,
             ">10,000": 10000,
         }
-        selected_filter = st.selectbox("Minimum enrollment", list(enrollment_options.keys()), index=0)
+        selected_filter = st.selectbox(
+            "Minimum enrollment", list(enrollment_options.keys()), index=0
+        )
         min_enrollment = enrollment_options[selected_filter]
         view = view[view["enrollment"].fillna(0) >= min_enrollment]
         if view.empty:
@@ -266,7 +294,9 @@ class CollegeScorecardSection(BaseSection):
         }[status_choice]
         metric_label = f"{status_choice} Share (%)"
 
-        view = view.dropna(subset=["median_debt_completers", status_column, "enrollment"])
+        view = view.dropna(
+            subset=["median_debt_completers", status_column, "enrollment"]
+        )
         if view.empty:
             st.warning("No data available after filtering.")
             return
@@ -275,17 +305,30 @@ class CollegeScorecardSection(BaseSection):
             alt.Chart(view)
             .mark_circle(opacity=0.8)
             .encode(
-                x=alt.X("median_debt_completers:Q", title="Median Debt (Completers)", scale=alt.Scale(zero=False)),
-                y=alt.Y(f"{status_column}:Q", title=metric_label, scale=alt.Scale(domain=[0, 100])),
+                x=alt.X(
+                    "median_debt_completers:Q",
+                    title="Median Debt (Completers)",
+                    scale=alt.Scale(zero=False),
+                ),
+                y=alt.Y(
+                    f"{status_column}:Q",
+                    title=metric_label,
+                    scale=alt.Scale(domain=[0, 100]),
+                ),
                 size=alt.Size(
                     "enrollment:Q",
                     title="Enrollment",
-                    scale=alt.Scale(domain=[view["enrollment"].min(), view["enrollment"].max()], range=[40, 800]),
+                    scale=alt.Scale(
+                        domain=[view["enrollment"].min(), view["enrollment"].max()],
+                        range=[40, 800],
+                    ),
                 ),
                 color=alt.Color("sector:N", title="Sector"),
                 tooltip=[
                     alt.Tooltip("instnm:N", title="Institution"),
-                    alt.Tooltip("median_debt_completers:Q", title="Median Debt", format="$,.0f"),
+                    alt.Tooltip(
+                        "median_debt_completers:Q", title="Median Debt", format="$,.0f"
+                    ),
                     alt.Tooltip(f"{status_column}:Q", title=metric_label, format=".1f"),
                     alt.Tooltip("enrollment:Q", title="Enrollment", format=",.0f"),
                     alt.Tooltip("sector:N", title="Sector"),

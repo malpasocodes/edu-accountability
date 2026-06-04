@@ -103,11 +103,21 @@ def main() -> None:
         print("\nAll IPEDS SFA files present and valid.")
         print("Run the canonical pipeline to process:")
         print("  python -m src.pipelines.canonical.ipeds_sfa.extraction --dataset pell")
-        print("  python -m src.pipelines.canonical.ipeds_sfa.extraction --dataset loans")
-        print("  python -m src.pipelines.canonical.ipeds_sfa.enrich_metadata --dataset pell")
-        print("  python -m src.pipelines.canonical.ipeds_sfa.enrich_metadata --dataset loans")
-        print("  python -m src.pipelines.canonical.ipeds_sfa.build_outputs --dataset pell")
-        print("  python -m src.pipelines.canonical.ipeds_sfa.build_outputs --dataset loans")
+        print(
+            "  python -m src.pipelines.canonical.ipeds_sfa.extraction --dataset loans"
+        )
+        print(
+            "  python -m src.pipelines.canonical.ipeds_sfa.enrich_metadata --dataset pell"
+        )
+        print(
+            "  python -m src.pipelines.canonical.ipeds_sfa.enrich_metadata --dataset loans"
+        )
+        print(
+            "  python -m src.pipelines.canonical.ipeds_sfa.build_outputs --dataset pell"
+        )
+        print(
+            "  python -m src.pipelines.canonical.ipeds_sfa.build_outputs --dataset loans"
+        )
 
 
 if __name__ == "__main__":

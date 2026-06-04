@@ -16,7 +16,6 @@ from src.pipelines.canonical.ipeds_grad.enrich_metadata import (
     SECTOR_MAP,
 )
 
-
 SALARY_PATTERN = re.compile(
     r"\((?P<source_flag>DRVHR(?P<year>\d{4}))(?P<revision>_RV)?\)",
     re.IGNORECASE,
@@ -58,7 +57,9 @@ class IPEDSSalaryExtractor:
 
     def _wide_to_long(self, frame: pd.DataFrame) -> pd.DataFrame:
         id_vars = ["UnitID", "Institution Name"]
-        value_columns = [col for col in frame.columns if col not in id_vars and col.strip()]
+        value_columns = [
+            col for col in frame.columns if col not in id_vars and col.strip()
+        ]
 
         column_meta = self._build_column_metadata(value_columns)
         if not column_meta:
@@ -85,9 +86,13 @@ class IPEDSSalaryExtractor:
         pre_drop = len(melted)
         melted = melted.dropna(subset=[value_col])
         if pre_drop - len(melted):
-            print(f"  Dropped {pre_drop - len(melted)} rows with null {value_col} ({len(melted)} remaining)")
+            print(
+                f"  Dropped {pre_drop - len(melted)} rows with null {value_col} ({len(melted)} remaining)"
+            )
 
-        melted = melted.rename(columns={"UnitID": "unitid", "Institution Name": "instnm"})
+        melted = melted.rename(
+            columns={"UnitID": "unitid", "Institution Name": "instnm"}
+        )
         melted["unitid"] = melted["unitid"].astype("Int64")
         melted["instnm"] = melted["instnm"].astype("string")
         melted[value_col] = melted[value_col].astype("float32")

@@ -27,12 +27,16 @@ def classify_yoy_direction(pct_change: pd.Series) -> pd.Series:
     Returns:
         Categorical Series with values "Decrease", "Same", or "Increase".
     """
-    return pd.cut(
-        pct_change,
-        bins=[-float("inf"), -YOY_PCT_THRESHOLD, YOY_PCT_THRESHOLD, float("inf")],
-        labels=["Decrease", "Same", "Increase"],
-        include_lowest=True,
-    ).fillna("Same").astype(str)
+    return (
+        pd.cut(
+            pct_change,
+            bins=[-float("inf"), -YOY_PCT_THRESHOLD, YOY_PCT_THRESHOLD, float("inf")],
+            labels=["Decrease", "Same", "Increase"],
+            include_lowest=True,
+        )
+        .fillna("Same")
+        .astype(str)
+    )
 
 
 def _identify_year_columns(columns: Iterable[str]) -> List[tuple[int, str]]:

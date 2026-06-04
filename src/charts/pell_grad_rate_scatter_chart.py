@@ -10,10 +10,9 @@ import streamlit as st
 
 from src.ui.renderers import render_altair_chart, render_dataframe
 
-
 SECTOR_COLOR_SCALE = alt.Scale(
     domain=["Public", "Private, not-for-profit", "Private, for-profit", "Unknown"],
-    range=["#2ca02c", "#9467bd", "#1f77b4", "#7f7f7f"]
+    range=["#2ca02c", "#9467bd", "#1f77b4", "#7f7f7f"],
 )
 
 
@@ -48,12 +47,16 @@ def render_pell_grad_rate_scatter(
     working["PellDollarsBillions"] = working["PellDollars"] / 1_000_000_000
 
     # Ensure Sector column exists and handle missing values
-    working["Sector"] = working.get("Sector", "Unknown").fillna("Unknown").replace("", "Unknown")
+    working["Sector"] = (
+        working.get("Sector", "Unknown").fillna("Unknown").replace("", "Unknown")
+    )
     working["Institution"] = working.get("Institution", "")
     working["State"] = working.get("State", "")
 
     # Filter for valid numeric data
-    filtered = working.dropna(subset=["PellGraduationRate", "PellDollarsBillions", "Enrollment"])
+    filtered = working.dropna(
+        subset=["PellGraduationRate", "PellDollarsBillions", "Enrollment"]
+    )
     filtered = filtered[filtered["Enrollment"] > 0]
 
     if filtered.empty:
@@ -78,11 +81,7 @@ def render_pell_grad_rate_scatter(
                 title="Pell Student Graduation Rate (%)",
                 scale=alt.Scale(domain=[0, 100]),
             ),
-            color=alt.Color(
-                "Sector:N",
-                title="Sector",
-                scale=SECTOR_COLOR_SCALE
-            ),
+            color=alt.Color("Sector:N", title="Sector", scale=SECTOR_COLOR_SCALE),
             size=alt.Size(
                 "Enrollment:Q",
                 title="Enrollment",
@@ -90,8 +89,16 @@ def render_pell_grad_rate_scatter(
             ),
             tooltip=[
                 alt.Tooltip("Institution:N", title="Institution"),
-                alt.Tooltip("PellGraduationRate:Q", title="Pell Graduation Rate (%)", format=".1f"),
-                alt.Tooltip("PellDollarsBillions:Q", title="Total Pell Dollars (Billions)", format="$,.2f"),
+                alt.Tooltip(
+                    "PellGraduationRate:Q",
+                    title="Pell Graduation Rate (%)",
+                    format=".1f",
+                ),
+                alt.Tooltip(
+                    "PellDollarsBillions:Q",
+                    title="Total Pell Dollars (Billions)",
+                    format="$,.2f",
+                ),
                 alt.Tooltip("Enrollment:Q", title="Enrollment", format=","),
                 alt.Tooltip("Sector:N", title="Sector"),
                 alt.Tooltip("State:N", title="State"),

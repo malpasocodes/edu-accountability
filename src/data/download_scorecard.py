@@ -16,24 +16,21 @@ from typing import Optional
 
 import pandas as pd
 
-
 # College Scorecard data URL (most recent institution-level data)
 SCORECARD_URL = "https://ed-public-download.app.cloud.gov/downloads/Most-Recent-Cohorts-Institution.zip"
 
 # Fields to extract
 FIELDS_TO_EXTRACT = [
-    "UNITID",              # Institution ID (links to IPEDS)
-    "INSTNM",              # Institution name
-    "STABBR",              # State abbreviation
-    "MD_EARN_WNE_P10",     # Median earnings 10 years after entry
-    "MD_EARN_WNE_P6",      # Median earnings 6 years after entry (backup)
+    "UNITID",  # Institution ID (links to IPEDS)
+    "INSTNM",  # Institution name
+    "STABBR",  # State abbreviation
+    "MD_EARN_WNE_P10",  # Median earnings 10 years after entry
+    "MD_EARN_WNE_P6",  # Median earnings 6 years after entry (backup)
 ]
 
 
 def download_scorecard_data(
-    output_dir: Path,
-    url: str = SCORECARD_URL,
-    force: bool = False
+    output_dir: Path, url: str = SCORECARD_URL, force: bool = False
 ) -> Path:
     """
     Download College Scorecard ZIP file.
@@ -81,9 +78,9 @@ def extract_scorecard_csv(zip_path: Path, output_dir: Path) -> Optional[Path]:
     print("\nExtracting CSV from ZIP...")
 
     try:
-        with zipfile.ZipFile(zip_path, 'r') as zip_ref:
+        with zipfile.ZipFile(zip_path, "r") as zip_ref:
             # Find the CSV file (usually Most-Recent-Cohorts-Institution.csv)
-            csv_files = [f for f in zip_ref.namelist() if f.endswith('.csv')]
+            csv_files = [f for f in zip_ref.namelist() if f.endswith(".csv")]
 
             if not csv_files:
                 print("✗ No CSV files found in ZIP archive")
@@ -108,9 +105,7 @@ def extract_scorecard_csv(zip_path: Path, output_dir: Path) -> Optional[Path]:
 
 
 def process_scorecard_data(
-    csv_path: Path,
-    output_path: Path,
-    fields: list[str] = FIELDS_TO_EXTRACT
+    csv_path: Path, output_path: Path, fields: list[str] = FIELDS_TO_EXTRACT
 ) -> pd.DataFrame:
     """
     Load full Scorecard CSV and extract only needed fields.
@@ -138,12 +133,14 @@ def process_scorecard_data(
         earnings_cols = ["MD_EARN_WNE_P10", "MD_EARN_WNE_P6"]
         for col in earnings_cols:
             if col in df.columns:
-                df[col] = pd.to_numeric(df[col], errors='coerce')
+                df[col] = pd.to_numeric(df[col], errors="coerce")
 
         # Check data availability
         has_10yr = df["MD_EARN_WNE_P10"].notna().sum()
         has_6yr = df["MD_EARN_WNE_P6"].notna().sum()
-        has_either = (df["MD_EARN_WNE_P10"].notna() | df["MD_EARN_WNE_P6"].notna()).sum()
+        has_either = (
+            df["MD_EARN_WNE_P10"].notna() | df["MD_EARN_WNE_P6"].notna()
+        ).sum()
 
         print("\nData availability:")
         print(f"  10-year earnings: {has_10yr:,} ({has_10yr/len(df)*100:.1f}%)")
@@ -226,7 +223,7 @@ version: "1.0"
 """
 
     metadata_path = output_dir / "metadata.yaml"
-    with open(metadata_path, 'w') as f:
+    with open(metadata_path, "w") as f:
         f.write(metadata_content)
 
     print(f"✓ Created metadata: {metadata_path}")
@@ -259,7 +256,7 @@ def main():
 
     # Step 5: Clean up (optional - remove full CSV to save space)
     cleanup = input("\nDelete full Scorecard CSV to save space? (y/n): ").lower()
-    if cleanup == 'y':
+    if cleanup == "y":
         csv_path.unlink()
         zip_path.unlink()
         print(f"✓ Deleted: {csv_path}")

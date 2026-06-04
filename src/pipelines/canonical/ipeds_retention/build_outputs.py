@@ -94,10 +94,9 @@ class RetentionOutputBuilder:
     @staticmethod
     def _git_sha() -> str:
         try:
-            return (
-                subprocess.check_output(["git", "rev-parse", "HEAD"], text=True)
-                .strip()
-            )
+            return subprocess.check_output(
+                ["git", "rev-parse", "HEAD"], text=True
+            ).strip()
         except Exception:
             return "unknown"
 

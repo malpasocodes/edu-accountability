@@ -34,8 +34,16 @@ PELL_URL = "https://studentaid.gov/sites/default/files/fsawg/datacenter/library/
 LOAN_URL = "https://studentaid.gov/sites/default/files/fsawg/datacenter/library/LoanBySchool.csv"
 
 FILES = [
-    {"url": PELL_URL, "filename": "pelltotals.csv", "label": "Pell Grant disbursements"},
-    {"url": LOAN_URL, "filename": "loantotals.csv", "label": "Federal Loan disbursements"},
+    {
+        "url": PELL_URL,
+        "filename": "pelltotals.csv",
+        "label": "Pell Grant disbursements",
+    },
+    {
+        "url": LOAN_URL,
+        "filename": "loantotals.csv",
+        "label": "Federal Loan disbursements",
+    },
 ]
 
 MANUAL_INSTRUCTIONS = """
@@ -63,7 +71,11 @@ def _detect_years(path: Path) -> list[int]:
     """Read the header of a CSV and return sorted list of detected years."""
     with path.open(encoding="utf-8") as fh:
         header = fh.readline()
-    return sorted(int(m.group(1)) for col in header.split(",") if (m := YR_PATTERN.match(col.strip())))
+    return sorted(
+        int(m.group(1))
+        for col in header.split(",")
+        if (m := YR_PATTERN.match(col.strip()))
+    )
 
 
 def validate_files() -> bool:
@@ -161,8 +173,16 @@ def main(*, force: bool = False, validate_only: bool = False) -> None:
 if __name__ == "__main__":
     import argparse
 
-    parser = argparse.ArgumentParser(description="Fetch and validate FSA disbursement data.")
-    parser.add_argument("--force", action="store_true", help="Re-download even if files exist")
-    parser.add_argument("--validate", action="store_true", help="Validate existing files only (no download)")
+    parser = argparse.ArgumentParser(
+        description="Fetch and validate FSA disbursement data."
+    )
+    parser.add_argument(
+        "--force", action="store_true", help="Re-download even if files exist"
+    )
+    parser.add_argument(
+        "--validate",
+        action="store_true",
+        help="Validate existing files only (no download)",
+    )
     args = parser.parse_args()
     main(force=args.force, validate_only=args.validate)

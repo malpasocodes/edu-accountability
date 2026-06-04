@@ -70,7 +70,9 @@ class ScorecardBuilder:
         latest.to_parquet(self.config.latest_parquet, index=False)
         summary.to_parquet(self.config.summary_parquet, index=False)
 
-    def _write_metadata(self, long_df: pd.DataFrame, latest: pd.DataFrame, summary: pd.DataFrame) -> None:
+    def _write_metadata(
+        self, long_df: pd.DataFrame, latest: pd.DataFrame, summary: pd.DataFrame
+    ) -> None:
         metadata = {
             "build_ts": datetime.now(timezone.utc).isoformat(),
             "source_file": str(self.config.long_parquet),
@@ -93,17 +95,23 @@ def main() -> None:
     parser.add_argument(
         "--long-parquet",
         type=Path,
-        default=Path("data/processed/2023/canonical/scorecard_debt_repayment_long.parquet"),
+        default=Path(
+            "data/processed/2023/canonical/scorecard_debt_repayment_long.parquet"
+        ),
     )
     parser.add_argument(
         "--latest-parquet",
         type=Path,
-        default=Path("data/processed/2023/canonical/scorecard_debt_repayment_latest_by_inst.parquet"),
+        default=Path(
+            "data/processed/2023/canonical/scorecard_debt_repayment_latest_by_inst.parquet"
+        ),
     )
     parser.add_argument(
         "--summary-parquet",
         type=Path,
-        default=Path("data/processed/2023/canonical/scorecard_debt_repayment_summary_by_year.parquet"),
+        default=Path(
+            "data/processed/2023/canonical/scorecard_debt_repayment_summary_by_year.parquet"
+        ),
     )
     parser.add_argument(
         "--metadata-json",

@@ -159,7 +159,11 @@ def _build_rows(sector_filter: Sequence[str]) -> List[List[object]]:
     if dropped:
         logger.info(
             "Dropped %d of %d institutions (missing cost=%d, missing grad=%d, missing both=%d)",
-            dropped, len(institutions), missing_cost, missing_grad, missing_both,
+            dropped,
+            len(institutions),
+            missing_cost,
+            missing_grad,
+            missing_both,
         )
 
     rows.sort(key=lambda item: (item[1].lower(), item[0]))
@@ -193,9 +197,7 @@ def main() -> None:
     for name, config in SEGMENTS.items():
         rows = _build_rows(config["sectors"])
         if not rows:
-            raise SystemExit(
-                f"No qualifying institutions found for segment '{name}'."
-            )
+            raise SystemExit(f"No qualifying institutions found for segment '{name}'.")
         write_dataset(rows, config["output"])
         logger.info("Wrote %d rows to %s", len(rows), config["output"])
 

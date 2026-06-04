@@ -11,7 +11,6 @@ from typing import Iterable
 
 import pandas as pd
 
-
 SOURCE_PATTERN = re.compile(r"\(SFA(\d{2})(\d{2})(?:_RV)?\)")
 
 
@@ -59,18 +58,28 @@ class SFAPercentExtractor:
         )
 
         meta_df = pd.DataFrame.from_records(list(column_meta.values()))
-        melted = melted.merge(meta_df, left_on="_original_column", right_on="column_name", how="left")
+        melted = melted.merge(
+            meta_df, left_on="_original_column", right_on="column_name", how="left"
+        )
 
-        melted[self.config.value_column] = pd.to_numeric(melted[self.config.value_column], errors="coerce")
+        melted[self.config.value_column] = pd.to_numeric(
+            melted[self.config.value_column], errors="coerce"
+        )
         pre_drop = len(melted)
         melted = melted.dropna(subset=[self.config.value_column])
         if pre_drop - len(melted):
-            print(f"  Dropped {pre_drop - len(melted)} rows with null {self.config.value_column} ({len(melted)} remaining)")
+            print(
+                f"  Dropped {pre_drop - len(melted)} rows with null {self.config.value_column} ({len(melted)} remaining)"
+            )
 
-        melted = melted.rename(columns={"UnitID": "unitid", "Institution Name": "instnm"})
+        melted = melted.rename(
+            columns={"UnitID": "unitid", "Institution Name": "instnm"}
+        )
         melted["unitid"] = melted["unitid"].astype("Int64")
         melted["year"] = melted["year"].astype("int16")
-        melted[self.config.value_column] = melted[self.config.value_column].astype("float32")
+        melted[self.config.value_column] = melted[self.config.value_column].astype(
+            "float32"
+        )
 
         melted["cohort_reference"] = melted.apply(
             lambda row: f"{row['aid_year']} {self.config.metric_label}", axis=1
@@ -127,7 +136,9 @@ class SFAPercentExtractor:
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="Extract IPEDS SFA percentage datasets.")
+    parser = argparse.ArgumentParser(
+        description="Extract IPEDS SFA percentage datasets."
+    )
     parser.add_argument(
         "--dataset",
         choices=["pell", "loans"],
@@ -140,13 +151,17 @@ def main() -> None:
         "pell": SFAPercentExtractionConfig(
             wide_csv=Path("data/raw/ipeds/percent_pell_grants.csv"),
             value_column="percent_pell",
-            output_path=Path("data/processed/2023/canonical/ipeds_percent_pell_long.parquet"),
+            output_path=Path(
+                "data/processed/2023/canonical/ipeds_percent_pell_long.parquet"
+            ),
             metric_label="Pell",
         ),
         "loans": SFAPercentExtractionConfig(
             wide_csv=Path("data/raw/ipeds/percent_federal_loans.csv"),
             value_column="percent_loans",
-            output_path=Path("data/processed/2023/canonical/ipeds_percent_loans_long.parquet"),
+            output_path=Path(
+                "data/processed/2023/canonical/ipeds_percent_loans_long.parquet"
+            ),
             metric_label="Loans",
         ),
     }

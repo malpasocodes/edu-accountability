@@ -11,7 +11,7 @@ from .base import BaseSection
 
 class OverviewSection(BaseSection):
     """Handles the overview/landing page section."""
-    
+
     def render_overview(self) -> None:
         """Render the overview page content."""
         # Hero Section with enhanced styling
@@ -26,13 +26,12 @@ class OverviewSection(BaseSection):
                 </p>
             </div>
             """,
-            unsafe_allow_html=True
+            unsafe_allow_html=True,
         )
-        
+
         # Mission Section
         st.subheader("Our Mission")
-        st.markdown(
-            """
+        st.markdown("""
             The EDU Accountability Lab delivers independent, data-driven analysis of
             higher education with a focus on accountability, affordability, and outcomes.
             Our audience includes policymakers, researchers, and taxpayers who seek greater transparency
@@ -40,26 +39,24 @@ class OverviewSection(BaseSection):
             institutions, programs, metrics, or policies. Our goal is to provide clear and well-documented
             methods that support policy discussions, strengthen institutional accountability,
             and improve public understanding of the value of higher education.
-            """
-        )
-        
+            """)
+
         # Current Focus Areas
         st.subheader("Current Focus Areas")
 
-        st.markdown(
-            """
+        st.markdown("""
             - **Metrics for Accountability**: We are refining measures that capture affordability, completion, and post-graduation outcomes. These metrics are designed to make comparisons across institutions more transparent, reproducible, and useful for policymakers and researchers.
 
             - **Government Funding Analysis**: We are analyzing the flow of federal support—especially through student loans and Pell Grants—to better understand how public resources shape affordability and access. Tracking these funding streams alongside institutional outcomes provides a fuller picture of higher education's value and accountability.
 
             - **Equity and Subgroup Outcomes**: We are examining how affordability, funding, and outcomes vary across student subgroups (e.g., income levels, race/ethnicity, first-generation status). Highlighting these differential impacts provides a more complete understanding of equity in higher education.
-            """
-        )
-        
+            """)
+
         # Important Notice section - display full disclaimer
         from src.ui.disclaimer import render_disclaimer_summary
+
         render_disclaimer_summary()
-        
+
         # Interactive Navigation Cards
         st.subheader("Explore the Dashboard")
         st.markdown("**Choose a section to begin your analysis:**")
@@ -101,7 +98,9 @@ class OverviewSection(BaseSection):
 
         for row_start in range(0, len(card_definitions), 3):
             columns = st.columns(3)
-            for column, card in zip(columns, card_definitions[row_start : row_start + 3]):
+            for column, card in zip(
+                columns, card_definitions[row_start : row_start + 3]
+            ):
                 with column:
                     with st.container():
                         card_html = f"""
@@ -117,13 +116,11 @@ class OverviewSection(BaseSection):
 
         # Contact section at bottom
         st.markdown("---")
-        st.markdown(
-            """
+        st.markdown("""
             📬 **Contact**
             For questions, data verification, or to report a potential inaccuracy, please email **[support@edu-accountability.com](mailto:support@edu-accountability.com)**.
             Your feedback helps us improve the clarity and reliability of this work.
-            """
-        )
+            """)
 
     def render_chart(self, chart_name: str) -> None:
         """
@@ -135,11 +132,11 @@ class OverviewSection(BaseSection):
         # chart_name is unused since overview has no charts
         _ = chart_name
         self.render_overview()
-    
+
     def get_available_charts(self) -> List[str]:
         """
         Get available charts for overview section.
-        
+
         Returns:
             Empty list as overview has no charts
         """

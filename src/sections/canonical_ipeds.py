@@ -195,9 +195,7 @@ class CanonicalIPEDSSection(BaseSection):
 
         canonical_df = getattr(self.data_manager, "canonical_grad_df", pd.DataFrame())
         headcount_df = getattr(self.data_manager, "headcount_df", pd.DataFrame())
-        headcount_fallback = getattr(
-            self.data_manager, "headcount_fallback_map", None
-        )
+        headcount_fallback = getattr(self.data_manager, "headcount_fallback_map", None)
 
         if canonical_df.empty:
             st.warning("Canonical graduation data is not available.")
@@ -271,7 +269,12 @@ class CanonicalIPEDSSection(BaseSection):
                 x=alt.X(
                     "z_score:Q",
                     title="Z-score",
-                    scale=alt.Scale(domain=[peer_df["z_score"].min() - 0.5, peer_df["z_score"].max() + 0.5]),
+                    scale=alt.Scale(
+                        domain=[
+                            peer_df["z_score"].min() - 0.5,
+                            peer_df["z_score"].max() + 0.5,
+                        ]
+                    ),
                 ),
                 y=alt.Y(
                     "grad_rate_150:Q",
@@ -291,9 +294,11 @@ class CanonicalIPEDSSection(BaseSection):
             .properties(height=400, title="Graduation rate distribution by z-score")
         )
 
-        dividers = alt.Chart(pd.DataFrame({"z": [-1, 0, 1]})).mark_rule(
-            color="#555555", strokeDash=[6, 4]
-        ).encode(x="z:Q")
+        dividers = (
+            alt.Chart(pd.DataFrame({"z": [-1, 0, 1]}))
+            .mark_rule(color="#555555", strokeDash=[6, 4])
+            .encode(x="z:Q")
+        )
 
         st.altair_chart((chart + dividers), use_container_width=True)
 
@@ -312,7 +317,10 @@ class CanonicalIPEDSSection(BaseSection):
             subset = (
                 peer_df[peer_df["quadrant"] == label]
                 .sort_values("z_score", ascending=False)
-                .loc[:, ["instnm", "grad_rate_150", "z_score", "sector", "ft_ug_headcount"]]
+                .loc[
+                    :,
+                    ["instnm", "grad_rate_150", "z_score", "sector", "ft_ug_headcount"],
+                ]
             )
             subset.rename(
                 columns={

@@ -32,7 +32,9 @@ class DistanceTopEnrollmentResult:
     chart_data: pd.DataFrame
 
 
-def _identify_enrollment_columns(columns: Iterable[str]) -> tuple[List[tuple[int, str]], List[tuple[int, str]], List[tuple[int, str]]]:
+def _identify_enrollment_columns(
+    columns: Iterable[str],
+) -> tuple[List[tuple[int, str]], List[tuple[int, str]], List[tuple[int, str]]]:
     """Identify total, exclusive DE, and some DE enrollment columns."""
     total_columns: List[tuple[int, str]] = []
     de_columns: List[tuple[int, str]] = []
@@ -69,23 +71,26 @@ def _identify_enrollment_columns(columns: Iterable[str]) -> tuple[List[tuple[int
 
 
 def _prepare_distance_enrollment_dataframe(
-    distance_df: pd.DataFrame,
-    metadata_df: pd.DataFrame,
-    top_n: int,
-    year: int = 2024
+    distance_df: pd.DataFrame, metadata_df: pd.DataFrame, top_n: int, year: int = 2024
 ) -> DistanceTopEnrollmentResult:
     """Prepare data for distance education enrollment chart."""
     if distance_df.empty:
         return DistanceTopEnrollmentResult(period_label=None, chart_data=distance_df)
 
-    total_columns, de_columns, sde_columns = _identify_enrollment_columns(distance_df.columns)
+    total_columns, de_columns, sde_columns = _identify_enrollment_columns(
+        distance_df.columns
+    )
 
     if not total_columns:
-        raise ValueError("No total enrollment columns found in distance education dataset.")
+        raise ValueError(
+            "No total enrollment columns found in distance education dataset."
+        )
 
     working = distance_df.copy()
     if "UnitID" not in working.columns:
-        raise ValueError("Distance education dataset missing 'UnitID' column required for charting.")
+        raise ValueError(
+            "Distance education dataset missing 'UnitID' column required for charting."
+        )
 
     # Find the specific year columns we need
     total_col = None
@@ -122,7 +127,9 @@ def _prepare_distance_enrollment_dataframe(
     # Prepare metadata
     metadata = metadata_df.copy()
     required_metadata = {"UnitID", "institution", "sector"}
-    missing_metadata = [column for column in required_metadata if column not in metadata.columns]
+    missing_metadata = [
+        column for column in required_metadata if column not in metadata.columns
+    ]
     if missing_metadata:
         raise ValueError(
             "Cannot merge distance education dataset with metadata. Missing columns: "
@@ -165,45 +172,44 @@ def _prepare_distance_enrollment_dataframe(
         in_person = max(0, total_enrollment - exclusive_de - some_de)
 
         # Add rows for each enrollment type
-        chart_data.extend([
-            {
-                "Institution": institution,
-                "Sector": sector,
-                "UnitID": unit_id,
-                "Enrollment_Type": "Exclusively Distance Education",
-                "Enrollment": exclusive_de,
-                "Total_Enrollment": total_enrollment,
-                "Year": year
-            },
-            {
-                "Institution": institution,
-                "Sector": sector,
-                "UnitID": unit_id,
-                "Enrollment_Type": "Some Distance Education",
-                "Enrollment": some_de,
-                "Total_Enrollment": total_enrollment,
-                "Year": year
-            },
-            {
-                "Institution": institution,
-                "Sector": sector,
-                "UnitID": unit_id,
-                "Enrollment_Type": "In-Person Only",
-                "Enrollment": in_person,
-                "Total_Enrollment": total_enrollment,
-                "Year": year
-            }
-        ])
+        chart_data.extend(
+            [
+                {
+                    "Institution": institution,
+                    "Sector": sector,
+                    "UnitID": unit_id,
+                    "Enrollment_Type": "Exclusively Distance Education",
+                    "Enrollment": exclusive_de,
+                    "Total_Enrollment": total_enrollment,
+                    "Year": year,
+                },
+                {
+                    "Institution": institution,
+                    "Sector": sector,
+                    "UnitID": unit_id,
+                    "Enrollment_Type": "Some Distance Education",
+                    "Enrollment": some_de,
+                    "Total_Enrollment": total_enrollment,
+                    "Year": year,
+                },
+                {
+                    "Institution": institution,
+                    "Sector": sector,
+                    "UnitID": unit_id,
+                    "Enrollment_Type": "In-Person Only",
+                    "Enrollment": in_person,
+                    "Total_Enrollment": total_enrollment,
+                    "Year": year,
+                },
+            ]
+        )
 
     chart_df = pd.DataFrame(chart_data)
 
     # Fill missing sectors
     chart_df["Sector"] = chart_df["Sector"].fillna("Unknown").replace("", "Unknown")
 
-    return DistanceTopEnrollmentResult(
-        period_label=str(year),
-        chart_data=chart_df
-    )
+    return DistanceTopEnrollmentResult(period_label=str(year), chart_data=chart_df)
 
 
 def render_distance_top_enrollment_chart(
@@ -212,7 +218,7 @@ def render_distance_top_enrollment_chart(
     *,
     top_n: int = 25,
     title: str,
-    year: int = 2024
+    year: int = 2024,
 ) -> None:
     """Render a horizontal stacked bar chart of top institutions by enrollment with distance education breakdown."""
 
@@ -235,8 +241,12 @@ def render_distance_top_enrollment_chart(
 
     # Create enrollment type color scale for stacking
     enrollment_type_color_scale = alt.Scale(
-        domain=["Exclusively Distance Education", "Some Distance Education", "In-Person Only"],
-        range=["#d62728", "#ff7f0e", "#2ca02c"]  # Red, Orange, Green
+        domain=[
+            "Exclusively Distance Education",
+            "Some Distance Education",
+            "In-Person Only",
+        ],
+        range=["#d62728", "#ff7f0e", "#2ca02c"],  # Red, Orange, Green
     )
 
     # Calculate number of unique institutions for height
@@ -253,14 +263,20 @@ def render_distance_top_enrollment_chart(
             ),
             y=alt.Y(
                 "Institution:N",
-                sort=alt.EncodingSortField(field="Total_Enrollment", op="max", order="descending"),
+                sort=alt.EncodingSortField(
+                    field="Total_Enrollment", op="max", order="descending"
+                ),
                 title="Institution",
             ),
             color=alt.Color(
                 "Enrollment_Type:N",
                 title="Enrollment Type",
                 scale=enrollment_type_color_scale,
-                sort=["Exclusively Distance Education", "Some Distance Education", "In-Person Only"],
+                sort=[
+                    "Exclusively Distance Education",
+                    "Some Distance Education",
+                    "In-Person Only",
+                ],
             ),
             order=alt.Order("Enrollment_Type:N", sort="ascending"),
             tooltip=[
@@ -299,7 +315,7 @@ def render_distance_top_enrollment_chart(
             "Sector": "Sector",
             "Exclusively Distance Education": "Exclusive DE",
             "Some Distance Education": "Some DE",
-            "In-Person Only": "In-Person"
+            "In-Person Only": "In-Person",
         },
         inplace=True,
     )

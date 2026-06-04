@@ -117,7 +117,9 @@ def main() -> None:
     )
     parser.add_argument(
         "--metadata-json",
-        default=Path("out/canonical/ipeds_avg_salary_instructional_staff/run_latest.json"),
+        default=Path(
+            "out/canonical/ipeds_avg_salary_instructional_staff/run_latest.json"
+        ),
         type=Path,
     )
     args = parser.parse_args()
