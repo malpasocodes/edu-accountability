@@ -8,11 +8,16 @@ import streamlit as st
 
 from src.charts.faculty_composition_chart import render_faculty_adjunct_chart
 from src.config.constants import (
+    ENROLLMENT_FILTER_OPTIONS,
     FACULTY_ADJUNCT_RELIANCE_LABEL,
     FACULTY_CHARTS,
     FACULTY_OVERVIEW_LABEL,
 )
+from src.state.session_manager import SessionManager
 from .base import BaseSection
+
+FACULTY_ENROLLMENT_FILTER_KEY = "faculty_enrollment_filter"
+DEFAULT_FACULTY_ENROLLMENT_FILTER = 1
 
 
 class FacultySection(BaseSection):
@@ -83,6 +88,44 @@ class FacultySection(BaseSection):
         else:
             st.error(f"Unknown chart: {chart_name}")
 
+    def _render_enrollment_filter(self) -> int:
+        """Render the enrollment filter UI control and return the selected value."""
+        st.markdown("### Filter by Enrollment")
+
+        option_labels = []
+        for threshold in ENROLLMENT_FILTER_OPTIONS:
+            if threshold == 1:
+                option_labels.append("All (>0)")
+            else:
+                option_labels.append(f">{threshold:,}")
+
+        label_to_value = dict(zip(option_labels, ENROLLMENT_FILTER_OPTIONS))
+
+        current_value = SessionManager.get(
+            FACULTY_ENROLLMENT_FILTER_KEY, DEFAULT_FACULTY_ENROLLMENT_FILTER
+        )
+        current_label = next(
+            (
+                label
+                for label, value in label_to_value.items()
+                if value == current_value
+            ),
+            option_labels[0],
+        )
+
+        selected_label = st.radio(
+            "Minimum undergraduate enrollment:",
+            options=option_labels,
+            index=option_labels.index(current_label),
+            horizontal=True,
+            key="faculty_enrollment_filter_radio",
+        )
+
+        selected_value = label_to_value[selected_label]
+        SessionManager.set(FACULTY_ENROLLMENT_FILTER_KEY, selected_value)
+        st.markdown("")  # Spacing
+        return selected_value
+
     def _render_adjunct_reliance_with_tabs(self, title: str) -> None:
         """Render the adjunct reliance ranking with 4-year/2-year tabs."""
         faculty_df = self.data_manager.get_faculty_data()
@@ -93,14 +136,22 @@ class FacultySection(BaseSection):
             )
             return
 
+        min_enrollment = self._render_enrollment_filter()
+
         tab_four, tab_two = st.tabs(["4-year", "2-year"])
         with tab_four:
             render_faculty_adjunct_chart(
-                faculty_df, sector="four_year", title=f"{title} (4-year)"
+                faculty_df,
+                sector="four_year",
+                title=f"{title} (4-year)",
+                min_enrollment=min_enrollment,
             )
         with tab_two:
             render_faculty_adjunct_chart(
-                faculty_df, sector="two_year", title=f"{title} (2-year)"
+                faculty_df,
+                sector="two_year",
+                title=f"{title} (2-year)",
+                min_enrollment=min_enrollment,
             )
 
     def get_available_charts(self) -> List[str]:

@@ -29,6 +29,7 @@ PROCESSED_DIR = PROJECT_ROOT / "data" / "processed"
 # lives in the year-stamped snapshot directory used by the rest of the dashboard.
 EAP_PATH = RAW_DIR / "ipeds" / "eap2023.csv"
 INSTITUTIONS_PATH = RAW_DIR / "ipeds" / "2023" / "institutions.csv"
+ENROLLMENT_PATH = RAW_DIR / "ipeds" / "2023" / "enrollment.csv"
 
 CSV_OUTPUT = PROCESSED_DIR / "faculty_metrics.csv"
 PARQUET_OUTPUT = PROCESSED_DIR / "faculty_metrics.parquet"
@@ -55,6 +56,7 @@ OUTPUT_COLUMNS = [
     "state",
     "SECTOR",
     "sector",
+    "enrollment",
     "fulltime_faculty",
     "parttime_faculty",
     "total_faculty",
@@ -98,12 +100,29 @@ def _load_institutions() -> pd.DataFrame:
     return institutions[["UnitID", "institution", "state", "SECTOR", "sector"]]
 
 
+def _load_enrollment() -> pd.DataFrame:
+    """Read undergraduate enrollment (ENR_UGD) keyed on UnitID.
+
+    Matches the ``enrollment`` field used by the College Value Grid so the
+    enrollment filter behaves identically across sections.
+    """
+    enrollment = pd.read_csv(
+        ENROLLMENT_PATH,
+        usecols=["UnitID", "ENR_UGD"],
+    )
+    enrollment["enrollment"] = pd.to_numeric(enrollment["ENR_UGD"], errors="coerce")
+    return enrollment[["UnitID", "enrollment"]]
+
+
 def build_dataframe() -> pd.DataFrame:
     """Join instructional staffing with institution metadata and derive metrics."""
     totals = _load_instructional_totals()
     institutions = _load_institutions()
+    enrollment = _load_enrollment()
 
     merged = totals.merge(institutions, on="UnitID", how="inner")
+    merged = merged.merge(enrollment, on="UnitID", how="left")
+    merged["enrollment"] = merged["enrollment"].fillna(0)
     dropped = len(totals) - len(merged)
     if dropped:
         logger.info(
@@ -131,8 +150,13 @@ def _apply_schema(df: pd.DataFrame) -> pd.DataFrame:
     """Coerce to the dashboard dtype conventions before writing Parquet."""
     typed = df.copy()
     typed["UnitID"] = typed["UnitID"].astype("Int32")
-    for column in ("fulltime_faculty", "parttime_faculty", "total_faculty"):
-        typed[column] = typed[column].astype("Int32")
+    for column in (
+        "enrollment",
+        "fulltime_faculty",
+        "parttime_faculty",
+        "total_faculty",
+    ):
+        typed[column] = typed[column].round().astype("Int32")
     typed["SECTOR"] = typed["SECTOR"].astype("Int32")
     typed["pct_parttime"] = typed["pct_parttime"].astype("float32")
     typed["institution"] = typed["institution"].astype("string")

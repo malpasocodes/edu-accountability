@@ -178,6 +178,7 @@ DEFAULT_SESSION_STATE: Dict[str, str] = {
     "pell_chart": PELL_OVERVIEW_LABEL,
     "distance_chart": DISTANCE_OVERVIEW_LABEL,
     "faculty_chart": FACULTY_OVERVIEW_LABEL,
+    "faculty_enrollment_filter": 1,
     "college_explorer_chart": COLLEGE_EXPLORER_OVERVIEW_LABEL,
     "canonical_ipeds_chart": CANONICAL_IPEDS_OVERVIEW_LABEL,
 }
