@@ -2,7 +2,13 @@
 
 from __future__ import annotations
 
+import re
+from typing import Iterable, List
+
 import pandas as pd
+
+# Matches federal-aid year columns named like "YR2022" (case-insensitive).
+YEAR_COLUMN_PATTERN = re.compile(r"^YR(\d{4})$", re.IGNORECASE)
 
 # Percent-change threshold for classifying YoY direction.
 # Changes within +/- this value are labeled "Same".
@@ -27,3 +33,21 @@ def classify_yoy_direction(pct_change: pd.Series) -> pd.Series:
         labels=["Decrease", "Same", "Increase"],
         include_lowest=True,
     ).fillna("Same").astype(str)
+
+
+def _identify_year_columns(columns: Iterable[str]) -> List[tuple[int, str]]:
+    """Return (year, column_name) pairs for YR#### columns, sorted by year."""
+    discovered: List[tuple[int, str]] = []
+    for column in columns:
+        normalized = column.strip()
+        match = YEAR_COLUMN_PATTERN.match(normalized)
+        if match:
+            year = int(match.group(1))
+            discovered.append((year, column))
+    return sorted(discovered)
+
+
+def _normalize_unit_ids(series: pd.Series) -> pd.Series:
+    """Coerce UnitID values to nullable Int64, preserving exact values."""
+    coerced = pd.to_numeric(series, errors="coerce")
+    return coerced.astype("Int64")

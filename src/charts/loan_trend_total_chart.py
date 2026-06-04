@@ -6,10 +6,7 @@ import altair as alt
 import pandas as pd
 import streamlit as st
 
-from src.charts.loan_top_dollars_chart import (
-    _identify_year_columns,
-    _normalize_unit_ids,
-)
+from src.charts.trend_utils import _identify_year_columns, _normalize_unit_ids
 from src.ui.renderers import render_altair_chart
 
 

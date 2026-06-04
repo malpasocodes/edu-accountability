@@ -2,17 +2,16 @@
 
 from __future__ import annotations
 
-import re
 from dataclasses import dataclass
-from typing import Iterable, List, Optional
+from typing import Optional
 
 import altair as alt
 import pandas as pd
 import streamlit as st
 
+from src.charts.trend_utils import _identify_year_columns, _normalize_unit_ids
 from src.ui.renderers import render_altair_chart, render_dataframe
 
-YEAR_COLUMN_PATTERN = re.compile(r"^YR(\d{4})$", re.IGNORECASE)
 SECTOR_COLOR_SCALE = alt.Scale(
     domain=["Public", "Private, not-for-profit", "Private, for-profit", "Unknown"],
     range=["#2ca02c", "#9467bd", "#1f77b4", "#7f7f7f"],
@@ -26,22 +25,6 @@ class PellTopDollarResult:
     table_data: pd.DataFrame
     sector_summary: pd.DataFrame
     requested_top_n: int
-
-
-def _identify_year_columns(columns: Iterable[str]) -> List[tuple[int, str]]:
-    discovered: List[tuple[int, str]] = []
-    for column in columns:
-        normalized = column.strip()
-        match = YEAR_COLUMN_PATTERN.match(normalized)
-        if match:
-            year = int(match.group(1))
-            discovered.append((year, column))
-    return sorted(discovered)
-
-
-def _normalize_unit_ids(series: pd.Series) -> pd.Series:
-    coerced = pd.to_numeric(series, errors="coerce")
-    return coerced.astype("Int64")
 
 
 @st.cache_data(show_spinner=False)

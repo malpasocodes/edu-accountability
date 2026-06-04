@@ -6,17 +6,13 @@ import altair as alt
 import pandas as pd
 import streamlit as st
 
+from src.charts.trend_utils import _normalize_unit_ids
 from src.ui.renderers import render_altair_chart, render_dataframe
 
 SECTOR_COLOR_SCALE = alt.Scale(
     domain=["Public", "Private, not-for-profit", "Private, for-profit", "Unknown"],
     range=["#2ca02c", "#9467bd", "#1f77b4", "#7f7f7f"],
 )
-
-
-def _normalize_unit_ids(series: pd.Series) -> pd.Series:
-    coerced = pd.to_numeric(series, errors="coerce")
-    return coerced.astype("Int64")
 
 
 def render_pell_vs_grad_scatter(

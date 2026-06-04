@@ -9,6 +9,7 @@ import pandas as pd
 import streamlit as st
 import altair as alt
 
+from src.charts.trend_utils import _normalize_unit_ids
 from src.ui.renderers import render_altair_chart
 
 # Pattern to match total enrollment columns
@@ -30,12 +31,6 @@ def _identify_total_enrollment_columns(columns: Iterable[str]) -> List[tuple[int
             year = int(match.group(1))
             discovered.append((year, column))
     return sorted(discovered)
-
-
-def _normalize_unit_ids(series: pd.Series) -> pd.Series:
-    """Normalize UnitID values to consistent format."""
-    coerced = pd.to_numeric(series, errors="coerce")
-    return coerced.astype("Int64")
 
 
 def _prepare_enrollment_trend_dataframe(
