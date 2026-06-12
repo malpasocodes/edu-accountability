@@ -30,7 +30,9 @@ PROCESSED_DIR = PROJECT_ROOT / "data" / "processed"
 EAP_PATH = RAW_DIR / "ipeds" / "eap2023.csv"
 INSTITUTIONS_PATH = RAW_DIR / "ipeds" / "2023" / "institutions.csv"
 ENROLLMENT_PATH = RAW_DIR / "ipeds" / "2023" / "enrollment.csv"
-GRADRATES_PATH = RAW_DIR / "ipeds" / "2023" / "gradrates.csv"
+# Graduation Rate Survey (GRS) series: GR{year} columns, latest first.
+PELLGRAD_PATH = RAW_DIR / "ipeds" / "2023" / "pellgradrates.csv"
+GR_YEAR_COLUMNS = [f"GR{year}" for year in range(2023, 2015, -1)]
 
 CSV_OUTPUT = PROCESSED_DIR / "faculty_metrics.csv"
 PARQUET_OUTPUT = PROCESSED_DIR / "faculty_metrics.parquet"
@@ -117,16 +119,21 @@ def _load_enrollment() -> pd.DataFrame:
 
 
 def _load_graduation_rates() -> pd.DataFrame:
-    """Read six-year graduation rate (PCT_AWARD_6YRS) keyed on UnitID.
+    """Latest available IPEDS Graduation Rate Survey (GRS) six-year rate per UnitID.
 
-    Matches the ``graduation_rate`` field used by the College Value Grid so the
-    two scatter charts report the same outcome measure.
+    GRS measures first-time, full-time, degree-seeking students completing within
+    150% of normal time -- the standard completion metric reported by College
+    Explorer and the canonical grad-rate pipeline. We take each institution's most
+    recent non-null ``GR{year}`` value so the College Value Grid and Faculty charts
+    report the same outcome as the rest of the dashboard. (This replaces the
+    broader Outcome Measures ``PCT_AWARD_6YRS`` cut, which runs higher because it
+    counts part-time and returning students over an eight-year window.)
     """
-    grad = pd.read_csv(
-        GRADRATES_PATH,
-        usecols=["UnitID", "PCT_AWARD_6YRS"],
-    )
-    grad["graduation_rate"] = pd.to_numeric(grad["PCT_AWARD_6YRS"], errors="coerce")
+    grad = pd.read_csv(PELLGRAD_PATH, usecols=["UnitID", *GR_YEAR_COLUMNS])
+    for column in GR_YEAR_COLUMNS:
+        grad[column] = pd.to_numeric(grad[column], errors="coerce")
+    # First non-null across GR2023..GR2016 (latest reported rate per institution).
+    grad["graduation_rate"] = grad[GR_YEAR_COLUMNS].bfill(axis=1).iloc[:, 0]
     return grad[["UnitID", "graduation_rate"]]
 
 

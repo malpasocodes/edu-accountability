@@ -13,7 +13,12 @@ logger = logging.getLogger(__name__)
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent
 RAW_DIR = PROJECT_ROOT / "data" / "raw"
+# Year-stamped IPEDS snapshot used by the rest of the dashboard.
+IPEDS_DIR = RAW_DIR / "ipeds" / "2023"
 PROCESSED_DIR = PROJECT_ROOT / "data" / "processed"
+
+# Graduation Rate Survey (GRS) series: GR{year} columns, latest first.
+GR_YEAR_COLUMNS = [f"GR{year}" for year in range(2023, 2015, -1)]
 
 SEGMENTS = {
     "tuition_vs_graduation": {
@@ -71,7 +76,7 @@ class Institution:
 
 
 def _load_institutions(sector_filter: Sequence[str]) -> Dict[str, Institution]:
-    path = RAW_DIR / "institutions.csv"
+    path = IPEDS_DIR / "institutions.csv"
     institutions: Dict[str, Institution] = {}
     with path.open(newline="", encoding="utf-8") as handle:
         reader = csv.DictReader(handle)
@@ -98,7 +103,7 @@ def _load_institutions(sector_filter: Sequence[str]) -> Dict[str, Institution]:
 def _load_numeric_column(
     filename: str, value_field: str, parser: Callable[[str], Optional[float]]
 ) -> Dict[str, float]:
-    path = RAW_DIR / filename
+    path = IPEDS_DIR / filename
     values: Dict[str, float] = {}
     with path.open(newline="", encoding="utf-8") as handle:
         reader = csv.DictReader(handle)
@@ -113,13 +118,39 @@ def _load_numeric_column(
     return values
 
 
+def _load_latest_grad_rates() -> Dict[str, float]:
+    """Latest available IPEDS Graduation Rate Survey (GRS) six-year rate per UnitID.
+
+    GRS measures first-time, full-time, degree-seeking students completing within
+    150% of normal time -- the standard completion metric reported by College
+    Explorer and the canonical grad-rate pipeline. We take each institution's most
+    recent non-null ``GR{year}`` value so the whole dashboard reports one outcome.
+    (Replaces the broader Outcome Measures ``PCT_AWARD_6YRS`` cut previously used
+    here, which runs higher because it also counts part-time/returning students.)
+    """
+    path = IPEDS_DIR / "pellgradrates.csv"
+    values: Dict[str, float] = {}
+    with path.open(newline="", encoding="utf-8") as handle:
+        reader = csv.DictReader(handle)
+        for row in reader:
+            unit_id = row.get("UnitID", "").strip()
+            if not unit_id:
+                continue
+            for column in GR_YEAR_COLUMNS:
+                rate = _parse_float(row.get(column, ""))
+                if rate is not None:
+                    values[unit_id] = rate
+                    break
+    return values
+
+
 def _build_rows(sector_filter: Sequence[str]) -> List[List[object]]:
     institutions = _load_institutions(sector_filter)
     if not institutions:
         return []
 
     tuition = _load_numeric_column("cost.csv", "TUITION_FEES_INSTATE2023", _parse_float)
-    grad_rates = _load_numeric_column("gradrates.csv", "PCT_AWARD_6YRS", _parse_float)
+    grad_rates = _load_latest_grad_rates()
     enrollment = _load_numeric_column("enrollment.csv", "ENR_UGD", _parse_int)
 
     rows: List[List[object]] = []

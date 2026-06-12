@@ -30,3 +30,6 @@ data/raw/college_scorecard/Most-Recent-Cohorts-Institution_*.csv
 
 # IPEDS raw download archives (keep the extracted .csv/.xlsx instead)
 data/raw/ipeds/*.zip
+
+# Substack working drafts (kept local; not published to the repo)
+docs/substack/
