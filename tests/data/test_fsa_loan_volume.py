@@ -32,6 +32,11 @@ PHOENIX_DECADE_LOANS_GRADUATE = 3_031_328_806
 PHOENIX_DECADE_PELL = 2_099_633_987
 WALDEN_DECADE_LOANS = 7_988_029_201
 
+# National context figures (all schools, 2013-2022) — cited in the essay.
+NATIONAL_DECADE_LOANS = 928_266_080_852
+NATIONAL_DECADE_LOANS_UNDERGRAD = 558_546_771_192  # incl. Parent PLUS; 60.2%
+NATIONAL_DECADE_PELL = 253_396_137_190
+
 
 @pytest.fixture(scope="module")
 def dl_volume() -> pd.DataFrame:
@@ -100,6 +105,45 @@ def test_wide_unitid_file_matches_pinned_figures() -> None:
     # Mapping keeps 95.2% of the $928.3B COD total (unmatched OPEIDs are
     # mostly schools that closed since 2013 and have no IPEDS 2023 row).
     assert int(wide[year_cols].sum().sum()) == 883_326_699_805
+
+
+def test_national_undergrad_loan_share(dl_volume: pd.DataFrame) -> None:
+    """Nationally ~60% of loan dollars are undergraduate-directed (falling)."""
+    by_type = dl_volume.groupby("loan_type", observed=True)["disbursed_usd"].sum()
+    undergrad = int(by_type[by_type.index.isin(UNDERGRAD_LOAN_TYPES)].sum())
+    total = int(by_type.sum())
+
+    assert total == NATIONAL_DECADE_LOANS
+    assert undergrad == NATIONAL_DECADE_LOANS_UNDERGRAD
+    assert undergrad / total == pytest.approx(0.602, abs=0.005)
+
+    # The share declines across the decade: 66% (2013) -> 52.5% (2022).
+    y2022 = dl_volume[dl_volume["year"] == 2022]
+    by_type_2022 = y2022.groupby("loan_type", observed=True)["disbursed_usd"].sum()
+    ug_2022 = by_type_2022[by_type_2022.index.isin(UNDERGRAD_LOAN_TYPES)].sum()
+    assert ug_2022 / by_type_2022.sum() == pytest.approx(0.525, abs=0.005)
+
+
+def test_national_pell_and_combined_undergrad_share() -> None:
+    """Pell (all-undergraduate) plus loans: ~69% of the national federal aid
+    pool — and ~77% of Phoenix's — was directed to undergraduates."""
+    pell = pd.read_csv(PELL_PATH)
+    year_cols = [f"YR{year}" for year in DECADE_YEARS]
+    national_pell = int(
+        pell[year_cols].apply(pd.to_numeric, errors="coerce").sum().sum()
+    )
+    assert national_pell == NATIONAL_DECADE_PELL
+
+    national_share = (NATIONAL_DECADE_LOANS_UNDERGRAD + national_pell) / (
+        NATIONAL_DECADE_LOANS + national_pell
+    )
+    assert national_share == pytest.approx(0.687, abs=0.005)
+
+    # The essay's "77 cents of every dollar" (Phoenix, loans + Pell).
+    phoenix_share = (PHOENIX_DECADE_LOANS_UNDERGRAD + PHOENIX_DECADE_PELL) / (
+        PHOENIX_DECADE_LOANS + PHOENIX_DECADE_PELL
+    )
+    assert phoenix_share == pytest.approx(0.770, abs=0.005)
 
 
 def test_phoenix_decade_pell_total() -> None:
