@@ -95,10 +95,28 @@ sources:
 
       federal_loans:
         name: "Federal Loan Disbursements by School"
-        description: "Total federal loan dollars disbursed by institution and year"
+        description: >
+          Total federal loan dollars disbursed by institution and year.
+          DEPRECATED for dollar amounts — undocumented definition, runs at
+          ~40-60% of official COD disbursements; see the loantotals.csv
+          deprecation notice in data/raw/fsa/metadata.yaml. Superseded by
+          dl_volume.
         file_format: "CSV, Excel"
         historical_range: "2008-present"
         fetch_script: "python src/data/fetch_fsa_data.py"
+
+      dl_volume:
+        name: "Title IV Program Volume Reports — Direct Loan Volume by School"
+        description: >
+          Official COD-system Direct Loan disbursements per school per award
+          year, by loan type (Subsidized, Unsub-Undergraduate, Unsub-Graduate,
+          Parent PLUS, Grad PLUS). Authoritative for loan-dollar totals and
+          undergraduate/graduate splits. Keyed by OPE ID, not IPEDS UnitID.
+        file_format: "XLS (one Q4 workbook per award year)"
+        historical_range: "Award years 2012-13 through 2021-22 in repo"
+        source_url: "https://studentaid.gov/data-center/student/title-iv"
+        build_script: "python -m src.data.build_fsa_loan_volume"
+        verification_tests: "tests/data/test_fsa_loan_volume.py"
 
 # Current data snapshots
 current_data:

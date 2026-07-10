@@ -33,6 +33,17 @@ datasets:
     download_url: "https://studentaid.gov/data-center/school/direct-loans"
     data_range: "Academic years 2009-10 through 2021-22"
     currency: "U.S. Dollars (not adjusted for inflation)"
+    deprecation_notice: >
+      DEPRECATED FOR DOLLAR AMOUNTS (2026-07-10). Fetched as
+      "LoanBySchool.csv" (see src/data/fetch_fsa_data.py); its exact
+      definition is undocumented and its values run at roughly 40-60% of
+      the official COD disbursement figures in FSA's Title IV Program
+      Volume Reports, with a per-year ratio that drifts (University of
+      Phoenix 2013-2022: $4.93B here vs $11.11B in the volume reports).
+      Use dl_volume/ (processed: data/processed/fsa_dl_volume.*) for any
+      loan-dollar total or cross-school dollar comparison. Retained only
+      because dashboard charts still read it; do not cite its dollar
+      levels.
     loan_types_included:
       - "Direct Subsidized Loans"
       - "Direct Unsubsidized Loans"
@@ -43,6 +54,39 @@ datasets:
       - "YR2022: Total federal loan dollars disbursed in 2021-22 academic year"
       - "YR2021: Total federal loan dollars disbursed in 2020-21 academic year"
       - "[Previous years follow same pattern]"
+
+  "dl_volume/":
+    source_name: "Title IV Program Volume Reports — Direct Loan Volume by School"
+    description: >
+      Official award-year Direct Loan disbursements per school from the
+      Common Origination and Disbursement (COD) system, broken out by loan
+      type (Subsidized, Unsubsidized-Undergraduate, Unsubsidized-Graduate,
+      Parent PLUS, Grad PLUS). One Q4 (full-year cumulative) workbook per
+      award year, AY2012-13 through AY2021-22. Authoritative source for
+      loan-dollar totals; supersedes loantotals.csv.
+    file_format: "XLS (legacy Excel; 'Award Year Summary' tab)"
+    download_url: "https://studentaid.gov/data-center/student/title-iv"
+    download_date: "2026-07-10"
+    data_range: "Award years 2012-13 through 2021-22"
+    currency: "U.S. Dollars (not adjusted for inflation)"
+    build_script: "python -m src.data.build_fsa_loan_volume"
+    processed_outputs:
+      - "data/processed/fsa_dl_volume.csv"
+      - "data/processed/fsa_dl_volume.parquet"
+    key_fields:
+      - "OPE ID: 8-digit institution identifier (NOT IPEDS UnitID; one row
+         covers the whole institution, e.g. all University of Phoenix
+         campuses under 02098800)"
+      - "Five loan-type blocks, each with Recipients / # and $ Originated /
+         # and $ Disbursed"
+    file_urls:
+      - "dl_volume_ay2012_2013_q4.xls: recovered from the Internet Archive
+         (https://web.archive.org/web/2015/https://studentaid.ed.gov/sa/sites/default/files/fsawg/datacenter/library/DL_Dashboard_AY2012_2013_Q4.xls);
+         no longer on the live FSA site"
+      - "dl_volume_ay2013_2014_q4.xls through ay2017_2018:
+         https://studentaid.gov/sites/default/files/fsawg/datacenter/library/DL_Dashboard_AY{YYYY}_{YYYY}_Q4.xls"
+      - "dl_volume_ay2018_2019_q4.xls through ay2021_2022:
+         https://studentaid.gov/sites/default/files/fsawg/datacenter/library/dl-dashboard-ay{yyyy}-{yyyy}-q4.xls"
 
 # Data linking notes
 data_linking:
