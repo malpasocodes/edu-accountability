@@ -37,6 +37,9 @@ NATIONAL_DECADE_LOANS = 928_266_080_852
 NATIONAL_DECADE_LOANS_UNDERGRAD = 558_546_771_192  # incl. Parent PLUS; 60.2%
 NATIONAL_DECADE_PELL = 253_396_137_190
 
+PENN_STATE_OPEID = "00332900"
+PENN_STATE_DECADE_LOANS_UNDERGRAD = 4_430_838_491  # runner-up to Phoenix
+
 
 @pytest.fixture(scope="module")
 def dl_volume() -> pd.DataFrame:
@@ -122,6 +125,27 @@ def test_national_undergrad_loan_share(dl_volume: pd.DataFrame) -> None:
     by_type_2022 = y2022.groupby("loan_type", observed=True)["disbursed_usd"].sum()
     ug_2022 = by_type_2022[by_type_2022.index.isin(UNDERGRAD_LOAN_TYPES)].sum()
     assert ug_2022 / by_type_2022.sum() == pytest.approx(0.525, abs=0.005)
+
+
+def test_phoenix_is_largest_undergrad_loan_recipient(
+    dl_volume: pd.DataFrame,
+) -> None:
+    """Essay: counting only undergraduate-directed loan dollars, Phoenix
+    still out-drew every other institution — nearly twice the runner-up
+    (Penn State)."""
+    undergrad_totals = (
+        dl_volume[dl_volume["loan_type"].isin(UNDERGRAD_LOAN_TYPES)]
+        .groupby("opeid", observed=True)["disbursed_usd"]
+        .sum()
+        .sort_values(ascending=False)
+    )
+    assert undergrad_totals.index[0] == PHOENIX_OPEID
+    assert int(undergrad_totals.iloc[0]) == PHOENIX_DECADE_LOANS_UNDERGRAD
+    assert undergrad_totals.index[1] == PENN_STATE_OPEID
+    assert int(undergrad_totals.iloc[1]) == PENN_STATE_DECADE_LOANS_UNDERGRAD
+    assert undergrad_totals.iloc[0] / undergrad_totals.iloc[1] == pytest.approx(
+        1.82, abs=0.01
+    )
 
 
 def test_national_pell_and_combined_undergrad_share() -> None:
