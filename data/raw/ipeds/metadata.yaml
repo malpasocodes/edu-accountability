@@ -68,7 +68,29 @@ datasets:
       - "UnitID: Institution identifier"
       - "GRTOTLT: Graduation rate, total cohort"
       - "GRTYPE: Type of graduation rate"
-    
+
+  "om2023.csv":
+    source_survey: "OM2023"
+    survey_name: "Outcome Measures"
+    description: >
+      Award rates for ALL entering degree/certificate-seeking undergraduates
+      (first-time and non-first-time, full-time and part-time; 2015-16
+      adjusted cohort) at 4, 6, and 8 years, counting any award. Broader
+      than the Graduation Rate Survey, which covers only first-time
+      full-time students. Raw NCES file, committed to back the Substack
+      Part II reconciliation figures; pinned in tests/data/test_om2023.py.
+    collection_period: "2023-24 (2015-16 entering cohort tracked 8 years)"
+    ipeds_file_name: "OM2023.csv"
+    download_url: "https://nces.ed.gov/ipeds/datacenter/data/OM2023.zip"
+    download_date: "2026-07-10"
+    key_fields:
+      - "UNITID: Institution identifier"
+      - "OMCHRT: Cohort code (10 FT first-time, 20 PT first-time, 30 FT
+         non-first-time, 40 PT non-first-time, 50 total entering; x1/x2
+         suffixes = Pell / non-Pell subsets)"
+      - "OMACHRT: Adjusted cohort count"
+      - "OMAWDP4/6/8: Percent awarded any credential within 4/6/8 years"
+
 # Data processing notes
 processing_notes:
   - "Files downloaded from IPEDS Data Center as CSV format"
