@@ -79,6 +79,29 @@ def test_phoenix_is_largest_loan_recipient(dl_volume: pd.DataFrame) -> None:
     assert int(decade_totals.iloc[1]) == WALDEN_DECADE_LOANS
 
 
+def test_wide_unitid_file_matches_pinned_figures() -> None:
+    """The dashboard's UnitID-keyed wide file must agree with the tidy dataset."""
+    wide_path = PROJECT_ROOT / "data" / "processed" / "loan_totals_cod.csv"
+    if not wide_path.exists():
+        pytest.skip(
+            "loan_totals_cod.csv missing — run "
+            "`python -m src.data.build_fsa_loan_volume`"
+        )
+    wide = pd.read_csv(wide_path)
+
+    assert wide["UnitID"].is_unique  # no OPEID double-mapping duplicates dollars
+    year_cols = [f"YR{year}" for year in DECADE_YEARS]
+    assert all(col in wide.columns for col in year_cols)
+
+    phoenix = wide[wide["UnitID"] == 484613]
+    assert len(phoenix) == 1
+    assert int(phoenix[year_cols].sum(axis=1).iloc[0]) == PHOENIX_DECADE_LOANS
+
+    # Mapping keeps 95.2% of the $928.3B COD total (unmatched OPEIDs are
+    # mostly schools that closed since 2013 and have no IPEDS 2023 row).
+    assert int(wide[year_cols].sum().sum()) == 883_326_699_805
+
+
 def test_phoenix_decade_pell_total() -> None:
     pell = pd.read_csv(PELL_PATH)
     row = pell[pell["UnitID"] == 484613]

@@ -23,7 +23,7 @@ def _prepare_loan_trend_total_dataframe(
     Parameters
     ----------
     loans_df : pd.DataFrame
-        Federal loan dataset with year columns (YR2008-YR2022)
+        Federal loan dataset with year columns (e.g. YR2013-YR2022)
     metadata_df : pd.DataFrame
         Metadata with UnitID, institution, sector columns
     sector : str

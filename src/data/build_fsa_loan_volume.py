@@ -167,6 +167,54 @@ def build_fsa_loan_volume() -> pd.DataFrame:
     return tidy[OUTPUT_COLUMNS].sort_values(["year", "opeid", "loan_type"])
 
 
+def build_loan_totals_by_unitid(tidy: pd.DataFrame) -> pd.DataFrame:
+    """Derive the dashboard's wide loan file (UnitID x YR columns) from COD.
+
+    COD reports one row per OPE ID (the whole institution); the dashboard is
+    keyed by IPEDS UnitID. Each OPE ID maps to the UnitID that carries the
+    same 8-digit OPEID in the IPEDS institutions file. Where several UnitIDs
+    share an OPEID (main campus vs. system office), the whole COD total is
+    assigned to the largest-enrollment UnitID rather than duplicated. COD
+    OPEIDs with no IPEDS 2023 match (mostly schools that closed since 2013,
+    ~5% of dollars) are dropped.
+    """
+    inst = pd.read_csv(INSTITUTIONS_PATH, usecols=["UnitID", "INSTITUTION", "OPEID"])
+    inst = inst[inst["OPEID"] > 0].copy()
+    inst["opeid"] = inst["OPEID"].astype("int64").astype(str).str.zfill(8)
+
+    enrollment = pd.read_csv(ENROLLMENT_PATH, usecols=["UnitID", "ENR_TOTAL"])
+    inst = inst.merge(enrollment, on="UnitID", how="left")
+    inst["ENR_TOTAL"] = inst["ENR_TOTAL"].fillna(0)
+    inst = inst.sort_values(
+        ["opeid", "ENR_TOTAL", "UnitID"], ascending=[True, False, True]
+    ).drop_duplicates("opeid", keep="first")
+
+    per_year = (
+        tidy.groupby(["opeid", "year"], observed=True)["disbursed_usd"]
+        .sum()
+        .reset_index()
+        .merge(inst[["opeid", "UnitID", "INSTITUTION"]], on="opeid", how="inner")
+    )
+    wide = per_year.pivot_table(
+        index=["UnitID", "INSTITUTION"],
+        columns="year",
+        values="disbursed_usd",
+        aggfunc="sum",
+    ).reset_index()
+    wide.columns = [f"YR{c}" if isinstance(c, int) else c for c in wide.columns]
+    wide = wide.rename(columns={"INSTITUTION": "Institution"})
+    return wide.sort_values("UnitID")
+
+
+INSTITUTIONS_PATH = (
+    PROJECT_ROOT / "data" / "raw" / "ipeds" / "2023" / "institutions.csv"
+)
+ENROLLMENT_PATH = PROJECT_ROOT / "data" / "raw" / "ipeds" / "2023" / "enrollment.csv"
+
+WIDE_CSV_OUTPUT = PROCESSED_DIR / "loan_totals_cod.csv"
+WIDE_PARQUET_OUTPUT = PROCESSED_DIR / "loan_totals_cod.parquet"
+
+
 def main() -> None:
     logging.basicConfig(level=logging.INFO, format="%(levelname)s %(message)s")
     dataset = build_fsa_loan_volume()
@@ -179,6 +227,16 @@ def main() -> None:
         dataset["award_year"].nunique(),
         CSV_OUTPUT.name,
         PARQUET_OUTPUT.name,
+    )
+
+    wide = build_loan_totals_by_unitid(dataset)
+    wide.to_csv(WIDE_CSV_OUTPUT, index=False)
+    wide.to_parquet(WIDE_PARQUET_OUTPUT, compression="snappy", index=False)
+    logger.info(
+        "Wrote UnitID-keyed wide loan totals (%d institutions) to %s / %s",
+        len(wide),
+        WIDE_CSV_OUTPUT.name,
+        WIDE_PARQUET_OUTPUT.name,
     )
 
 

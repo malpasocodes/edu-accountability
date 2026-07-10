@@ -283,11 +283,20 @@ class DataManager:
                 source.description,
             )
 
-    def get_fsa_year_range(self) -> str:
-        """Return the year range string (e.g. '2008-2022') detected from FSA data columns."""
+    def get_fsa_year_range(self, which: str = "both") -> str:
+        """Return the year range string (e.g. '2008-2022') detected from FSA data columns.
+
+        ``which`` selects the source: "pell", "loans", or "both". Pell and
+        loan coverage differ (Pell from 2008; COD loan reports from 2013).
+        """
         yr_pattern = re.compile(r"^YR(\d{4})$", re.IGNORECASE)
         years: set[int] = set()
-        for df in (self.pell_df, self.loan_df):
+        sources = {
+            "pell": (self.pell_df,),
+            "loans": (self.loan_df,),
+            "both": (self.pell_df, self.loan_df),
+        }[which]
+        for df in sources:
             if df is not None and not df.empty:
                 for col in df.columns:
                     m = yr_pattern.match(col.strip())

@@ -73,6 +73,10 @@ datasets:
     processed_outputs:
       - "data/processed/fsa_dl_volume.csv"
       - "data/processed/fsa_dl_volume.parquet"
+      - "data/processed/loan_totals_cod.csv (UnitID-keyed wide file consumed
+         by the dashboard; OPE ID totals assigned to the largest-enrollment
+         UnitID sharing that OPEID)"
+      - "data/processed/loan_totals_cod.parquet"
     key_fields:
       - "OPE ID: 8-digit institution identifier (NOT IPEDS UnitID; one row
          covers the whole institution, e.g. all University of Phoenix

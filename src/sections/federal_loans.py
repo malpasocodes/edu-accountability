@@ -59,7 +59,7 @@ class FederalLoansSection(BaseSection):
 
         # What is this section
         st.markdown("### What is Federal Loans Analysis?")
-        fsa_years = self.data_manager.get_fsa_year_range()
+        fsa_years = self.data_manager.get_fsa_year_range(which="loans")
         st.markdown(f"""
             This section tracks **federal student loan dollars** disbursed to students at colleges and universities
             across the United States. The data covers **{fsa_years}** and shows which institutions have the highest
@@ -147,7 +147,7 @@ class FederalLoansSection(BaseSection):
         st.markdown("""
             **Start with Largest Federal Loan Portfolios** to identify institutions with the highest debt volumes.
             Then explore the **vs Graduation Rate** chart to see how loan burdens relate to student outcomes.
-            Finally, use the **Trend** chart to understand how these patterns have evolved over the past 15 years.
+            Finally, use the **Trend** chart to understand how these patterns have evolved over the past decade.
 
             **Each chart includes tabs** at the top for 4-year and 2-year institutions, allowing you to compare
             patterns across different institutional types.
@@ -171,8 +171,11 @@ class FederalLoansSection(BaseSection):
         # Data disclaimer
         st.markdown("### Data Source & Notes")
         st.info(
-            f"**Data Source:** IPEDS (Integrated Postsecondary Education Data System), {fsa_years}. "
-            "Loan totals reflect annual federal loan dollars disbursed to students at each institution. "
+            f"**Data Source:** U.S. Department of Education, Federal Student Aid — "
+            f"Title IV Program Volume Reports (Direct Loan disbursements by school, "
+            f"COD system), {fsa_years}. Totals cover all Direct Loan types "
+            "(Subsidized, Unsubsidized, Parent PLUS, Grad PLUS) disbursed to "
+            "students at each institution. "
             "For high-stakes decisions, validate against the latest Department of Education releases."
         )
 
@@ -182,7 +185,7 @@ class FederalLoansSection(BaseSection):
 
         if self.data_manager.loan_df is None or self.data_manager.loan_df.empty:
             st.warning(
-                "Loan dataset is unavailable. Confirm `data/raw/fsa/loantotals.csv` exists and reload."
+                "Loan dataset is unavailable. Run `python -m src.data.build_fsa_loan_volume` to generate `data/processed/loan_totals_cod.csv`, then reload."
             )
             return
 

@@ -44,9 +44,12 @@ class DataSources:
         required=True,
     )
 
+    # Built from FSA's official Title IV volume reports (COD) by
+    # src/data/build_fsa_loan_volume.py; supersedes the deprecated
+    # data/raw/fsa/loantotals.csv, which understates disbursements.
     LOAN_RAW = DataSourceConfig(
-        path=_fsa_dir / "loantotals.csv",
-        description="Federal loan totals by institution",
+        path=_processed_dir / "loan_totals_cod.csv",
+        description="Federal loan totals by institution (COD Title IV reports)",
         required=False,
     )
 
