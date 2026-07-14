@@ -10,6 +10,7 @@ This directory contains **REAL College Scorecard data** downloaded from the U.S.
 
 - `Most-Recent-Cohorts-Institution_05192025 2.csv` - Full College Scorecard data (98MB)
 - `scorecard_earnings.csv` - Processed file with only needed fields (0.3MB)
+- `uop_debt_scorecard.json` - University of Phoenix debt fields (Scorecard API, fetched 2026-07-13; completer median debt $31,553, non-completer median $9,178, federal loan rate 62.5%) — cited by the Substack accountability series, pinned in `tests/data/test_uop_scorecard_debt.py`
 
 ## Current Data
 

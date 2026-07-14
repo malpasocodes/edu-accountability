@@ -1,0 +1,23 @@
+{
+  "_provenance": {
+    "fetched": "2026-07-13",
+    "source": "College Scorecard API, U.S. Department of Education",
+    "url": "https://api.data.gov/ed/collegescorecard/v1/schools?id=484613&fields=id,school.name,latest.aid.median_debt.completers.overall,latest.aid.median_debt.noncompleters,latest.aid.federal_loan_rate,latest.aid.pell_grant_rate",
+    "notes": "Used by the Substack accountability series (Part IIa) for the University of Phoenix completer median federal debt (~$31,553) cited in the non-completer debt footnote. 'latest' resolves to the most recent Scorecard release at fetch time. Median debt fields are cumulative federal loan debt at separation, medians among borrowers. Pinned in tests/data/test_uop_scorecard_debt.py."
+  },
+  "metadata": {
+    "page": 0,
+    "total": 1,
+    "per_page": 20
+  },
+  "results": [
+    {
+      "latest.aid.median_debt.completers.overall": 31553,
+      "latest.aid.median_debt.noncompleters": 9178,
+      "latest.aid.federal_loan_rate": 0.625,
+      "latest.aid.pell_grant_rate": 0.4981,
+      "school.name": "University of Phoenix-Arizona",
+      "id": 484613
+    }
+  ]
+}
