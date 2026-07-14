@@ -72,6 +72,36 @@ def test_northridge_total_entering_cohort(om: pd.DataFrame) -> None:
     assert (total["OMAWDP4"], total["OMAWDP6"], total["OMAWDP8"]) == (48, 68, 71)
 
 
+# Major online adult-serving universities cited in the Part IIa
+# online-modality footnote: (UnitID, name, total entering cohort, 8-year
+# any-award rate). Ordered by 8-year rate; Phoenix (26%) trails every one
+# of them, above only American Public University System (25%).
+ONLINE_PEERS = [
+    (433387, "Western Governors University", 30_315, 48),
+    (104717, "Grand Canyon University", 25_628, 46),
+    (232557, "Liberty University", 18_973, 42),
+    (119605, "National University", 4_741, 41),
+    (183026, "Southern New Hampshire University", 28_197, 36),
+    (163204, "University of Maryland Global Campus", 15_087, 32),
+    (125231, "Walden University", 5_015, 32),
+    (413413, "Capella University", 6_795, 28),
+    (449339, "American Public University System", 26_157, 25),
+]
+
+
+def test_online_peer_award_rates(om: pd.DataFrame) -> None:
+    """Footnote: even against the other giants of online adult education —
+    the same flexibility, the same working adults — Phoenix's 26% sits at
+    the bottom of the pack, above only APUS."""
+    phoenix = _row(om, PHOENIX_UNITID, TOTAL_ENTERING)
+    for unitid, name, cohort, awdp8 in ONLINE_PEERS:
+        peer = _row(om, unitid, TOTAL_ENTERING)
+        assert int(peer["OMACHRT"]) == cohort, name
+        assert peer["OMAWDP8"] == awdp8, name
+        if unitid != 449339:  # APUS is the one peer below Phoenix
+            assert peer["OMAWDP8"] > phoenix["OMAWDP8"], name
+
+
 def test_om_agrees_with_processed_gradrates_file() -> None:
     """The dashboard's gradrates.csv carries the six-year OM rate; it must
     stay consistent with the raw OM2023 file."""
