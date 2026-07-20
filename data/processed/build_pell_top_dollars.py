@@ -9,8 +9,8 @@ from typing import Dict, Iterable, List, Optional, Tuple
 
 TOP_N = 25
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
-RAW_PELL_PATH = PROJECT_ROOT / "data" / "raw" / "pelltotals.csv"
-INSTITUTIONS_PATH = PROJECT_ROOT / "data" / "raw" / "institutions.csv"
+RAW_PELL_PATH = PROJECT_ROOT / "data" / "raw" / "fsa" / "pelltotals.csv"
+INSTITUTIONS_PATH = PROJECT_ROOT / "data" / "raw" / "ipeds" / "2023" / "institutions.csv"
 GRAD_4YR_PATH = PROJECT_ROOT / "data" / "processed" / "tuition_vs_graduation.csv"
 GRAD_2YR_PATH = PROJECT_ROOT / "data" / "processed" / "tuition_vs_graduation_two_year.csv"
 OUTPUT_DIR = Path(__file__).resolve().parent
@@ -24,6 +24,12 @@ TREND_OUTPUT_PATHS = {
     "four_year": OUTPUT_DIR / "pell_top_dollars_trend_four_year.csv",
     "two_year": OUTPUT_DIR / "pell_top_dollars_trend_two_year.csv",
 }
+
+# Rankings sum award years 2013-2022 only, so they stay commensurable with the
+# COD loan reports (which begin in 2013) and with institutions whose
+# consolidated UnitIDs carry no earlier Pell history (e.g., University of
+# Phoenix). Trend outputs keep the full year series.
+RANKING_START_YEAR = 2013
 
 SECTOR_NAME_BY_CODE: Dict[str, str] = {
     "1": "Public",
@@ -282,8 +288,14 @@ def build_dataset() -> None:
         year_column_map = {year: column for year, column in year_columns}
         target_year = 2022 if 2022 in year_column_map else year_columns[-1][0]
 
-        min_year = year_columns[0][0]
-        max_year = year_columns[-1][0]
+        ranking_year_columns = [
+            item for item in year_columns if item[0] >= RANKING_START_YEAR
+        ]
+        if not ranking_year_columns:
+            ranking_year_columns = year_columns
+
+        min_year = ranking_year_columns[0][0]
+        max_year = ranking_year_columns[-1][0]
         years_covered = f"{min_year}-{max_year}" if min_year != max_year else str(min_year)
 
         rows_all: List[FieldRow] = []
@@ -297,7 +309,7 @@ def build_dataset() -> None:
             if not unit_id:
                 continue
 
-            total_dollars = _sum_years(raw_row, year_columns)
+            total_dollars = _sum_years(raw_row, ranking_year_columns)
             if total_dollars <= 0:
                 continue
 

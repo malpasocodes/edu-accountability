@@ -8,8 +8,8 @@ from pathlib import Path
 from typing import Dict, Iterable, List, Optional, Tuple
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
-RAW_PELL_PATH = PROJECT_ROOT / "data" / "raw" / "pelltotals.csv"
-INSTITUTIONS_PATH = PROJECT_ROOT / "data" / "raw" / "institutions.csv"
+RAW_PELL_PATH = PROJECT_ROOT / "data" / "raw" / "fsa" / "pelltotals.csv"
+INSTITUTIONS_PATH = PROJECT_ROOT / "data" / "raw" / "ipeds" / "2023" / "institutions.csv"
 GRAD_4YR_PATH = PROJECT_ROOT / "data" / "processed" / "tuition_vs_graduation.csv"
 GRAD_2YR_PATH = PROJECT_ROOT / "data" / "processed" / "tuition_vs_graduation_two_year.csv"
 OUTPUT_DIR = Path(__file__).resolve().parent
@@ -18,6 +18,12 @@ OUTPUT_PATHS = {
     "four_year": OUTPUT_DIR / "pell_vs_grad_scatter_four_year.csv",
     "two_year": OUTPUT_DIR / "pell_vs_grad_scatter_two_year.csv",
 }
+
+# Pell dollar sums are restricted to award years 2013-2022 so cross-institution
+# comparisons stay commensurable with the COD loan reports (which begin in
+# 2013) and with institutions whose consolidated UnitIDs carry no earlier
+# Pell history (e.g., University of Phoenix).
+RANKING_START_YEAR = 2013
 
 SECTOR_NAME_BY_CODE: Dict[str, str] = {
     "1": "Public",
@@ -163,6 +169,7 @@ def build_dataset() -> None:
         if reader.fieldnames is None:
             raise ValueError("Pell totals CSV is missing headers.")
         year_columns = _identify_year_columns(reader.fieldnames)
+        year_columns = [item for item in year_columns if item[0] >= RANKING_START_YEAR]
         if not year_columns:
             raise ValueError(
                 "Unable to locate year columns (expected headers like 'YR2022')."

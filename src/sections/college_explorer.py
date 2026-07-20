@@ -181,7 +181,7 @@ class CollegeExplorerSection(BaseSection):
         # Data notes
         st.markdown("### Data Notes")
         st.markdown("""
-            - **Graduation rates** in the Summary and Graduation Rates tabs come from IPEDS **Outcome Measures** reporting (columns `GR20XX`/`PGR20XX`), which track **all entering students** over an eight-year window. The most recent value shown is the 2023 outcome for cohorts that started in 2015.
+            - **Graduation rates** in the Summary and Graduation Rates tabs come from the IPEDS **Graduation Rate Survey** (columns `GR20XX`/`PGR20XX`), which tracks **first-time, full-time** degree-seeking students who complete within 150% of normal program time (six years for a bachelor's degree). The most recent value shown is the 2023 rate — at four-year institutions, the cohort that entered in 2017. Part-time and returning students are not counted in this measure.
             - **Enrollment metrics** pull from the IPEDS **Distance Education** collection (2020-2024) so the “Total,” “Exclusive Distance Ed,” and “Some Distance Ed” counts reflect the latest fall snapshot available.
             """)
 
@@ -433,9 +433,10 @@ class CollegeExplorerSection(BaseSection):
                 st.markdown("---")
                 st.markdown("#### Graduation Rates")
                 st.caption(
-                    "“Overall Graduation Rate” reflects the share of **all entering students** (full-time, part-time, Pell, and non-Pell) who "
-                    "completed a credential within eight years, using the IPEDS Outcome Measures series. The value shown for 2023 corresponds "
-                    "to students who first entered in 2015."
+                    "“Overall Graduation Rate” reflects the share of **first-time, full-time** degree-seeking students who "
+                    "completed a credential within 150% of normal program time (six years for bachelor's-degree seekers), from the "
+                    "IPEDS Graduation Rate Survey. The 2023 value at four-year institutions corresponds to the cohort that first "
+                    "entered in 2017. Part-time and returning students are not counted in this measure."
                 )
 
                 # Get the most recent year's data (2023)
@@ -1173,7 +1174,8 @@ class CollegeExplorerSection(BaseSection):
                 st.metric("Overall Trend", "Insufficient Data")
 
         st.caption(
-            "Rates reflect IPEDS Outcome Measures (eight-year completion window)."
+            "Rates reflect the IPEDS Graduation Rate Survey (first-time, full-time "
+            "students, 150% of normal time)."
         )
 
     def _get_canonical_grad_record(self, unit_id: int) -> Optional[pd.Series]:

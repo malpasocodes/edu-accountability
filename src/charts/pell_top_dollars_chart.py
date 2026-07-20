@@ -17,6 +17,12 @@ SECTOR_COLOR_SCALE = alt.Scale(
     range=["#2ca02c", "#9467bd", "#1f77b4", "#7f7f7f"],
 )
 
+# Rankings sum award years 2013-2022 only, so Pell totals stay commensurable
+# with the COD loan reports (which begin in 2013) and with institutions whose
+# consolidated UnitIDs carry no earlier Pell history (e.g., University of
+# Phoenix). The Pell trend charts keep the full 2008-2022 series.
+RANKING_START_YEAR = 2013
+
 
 @dataclass(frozen=True)
 class PellTopDollarResult:
@@ -44,6 +50,7 @@ def _prepare_top_dollar_dataframe(
         )
 
     year_columns = _identify_year_columns(pell_df.columns)
+    year_columns = [item for item in year_columns if item[0] >= RANKING_START_YEAR]
     if not year_columns:
         raise ValueError(
             "No year columns found in Pell dataset (expected columns named like 'YR2022')."

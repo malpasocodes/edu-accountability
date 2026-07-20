@@ -31,6 +31,12 @@ SECTOR_NAME_BY_CODE: Dict[str, str] = {
     "9": "Private, for-profit",
 }
 
+# Pell dollar sums are restricted to award years 2013-2022 so cross-institution
+# comparisons stay commensurable with the COD loan reports (which begin in
+# 2013) and with institutions whose consolidated UnitIDs carry no earlier
+# Pell history (e.g., University of Phoenix).
+RANKING_START_YEAR = 2013
+
 FieldRow = Dict[str, str]
 
 
@@ -52,16 +58,23 @@ def _calculate_average_pell_grad_rate(row: FieldRow) -> Optional[float]:
 
 
 def _calculate_total_pell_dollars(row: FieldRow) -> float:
-    """Calculate total Pell dollars across all available years."""
+    """Calculate total Pell dollars across award years 2013-2022."""
     total = 0.0
     for field_name, value in row.items():
-        if field_name.startswith("YR"):
-            cleaned = value.replace(",", "").strip()
-            if cleaned:
-                try:
-                    total += float(cleaned)
-                except ValueError:
-                    pass
+        if not field_name.startswith("YR"):
+            continue
+        try:
+            year = int(field_name[2:6])
+        except ValueError:
+            continue
+        if year < RANKING_START_YEAR:
+            continue
+        cleaned = value.replace(",", "").strip()
+        if cleaned:
+            try:
+                total += float(cleaned)
+            except ValueError:
+                pass
     return total
 
 

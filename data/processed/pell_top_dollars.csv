@@ -1,26 +1,26 @@
 rank,UnitID,Institution,Sector,PellDollars,PellDollarsBillions,YearsCovered
-1,484613,University of Phoenix-Arizona,"Private, for-profit",2099633987,2.100,2008-2022
-2,135717,Miami Dade College,Public,1819649908,1.820,2008-2022
-3,150987,Ivy Tech Community College,Public,1673206184,1.673,2008-2022
-4,104717,Grand Canyon University,"Private, for-profit",1406375962,1.406,2008-2022
-5,133951,Florida International University,Public,1351579143,1.352,2008-2022
-6,154022,Ashford University,"Private, for-profit",1270953931,1.271,2008-2022
-7,132903,University of Central Florida,Public,1234093248,1.234,2008-2022
-8,110608,California State University-Northridge,Public,1205099732,1.205,2008-2022
-9,433387,Western Governors University,"Private, not-for-profit",1193104174,1.193,2008-2022
-10,225423,Houston Community College,Public,1190107411,1.190,2008-2022
-11,232557,Liberty University,"Private, not-for-profit",1139806843,1.140,2008-2022
-12,138187,Valencia College,Public,1115288833,1.115,2008-2022
-13,104151,Arizona State University Campus Immersion,Public,1079399210,1.079,2008-2022
-14,183026,Southern New Hampshire University,"Private, not-for-profit",1049817619,1.050,2008-2022
-15,110583,California State University-Long Beach,Public,1013538208,1.014,2008-2022
-16,132709,Broward College,Public,970819154,0.971,2008-2022
-17,110565,California State University-Fullerton,Public,969205457,0.969,2008-2022
-18,227368,The University of Texas Rio Grande Valley,Public,968902622,0.969,2008-2022
-19,110592,California State University-Los Angeles,Public,949458910,0.949,2008-2022
-20,190521,CUNY Borough of Manhattan Community College,Public,946879333,0.947,2008-2022
-21,227182,Lone Star College System,Public,933070964,0.933,2008-2022
-22,224642,El Paso Community College,Public,901924279,0.902,2008-2022
-23,110617,California State University-Sacramento,Public,891590290,0.892,2008-2022
-24,142522,Brigham Young University-Idaho,"Private, not-for-profit",881982913,0.882,2008-2022
-25,225511,University of Houston,Public,877290898,0.877,2008-2022
+1,484613,University of Phoenix-Arizona,"Private, for-profit",2099633987,2.100,2013-2022
+2,135717,Miami Dade College,Public,1235094541,1.235,2013-2022
+3,150987,Ivy Tech Community College,Public,1177888368,1.178,2013-2022
+4,104717,Grand Canyon University,"Private, for-profit",1144819793,1.145,2013-2022
+5,133951,Florida International University,Public,1024317924,1.024,2013-2022
+6,183026,Southern New Hampshire University,"Private, not-for-profit",1017881062,1.018,2013-2022
+7,433387,Western Governors University,"Private, not-for-profit",1017464239,1.017,2013-2022
+8,132903,University of Central Florida,Public,944102008,0.944,2013-2022
+9,110608,California State University-Northridge,Public,924610465,0.925,2013-2022
+10,232557,Liberty University,"Private, not-for-profit",855122344,0.855,2013-2022
+11,110583,California State University-Long Beach,Public,765312318,0.765,2013-2022
+12,225423,Houston Community College,Public,764203029,0.764,2013-2022
+13,138187,Valencia College,Public,764081935,0.764,2013-2022
+14,110565,California State University-Fullerton,Public,751348609,0.751,2013-2022
+15,110592,California State University-Los Angeles,Public,747477554,0.747,2013-2022
+16,227368,The University of Texas Rio Grande Valley,Public,744262746,0.744,2013-2022
+17,104151,Arizona State University Campus Immersion,Public,731586205,0.732,2013-2022
+18,142522,Brigham Young University-Idaho,"Private, not-for-profit",731144391,0.731,2013-2022
+19,154022,Ashford University,"Private, for-profit",671129995,0.671,2013-2022
+20,110617,California State University-Sacramento,Public,669349102,0.669,2013-2022
+21,227182,Lone Star College System,Public,667964692,0.668,2013-2022
+22,190521,CUNY Borough of Manhattan Community College,Public,665548555,0.666,2013-2022
+23,225511,University of Houston,Public,662347238,0.662,2013-2022
+24,132709,Broward College,Public,661345461,0.661,2013-2022
+25,139940,Georgia State University,Public,615631024,0.616,2013-2022

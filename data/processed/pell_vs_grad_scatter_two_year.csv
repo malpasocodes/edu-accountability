@@ -1,975 +1,1019 @@
 UnitID,Institution,Sector,GraduationRate,PellDollars,PellDollarsBillions,YearsCovered
-150987,Ivy Tech Community College,Public,27.00,1673206184,1.673,2008-2022
-190521,CUNY Borough of Manhattan Community College,Public,29.00,946879333,0.947,2008-2022
-224642,El Paso Community College,Public,22.00,901924279,0.902,2008-2022
-228547,Tarrant County College District,Public,23.00,862646039,0.863,2008-2022
-202356,Cuyahoga Community College District,Public,17.00,685032973,0.685,2008-2022
-215239,Community College of Philadelphia,Public,17.00,645381928,0.645,2008-2022
-187532,Central New Mexico Community College,Public,31.00,597049042,0.597,2008-2022
-158662,Delgado Community College,Public,18.00,596360906,0.596,2008-2022
-232946,Northern Virginia Community College,Public,26.00,588079214,0.588,2008-2022
-209746,Portland Community College,Public,18.00,567711898,0.568,2008-2022
-202222,Columbus State Community College,Public,27.00,555469390,0.555,2008-2022
-119164,Mt San Antonio College,Public,32.00,512456813,0.512,2008-2022
-117645,Long Beach City College,Public,22.00,509304321,0.509,2008-2022
-244437,Georgia State University-Perimeter College,Public,19.00,507125675,0.507,2008-2022
-172635,Wayne County Community College District,Public,14.00,498010942,0.498,2008-2022
-233772,Tidewater Community College,Public,21.00,472049062,0.472,2008-2022
-175786,Hinds Community College,Public,36.00,465763256,0.466,2008-2022
-434672,Community College of Baltimore County,Public,16.00,462980459,0.463,2008-2022
-113856,East Los Angeles College,Public,25.00,460267490,0.460,2008-2022
-190628,CUNY LaGuardia Community College,Public,35.00,457959183,0.458,2008-2022
-105525,Pima Community College,Public,19.00,453882804,0.454,2008-2022
-171535,Oakland Community College,Public,30.00,448975259,0.449,2008-2022
-190619,CUNY Kingsborough Community College,Public,37.00,441589104,0.442,2008-2022
-111887,Cerritos College,Public,28.00,440774040,0.441,2008-2022
-193478,Nassau Community College,Public,33.00,439971386,0.440,2008-2022
-217475,Community College of Rhode Island,Public,22.00,438213076,0.438,2008-2022
-114789,Fresno City College,Public,22.00,433528422,0.434,2008-2022
-218894,Trident Technical College,Public,22.00,424115044,0.424,2008-2022
-121044,Pasadena City College,Public,31.00,418315257,0.418,2008-2022
-193326,Monroe Community College,Public,27.00,416703326,0.417,2008-2022
-190673,CUNY Queensborough Community College,Public,31.00,415464015,0.415,2008-2022
-190530,CUNY Bronx Community College,Public,28.00,413173201,0.413,2008-2022
-198534,Fayetteville Technical Community College,Public,29.00,400370898,0.400,2008-2022
-109208,American River College,Public,22.00,396562213,0.397,2008-2022
-230746,Salt Lake Community College,Public,24.00,386454096,0.386,2008-2022
-207935,Tulsa Community College,Public,22.00,386376909,0.386,2008-2022
-239248,Milwaukee Area Technical College,Public,31.00,385025793,0.385,2008-2022
-198260,Central Piedmont Community College,Public,22.00,380965032,0.381,2008-2022
-199856,Wake Technical Community College,Public,30.00,380499899,0.380,2008-2022
-198622,Guilford Technical Community College,Public,25.00,368011431,0.368,2008-2022
-366395,Suffolk County Community College,Public,33.00,366933000,0.367,2008-2022
-212878,Harrisburg Area Community College,Public,19.00,359999512,0.360,2008-2022
-163426,Montgomery College,Public,19.00,351963765,0.352,2008-2022
-122658,San Joaquin Delta College,Public,27.00,341336853,0.341,2008-2022
-144865,College of DuPage,Public,23.00,338264176,0.338,2008-2022
-113980,El Camino Community College District,Public,27.00,337139473,0.337,2008-2022
-184995,Hudson County Community College,Public,21.00,326023146,0.326,2008-2022
-123800,Southwestern College,Public,26.00,325727625,0.326,2008-2022
-105154,Mesa Community College,Public,17.00,323728921,0.324,2008-2022
-121901,Riverside City College,Public,26.00,321302349,0.321,2008-2022
-223816,Central Texas College,Public,16.00,317810238,0.318,2008-2022
-184481,Essex County College,Public,21.00,316753494,0.317,2008-2022
-111939,Chaffey College,Public,25.00,315843633,0.316,2008-2022
-170790,Macomb Community College,Public,18.00,315070748,0.315,2008-2022
-170657,Lansing Community College,Public,18.00,313804769,0.314,2008-2022
-115001,Glendale Community College,Public,25.00,309676320,0.310,2008-2022
-191083,Erie Community College,Public,31.00,309511189,0.310,2008-2022
-117706,Los Angeles Pierce College,Public,25.00,308724953,0.309,2008-2022
-199333,Pitt Community College,Public,27.00,307870215,0.308,2008-2022
-147378,Moraine Valley Community College,Public,26.00,307329021,0.307,2008-2022
-140331,Chattahoochee Technical College,Public,29.00,306955802,0.307,2008-2022
-210605,Community College of Allegheny County,Public,22.00,304589165,0.305,2008-2022
-221485,Southwest Tennessee Community College,Public,17.00,300409741,0.300,2008-2022
-114859,Fullerton College,Public,26.00,298697781,0.299,2008-2022
-153737,Kirkwood Community College,Public,31.00,297461093,0.297,2008-2022
-122180,Sacramento City College,Public,17.00,296035486,0.296,2008-2022
-205841,Stark State College,Public,28.00,294880315,0.295,2008-2022
-209038,Lane Community College,Public,22.00,294535890,0.295,2008-2022
-117788,Los Angeles City College,Public,18.00,293711612,0.294,2008-2022
-117733,Los Angeles Valley College,Public,20.00,286430544,0.286,2008-2022
-165112,Bunker Hill Community College,Public,20.00,285770681,0.286,2008-2022
-153214,Des Moines Area Community College,Public,26.00,285046788,0.285,2008-2022
-107664,University of Arkansas-Pulaski Technical College,Public,27.00,279237605,0.279,2008-2022
-125091,Victor Valley College,Public,22.00,278540913,0.279,2008-2022
-227377,Texas Southmost College,Public,29.00,278456084,0.278,2008-2022
-112190,City College of San Francisco,Public,20.00,276790589,0.277,2008-2022
-176071,Mississippi Gulf Coast Community College,Public,36.00,270579643,0.271,2008-2022
-156921,Jefferson Community and Technical College,Public,25.00,265941126,0.266,2008-2022
-115861,Imperial Valley College,Public,37.00,265521521,0.266,2008-2022
-190585,CUNY Hostos Community College,Public,32.00,265001236,0.265,2008-2022
-110246,Butte College,Public,34.00,264736448,0.265,2008-2022
-183743,Bergen Community College,Public,32.00,264038289,0.264,2008-2022
-177995,Metropolitan Community College-Kansas City,Public,20.00,262475203,0.262,2008-2022
-170055,Grand Rapids Community College,Public,23.00,261734845,0.262,2008-2022
-139278,West Georgia Technical College,Public,35.00,261658366,0.262,2008-2022
-123217,College of the Sequoias,Public,31.00,261293489,0.261,2008-2022
-187620,New Mexico State University-Dona Ana,Public,23.00,261028488,0.261,2008-2022
-156392,Bluegrass Community and Technical College,Public,29.00,260776040,0.261,2008-2022
-120342,Orange Coast College,Public,32.00,259566395,0.260,2008-2022
-123341,Sierra College,Public,28.00,259398459,0.259,2008-2022
-226578,McLennan Community College,Public,22.00,258077722,0.258,2008-2022
-122339,San Diego City College,Public,19.00,255250711,0.255,2008-2022
-218353,Midlands Technical College,Public,20.00,254693917,0.255,2008-2022
-169521,Delta College,Public,21.00,253409543,0.253,2008-2022
-139986,Southern Crescent Technical College,Public,44.00,252048837,0.252,2008-2022
-204945,Owens Community College,Public,39.00,249596044,0.250,2008-2022
-187198,UCNJ Union College of Union County  NJ,Public,29.00,246930210,0.247,2008-2022
-118718,Merced College,Public,28.00,246700211,0.247,2008-2022
-197294,SUNY Westchester Community College,Public,27.00,246640088,0.247,2008-2022
-169275,Mott Community College,Public,20.00,245038436,0.245,2008-2022
-119216,Mt San Jacinto Community College District,Public,24.00,244890081,0.245,2008-2022
-104160,Arizona Western College,Public,21.00,244607359,0.245,2008-2022
-207449,Oklahoma City Community College,Public,16.00,241951471,0.242,2008-2022
-185536,Middlesex College,Public,29.00,241782597,0.242,2008-2022
-420398,Northwest Vista College,Public,25.00,239406224,0.239,2008-2022
-203331,Eastern Gateway Community College,Public,15.00,239167164,0.239,2008-2022
-176178,Northwest Mississippi Community College,Public,29.00,234818878,0.235,2008-2022
-101514,John C Calhoun State Community College,Public,27.00,234350878,0.234,2008-2022
-181303,Metropolitan Community College Area,Public,16.00,230761158,0.231,2008-2022
-163657,Prince George's Community College,Public,12.00,229898574,0.230,2008-2022
-172617,Washtenaw Community College,Public,28.00,229750646,0.230,2008-2022
-437103,Baton Rouge Community College,Public,21.00,229625743,0.230,2008-2022
-117724,Los Angeles Trade Technical College,Public,19.00,227874273,0.228,2008-2022
-138840,Atlanta Technical College,Public,37.00,226840375,0.227,2008-2022
-186034,Passaic County Community College,Public,17.00,225876454,0.226,2008-2022
-105428,Phoenix College,Public,19.00,225812860,0.226,2008-2022
-115296,Grossmont College,Public,27.00,225549259,0.226,2008-2022
-222576,Amarillo College,Public,33.00,223415216,0.223,2008-2022
-139384,Georgia Northwestern Technical College,Public,46.00,221590997,0.222,2008-2022
-140012,Gwinnett Technical College,Public,34.00,221328920,0.221,2008-2022
-211927,Delaware County Community College,Public,17.00,220242908,0.220,2008-2022
-198552,Forsyth Technical Community College,Public,30.00,217722621,0.218,2008-2022
-157711,Somerset Community College,Public,33.00,214477799,0.214,2008-2022
-175829,Itawamba Community College,Public,43.00,213674088,0.214,2008-2022
-487320,Texas State Technical College,Public,41.00,211803054,0.212,2008-2022
-144209,City Colleges of Chicago-Harold Washington College,Public,21.00,211026851,0.211,2008-2022
-193283,Mohawk Valley Community College,Public,36.00,207270722,0.207,2008-2022
-158431,Bossier Parish Community College,Public,19.00,207245302,0.207,2008-2022
-153311,Eastern Iowa Community College District,Public,34.00,207241225,0.207,2008-2022
-214379,Northampton County Area Community College,Public,29.00,204636421,0.205,2008-2022
-483045,Central Georgia Technical College,Public,43.00,204423461,0.204,2008-2022
-221184,Nashville State Community College,Public,22.00,204001071,0.204,2008-2022
-113573,College of the Desert,Public,27.00,203668570,0.204,2008-2022
-183938,Camden County College,Public,24.00,202789159,0.203,2008-2022
-218025,Florence-Darlington Technical College,Public,16.00,202372143,0.202,2008-2022
-123527,San Bernardino Valley College,Public,20.00,201582921,0.202,2008-2022
-113333,De Anza College,Public,43.00,201267349,0.201,2008-2022
-194222,Onondaga Community College,Public,24.00,200710275,0.201,2008-2022
-117052,Reedley College,Public,28.00,199507929,0.200,2008-2022
-219824,Chattanooga State Community College,Public,26.00,199034947,0.199,2008-2022
-218140,Horry-Georgetown Technical College,Public,31.00,197149061,0.197,2008-2022
-228158,South Plains College,Public,21.00,196603664,0.197,2008-2022
-112172,Citrus College,Public,32.00,195277630,0.195,2008-2022
-174136,Minneapolis Community and Technical College,Public,25.00,193892308,0.194,2008-2022
-120971,Palomar College,Public,24.00,193836983,0.194,2008-2022
-170541,Kalamazoo Valley Community College,Public,20.00,193617510,0.194,2008-2022
-228316,Southwest Texas Junior College,Public,31.00,193194722,0.193,2008-2022
-101240,Gadsden State Community College,Public,27.00,192969532,0.193,2008-2022
-199494,Rowan-Cabarrus Community College,Public,31.00,192379813,0.192,2008-2022
-223427,Blinn College District,Public,15.00,190112115,0.190,2008-2022
-198154,Cape Fear Community College,Public,36.00,189223083,0.189,2008-2022
-221643,Pellissippi State Community College,Public,33.00,188723143,0.189,2008-2022
-218520,Piedmont Technical College,Public,31.00,188448558,0.188,2008-2022
-175810,Holmes Community College,Public,40.00,188378328,0.188,2008-2022
-122889,Santa Barbara City College,Public,29.00,187410534,0.187,2008-2022
-113096,Cosumnes River College,Public,19.00,185950146,0.186,2008-2022
-138682,Albany Technical College,Public,43.00,185708148,0.186,2008-2022
-183859,Brookdale Community College,Public,33.00,185151252,0.185,2008-2022
-149842,William Rainey Harper College,Public,34.00,184416283,0.184,2008-2022
-140942,Savannah Technical College,Public,41.00,182949057,0.183,2008-2022
-227854,St Philip's College,Public,18.00,182716364,0.183,2008-2022
-165033,Bristol Community College,Public,28.00,180108197,0.180,2008-2022
-176239,Pearl River Community College,Public,38.00,179463267,0.179,2008-2022
-218830,Spartanburg Community College,Public,25.00,179362676,0.179,2008-2022
-123013,Santa Rosa Junior College,Public,33.00,179125823,0.179,2008-2022
-455114,College of Western Idaho,Public,25.00,179039357,0.179,2008-2022
-138956,Augusta Technical College,Public,36.00,178474762,0.178,2008-2022
-175315,Century College,Public,31.00,177588994,0.178,2008-2022
-125028,Ventura College,Public,29.00,176405459,0.176,2008-2022
-232414,J Sargeant Reynolds Community College,Public,21.00,176292832,0.176,2008-2022
-246354,Palo Alto College,Public,19.00,175934159,0.176,2008-2022
-111461,College of the Canyons,Public,29.00,174869030,0.175,2008-2022
-155210,Johnson County Community College,Public,27.00,173756627,0.174,2008-2022
-191719,Hudson Valley Community College,Public,35.00,173110471,0.173,2008-2022
-101286,George C Wallace Community College-Dothan,Public,33.00,171676163,0.172,2008-2022
-167534,Quinsigamond Community College,Public,28.00,171115209,0.171,2008-2022
-146296,Joliet Junior College,Public,19.00,171065246,0.171,2008-2022
-143215,Southwestern Illinois College,Public,32.00,170633387,0.171,2008-2022
-222053,Volunteer State Community College,Public,26.00,168936549,0.169,2008-2022
-414461,Mech-Tech College,"Private, for-profit",56.00,168538743,0.169,2008-2022
-384333,Estrella Mountain Community College,Public,19.00,167919399,0.168,2008-2022
-144218,City Colleges of Chicago-Wilbur Wright College,Public,28.00,166779362,0.167,2008-2022
-141255,Wiregrass Georgia Technical College,Public,45.00,165930745,0.166,2008-2022
-183655,Atlantic Cape Community College,Public,24.00,165011278,0.165,2008-2022
-175652,East Mississippi Community College,Public,34.00,164169668,0.164,2008-2022
-115126,Golden West College,Public,29.00,163589367,0.164,2008-2022
-101295,George C Wallace State Community College-Hanceville,Public,42.00,163556070,0.164,2008-2022
-144166,City Colleges of Chicago-Malcolm X College,Public,28.00,163148889,0.163,2008-2022
-244446,Georgia Piedmont Technical College,Public,39.00,162766638,0.163,2008-2022
-175041,Saint Paul College,Public,32.00,161618308,0.162,2008-2022
-129367,Connecticut State Community College,Public,23.00,161514280,0.162,2008-2022
-181640,Southeast Community College Area,Public,33.00,161047809,0.161,2008-2022
-218885,Tri-County Technical College,Public,32.00,161033631,0.161,2008-2022
-367459,NorthWest Arkansas Community College,Public,22.00,160840766,0.161,2008-2022
-154800,Butler Community College,Public,26.00,159752755,0.160,2008-2022
-101505,Jefferson State Community College,Public,19.00,158448680,0.158,2008-2022
-113634,Diablo Valley College,Public,31.00,157797060,0.158,2008-2022
-149532,Triton College,Public,17.00,157647194,0.158,2008-2022
-139357,Columbus Technical College,Public,29.00,156977761,0.157,2008-2022
-189547,SUNY Broome Community College,Public,33.00,156050740,0.156,2008-2022
-114266,Evergreen Valley College,Public,26.00,155962970,0.156,2008-2022
-238759,Gateway Technical College,Public,47.00,154351774,0.154,2008-2022
-233754,Virginia Peninsula Community College,Public,19.00,154343328,0.154,2008-2022
-221908,Northeast State Community College,Public,35.00,153529023,0.154,2008-2022
-146685,Lincoln Land Community College,Public,39.00,153307207,0.153,2008-2022
-214111,Montgomery County Community College,Public,23.00,153020827,0.153,2008-2022
-167376,Northern Essex Community College,Public,23.00,152756258,0.153,2008-2022
-179645,Three Rivers College,Public,26.00,152473481,0.152,2008-2022
-167905,Springfield Technical Community College,Public,35.00,150955149,0.151,2008-2022
-126863,Community College of Aurora,Public,19.00,150812247,0.151,2008-2022
-156648,Elizabethtown Community and Technical College,Public,33.00,149152757,0.149,2008-2022
-228608,Temple College,Public,19.00,148965276,0.149,2008-2022
-226019,Kilgore College,Public,31.00,148614926,0.149,2008-2022
-111920,Chabot College,Public,23.00,147346795,0.147,2008-2022
-161767,Anne Arundel Community College,Public,37.00,147263896,0.147,2008-2022
-198376,Davidson-Davie Community College,Public,37.00,146909506,0.147,2008-2022
-161545,Southern Maine Community College,Public,26.00,146836869,0.147,2008-2022
-110334,Cabrillo College,Public,26.00,146795549,0.147,2008-2022
-198570,Gaston College,Public,42.00,146671473,0.147,2008-2022
-155292,Kansas City Kansas Community College,Public,31.00,146286556,0.146,2008-2022
-197887,Asheville-Buncombe Technical Community College,Public,30.00,146109006,0.146,2008-2022
-218858,Central Carolina Technical College,Public,19.00,145737069,0.146,2008-2022
-174428,Normandale Community College,Public,23.00,145443339,0.145,2008-2022
-101161,Coastal Alabama Community College,Public,23.00,145181562,0.145,2008-2022
-208318,Central Oregon Community College,Public,24.00,144951437,0.145,2008-2022
-434061,South Louisiana Community College,Public,31.00,144903206,0.145,2008-2022
-115393,Hartnell College,Public,14.00,143074631,0.143,2008-2022
-239488,Northeast Wisconsin Technical College,Public,51.00,142936981,0.143,2008-2022
-176169,Northeast Mississippi Community College,Public,29.00,142884320,0.143,2008-2022
-218991,York Technical College,Public,26.00,142871541,0.143,2008-2022
-122205,Saddleback College,Public,27.00,142232268,0.142,2008-2022
-101569,Lawson State Community College,Public,22.00,141007700,0.141,2008-2022
-145682,Illinois Central College,Public,36.00,139655884,0.140,2008-2022
-185873,Ocean County College,Public,38.00,139512291,0.140,2008-2022
-117867,Los Angeles Mission College,Public,21.00,139394202,0.139,2008-2022
-117690,Los Angeles Harbor College,Public,20.00,138589911,0.139,2008-2022
-213525,Lehigh Carbon Community College,Public,22.00,137757013,0.138,2008-2022
-161864,Baltimore City Community College,Public,30.00,137513250,0.138,2008-2022
-126119,Yuba College,Public,24.00,137484420,0.137,2008-2022
-148380,Rock Valley College,Public,32.00,136822940,0.137,2008-2022
-190840,Dutchess Community College,Public,32.00,136744646,0.137,2008-2022
-198455,Durham Technical Community College,Public,22.00,136680957,0.137,2008-2022
-188100,San Juan College,Public,35.00,136437623,0.136,2008-2022
-167312,North Shore Community College,Public,31.00,135489761,0.135,2008-2022
-175519,Coahoma Community College,Public,33.00,135080906,0.135,2008-2022
-175883,Jones County Junior College,Public,32.00,134942451,0.135,2008-2022
-117247,Laney College,Public,18.00,134923955,0.135,2008-2022
-120421,Oxnard College,Public,24.00,134634728,0.135,2008-2022
-146472,College of Lake County,Public,32.00,133862210,0.134,2008-2022
-191339,Genesee Community College,Public,33.00,133850909,0.134,2008-2022
-183877,Rowan College at Burlington County,Public,32.00,133699109,0.134,2008-2022
-153630,Iowa Western Community College,Public,28.00,133678111,0.134,2008-2022
-102067,Shelton State Community College,Public,22.00,133336100,0.133,2008-2022
-221397,Roane State Community College,Public,34.00,133328178,0.133,2008-2022
-222062,Walters State Community College,Public,32.00,133131529,0.133,2008-2022
-144944,Elgin Community College,Public,31.00,133080218,0.133,2008-2022
-119137,Moorpark College,Public,33.00,132945758,0.133,2008-2022
-108807,Allan Hancock College,Public,23.00,132579178,0.133,2008-2022
-209940,Rogue Community College,Public,17.00,132494188,0.132,2008-2022
-166887,Middlesex Community College,Public,23.00,132142987,0.132,2008-2022
-166133,Holyoke Community College,Public,24.00,131834777,0.132,2008-2022
-113218,Cuyamaca College,Public,25.00,131530341,0.132,2008-2022
-207670,Rose State College,Public,16.00,131414858,0.131,2008-2022
-198251,Central Carolina Community College,Public,40.00,129980640,0.130,2008-2022
-246813,Athens Technical College,Public,40.00,129038629,0.129,2008-2022
-144157,City Colleges of Chicago-Kennedy-King College,Public,27.00,128806059,0.129,2008-2022
-203599,Lakeland Community College,Public,19.00,128766761,0.129,2008-2022
-147916,Parkland College,Public,26.00,128325279,0.128,2008-2022
-104346,Central Arizona College,Public,12.00,127779658,0.128,2008-2022
-199786,Alamance Community College,Public,36.00,125694186,0.126,2008-2022
-166823,Massasoit Community College,Public,24.00,125622059,0.126,2008-2022
-193946,Niagara County Community College,Public,34.00,125192140,0.125,2008-2022
-148007,Prairie State College,Public,18.00,125050461,0.125,2008-2022
-147411,Morton College,Public,22.00,125044695,0.125,2008-2022
-102429,Bevill State Community College,Public,33.00,124834682,0.125,2008-2022
-157483,West Kentucky Community and Technical College,Public,47.00,124460010,0.124,2008-2022
-213659,Luzerne County Community College,Public,23.00,124004629,0.124,2008-2022
-176008,Mississippi Delta Community College,Public,25.00,123752410,0.124,2008-2022
-162779,Howard Community College,Public,18.00,123669287,0.124,2008-2022
-117894,Los Medanos College,Public,29.00,123495473,0.123,2008-2022
-487162,Southern Regional Technical College,Public,49.00,123022292,0.123,2008-2022
-175573,Copiah-Lincoln Community College,Public,42.00,122867127,0.123,2008-2022
-364025,Chandler-Gilbert Community College,Public,21.00,122653136,0.123,2008-2022
-198233,Catawba Valley Community College,Public,32.00,122646955,0.123,2008-2022
-227401,Paris Junior College,Public,27.00,122291172,0.122,2008-2022
-101736,Northwest Shoals Community College,Public,35.00,121425352,0.121,2008-2022
-121707,College of the Redwoods,Public,24.00,120912087,0.121,2008-2022
-185509,Mercer County Community College,Public,24.00,120790760,0.121,2008-2022
-157553,Big Sandy Community and Technical College,Public,30.00,120006815,0.120,2008-2022
-191199,Finger Lakes Community College,Public,33.00,119205461,0.119,2008-2022
-215585,Reading Area Community College,Public,20.00,119008982,0.119,2008-2022
-149727,Waubonsee Community College,Public,29.00,118967581,0.119,2008-2022
-116439,Irvine Valley College,Public,30.00,118886964,0.119,2008-2022
-117715,Los Angeles Southwest College,Public,15.00,118760276,0.119,2008-2022
-179539,State Fair Community College,Public,31.00,118596677,0.119,2008-2022
-184791,Rowan College of South Jersey-Gloucester Campus,Public,27.00,117856742,0.118,2008-2022
-238722,Fox Valley Technical College,Public,64.00,117406970,0.117,2008-2022
-178448,Moberly Area Community College,Public,29.00,117121410,0.117,2008-2022
-203155,Hocking College,Public,30.00,116867028,0.117,2008-2022
-162122,College of Southern Maryland,Public,24.00,116656927,0.117,2008-2022
-232450,Brightpoint Community College,Public,27.00,116586932,0.117,2008-2022
-199838,Vance-Granville Community College,Public,31.00,116573281,0.117,2008-2022
-122384,San Diego Miramar College,Public,21.00,116284784,0.116,2008-2022
-251260,Southern Union State Community College,Public,29.00,116107085,0.116,2008-2022
-209074,Linn-Benton Community College,Public,13.00,114123700,0.114,2008-2022
-173559,Minnesota State Community and Technical College,Public,40.00,114017302,0.114,2008-2022
-143279,Black Hawk College,Public,28.00,113497193,0.113,2008-2022
-174376,North Hennepin Community College,Public,25.00,112806012,0.113,2008-2022
-160649,Southern University at Shreveport,Public,18.00,112671258,0.113,2008-2022
-216825,Westmoreland County Community College,Public,26.00,112305766,0.112,2008-2022
-149365,South Suburban College,Public,17.00,112216935,0.112,2008-2022
-121363,Porterville College,Public,29.00,112070137,0.112,2008-2022
-220400,Jackson State Community College,Public,28.00,111803865,0.112,2008-2022
-224110,North Central Texas College,Public,22.00,111785357,0.112,2008-2022
-229841,Wharton County Junior College,Public,24.00,111697167,0.112,2008-2022
-177135,Crowder College,Public,36.00,110437280,0.110,2008-2022
-199740,Stanly Community College,Public,38.00,110384124,0.110,2008-2022
-460394,Moreno Valley College,Public,22.00,110335716,0.110,2008-2022
-198330,Coastal Carolina Community College,Public,32.00,110322784,0.110,2008-2022
-233949,Virginia Western Community College,Public,33.00,110175071,0.110,2008-2022
-102030,Bishop State Community College,Public,25.00,109434026,0.109,2008-2022
-166957,Mount Wachusett Community College,Public,27.00,108771228,0.109,2008-2022
-199634,Sandhills Community College,Public,31.00,108529391,0.109,2008-2022
-105206,Mohave Community College,Public,16.00,108491605,0.108,2008-2022
-195322,Schenectady County Community College,Public,25.00,108298240,0.108,2008-2022
-154572,Western Iowa Tech Community College,Public,49.00,108226653,0.108,2008-2022
-153524,Iowa Central Community College,Public,36.00,108154257,0.108,2008-2022
-195058,Rockland Community College,Public,33.00,107584244,0.108,2008-2022
-172963,Anoka-Ramsey Community College,Public,22.00,107498957,0.107,2008-2022
-142443,North Idaho College,Public,27.00,107233048,0.107,2008-2022
-144184,City Colleges of Chicago-Harry S Truman College,Public,23.00,106995571,0.107,2008-2022
-140678,North Georgia Technical College,Public,39.00,106910526,0.107,2008-2022
-208406,Clackamas Community College,Public,29.00,106696298,0.107,2008-2022
-198118,Caldwell Community College and Technical Institute,Public,29.00,105933813,0.106,2008-2022
-106980,National Park College,Public,30.00,105854292,0.106,2008-2022
-141006,South Georgia Technical College,Public,50.00,105093589,0.105,2008-2022
-226204,Lee College,Public,52.00,104903509,0.105,2008-2022
-153472,Indian Hills Community College,Public,41.00,104664032,0.105,2008-2022
-157331,Maysville Community and Technical College,Public,43.00,104553955,0.105,2008-2022
-240116,Chippewa Valley Technical College,Public,53.00,104475497,0.104,2008-2022
-219888,Columbia State Community College,Public,29.00,104302005,0.104,2008-2022
-177676,Jefferson College,Public,32.00,103909977,0.104,2008-2022
-366465,Ogeechee Technical College,Public,51.00,103863631,0.104,2008-2022
-140243,Lanier Technical College,Public,41.00,103477660,0.103,2008-2022
-171155,Mid Michigan College,Public,26.00,103350673,0.103,2008-2022
-199476,Robeson Community College,Public,34.00,103090752,0.103,2008-2022
-191986,Jamestown Community College,Public,38.00,102808884,0.103,2008-2022
-157739,Southeast Kentucky Community & Technical College,Public,39.00,100306650,0.100,2008-2022
-156338,Southcentral Kentucky Community and Technical College,Public,40.00,99680797,0.100,2008-2022
-199449,Richmond Community College,Public,34.00,99657298,0.100,2008-2022
-112686,Compton College,Public,17.00,99202587,0.099,2008-2022
-194240,Orange County Community College,Public,29.00,98938203,0.099,2008-2022
-101897,Northeast Alabama Community College,Public,42.00,98525749,0.099,2008-2022
-184205,Rowan College of South Jersey-Cumberland Campus,Public,33.00,98125615,0.098,2008-2022
-144193,City Colleges of Chicago-Richard J Daley College,Public,31.00,98047263,0.098,2008-2022
-198774,Johnston Community College,Public,38.00,97477257,0.097,2008-2022
-173708,Hennepin Technical College,Public,37.00,97372593,0.097,2008-2022
-122746,San Jose City College,Public,23.00,96776760,0.097,2008-2022
-227225,Northeast Texas Community College,Public,37.00,96262340,0.096,2008-2022
-113193,Cuesta College,Public,32.00,96212962,0.096,2008-2022
-211307,Bucks County Community College,Public,20.00,96039395,0.096,2008-2022
-170550,Kellogg Community College,Public,13.00,95954137,0.096,2008-2022
-105792,South Mountain Community College,Public,14.00,95530269,0.096,2008-2022
-175935,Meridian Community College,Public,33.00,95157855,0.095,2008-2022
-176354,Southwest Mississippi Community College,Public,46.00,95049922,0.095,2008-2022
-460464,Norco College,Public,24.00,94866864,0.095,2008-2022
-174738,Rochester Community and Technical College,Public,30.00,93921815,0.094,2008-2022
-155195,Hutchinson Community College,Public,35.00,93918670,0.094,2008-2022
-112826,Contra Costa College,Public,22.00,93421441,0.093,2008-2022
-153445,Hawkeye Community College,Public,26.00,93349462,0.093,2008-2022
-186645,Raritan Valley Community College,Public,32.00,93160596,0.093,2008-2022
-174756,St Cloud Technical and Community College,Public,35.00,93150302,0.093,2008-2022
-170620,Lake Michigan College,Public,21.00,93044525,0.093,2008-2022
-199908,Western Piedmont Community College,Public,36.00,92934857,0.093,2008-2022
-247940,Owensboro Community and Technical College,Public,41.00,92879041,0.093,2008-2022
-262031,St Charles Community College,Public,23.00,91929186,0.092,2008-2022
-221096,Motlow State Community College,Public,36.00,91321985,0.091,2008-2022
-222822,Angelina College,Public,20.00,91288590,0.091,2008-2022
-240170,Western Technical College,Public,52.00,91229226,0.091,2008-2022
-448594,Lemoore College,Public,28.00,90935228,0.091,2008-2022
-198321,Cleveland Community College,Public,29.00,90836236,0.091,2008-2022
-156231,Ashland Community and Technical College,Public,42.00,90645446,0.091,2008-2022
-161077,Central Maine Community College,Public,34.00,90280466,0.090,2008-2022
-198817,Lenoir Community College,Public,33.00,89982207,0.090,2008-2022
-157438,Gateway Community and Technical College,Public,41.00,89713976,0.090,2008-2022
-118930,Mission College,Public,18.00,89658439,0.090,2008-2022
-196565,Tompkins Cortland Community College,Public,33.00,89590124,0.090,2008-2022
-156790,Hazard Community and Technical College,Public,39.00,89276532,0.089,2008-2022
-156860,Hopkinsville Community College,Public,29.00,89120298,0.089,2008-2022
-180902,Central Community College,Public,52.00,88732954,0.089,2008-2022
-229504,Vernon College,Public,27.00,88648648,0.089,2008-2022
-198491,Edgecombe Community College,Public,33.00,88597019,0.089,2008-2022
-189839,Cayuga County Community College,Public,29.00,88451290,0.088,2008-2022
-218487,Orangeburg Calhoun Technical College,Public,34.00,88112363,0.088,2008-2022
-147800,Oakton College,Public,16.00,87812392,0.088,2008-2022
-203386,Hondros College of Nursing,"Private, for-profit",45.00,87557742,0.088,2008-2022
-184180,County College of Morris,Public,37.00,87499952,0.087,2008-2022
-146603,Lewis and Clark Community College,Public,48.00,86857415,0.087,2008-2022
-175643,East Central Community College,Public,41.00,86825234,0.087,2008-2022
-104425,Cochise County Community College District,Public,20.00,86824719,0.087,2008-2022
-105747,Scottsdale Community College,Public,20.00,86817918,0.087,2008-2022
-178217,Mineral Area College,Public,42.00,86807650,0.087,2008-2022
-154110,Northeast Iowa Community College,Public,39.00,86799888,0.087,2008-2022
-141811,Leeward Community College,Public,27.00,86792099,0.087,2008-2022
-146506,Lake Land College,Public,54.00,86488678,0.086,2008-2022
-230861,Community College of Vermont,Public,18.00,86126588,0.086,2008-2022
-198987,Mitchell Community College,Public,37.00,86125237,0.086,2008-2022
-223320,Coastal Bend College,Public,28.00,85922977,0.086,2008-2022
-146418,Kishwaukee College,Public,36.00,85687800,0.086,2008-2022
-172291,St Clair County Community College,Public,28.00,85399563,0.085,2008-2022
-228699,Texarkana College,Public,43.00,85289715,0.085,2008-2022
-483212,Louisiana Delta Community College,Public,33.00,84833040,0.085,2008-2022
-160579,SOWELA Technical Community College,Public,47.00,84170142,0.084,2008-2022
-106625,Black River Technical College,Public,55.00,84037183,0.084,2008-2022
-187958,University of New Mexico-Gallup Campus,Public,22.00,84018322,0.084,2008-2022
-144175,City Colleges of Chicago-Olive-Harvey College,Public,52.00,83775378,0.084,2008-2022
-233639,Southside Virginia Community College,Public,33.00,83133072,0.083,2008-2022
-232195,Germanna Community College,Public,32.00,83014503,0.083,2008-2022
-199926,Wilkes Community College,Public,44.00,82677851,0.083,2008-2022
-206923,Carl Albert State College,Public,51.00,82581077,0.083,2008-2022
-239460,Northcentral Technical College,Public,45.00,82312097,0.082,2008-2022
-192022,Jefferson Community College,Public,29.00,82084751,0.082,2008-2022
-171304,Muskegon Community College,Public,20.00,81939377,0.082,2008-2022
-146205,John A Logan College,Public,31.00,81908114,0.082,2008-2022
-109907,Barstow Community College,Public,17.00,81633104,0.082,2008-2022
-162557,Frederick Community College,Public,45.00,80148359,0.080,2008-2022
-106449,Arkansas State University-Beebe,Public,42.00,79809073,0.080,2008-2022
-159407,Louisiana State University-Eunice,Public,22.00,79721717,0.080,2008-2022
-420431,Oconee Fall Line Technical College,Public,40.00,79521791,0.080,2008-2022
-207281,Northern Oklahoma College,Public,37.00,79269936,0.079,2008-2022
-238014,West Virginia Northern Community College,Public,35.00,79191140,0.079,2008-2022
-191612,Herkimer County Community College,Public,33.00,79121396,0.079,2008-2022
-225371,Hill College,Public,24.00,78939082,0.079,2008-2022
-101301,George C Wallace State Community College-Selma,Public,29.00,78730677,0.079,2008-2022
-190442,SUNY Corning Community College,Public,34.00,78580036,0.079,2008-2022
-219879,Cleveland State Community College,Public,27.00,78501073,0.079,2008-2022
-444219,Folsom Lake College,Public,21.00,78376056,0.078,2008-2022
-188438,SUNY Adirondack,Public,29.00,77959326,0.078,2008-2022
-217712,Technical College of the Lowcountry,Public,21.00,77455438,0.077,2008-2022
-154952,Cowley County Community College,Public,39.00,76902903,0.077,2008-2022
-199421,Randolph Community College,Public,37.00,76891930,0.077,2008-2022
-220057,Dyersburg State Community College,Public,30.00,76860080,0.077,2008-2022
-114938,Gavilan College,Public,13.00,76452776,0.076,2008-2022
-231882,Danville Community College,Public,31.00,76356228,0.076,2008-2022
-223898,Cisco College,Public,25.00,75747009,0.076,2008-2022
-199768,Surry Community College,Public,45.00,74931132,0.075,2008-2022
-177250,East Central College,Public,31.00,74751936,0.075,2008-2022
-175236,Ridgewater College,Public,46.00,74540619,0.075,2008-2022
-173461,Lake Superior College,Public,40.00,73747946,0.074,2008-2022
-448673,Rasmussen University-Illinois,"Private, for-profit",42.00,73538641,0.074,2008-2022
-102076,Snead State Community College,Public,32.00,73443685,0.073,2008-2022
-399212,Santiago Canyon College,Public,25.00,73262926,0.073,2008-2022
-147004,McHenry County College,Public,37.00,73057044,0.073,2008-2022
-162690,Hagerstown Community College,Public,33.00,72900820,0.073,2008-2022
-162706,Harford Community College,Public,31.00,72684902,0.073,2008-2022
-120290,Ohlone College,Public,24.00,72145065,0.072,2008-2022
-160667,Northshore Technical Community College,Public,40.00,72091979,0.072,2008-2022
-236656,South Puget Sound Community College,Public,43.00,71565734,0.072,2008-2022
-240125,Waukesha County Technical College,Public,45.00,71536049,0.072,2008-2022
-232575,Laurel Ridge Community College,Public,32.00,71154268,0.071,2008-2022
-119067,Monterey Peninsula College,Public,16.00,70912417,0.071,2008-2022
-366401,Las Positas College,Public,28.00,70690464,0.071,2008-2022
-188137,Santa Fe Community College,Public,28.00,70571518,0.071,2008-2022
-207290,Northeastern Oklahoma A&M College,Public,26.00,70525424,0.071,2008-2022
-368911,Southeastern Technical College,Public,46.00,70471931,0.070,2008-2022
-154378,Southeastern Community College,Public,35.00,70323051,0.070,2008-2022
-157304,Madisonville Community College,Public,48.00,70092792,0.070,2008-2022
-141796,Kapiolani Community College,Public,31.00,69753004,0.070,2008-2022
-205179,Fortis College-Centerville,"Private, for-profit",33.00,69519042,0.070,2008-2022
-210270,Umpqua Community College,Public,28.00,69325023,0.069,2008-2022
-164313,Wor-Wic Community College,Public,22.00,69310308,0.069,2008-2022
-231536,Blue Ridge Community College,Public,31.00,69286202,0.069,2008-2022
-156107,Wichita State University-Campus of Applied Sciences and Technology,Public,45.00,69186921,0.069,2008-2022
-441760,Lamar Institute of Technology,Public,33.00,69165872,0.069,2008-2022
-187639,Clovis Community College,Public,19.00,69081140,0.069,2008-2022
-199731,Southwestern Community College,Public,38.00,68986016,0.069,2008-2022
-225520,Howard College,Public,31.00,68829493,0.069,2008-2022
-181491,Northeast Community College,Public,47.00,68493129,0.068,2008-2022
-112385,Coastline Community College,Public,14.00,68178063,0.068,2008-2022
-158884,Nunez Community College,Public,36.00,68095838,0.068,2008-2022
-198668,Haywood Community College,Public,36.00,67957489,0.068,2008-2022
-198367,Craven Community College,Public,34.00,67674419,0.068,2008-2022
-167631,Roxbury Community College,Public,31.00,67324727,0.067,2008-2022
-107460,North Arkansas College,Public,41.00,67131165,0.067,2008-2022
-232867,New River Community College,Public,29.00,67104974,0.067,2008-2022
-240198,Northwood Technical College,Public,60.00,67083357,0.067,2008-2022
-232788,Mountain Empire Community College,Public,40.00,66896505,0.067,2008-2022
-229540,Victoria College,Public,23.00,66883407,0.067,2008-2022
-199087,Nash Community College,Public,25.00,66742439,0.067,2008-2022
-119331,Napa Valley College,Public,24.00,66686129,0.067,2008-2022
-173911,South Central College,Public,32.00,66388788,0.066,2008-2022
-205966,Southern State Community College,Public,23.00,66287225,0.066,2008-2022
-233019,Patrick & Henry Community College,Public,35.00,66272157,0.066,2008-2022
-173799,Inver Hills Community College,Public,25.00,66213462,0.066,2008-2022
-161688,Allegany College of Maryland,Public,32.00,66099099,0.066,2008-2022
-384342,Heartland Community College,Public,23.00,66092913,0.066,2008-2022
-383190,Hawaii Community College,Public,29.00,65945602,0.066,2008-2022
-146348,Kankakee Community College,Public,30.00,65881714,0.066,2008-2022
-233648,Southwest Virginia Community College,Public,33.00,65877324,0.066,2008-2022
-173203,Central Lakes College-Brainerd,Public,41.00,65754480,0.066,2008-2022
-217615,Aiken Technical College,Public,24.00,65389569,0.065,2008-2022
-183099,NHTI-Concord's Community College,Public,31.00,65218197,0.065,2008-2022
-107585,University of Arkansas Community College-Morrilton,Public,38.00,65030576,0.065,2008-2022
-197850,South Piedmont Community College,Public,23.00,64908312,0.065,2008-2022
-206996,Connors State College,Public,23.00,64587041,0.065,2008-2022
-210234,Treasure Valley Community College,Public,27.00,64567190,0.065,2008-2022
-238397,Blackhawk Technical College,Public,42.00,64392956,0.064,2008-2022
-166647,Massachusetts Bay Community College,Public,25.00,64155801,0.064,2008-2022
-199722,Southeastern Community College,Public,37.00,63915079,0.064,2008-2022
-199892,Wayne Community College,Public,39.00,63852782,0.064,2008-2022
-125499,West Valley College,Public,23.00,63817377,0.064,2008-2022
-122791,College of San Mateo,Public,30.00,63040177,0.063,2008-2022
-168883,Bay de Noc Community College,Public,33.00,62956258,0.063,2008-2022
-146366,Kaskaskia College,Public,39.00,62643468,0.063,2008-2022
-118772,Merritt College,Public,20.00,62636722,0.063,2008-2022
-104577,Eastern Arizona College,Public,26.00,62562543,0.063,2008-2022
-207236,Murray State College,Public,33.00,62345812,0.062,2008-2022
-198729,James Sprunt Community College,Public,39.00,61899749,0.062,2008-2022
-160481,Fletcher Technical Community College,Public,35.00,61416642,0.061,2008-2022
-237817,Southern West Virginia Community and Technical College,Public,26.00,61035241,0.061,2008-2022
-226107,Lamar State College-Orange,Public,31.00,61019263,0.061,2008-2022
-118684,Mendocino College,Public,18.00,61004708,0.061,2008-2022
-211343,Butler County Community College,Public,27.00,60791270,0.061,2008-2022
-172307,Southwestern Michigan College,Public,30.00,60659618,0.061,2008-2022
-143613,Carl Sandburg College,Public,49.00,60589230,0.061,2008-2022
-174473,Northland Community and Technical College,Public,45.00,60405311,0.060,2008-2022
-101143,Enterprise State Community College,Public,20.00,60342030,0.060,2008-2022
-108667,College of Alameda,Public,19.00,60206182,0.060,2008-2022
-231697,Central Virginia Community College,Public,27.00,59809923,0.060,2008-2022
-191302,Fulton-Montgomery Community College,Public,36.00,59460064,0.059,2008-2022
-199625,Sampson Community College,Public,37.00,59285560,0.059,2008-2022
-206011,Terra State Community College,Public,20.00,59278315,0.059,2008-2022
-145831,Illinois Valley Community College,Public,36.00,59103769,0.059,2008-2022
-222567,Alvin Community College,Public,29.00,58881817,0.059,2008-2022
-100760,Central Alabama Community College,Public,26.00,58838789,0.059,2008-2022
-199485,Rockingham Community College,Public,29.00,58659824,0.059,2008-2022
-446774,Blue Ridge Community and Technical College,Public,45.00,58406084,0.058,2008-2022
-236610,Shoreline Community College,Public,45.00,58324698,0.058,2008-2022
-239220,Mid-State Technical College,Public,44.00,58248680,0.058,2008-2022
-485458,Coastal Pines Technical College,Public,53.00,58214437,0.058,2008-2022
-164775,Berkshire Community College,Public,27.00,58165561,0.058,2008-2022
-161138,Eastern Maine Community College,Public,34.00,58142235,0.058,2008-2022
-234377,Wytheville Community College,Public,41.00,58139239,0.058,2008-2022
-125170,Berkeley City College,Public,18.00,57854602,0.058,2008-2022
-160010,Northwest Louisiana Technical Community College,Public,52.00,57820586,0.058,2008-2022
-198710,Isothermal Community College,Public,37.00,57735783,0.058,2008-2022
-101602,Lurleen B Wallace Community College,Public,40.00,57690870,0.058,2008-2022
-197814,College of the Albemarle,Public,29.00,57326375,0.057,2008-2022
-233116,Piedmont Virginia Community College,Public,33.00,56581203,0.057,2008-2022
-146278,John Wood Community College,Public,40.00,56081491,0.056,2008-2022
-443492,Pierpont Community and Technical College,Public,34.00,55959609,0.056,2008-2022
-118347,College of Marin,Public,18.00,55407066,0.055,2008-2022
-171225,Monroe County Community College,Public,22.00,55375814,0.055,2008-2022
-101028,Chattahoochee Valley Community College,Public,21.00,55266273,0.055,2008-2022
-233903,Virginia Highlands Community College,Public,32.00,55167055,0.055,2008-2022
-188049,University of New Mexico-Valencia County Campus,Public,20.00,54858629,0.055,2008-2022
-404426,Coconino Community College,Public,15.00,54824961,0.055,2008-2022
-204440,Northwest State Community College,Public,30.00,54274285,0.054,2008-2022
-173063,Riverland Community College,Public,41.00,54187833,0.054,2008-2022
-187994,New Mexico State University-Alamogordo,Public,20.00,54122940,0.054,2008-2022
-102313,H Councill Trenholm State Community College,Public,40.00,53835286,0.054,2008-2022
-107637,Southeast Arkansas College,Public,29.00,53788824,0.054,2008-2022
-113111,Crafton Hills College,Public,28.00,53556500,0.054,2008-2022
-196699,Ulster County Community College,Public,37.00,53094759,0.053,2008-2022
-436304,River Parishes Community College,Public,27.00,52986874,0.053,2008-2022
-183132,Manchester Community College,Public,27.00,52971148,0.053,2008-2022
-125462,Coalinga College,Public,24.00,52538391,0.053,2008-2022
-447582,New River Community and Technical College,Public,21.00,52211005,0.052,2008-2022
-165194,Cape Cod Community College,Public,32.00,52067882,0.052,2008-2022
-158088,Central Louisiana Technical Community College,Public,61.00,52055220,0.052,2008-2022
-440402,Arkansas State University-Newport,Public,42.00,51948383,0.052,2008-2022
-173638,Minnesota West Community and Technical College,Public,50.00,51939558,0.052,2008-2022
-444954,Mountwest Community and Technical College,Public,42.00,51898568,0.052,2008-2022
-161192,Kennebec Valley Community College,Public,45.00,51896208,0.052,2008-2022
-154059,North Iowa Area Community College,Public,40.00,51804433,0.052,2008-2022
-197966,Beaufort County Community College,Public,39.00,51789544,0.052,2008-2022
-124113,Taft College,Public,11.00,51783080,0.052,2008-2022
-366553,Southern Technical College,"Private, for-profit",33.00,51760681,0.052,2008-2022
-198640,Halifax Community College,Public,44.00,51749795,0.052,2008-2022
-199324,Piedmont Community College,Public,41.00,51399211,0.051,2008-2022
-148256,Rend Lake College,Public,59.00,51323064,0.051,2008-2022
-144564,Danville Area Community College,Public,30.00,51158896,0.051,2008-2022
-148292,Richland Community College,Public,23.00,51017306,0.051,2008-2022
-227386,Panola College,Public,33.00,50733451,0.051,2008-2022
-219426,Southeast Technical College,Public,61.00,50669684,0.051,2008-2022
-239372,Moraine Park Technical College,Public,54.00,49914778,0.050,2008-2022
-202648,Edison State Community College,Public,44.00,49854722,0.050,2008-2022
-430935,Colegio de Cinematografía Artes y Television,"Private, for-profit",32.00,49643207,0.050,2008-2022
-179344,Missouri State University-West Plains,Public,27.00,49581045,0.050,2008-2022
-212869,Harcum College,"Private, not-for-profit",49.00,49423409,0.049,2008-2022
-171395,North Central Michigan College,Public,33.00,49377568,0.049,2008-2022
-240505,Casper College,Public,42.00,49151545,0.049,2008-2022
-207740,Seminole State College,Public,33.00,48972531,0.049,2008-2022
-226116,Lamar State College-Port Arthur,Public,30.00,48598641,0.049,2008-2022
-198206,Carteret Community College,Public,38.00,48589979,0.049,2008-2022
-187666,Eastern New Mexico University-Roswell Campus,Public,43.00,47942718,0.048,2008-2022
-107725,University of Arkansas Hope-Texarkana,Public,43.00,47537736,0.048,2008-2022
-107549,Ozarka College,Public,63.00,47507585,0.048,2008-2022
-217989,Denmark Technical College,Public,13.00,47356932,0.047,2008-2022
-211079,Community College of Beaver County,Public,26.00,47195117,0.047,2008-2022
-155098,Fort Scott Community College,Public,26.00,47181162,0.047,2008-2022
-198039,Blue Ridge Community College,Public,46.00,47050991,0.047,2008-2022
-181817,Western Nebraska Community College,Public,43.00,46930391,0.047,2008-2022
-107327,Arkansas Northeastern College,Public,40.00,46402557,0.046,2008-2022
-395362,Copper Mountain Community College,Public,23.00,46204707,0.046,2008-2022
-107318,Arkansas State University Mid-South,Public,26.00,46008134,0.046,2008-2022
-173416,Dakota County Technical College,Public,52.00,45954203,0.046,2008-2022
-106999,University of Arkansas Community College-Batesville,Public,50.00,45953513,0.046,2008-2022
-247603,Sussex County Community College,Public,25.00,45805574,0.046,2008-2022
-127778,Otero College,Public,41.00,45569351,0.046,2008-2022
-153533,Iowa Lakes Community College,Public,53.00,45278019,0.045,2008-2022
-107974,South Arkansas College,Public,44.00,45069978,0.045,2008-2022
-489201,Clovis Community College,Public,28.00,44659068,0.045,2008-2022
-155186,Highland Community College,Public,27.00,44658510,0.045,2008-2022
-154925,Coffeyville Community College,Public,39.00,44044547,0.044,2008-2022
-207050,Eastern Oklahoma State College,Public,23.00,43849516,0.044,2008-2022
-171234,Montcalm Community College,Public,37.00,43779344,0.044,2008-2022
-145521,Highland Community College,Public,36.00,43420643,0.043,2008-2022
-111896,Cerro Coso Community College,Public,13.00,43414918,0.043,2008-2022
-199953,Wilson Community College,Public,31.00,43381822,0.043,2008-2022
-208035,Western Oklahoma State College,Public,27.00,43127308,0.043,2008-2022
-200305,North Dakota State College of Science,Public,47.00,43002252,0.043,2008-2022
-154697,Barton County Community College,Public,36.00,42724771,0.043,2008-2022
-455512,Woodland Community College,Public,22.00,42695099,0.043,2008-2022
-201283,Belmont College,Public,40.00,42656018,0.043,2008-2022
-239008,Lakeshore Technical College,Public,57.00,42486886,0.042,2008-2022
-192688,Mandl School-The College of Allied Health,"Private, for-profit",52.00,42427230,0.042,2008-2022
-420538,Arkansas State University-Mountain Home,Public,43.00,42413378,0.042,2008-2022
-195988,Sullivan County Community College,Public,28.00,42403074,0.042,2008-2022
-219143,Lake Area Technical College,Public,72.00,42280600,0.042,2008-2022
-180249,Great Falls College Montana State University,Public,37.00,42249919,0.042,2008-2022
-123484,College of the Siskiyous,Public,16.00,42180590,0.042,2008-2022
-210155,Southwestern Oregon Community College,Public,33.00,42056048,0.042,2008-2022
-141680,Honolulu Community College,Public,23.00,42039843,0.042,2008-2022
-127732,Northeastern Junior College,Public,33.00,41920263,0.042,2008-2022
-179715,North Central Missouri College,Public,44.00,41803356,0.042,2008-2022
-155104,Garden City Community College,Public,40.00,41741674,0.042,2008-2022
-170587,Kirtland Community College,Public,21.00,41230307,0.041,2008-2022
-173735,Minnesota North College,Public,41.00,41017184,0.041,2008-2022
-148821,Shawnee Community College,Public,41.00,40840748,0.041,2008-2022
-461014,Mildred Elley-New York Campus,"Private, for-profit",36.00,40745050,0.041,2008-2022
-111434,Canada College,Public,21.00,40571415,0.041,2008-2022
-175263,Minnesota State College Southeast,Public,46.00,40401649,0.040,2008-2022
-207069,Redlands Community College,Public,25.00,40292800,0.040,2008-2022
-208275,Blue Mountain Community College,Public,29.00,40171159,0.040,2008-2022
-106795,Cossatot Community College of the University of Arkansas,Public,38.00,39218489,0.039,2008-2022
-180197,Flathead Valley Community College,Public,34.00,39151860,0.039,2008-2022
-428392,Klamath Community College,Public,19.00,38714325,0.039,2008-2022
-107619,Phillips Community College of the University of Arkansas,Public,49.00,38702906,0.039,2008-2022
-162168,Chesapeake College,Public,24.00,38547157,0.039,2008-2022
-240666,Northern Wyoming Community College District,Public,41.00,38453258,0.038,2008-2022
-169655,MIAT College of Technology,"Private, for-profit",66.00,38382598,0.038,2008-2022
-172954,Anoka Technical College,Public,43.00,37993192,0.038,2008-2022
-148672,Sauk Valley Community College,Public,45.00,37980289,0.038,2008-2022
-106883,East Arkansas Community College,Public,33.00,37877096,0.038,2008-2022
-242556,Instituto Tecnologico de Puerto Rico-Recinto de Guayama,Public,59.00,37876187,0.038,2008-2022
-101462,J. F. Drake State Community and Technical College,Public,18.00,37675323,0.038,2008-2022
-412599,Remington College-Memphis Campus,"Private, not-for-profit",43.00,37544323,0.038,2008-2022
-198084,Brunswick Community College,Public,35.00,37336299,0.037,2008-2022
-172918,Alexandria Technical & Community College,Public,65.00,37271217,0.037,2008-2022
-155566,Neosho County Community College,Public,41.00,36918837,0.037,2008-2022
-112561,Columbia College,Public,21.00,36765995,0.037,2008-2022
-156851,Henderson Community College,Public,26.00,36302539,0.036,2008-2022
-239910,Southwest Wisconsin Technical College,Public,70.00,36281996,0.036,2008-2022
-105349,Northland Pioneer College,Public,33.00,35726591,0.036,2008-2022
-165981,Greenfield Community College,Public,32.00,35695159,0.036,2008-2022
-198011,Bladen Community College,Public,20.00,35693951,0.036,2008-2022
-233310,Rappahannock Community College,Public,30.00,35686687,0.036,2008-2022
-141990,Windward Community College,Public,29.00,35492455,0.035,2008-2022
-450058,Fortis College-Columbus,"Private, for-profit",50.00,35421375,0.035,2008-2022
-235671,Bates Technical College,Public,33.00,35414804,0.035,2008-2022
-414911,Pennsylvania Highlands Community College,Public,40.00,35395973,0.035,2008-2022
-217837,Northeastern Technical College,Public,22.00,34811563,0.035,2008-2022
-190169,Columbia-Greene Community College,Public,36.00,34611076,0.035,2008-2022
-243841,ICPR Junior College,"Private, for-profit",32.00,33978920,0.034,2008-2022
-372921,Fortis College-Smyrna,"Private, for-profit",53.00,33914909,0.034,2008-2022
-181312,Mid-Plains Community College,Public,41.00,33758331,0.034,2008-2022
-194028,North Country Community College,Public,38.00,33654844,0.034,2008-2022
-154907,Cloud County Community College,Public,56.00,33628710,0.034,2008-2022
-216296,Thaddeus Stevens College of Technology,Public,69.00,33321780,0.033,2008-2022
-227687,Ranger College,Public,25.00,33289989,0.033,2008-2022
-177977,State Technical College of Missouri,Public,75.00,33284281,0.033,2008-2022
-188225,University of New Mexico-Taos Campus,Public,31.00,33191007,0.033,2008-2022
-148991,Spoon River College,Public,42.00,33102435,0.033,2008-2022
-190053,Clinton Community College,Public,31.00,33064832,0.033,2008-2022
-162104,Cecil College,Public,21.00,33055065,0.033,2008-2022
-148937,Southeastern Illinois College,Public,34.00,32968440,0.033,2008-2022
-145707,Illinois Eastern Community Colleges,Public,49.00,32928925,0.033,2008-2022
-192509,Long Island Business Institute,"Private, for-profit",35.00,32880530,0.033,2008-2022
-154642,Allen County Community College,Public,47.00,32609924,0.033,2008-2022
-154396,Southwestern Community College,Public,46.00,32554497,0.033,2008-2022
-219480,Western Dakota Technical College,Public,47.00,32206150,0.032,2008-2022
-153922,Marshalltown Community College,Public,31.00,32186196,0.032,2008-2022
-199795,Tri-County Community College,Public,31.00,32125849,0.032,2008-2022
-183150,Great Bay Community College,Public,35.00,31804352,0.032,2008-2022
-205887,Stautzenberger College-Maumee,"Private, for-profit",51.00,31715036,0.032,2008-2022
-107992,Southern Arkansas University Tech,Public,38.00,31543386,0.032,2008-2022
-405872,Carroll Community College,Public,33.00,31196744,0.031,2008-2022
-198923,McDowell Technical Community College,Public,34.00,30784876,0.031,2008-2022
-154998,Dodge City Community College,Public,31.00,30322107,0.030,2008-2022
-242149,ICPR Junior College-Mayaguez,"Private, for-profit",45.00,29952205,0.030,2008-2022
-172671,West Shore Community College,Public,30.00,29910598,0.030,2008-2022
-484932,BridgeValley Community & Technical College,Public,38.00,29826904,0.030,2008-2022
-161484,Northern Maine Community College,Public,49.00,29719937,0.030,2008-2022
-180276,Helena College University of Montana,Public,32.00,29707799,0.030,2008-2022
-243647,Palau Community College,Public,32.00,29621722,0.030,2008-2022
-233338,Richard Bland College,Public,33.00,29350472,0.029,2008-2022
-420440,York County Community College,Public,24.00,29194808,0.029,2008-2022
-142179,College of Eastern Idaho,Public,60.00,29165574,0.029,2008-2022
-188003,Southeast New Mexico College,Public,21.00,29075249,0.029,2008-2022
-455628,Fortis Institute-Birmingham,"Private, for-profit",54.00,29005532,0.029,2008-2022
-200846,University of Akron Wayne College,Public,13.00,28943287,0.029,2008-2022
-155450,Labette Community College,Public,17.00,28761822,0.029,2008-2022
-475565,CUNY Stella and Charles Guttman Community College,Public,48.00,28761515,0.029,2008-2022
-193201,Mildred Elley School-Albany Campus,"Private, for-profit",36.00,28613035,0.029,2008-2022
-218672,University of South Carolina-Lancaster,Public,23.00,28537668,0.029,2008-2022
-198871,Louisburg College,"Private, not-for-profit",38.00,28470527,0.028,2008-2022
-218681,University of South Carolina-Salkehatchie,Public,30.00,28426446,0.028,2008-2022
-237437,Huntington Junior College,"Private, not-for-profit",33.00,28384160,0.028,2008-2022
-183141,Nashua Community College,Public,27.00,27898698,0.028,2008-2022
-198914,Mayland Community College,Public,37.00,27843369,0.028,2008-2022
-155858,Seward County Community College,Public,53.00,27632928,0.028,2008-2022
-239442,Nicolet Area Technical College,Public,54.00,27416410,0.027,2008-2022
-219189,Mitchell Technical College,Public,72.00,27138404,0.027,2008-2022
-223922,Clarendon College,Public,35.00,27081696,0.027,2008-2022
-450067,Fortis College-Cincinnati,"Private, for-profit",47.00,26532256,0.027,2008-2022
-233037,Paul D Camp Community College,Public,25.00,26503307,0.027,2008-2022
-445744,Fortis Institute-Port Saint Lucie,"Private, for-profit",57.00,25967333,0.026,2008-2022
-245625,Warren County Community College,Public,34.00,25863088,0.026,2008-2022
-186469,Salem Community College,Public,37.00,25775120,0.026,2008-2022
-250744,Dorsey College-Roseville,"Private, for-profit",39.00,25741995,0.026,2008-2022
-188021,New Mexico State University-Grants,Public,28.00,25732756,0.026,2008-2022
-242583,Instituto Tecnologico de Puerto Rico-Recinto de San Juan,Public,1.00,25658006,0.026,2008-2022
-169992,Gogebic Community College,Public,35.00,25603077,0.026,2008-2022
-375416,Remington College-Cleveland Campus,"Private, not-for-profit",49.00,25576053,0.026,2008-2022
-242130,ICPR Junior College-Arecibo,"Private, for-profit",40.00,25172349,0.025,2008-2022
-488730,Northeast Lakeview College,Public,11.00,24975768,0.025,2008-2022
-199467,Roanoke-Chowan Community College,Public,19.00,24801944,0.025,2008-2022
-455479,Fortis Institute-Pensacola,"Private, for-profit",56.00,24786553,0.025,2008-2022
-445203,Remington College-North Houston Campus,"Private, not-for-profit",51.00,24779794,0.025,2008-2022
-169974,Glen Oaks Community College,Public,26.00,24682502,0.025,2008-2022
-107521,Arkansas State University Three Rivers,Public,50.00,24633302,0.025,2008-2022
-242042,Instituto Tecnologico de Puerto Rico-Recinto de Manati,Public,92.00,24609493,0.025,2008-2022
-439738,Fortis College-Baton Rouge,"Private, for-profit",56.00,24261034,0.024,2008-2022
-107743,University of Arkansas Community College Rich Mountain,Public,47.00,24255468,0.024,2008-2022
-183123,Lakes Region Community College,Public,28.00,24253827,0.024,2008-2022
-187903,New Mexico Junior College,Public,24.00,24018134,0.024,2008-2022
-440059,Aviation Institute of Maintenance-Atlanta,"Private, for-profit",62.00,23860124,0.024,2008-2022
-460677,ICPR Junior College,"Private, for-profit",32.00,23644723,0.024,2008-2022
-196389,Swedish Institute a College of Health Sciences,"Private, for-profit",91.00,23332154,0.023,2008-2022
-155201,Independence Community College,Public,31.00,23197513,0.023,2008-2022
-224891,Frank Phillips College,Public,30.00,23036198,0.023,2008-2022
-159197,ITI Technical College,"Private, for-profit",82.00,22785776,0.023,2008-2022
-154934,Colby Community College,Public,44.00,22732542,0.023,2008-2022
-117195,Lake Tahoe Community College,Public,9.00,22723735,0.023,2008-2022
-377111,Remington College-Fort Worth Campus,"Private, not-for-profit",53.00,22616300,0.023,2008-2022
-363633,Luna Community College,Public,20.00,22432362,0.022,2008-2022
-153296,Ellsworth Community College,Public,36.00,22417697,0.022,2008-2022
-403487,Wabash Valley College,Public,50.00,22369774,0.022,2008-2022
-162609,Garrett College,Public,31.00,22169510,0.022,2008-2022
-173115,Northwest Technical College,Public,47.00,21905890,0.022,2008-2022
-141802,Kauai Community College,Public,25.00,21636634,0.022,2008-2022
-447935,ATA College,"Private, for-profit",35.00,21527365,0.022,2008-2022
-183105,White Mountains Community College,Public,44.00,21358007,0.021,2008-2022
-155715,Pratt Community College,Public,36.00,21248044,0.021,2008-2022
-127389,Lamar Community College,Public,37.00,21161395,0.021,2008-2022
-439792,Fortis College-Orange Park,"Private, for-profit",61.00,21153885,0.021,2008-2022
-154129,Northwest Iowa Community College,Public,60.00,21043812,0.021,2008-2022
-382957,Fortis College-Richmond,"Private, for-profit",52.00,20834550,0.021,2008-2022
-174570,Pine Technical & Community College,Public,34.00,20833313,0.021,2008-2022
-449083,CBT Technology Institute-Main Campus,"Private, for-profit",89.00,20823500,0.021,2008-2022
-231873,Mountain Gateway Community College,Public,44.00,20714283,0.021,2008-2022
-218955,Williamsburg Technical College,Public,34.00,20701809,0.021,2008-2022
-216083,South Hills School of Business & Technology,"Private, for-profit",67.00,20672181,0.021,2008-2022
-366535,Remington College-Mobile Campus,"Private, not-for-profit",53.00,20595069,0.021,2008-2022
-218690,University of South Carolina-Sumter,Public,25.00,20349459,0.020,2008-2022
-386153,Seminar L'moros Bais Yaakov,"Private, not-for-profit",39.00,20329338,0.020,2008-2022
-185721,Eastwick College-Nutley,"Private, for-profit",64.00,20275907,0.020,2008-2022
-198905,Martin Community College,Public,35.00,19911293,0.020,2008-2022
-403478,Lincoln Trail College,Public,37.00,19833132,0.020,2008-2022
-488077,Sonoran Desert Institute,"Private, for-profit",47.00,19646255,0.020,2008-2022
-117274,Lassen Community College,Public,8.00,19622393,0.020,2008-2022
-155593,Fort Hays Tech North Central,Public,67.00,19529263,0.020,2008-2022
-452124,Fortis Institute-Nashville,"Private, for-profit",51.00,19410130,0.019,2008-2022
-232016,Centura College-Virginia Beach,"Private, for-profit",70.00,19409845,0.019,2008-2022
-199023,Montgomery Community College,Public,27.00,19362304,0.019,2008-2022
-460020,Fortis College-Columbia,"Private, for-profit",54.00,19061654,0.019,2008-2022
-420556,Columbia Gorge Community College,Public,31.00,18929323,0.019,2008-2022
-183114,River Valley Community College,Public,39.00,18855858,0.019,2008-2022
-203720,Ohio Business College-Sheffield,"Private, for-profit",48.00,18799175,0.019,2008-2022
-208415,Clatsop Community College,Public,20.00,18617223,0.019,2008-2022
-138655,Interactive College of Technology-Chamblee,"Private, for-profit",43.00,18519190,0.019,2008-2022
-195784,St Paul's School of Nursing-Staten Island,"Private, for-profit",59.00,18147807,0.018,2008-2022
-231411,Advanced Technology Institute,"Private, for-profit",78.00,18057742,0.018,2008-2022
-385503,Fortis Institute-Scranton,"Private, for-profit",63.00,17808743,0.018,2008-2022
-232052,Eastern Shore Community College,Public,33.00,17727300,0.018,2008-2022
-160524,Remington College-Lafayette Campus,"Private, not-for-profit",50.00,17464442,0.017,2008-2022
-126748,Colorado Northwestern Community College,Public,41.00,17106221,0.017,2008-2022
-106546,Baptist Health College Little Rock,"Private, not-for-profit",77.00,16845950,0.017,2008-2022
-126605,Spartan College of Aeronautics and Technology,"Private, for-profit",68.00,16645017,0.017,2008-2022
-101994,Reid State Technical College,Public,51.00,16360960,0.016,2008-2022
-233329,Fortis College-Norfolk,"Private, for-profit",53.00,16291281,0.016,2008-2022
-215682,Rosedale Technical College,"Private, not-for-profit",83.00,16019589,0.016,2008-2022
-180081,Highlands College of Montana Tech,Public,34.00,15975509,0.016,2008-2022
-449092,CBT Technology Institute-Hialeah,"Private, for-profit",94.00,15867550,0.016,2008-2022
-161581,Washington County Community College,Public,50.00,15822265,0.016,2008-2022
-456454,Fortis College-Salt Lake City,"Private, for-profit",66.00,15806847,0.016,2008-2022
-403469,Frontier Community College,Public,73.00,15652058,0.016,2008-2022
-487302,Fortis College-Cuyahoga Falls,"Private, for-profit",60.00,15612951,0.016,2008-2022
-189811,St Paul's School of Nursing-Queens,"Private, for-profit",70.00,15606185,0.016,2008-2022
-155052,Flint Hills Technical College,Public,77.00,15497431,0.015,2008-2022
-220118,Chattanooga College Medical Dental and & Technical Careers,"Private, for-profit",56.00,15477027,0.015,2008-2022
-460756,Hawaii Medical College,"Private, for-profit",82.00,15407728,0.015,2008-2022
-213233,Johnson College,"Private, not-for-profit",62.00,15323157,0.015,2008-2022
-200192,Lake Region State College,Public,52.00,15262234,0.015,2008-2022
-107840,Shorter College,"Private, not-for-profit",13.00,14927313,0.015,2008-2022
-445249,Remington College-Nashville Campus,"Private, not-for-profit",65.00,14768190,0.015,2008-2022
-229832,Western Texas College,Public,22.00,14666909,0.015,2008-2022
-240596,Eastern Wyoming College,Public,39.00,14595769,0.015,2008-2022
-169761,Dorsey College,"Private, for-profit",60.00,14577091,0.015,2008-2022
-120953,Palo Verde College,Public,12.00,14313733,0.014,2008-2022
-372329,IBMC College,"Private, for-profit",78.00,14298613,0.014,2008-2022
-438708,Eastern West Virginia Community and Technical College,Public,28.00,14284461,0.014,2008-2022
-123642,South Coast College,"Private, for-profit",33.00,14222055,0.014,2008-2022
-451352,Southeastern College-Charlotte,"Private, for-profit",67.00,14050255,0.014,2008-2022
-203739,Ohio Business College-Sandusky,"Private, for-profit",52.00,13933386,0.014,2008-2022
-483504,Dorsey College-Dearborn,"Private, for-profit",59.00,13923224,0.014,2008-2022
-444565,Culinary Institute Inc,"Private, for-profit",57.00,13830849,0.014,2008-2022
-140003,Gwinnett College-Lilburn,"Private, for-profit",49.00,13690263,0.014,2008-2022
-451857,Remington College-Houston Southeast Campus,"Private, not-for-profit",63.00,13659357,0.014,2008-2022
-200314,Dakota College at Bottineau,Public,34.00,13440778,0.013,2008-2022
-448600,Stautzenberger College-Brecksville,"Private, for-profit",46.00,13412779,0.013,2008-2022
-151467,International Business College-Indianapolis,"Private, for-profit",66.00,13128679,0.013,2008-2022
-145239,Fox College,"Private, for-profit",69.00,12900560,0.013,2008-2022
-218706,University of South Carolina-Union,Public,22.00,12830388,0.013,2008-2022
-200341,Williston State College,Public,42.00,12805453,0.013,2008-2022
-440271,Remington College-Baton Rouge Campus,"Private, not-for-profit",56.00,12784853,0.013,2008-2022
-458681,Fortis College-Indianapolis,"Private, for-profit",49.00,12689860,0.013,2008-2022
-249609,Fortis Institute-Forty Fort,"Private, for-profit",66.00,12486203,0.012,2008-2022
-215381,Pittsburgh Institute of Aeronautics,"Private, not-for-profit",73.00,12386623,0.012,2008-2022
-237987,West Virginia Junior College-Charleston,"Private, for-profit",68.00,12368685,0.012,2008-2022
-188216,Southwestern Indian Polytechnic Institute,Public,49.00,12311477,0.012,2008-2022
-204662,Ohio State University Agricultural Technical Institute,Public,52.00,12133139,0.012,2008-2022
-155487,Manhattan Area Technical College,Public,63.00,12085258,0.012,2008-2022
-417327,City College-Altamonte Springs,"Private, for-profit",55.00,11933219,0.012,2008-2022
-126359,Bel-Rea Institute of Animal Technology,"Private, for-profit",55.00,11916214,0.012,2008-2022
-250027,Laurel Business Institute,"Private, for-profit",73.00,11827312,0.012,2008-2022
-225876,Jacksonville College-Main Campus,"Private, not-for-profit",33.00,11447393,0.011,2008-2022
-446109,Cambridge College of Healthcare & Technology,"Private, for-profit",64.00,11420372,0.011,2008-2022
-101648,Marion Military Institute,Public,33.00,11225845,0.011,2008-2022
-383996,Eastern New Mexico University Ruidoso Branch Community College,Public,21.00,11223782,0.011,2008-2022
-423652,Oregon Coast Community College,Public,33.00,11125758,0.011,2008-2022
-149310,Taylor Business Institute,"Private, for-profit",24.00,10844704,0.011,2008-2022
-199263,Pamlico Community College,Public,57.00,10777836,0.011,2008-2022
-442383,West Virginia Junior College-Bridgeport,"Private, for-profit",70.00,10622627,0.011,2008-2022
-215309,University of Pittsburgh-Titusville,Public,30.00,10604080,0.011,2008-2022
-204884,East Ohio College,"Private, for-profit",72.00,10586695,0.011,2008-2022
-180373,Miles Community College,Public,45.00,10547027,0.011,2008-2022
-413626,Leech Lake Tribal College,Public,30.00,10373736,0.010,2008-2022
-215992,Laurel Technical Institute,"Private, for-profit",60.00,10372170,0.010,2008-2022
-213914,Vet Tech Institute,"Private, for-profit",62.00,10283014,0.010,2008-2022
-188261,Mesalands Community College,Public,58.00,10090588,0.010,2008-2022
-429128,Urban College of Boston,"Private, not-for-profit",23.00,10064819,0.010,2008-2022
-494843,Fortis College-Landover,"Private, for-profit",69.00,9986394,0.010,2008-2022
-139995,Gupton Jones College of Funeral Service,"Private, not-for-profit",73.00,9906124,0.010,2008-2022
-212045,Douglas Education Center,"Private, for-profit",83.00,9792823,0.010,2008-2022
-200590,ETI Technical College,"Private, for-profit",64.00,9736410,0.010,2008-2022
-494852,Stautzenberger College-Rockford Career College,"Private, for-profit",41.00,9683214,0.010,2008-2022
-443261,Southeastern College-Charleston,"Private, for-profit",65.00,9632361,0.010,2008-2022
-449524,Taylor College,"Private, for-profit",72.00,9603917,0.010,2008-2022
-212434,Erie Institute of Technology Inc,"Private, for-profit",71.00,9533455,0.010,2008-2022
-377458,Centura College-Norfolk,"Private, for-profit",69.00,9457177,0.009,2008-2022
-487311,Jones Technical Institute,"Private, not-for-profit",73.00,9388716,0.009,2008-2022
-420723,Tillamook Bay Community College,Public,14.00,9325093,0.009,2008-2022
-187976,University of New Mexico-Los Alamos Campus,Public,23.00,9194925,0.009,2008-2022
-216436,Triangle Tech Inc-Pittsburgh,"Private, for-profit",58.00,9123048,0.009,2008-2022
-213473,Lansdale School of Business,"Private, for-profit",69.00,9116536,0.009,2008-2022
-456977,CBT Technology Institute-Cutler Bay,"Private, for-profit",76.00,9081705,0.009,2008-2022
-187912,New Mexico Military Institute,Public,40.00,8528803,0.009,2008-2022
-180212,Fort Peck Community College,Public,26.00,8343477,0.008,2008-2022
-444866,Southeastern College-Columbia,"Private, for-profit",51.00,8329240,0.008,2008-2022
-490975,Fortis College-Cutler Bay,"Private, for-profit",61.00,8240270,0.008,2008-2022
-487092,Emory University-Oxford College,"Private, not-for-profit",94.00,8093516,0.008,2008-2022
-421841,New York Conservatory for Dramatic Arts,"Private, for-profit",80.00,7982219,0.008,2008-2022
-214892,Penn Commercial Business/Technical School,"Private, for-profit",53.00,7961639,0.008,2008-2022
-155830,Salina Area Technical College,Public,81.00,7868896,0.008,2008-2022
-180328,Little Big Horn College,Public,31.00,7648295,0.008,2008-2022
-180151,Dawson Community College,Public,28.00,7620905,0.008,2008-2022
-442781,Tohono O'odham Community College,Public,14.00,7356750,0.007,2008-2022
-146816,Generations College,"Private, not-for-profit",29.00,7205866,0.007,2008-2022
-446163,Community Christian College,"Private, not-for-profit",15.00,7080741,0.007,2008-2022
-223472,Vet Tech Institute of Houston,"Private, for-profit",72.00,7065817,0.007,2008-2022
-181765,Nebraska College of Technical Agriculture,Public,57.00,6801637,0.007,2008-2022
-216454,Triangle Tech Inc-Dubois,"Private, for-profit",80.00,6621529,0.007,2008-2022
-188687,American Academy McAllister Institute of Funeral Service,"Private, not-for-profit",31.00,6331429,0.006,2008-2022
-212975,Commonwealth Technical Institute,"Private, not-for-profit",77.00,6301864,0.006,2008-2022
-216551,Valley Forge Military College,"Private, not-for-profit",17.00,6163227,0.006,2008-2022
-481155,Helms College,"Private, not-for-profit",67.00,6158861,0.006,2008-2022
-225991,KD Conservatory College of Film and Dramatic Arts,"Private, for-profit",72.00,6074026,0.006,2008-2022
-441487,Texas County Technical College,"Private, for-profit",87.00,5823494,0.006,2008-2022
-216445,Triangle Tech Inc-Greensburg,"Private, for-profit",74.00,5708670,0.006,2008-2022
-438735,Aviation Institute of Maintenance-Indianapolis,"Private, for-profit",52.00,5652672,0.006,2008-2022
-224271,Dallas Institute of Funeral Service,"Private, not-for-profit",66.00,5528771,0.006,2008-2022
-180160,Chief Dull Knife College,Public,15.00,5359527,0.005,2008-2022
-195191,St. Joseph's College of Nursing,"Private, not-for-profit",78.00,5290585,0.005,2008-2022
-449612,Louisiana Culinary Institute,"Private, for-profit",49.00,5116911,0.005,2008-2022
-432524,Delaware College of Art and Design,"Private, not-for-profit",62.00,5085847,0.005,2008-2022
-200208,Cankdeska Cikana Community College,Public,9.00,5030227,0.005,2008-2022
-188678,American Academy of Dramatic Arts-New York,"Private, not-for-profit",87.00,4892275,0.005,2008-2022
-108852,American Academy of Dramatic Arts-Los Angeles,"Private, not-for-profit",62.00,4870583,0.005,2008-2022
-434751,White Earth Tribal and Community College,"Private, not-for-profit",28.00,4835767,0.005,2008-2022
-166407,Lawrence Memorial Hospital School of Nursing,"Private, not-for-profit",69.00,4790456,0.005,2008-2022
-150251,College of Court Reporting Inc,"Private, for-profit",16.00,4694495,0.005,2008-2022
-494436,Fortis Institute-Cookeville,"Private, for-profit",58.00,4687484,0.005,2008-2022
-203289,International College of Broadcasting,"Private, for-profit",48.00,4655558,0.005,2008-2022
-366261,Commonwealth Institute of Funeral Service,"Private, not-for-profit",58.00,4654582,0.005,2008-2022
-448859,Triangle Tech Inc-Bethlehem,"Private, for-profit",70.00,4607658,0.005,2008-2022
-222105,William R Moore College of Technology,"Private, not-for-profit",58.00,4408301,0.004,2008-2022
-434016,Little Priest Tribal College,Public,7.00,4395765,0.004,2008-2022
-449728,ATA College,"Private, for-profit",92.00,4305193,0.004,2008-2022
-191959,Island Drafting and Technical Institute,"Private, for-profit",84.00,4250249,0.004,2008-2022
-497277,Arizona College-Glendale,"Private, for-profit",68.00,4162570,0.004,2008-2022
-443377,Triangle Tech Inc-Sunbury,"Private, for-profit",75.00,4139391,0.004,2008-2022
-442523,Alaska Christian College,"Private, not-for-profit",32.00,4049137,0.004,2008-2022
-437750,Professional Golfers Career College,"Private, for-profit",78.00,3935519,0.004,2008-2022
-382911,Southwest College for the Deaf,Public,22.00,3745892,0.004,2008-2022
-491817,Seminary Bnos Chaim,"Private, not-for-profit",97.00,3647997,0.004,2008-2022
-491446,Bnos Zion Of Bobov Seminary,"Private, not-for-profit",95.00,3643434,0.004,2008-2022
-195702,Saint Elizabeth College of Nursing,"Private, not-for-profit",73.00,3522636,0.004,2008-2022
-216940,Williamson College of the Trades,"Private, not-for-profit",80.00,3506735,0.004,2008-2022
-190451,Pomeroy College of Nursing at Crouse Hospital,"Private, not-for-profit",63.00,3470580,0.003,2008-2022
-220464,John A Gupton College,"Private, not-for-profit",73.00,3368259,0.003,2008-2022
-369455,Worsham College of Mortuary Science,"Private, for-profit",94.00,3215176,0.003,2008-2022
-488059,Med College,"Private, for-profit",88.00,3022511,0.003,2008-2022
-367103,Interactive College of Technology-Newport,"Private, for-profit",25.00,2992426,0.003,2008-2022
-147396,Morrison Institute of Technology,"Private, not-for-profit",82.00,2919575,0.003,2008-2022
-214023,ASPIRA City College,"Private, not-for-profit",43.00,2717276,0.003,2008-2022
-461315,Keweenaw Bay Ojibwa Community College,Public,21.00,2592672,0.003,2008-2022
-441070,Saginaw Chippewa Tribal College,Public,16.00,2588491,0.003,2008-2022
-367361,Interactive College of Technology,"Private, for-profit",14.00,2585891,0.003,2008-2022
-480967,College of the Muscogee Nation,Public,35.00,2467237,0.002,2008-2022
-442435,Interactive College of Technology-Gainesville,"Private, for-profit",47.00,2328279,0.002,2008-2022
-138664,Interactive College of Technology-Morrow,"Private, for-profit",42.00,2324217,0.002,2008-2022
-486424,Saint Michael College of Allied Health,"Private, for-profit",89.00,2293865,0.002,2008-2022
-190956,Belanger School of Nursing,"Private, not-for-profit",56.00,2228377,0.002,2008-2022
-440776,Interactive College of Technology,"Private, for-profit",21.00,2172115,0.002,2008-2022
-475422,Finger Lakes Health College of Nursing & Health Sciences,"Private, not-for-profit",78.00,2156331,0.002,2008-2022
-183248,St Joseph School of Nursing,"Private, not-for-profit",80.00,2112057,0.002,2008-2022
-436599,FINE Mortuary College,"Private, for-profit",63.00,1990048,0.002,2008-2022
-195289,Samaritan Hospital School of Nursing,"Private, not-for-profit",83.00,1929430,0.002,2008-2022
-458034,Houston International College Cardiotech Ultrasound School,"Private, for-profit",90.00,1896099,0.002,2008-2022
-419341,Jna Institute of Culinary Arts,"Private, for-profit",59.00,1810252,0.002,2008-2022
-443696,Interactive College of Technology,"Private, for-profit",23.00,1798374,0.002,2008-2022
-487658,Academy of Interactive Entertainment,"Private, not-for-profit",59.00,1751828,0.002,2008-2022
-192961,St. Peter's Hospital College of Nursing,"Private, not-for-profit",80.00,1681978,0.002,2008-2022
-134422,Key College,"Private, for-profit",75.00,1554077,0.002,2008-2022
-439899,Rosedale Bible College,"Private, not-for-profit",62.00,1541833,0.002,2008-2022
-483647,Ohio Institute of Allied Health,"Private, not-for-profit",61.00,1473906,0.001,2008-2022
-490346,Elyon College,"Private, not-for-profit",97.00,1287142,0.001,2008-2022
-493798,New York Seminary,"Private, not-for-profit",99.00,1242608,0.001,2008-2022
-446598,Universal College of Healing Arts,"Private, for-profit",91.00,1159191,0.001,2008-2022
-461953,Colorado Academy of Veterinary Technology,"Private, for-profit",54.00,1146078,0.001,2008-2022
-161208,The Landing School,"Private, not-for-profit",91.00,944220,0.001,2008-2022
-434432,Myotherapy Institute,"Private, for-profit",67.00,938988,0.001,2008-2022
-458140,Northwest School of Wooden Boat Building,"Private, not-for-profit",86.00,834917,0.001,2008-2022
-486123,Theatre of Arts,"Private, for-profit",57.00,766587,0.001,2008-2022
-495147,Pacific Northwest Christian College,"Private, not-for-profit",50.00,382049,0.000,2008-2022
-477233,Evangel University-James River Assembly of God Church,"Private, not-for-profit",61.00,315580,0.000,2008-2022
-494986,Apex College of Veterinary Technology,"Private, for-profit",50.00,270569,0.000,2008-2022
-493619,Young Americans College of the Performing Arts,"Private, not-for-profit",31.00,221934,0.000,2008-2022
-493521,Global Tech College,"Private, for-profit",60.00,189517,0.000,2008-2022
-496654,Sri Sai Krish Institute,"Private, for-profit",71.00,106380,0.000,2008-2022
-493488,Premiere International College,"Private, for-profit",50.00,86593,0.000,2008-2022
-488563,California College of Music,"Private, for-profit",44.00,9059,0.000,2008-2022
+150987,Ivy Tech Community College,Public,37.00,1177888368,1.178,2013-2022
+190521,CUNY Borough of Manhattan Community College,Public,26.00,665548555,0.666,2013-2022
+224642,El Paso Community College,Public,22.00,615426415,0.615,2013-2022
+228547,Tarrant County College District,Public,26.00,594906089,0.595,2013-2022
+215239,Community College of Philadelphia,Public,20.00,446385239,0.446,2013-2022
+232946,Northern Virginia Community College,Public,37.00,436175723,0.436,2013-2022
+202356,Cuyahoga Community College District,Public,29.00,410042252,0.410,2013-2022
+158662,Delgado Community College,Public,22.00,397734958,0.398,2013-2022
+209746,Portland Community College,Public,18.00,371166570,0.371,2013-2022
+119164,Mt San Antonio College,Public,39.00,364390156,0.364,2013-2022
+187532,Central New Mexico Community College,Public,29.00,354652968,0.355,2013-2022
+117645,Long Beach City College,Public,27.00,332824285,0.333,2013-2022
+190628,CUNY LaGuardia Community College,Public,25.00,318176963,0.318,2013-2022
+202222,Columbus State Community College,Public,25.00,317347957,0.317,2013-2022
+244437,Georgia State University-Perimeter College,Public,22.00,312138383,0.312,2013-2022
+113856,East Los Angeles College,Public,33.00,305021384,0.305,2013-2022
+111887,Cerritos College,Public,29.00,304398679,0.304,2013-2022
+193478,Nassau Community College,Public,23.00,299651563,0.300,2013-2022
+121044,Pasadena City College,Public,41.00,298441747,0.298,2013-2022
+434672,Community College of Baltimore County,Public,16.00,290934736,0.291,2013-2022
+199856,Wake Technical Community College,Public,31.00,290209324,0.290,2013-2022
+198534,Fayetteville Technical Community College,Public,21.00,287823330,0.288,2013-2022
+114789,Fresno City College,Public,28.00,287123973,0.287,2013-2022
+175786,Hinds Community College,Public,42.00,286326226,0.286,2013-2022
+233772,Tidewater Community College,Public,30.00,283736584,0.284,2013-2022
+190619,CUNY Kingsborough Community College,Public,24.00,282452007,0.282,2013-2022
+190673,CUNY Queensborough Community College,Public,23.00,282450448,0.282,2013-2022
+217475,Community College of Rhode Island,Public,25.00,280389038,0.280,2013-2022
+190530,CUNY Bronx Community College,Public,18.00,274666203,0.275,2013-2022
+218894,Trident Technical College,Public,29.00,271235698,0.271,2013-2022
+105525,Pima Community College,Public,21.00,265094869,0.265,2013-2022
+193326,Monroe Community College,Public,23.00,259656361,0.260,2013-2022
+239248,Milwaukee Area Technical College,Public,25.00,257018969,0.257,2013-2022
+207935,Tulsa Community College,Public,27.00,254135835,0.254,2013-2022
+171535,Oakland Community College,Public,19.00,253567747,0.254,2013-2022
+113980,El Camino Community College District,Public,37.00,250797510,0.251,2013-2022
+366395,Suffolk County Community College,Public,25.00,249678477,0.250,2013-2022
+109208,American River College,Public,33.00,246001211,0.246,2013-2022
+198260,Central Piedmont Community College,Public,26.00,245798699,0.246,2013-2022
+172635,Wayne County Community College District,Public,23.00,240727742,0.241,2013-2022
+144865,College of DuPage,Public,24.00,240068634,0.240,2013-2022
+212878,Harrisburg Area Community College,Public,21.00,239969605,0.240,2013-2022
+123800,Southwestern College,Public,31.00,239875194,0.240,2013-2022
+230746,Salt Lake Community College,Public,30.00,239157450,0.239,2013-2022
+163426,Montgomery College,Public,27.00,236145554,0.236,2013-2022
+147378,Moraine Valley Community College,Public,33.00,229421752,0.229,2013-2022
+199333,Pitt Community College,Public,28.00,224246606,0.224,2013-2022
+114859,Fullerton College,Public,34.00,219602145,0.220,2013-2022
+121901,Riverside City College,Public,32.00,218498534,0.218,2013-2022
+111939,Chaffey College,Public,32.00,216795640,0.217,2013-2022
+122658,San Joaquin Delta College,Public,32.00,216184959,0.216,2013-2022
+198622,Guilford Technical Community College,Public,31.00,216122394,0.216,2013-2022
+203331,Eastern Gateway Community College,Public,30.00,216116122,0.216,2013-2022
+117706,Los Angeles Pierce College,Public,41.00,215146079,0.215,2013-2022
+170790,Macomb Community College,Public,16.00,213749823,0.214,2013-2022
+487320,Texas State Technical College,Public,38.00,211803054,0.212,2013-2022
+184995,Hudson County Community College,Public,23.00,211195046,0.211,2013-2022
+115001,Glendale Community College,Public,33.00,207678310,0.208,2013-2022
+165112,Bunker Hill Community College,Public,19.00,198546059,0.199,2013-2022
+117733,Los Angeles Valley College,Public,41.00,198213858,0.198,2013-2022
+223816,Central Texas College,Public,15.00,194865373,0.195,2013-2022
+184481,Essex County College,Public,21.00,194786156,0.195,2013-2022
+105154,Mesa Community College,Public,19.00,194050651,0.194,2013-2022
+125091,Victor Valley College,Public,32.00,192386954,0.192,2013-2022
+117788,Los Angeles City College,Public,24.00,190025790,0.190,2013-2022
+122180,Sacramento City College,Public,31.00,189186807,0.189,2013-2022
+115861,Imperial Valley College,Public,46.00,187123669,0.187,2013-2022
+176071,Mississippi Gulf Coast Community College,Public,47.00,186956980,0.187,2013-2022
+140331,Chattahoochee Technical College,Public,39.00,186189328,0.186,2013-2022
+191083,Erie Community College,Public,27.00,185980615,0.186,2013-2022
+190585,CUNY Hostos Community College,Public,17.00,183651443,0.184,2013-2022
+177995,Metropolitan Community College-Kansas City,Public,29.00,183298565,0.183,2013-2022
+120342,Orange Coast College,Public,45.00,182443089,0.182,2013-2022
+123217,College of the Sequoias,Public,33.00,182092862,0.182,2013-2022
+437103,Baton Rouge Community College,Public,27.00,182038279,0.182,2013-2022
+210605,Community College of Allegheny County,Public,23.00,181694537,0.182,2013-2022
+139986,Southern Crescent Technical College,Public,51.00,180878326,0.181,2013-2022
+139278,West Georgia Technical College,Public,30.00,180253272,0.180,2013-2022
+483045,Central Georgia Technical College,Public,41.00,179082077,0.179,2013-2022
+183743,Bergen Community College,Public,24.00,177863593,0.178,2013-2022
+119216,Mt San Jacinto Community College District,Public,36.00,176328031,0.176,2013-2022
+221485,Southwest Tennessee Community College,Public,19.00,175697932,0.176,2013-2022
+197294,SUNY Westchester Community College,Public,23.00,171743570,0.172,2013-2022
+123341,Sierra College,Public,38.00,171522795,0.172,2013-2022
+153737,Kirkwood Community College,Public,40.00,167520220,0.168,2013-2022
+187620,New Mexico State University-Dona Ana,Public,16.00,167389684,0.167,2013-2022
+153214,Des Moines Area Community College,Public,34.00,167084354,0.167,2013-2022
+107664,University of Arkansas-Pulaski Technical College,Public,33.00,166718670,0.167,2013-2022
+156921,Jefferson Community and Technical College,Public,31.00,165164241,0.165,2013-2022
+185536,Middlesex College,Public,35.00,163757129,0.164,2013-2022
+187198,UCNJ Union College of Union County  NJ,Public,35.00,163211316,0.163,2013-2022
+110246,Butte College,Public,32.00,163065549,0.163,2013-2022
+226578,McLennan Community College,Public,35.00,162882533,0.163,2013-2022
+218353,Midlands Technical College,Public,16.00,162361382,0.162,2013-2022
+420398,Northwest Vista College,Public,37.00,162220820,0.162,2013-2022
+170657,Lansing Community College,Public,23.00,162213412,0.162,2013-2022
+115296,Grossmont College,Public,32.00,162207389,0.162,2013-2022
+122339,San Diego City College,Public,24.00,161593789,0.162,2013-2022
+205841,Stark State College,Public,23.00,158842087,0.159,2013-2022
+140012,Gwinnett Technical College,Public,27.00,158559611,0.159,2013-2022
+118718,Merced College,Public,29.00,158509256,0.159,2013-2022
+158431,Bossier Parish Community College,Public,13.00,157914929,0.158,2013-2022
+169521,Delta College,Public,17.00,156309276,0.156,2013-2022
+163657,Prince George's Community College,Public,25.00,156120130,0.156,2013-2022
+138840,Atlanta Technical College,Public,41.00,155391426,0.155,2013-2022
+156392,Bluegrass Community and Technical College,Public,38.00,154634169,0.155,2013-2022
+194222,Onondaga Community College,Public,25.00,154431038,0.154,2013-2022
+209038,Lane Community College,Public,22.00,152944664,0.153,2013-2022
+104160,Arizona Western College,Public,25.00,152495236,0.152,2013-2022
+117724,Los Angeles Trade Technical College,Public,27.00,152179820,0.152,2013-2022
+101514,John C Calhoun State Community College,Public,41.00,150774595,0.151,2013-2022
+105428,Phoenix College,Public,18.00,149783255,0.150,2013-2022
+113573,College of the Desert,Public,29.00,149225823,0.149,2013-2022
+207449,Oklahoma City Community College,Public,21.00,148040233,0.148,2013-2022
+139384,Georgia Northwestern Technical College,Public,34.00,146347275,0.146,2013-2022
+228158,South Plains College,Public,25.00,146116072,0.146,2013-2022
+186034,Passaic County Community College,Public,15.00,145865645,0.146,2013-2022
+170055,Grand Rapids Community College,Public,18.00,145821746,0.146,2013-2022
+214379,Northampton County Area Community College,Public,21.00,144937784,0.145,2013-2022
+112190,City College of San Francisco,Public,40.00,144493921,0.144,2013-2022
+172617,Washtenaw Community College,Public,30.00,144005425,0.144,2013-2022
+120971,Palomar College,Public,34.00,143287497,0.143,2013-2022
+176178,Northwest Mississippi Community College,Public,42.00,143216384,0.143,2013-2022
+222576,Amarillo College,Public,31.00,142496306,0.142,2013-2022
+211927,Delaware County Community College,Public,20.00,142411797,0.142,2013-2022
+123527,San Bernardino Valley College,Public,22.00,142389143,0.142,2013-2022
+113333,De Anza College,Public,68.00,140426737,0.140,2013-2022
+198552,Forsyth Technical Community College,Public,28.00,139213998,0.139,2013-2022
+227377,Texas Southmost College,Public,27.00,138654115,0.139,2013-2022
+112172,Citrus College,Public,44.00,137459594,0.137,2013-2022
+181303,Metropolitan Community College Area,Public,25.00,136517105,0.137,2013-2022
+183938,Camden County College,Public,33.00,135696350,0.136,2013-2022
+221184,Nashville State Community College,Public,17.00,135611184,0.136,2013-2022
+144209,City Colleges of Chicago-Harold Washington College,Public,29.00,133341705,0.133,2013-2022
+193283,Mohawk Valley Community College,Public,35.00,131102568,0.131,2013-2022
+223427,Blinn College District,Public,11.00,130461503,0.130,2013-2022
+199494,Rowan-Cabarrus Community College,Public,30.00,130177833,0.130,2013-2022
+169275,Mott Community College,Public,15.00,129449944,0.129,2013-2022
+434061,South Louisiana Community College,Public,30.00,128847941,0.129,2013-2022
+111461,College of the Canyons,Public,44.00,128735760,0.129,2013-2022
+228316,Southwest Texas Junior College,Public,33.00,128491770,0.128,2013-2022
+129367,Connecticut State Community College,Public,19.00,128012995,0.128,2013-2022
+218140,Horry-Georgetown Technical College,Public,28.00,127692407,0.128,2013-2022
+122889,Santa Barbara City College,Public,36.00,127625518,0.128,2013-2022
+113096,Cosumnes River College,Public,33.00,127413842,0.127,2013-2022
+165033,Bristol Community College,Public,21.00,126490759,0.126,2013-2022
+198154,Cape Fear Community College,Public,34.00,126374747,0.126,2013-2022
+153311,Eastern Iowa Community College District,Public,34.00,126190180,0.126,2013-2022
+218025,Florence-Darlington Technical College,Public,20.00,125979268,0.126,2013-2022
+157711,Somerset Community College,Public,40.00,125423035,0.125,2013-2022
+455114,College of Western Idaho,Public,27.00,124602509,0.125,2013-2022
+117052,Reedley College,Public,42.00,124126494,0.124,2013-2022
+487162,Southern Regional Technical College,Public,36.00,123022292,0.123,2013-2022
+149842,William Rainey Harper College,Public,46.00,122932127,0.123,2013-2022
+219824,Chattanooga State Community College,Public,22.00,121744664,0.122,2013-2022
+125028,Ventura College,Public,43.00,121095020,0.121,2013-2022
+218520,Piedmont Technical College,Public,33.00,120855935,0.121,2013-2022
+183859,Brookdale Community College,Public,29.00,120135153,0.120,2013-2022
+384333,Estrella Mountain Community College,Public,25.00,119944067,0.120,2013-2022
+221643,Pellissippi State Community College,Public,28.00,119198844,0.119,2013-2022
+146296,Joliet Junior College,Public,21.00,118686594,0.119,2013-2022
+123013,Santa Rosa Junior College,Public,34.00,118659386,0.119,2013-2022
+176239,Pearl River Community College,Public,35.00,118140335,0.118,2013-2022
+113634,Diablo Valley College,Public,46.00,117700501,0.118,2013-2022
+138682,Albany Technical College,Public,34.00,117673339,0.118,2013-2022
+167534,Quinsigamond Community College,Public,21.00,117641870,0.118,2013-2022
+101286,George C Wallace Community College-Dothan,Public,27.00,116111597,0.116,2013-2022
+101240,Gadsden State Community College,Public,32.00,114751401,0.115,2013-2022
+191719,Hudson Valley Community College,Public,33.00,114230924,0.114,2013-2022
+174136,Minneapolis Community and Technical College,Public,17.00,114151106,0.114,2013-2022
+246354,Palo Alto College,Public,34.00,113832631,0.114,2013-2022
+204945,Owens Community College,Public,32.00,113150862,0.113,2013-2022
+218830,Spartanburg Community College,Public,30.00,113018774,0.113,2013-2022
+138956,Augusta Technical College,Public,31.00,112541176,0.113,2013-2022
+175810,Holmes Community College,Public,45.00,112462002,0.112,2013-2022
+115126,Golden West College,Public,45.00,112375245,0.112,2013-2022
+175829,Itawamba Community College,Public,45.00,112373059,0.112,2013-2022
+175315,Century College,Public,21.00,111658749,0.112,2013-2022
+101505,Jefferson State Community College,Public,23.00,111221411,0.111,2013-2022
+140942,Savannah Technical College,Public,37.00,111065524,0.111,2013-2022
+154800,Butler Community College,Public,30.00,109409948,0.109,2013-2022
+189547,SUNY Broome Community College,Public,23.00,108858994,0.109,2013-2022
+222053,Volunteer State Community College,Public,24.00,108699758,0.109,2013-2022
+232414,J Sargeant Reynolds Community College,Public,30.00,108628184,0.109,2013-2022
+144166,City Colleges of Chicago-Malcolm X College,Public,14.00,108466701,0.108,2013-2022
+155210,Johnson County Community College,Public,29.00,108270763,0.108,2013-2022
+183655,Atlantic Cape Community College,Public,25.00,107583125,0.108,2013-2022
+175041,Saint Paul College,Public,32.00,107576094,0.108,2013-2022
+170541,Kalamazoo Valley Community College,Public,23.00,106567363,0.107,2013-2022
+414461,Mech-Tech College,"Private, for-profit",62.00,106480126,0.106,2013-2022
+144218,City Colleges of Chicago-Wilbur Wright College,Public,33.00,106070022,0.106,2013-2022
+101295,George C Wallace State Community College-Hanceville,Public,48.00,105912862,0.106,2013-2022
+226019,Kilgore College,Public,33.00,105716177,0.106,2013-2022
+122205,Saddleback College,Public,42.00,104788547,0.105,2013-2022
+101161,Coastal Alabama Community College,Public,26.00,104273319,0.104,2013-2022
+149532,Triton College,Public,29.00,103499557,0.103,2013-2022
+146685,Lincoln Land Community College,Public,43.00,103072398,0.103,2013-2022
+114266,Evergreen Valley College,Public,43.00,103033428,0.103,2013-2022
+214111,Montgomery County Community College,Public,23.00,102644312,0.103,2013-2022
+227854,St Philip's College,Public,35.00,102478489,0.102,2013-2022
+139357,Columbus Technical College,Public,21.00,102360725,0.102,2013-2022
+218885,Tri-County Technical College,Public,39.00,102159163,0.102,2013-2022
+126863,Community College of Aurora,Public,29.00,102142616,0.102,2013-2022
+115393,Hartnell College,Public,30.00,101293389,0.101,2013-2022
+213525,Lehigh Carbon Community College,Public,28.00,100812544,0.101,2013-2022
+119137,Moorpark College,Public,39.00,100771910,0.101,2013-2022
+143215,Southwestern Illinois College,Public,37.00,100706181,0.101,2013-2022
+161545,Southern Maine Community College,Public,21.00,100412052,0.100,2013-2022
+179645,Three Rivers College,Public,35.00,100237131,0.100,2013-2022
+197887,Asheville-Buncombe Technical Community College,Public,32.00,100204556,0.100,2013-2022
+167905,Springfield Technical Community College,Public,27.00,99896308,0.100,2013-2022
+174428,Normandale Community College,Public,19.00,98432570,0.098,2013-2022
+367459,NorthWest Arkansas Community College,Public,27.00,98111834,0.098,2013-2022
+167376,Northern Essex Community College,Public,19.00,97943655,0.098,2013-2022
+175652,East Mississippi Community College,Public,42.00,97470116,0.097,2013-2022
+198455,Durham Technical Community College,Public,36.00,97234121,0.097,2013-2022
+221908,Northeast State Community College,Public,32.00,97180281,0.097,2013-2022
+244446,Georgia Piedmont Technical College,Public,35.00,96859499,0.097,2013-2022
+176169,Northeast Mississippi Community College,Public,35.00,96771430,0.097,2013-2022
+108807,Allan Hancock College,Public,27.00,96294867,0.096,2013-2022
+141255,Wiregrass Georgia Technical College,Public,44.00,96242950,0.096,2013-2022
+113218,Cuyamaca College,Public,34.00,95511177,0.096,2013-2022
+120421,Oxnard College,Public,33.00,95343950,0.095,2013-2022
+233754,Virginia Peninsula Community College,Public,34.00,94930765,0.095,2013-2022
+218991,York Technical College,Public,32.00,94688133,0.095,2013-2022
+116439,Irvine Valley College,Public,58.00,94468447,0.094,2013-2022
+238759,Gateway Technical College,Public,47.00,94444877,0.094,2013-2022
+111920,Chabot College,Public,41.00,93933600,0.094,2013-2022
+110334,Cabrillo College,Public,38.00,93844785,0.094,2013-2022
+117867,Los Angeles Mission College,Public,31.00,93449041,0.093,2013-2022
+198376,Davidson-Davie Community College,Public,42.00,93265865,0.093,2013-2022
+185873,Ocean County College,Public,39.00,93265246,0.093,2013-2022
+181640,Southeast Community College Area,Public,27.00,93238747,0.093,2013-2022
+198251,Central Carolina Community College,Public,41.00,93234714,0.093,2013-2022
+183877,Rowan College at Burlington County,Public,38.00,93040460,0.093,2013-2022
+146472,College of Lake County,Public,38.00,92446526,0.092,2013-2022
+239488,Northeast Wisconsin Technical College,Public,46.00,92291153,0.092,2013-2022
+155292,Kansas City Kansas Community College,Public,38.00,91092224,0.091,2013-2022
+228608,Temple College,Public,27.00,90431457,0.090,2013-2022
+190840,Dutchess Community College,Public,29.00,90173609,0.090,2013-2022
+162779,Howard Community College,Public,26.00,90053828,0.090,2013-2022
+161767,Anne Arundel Community College,Public,25.00,89571913,0.090,2013-2022
+188100,San Juan College,Public,31.00,89336970,0.089,2013-2022
+117247,Laney College,Public,36.00,88897088,0.089,2013-2022
+117690,Los Angeles Harbor College,Public,36.00,88416669,0.088,2013-2022
+198570,Gaston College,Public,51.00,87803437,0.088,2013-2022
+166887,Middlesex Community College,Public,23.00,87772166,0.088,2013-2022
+147411,Morton College,Public,28.00,87159892,0.087,2013-2022
+101569,Lawson State Community College,Public,26.00,87082476,0.087,2013-2022
+175883,Jones County Junior College,Public,36.00,86404115,0.086,2013-2022
+102067,Shelton State Community College,Public,21.00,86358387,0.086,2013-2022
+156648,Elizabethtown Community and Technical College,Public,50.00,86305715,0.086,2013-2022
+153630,Iowa Western Community College,Public,40.00,86197959,0.086,2013-2022
+126119,Yuba College,Public,32.00,86176712,0.086,2013-2022
+460394,Moreno Valley College,Public,33.00,86120225,0.086,2013-2022
+144944,Elgin Community College,Public,41.00,85630428,0.086,2013-2022
+184791,Rowan College of South Jersey-Gloucester Campus,Public,33.00,85589789,0.086,2013-2022
+148380,Rock Valley College,Public,40.00,85387697,0.085,2013-2022
+117894,Los Medanos College,Public,39.00,85375229,0.085,2013-2022
+167312,North Shore Community College,Public,18.00,84891988,0.085,2013-2022
+198233,Catawba Valley Community College,Public,36.00,84468833,0.084,2013-2022
+122384,San Diego Miramar College,Public,48.00,84202605,0.084,2013-2022
+222062,Walters State Community College,Public,36.00,83261597,0.083,2013-2022
+160649,Southern University at Shreveport,Public,7.00,83220629,0.083,2013-2022
+166823,Massasoit Community College,Public,24.00,83190830,0.083,2013-2022
+207670,Rose State College,Public,21.00,82847108,0.083,2013-2022
+221397,Roane State Community College,Public,32.00,82515143,0.083,2013-2022
+166133,Holyoke Community College,Public,32.00,82353630,0.082,2013-2022
+203386,Hondros College of Nursing,"Private, for-profit",19.00,82255351,0.082,2013-2022
+218858,Central Carolina Technical College,Public,31.00,82169267,0.082,2013-2022
+149727,Waubonsee Community College,Public,41.00,82078963,0.082,2013-2022
+148007,Prairie State College,Public,19.00,81953396,0.082,2013-2022
+157483,West Kentucky Community and Technical College,Public,49.00,81781144,0.082,2013-2022
+364025,Chandler-Gilbert Community College,Public,23.00,81483685,0.081,2013-2022
+209940,Rogue Community College,Public,12.00,80952349,0.081,2013-2022
+191339,Genesee Community College,Public,28.00,80609873,0.081,2013-2022
+104346,Central Arizona College,Public,23.00,80492307,0.080,2013-2022
+213659,Luzerne County Community College,Public,21.00,79737957,0.080,2013-2022
+162122,College of Southern Maryland,Public,33.00,79221330,0.079,2013-2022
+193946,Niagara County Community College,Public,31.00,78285291,0.078,2013-2022
+251260,Southern Union State Community College,Public,27.00,77752056,0.078,2013-2022
+101736,Northwest Shoals Community College,Public,33.00,77380477,0.077,2013-2022
+157553,Big Sandy Community and Technical College,Public,38.00,77284112,0.077,2013-2022
+215585,Reading Area Community College,Public,26.00,77191270,0.077,2013-2022
+185509,Mercer County Community College,Public,21.00,77068872,0.077,2013-2022
+208318,Central Oregon Community College,Public,25.00,77051065,0.077,2013-2022
+199838,Vance-Granville Community College,Public,47.00,76491866,0.076,2013-2022
+147916,Parkland College,Public,33.00,76203474,0.076,2013-2022
+117715,Los Angeles Southwest College,Public,34.00,75719139,0.076,2013-2022
+229841,Wharton County Junior College,Public,20.00,75706979,0.076,2013-2022
+175573,Copiah-Lincoln Community College,Public,52.00,75700122,0.076,2013-2022
+483212,Louisiana Delta Community College,Public,28.00,75425448,0.075,2013-2022
+232450,Brightpoint Community College,Public,39.00,75008686,0.075,2013-2022
+198330,Coastal Carolina Community College,Public,42.00,74877271,0.075,2013-2022
+121363,Porterville College,Public,29.00,74843848,0.075,2013-2022
+460464,Norco College,Public,33.00,74739100,0.075,2013-2022
+246813,Athens Technical College,Public,33.00,74323839,0.074,2013-2022
+179539,State Fair Community College,Public,40.00,74187047,0.074,2013-2022
+153524,Iowa Central Community College,Public,44.00,73944800,0.074,2013-2022
+191199,Finger Lakes Community College,Public,28.00,73653871,0.074,2013-2022
+175519,Coahoma Community College,Public,38.00,73632740,0.074,2013-2022
+145682,Illinois Central College,Public,40.00,73625379,0.074,2013-2022
+161864,Baltimore City Community College,Public,12.00,73537210,0.074,2013-2022
+166957,Mount Wachusett Community College,Public,29.00,73416875,0.073,2013-2022
+143279,Black Hawk College,Public,43.00,73261899,0.073,2013-2022
+233949,Virginia Western Community College,Public,41.00,72425744,0.072,2013-2022
+178448,Moberly Area Community College,Public,39.00,72081310,0.072,2013-2022
+140243,Lanier Technical College,Public,36.00,71767212,0.072,2013-2022
+220400,Jackson State Community College,Public,20.00,71753685,0.072,2013-2022
+216825,Westmoreland County Community College,Public,25.00,71744650,0.072,2013-2022
+199740,Stanly Community College,Public,72.00,71294247,0.071,2013-2022
+174376,North Hennepin Community College,Public,16.00,71279786,0.071,2013-2022
+177135,Crowder College,Public,43.00,71275706,0.071,2013-2022
+199634,Sandhills Community College,Public,48.00,71214687,0.071,2013-2022
+176008,Mississippi Delta Community College,Public,30.00,71123660,0.071,2013-2022
+238722,Fox Valley Technical College,Public,61.00,71117006,0.071,2013-2022
+194240,Orange County Community College,Public,23.00,70957446,0.071,2013-2022
+195322,Schenectady County Community College,Public,29.00,70941512,0.071,2013-2022
+203599,Lakeland Community College,Public,23.00,70913421,0.071,2013-2022
+199449,Richmond Community College,Public,41.00,70835039,0.071,2013-2022
+199786,Alamance Community College,Public,30.00,70759048,0.071,2013-2022
+195058,Rockland Community College,Public,29.00,70589363,0.071,2013-2022
+140678,North Georgia Technical College,Public,37.00,70479627,0.070,2013-2022
+224110,North Central Texas College,Public,35.00,70165198,0.070,2013-2022
+199476,Robeson Community College,Public,30.00,69900402,0.070,2013-2022
+219888,Columbia State Community College,Public,31.00,69868347,0.070,2013-2022
+366465,Ogeechee Technical College,Public,40.00,69624583,0.070,2013-2022
+102429,Bevill State Community College,Public,44.00,69421149,0.069,2013-2022
+102030,Bishop State Community College,Public,23.00,69174567,0.069,2013-2022
+227401,Paris Junior College,Public,37.00,69032094,0.069,2013-2022
+113193,Cuesta College,Public,44.00,68899114,0.069,2013-2022
+172963,Anoka-Ramsey Community College,Public,24.00,68711993,0.069,2013-2022
+112686,Compton College,Public,32.00,68242242,0.068,2013-2022
+209074,Linn-Benton Community College,Public,25.00,68227326,0.068,2013-2022
+173559,Minnesota State Community and Technical College,Public,46.00,68104985,0.068,2013-2022
+141006,South Georgia Technical College,Public,59.00,68085982,0.068,2013-2022
+149365,South Suburban College,Public,24.00,67657896,0.068,2013-2022
+186645,Raritan Valley Community College,Public,35.00,67595386,0.068,2013-2022
+240116,Chippewa Valley Technical College,Public,46.00,67347336,0.067,2013-2022
+156338,Southcentral Kentucky Community and Technical College,Public,52.00,67037216,0.067,2013-2022
+226204,Lee College,Public,19.00,66898784,0.067,2013-2022
+198118,Caldwell Community College and Technical Institute,Public,40.00,66552309,0.067,2013-2022
+198774,Johnston Community College,Public,29.00,66265416,0.066,2013-2022
+155195,Hutchinson Community College,Public,45.00,66044136,0.066,2013-2022
+161077,Central Maine Community College,Public,28.00,66035780,0.066,2013-2022
+448594,Lemoore College,Public,40.00,65879028,0.066,2013-2022
+157331,Maysville Community and Technical College,Public,51.00,65849478,0.066,2013-2022
+121707,College of the Redwoods,Public,25.00,65410065,0.065,2013-2022
+221096,Motlow State Community College,Public,29.00,65235642,0.065,2013-2022
+211307,Bucks County Community College,Public,28.00,65010315,0.065,2013-2022
+184180,County College of Morris,Public,35.00,64581226,0.065,2013-2022
+262031,St Charles Community College,Public,23.00,63355708,0.063,2013-2022
+106980,National Park College,Public,36.00,63221538,0.063,2013-2022
+157739,Southeast Kentucky Community & Technical College,Public,44.00,63213387,0.063,2013-2022
+184205,Rowan College of South Jersey-Cumberland Campus,Public,33.00,63188753,0.063,2013-2022
+191986,Jamestown Community College,Public,34.00,63006139,0.063,2013-2022
+160579,SOWELA Technical Community College,Public,43.00,62965789,0.063,2013-2022
+154572,Western Iowa Tech Community College,Public,40.00,62661907,0.063,2013-2022
+144157,City Colleges of Chicago-Kennedy-King College,Public,26.00,62646197,0.063,2013-2022
+170550,Kellogg Community College,Public,26.00,62571634,0.063,2013-2022
+176354,Southwest Mississippi Community College,Public,40.00,62493983,0.062,2013-2022
+142443,North Idaho College,Public,36.00,62030541,0.062,2013-2022
+228699,Texarkana College,Public,36.00,61101227,0.061,2013-2022
+174756,St Cloud Technical and Community College,Public,42.00,60925745,0.061,2013-2022
+105792,South Mountain Community College,Public,23.00,60916590,0.061,2013-2022
+229504,Vernon College,Public,18.00,60859075,0.061,2013-2022
+109907,Barstow Community College,Public,33.00,60672594,0.061,2013-2022
+141811,Leeward Community College,Public,32.00,60456229,0.060,2013-2022
+208406,Clackamas Community College,Public,22.00,60445611,0.060,2013-2022
+104425,Cochise County Community College District,Public,30.00,60383486,0.060,2013-2022
+174738,Rochester Community and Technical College,Public,26.00,60355436,0.060,2013-2022
+144184,City Colleges of Chicago-Harry S Truman College,Public,31.00,60273123,0.060,2013-2022
+122746,San Jose City College,Public,32.00,60190228,0.060,2013-2022
+232195,Germanna Community College,Public,37.00,59556733,0.060,2013-2022
+173708,Hennepin Technical College,Public,44.00,59441611,0.059,2013-2022
+240170,Western Technical College,Public,39.00,58758562,0.059,2013-2022
+105206,Mohave Community College,Public,30.00,58722616,0.059,2013-2022
+203155,Hocking College,Public,29.00,58537826,0.059,2013-2022
+198817,Lenoir Community College,Public,28.00,58298058,0.058,2013-2022
+162557,Frederick Community College,Public,35.00,58266199,0.058,2013-2022
+485458,Coastal Pines Technical College,Public,46.00,58214437,0.058,2013-2022
+175935,Meridian Community College,Public,44.00,58039911,0.058,2013-2022
+147800,Oakton College,Public,31.00,57876193,0.058,2013-2022
+177676,Jefferson College,Public,32.00,57827629,0.058,2013-2022
+227225,Northeast Texas Community College,Public,33.00,57661313,0.058,2013-2022
+112826,Contra Costa College,Public,33.00,57432345,0.057,2013-2022
+175643,East Central Community College,Public,39.00,57188685,0.057,2013-2022
+156231,Ashland Community and Technical College,Public,59.00,56911549,0.057,2013-2022
+199421,Randolph Community College,Public,54.00,56626653,0.057,2013-2022
+420431,Oconee Fall Line Technical College,Public,42.00,56456040,0.056,2013-2022
+180902,Central Community College,Public,45.00,56355115,0.056,2013-2022
+198321,Cleveland Community College,Public,11.00,56292563,0.056,2013-2022
+101897,Northeast Alabama Community College,Public,32.00,56227386,0.056,2013-2022
+448673,Rasmussen University-Illinois,"Private, for-profit",40.00,56057049,0.056,2013-2022
+171155,Mid Michigan College,Public,18.00,55959119,0.056,2013-2022
+159407,Louisiana State University-Eunice,Public,14.00,55678881,0.056,2013-2022
+144193,City Colleges of Chicago-Richard J Daley College,Public,28.00,55101280,0.055,2013-2022
+160667,Northshore Technical Community College,Public,35.00,54978344,0.055,2013-2022
+153472,Indian Hills Community College,Public,40.00,54851025,0.055,2013-2022
+444219,Folsom Lake College,Public,40.00,54668712,0.055,2013-2022
+399212,Santiago Canyon College,Public,47.00,54599030,0.055,2013-2022
+199908,Western Piedmont Community College,Public,36.00,54527374,0.055,2013-2022
+198987,Mitchell Community College,Public,16.00,54481480,0.054,2013-2022
+218487,Orangeburg Calhoun Technical College,Public,40.00,54381658,0.054,2013-2022
+153445,Hawkeye Community College,Public,31.00,54379275,0.054,2013-2022
+247940,Owensboro Community and Technical College,Public,49.00,54204675,0.054,2013-2022
+199926,Wilkes Community College,Public,52.00,54094362,0.054,2013-2022
+105747,Scottsdale Community College,Public,24.00,53983472,0.054,2013-2022
+156790,Hazard Community and Technical College,Public,47.00,53772256,0.054,2013-2022
+192022,Jefferson Community College,Public,26.00,53645019,0.054,2013-2022
+230861,Community College of Vermont,Public,26.00,53594990,0.054,2013-2022
+188438,SUNY Adirondack,Public,29.00,53530579,0.054,2013-2022
+147004,McHenry County College,Public,39.00,52764997,0.053,2013-2022
+223320,Coastal Bend College,Public,11.00,52698646,0.053,2013-2022
+198491,Edgecombe Community College,Public,58.00,52683320,0.053,2013-2022
+157438,Gateway Community and Technical College,Public,49.00,52682929,0.053,2013-2022
+170620,Lake Michigan College,Public,22.00,52610243,0.053,2013-2022
+196565,Tompkins Cortland Community College,Public,27.00,52269079,0.052,2013-2022
+146506,Lake Land College,Public,54.00,52118775,0.052,2013-2022
+118930,Mission College,Public,53.00,51967430,0.052,2013-2022
+146418,Kishwaukee College,Public,38.00,51921688,0.052,2013-2022
+225371,Hill College,Public,28.00,51919940,0.052,2013-2022
+106449,Arkansas State University-Beebe,Public,38.00,51570511,0.052,2013-2022
+114938,Gavilan College,Public,44.00,51433496,0.051,2013-2022
+239460,Northcentral Technical College,Public,49.00,51371647,0.051,2013-2022
+206923,Carl Albert State College,Public,41.00,51006249,0.051,2013-2022
+156107,Wichita State University-Campus of Applied Sciences and Technology,Public,36.00,50858269,0.051,2013-2022
+119067,Monterey Peninsula College,Public,30.00,50769698,0.051,2013-2022
+154110,Northeast Iowa Community College,Public,48.00,50685257,0.051,2013-2022
+189839,Cayuga County Community College,Public,34.00,50657411,0.051,2013-2022
+172291,St Clair County Community College,Public,32.00,50616184,0.051,2013-2022
+242820,Liceo de Arte y Tecnologia,"Private, for-profit",65.00,50496552,0.050,2013-2022
+178217,Mineral Area College,Public,42.00,50433274,0.050,2013-2022
+146603,Lewis and Clark Community College,Public,48.00,50383973,0.050,2013-2022
+156860,Hopkinsville Community College,Public,37.00,50273054,0.050,2013-2022
+207281,Northern Oklahoma College,Public,41.00,49927747,0.050,2013-2022
+158884,Nunez Community College,Public,18.00,49713981,0.050,2013-2022
+199768,Surry Community College,Public,8.00,49616979,0.050,2013-2022
+106625,Black River Technical College,Public,34.00,49451388,0.049,2013-2022
+101301,George C Wallace State Community College-Selma,Public,39.00,49160988,0.049,2013-2022
+146205,John A Logan College,Public,41.00,49092961,0.049,2013-2022
+102076,Snead State Community College,Public,49.00,48958636,0.049,2013-2022
+120290,Ohlone College,Public,55.00,48450788,0.048,2013-2022
+366401,Las Positas College,Public,48.00,48209896,0.048,2013-2022
+222822,Angelina College,Public,27.00,47961012,0.048,2013-2022
+441760,Lamar Institute of Technology,Public,27.00,47850905,0.048,2013-2022
+112385,Coastline Community College,Public,28.00,47777008,0.048,2013-2022
+141796,Kapiolani Community College,Public,20.00,47562303,0.048,2013-2022
+162706,Harford Community College,Public,38.00,47531139,0.048,2013-2022
+162690,Hagerstown Community College,Public,36.00,47442736,0.047,2013-2022
+236656,South Puget Sound Community College,Public,42.00,47425818,0.047,2013-2022
+160481,Fletcher Technical Community College,Public,25.00,47350176,0.047,2013-2022
+171304,Muskegon Community College,Public,31.00,46803127,0.047,2013-2022
+191612,Herkimer County Community College,Public,28.00,46672489,0.047,2013-2022
+219879,Cleveland State Community College,Public,29.00,46457903,0.046,2013-2022
+199731,Southwestern Community College,Public,54.00,46160957,0.046,2013-2022
+175236,Ridgewater College,Public,45.00,45789846,0.046,2013-2022
+199087,Nash Community College,Public,52.00,45760675,0.046,2013-2022
+187958,University of New Mexico-Gallup Campus,Public,19.00,45584746,0.046,2013-2022
+220057,Dyersburg State Community College,Public,27.00,45502681,0.046,2013-2022
+217712,Technical College of the Lowcountry,Public,12.00,45458452,0.045,2013-2022
+232575,Laurel Ridge Community College,Public,39.00,45383056,0.045,2013-2022
+384342,Heartland Community College,Public,52.00,45300135,0.045,2013-2022
+190442,SUNY Corning Community College,Public,33.00,45216449,0.045,2013-2022
+233639,Southside Virginia Community College,Public,35.00,45203222,0.045,2013-2022
+199892,Wayne Community College,Public,57.00,45158110,0.045,2013-2022
+231536,Blue Ridge Community College,Public,34.00,45087936,0.045,2013-2022
+225520,Howard College,Public,36.00,45077479,0.045,2013-2022
+223898,Cisco College,Public,31.00,45050693,0.045,2013-2022
+227386,Panola College,Public,41.00,44879820,0.045,2013-2022
+198729,James Sprunt Community College,Public,39.00,44823132,0.045,2013-2022
+181491,Northeast Community College,Public,56.00,44805857,0.045,2013-2022
+231882,Danville Community College,Public,38.00,44780862,0.045,2013-2022
+489201,Clovis Community College,Public,40.00,44659068,0.045,2013-2022
+207290,Northeastern Oklahoma A&M College,Public,31.00,44502367,0.045,2013-2022
+173461,Lake Superior College,Public,38.00,44219543,0.044,2013-2022
+177250,East Central College,Public,38.00,44098532,0.044,2013-2022
+198367,Craven Community College,Public,46.00,43812287,0.044,2013-2022
+183099,NHTI-Concord's Community College,Public,31.00,43776624,0.044,2013-2022
+187639,Clovis Community College,Public,41.00,43452357,0.043,2013-2022
+233648,Southwest Virginia Community College,Public,44.00,43436518,0.043,2013-2022
+199625,Sampson Community College,Public,52.00,43414178,0.043,2013-2022
+161688,Allegany College of Maryland,Public,45.00,43376860,0.043,2013-2022
+188137,Santa Fe Community College,Public,25.00,43174837,0.043,2013-2022
+240125,Waukesha County Technical College,Public,46.00,43161576,0.043,2013-2022
+154952,Cowley County Community College,Public,47.00,43059244,0.043,2013-2022
+206996,Connors State College,Public,29.00,42831352,0.043,2013-2022
+119331,Napa Valley College,Public,32.00,42573942,0.043,2013-2022
+167631,Roxbury Community College,Public,10.00,42412158,0.042,2013-2022
+173911,South Central College,Public,29.00,42281764,0.042,2013-2022
+222567,Alvin Community College,Public,34.00,42121364,0.042,2013-2022
+229540,Victoria College,Public,25.00,42060479,0.042,2013-2022
+104577,Eastern Arizona College,Public,36.00,41917523,0.042,2013-2022
+164313,Wor-Wic Community College,Public,27.00,41863385,0.042,2013-2022
+107585,University of Arkansas Community College-Morrilton,Public,47.00,41848488,0.042,2013-2022
+211343,Butler County Community College,Public,31.00,41750650,0.042,2013-2022
+199722,Southeastern Community College,Public,51.00,41746349,0.042,2013-2022
+154378,Southeastern Community College,Public,43.00,41689642,0.042,2013-2022
+125170,Berkeley City College,Public,41.00,41647176,0.042,2013-2022
+368911,Southeastern Technical College,Public,34.00,41595659,0.042,2013-2022
+144175,City Colleges of Chicago-Olive-Harvey College,Public,20.00,41485447,0.041,2013-2022
+157304,Madisonville Community College,Public,55.00,41416089,0.041,2013-2022
+232867,New River Community College,Public,44.00,41333478,0.041,2013-2022
+161138,Eastern Maine Community College,Public,33.00,41209753,0.041,2013-2022
+124113,Taft College,Public,34.00,41024839,0.041,2013-2022
+118772,Merritt College,Public,21.00,40915738,0.041,2013-2022
+240198,Northwood Technical College,Public,51.00,40781012,0.041,2013-2022
+118684,Mendocino College,Public,31.00,40773405,0.041,2013-2022
+217615,Aiken Technical College,Public,19.00,40715713,0.041,2013-2022
+173799,Inver Hills Community College,Public,19.00,40628525,0.041,2013-2022
+122791,College of San Mateo,Public,57.00,40588223,0.041,2013-2022
+232788,Mountain Empire Community College,Public,53.00,40354115,0.040,2013-2022
+231697,Central Virginia Community College,Public,41.00,40322159,0.040,2013-2022
+237817,Southern West Virginia Community and Technical College,Public,25.00,40152954,0.040,2013-2022
+108667,College of Alameda,Public,34.00,40048808,0.040,2013-2022
+166647,Massachusetts Bay Community College,Public,16.00,39991431,0.040,2013-2022
+164775,Berkshire Community College,Public,23.00,39545450,0.040,2013-2022
+198668,Haywood Community College,Public,44.00,39361885,0.039,2013-2022
+238014,West Virginia Northern Community College,Public,30.00,39180643,0.039,2013-2022
+226107,Lamar State College-Orange,Public,31.00,38921236,0.039,2013-2022
+383190,Hawaii Community College,Public,32.00,38887455,0.039,2013-2022
+107460,North Arkansas College,Public,29.00,38878267,0.039,2013-2022
+436304,River Parishes Community College,Public,31.00,38748244,0.039,2013-2022
+233116,Piedmont Virginia Community College,Public,35.00,38728528,0.039,2013-2022
+440402,Arkansas State University-Newport,Public,42.00,38600522,0.039,2013-2022
+199485,Rockingham Community College,Public,28.00,38591112,0.039,2013-2022
+146366,Kaskaskia College,Public,49.00,38553651,0.039,2013-2022
+143613,Carl Sandburg College,Public,37.00,38544577,0.039,2013-2022
+233019,Patrick & Henry Community College,Public,45.00,38538597,0.039,2013-2022
+146348,Kankakee Community College,Public,38.00,38051263,0.038,2013-2022
+107637,Southeast Arkansas College,Public,18.00,37958976,0.038,2013-2022
+145831,Illinois Valley Community College,Public,45.00,37841707,0.038,2013-2022
+205179,Fortis College-Centerville,"Private, for-profit",42.00,37827987,0.038,2013-2022
+446774,Blue Ridge Community and Technical College,Public,41.00,37713221,0.038,2013-2022
+183132,Manchester Community College,Public,37.00,37587103,0.038,2013-2022
+125499,West Valley College,Public,52.00,37547897,0.038,2013-2022
+238397,Blackhawk Technical College,Public,30.00,37444481,0.037,2013-2022
+102313,H Councill Trenholm State Community College,Public,17.00,37353186,0.037,2013-2022
+210234,Treasure Valley Community College,Public,27.00,37118471,0.037,2013-2022
+233903,Virginia Highlands Community College,Public,42.00,36931058,0.037,2013-2022
+236610,Shoreline Community College,Public,32.00,36858444,0.037,2013-2022
+173203,Central Lakes College-Brainerd,Public,48.00,36686096,0.037,2013-2022
+197850,South Piedmont Community College,Public,35.00,36606967,0.037,2013-2022
+113111,Crafton Hills College,Public,37.00,36508752,0.037,2013-2022
+430935,Colegio de Cinematografía Artes y Television,"Private, for-profit",35.00,36151252,0.036,2013-2022
+197814,College of the Albemarle,Public,39.00,36084086,0.036,2013-2022
+146278,John Wood Community College,Public,46.00,35899257,0.036,2013-2022
+207236,Murray State College,Public,30.00,35855256,0.036,2013-2022
+101602,Lurleen B Wallace Community College,Public,43.00,35823926,0.036,2013-2022
+191302,Fulton-Montgomery Community College,Public,34.00,35730736,0.036,2013-2022
+239220,Mid-State Technical College,Public,54.00,35507577,0.036,2013-2022
+172307,Southwestern Michigan College,Public,27.00,35460762,0.035,2013-2022
+158088,Central Louisiana Technical Community College,Public,75.00,35397879,0.035,2013-2022
+101028,Chattahoochee Valley Community College,Public,36.00,35345696,0.035,2013-2022
+212869,Harcum College,"Private, not-for-profit",39.00,35288507,0.035,2013-2022
+210270,Umpqua Community College,Public,32.00,35091691,0.035,2013-2022
+404426,Coconino Community College,Public,23.00,35087518,0.035,2013-2022
+101143,Enterprise State Community College,Public,29.00,34894408,0.035,2013-2022
+160010,Northwest Louisiana Technical Community College,Public,73.00,34881282,0.035,2013-2022
+174473,Northland Community and Technical College,Public,48.00,34838029,0.035,2013-2022
+196699,Ulster County Community College,Public,31.00,34809427,0.035,2013-2022
+198710,Isothermal Community College,Public,49.00,34718675,0.035,2013-2022
+125462,Coalinga College,Public,42.00,34465450,0.034,2013-2022
+173063,Riverland Community College,Public,53.00,34290331,0.034,2013-2022
+168883,Bay de Noc Community College,Public,21.00,33771797,0.034,2013-2022
+234377,Wytheville Community College,Public,45.00,33742760,0.034,2013-2022
+205966,Southern State Community College,Public,26.00,33625170,0.034,2013-2022
+461014,Mildred Elley-New York Campus,"Private, for-profit",32.00,33565975,0.034,2013-2022
+161192,Kennebec Valley Community College,Public,48.00,33535919,0.034,2013-2022
+197966,Beaufort County Community College,Public,36.00,33085112,0.033,2013-2022
+207050,Eastern Oklahoma State College,Public,30.00,32934529,0.033,2013-2022
+447582,New River Community and Technical College,Public,30.00,32825431,0.033,2013-2022
+165194,Cape Cod Community College,Public,22.00,32824717,0.033,2013-2022
+198206,Carteret Community College,Public,42.00,32745795,0.033,2013-2022
+148292,Richland Community College,Public,47.00,32707856,0.033,2013-2022
+219426,Southeast Technical College,Public,51.00,32677374,0.033,2013-2022
+154925,Coffeyville Community College,Public,42.00,31584058,0.032,2013-2022
+444954,Mountwest Community and Technical College,Public,17.00,31282657,0.031,2013-2022
+239372,Moraine Park Technical College,Public,50.00,31273197,0.031,2013-2022
+206011,Terra State Community College,Public,36.00,31133080,0.031,2013-2022
+107725,University of Arkansas Hope-Texarkana,Public,49.00,31046435,0.031,2013-2022
+226116,Lamar State College-Port Arthur,Public,30.00,30955053,0.031,2013-2022
+198640,Halifax Community College,Public,41.00,30928819,0.031,2013-2022
+198039,Blue Ridge Community College,Public,38.00,30731773,0.031,2013-2022
+173638,Minnesota West Community and Technical College,Public,47.00,30603742,0.031,2013-2022
+179344,Missouri State University-West Plains,Public,35.00,30480709,0.030,2013-2022
+395362,Copper Mountain Community College,Public,38.00,30355701,0.030,2013-2022
+100760,Central Alabama Community College,Public,24.00,30182185,0.030,2013-2022
+240505,Casper College,Public,39.00,30047013,0.030,2013-2022
+219143,Lake Area Technical College,Public,64.00,29887409,0.030,2013-2022
+118347,College of Marin,Public,36.00,29871368,0.030,2013-2022
+155098,Fort Scott Community College,Public,34.00,29866876,0.030,2013-2022
+484932,BridgeValley Community & Technical College,Public,27.00,29826904,0.030,2013-2022
+420538,Arkansas State University-Mountain Home,Public,50.00,29782807,0.030,2013-2022
+154059,North Iowa Area Community College,Public,55.00,29753381,0.030,2013-2022
+443492,Pierpont Community and Technical College,Public,39.00,29511098,0.030,2013-2022
+207740,Seminole State College,Public,29.00,29510315,0.030,2013-2022
+199324,Piedmont Community College,Public,42.00,29481016,0.029,2013-2022
+171225,Monroe County Community College,Public,31.00,29362936,0.029,2013-2022
+455512,Woodland Community College,Public,37.00,29328299,0.029,2013-2022
+141680,Honolulu Community College,Public,35.00,29276042,0.029,2013-2022
+144564,Danville Area Community College,Public,38.00,29143950,0.029,2013-2022
+247603,Sussex County Community College,Public,44.00,29131367,0.029,2013-2022
+155104,Garden City Community College,Public,41.00,29088340,0.029,2013-2022
+187994,New Mexico State University-Alamogordo,Public,20.00,29084642,0.029,2013-2022
+111896,Cerro Coso Community College,Public,26.00,29035437,0.029,2013-2022
+173416,Dakota County Technical College,Public,45.00,28650003,0.029,2013-2022
+211079,Community College of Beaver County,Public,21.00,28642747,0.029,2013-2022
+127732,Northeastern Junior College,Public,54.00,28413154,0.028,2013-2022
+154697,Barton County Community College,Public,43.00,28347895,0.028,2013-2022
+475565,CUNY Stella and Charles Guttman Community College,Public,25.00,28314699,0.028,2013-2022
+148256,Rend Lake College,Public,60.00,28036838,0.028,2013-2022
+107974,South Arkansas College,Public,25.00,28036796,0.028,2013-2022
+202648,Edison State Community College,Public,31.00,27706846,0.028,2013-2022
+239008,Lakeshore Technical College,Public,43.00,27680174,0.028,2013-2022
+200305,North Dakota State College of Science,Public,50.00,27635753,0.028,2013-2022
+450058,Fortis College-Columbus,"Private, for-profit",32.00,27624487,0.028,2013-2022
+181817,Western Nebraska Community College,Public,35.00,27520347,0.028,2013-2022
+208035,Western Oklahoma State College,Public,34.00,27479036,0.027,2013-2022
+148821,Shawnee Community College,Public,44.00,27459101,0.027,2013-2022
+107549,Ozarka College,Public,44.00,27266132,0.027,2013-2022
+188049,University of New Mexico-Valencia County Campus,Public,19.00,27075539,0.027,2013-2022
+127778,Otero College,Public,37.00,26957929,0.027,2013-2022
+171395,North Central Michigan College,Public,24.00,26953223,0.027,2013-2022
+240666,Northern Wyoming Community College District,Public,43.00,26949273,0.027,2013-2022
+192688,Mandl School-The College of Allied Health,"Private, for-profit",32.00,26668305,0.027,2013-2022
+155186,Highland Community College,Public,39.00,26585320,0.027,2013-2022
+106999,University of Arkansas Community College-Batesville,Public,56.00,26373728,0.026,2013-2022
+192509,Long Island Business Institute,"Private, for-profit",22.00,26370941,0.026,2013-2022
+198084,Brunswick Community College,Public,46.00,26278434,0.026,2013-2022
+106795,Cossatot Community College of the University of Arkansas,Public,48.00,26165974,0.026,2013-2022
+195988,Sullivan County Community College,Public,22.00,25856787,0.026,2013-2022
+169655,MIAT College of Technology,"Private, for-profit",64.00,25776898,0.026,2013-2022
+366553,Southern Technical College,"Private, for-profit",50.00,25727361,0.026,2013-2022
+173735,Minnesota North College,Public,42.00,25549210,0.026,2013-2022
+145521,Highland Community College,Public,46.00,25541374,0.026,2013-2022
+107327,Arkansas Northeastern College,Public,21.00,25464605,0.025,2013-2022
+187666,Eastern New Mexico University-Roswell Campus,Public,28.00,25376367,0.025,2013-2022
+111434,Canada College,Public,49.00,25327157,0.025,2013-2022
+179715,North Central Missouri College,Public,56.00,25290392,0.025,2013-2022
+204440,Northwest State Community College,Public,47.00,25044817,0.025,2013-2022
+488730,Northeast Lakeview College,Public,34.00,24975768,0.025,2013-2022
+210155,Southwestern Oregon Community College,Public,38.00,24903354,0.025,2013-2022
+112561,Columbia College,Public,30.00,24764660,0.025,2013-2022
+216296,Thaddeus Stevens College of Technology,Public,60.00,24590443,0.025,2013-2022
+428392,Klamath Community College,Public,37.00,24588253,0.025,2013-2022
+180249,Great Falls College Montana State University,Public,32.00,24586738,0.025,2013-2022
+107318,Arkansas State University Mid-South,Public,50.00,24534455,0.025,2013-2022
+101462,J. F. Drake State Community and Technical College,Public,11.00,24508567,0.025,2013-2022
+171234,Montcalm Community College,Public,27.00,24469129,0.024,2013-2022
+227687,Ranger College,Public,35.00,24346921,0.024,2013-2022
+177977,State Technical College of Missouri,Public,79.00,24343437,0.024,2013-2022
+199953,Wilson Community College,Public,36.00,24341805,0.024,2013-2022
+123484,College of the Siskiyous,Public,30.00,24211100,0.024,2013-2022
+107619,Phillips Community College of the University of Arkansas,Public,52.00,23948917,0.024,2013-2022
+239910,Southwest Wisconsin Technical College,Public,54.00,23836406,0.024,2013-2022
+155566,Neosho County Community College,Public,39.00,23621646,0.024,2013-2022
+194028,North Country Community College,Public,25.00,23617626,0.024,2013-2022
+235671,Bates Technical College,Public,30.00,23582077,0.024,2013-2022
+243841,ICPR Junior College,"Private, for-profit",51.00,23517704,0.024,2013-2022
+233310,Rappahannock Community College,Public,40.00,23488093,0.023,2013-2022
+183150,Great Bay Community College,Public,30.00,23433250,0.023,2013-2022
+170587,Kirtland Community College,Public,26.00,23380510,0.023,2013-2022
+172954,Anoka Technical College,Public,56.00,23354728,0.023,2013-2022
+153533,Iowa Lakes Community College,Public,26.00,23255918,0.023,2013-2022
+242556,Instituto Tecnologico de Puerto Rico-Recinto de Guayama,Public,87.00,23228013,0.023,2013-2022
+414911,Pennsylvania Highlands Community College,Public,41.00,23111746,0.023,2013-2022
+207069,Redlands Community College,Public,34.00,22862603,0.023,2013-2022
+162168,Chesapeake College,Public,21.00,22842066,0.023,2013-2022
+148672,Sauk Valley Community College,Public,51.00,22747512,0.023,2013-2022
+217989,Denmark Technical College,Public,14.00,22635776,0.023,2013-2022
+162104,Cecil College,Public,28.00,22493131,0.022,2013-2022
+217837,Northeastern Technical College,Public,35.00,22432308,0.022,2013-2022
+106883,East Arkansas Community College,Public,47.00,22416776,0.022,2013-2022
+172918,Alexandria Technical & Community College,Public,61.00,22239743,0.022,2013-2022
+148991,Spoon River College,Public,43.00,22201043,0.022,2013-2022
+154998,Dodge City Community College,Public,31.00,22037537,0.022,2013-2022
+180197,Flathead Valley Community College,Public,27.00,21847502,0.022,2013-2022
+142179,College of Eastern Idaho,Public,35.00,21646653,0.022,2013-2022
+156851,Henderson Community College,Public,44.00,21596977,0.022,2013-2022
+175263,Minnesota State College Southeast,Public,51.00,21546726,0.022,2013-2022
+196389,Swedish Institute a College of Health Sciences,"Private, for-profit",77.00,21428660,0.021,2013-2022
+208275,Blue Mountain Community College,Public,23.00,21283624,0.021,2013-2022
+141990,Windward Community College,Public,29.00,21259967,0.021,2013-2022
+219480,Western Dakota Technical College,Public,53.00,21134813,0.021,2013-2022
+154907,Cloud County Community College,Public,46.00,21097195,0.021,2013-2022
+181312,Mid-Plains Community College,Public,46.00,21094080,0.021,2013-2022
+165981,Greenfield Community College,Public,22.00,21069148,0.021,2013-2022
+190169,Columbia-Greene Community College,Public,34.00,21062059,0.021,2013-2022
+148937,Southeastern Illinois College,Public,51.00,20893199,0.021,2013-2022
+233338,Richard Bland College,Public,21.00,20742156,0.021,2013-2022
+107992,Southern Arkansas University Tech,Public,61.00,20485964,0.020,2013-2022
+405872,Carroll Community College,Public,47.00,20381574,0.020,2013-2022
+242149,ICPR Junior College-Mayaguez,"Private, for-profit",45.00,20332979,0.020,2013-2022
+145707,Illinois Eastern Community Colleges,Public,62.00,20180227,0.020,2013-2022
+460677,ICPR Junior College,"Private, for-profit",57.00,20163574,0.020,2013-2022
+372921,Fortis College-Smyrna,"Private, for-profit",54.00,20108359,0.020,2013-2022
+105349,Northland Pioneer College,Public,8.00,20066936,0.020,2013-2022
+205887,Stautzenberger College-Maumee,"Private, for-profit",56.00,19970248,0.020,2013-2022
+250744,Dorsey College-Roseville,"Private, for-profit",31.00,19960291,0.020,2013-2022
+154396,Southwestern Community College,Public,53.00,19812181,0.020,2013-2022
+199795,Tri-County Community College,Public,54.00,19768151,0.020,2013-2022
+420440,York County Community College,Public,28.00,19754737,0.020,2013-2022
+488077,Sonoran Desert Institute,"Private, for-profit",32.00,19646255,0.020,2013-2022
+412599,Remington College-Memphis Campus,"Private, not-for-profit",33.00,19420404,0.019,2013-2022
+155450,Labette Community College,Public,29.00,19392485,0.019,2013-2022
+155858,Seward County Community College,Public,46.00,19135292,0.019,2013-2022
+190053,Clinton Community College,Public,21.00,18941038,0.019,2013-2022
+183141,Nashua Community College,Public,30.00,18837950,0.019,2013-2022
+243647,Palau Community College,Public,34.00,18835004,0.019,2013-2022
+153922,Marshalltown Community College,Public,37.00,18634142,0.019,2013-2022
+440059,Aviation Institute of Maintenance-Atlanta,"Private, for-profit",52.00,18496215,0.018,2013-2022
+198914,Mayland Community College,Public,49.00,18011653,0.018,2013-2022
+172671,West Shore Community College,Public,30.00,18001978,0.018,2013-2022
+242130,ICPR Junior College-Arecibo,"Private, for-profit",38.00,17975072,0.018,2013-2022
+450067,Fortis College-Cincinnati,"Private, for-profit",41.00,17931753,0.018,2013-2022
+198871,Louisburg College,"Private, not-for-profit",39.00,17857144,0.018,2013-2022
+218672,University of South Carolina-Lancaster,Public,29.00,17725231,0.018,2013-2022
+219189,Mitchell Technical College,Public,71.00,17698264,0.018,2013-2022
+455628,Fortis Institute-Birmingham,"Private, for-profit",36.00,17662112,0.018,2013-2022
+455479,Fortis Institute-Pensacola,"Private, for-profit",47.00,17614821,0.018,2013-2022
+161484,Northern Maine Community College,Public,33.00,17539731,0.018,2013-2022
+223922,Clarendon College,Public,61.00,17435883,0.017,2013-2022
+188003,Southeast New Mexico College,Public,29.00,17297914,0.017,2013-2022
+154642,Allen County Community College,Public,39.00,17133850,0.017,2013-2022
+218681,University of South Carolina-Salkehatchie,Public,22.00,17107283,0.017,2013-2022
+198923,McDowell Technical Community College,Public,57.00,17060356,0.017,2013-2022
+188225,University of New Mexico-Taos Campus,Public,16.00,17042984,0.017,2013-2022
+193201,Mildred Elley School-Albany Campus,"Private, for-profit",27.00,17030464,0.017,2013-2022
+198011,Bladen Community College,Public,31.00,17007058,0.017,2013-2022
+239442,Nicolet Area Technical College,Public,45.00,16800556,0.017,2013-2022
+201283,Belmont College,Public,39.00,16356735,0.016,2013-2022
+138655,Interactive College of Technology-Chamblee,"Private, for-profit",39.00,16164674,0.016,2013-2022
+186469,Salem Community College,Public,37.00,16089730,0.016,2013-2022
+245625,Warren County Community College,Public,48.00,15933576,0.016,2013-2022
+460020,Fortis College-Columbia,"Private, for-profit",36.00,15927778,0.016,2013-2022
+183123,Lakes Region Community College,Public,43.00,15897746,0.016,2013-2022
+155201,Independence Community College,Public,34.00,15749105,0.016,2013-2022
+487302,Fortis College-Cuyahoga Falls,"Private, for-profit",43.00,15612951,0.016,2013-2022
+154934,Colby Community College,Public,57.00,15565997,0.016,2013-2022
+159197,ITI Technical College,"Private, for-profit",56.00,15553485,0.016,2013-2022
+445744,Fortis Institute-Port Saint Lucie,"Private, for-profit",59.00,15451786,0.015,2013-2022
+107521,Arkansas State University Three Rivers,Public,35.00,15436876,0.015,2013-2022
+180276,Helena College University of Montana,Public,41.00,15435767,0.015,2013-2022
+169992,Gogebic Community College,Public,32.00,15301474,0.015,2013-2022
+195784,St Paul's School of Nursing-Staten Island,"Private, for-profit",28.00,15266778,0.015,2013-2022
+386153,Seminar L'moros Bais Yaakov,"Private, not-for-profit",61.00,15183874,0.015,2013-2022
+107743,University of Arkansas Community College Rich Mountain,Public,60.00,15178016,0.015,2013-2022
+188021,New Mexico State University-Grants,Public,24.00,15144423,0.015,2013-2022
+200846,University of Akron Wayne College,Public,10.00,15128766,0.015,2013-2022
+375416,Remington College-Cleveland Campus,"Private, not-for-profit",48.00,15059420,0.015,2013-2022
+237437,Huntington Junior College,"Private, not-for-profit",13.00,14942480,0.015,2013-2022
+107840,Shorter College,"Private, not-for-profit",7.00,14825256,0.015,2013-2022
+141802,Kauai Community College,Public,29.00,14806788,0.015,2013-2022
+233037,Paul D Camp Community College,Public,22.00,14769159,0.015,2013-2022
+117195,Lake Tahoe Community College,Public,42.00,14638280,0.015,2013-2022
+199467,Roanoke-Chowan Community College,Public,21.00,14455208,0.014,2013-2022
+460756,Hawaii Medical College,"Private, for-profit",35.00,14376886,0.014,2013-2022
+439738,Fortis College-Baton Rouge,"Private, for-profit",45.00,14368209,0.014,2013-2022
+224891,Frank Phillips College,Public,33.00,14298240,0.014,2013-2022
+153296,Ellsworth Community College,Public,43.00,14225562,0.014,2013-2022
+154129,Northwest Iowa Community College,Public,55.00,14199589,0.014,2013-2022
+439792,Fortis College-Orange Park,"Private, for-profit",35.00,14033458,0.014,2013-2022
+483504,Dorsey College-Dearborn,"Private, for-profit",28.00,13923224,0.014,2013-2022
+189811,St Paul's School of Nursing-Queens,"Private, for-profit",42.00,13830679,0.014,2013-2022
+403487,Wabash Valley College,Public,59.00,13823647,0.014,2013-2022
+242583,Instituto Tecnologico de Puerto Rico-Recinto de San Juan,Public,55.00,13619751,0.014,2013-2022
+127389,Lamar Community College,Public,41.00,13549664,0.014,2013-2022
+155715,Pratt Community College,Public,43.00,13543198,0.014,2013-2022
+183105,White Mountains Community College,Public,60.00,13469308,0.013,2013-2022
+187903,New Mexico Junior College,Public,24.00,13355533,0.013,2013-2022
+185721,Eastwick College-Nutley,"Private, for-profit",64.00,13296921,0.013,2013-2022
+445203,Remington College-North Houston Campus,"Private, not-for-profit",51.00,13258940,0.013,2013-2022
+174570,Pine Technical & Community College,Public,40.00,13167913,0.013,2013-2022
+218690,University of South Carolina-Sumter,Public,36.00,13077271,0.013,2013-2022
+403478,Lincoln Trail College,Public,47.00,13053773,0.013,2013-2022
+382957,Fortis College-Richmond,"Private, for-profit",37.00,13020968,0.013,2013-2022
+449083,CBT Technology Institute-Main Campus,"Private, for-profit",87.00,13008950,0.013,2013-2022
+241146,American Educational College,"Private, for-profit",69.00,12893288,0.013,2013-2022
+231873,Mountain Gateway Community College,Public,46.00,12826641,0.013,2013-2022
+162609,Garrett College,Public,32.00,12798871,0.013,2013-2022
+447935,ATA College,"Private, for-profit",33.00,12759011,0.013,2013-2022
+155593,Fort Hays Tech North Central,Public,75.00,12759011,0.013,2013-2022
+456454,Fortis College-Salt Lake City,"Private, for-profit",42.00,12715701,0.013,2013-2022
+363633,Luna Community College,Public,39.00,12671568,0.013,2013-2022
+216083,South Hills School of Business & Technology,"Private, for-profit",61.00,12595866,0.013,2013-2022
+242042,Instituto Tecnologico de Puerto Rico-Recinto de Manati,Public,61.00,12438016,0.012,2013-2022
+452124,Fortis Institute-Nashville,"Private, for-profit",52.00,12371702,0.012,2013-2022
+173115,Northwest Technical College,Public,50.00,12365266,0.012,2013-2022
+377111,Remington College-Fort Worth Campus,"Private, not-for-profit",26.00,12271600,0.012,2013-2022
+183114,River Valley Community College,Public,31.00,12164529,0.012,2013-2022
+198905,Martin Community College,Public,38.00,12162267,0.012,2013-2022
+169974,Glen Oaks Community College,Public,37.00,12144008,0.012,2013-2022
+419183,Central California School of Continuing Education,"Private, for-profit",88.00,12126928,0.012,2013-2022
+126748,Colorado Northwestern Community College,Public,26.00,11959969,0.012,2013-2022
+215682,Rosedale Technical College,"Private, not-for-profit",80.00,11947277,0.012,2013-2022
+218955,Williamsburg Technical College,Public,21.00,11830067,0.012,2013-2022
+117274,Lassen Community College,Public,29.00,11626146,0.012,2013-2022
+366535,Remington College-Mobile Campus,"Private, not-for-profit",47.00,11568289,0.012,2013-2022
+199023,Montgomery Community College,Public,54.00,11208508,0.011,2013-2022
+233329,Fortis College-Norfolk,"Private, for-profit",33.00,11152224,0.011,2013-2022
+208415,Clatsop Community College,Public,24.00,11067065,0.011,2013-2022
+420556,Columbia Gorge Community College,Public,12.00,11043665,0.011,2013-2022
+385503,Fortis Institute-Scranton,"Private, for-profit",47.00,11040220,0.011,2013-2022
+169761,Dorsey College,"Private, for-profit",38.00,10900458,0.011,2013-2022
+458681,Fortis College-Indianapolis,"Private, for-profit",31.00,10875575,0.011,2013-2022
+213233,Johnson College,"Private, not-for-profit",47.00,10829806,0.011,2013-2022
+160524,Remington College-Lafayette Campus,"Private, not-for-profit",36.00,10751668,0.011,2013-2022
+203720,Ohio Business College-Sheffield,"Private, for-profit",71.00,10597088,0.011,2013-2022
+197531,Word of Life Bible Institute,"Private, not-for-profit",87.00,10573711,0.011,2013-2022
+372329,IBMC College,"Private, for-profit",68.00,10558388,0.011,2013-2022
+449092,CBT Technology Institute-Hialeah,"Private, for-profit",89.00,10295000,0.010,2013-2022
+161581,Washington County Community College,Public,43.00,10210893,0.010,2013-2022
+106546,Baptist Health College Little Rock,"Private, not-for-profit",67.00,10146014,0.010,2013-2022
+441788,Aviation Institute of Maintenance-Dallas,"Private, for-profit",56.00,10140095,0.010,2013-2022
+494843,Fortis College-Landover,"Private, for-profit",41.00,9986394,0.010,2013-2022
+229832,Western Texas College,Public,59.00,9969168,0.010,2013-2022
+215381,Pittsburgh Institute of Aeronautics,"Private, not-for-profit",59.00,9864733,0.010,2013-2022
+448600,Stautzenberger College-Brecksville,"Private, for-profit",41.00,9763118,0.010,2013-2022
+200192,Lake Region State College,Public,51.00,9709706,0.010,2013-2022
+494852,Stautzenberger College-Rockford Career College,"Private, for-profit",62.00,9683214,0.010,2013-2022
+403469,Frontier Community College,Public,53.00,9629106,0.010,2013-2022
+232052,Eastern Shore Community College,Public,36.00,9532361,0.010,2013-2022
+155052,Flint Hills Technical College,Public,68.00,9494001,0.009,2013-2022
+180081,Highlands College of Montana Tech,Public,29.00,9389721,0.009,2013-2022
+487311,Jones Technical Institute,"Private, not-for-profit",71.00,9388716,0.009,2013-2022
+231411,Advanced Technology Institute,"Private, for-profit",73.00,9372767,0.009,2013-2022
+220118,Chattanooga College Medical Dental and & Technical Careers,"Private, for-profit",87.00,9171448,0.009,2013-2022
+240596,Eastern Wyoming College,Public,51.00,9064374,0.009,2013-2022
+200314,Dakota College at Bottineau,Public,53.00,8918331,0.009,2013-2022
+446109,Cambridge College of Healthcare & Technology,"Private, for-profit",42.00,8852059,0.009,2013-2022
+128151,Pickens Technical College,Public,58.00,8827677,0.009,2013-2022
+200341,Williston State College,Public,39.00,8818556,0.009,2013-2022
+438708,Eastern West Virginia Community and Technical College,Public,41.00,8774437,0.009,2013-2022
+101994,Reid State Technical College,Public,55.00,8757474,0.009,2013-2022
+491181,Galen College of Nursing-ARH,"Private, for-profit",45.00,8626190,0.009,2013-2022
+444565,Culinary Institute Inc,"Private, for-profit",58.00,8521714,0.009,2013-2022
+218706,University of South Carolina-Union,Public,38.00,8321394,0.008,2013-2022
+145239,Fox College,"Private, for-profit",44.00,8317907,0.008,2013-2022
+490975,Fortis College-Cutler Bay,"Private, for-profit",36.00,8240270,0.008,2013-2022
+445249,Remington College-Nashville Campus,"Private, not-for-profit",58.00,8211573,0.008,2013-2022
+120953,Palo Verde College,Public,14.00,8126283,0.008,2013-2022
+123642,South Coast College,"Private, for-profit",33.00,8123617,0.008,2013-2022
+487092,Emory University-Oxford College,"Private, not-for-profit",95.00,8093516,0.008,2013-2022
+237987,West Virginia Junior College-Charleston,"Private, for-profit",77.00,7930762,0.008,2013-2022
+140003,Gwinnett College-Lilburn,"Private, for-profit",41.00,7924472,0.008,2013-2022
+155487,Manhattan Area Technical College,Public,66.00,7907575,0.008,2013-2022
+250285,Aviation Institute of Maintenance-Philadelphia,"Private, for-profit",44.00,7858272,0.008,2013-2022
+225876,Jacksonville College-Main Campus,"Private, not-for-profit",42.00,7855059,0.008,2013-2022
+151467,International Business College-Indianapolis,"Private, for-profit",69.00,7844568,0.008,2013-2022
+417327,City College-Altamonte Springs,"Private, for-profit",75.00,7835098,0.008,2013-2022
+451352,Southeastern College-Charlotte,"Private, for-profit",60.00,7632830,0.008,2013-2022
+101648,Marion Military Institute,Public,31.00,7544550,0.008,2013-2022
+451857,Remington College-Houston Southeast Campus,"Private, not-for-profit",58.00,7522000,0.008,2013-2022
+204662,Ohio State University Agricultural Technical Institute,Public,41.00,7520429,0.008,2013-2022
+250027,Laurel Business Institute,"Private, for-profit",79.00,7512465,0.008,2013-2022
+126605,Spartan College of Aeronautics and Technology,"Private, for-profit",69.00,7392950,0.007,2013-2022
+139995,Gupton Jones College of Funeral Service,"Private, not-for-profit",62.00,7326124,0.007,2013-2022
+449524,Taylor College,"Private, for-profit",62.00,7219926,0.007,2013-2022
+188216,Southwestern Indian Polytechnic Institute,Public,9.00,7189436,0.007,2013-2022
+429128,Urban College of Boston,"Private, not-for-profit",0.00,7172681,0.007,2013-2022
+213914,Vet Tech Institute,"Private, for-profit",63.00,6972851,0.007,2013-2022
+413626,Leech Lake Tribal College,Public,0.00,6944881,0.007,2013-2022
+457411,Aviation Institute of Maintenance-Orlando,"Private, for-profit",67.00,6861100,0.007,2013-2022
+204884,East Ohio College,"Private, for-profit",67.00,6856236,0.007,2013-2022
+126359,Bel-Rea Institute of Animal Technology,"Private, for-profit",61.00,6852148,0.007,2013-2022
+423652,Oregon Coast Community College,Public,31.00,6786224,0.007,2013-2022
+227748,Aviation Institute of Maintenance-Houston,"Private, for-profit",52.00,6644948,0.007,2013-2022
+180373,Miles Community College,Public,49.00,6531869,0.007,2013-2022
+187000,Aviation Institute of Maintenance-Teterboro,"Private, for-profit",79.00,6441985,0.006,2013-2022
+199263,Pamlico Community College,Public,47.00,6293857,0.006,2013-2022
+203739,Ohio Business College-Sandusky,"Private, for-profit",50.00,6248329,0.006,2013-2022
+482255,Aviation Institute of Maintenance-Las Vegas,"Private, for-profit",88.00,6226165,0.006,2013-2022
+377458,Centura College-Norfolk,"Private, for-profit",63.00,6219674,0.006,2013-2022
+212434,Erie Institute of Technology Inc,"Private, for-profit",84.00,6167878,0.006,2013-2022
+481155,Helms College,"Private, not-for-profit",56.00,6158861,0.006,2013-2022
+421841,New York Conservatory for Dramatic Arts,"Private, for-profit",65.00,5987480,0.006,2013-2022
+212045,Douglas Education Center,"Private, for-profit",82.00,5891923,0.006,2013-2022
+443261,Southeastern College-Charleston,"Private, for-profit",70.00,5886004,0.006,2013-2022
+442781,Tohono O'odham Community College,Public,10.00,5885363,0.006,2013-2022
+493646,Ohel Margulia Seminary,"Private, not-for-profit",100.00,5721360,0.006,2013-2022
+420723,Tillamook Bay Community College,Public,43.00,5709476,0.006,2013-2022
+187976,University of New Mexico-Los Alamos Campus,Public,30.00,5700576,0.006,2013-2022
+187912,New Mexico Military Institute,Public,38.00,5693251,0.006,2013-2022
+200590,ETI Technical College,"Private, for-profit",63.00,5677932,0.006,2013-2022
+442383,West Virginia Junior College-Bridgeport,"Private, for-profit",61.00,5677087,0.006,2013-2022
+456977,CBT Technology Institute-Cutler Bay,"Private, for-profit",57.00,5605905,0.006,2013-2022
+497046,Madera Community College,Public,33.00,5572514,0.006,2013-2022
+446163,Community Christian College,"Private, not-for-profit",9.00,5547171,0.006,2013-2022
+215992,Laurel Technical Institute,"Private, for-profit",74.00,5489825,0.005,2013-2022
+188261,Mesalands Community College,Public,57.00,5425335,0.005,2013-2022
+146816,Generations College,"Private, not-for-profit",6.00,5418060,0.005,2013-2022
+444866,Southeastern College-Columbia,"Private, for-profit",52.00,5385818,0.005,2013-2022
+215309,University of Pittsburgh-Titusville,Public,0.00,5366592,0.005,2013-2022
+383996,Eastern New Mexico University Ruidoso Branch Community College,Public,15.00,5321856,0.005,2013-2022
+214892,Penn Commercial Business/Technical School,"Private, for-profit",73.00,5317212,0.005,2013-2022
+440271,Remington College-Baton Rouge Campus,"Private, not-for-profit",27.00,5259571,0.005,2013-2022
+188687,American Academy McAllister Institute of Funeral Service,"Private, not-for-profit",29.00,5140079,0.005,2013-2022
+155830,Salina Area Technical College,Public,72.00,5120168,0.005,2013-2022
+185679,JFK Muhlenberg Harold B. and Dorothy A. Snyder Schools,"Private, not-for-profit",33.00,5102649,0.005,2013-2022
+223472,Vet Tech Institute of Houston,"Private, for-profit",60.00,5077950,0.005,2013-2022
+216436,Triangle Tech Inc-Pittsburgh,"Private, for-profit",59.00,5042416,0.005,2013-2022
+249609,Fortis Institute-Forty Fort,"Private, for-profit",58.00,4959721,0.005,2013-2022
+427973,Aviation Institute of Maintenance-Norfolk,"Private, for-profit",31.00,4821512,0.005,2013-2022
+494436,Fortis Institute-Cookeville,"Private, for-profit",32.00,4687484,0.005,2013-2022
+180151,Dawson Community College,Public,38.00,4656539,0.005,2013-2022
+149310,Taylor Business Institute,"Private, for-profit",68.00,4647848,0.005,2013-2022
+494463,Derech Hachaim Seminary,"Private, not-for-profit",98.00,4618434,0.005,2013-2022
+213473,Lansdale School of Business,"Private, for-profit",70.00,4556684,0.005,2013-2022
+215594,Reading Hospital School of Health Sciences,"Private, not-for-profit",28.00,4465081,0.004,2013-2022
+180212,Fort Peck Community College,Public,16.00,4381633,0.004,2013-2022
+224271,Dallas Institute of Funeral Service,"Private, not-for-profit",26.00,4347029,0.004,2013-2022
+181765,Nebraska College of Technical Agriculture,Public,57.00,4334763,0.004,2013-2022
+486558,Aviation Institute of Maintenance-Fremont,"Private, for-profit",51.00,4245931,0.004,2013-2022
+232016,Centura College-Virginia Beach,"Private, for-profit",50.00,4177604,0.004,2013-2022
+216551,Valley Forge Military College,"Private, not-for-profit",94.00,4172184,0.004,2013-2022
+497277,Arizona College-Glendale,"Private, for-profit",86.00,4162570,0.004,2013-2022
+108852,American Academy of Dramatic Arts-Los Angeles,"Private, not-for-profit",76.00,3907054,0.004,2013-2022
+152497,Saint Elizabeth School of Nursing,"Private, not-for-profit",50.00,3829448,0.004,2013-2022
+225991,KD Conservatory College of Film and Dramatic Arts,"Private, for-profit",72.00,3793127,0.004,2013-2022
+452106,Escuela De Troqueleria Y Herramentaje,Public,63.00,3763840,0.004,2013-2022
+195191,St. Joseph's College of Nursing,"Private, not-for-profit",100.00,3725102,0.004,2013-2022
+491817,Seminary Bnos Chaim,"Private, not-for-profit",94.00,3647997,0.004,2013-2022
+491446,Bnos Zion Of Bobov Seminary,"Private, not-for-profit",83.00,3643434,0.004,2013-2022
+166407,Lawrence Memorial Hospital School of Nursing,"Private, not-for-profit",100.00,3639166,0.004,2013-2022
+222105,William R Moore College of Technology,"Private, not-for-profit",47.00,3633505,0.004,2013-2022
+438735,Aviation Institute of Maintenance-Indianapolis,"Private, for-profit",59.00,3561972,0.004,2013-2022
+212975,Commonwealth Technical Institute,"Private, not-for-profit",74.00,3560582,0.004,2013-2022
+216940,Williamson College of the Trades,"Private, not-for-profit",66.00,3506735,0.004,2013-2022
+442523,Alaska Christian College,"Private, not-for-profit",12.00,3502037,0.004,2013-2022
+188678,American Academy of Dramatic Arts-New York,"Private, not-for-profit",93.00,3490519,0.003,2013-2022
+441496,Aviation Institute of Maintenance-Kansas City,"Private, for-profit",46.00,3394566,0.003,2013-2022
+445762,Aviation Institute of Maintenance-Manassas,"Private, for-profit",40.00,3375799,0.003,2013-2022
+216454,Triangle Tech Inc-Dubois,"Private, for-profit",67.00,3355568,0.003,2013-2022
+216445,Triangle Tech Inc-Greensburg,"Private, for-profit",80.00,3344909,0.003,2013-2022
+195702,Saint Elizabeth College of Nursing,"Private, not-for-profit",100.00,3343979,0.003,2013-2022
+169187,Carnegie Institute,"Private, for-profit",100.00,3224939,0.003,2013-2022
+200208,Cankdeska Cikana Community College,Public,9.00,3216938,0.003,2013-2022
+449612,Louisiana Culinary Institute,"Private, for-profit",90.00,3202282,0.003,2013-2022
+448859,Triangle Tech Inc-Bethlehem,"Private, for-profit",75.00,3177760,0.003,2013-2022
+366261,Commonwealth Institute of Funeral Service,"Private, not-for-profit",55.00,3112112,0.003,2013-2022
+434751,White Earth Tribal and Community College,"Private, not-for-profit",23.00,3103061,0.003,2013-2022
+441487,Texas County Technical College,"Private, for-profit",25.00,3101375,0.003,2013-2022
+432524,Delaware College of Art and Design,"Private, not-for-profit",41.00,3075242,0.003,2013-2022
+150251,College of Court Reporting Inc,"Private, for-profit",0.00,3044584,0.003,2013-2022
+488059,Med College,"Private, for-profit",71.00,3022511,0.003,2013-2022
+203289,International College of Broadcasting,"Private, for-profit",86.00,3005370,0.003,2013-2022
+449728,ATA College,"Private, for-profit",67.00,2994244,0.003,2013-2022
+180328,Little Big Horn College,Public,11.00,2915047,0.003,2013-2022
+215974,UPMC Shadyside School of Nursing,"Private, not-for-profit",43.00,2866289,0.003,2013-2022
+180160,Chief Dull Knife College,Public,0.00,2765046,0.003,2013-2022
+191959,Island Drafting and Technical Institute,"Private, for-profit",77.00,2726506,0.003,2013-2022
+491844,Red Lake Nation College,Public,48.00,2624972,0.003,2013-2022
+434016,Little Priest Tribal College,Public,17.00,2547027,0.003,2013-2022
+369455,Worsham College of Mortuary Science,"Private, for-profit",69.00,2520107,0.003,2013-2022
+382911,Southwest College for the Deaf,Public,80.00,2470764,0.002,2013-2022
+480967,College of the Muscogee Nation,Public,24.00,2467237,0.002,2013-2022
+220464,John A Gupton College,"Private, not-for-profit",31.00,2363486,0.002,2013-2022
+367103,Interactive College of Technology-Newport,"Private, for-profit",43.00,2303783,0.002,2013-2022
+486424,Saint Michael College of Allied Health,"Private, for-profit",84.00,2293865,0.002,2013-2022
+443377,Triangle Tech Inc-Sunbury,"Private, for-profit",77.00,2244755,0.002,2013-2022
+184968,Holy Name Medical Center-Sister Claire Tynan School of Nursing,"Private, not-for-profit",75.00,2106459,0.002,2013-2022
+461315,Keweenaw Bay Ojibwa Community College,Public,9.00,2104608,0.002,2013-2022
+213163,UPMC Jameson School of Nursing,"Private, not-for-profit",57.00,2066537,0.002,2013-2022
+190451,Pomeroy College of Nursing at Crouse Hospital,"Private, not-for-profit",69.00,2051522,0.002,2013-2022
+441070,Saginaw Chippewa Tribal College,Public,0.00,2031995,0.002,2013-2022
+431600,UPMC Mercy School of Nursing,"Private, not-for-profit",80.00,2028963,0.002,2013-2022
+213622,UPMC St. Margaret School of Nursing,"Private, not-for-profit",50.00,1953898,0.002,2013-2022
+147396,Morrison Institute of Technology,"Private, not-for-profit",67.00,1898417,0.002,2013-2022
+138664,Interactive College of Technology-Morrow,"Private, for-profit",43.00,1890292,0.002,2013-2022
+482185,Academy of Interactive Entertainment,"Private, not-for-profit",97.00,1862622,0.002,2013-2022
+475422,Finger Lakes Health College of Nursing & Health Sciences,"Private, not-for-profit",100.00,1795135,0.002,2013-2022
+367361,Interactive College of Technology,"Private, for-profit",30.00,1767206,0.002,2013-2022
+487658,Academy of Interactive Entertainment,"Private, not-for-profit",100.00,1751828,0.002,2013-2022
+442435,Interactive College of Technology-Gainesville,"Private, for-profit",18.00,1698176,0.002,2013-2022
+216773,Western Pennsylvania Hospital School of Nursing,"Private, not-for-profit",68.00,1685989,0.002,2013-2022
+436599,FINE Mortuary College,"Private, for-profit",50.00,1529868,0.002,2013-2022
+483647,Ohio Institute of Allied Health,"Private, not-for-profit",93.00,1473906,0.001,2013-2022
+204893,Trinity Health System School of Nursing,"Private, not-for-profit",25.00,1465630,0.001,2013-2022
+190956,Belanger School of Nursing,"Private, not-for-profit",100.00,1397989,0.001,2013-2022
+458034,Houston International College Cardiotech Ultrasound School,"Private, for-profit",100.00,1375378,0.001,2013-2022
+494764,Aviation Institute of Maintenance-Charlotte,"Private, for-profit",50.00,1321671,0.001,2013-2022
+145354,Graham Hospital School of Nursing,"Private, not-for-profit",50.00,1294475,0.001,2013-2022
+490346,Elyon College,"Private, not-for-profit",95.00,1287142,0.001,2013-2022
+440776,Interactive College of Technology,"Private, for-profit",48.00,1270633,0.001,2013-2022
+195289,Samaritan Hospital School of Nursing,"Private, not-for-profit",50.00,1253343,0.001,2013-2022
+493798,New York Seminary,"Private, not-for-profit",93.00,1242608,0.001,2013-2022
+183248,St Joseph School of Nursing,"Private, not-for-profit",100.00,1165886,0.001,2013-2022
+437750,Professional Golfers Career College,"Private, for-profit",40.00,1081668,0.001,2013-2022
+192961,St. Peter's Hospital College of Nursing,"Private, not-for-profit",100.00,1073379,0.001,2013-2022
+419341,Jna Institute of Culinary Arts,"Private, for-profit",14.00,1008784,0.001,2013-2022
+461953,Colorado Academy of Veterinary Technology,"Private, for-profit",65.00,979628,0.001,2013-2022
+214023,ASPIRA City College,"Private, not-for-profit",0.00,962628,0.001,2013-2022
+439899,Rosedale Bible College,"Private, not-for-profit",47.00,956199,0.001,2013-2022
+188669,The Ailey School,"Private, not-for-profit",86.00,913144,0.001,2013-2022
+443696,Interactive College of Technology,"Private, for-profit",34.00,865329,0.001,2013-2022
+486123,Theatre of Arts,"Private, for-profit",57.00,766587,0.001,2013-2022
+494755,West Virginia Junior College-United Career Institute,"Private, for-profit",86.00,697492,0.001,2013-2022
+446598,Universal College of Healing Arts,"Private, for-profit",100.00,691193,0.001,2013-2022
+161208,The Landing School,"Private, not-for-profit",100.00,658335,0.001,2013-2022
+458140,Northwest School of Wooden Boat Building,"Private, not-for-profit",86.00,598134,0.001,2013-2022
+193609,Neighborhood Playhouse School of the Theater,"Private, not-for-profit",100.00,529440,0.001,2013-2022
+434432,Myotherapy Institute,"Private, for-profit",43.00,515223,0.001,2013-2022
+190008,Circle in the Square Theatre School,"Private, not-for-profit",100.00,491822,0.000,2013-2022
+134422,Key College,"Private, for-profit",100.00,472254,0.000,2013-2022
+140827,Miami Ad School-Atlanta,"Private, for-profit",40.00,440658,0.000,2013-2022
+131830,National Conservatory of Dramatic Arts,"Private, not-for-profit",50.00,440540,0.000,2013-2022
+496265,Triangle Tech-Chambersburg,"Private, for-profit",73.00,407863,0.000,2013-2022
+495147,Pacific Northwest Christian College,"Private, not-for-profit",0.00,382049,0.000,2013-2022
+477233,Evangel University-James River Assembly of God Church,"Private, not-for-profit",63.00,315580,0.000,2013-2022
+494986,Apex College of Veterinary Technology,"Private, for-profit",67.00,270569,0.000,2013-2022
+457925,Portland Actors Conservatory,"Private, not-for-profit",100.00,265413,0.000,2013-2022
+493619,Young Americans College of the Performing Arts,"Private, not-for-profit",7.00,221934,0.000,2013-2022
+485856,Studio Incamminati,"Private, not-for-profit",0.00,214566,0.000,2013-2022
+493521,Global Tech College,"Private, for-profit",100.00,189517,0.000,2013-2022
+493488,Premiere International College,"Private, for-profit",100.00,86593,0.000,2013-2022
+392354,School of Professional Horticulture  New York Botanical Garden,"Private, not-for-profit",100.00,51278,0.000,2013-2022
+488563,California College of Music,"Private, for-profit",80.00,9059,0.000,2013-2022
