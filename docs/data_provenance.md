@@ -13,7 +13,7 @@ This note captures where core dashboard views source their data, the definitions
 | Input | Dataset | IPEDS survey | Collection year | Key fields used |
 | ----- | ------- | ------------ | ---------------- | ---------------- |
 | `data/raw/ipeds/2023/cost.csv` | Tuition & fees | IC2023_AY | 2023-24 AY | `UnitID`, `TUITION_FEES_INSTATE2023` |
-| `data/raw/ipeds/2023/gradrates.csv` | Graduation rates | GR2023 | 2015 entering cohort measured at 150% of normal time | `UnitID`, `PCT_AWARD_6YRS` |
+| `data/raw/ipeds/2023/pellgradrates.csv` | Graduation rates | Graduation Rate Survey (GRS) | Survey years 2016–2023; latest non-null year per institution | `UnitID`, `GR2023` … `GR2016` |
 | `data/raw/ipeds/2023/enrollment.csv` | Enrollment | EF2023A | Fall 2023 | `UnitID`, `ENR_UGD` |
 | `data/raw/ipeds/2023/institutions.csv` | Institution metadata | HD2023 | Fall 2023 | `UnitID`, `INSTITUTION`, `STATE`, `SECTOR`, `LEVEL`, `CATEGORY` |
 
@@ -29,7 +29,7 @@ This note captures where core dashboard views source their data, the definitions
 ### Metric Definitions
 
 - **Cost** – Published in-state tuition plus required fees for the 2023-24 academic year (`IC2023_AY` → `TUITION_FEES_INSTATE2023`). No inflation adjustment or averaging is applied; numbers are nominal 2023-24 USD.
-- **Graduation rate** – IPEDS Graduation Rates (GR) survey measure for students entering in 2015, completing within 150% of the program length. For community colleges this is three years; for bachelor’s institutions it is six years. The field used is `PCT_AWARD_6YRS`.
+- **Graduation rate** – IPEDS Graduation Rate Survey (GRS) 150%-of-normal-time completion rate for first-time, full-time, degree-seeking students. Each institution's most recent non-null `GR{year}` is used (coalesced `GR2023` → `GR2016` in `_load_latest_grad_rates()`). For bachelor's institutions `GR2023` corresponds to the 2017 entering cohort (six years); for community colleges, three years. This replaced the broader Outcome Measures `PCT_AWARD_6YRS` cut (June 2026) so every dashboard surface reports the same measure.
 - **Enrollment** – Undergraduate headcount from Fall 2023 (`ENR_UGD`), used for bubble sizing and minimum enrollment filtering.
 - **Sector** – Derived from IPEDS `SECTOR` codes (1–6) mapped to readable labels.
 
@@ -50,26 +50,28 @@ This note captures where core dashboard views source their data, the definitions
 | ----- | ------- | ------------ | -------- | ---------- |
 | `data/raw/ipeds/2023/institutions.csv` | Institutional characteristics | HD2023 | Fall 2023 | `UnitID`, `INSTITUTION`, `CITY`, `STATE`, `ZIP`, `SECTOR` |
 | `data/raw/ipeds/2023/distanced.csv` | Distance education enrollment | DE | 2020–2024 | `UnitID`, `TOTAL_ENROLL_2024`, `DE_ENROLL_2024`, `SDE_ENROLL_TOTAL`, historical year columns |
-| `data/raw/ipeds/2023/pellgradrates.csv` | Outcome Measures with Pell detail | Outcome Measures/Customized CSV pull | Cohorts entering 2015 (reported through 2023) | `UnitID`, `GR2023`, `PGR2023`, … `GR2016`, `PGR2016` |
+| `data/raw/ipeds/2023/pellgradrates.csv` | Graduation Rate Survey with Pell subgroup | GRS (customized CSV pull) | Survey years 2016–2023 (`GR2023` ≈ 2017 entering cohort at four-year institutions) | `UnitID`, `GR2023`, `PGR2023`, … `GR2016`, `PGR2016` |
+| `data/processed/2023/canonical/ipeds_grad_rates_latest_by_inst.parquet` | Canonical GRS pipeline (latest rate per institution) | IPEDS DRVGR/DFR, cohorts 2004–2023 | Latest survey year per institution | `unitid`, `grad_rate_150`, `year` |
 
 ### Data Flow
 
 1. `DataManager._load_institutions_raw()` ingests the HD2023 extract.
 2. `DataManager._load_distance_raw()` loads the distance education table (optional; falls back to empty if missing).
-3. `DataManager._load_pellgradrates_raw()` ingests `pellgradrates.csv` for Outcome Measures reporting.
-4. `CollegeExplorerSection` holds references to these DataFrames and merges them in the Summary tab when an institution is selected.
+3. `DataManager._load_pellgradrates_raw()` ingests `pellgradrates.csv` for Graduation Rate Survey reporting.
+4. When `USE_CANONICAL_GRAD_DATA` is enabled (the default), the canonical GRS parquet is also loaded and rendered as the "Canonical Pipeline Snapshot" metric.
+5. `CollegeExplorerSection` holds references to these DataFrames and merges them in the Summary tab when an institution is selected.
 
 ### Metric Definitions
 
 - **Enrollment metrics** – Pulled from the 2024 columns in `distanced.csv`. If a value is missing, the UI shows “N/A”. Metrics represent the latest Fall headcount for total enrollment, exclusively online enrollment, and students taking some distance education.
-- **Overall Graduation Rate** – Derived from `GR2023` (or earlier year if needed) in `pellgradrates.csv`. This is the Outcome Measures statistic: all entering students (full-time, part-time, Pell, non-Pell) completing any credential within eight years of entry. The 2023 value reflects students who started in 2015.
-- **Pell Graduation Rate** – `PGR2023` (and historical peers) capturing the same eight-year completion window for Pell recipients only.
-- **Sector Medians & Z-scores** – Computed on the fly by filtering the Outcome Measures table by sector (IPEDS sectors 1–3 considered four-year, 4–6 considered two-year). Means, medians, and standard deviations enable contextual metrics for the selected institution.
+- **Overall Graduation Rate** – Derived from `GR2023` (or earlier year if needed) in `pellgradrates.csv`. This is the Graduation Rate Survey statistic: first-time, full-time, degree-seeking students completing within 150% of normal program time (six years for bachelor's-degree seekers). The 2023 value at four-year institutions reflects the cohort that entered in 2017. Part-time and returning students are not counted.
+- **Pell Graduation Rate** – `PGR2023` (and historical peers) capturing the same GRS 150% measure for Pell recipients only.
+- **Sector Medians & Z-scores** – Computed on the fly by filtering the graduation-rate table by sector (IPEDS sectors 1–3 considered four-year, 4–6 considered two-year). Means, medians, and standard deviations enable contextual metrics for the selected institution.
 
 ### UI Callouts
 
-- The Summary tab now contains a caption clarifying that “Overall Graduation Rate” comes from Outcome Measures and covers the eight-year window.
-- Overview page Data Notes clarify the data files and definitions so users understand the mismatch relative to Value Grid graduation rates.
+- The Summary tab caption states that “Overall Graduation Rate” comes from the Graduation Rate Survey (first-time, full-time, 150% of normal time). Earlier caption text describing the values as Outcome Measures was a leftover from the pre-June-2026 pipeline and was corrected 2026-07-20.
+- Overview page Data Notes describe the same GRS definition; Value Grid and College Explorer now report the same measure, so no cross-section mismatch note is needed.
 
 ---
 
@@ -128,9 +130,60 @@ This note captures where core dashboard views source their data, the definitions
 
 ---
 
+## Federal Loans
+
+**Purpose:** Rankings, trends, and loans-vs-graduation scatter for federal loan dollars by institution.
+
+### Source Files
+
+| Input | Description | Coverage | Key fields |
+| ----- | ----------- | -------- | ---------- |
+| `data/raw/fsa/dl_volume/*.xls` | FSA Title IV Program Volume Reports — Direct Loan volume by school (COD system), Q4 workbooks | Award years 2012-13 … 2021-22 | school, OPE ID, recipients, disbursed dollars per loan type |
+| `data/processed/fsa_dl_volume.{csv,parquet}` | Tidy per-school × award-year × loan-type dataset built from the workbooks | 2013–2022, keyed by OPE ID | `opeid`, `year`, `loan_type` (sub/unsub-UG/unsub-grad/Grad PLUS/Parent PLUS), `disbursed_usd` |
+| `data/processed/loan_totals_cod.{csv,parquet}` | UnitID-keyed wide derivative loaded by the dashboard (`DataSources.LOAN_RAW`) | `YR2013`–`YR2022` | `UnitID`, `Institution`, year columns |
+
+### Pipeline & Definitions
+
+1. `src/data/build_fsa_loan_volume.py` parses the workbooks into `fsa_dl_volume`, then maps OPE-ID totals to the largest-enrollment UnitID sharing that OPEID (~95.2% of national dollars mapped) to produce `loan_totals_cod`.
+2. All Federal Loans charts (top dollars, trend, vs-graduation scatter) compute from `loan_df` at render time; graduation rates in the scatter come from the value-grid metadata (GRS, see above).
+3. Loan dollars are **all Title IV Direct Loan disbursements** (subsidized, unsubsidized undergrad/grad, Grad PLUS, Parent PLUS) summed per year. Coverage begins at award year 2012-13 because COD school-level reports do not exist earlier (FFEL-era lending is not published school-by-school).
+
+### Deprecated Source
+
+`data/raw/fsa/loantotals.csv` (an undocumented FSA "LoanBySchool" download) understates disbursements at roughly 40–60% of the official COD figures (e.g., University of Phoenix 2013–2022: $4.93B vs the official $11.11B) and was **deprecated for dollar amounts on 2026-07-10** (`data/raw/fsa/metadata.yaml`). No dashboard chart reads it. If a deployed instance shows the low figures, it is running a pre-2026-07-10 build.
+
+### Verification
+
+`tests/data/test_fsa_loan_volume.py` pins the cited figures against the processed files: Phoenix 2013–2022 loans $11,108,326,427 (72.7% undergraduate-directed), Pell $2,099,633,987, combined $13,207,960,414; Walden #2; national totals.
+
+---
+
+## Pell Grants
+
+**Purpose:** Rankings, trends, and Pell-vs-graduation scatters for Pell Grant dollars by institution.
+
+### Source Files
+
+| Input | Description | Coverage | Key fields |
+| ----- | ----------- | -------- | ---------- |
+| `data/raw/fsa/pelltotals.csv` | FSA Pell Grant disbursements by school (`DataSources.PELL_RAW`) | `YR2008`–`YR2022` | `UnitID`, `Institution`, year columns |
+| `data/processed/pell_top_dollars*.csv` | Ranking and top-10 trend datasets (`data/processed/build_pell_top_dollars.py`) | Rankings 2013–2022; trends 2008–2022 | `rank`, `PellDollars`, `YearsCovered` |
+| `data/processed/pell_vs_grad_scatter*.csv` | Pell dollars vs graduation rate (`build_pell_vs_grad_scatter.py`) | 2013–2022 | `GraduationRate` (value-grid GRS), `PellDollars` |
+| `data/processed/pell_grad_rate_scatter*.csv` | Pell-recipient graduation rate scatter (`build_pell_grad_rate_scatter.py`) | Rates avg `PGR2017`–`PGR2023`; dollars 2013–2022 | `PellGraduationRate`, `PellDollars` |
+
+### Window Convention (2026-07-20)
+
+Cross-institution **rankings and scatters sum award years 2013–2022 only** (`RANKING_START_YEAR = 2013` in `src/charts/pell_top_dollars_chart.py` and the three builders), for two reasons: (1) commensurability with the COD loan data, which begins in 2013; (2) institutions that consolidated reporting IDs (e.g., University of Phoenix under UnitID 484613) carry no pre-2013 values in the Pell file, so an all-years sum would silently compare unequal windows. **Trend charts keep the full 2008–2022 series.** The scatter's `GraduationRate` is sourced from `tuition_vs_graduation.csv`, so it always matches the Value Grid (GRS).
+
+### Verification
+
+`tests/data/test_pell_window.py` pins the window labels, the Phoenix scatter rate against the Value Grid rate, Phoenix's $2,099,633,987 / #1 rank, and CSU Northridge's #10 national rank over 2013–2022.
+
+---
+
 ## Open Items & Next Steps
 
 - **Documentation integration:** Decide where this provenance summary should live for end users (e.g., README, in-app “Data Sources” modal, or documentation site).
-- **Outcome Measures vs Graduation Rates:** Currently Value Grid and Explorer use different graduation definitions (150% of normal time vs eight-year Outcome Measures). If convergence is desired, adjust one or both pipelines; otherwise continue documenting the distinction prominently.
-- **Additional sections:** Pell Grants, Federal Loans, Distance Education, and any future College Explorer ROI integration still need comparable provenance notes once their pipelines are reviewed.
-- **Testing hooks:** No automated tests exist for the data pipelines; adding regression tests for the builder scripts would harden provenance guarantees.
+- **Outcome Measures vs Graduation Rates:** RESOLVED — since June 2026 every surface (Value Grid, Faculty, College Explorer, Pell/loan scatters) reports the GRS 150% first-time/full-time rate; College Explorer caption text was corrected to match on 2026-07-20. Remaining idea: surface the IPEDS Outcome Measures 8-year, all-entering-undergraduates rate (`data/raw/ipeds/om2023.csv` — committed and test-pinned but not loaded by the app) as an explicitly labeled *complementary* metric rather than a replacement.
+- **Additional sections:** Distance Education, Faculty, and the feature-flagged Canonical sections still need comparable provenance notes (Pell Grants and Federal Loans are now covered above).
+- **Testing hooks:** Pinned regression tests now guard the headline figures: `tests/data/test_fsa_loan_volume.py`, `test_pell_window.py`, `test_om2023.py`, `test_uop_grs_cohorts.py`, `test_uop_scorecard_debt.py`.
